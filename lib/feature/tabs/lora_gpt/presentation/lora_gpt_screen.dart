@@ -208,21 +208,6 @@ class _LoraGptScreenState extends State<LoraGptScreen>
         top: 0,
         left: 0,
         right: 0,
-        child: Container(
-          height: MediaQuery.of(context).size.height / 10,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.black,
-                Colors.black.withOpacity(0.8),
-                Colors.black.withOpacity(0.6),
-                Colors.black.withOpacity(0.2),
-                Colors.black.withOpacity(0.04),
-              ],
-            ),
-          ),
-        ),
+        child: Container(height: 70),
       );
 }

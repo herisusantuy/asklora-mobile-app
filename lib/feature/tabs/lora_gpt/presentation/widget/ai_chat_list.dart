@@ -8,14 +8,13 @@ class AiChatList extends StatefulWidget {
 }
 
 class _AiChatListState extends State<AiChatList> {
-  // TODO backuping the new chat button if needed in the future
-  // final Duration _newChatButtonDuration = const Duration(milliseconds: 200);
-  // bool _showNewChatButton = false;
+  final Duration _newChatButtonDuration = const Duration(milliseconds: 200);
+  bool _showNewChatButton = false;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
       child: BlocConsumer<LoraGptBloc, LoraGptState>(
         listener: (context, state) => {
           if (state.status == ResponseState.error)
@@ -43,30 +42,32 @@ class _AiChatListState extends State<AiChatList> {
               blendMode: BlendMode.dstOut,
               child: NotificationListener<UserScrollNotification>(
                 onNotification: (notification) {
-                  // TODO backuping the new chat button if needed in the future
-                  // final ScrollDirection direction = notification.direction;
-                  // setState(() {
-                  //   if (direction == ScrollDirection.reverse) {
-                  //     _showNewChatButton = false;
-                  //   } else if (direction == ScrollDirection.forward) {
-                  //     _showNewChatButton = true;
-                  //   }
-                  // });
+                  final ScrollDirection direction = notification.direction;
+                  setState(() {
+                    if (direction == ScrollDirection.reverse) {
+                      _showNewChatButton = false;
+                    } else if (direction == ScrollDirection.forward) {
+                      _showNewChatButton = true;
+                    }
+                  });
                   return true;
                 },
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height,
-                  child: SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    padding: const EdgeInsets.only(top: 72, bottom: 55),
-                    reverse: true,
-                    child: Column(
-                      children: reversedConversations.map((e) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 17),
-                          child: _getBubbleChat(state, e),
-                        );
-                      }).toList(),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 70),
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      padding: const EdgeInsets.only(bottom: 55),
+                      reverse: true,
+                      child: Column(
+                        children: reversedConversations.map((e) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 17),
+                            child: _getBubbleChat(state, e),
+                          );
+                        }).toList(),
+                      ),
                     ),
                   ),
                 )
@@ -97,49 +98,50 @@ class _AiChatListState extends State<AiChatList> {
                 ,
               ),
             ),
-
-            // TODO backuping the new chat button if needed in the future
-            // AnimatedPositioned(
-            //   bottom: state.status == ResponseState.loading ||
-            //           state.conversations.isEmpty ||
-            //           _showNewChatButton
-            //       ? 0
-            //       : 64,
-            //   left: 0,
-            //   right: 0,
-            //   duration: _newChatButtonDuration,
-            //   child: UnconstrainedBox(
-            //     constrainedAxis: Axis.vertical,
-            //     child: AnimatedOpacity(
-            //       opacity: state.status == ResponseState.loading ||
-            //               state.conversations.isEmpty ||
-            //               _showNewChatButton
-            //           ? 0
-            //           : 1,
-            //       duration: _newChatButtonDuration,
-            //       child: ElevatedButton(
-            //           onPressed: () => context
-            //               .read<LoraGptBloc>()
-            //               .add(const OnResetSession()),
-            //           style: ElevatedButton.styleFrom(
-            //             shape: const StadiumBorder(),
-            //             backgroundColor: AskLoraColors.gray.withOpacity(0.8),
-            //             elevation: 0,
-            //             fixedSize: const Size(124, 32),
-            //           ),
-            //           child: Row(
-            //             children: [
-            //               const Icon(Icons.add),
-            //               CustomTextNew(
-            //                 'New chat',
-            //                 style: AskLoraTextStyles.body1
-            //                     .copyWith(color: AskLoraColors.white),
-            //               )
-            //             ],
-            //           )),
-            //     ),
-            //   ),
-            // ),
+            if (FeatureFlags.isNewChatHide)
+              const SizedBox.shrink()
+            else
+              AnimatedPositioned(
+                bottom: state.status == ResponseState.loading ||
+                        state.conversations.isEmpty ||
+                        _showNewChatButton
+                    ? 0
+                    : 64,
+                left: 0,
+                right: 0,
+                duration: _newChatButtonDuration,
+                child: UnconstrainedBox(
+                  constrainedAxis: Axis.vertical,
+                  child: AnimatedOpacity(
+                    opacity: state.status == ResponseState.loading ||
+                            state.conversations.isEmpty ||
+                            _showNewChatButton
+                        ? 0
+                        : 1,
+                    duration: _newChatButtonDuration,
+                    child: ElevatedButton(
+                        onPressed: () => context
+                            .read<LoraGptBloc>()
+                            .add(const OnResetSession()),
+                        style: ElevatedButton.styleFrom(
+                          shape: const StadiumBorder(),
+                          backgroundColor: AskLoraColors.gray.withOpacity(0.8),
+                          elevation: 0,
+                          fixedSize: const Size(124, 32),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.add),
+                            CustomTextNew(
+                              'New chat',
+                              style: AskLoraTextStyles.body1
+                                  .copyWith(color: AskLoraColors.white),
+                            )
+                          ],
+                        )),
+                  ),
+                ),
+              ),
           ]);
         },
       ),
