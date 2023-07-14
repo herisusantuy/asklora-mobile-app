@@ -36,21 +36,59 @@ class _LoraGptScreenState extends State<LoraGptScreen>
         child: Stack(
           children: [
             const AiChatList(),
-            _topDarkenTransparencyWidget(context),
-            Positioned(
-              top: 5,
-              left: 0,
-              right: 0,
-              child: _header,
+            _header,
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, bottom: 12),
+                child: _bottomContent,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget get _header => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        height: 70,
+        child: Stack(
+          children: [
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 11,
+                    height: 11,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: AskLoraColors.primaryGreen,
+                            spreadRadius: 2,
+                            blurRadius: 7, // changes position of shadow
+                          ),
+                        ],
+                        color: AskLoraColors.primaryGreen),
+                  ),
+                  const SizedBox(width: 30),
+                  CustomTextNew(
+                    'Lora',
+                    style: AskLoraTextStyles.h5
+                        .copyWith(color: AskLoraColors.white),
+                  ),
+                ],
+              ),
             ),
             BlocBuilder<TabScreenBloc, TabScreenState>(
               buildWhen: (previous, current) =>
                   previous.aiPageSelected != current.aiPageSelected,
               builder: (context, state) {
                 if (state.aiPageSelected) {
-                  return Positioned(
-                      top: 20,
-                      right: 20,
+                  return Align(
+                      alignment: Alignment.centerRight,
                       child: InkWell(
                         onTap: () => context
                             .read<TabScreenBloc>()
@@ -66,48 +104,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                 }
               },
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15, bottom: 12),
-                child: _bottomContent,
-              ),
-            ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget get _header => UnconstrainedBox(
-        constrainedAxis: Axis.horizontal,
-        child: CustomHeader(
-          title: '',
-          body: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 11,
-                height: 11,
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: AskLoraColors.primaryGreen,
-                        spreadRadius: 2,
-                        blurRadius: 7, // changes position of shadow
-                      ),
-                    ],
-                    color: AskLoraColors.primaryGreen),
-              ),
-              const SizedBox(width: 30),
-              CustomTextNew(
-                'Lora',
-                style:
-                    AskLoraTextStyles.h5.copyWith(color: AskLoraColors.white),
-              )
-            ],
-          ),
         ),
       );
 
@@ -203,11 +200,4 @@ class _LoraGptScreenState extends State<LoraGptScreen>
       },
     );
   }
-
-  Widget _topDarkenTransparencyWidget(BuildContext context) => Positioned(
-        top: 0,
-        left: 0,
-        right: 0,
-        child: Container(height: 70),
-      );
 }
