@@ -64,7 +64,7 @@ enum EmploymentStatus {
   selfEmployed('Self Employed', 'SELFEMPLOYED'),
   retired('Retired', 'RETIRED'),
   student('Student', 'STUDENT'),
-  businessOwner('Business Owner', 'BUSINESSOWNER'),
+  businessOwner('Business Owner', 'ATHOMETRADER'),
   homemaker('Homemaker', 'HOMEMAKER'),
   unemployed('Unemployed', 'UNEMPLOYED'),
   other('Other', 'OTHER'),
