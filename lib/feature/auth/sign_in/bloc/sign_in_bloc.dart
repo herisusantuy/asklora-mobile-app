@@ -53,8 +53,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         emailAddressErrorText:
             (event.emailAddress.toLowerCase().isValidEmail() ||
                     event.emailAddress.isEmpty)
-                ? ''
-                : 'Enter valid email'));
+                ? AuthErrorMessage.empty.value
+                : AuthErrorMessage.enterValidEmail.value));
   }
 
   void _onPasswordChanged(
