@@ -218,6 +218,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "estTakeProfitPercent": MessageLookupByLibrary.simpleMessage("預計止賺%"),
         "estimatedEndDate": MessageLookupByLibrary.simpleMessage("預計結束日期"),
         "existingPassword": MessageLookupByLibrary.simpleMessage("現有密碼"),
+        "extrovertLessThan8":
+            MessageLookupByLibrary.simpleMessage("每個人都需要me time，獨個觀看世間變幻事情"),
+        "extrovertMoreThan8":
+            MessageLookupByLibrary.simpleMessage("你一定係交際花, 將你嘅vibe發光發亮!"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("成交價格"),
         "financialProfile":
             MessageLookupByLibrary.simpleMessage("Financial Profile"),
@@ -277,6 +281,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "min": m11,
         "min8Character": MessageLookupByLibrary.simpleMessage("最少 8 個字母"),
         "needHelp": MessageLookupByLibrary.simpleMessage("需要幫助？"),
+        "neuroticismLessThan8":
+            MessageLookupByLibrary.simpleMessage("我哋可以進取少少, 承受一定嘅風險 "),
+        "neuroticismMoreThan8":
+            MessageLookupByLibrary.simpleMessage("我哋一步一步嚟, 控制住風險"),
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
         "nextStep": MessageLookupByLibrary.simpleMessage("下一步"),
         "no": MessageLookupByLibrary.simpleMessage(" 否"),
@@ -293,6 +301,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "onBoardingCompletionMessage": MessageLookupByLibrary.simpleMessage(
             "您已經完成了在Asklora開立賬戶的所有步驟！您的賬戶一\n經審核通過，即可開始交易。審核通常需要1至2個工作日。"),
         "openInvestmentAccount": MessageLookupByLibrary.simpleMessage("開立投資賬戶"),
+        "opennessLessThan8":
+            MessageLookupByLibrary.simpleMessage("用AI投資其實可以好簡單"),
+        "opennessMoreThan8": MessageLookupByLibrary.simpleMessage("我哋一定好夾!"),
         "orderCancelled": MessageLookupByLibrary.simpleMessage("訂單己取消"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("訂單已過期"),
         "orderPlaced": MessageLookupByLibrary.simpleMessage("已提交訂單"),
@@ -308,6 +319,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "performance": MessageLookupByLibrary.simpleMessage("表現"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "personalisation": MessageLookupByLibrary.simpleMessage("個人化"),
+        "personalizationResultScreenTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "Alright!\n\n你嘅答案顯示我嘅科技同你都幾夾，我哋都可以進取少少！"),
         "phone": MessageLookupByLibrary.simpleMessage("電話"),
         "pleaseAddAHkBankAccount": MessageLookupByLibrary.simpleMessage(
             "請確保加入的香港銀行戶口是在你名下。其他人的銀行戶口及聯名戶口將不會接受。"),

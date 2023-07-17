@@ -501,5 +501,12 @@
   "privacySuccessScreenTitle": "年齡只不過係個數字。",
   "privacySuccessScreenDescription": "識揀 Asklora，\n證明你精明過好多人！\n\nOk！係時候再了解你多啲！",
   "buttonTryAgain": "再試一次",
-  "buttonSure": "好"
+  "buttonSure": "好",
+  "personalizationResultScreenTitle": "Alright!\n\n你嘅答案顯示我嘅科技同你都幾夾，我哋都可以進取少少！",
+  "opennessLessThan8": "用AI投資其實可以好簡單",
+  "opennessMoreThan8": "我哋一定好夾!",
+  "neuroticismLessThan8": "我哋可以進取少少, 承受一定嘅風險 ",
+  "neuroticismMoreThan8": "我哋一步一步嚟, 控制住風險",
+  "extrovertLessThan8": "每個人都需要me time，獨個觀看世間變幻事情",
+  "extrovertMoreThan8": "你一定係交際花, 將你嘅vibe發光發亮!"
 }

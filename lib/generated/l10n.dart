@@ -3644,6 +3644,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Alright!\n\nBased on your answers, my technology is perfect for you and you can take on more risks.`
+  String get personalizationResultScreenTitle {
+    return Intl.message(
+      'Alright!\n\nBased on your answers, my technology is perfect for you and you can take on more risks.',
+      name: 'personalizationResultScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investing can be simple with AI`
+  String get opennessLessThan8 {
+    return Intl.message(
+      'Investing can be simple with AI',
+      name: 'opennessLessThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Our technology is for you.`
+  String get opennessMoreThan8 {
+    return Intl.message(
+      'Our technology is for you.',
+      name: 'opennessMoreThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can take on more risks.`
+  String get neuroticismLessThan8 {
+    return Intl.message(
+      'You can take on more risks.',
+      name: 'neuroticismLessThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You should reduce some risks.`
+  String get neuroticismMoreThan8 {
+    return Intl.message(
+      'You should reduce some risks.',
+      name: 'neuroticismMoreThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Introverts change the world!`
+  String get extrovertLessThan8 {
+    return Intl.message(
+      'Introverts change the world!',
+      name: 'extrovertLessThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Social butterfly, amplify that energy!`
+  String get extrovertMoreThan8 {
+    return Intl.message(
+      'Social butterfly, amplify that energy!',
+      name: 'extrovertMoreThan8',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
