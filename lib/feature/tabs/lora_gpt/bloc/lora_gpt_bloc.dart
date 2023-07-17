@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/domain/endpoints.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
 import '../../bloc/tab_screen_bloc.dart';
@@ -61,7 +62,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
     final askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
-    final query = state.query;
+    final query = state.query.trim();
 
     emit(state.copyWith(
         status: ResponseState.loading,
@@ -77,39 +78,52 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     if (subPage.path.isNotEmpty &&
         subPage.path == SubTabPage.portfolioBotStockDetails.value) {
-      response = await _loraGptRepository.portfolioDetails(
-          params: state.getPortfolioDetailsRequest(
-              query: query,
-              botType: subPage.arguments['botType'],
-              ticker: subPage.arguments['symbol']));
+      PortfolioDetailsRequest request = state.getPortfolioDetailsRequest(
+          query: query,
+          botType: subPage.arguments['botType'],
+          ticker: subPage.arguments['symbol']);
+
+      emit(
+        state.copyWith(
+            debugText:
+                'endpoint : $endpointPortfolioDetailPage\nparam : ${request.params}'),
+      );
+      response = await _loraGptRepository.portfolioDetails(params: request);
     } else if (state.tabPage == TabPage.portfolio) {
+      PortfolioQueryRequest request = state.getPortfolioRequest(query: query);
+      emit(
+        state.copyWith(
+            debugText:
+                'endpoint : $endpointPortfolio\nparam : ${request.params}\npayload : ${state.botstocks}'),
+      );
       response = await _loraGptRepository.portfolio(
-          params: state.getPortfolioRequest(query: query),
-          data: state.botstocks);
+          params: request, data: state.botstocks);
     } else {
-      response = await _loraGptRepository.general(
-          params: state.getGeneralChatRequest(query: query));
+      GeneralQueryRequest request = state.getGeneralChatRequest(query: query);
+
+      emit(
+        state.copyWith(
+            debugText: 'endpoint : $endpointChat\nparam : ${request.params}'),
+      );
+      response = await _loraGptRepository.general(params: request);
     }
 
+    tempList.removeLast();
     if (response.state == ResponseState.success) {
-      tempList.removeLast();
       tempList.add(response.data!);
-
-      emit(state.copyWith(
-          status: ResponseState.success,
-          conversations: tempList,
-          query: '',
-          sessionId: response.data?.requestId,
-          isTyping: true));
     } else {
-      tempList.removeLast();
-      emit(state.copyWith(
-          status: ResponseState.error,
-          query: '',
-          conversations: tempList,
-          sessionId: response.data?.requestId,
-          isTyping: false));
+      tempList.add(Lora(
+          'Sorry I cannot connect to the server right now, please try again',
+          '',
+          '',
+          false));
     }
+    emit(state.copyWith(
+        status: ResponseState.success,
+        conversations: tempList,
+        query: '',
+        sessionId: response.data?.requestId,
+        isTyping: true));
   }
 
   void _onResetSession(
@@ -117,6 +131,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       emit(state.copyWith(
           status: ResponseState.success,
           conversations: [],
+          isTyping: false,
           sessionId: '',
           query: ''));
 
