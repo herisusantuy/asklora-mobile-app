@@ -96,7 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "almostFinished":
             MessageLookupByLibrary.simpleMessage("Almost finished!"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
-            "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
+            "I\'m Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("Your Name"),
         "atLeast1Lowercase":
@@ -313,9 +313,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "gotIt": MessageLookupByLibrary.simpleMessage("Got It"),
         "greatStart": MessageLookupByLibrary.simpleMessage("Great start!"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
-            "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
+            "Let’s start the training with simple questions!\n\n  Remember - to lose patience is to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "Alright! Are you ready for the FinFit journey? "),
+            "Ready to start your AI revolution?"),
         "halfWayThere": MessageLookupByLibrary.simpleMessage("Halfway there!"),
         "headquarters": MessageLookupByLibrary.simpleMessage("Headquarters"),
         "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works"),
