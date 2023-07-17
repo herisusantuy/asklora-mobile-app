@@ -92,6 +92,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your investment account will be ready soon!"),
         "agree": MessageLookupByLibrary.simpleMessage("Agree"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
+        "aiIsqWelcomeSubTitle": MessageLookupByLibrary.simpleMessage(
+            "Let’s see what kind of stocks you prefer"),
+        "aiIsqWelcomeTitle": MessageLookupByLibrary.simpleMessage(
+            "It’s time to find out your investment preferences"),
         "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "almostFinished":
             MessageLookupByLibrary.simpleMessage("Almost finished!"),
