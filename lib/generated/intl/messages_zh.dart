@@ -153,6 +153,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonSignUp": MessageLookupByLibrary.simpleMessage("註冊"),
         "buttonSignUpAgain": MessageLookupByLibrary.simpleMessage("再次註冊"),
         "buttonSubmit": MessageLookupByLibrary.simpleMessage("提交"),
+        "buttonSure": MessageLookupByLibrary.simpleMessage("好"),
+        "buttonTryAgain": MessageLookupByLibrary.simpleMessage("再試一次"),
         "buttonViewTransactionHistory":
             MessageLookupByLibrary.simpleMessage("查看交易歷史"),
         "buttonWithdraw": MessageLookupByLibrary.simpleMessage("提取"),
@@ -400,7 +402,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
         "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
         "privacyEvaluation": MessageLookupByLibrary.simpleMessage("私隱評估"),
+        "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
+            "有可能你的風險評級太低，\n或者年齡未合乎要求。\n\n如有答案填錯，\n麻煩再試一次。"),
+        "privacyFailedScreenTitle":
+            MessageLookupByLibrary.simpleMessage("你尚未符合資格使用Asklora。"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
+        "privacySuccessScreenDescription": MessageLookupByLibrary.simpleMessage(
+            "識揀 Asklora，\n證明你精明過好多人！\n\nOk！係時候再了解你多啲！"),
+        "privacySuccessScreenTitle":
+            MessageLookupByLibrary.simpleMessage("年齡只不過係個數字。"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "readyToGo": MessageLookupByLibrary.simpleMessage("準備好未？"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),

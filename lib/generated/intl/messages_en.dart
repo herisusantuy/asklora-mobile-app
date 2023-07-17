@@ -187,6 +187,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonSignUpAgain":
             MessageLookupByLibrary.simpleMessage("Sign Up Again"),
         "buttonSubmit": MessageLookupByLibrary.simpleMessage("Submit"),
+        "buttonSure": MessageLookupByLibrary.simpleMessage("Sure"),
+        "buttonTryAgain": MessageLookupByLibrary.simpleMessage("Try Again"),
         "buttonViewTransactionHistory":
             MessageLookupByLibrary.simpleMessage("View Transaction History"),
         "buttonWithdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
@@ -521,7 +523,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "prevClose": MessageLookupByLibrary.simpleMessage("Prev Close"),
         "privacyEvaluation":
             MessageLookupByLibrary.simpleMessage("Privacy Evaluation"),
+        "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
+            "It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again."),
+        "privacyFailedScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "I\'m afraid you\'re not eligible for Asklora yet."),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "privacySuccessScreenDescription": MessageLookupByLibrary.simpleMessage(
+            "Age is just a number, but your personality is what sets you apart.\n\nAnswer a few personality questions, and I\'ll help you find investments that fit your style."),
+        "privacySuccessScreenTitle":
+            MessageLookupByLibrary.simpleMessage("I appreciate your honesty."),
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push-Notification"),
         "readyToGo": MessageLookupByLibrary.simpleMessage("Ready to go?"),

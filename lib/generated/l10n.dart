@@ -3584,6 +3584,66 @@ class S {
       args: [],
     );
   }
+
+  /// `I'm afraid you're not eligible for Asklora yet.`
+  String get privacyFailedScreenTitle {
+    return Intl.message(
+      'I\'m afraid you\'re not eligible for Asklora yet.',
+      name: 'privacyFailedScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.`
+  String get privacyFailedScreenDescription {
+    return Intl.message(
+      'It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.',
+      name: 'privacyFailedScreenDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I appreciate your honesty.`
+  String get privacySuccessScreenTitle {
+    return Intl.message(
+      'I appreciate your honesty.',
+      name: 'privacySuccessScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Age is just a number, but your personality is what sets you apart.\n\nAnswer a few personality questions, and I'll help you find investments that fit your style.`
+  String get privacySuccessScreenDescription {
+    return Intl.message(
+      'Age is just a number, but your personality is what sets you apart.\n\nAnswer a few personality questions, and I\'ll help you find investments that fit your style.',
+      name: 'privacySuccessScreenDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try Again`
+  String get buttonTryAgain {
+    return Intl.message(
+      'Try Again',
+      name: 'buttonTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sure`
+  String get buttonSure {
+    return Intl.message(
+      'Sure',
+      name: 'buttonSure',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
