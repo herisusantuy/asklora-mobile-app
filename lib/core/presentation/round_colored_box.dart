@@ -9,6 +9,7 @@ class RoundColoredBox extends StatelessWidget {
   final EdgeInsets padding;
   final Color backgroundColor;
   final double radius;
+  final BoxShadow? boxShadow;
 
   const RoundColoredBox(
       {this.backgroundColor = AskLoraColors.whiteSmoke,
@@ -16,6 +17,7 @@ class RoundColoredBox extends StatelessWidget {
       required this.content,
       this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
       this.radius = 20,
+      this.boxShadow,
       Key? key})
       : super(key: key);
 
@@ -24,7 +26,9 @@ class RoundColoredBox extends StatelessWidget {
     return Container(
       padding: padding,
       decoration: BoxDecoration(
-          color: backgroundColor, borderRadius: BorderRadius.circular(radius)),
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(radius),
+          boxShadow: [boxShadow ?? const BoxShadow()]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
