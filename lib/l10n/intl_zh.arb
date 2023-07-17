@@ -495,5 +495,9 @@
   "financialProfile": "Financial Profile",
   "agreements": "Agreements",
   "submitApplication": "Submit Application",
-  "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible"
+  "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible",
+  "emailNotExist":"此電郵地址的用戶不存在",
+  "emailNotVerified":"用戶電郵未認證",
+  "enterValidPassword": "無效電郵地址",
+  "enterValidEmail": "無效電郵地址"
 }

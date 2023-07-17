@@ -247,10 +247,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sorry! You were a bit late, your request has timed out. \n\nLet’s try and activate your account again!"),
         "emailActivationSuccessTitle": m8,
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email Address"),
+        "emailNotExist": MessageLookupByLibrary.simpleMessage(
+            "User does not exist with the given email"),
+        "emailNotVerified":
+            MessageLookupByLibrary.simpleMessage("User email is not verified"),
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
         "endBotStockAcknowledgement": m9,
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
+        "enterValidEmail":
+            MessageLookupByLibrary.simpleMessage("Enter valid email"),
         "enterValidPassword":
             MessageLookupByLibrary.simpleMessage("Enter valid password"),
         "errorGettingInformationInvestmentDetailSubTitle":

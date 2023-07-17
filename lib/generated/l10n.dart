@@ -3584,6 +3584,36 @@ class S {
       args: [],
     );
   }
+
+  /// `User does not exist with the given email`
+  String get emailNotExist {
+    return Intl.message(
+      'User does not exist with the given email',
+      name: 'emailNotExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User email is not verified`
+  String get emailNotVerified {
+    return Intl.message(
+      'User email is not verified',
+      name: 'emailNotVerified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter valid email`
+  String get enterValidEmail {
+    return Intl.message(
+      'Enter valid email',
+      name: 'enterValidEmail',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

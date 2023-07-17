@@ -19,6 +19,7 @@ import '../../../onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
 import '../../../tabs/presentation/tab_screen.dart';
 import '../../forgot_password/presentation/forgot_password_screen.dart';
 import '../../otp/presentation/otp_screen.dart';
+import '../../utils/auth_utils.dart';
 import '../bloc/sign_in_bloc.dart';
 
 class SignInForm extends StatelessWidget {
@@ -29,11 +30,11 @@ class SignInForm extends StatelessWidget {
     return BlocListener<SignInBloc, SignInState>(
         listener: (context, state) async {
       CustomLoadingOverlay.of(context).show(state.response.state);
-
       var responseState = state.response.state;
       if (responseState == ResponseState.error) {
         context.read<SignInBloc>().add(SignInEmailChanged(state.emailAddress));
-        CustomInAppNotification.show(context, state.response.message);
+        CustomInAppNotification.show(
+            context, getErrorMessage(context, state.response.message));
       } else if (responseState == ResponseState.success) {
         context.read<AppBloc>().add(const GetUserJourneyFromLocal());
         var arguments = Pair(state.emailAddress, state.password);

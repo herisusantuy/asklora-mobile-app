@@ -200,10 +200,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sorry！你嘅請求已經逾時。\n請重新開通帳戶。"),
         "emailActivationSuccessTitle": m8,
         "emailAddress": MessageLookupByLibrary.simpleMessage("電郵地址"),
+        "emailNotExist": MessageLookupByLibrary.simpleMessage("此電郵地址的用戶不存在"),
+        "emailNotVerified": MessageLookupByLibrary.simpleMessage("用戶電郵未認證"),
         "employees": MessageLookupByLibrary.simpleMessage("員工人數"),
         "endBotStockAcknowledgement": m9,
         "endDate": MessageLookupByLibrary.simpleMessage("結束日期"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("到期價值"),
+        "enterValidEmail": MessageLookupByLibrary.simpleMessage("無效電郵地址"),
+        "enterValidPassword": MessageLookupByLibrary.simpleMessage("無效電郵地址"),
         "errorGettingInformationInvestmentDetailSubTitle":
             MessageLookupByLibrary.simpleMessage("載入你投資細節時出咗少少問題，Reload一次試下？"),
         "errorGettingInformationPortfolioSubTitle":
