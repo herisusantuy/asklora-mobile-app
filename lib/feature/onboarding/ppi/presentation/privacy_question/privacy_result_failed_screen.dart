@@ -6,6 +6,7 @@ import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/utils.dart';
+import '../../../../../generated/l10n.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../ppi_result_screen.dart';
 import '../ppi_screen.dart';
@@ -19,9 +20,8 @@ class PrivacyResultFailedScreen extends StatelessWidget {
       onWillPop: () async => false,
       child: PpiResultScreen(
         ppiResult: PpiResult.failed,
-        memojiText: 'I’m afraid you’re not eligible for Asklora yet.',
-        additionalMessage:
-            '\nIt could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again',
+        title: S.of(context).privacyFailedScreenTitle,
+        additionalMessage: S.of(context).privacyFailedScreenDescription,
         additionalMessageTextStyle: AskLoraTextStyles.subtitle1,
         bottomPadding: 0,
         bottomButton: ButtonPair(
@@ -30,8 +30,8 @@ class PrivacyResultFailedScreen extends StatelessWidget {
                     QuestionPageType.privacy, QuestionPageStep.privacy)),
             secondaryButtonOnClick: () =>
                 openUrl(askloraFaq, mode: LaunchMode.externalApplication),
-            primaryButtonLabel: 'TRY AGAIN',
-            secondaryButtonLabel: 'NEED HELP?'),
+            primaryButtonLabel: S.of(context).buttonTryAgain,
+            secondaryButtonLabel: S.of(context).needHelp),
       ),
     );
   }
