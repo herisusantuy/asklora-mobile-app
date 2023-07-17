@@ -28,8 +28,6 @@ class _AiChatListState extends State<AiChatList> {
                 current.status != ResponseState.unknown ||
             previous.conversations.length != current.conversations.length,
         builder: (context, state) {
-          final List<Conversation> reversedConversations =
-              List.from(state.conversations.reversed);
           return Stack(children: [
             ShaderMask(
               shaderCallback: (rect) {
@@ -61,10 +59,16 @@ class _AiChatListState extends State<AiChatList> {
                       padding: const EdgeInsets.only(bottom: 55),
                       reverse: true,
                       child: Column(
-                        children: reversedConversations.map((e) {
+                        children: state.conversations
+                            .mapIndexed((index, conversation) {
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 17),
-                            child: _getBubbleChat(state, e),
+                            child: _getBubbleChat(
+                                conversation,
+                                index,
+                                state.isTyping &&
+                                    index == state.conversations.length - 1,
+                                state.userName),
                           );
                         }).toList(),
                       ),
@@ -148,23 +152,41 @@ class _AiChatListState extends State<AiChatList> {
     );
   }
 
-  Widget _getBubbleChat(LoraGptState state, Conversation e) {
-    final List<Conversation> reversedConversations =
-        List.from(state.conversations.reversed);
-    final message = reversedConversations[
-        (reversedConversations.length - 1) - reversedConversations.indexOf(e)];
-    if (message is Lora) {
-      return OutChatBubbleWidget((message).response,
-          animateText:
-              reversedConversations.indexOf(message) == 0 && state.isTyping);
-    } else if (message is Me) {
-      return InChatBubbleWidget(message: (message).query, name: state.userName);
-    } else if (message is Reset) {
+  Widget _getBubbleChat(
+      Conversation e, int index, bool isTyping, String userName) {
+    if (e is Lora) {
+      return OutChatBubbleWidget(
+        e.response,
+        animateText: isTyping,
+      );
+    } else if (e is Me) {
+      return InChatBubbleWidget(message: e.query, name: userName);
+    } else if (e is Reset) {
       return _sessionResetWidget();
     } else {
       return const LoraThinkingWidget();
     }
   }
+
+  ///todo: some backup code in case something fishy happening
+  // Widget _getBubbleChat(LoraGptState state, Conversation e, int index) {
+  //   final List<Conversation> reversedConversations =
+  //   List.from(state.conversations.reversed);
+  //   final message = reversedConversations[
+  //   (reversedConversations.length - 1) - reversedConversations.indexOf(e)];
+  //   if (e is Lora) {
+  //     print('outchat');
+  //     return OutChatBubbleWidget((e).response,
+  //       animateText:
+  //       reversedConversations.indexOf(e) == 0 && state.isTyping,);
+  //   } else if (e is Me) {
+  //     return InChatBubbleWidget(message: (e).query, name: state.userName);
+  //   } else if (e is Reset) {
+  //     return _sessionResetWidget();
+  //   } else {
+  //     return const LoraThinkingWidget();
+  //   }
+  // }
 
   Widget _sessionResetWidget() => Row(
         mainAxisAlignment: MainAxisAlignment.center,

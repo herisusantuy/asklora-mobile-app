@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,9 +12,11 @@ import '../../../../core/presentation/text_fields/style/text_field_style.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
+import '../../../../core/utils/build_configs/app_config_widget.dart';
+import '../../../../core/utils/build_configs/build_config.dart';
 import '../../../../core/utils/feature_flags.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
-import '../../../../generated/l10n.dart';
+import '../../../../core/values/app_values.dart';
 import '../../../bot_stock/presentation/portfolio/bloc/portfolio_bloc.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../bloc/tab_screen_bloc.dart';
