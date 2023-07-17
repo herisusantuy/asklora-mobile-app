@@ -86,7 +86,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       emit(
         state.copyWith(
             debugText:
-                'hitting endpoint : $endpointPortfolioDetailPage\n param : ${request.params}'),
+                'endpoint : $endpointPortfolioDetailPage\nparam : ${request.params}'),
       );
       response = await _loraGptRepository.portfolioDetails(params: request);
     } else if (state.tabPage == TabPage.portfolio) {
@@ -94,7 +94,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       emit(
         state.copyWith(
             debugText:
-                'hitting endpoint : $endpointPortfolio\n param : ${request.params}\n payload : ${state.botstocks}'),
+                'endpoint : $endpointPortfolio\nparam : ${request.params}\npayload : ${state.botstocks}'),
       );
       response = await _loraGptRepository.portfolio(
           params: request, data: state.botstocks);
@@ -103,8 +103,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
       emit(
         state.copyWith(
-            debugText:
-                'hitting endpoint : $endpointChat\n param : ${request.params}'),
+            debugText: 'endpoint : $endpointChat\nparam : ${request.params}'),
       );
       response = await _loraGptRepository.general(params: request);
     }

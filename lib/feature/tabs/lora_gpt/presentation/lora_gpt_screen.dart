@@ -193,7 +193,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                 child: ElevatedButton(
                     onPressed: () {
                       FocusScope.of(context).unfocus();
-                      if (state.query.isNotEmpty && !state.isTyping) {
+                      if (state.query.trim().isNotEmpty && !state.isTyping) {
                         context.read<LoraGptBloc>().add(const OnSearchQuery());
                       }
                     },
