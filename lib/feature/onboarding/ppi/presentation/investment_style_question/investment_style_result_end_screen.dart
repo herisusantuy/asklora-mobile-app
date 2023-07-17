@@ -6,7 +6,6 @@ import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../bot_stock/presentation/bot_recommendation/free_bot_recommendation_screen.dart';
 import '../../../../bot_stock/presentation/gift/bot_stock_do_screen.dart';
