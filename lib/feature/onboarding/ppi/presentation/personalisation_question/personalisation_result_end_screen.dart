@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../../bloc/question/question_bloc.dart';
@@ -45,9 +44,8 @@ class PersonalisationResultEndScreen extends StatelessWidget {
           final scores = state.snapShot?.data?.scores;
 
           return PpiResultScreen(
-            loraMemojiType: LoraMemojiType.lora7,
             ppiResult: PpiResult.success,
-            memojiText: 'Do you know?',
+            title: 'Do you know?',
             additionalMessage: _getMessage(scores),
             bottomButton: PrimaryButton(
                 key: const Key('next_button'),

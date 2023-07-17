@@ -3584,6 +3584,136 @@ class S {
       args: [],
     );
   }
+
+  /// `I'm afraid you're not eligible for Asklora yet.`
+  String get privacyFailedScreenTitle {
+    return Intl.message(
+      'I\'m afraid you\'re not eligible for Asklora yet.',
+      name: 'privacyFailedScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.`
+  String get privacyFailedScreenDescription {
+    return Intl.message(
+      'It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.',
+      name: 'privacyFailedScreenDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I appreciate your honesty.`
+  String get privacySuccessScreenTitle {
+    return Intl.message(
+      'I appreciate your honesty.',
+      name: 'privacySuccessScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Age is just a number, but your personality is what sets you apart.\n\nAnswer a few personality questions, and I'll help you find investments that fit your style.`
+  String get privacySuccessScreenDescription {
+    return Intl.message(
+      'Age is just a number, but your personality is what sets you apart.\n\nAnswer a few personality questions, and I\'ll help you find investments that fit your style.',
+      name: 'privacySuccessScreenDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try Again`
+  String get buttonTryAgain {
+    return Intl.message(
+      'Try Again',
+      name: 'buttonTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sure`
+  String get buttonSure {
+    return Intl.message(
+      'Sure',
+      name: 'buttonSure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alright!\n\nBased on your answers, my technology is perfect for you and you can take on more risks.`
+  String get personalizationResultScreenTitle {
+    return Intl.message(
+      'Alright!\n\nBased on your answers, my technology is perfect for you and you can take on more risks.',
+      name: 'personalizationResultScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investing can be simple with AI`
+  String get opennessLessThan8 {
+    return Intl.message(
+      'Investing can be simple with AI',
+      name: 'opennessLessThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Our technology is for you.`
+  String get opennessMoreThan8 {
+    return Intl.message(
+      'Our technology is for you.',
+      name: 'opennessMoreThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can take on more risks.`
+  String get neuroticismLessThan8 {
+    return Intl.message(
+      'You can take on more risks.',
+      name: 'neuroticismLessThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You should reduce some risks.`
+  String get neuroticismMoreThan8 {
+    return Intl.message(
+      'You should reduce some risks.',
+      name: 'neuroticismMoreThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Introverts change the world!`
+  String get extrovertLessThan8 {
+    return Intl.message(
+      'Introverts change the world!',
+      name: 'extrovertLessThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Social butterfly, amplify that energy!`
+  String get extrovertMoreThan8 {
+    return Intl.message(
+      'Social butterfly, amplify that energy!',
+      name: 'extrovertMoreThan8',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

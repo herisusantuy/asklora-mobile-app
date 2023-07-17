@@ -187,6 +187,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonSignUpAgain":
             MessageLookupByLibrary.simpleMessage("Sign Up Again"),
         "buttonSubmit": MessageLookupByLibrary.simpleMessage("Submit"),
+        "buttonSure": MessageLookupByLibrary.simpleMessage("Sure"),
+        "buttonTryAgain": MessageLookupByLibrary.simpleMessage("Try Again"),
         "buttonViewTransactionHistory":
             MessageLookupByLibrary.simpleMessage("View Transaction History"),
         "buttonWithdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
@@ -292,6 +294,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "existingPassword":
             MessageLookupByLibrary.simpleMessage("Existing Password"),
         "expiresAt": MessageLookupByLibrary.simpleMessage("Expires at"),
+        "extrovertLessThan8": MessageLookupByLibrary.simpleMessage(
+            "Introverts change the world!"),
+        "extrovertMoreThan8": MessageLookupByLibrary.simpleMessage(
+            "Social butterfly, amplify that energy!"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("Filled Price"),
         "financialProfile":
             MessageLookupByLibrary.simpleMessage("Financial Profile"),
@@ -359,6 +365,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "min8Character":
             MessageLookupByLibrary.simpleMessage("min. 8 characters"),
         "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
+        "neuroticismLessThan8":
+            MessageLookupByLibrary.simpleMessage("You can take on more risks."),
+        "neuroticismMoreThan8": MessageLookupByLibrary.simpleMessage(
+            "You should reduce some risks."),
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "nextStep": MessageLookupByLibrary.simpleMessage("Next step"),
         "no": MessageLookupByLibrary.simpleMessage(" No"),
@@ -385,6 +395,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days."),
         "openInvestmentAccount":
             MessageLookupByLibrary.simpleMessage("Open Investment Account"),
+        "opennessLessThan8": MessageLookupByLibrary.simpleMessage(
+            "Investing can be simple with AI"),
+        "opennessMoreThan8":
+            MessageLookupByLibrary.simpleMessage("Our technology is for you."),
         "orderCancelled":
             MessageLookupByLibrary.simpleMessage("Order Cancelled"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("Order Expired"),
@@ -405,6 +419,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "personalisation":
             MessageLookupByLibrary.simpleMessage("Personalisation"),
+        "personalizationResultScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "Alright!\n\nBased on your answers, my technology is perfect for you and you can take on more risks."),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "pleaseAddAHkBankAccount": MessageLookupByLibrary.simpleMessage(
             "Please add a HK bank account that is under your name; other people\'s bank accounts or joint accounts will not be accepted."),
@@ -521,7 +537,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "prevClose": MessageLookupByLibrary.simpleMessage("Prev Close"),
         "privacyEvaluation":
             MessageLookupByLibrary.simpleMessage("Privacy Evaluation"),
+        "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
+            "It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again."),
+        "privacyFailedScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "I\'m afraid you\'re not eligible for Asklora yet."),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "privacySuccessScreenDescription": MessageLookupByLibrary.simpleMessage(
+            "Age is just a number, but your personality is what sets you apart.\n\nAnswer a few personality questions, and I\'ll help you find investments that fit your style."),
+        "privacySuccessScreenTitle":
+            MessageLookupByLibrary.simpleMessage("I appreciate your honesty."),
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push-Notification"),
         "readyToGo": MessageLookupByLibrary.simpleMessage("Ready to go?"),

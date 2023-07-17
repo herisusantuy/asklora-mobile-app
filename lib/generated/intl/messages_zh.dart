@@ -153,6 +153,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonSignUp": MessageLookupByLibrary.simpleMessage("註冊"),
         "buttonSignUpAgain": MessageLookupByLibrary.simpleMessage("再次註冊"),
         "buttonSubmit": MessageLookupByLibrary.simpleMessage("提交"),
+        "buttonSure": MessageLookupByLibrary.simpleMessage("好"),
+        "buttonTryAgain": MessageLookupByLibrary.simpleMessage("再試一次"),
         "buttonViewTransactionHistory":
             MessageLookupByLibrary.simpleMessage("查看交易歷史"),
         "buttonWithdraw": MessageLookupByLibrary.simpleMessage("提取"),
@@ -216,6 +218,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "estTakeProfitPercent": MessageLookupByLibrary.simpleMessage("預計止賺%"),
         "estimatedEndDate": MessageLookupByLibrary.simpleMessage("預計結束日期"),
         "existingPassword": MessageLookupByLibrary.simpleMessage("現有密碼"),
+        "extrovertLessThan8":
+            MessageLookupByLibrary.simpleMessage("每個人都需要me time，獨個觀看世間變幻事情"),
+        "extrovertMoreThan8":
+            MessageLookupByLibrary.simpleMessage("你一定係交際花, 將你嘅vibe發光發亮!"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("成交價格"),
         "financialProfile":
             MessageLookupByLibrary.simpleMessage("Financial Profile"),
@@ -275,6 +281,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "min": m11,
         "min8Character": MessageLookupByLibrary.simpleMessage("最少 8 個字母"),
         "needHelp": MessageLookupByLibrary.simpleMessage("需要幫助？"),
+        "neuroticismLessThan8":
+            MessageLookupByLibrary.simpleMessage("我哋可以進取少少, 承受一定嘅風險 "),
+        "neuroticismMoreThan8":
+            MessageLookupByLibrary.simpleMessage("我哋一步一步嚟, 控制住風險"),
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
         "nextStep": MessageLookupByLibrary.simpleMessage("下一步"),
         "no": MessageLookupByLibrary.simpleMessage(" 否"),
@@ -291,6 +301,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "onBoardingCompletionMessage": MessageLookupByLibrary.simpleMessage(
             "您已經完成了在Asklora開立賬戶的所有步驟！您的賬戶一\n經審核通過，即可開始交易。審核通常需要1至2個工作日。"),
         "openInvestmentAccount": MessageLookupByLibrary.simpleMessage("開立投資賬戶"),
+        "opennessLessThan8":
+            MessageLookupByLibrary.simpleMessage("用AI投資其實可以好簡單"),
+        "opennessMoreThan8": MessageLookupByLibrary.simpleMessage("我哋一定好夾!"),
         "orderCancelled": MessageLookupByLibrary.simpleMessage("訂單己取消"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("訂單已過期"),
         "orderPlaced": MessageLookupByLibrary.simpleMessage("已提交訂單"),
@@ -306,6 +319,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "performance": MessageLookupByLibrary.simpleMessage("表現"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "personalisation": MessageLookupByLibrary.simpleMessage("個人化"),
+        "personalizationResultScreenTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "Alright!\n\n你嘅答案顯示我嘅科技同你都幾夾，我哋都可以進取少少！"),
         "phone": MessageLookupByLibrary.simpleMessage("電話"),
         "pleaseAddAHkBankAccount": MessageLookupByLibrary.simpleMessage(
             "請確保加入的香港銀行戶口是在你名下。其他人的銀行戶口及聯名戶口將不會接受。"),
@@ -400,7 +416,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
         "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
         "privacyEvaluation": MessageLookupByLibrary.simpleMessage("私隱評估"),
+        "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
+            "有可能你的風險評級太低，\n或者年齡未合乎要求。\n\n如有答案填錯，\n麻煩再試一次。"),
+        "privacyFailedScreenTitle":
+            MessageLookupByLibrary.simpleMessage("你尚未符合資格使用Asklora。"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
+        "privacySuccessScreenDescription": MessageLookupByLibrary.simpleMessage(
+            "識揀 Asklora，\n證明你精明過好多人！\n\nOk！係時候再了解你多啲！"),
+        "privacySuccessScreenTitle":
+            MessageLookupByLibrary.simpleMessage("年齡只不過係個數字。"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "readyToGo": MessageLookupByLibrary.simpleMessage("準備好未？"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
