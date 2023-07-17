@@ -333,7 +333,7 @@
   "privacyEvaluation": "私隱評估",
   "personalisation": "個人化",
   "createAnAccount": "開立賬戶",
-  "openInvestmentAccount": "開立投資賬戶",
+  "openInvestmentAccount": "開立新投資賬戶",
   "getTheFirstBotstockForFree": "獲取首個免費 Botstock ",
   "payDepositToStartRealTrade": "入金以開始正式交易",
   "tradeWithBots": "以 Bot 交易",
@@ -495,5 +495,7 @@
   "financialProfile": "Financial Profile",
   "agreements": "Agreements",
   "submitApplication": "Submit Application",
-  "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible"
+  "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible",
+  "investmentResultScreenTitle": "你嘅投資風格已經界定",
+  "investmentResultScreenDescription": "仲差少少就可以開波!\n\n開戶喇!"
 }

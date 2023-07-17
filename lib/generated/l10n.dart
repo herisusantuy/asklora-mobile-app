@@ -3584,6 +3584,26 @@ class S {
       args: [],
     );
   }
+
+  /// `I like your style`
+  String get investmentResultScreenTitle {
+    return Intl.message(
+      'I like your style',
+      name: 'investmentResultScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You’re one step closer to AI Investing. \n\nTime to open your account.`
+  String get investmentResultScreenDescription {
+    return Intl.message(
+      'You’re one step closer to AI Investing. \n\nTime to open your account.',
+      name: 'investmentResultScreenDescription',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

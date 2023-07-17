@@ -339,6 +339,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Investment Period"),
         "investmentPreferences":
             MessageLookupByLibrary.simpleMessage("Investment Preferences"),
+        "investmentResultScreenDescription": MessageLookupByLibrary.simpleMessage(
+            "You’re one step closer to AI Investing. \n\nTime to open your account."),
+        "investmentResultScreenTitle":
+            MessageLookupByLibrary.simpleMessage("I like your style"),
         "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
             "Let’s get to the heart of personalisation, it’s time to define your investment style."),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
