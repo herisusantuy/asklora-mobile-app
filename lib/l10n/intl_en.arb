@@ -540,5 +540,12 @@
   "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible",
   "emailNotExist": "User does not exist with the given email",
   "emailNotVerified": "User email is not verified",
-  "enterValidEmail": "Enter valid email"
+  "enterValidEmail": "Enter valid email",
+  "passworDoesNotMatch":"Your password does not match.",
+  "enterValidPassword":"Enter valid password",
+  "passwordChangeSuccessfully":"Password changed successfully.",
+  "tokenInvalid":"Token is invalid or expired.",
+  "invalidOtp":"Invalid OTP",
+  "linkPasswordResetIsSent":"Link for Password reset is sent to email.",
+  "accountIsNotActive":"Your account is not active yet."
 }

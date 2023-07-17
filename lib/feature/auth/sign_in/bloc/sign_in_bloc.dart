@@ -13,6 +13,7 @@ import '../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../../repository/auth_repository.dart';
+import '../../utils/auth_utils.dart';
 import '../domain/sign_in_response.dart';
 
 part 'sign_in_event.dart';
@@ -117,14 +118,16 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       }
     } on UnauthorizedException {
       emit(state.copyWith(
-          response: BaseResponse.error(message: 'Invalid Password')));
+          response: BaseResponse.error(
+              message: AuthErrorMessage.invalidPassword.value)));
     } on NotFoundException {
       emit(state.copyWith(
           response: BaseResponse.error(
-              message: 'User does not exist with the given email')));
+              message: AuthErrorMessage.emailNotExist.value)));
     } on NotAcceptableException {
       emit(state.copyWith(
-          response: BaseResponse.error(message: 'User email is not verified')));
+          response: BaseResponse.error(
+              message: AuthErrorMessage.emailNotVerified.value)));
     } catch (e) {
       _authRepository.removeStorageOnSignInFailed();
       emit(state.copyWith(response: BaseResponse.error()));

@@ -87,7 +87,9 @@ class SignUpForm extends StatelessWidget {
                 maxLine: 1,
                 labelText: S.of(context).email,
                 hintText: S.of(context).emailAddress,
-                errorText: getErrorMessage(context, state.usernameErrorText),
+                errorText:
+                    AuthErrorMessage.findByString(state.usernameErrorText)
+                        .getErrorMessage(context),
                 onChanged: (email) => context
                     .read<SignUpBloc>()
                     .add(SignUpUsernameChanged(email)));

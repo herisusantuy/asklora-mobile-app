@@ -79,6 +79,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "about": MessageLookupByLibrary.simpleMessage("關於"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("關於 Asklora"),
         "accountInformation": MessageLookupByLibrary.simpleMessage("帳戶資訊"),
+        "accountIsNotActive": MessageLookupByLibrary.simpleMessage(
+            "Your account is not active yet."),
         "accountSettings": MessageLookupByLibrary.simpleMessage("帳戶設定"),
         "activities": MessageLookupByLibrary.simpleMessage("交易記錄"),
         "afterPayDepositHeaderTitle":
@@ -257,6 +259,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Pullup"),
         "introduceBotSquat":
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Squat"),
+        "invalidOtp": MessageLookupByLibrary.simpleMessage("Invalid OTP"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("無效密碼"),
         "investmentAmount": MessageLookupByLibrary.simpleMessage("投資金額"),
         "investmentPeriod": MessageLookupByLibrary.simpleMessage("投資期"),
@@ -269,6 +272,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "licenseeName":
             MessageLookupByLibrary.simpleMessage("Licensee: Chang Yung Ching"),
         "licenseeNumber": MessageLookupByLibrary.simpleMessage("CE 編號: AFF918"),
+        "linkPasswordResetIsSent": MessageLookupByLibrary.simpleMessage(
+            "Link for Password reset is sent to email."),
         "manageYourBotstock":
             MessageLookupByLibrary.simpleMessage("管理 Botstock"),
         "marketCap": MessageLookupByLibrary.simpleMessage("市值"),
@@ -303,6 +308,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("密碼"),
         "passwordChangeSuccess":
             MessageLookupByLibrary.simpleMessage("Password Change Success"),
+        "passwordChangeSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Password changed successfully."),
         "passwordDoesNotMatch": MessageLookupByLibrary.simpleMessage("兩組密碼不相符"),
         "payDepositToStartRealTrade":
             MessageLookupByLibrary.simpleMessage("入金以開始正式交易"),
@@ -448,6 +455,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "theProofOfRemittanceShouldShowYourBankAccount":
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
         "to": MessageLookupByLibrary.simpleMessage("至"),
+        "tokenInvalid": MessageLookupByLibrary.simpleMessage(
+            "Token is invalid or expired."),
         "tooltipBotDetailsEstMaxLoss":
             MessageLookupByLibrary.simpleMessage("Bot將出售以限制損失的最低股票價位。"),
         "tooltipBotDetailsEstMaxProfit":

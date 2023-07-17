@@ -3614,6 +3614,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Your password does not match.`
+  String get passworDoesNotMatch {
+    return Intl.message(
+      'Your password does not match.',
+      name: 'passworDoesNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password changed successfully.`
+  String get passwordChangeSuccessfully {
+    return Intl.message(
+      'Password changed successfully.',
+      name: 'passwordChangeSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Token is invalid or expired.`
+  String get tokenInvalid {
+    return Intl.message(
+      'Token is invalid or expired.',
+      name: 'tokenInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid OTP`
+  String get invalidOtp {
+    return Intl.message(
+      'Invalid OTP',
+      name: 'invalidOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Link for Password reset is sent to email.`
+  String get linkPasswordResetIsSent {
+    return Intl.message(
+      'Link for Password reset is sent to email.',
+      name: 'linkPasswordResetIsSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account is not active yet.`
+  String get accountIsNotActive {
+    return Intl.message(
+      'Your account is not active yet.',
+      name: 'accountIsNotActive',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
