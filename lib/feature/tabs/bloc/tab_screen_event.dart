@@ -14,4 +14,8 @@ class AiButtonSelected extends TabScreenEvent {
   const AiButtonSelected();
 }
 
+class CloseAiOverLay extends TabScreenEvent {
+  const CloseAiOverLay();
+}
+
 class BackButtonClicked extends TabScreenEvent {}

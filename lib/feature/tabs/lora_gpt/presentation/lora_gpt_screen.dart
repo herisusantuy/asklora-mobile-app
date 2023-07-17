@@ -94,7 +94,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
               alignment: Alignment.centerRight,
               child: InkWell(
                 onTap: () =>
-                    context.read<TabScreenBloc>().add(const AiButtonSelected()),
+                    context.read<TabScreenBloc>().add(const CloseAiOverLay()),
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: getPngIcon('close_x',
