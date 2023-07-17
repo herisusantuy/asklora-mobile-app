@@ -15,7 +15,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           home: PpiResultScreen(
             ppiResult: PpiResult.success,
-            memojiText: 'congratulations',
+            title: 'congratulations',
             additionalMessage: 'additional message',
             bottomButton: bottomButton,
           ),
