@@ -7,7 +7,7 @@ enum AuthErrorMessage {
   emailNotExist('User does not exist with the given email'),
   emailNotVerified('User email is not verified'),
   enterValidEmail('Enter valid email'),
-  passworDoesNotMatch('Your password does not match.'),
+  passwordDoesNotMatch('Your password does not match.'),
   enterValidPassword('Enter valid password'),
   passwordChangeSuccessfully('Password changed successfully.'),
   tokenInvalid('Token is invalid or expired.'),
@@ -35,8 +35,8 @@ extension AuthErrorMessageExtension on AuthErrorMessage {
         return S.of(context).emailNotVerified;
       case AuthErrorMessage.enterValidEmail:
         return S.of(context).enterValidEmail;
-      case AuthErrorMessage.passworDoesNotMatch:
-        return S.of(context).passworDoesNotMatch;
+      case AuthErrorMessage.passwordDoesNotMatch:
+        return S.of(context).passwordDoesNotMatch;
       case AuthErrorMessage.enterValidPassword:
         return S.of(context).enterValidPassword;
       case AuthErrorMessage.passwordChangeSuccessfully:
