@@ -66,13 +66,11 @@ class WelcomePage extends StatelessWidget {
 
   Widget _welcomeCard(String iconAssetName, String text) => RoundColoredBox(
         backgroundColor: AskLoraColors.extraLightGray,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            offset: const Offset(0, 4),
-            blurRadius: 4,
-          )
-        ],
+        boxShadow: BoxShadow(
+          color: Colors.black.withOpacity(0.2),
+          offset: const Offset(0, 4),
+          blurRadius: 4,
+        ),
         padding: const EdgeInsets.symmetric(horizontal: 19, vertical: 21),
         content: Row(
           children: [
