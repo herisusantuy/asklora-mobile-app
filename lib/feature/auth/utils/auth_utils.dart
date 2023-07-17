@@ -13,7 +13,8 @@ enum AuthErrorMessage {
   tokenInvalid('Token is invalid or expired.'),
   invalidOtp('Invalid OTP'),
   linkPasswordResetIsSent('Link for Password reset is sent to email.'),
-  accountIsNotActive('Your account is not active yet.');
+  accountIsNotActive('Your account is not active yet.'),
+  empty('');
 
   final String value;
 

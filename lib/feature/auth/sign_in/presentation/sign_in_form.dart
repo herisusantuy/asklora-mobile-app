@@ -98,7 +98,8 @@ class SignInForm extends StatelessWidget {
           maxLine: 1,
           labelText: S.of(context).emailAddress,
           hintText: S.of(context).emailAddress,
-          errorText: state.emailAddressErrorText,
+          errorText: AuthErrorMessage.findByString(state.emailAddressErrorText)
+              .getErrorMessage(context),
           onChanged: (email) =>
               context.read<SignInBloc>().add(SignInEmailChanged(email))));
 

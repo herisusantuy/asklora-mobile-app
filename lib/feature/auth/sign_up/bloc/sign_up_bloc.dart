@@ -39,7 +39,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           isEmailValid: event.username.isValidEmail(),
           usernameErrorText:
               (event.username.isValidEmail() || event.username.isEmpty)
-                  ? ''
+                  ? AuthErrorMessage.empty.value
                   : AuthErrorMessage.enterValidEmail.value),
     );
   }
