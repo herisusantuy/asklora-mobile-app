@@ -17,6 +17,7 @@ import '../../../../core/utils/build_configs/build_config.dart';
 import '../../../../core/utils/feature_flags.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/values/app_values.dart';
+import '../../../../generated/l10n.dart';
 import '../../../bot_stock/presentation/portfolio/bloc/portfolio_bloc.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../bloc/tab_screen_bloc.dart';
