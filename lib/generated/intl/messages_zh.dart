@@ -263,6 +263,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "investmentAmount": MessageLookupByLibrary.simpleMessage("投資金額"),
         "investmentPeriod": MessageLookupByLibrary.simpleMessage("投資期"),
         "investmentPreferences": MessageLookupByLibrary.simpleMessage("投資偏好"),
+        "investmentResultScreenDescription":
+            MessageLookupByLibrary.simpleMessage("仲差少少就可以開波!\n\n開戶喇!"),
+        "investmentResultScreenTitle":
+            MessageLookupByLibrary.simpleMessage("你嘅投資風格已經界定"),
         "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
             "想要 FinFit， 有咩投資秘技？\n界定投資風格先！\n"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
@@ -300,7 +304,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("設置的新密碼不能和舊密碼相同"),
         "onBoardingCompletionMessage": MessageLookupByLibrary.simpleMessage(
             "您已經完成了在Asklora開立賬戶的所有步驟！您的賬戶一\n經審核通過，即可開始交易。審核通常需要1至2個工作日。"),
-        "openInvestmentAccount": MessageLookupByLibrary.simpleMessage("開立投資賬戶"),
+        "openInvestmentAccount":
+            MessageLookupByLibrary.simpleMessage("開立新投資賬戶"),
         "opennessLessThan8":
             MessageLookupByLibrary.simpleMessage("用AI投資其實可以好簡單"),
         "opennessMoreThan8": MessageLookupByLibrary.simpleMessage("我哋一定好夾!"),

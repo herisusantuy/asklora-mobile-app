@@ -538,6 +538,8 @@
   "agreements": "Agreements",
   "submitApplication": "Submit Application",
   "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible",
+  "investmentResultScreenTitle": "I like your style",
+  "investmentResultScreenDescription": "You’re one step closer to AI Investing. \n\nTime to open your account.",
   "privacyFailedScreenTitle": "I'm afraid you're not eligible for Asklora yet.",
   "privacyFailedScreenDescription": "It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.",
   "privacySuccessScreenTitle": "I appreciate your honesty.",

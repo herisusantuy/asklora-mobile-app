@@ -3585,6 +3585,26 @@ class S {
     );
   }
 
+  /// `I like your style`
+  String get investmentResultScreenTitle {
+    return Intl.message(
+      'I like your style',
+      name: 'investmentResultScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You’re one step closer to AI Investing. \n\nTime to open your account.`
+  String get investmentResultScreenDescription {
+    return Intl.message(
+      'You’re one step closer to AI Investing. \n\nTime to open your account.',
+      name: 'investmentResultScreenDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `I'm afraid you're not eligible for Asklora yet.`
   String get privacyFailedScreenTitle {
     return Intl.message(
