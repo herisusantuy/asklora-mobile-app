@@ -102,8 +102,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
 
   Widget _debugWidget(BuildContext context) {
     final config = AppConfigWidget.of(context);
-    if (kDebugMode &&
-        config != null &&
+    if (config != null &&
         (config.baseConfig is DevConfig ||
             config.baseConfig is StagingConfig)) {
       return Container(
