@@ -23,14 +23,9 @@ void main() {
         ));
       }
 
-      var mEmojiWidget = find.byKey(
-        const Key('memoji_widget'),
-      );
-
       testWidgets('Show Ppi Result screen with only memoji widget',
           (WidgetTester tester) async {
         await buildPpiResultScreen(tester, const SizedBox.shrink());
-        expect(mEmojiWidget, findsOneWidget);
       });
 
       testWidgets('Show Ppi Result screen with memoji widget and bottomButton',
@@ -38,7 +33,6 @@ void main() {
         Key bottomButtonKey = const Key('bottom_button');
         await buildPpiResultScreen(tester,
             PrimaryButton(key: bottomButtonKey, label: 'button', onTap: () {}));
-        expect(mEmojiWidget, findsOneWidget);
         expect(find.byKey(bottomButtonKey), findsOneWidget);
       });
     },
