@@ -39,7 +39,7 @@ class Lora extends Conversation {
   List<Object?> get props => [response, requestId, respType, newSession];
 
   static Lora get defaultMessage => Lora(
-      '👋Hi! I’m Lora. Let me know if you have any questions or requests on stocks investments.',
+      "👋Hi! I'm Lora. Let me know if you have any questions or requests on stocks investments.",
       '',
       '',
       false);

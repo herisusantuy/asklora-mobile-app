@@ -9,7 +9,7 @@ class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
   TabScreenBloc({required TabPage initialTabPage})
       : super(TabScreenState(currentTabPage: initialTabPage)) {
     on<TabChanged>(_onTabChanged);
-    on<AiButtonSelected>(_onAiButtonSelected);
+    on<OpenAiOverlay>(_onAiButtonSelected);
     on<CloseAiOverLay>(_onCloseAiOverlay);
     on<BackButtonClicked>(_onBackButtonClicked);
   }
@@ -22,7 +22,7 @@ class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
     emit(state.copyWith(currentTabPage: event.tabPage, aiPageSelected: false));
   }
 
-  _onAiButtonSelected(AiButtonSelected event, Emitter<TabScreenState> emit) {
+  _onAiButtonSelected(OpenAiOverlay event, Emitter<TabScreenState> emit) {
     emit(state.copyWith(aiPageSelected: true));
   }
 
