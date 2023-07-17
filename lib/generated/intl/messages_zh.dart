@@ -504,15 +504,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "weWillTakeInformationCollectedFromYour": m21,
         "website": MessageLookupByLibrary.simpleMessage("網站"),
         "welcomeScreenFirstBenefit":
-            MessageLookupByLibrary.simpleMessage("FinFit 教練指導"),
+            MessageLookupByLibrary.simpleMessage("度身訂做AI指導"),
         "welcomeScreenSecondBenefit":
             MessageLookupByLibrary.simpleMessage("個人化體驗"),
-        "welcomeScreenSubTitle":
-            MessageLookupByLibrary.simpleMessage("踢走投資壞習慣！投資夠FinFit，夠自信！"),
+        "welcomeScreenSubTitle": MessageLookupByLibrary.simpleMessage(
+            "踢走投資壞習慣！\n由AI 顧問 Asklora 帶你一齊體驗嶄新科技！"),
         "welcomeScreenThirdBenefit":
             MessageLookupByLibrary.simpleMessage("AI 全自動交易"),
         "welcomeScreenTitle":
-            MessageLookupByLibrary.simpleMessage("投資，你夠 Fit 未？"),
+            MessageLookupByLibrary.simpleMessage("投資都要夠 Fit "),
         "withdraw": MessageLookupByLibrary.simpleMessage("提取資金"),
         "withdrawalAmount": MessageLookupByLibrary.simpleMessage("提取金額"),
         "withdrawalRequestSubmittedSubTitle":
