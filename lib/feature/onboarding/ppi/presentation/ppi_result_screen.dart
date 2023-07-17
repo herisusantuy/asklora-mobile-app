@@ -48,7 +48,7 @@ class PpiResultScreen extends StatelessWidget {
                           ppiResult == PpiResult.success
                               ? 'lora_animation_green'
                               : 'lora_animation_pink',
-                          width: 208,
+                          width: 200,
                           fit: BoxFit.fitHeight),
                     ),
                     CustomTextNew(

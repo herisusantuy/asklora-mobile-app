@@ -48,6 +48,7 @@ Image getAPngImage(String imageName,
       width: width,
       color: color,
       fit: fit,
+      filterQuality: FilterQuality.high,
     );
 
 Widget getSvgImage(String assetName,
