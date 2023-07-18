@@ -23,7 +23,7 @@ class Environment {
       case EnvironmentType.staging:
         return StagingConfig();
       default:
-        return StagingConfig();
+        return DevConfig();
     }
   }
 }
