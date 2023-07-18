@@ -17,6 +17,7 @@ class BotPortfolioFilter extends StatelessWidget {
           return Path();
         },
         content: Container(
+          width: 130,
           margin: const EdgeInsets.only(top: 12, right: 8),
           decoration: BoxDecoration(
               boxShadow: [
@@ -43,15 +44,15 @@ class BotPortfolioFilter extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      CustomCheckbox(
-                        text: 'Active',
+                      CustomCheckboxListTile(
+                        text: S.of(context).active,
                         isChecked: state.activeFilterChecked,
                         onChanged: (value) => context
                             .read<PortfolioBloc>()
                             .add(ActiveFilterChecked(value!)),
                       ),
-                      CustomCheckbox(
-                        text: 'Pending',
+                      CustomCheckboxListTile(
+                        text: S.of(context).pending,
                         isChecked: state.pendingFilterChecked,
                         onChanged: (value) => context
                             .read<PortfolioBloc>()
