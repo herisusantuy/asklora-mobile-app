@@ -32,28 +32,27 @@ class InChatBubbleWidget extends StatelessWidget {
             Flexible(
               child: ClipRect(
                 child: BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: 7,
-                    sigmaY: 7,
-                  ),
-                  child: Container(
-                      padding: const EdgeInsets.all(15),
-                      margin: const EdgeInsets.only(bottom: 5),
-                      decoration: BoxDecoration(
-                        color: AskLoraColors.white.withOpacity(0.2),
-                        border: Border.all(
-                            width: 1.5,
-                            color: AskLoraColors.white.withOpacity(0.8)),
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
+                    filter: ImageFilter.blur(
+                      sigmaX: 7,
+                      sigmaY: 7,
+                    ),
+                    child: Container(
+                        padding: const EdgeInsets.all(15),
+                        margin: const EdgeInsets.only(bottom: 5),
+                        decoration: BoxDecoration(
+                          color: AskLoraColors.white.withOpacity(0.2),
+                          border: Border.all(
+                              width: 1.5,
+                              color: AskLoraColors.white.withOpacity(0.8)),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                          ),
                         ),
-                      ),
-                      child: CustomTextNew(message,
-                          style: AskLoraTextStyles.body2
-                              .copyWith(color: AskLoraColors.white))),
-                ),
+                        child: SelectableText(message,
+                            style: AskLoraTextStyles.body2
+                                .copyWith(color: AskLoraColors.white)))),
               ),
             ),
           ],

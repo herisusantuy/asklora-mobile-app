@@ -70,7 +70,7 @@ class OutChatBubbleWidget extends StatelessWidget {
                                   .read<LoraGptBloc>()
                                   .add(const OnFinishTyping());
                             })
-                        : CustomTextNew(message,
+                        : SelectableText(message,
                             style: AskLoraTextStyles.body2
                                 .copyWith(color: AskLoraColors.white))),
               ),
