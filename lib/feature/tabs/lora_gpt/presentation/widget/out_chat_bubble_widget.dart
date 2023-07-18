@@ -5,10 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/animated_text.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/typer_animated_text.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/app_icons.dart';
 import '../../bloc/lora_gpt_bloc.dart';
 
 class OutChatBubbleWidget extends StatelessWidget {
@@ -24,17 +24,7 @@ class OutChatBubbleWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle, color: AskLoraColors.whiteSmoke),
-                child: const LoraMemojiWidget(
-                  loraMemojiType: LoraMemojiType.lora3,
-                  height: 30,
-                  width: 30,
-                ),
-              ),
+              getPngIcon('icon_lora_ai_chat_bubble', fit: BoxFit.contain),
               const SizedBox(width: 12),
               CustomTextNew(
                 'Lora',
@@ -72,7 +62,7 @@ class OutChatBubbleWidget extends StatelessWidget {
                             repeatForever: false,
                             animatedTexts: [
                               TyperAnimatedText(message,
-                                  textStyle: AskLoraTextStyles.subtitle2
+                                  textStyle: AskLoraTextStyles.body2
                                       .copyWith(color: AskLoraColors.white))
                             ],
                             onFinished: () {
@@ -80,8 +70,8 @@ class OutChatBubbleWidget extends StatelessWidget {
                                   .read<LoraGptBloc>()
                                   .add(const OnFinishTyping());
                             })
-                        : CustomTextNew(message,
-                            style: AskLoraTextStyles.subtitle2
+                        : SelectableText(message,
+                            style: AskLoraTextStyles.body2
                                 .copyWith(color: AskLoraColors.white))),
               ),
             ),

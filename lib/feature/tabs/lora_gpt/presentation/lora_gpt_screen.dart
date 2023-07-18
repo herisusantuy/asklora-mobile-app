@@ -25,32 +25,24 @@ class _LoraGptScreenState extends State<LoraGptScreen>
   Widget build(BuildContext context) {
     return CustomScaffold(
       enableBackNavigation: false,
-      backgroundColor: Colors.white.withOpacity(0.2),
+      backgroundColor: Colors.transparent,
       body: Column(
         children: [
           _debugWidget(context),
           Expanded(
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: AskLoraColors.black.withOpacity(0.4),
-                  image: const DecorationImage(
-                      image: AssetImage('assets/lora_gpt_background.png'),
-                      fit: BoxFit.cover)),
-              child: Stack(
-                children: [
-                  const AiChatList(),
-                  _header,
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 15, right: 15, bottom: 12),
-                      child: _bottomContent,
-                    ),
+            child: Stack(
+              children: [
+                const AiChatList(),
+                _header,
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(left: 15, right: 15, bottom: 12),
+                    child: _bottomContent,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],
@@ -64,31 +56,10 @@ class _LoraGptScreenState extends State<LoraGptScreen>
         child: Stack(
           children: [
             Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 11,
-                    height: 11,
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: AskLoraColors.primaryGreen,
-                            spreadRadius: 2,
-                            blurRadius: 7, // changes position of shadow
-                          ),
-                        ],
-                        color: AskLoraColors.primaryGreen),
-                  ),
-                  const SizedBox(width: 30),
-                  CustomTextNew(
-                    'Lora',
-                    style: AskLoraTextStyles.h5
-                        .copyWith(color: AskLoraColors.white),
-                  ),
-                ],
+              child: CustomTextNew(
+                'Lora',
+                style:
+                    AskLoraTextStyles.h4.copyWith(color: AskLoraColors.white),
               ),
             ),
             Align(

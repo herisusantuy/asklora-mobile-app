@@ -3774,6 +3774,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Error Storing Data`
+  String get errorStoringData {
+    return Intl.message(
+      'Error Storing Data',
+      name: 'errorStoringData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions`
+  String get errorStoringDataDetails {
+    return Intl.message(
+      'Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions',
+      name: 'errorStoringDataDetails',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

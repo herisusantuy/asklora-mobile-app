@@ -276,6 +276,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorGettingInformationTransactionHistorySubTitle":
             MessageLookupByLibrary.simpleMessage(
                 "There was an error when trying to get the transaction history. Please try reloading the page"),
+        "errorStoringData":
+            MessageLookupByLibrary.simpleMessage("Error Storing Data"),
+        "errorStoringDataDetails": MessageLookupByLibrary.simpleMessage(
+            "Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions"),
         "errorWithdrawalUnavailableSubTitle": MessageLookupByLibrary.simpleMessage(
             "You don’t have any funds to withdraw. You haven’t deposited yet or your deposit might still be processing "),
         "errorWithdrawalUnavailableTitle":
