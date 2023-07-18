@@ -36,7 +36,7 @@ class Tabs extends StatelessWidget {
                       _tabPng(
                           onTap: () => context
                               .read<TabScreenBloc>()
-                              .add(const OpenAiOverlayClick()),
+                              .add(const OnAiOverlayClick()),
                           iconAsset: 'bottom_nav_ai',
                           activeIconAsset: 'bottom_nav_ai_selected',
                           active: state.aiPageSelected),
