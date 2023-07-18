@@ -89,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your account is not active yet."),
         "accountSettings":
             MessageLookupByLibrary.simpleMessage("Account Settings"),
+        "active": MessageLookupByLibrary.simpleMessage("Active"),
         "activities": MessageLookupByLibrary.simpleMessage("Activities"),
         "afterPayDepositHeaderTitle": MessageLookupByLibrary.simpleMessage(
             "Your investment account will be ready soon!"),
@@ -97,10 +98,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "almostFinished":
             MessageLookupByLibrary.simpleMessage("Almost finished!"),
+        "askMeAnythingRelatedToFinance": MessageLookupByLibrary.simpleMessage(
+            "Ask me anything related to finance"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
-            "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
+            "I\'m Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("Your Name"),
+        "askloraYouUltimateFinancialAdvisor":
+            MessageLookupByLibrary.simpleMessage(
+                "Asklora.\n Your ultimate\nfinancial advisor"),
         "atLeast1Lowercase":
             MessageLookupByLibrary.simpleMessage("at least 1 lowercase letter"),
         "atLeast1Number":
@@ -118,6 +124,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "botDuration": MessageLookupByLibrary.simpleMessage("Bot Duration"),
         "botManagementFee":
             MessageLookupByLibrary.simpleMessage("Bot Management Fee"),
+        "botRecommendationScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "Investments tailored  for you"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
             MessageLookupByLibrary.simpleMessage(
@@ -277,6 +285,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorGettingInformationTransactionHistorySubTitle":
             MessageLookupByLibrary.simpleMessage(
                 "There was an error when trying to get the transaction history. Please try reloading the page"),
+        "errorStoringData":
+            MessageLookupByLibrary.simpleMessage("Error Storing Data"),
+        "errorStoringDataDetails": MessageLookupByLibrary.simpleMessage(
+            "Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions"),
         "errorWithdrawalUnavailableSubTitle": MessageLookupByLibrary.simpleMessage(
             "You don’t have any funds to withdraw. You haven’t deposited yet or your deposit might still be processing "),
         "errorWithdrawalUnavailableTitle":
@@ -321,9 +333,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "gotIt": MessageLookupByLibrary.simpleMessage("Got It"),
         "greatStart": MessageLookupByLibrary.simpleMessage("Great start!"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
-            "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
+            "Let’s start the training with simple questions!\n\n  Remember - to lose patience is to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "Alright! Are you ready for the FinFit journey? "),
+            "Ready to start your AI revolution?"),
         "halfWayThere": MessageLookupByLibrary.simpleMessage("Halfway there!"),
         "headquarters": MessageLookupByLibrary.simpleMessage("Headquarters"),
         "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works"),
@@ -354,6 +366,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Investment Period"),
         "investmentPreferences":
             MessageLookupByLibrary.simpleMessage("Investment Preferences"),
+        "investmentResultScreenDescription": MessageLookupByLibrary.simpleMessage(
+            "You’re one step closer to AI Investing. \n\nTime to open your account."),
+        "investmentResultScreenTitle":
+            MessageLookupByLibrary.simpleMessage("I like your style"),
         "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
             "Let’s get to the heart of personalisation, it’s time to define your investment style."),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
@@ -387,6 +403,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("No Transactions"),
         "noTransactionsYet": MessageLookupByLibrary.simpleMessage(
             "Looks like you haven’t made \nany transactions yet!"),
+        "notFeelingIt": MessageLookupByLibrary.simpleMessage(
+            "Not feeling it? Try something different."),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
             "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
@@ -428,6 +446,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pay Deposit to Start Real Trade"),
         "paymentDetails":
             MessageLookupByLibrary.simpleMessage("Payment Details"),
+        "pending": MessageLookupByLibrary.simpleMessage("Pending"),
         "performance": MessageLookupByLibrary.simpleMessage("Performance"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "personalisation":

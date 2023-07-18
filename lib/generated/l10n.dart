@@ -1160,10 +1160,10 @@ class S {
     );
   }
 
-  /// `I'm Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? `
+  /// `I'm Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat’s your name? `
   String get askNameScreenPlaceholder {
     return Intl.message(
-      'I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? ',
+      'I\'m Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat’s your name? ',
       name: 'askNameScreenPlaceholder',
       desc: '',
       args: [],
@@ -1200,20 +1200,20 @@ class S {
     );
   }
 
-  /// `Alright! Are you ready for the FinFit journey? `
+  /// `Ready to start your AI revolution?`
   String get greetingScreenTitle {
     return Intl.message(
-      'Alright! Are you ready for the FinFit journey? ',
+      'Ready to start your AI revolution?',
       name: 'greetingScreenTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!`
+  /// `Let’s start the training with simple questions!\n\n  Remember - to lose patience is to lose the battle!`
   String get greetingScreenSubTitle {
     return Intl.message(
-      'Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!',
+      'Let’s start the training with simple questions!\n\n  Remember - to lose patience is to lose the battle!',
       name: 'greetingScreenSubTitle',
       desc: '',
       args: [],
@@ -3585,6 +3585,46 @@ class S {
     );
   }
 
+  /// `Asklora.\n Your ultimate\nfinancial advisor`
+  String get askloraYouUltimateFinancialAdvisor {
+    return Intl.message(
+      'Asklora.\n Your ultimate\nfinancial advisor',
+      name: 'askloraYouUltimateFinancialAdvisor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ask me anything related to finance`
+  String get askMeAnythingRelatedToFinance {
+    return Intl.message(
+      'Ask me anything related to finance',
+      name: 'askMeAnythingRelatedToFinance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I like your style`
+  String get investmentResultScreenTitle {
+    return Intl.message(
+      'I like your style',
+      name: 'investmentResultScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You’re one step closer to AI Investing. \n\nTime to open your account.`
+  String get investmentResultScreenDescription {
+    return Intl.message(
+      'You’re one step closer to AI Investing. \n\nTime to open your account.',
+      name: 'investmentResultScreenDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `I'm afraid you're not eligible for Asklora yet.`
   String get privacyFailedScreenTitle {
     return Intl.message(
@@ -3710,6 +3750,66 @@ class S {
     return Intl.message(
       'Social butterfly, amplify that energy!',
       name: 'extrovertMoreThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active`
+  String get active {
+    return Intl.message(
+      'Active',
+      name: 'active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pending {
+    return Intl.message(
+      'Pending',
+      name: 'pending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investments tailored  for you`
+  String get botRecommendationScreenTitle {
+    return Intl.message(
+      'Investments tailored  for you',
+      name: 'botRecommendationScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not feeling it? Try something different.`
+  String get notFeelingIt {
+    return Intl.message(
+      'Not feeling it? Try something different.',
+      name: 'notFeelingIt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error Storing Data`
+  String get errorStoringData {
+    return Intl.message(
+      'Error Storing Data',
+      name: 'errorStoringData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions`
+  String get errorStoringDataDetails {
+    return Intl.message(
+      'Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions',
+      name: 'errorStoringDataDetails',
       desc: '',
       args: [],
     );
