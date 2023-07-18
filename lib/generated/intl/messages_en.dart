@@ -121,6 +121,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "botDuration": MessageLookupByLibrary.simpleMessage("Bot Duration"),
         "botManagementFee":
             MessageLookupByLibrary.simpleMessage("Bot Management Fee"),
+        "botRecommendationScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "Investments tailored  for you"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
             MessageLookupByLibrary.simpleMessage(
@@ -385,6 +387,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("No Transactions"),
         "noTransactionsYet": MessageLookupByLibrary.simpleMessage(
             "Looks like you haven’t made \nany transactions yet!"),
+        "notFeelingIt": MessageLookupByLibrary.simpleMessage(
+            "Not feeling it? Try something different."),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
             "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),

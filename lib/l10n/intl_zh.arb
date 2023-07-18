@@ -512,5 +512,9 @@
   "neuroticismLessThan8": "我哋可以進取少少, 承受一定嘅風險 ",
   "neuroticismMoreThan8": "我哋一步一步嚟, 控制住風險",
   "extrovertLessThan8": "每個人都需要me time，獨個觀看世間變幻事情",
-  "extrovertMoreThan8": "你一定係交際花, 將你嘅vibe發光發亮!"
+  "extrovertMoreThan8": "你一定係交際花, 將你嘅vibe發光發亮!",
+  "botRecommendationScreenTitle": "最夾你嘅投資風格",
+  "notFeelingIt": "唔啱心水？\n當然仲有得揀！",
+  "buttonChangeInvestmentStyle": "更改投資風格",
+  "trade": "交易"
 }
