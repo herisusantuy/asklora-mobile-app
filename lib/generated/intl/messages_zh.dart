@@ -106,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "atLeast1Number": MessageLookupByLibrary.simpleMessage("最少 1 個數字"),
         "atLeast1Uppercase":
             MessageLookupByLibrary.simpleMessage("最少 1 個大寫英文字母"),
+        "backToLogin": MessageLookupByLibrary.simpleMessage("返回登入"),
         "bankName": MessageLookupByLibrary.simpleMessage("銀行名稱"),
         "bankNumber": MessageLookupByLibrary.simpleMessage("銀行號碼"),
         "beforeDepositHeaderTitle": m0,
@@ -176,6 +177,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonViewTransactionHistory":
             MessageLookupByLibrary.simpleMessage("查看交易歷史"),
         "buttonWithdraw": MessageLookupByLibrary.simpleMessage("提取"),
+        "cannotRememberEmailAddress": MessageLookupByLibrary.simpleMessage(
+            "忘記登入電郵地址\n請發送電郵至 cs@asklora.ai"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage("投資一樣\n要夠Fit"),
         "carouselIntro2":
             MessageLookupByLibrary.simpleMessage("FinFit教練，Lora 全程教路"),
@@ -225,6 +228,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "endBotStockAcknowledgement": m9,
         "endDate": MessageLookupByLibrary.simpleMessage("結束日期"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("到期價值"),
+        "enterANewPassword": MessageLookupByLibrary.simpleMessage("請輸入新密碼"),
         "errorGettingInformationInvestmentDetailSubTitle":
             MessageLookupByLibrary.simpleMessage("載入你投資細節時出咗少少問題，Reload一次試下？"),
         "errorGettingInformationPortfolioSubTitle":
@@ -250,6 +254,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "financialProfile":
             MessageLookupByLibrary.simpleMessage("Financial Profile"),
         "firstTimeCopyAskloraBankDetails": m11,
+        "forgotPassword": MessageLookupByLibrary.simpleMessage("忘記密碼"),
+        "forgotPasswordMessage":
+            MessageLookupByLibrary.simpleMessage("請輸入你的電郵地址，我們會發送重設密碼的指示給你。"),
         "founded": MessageLookupByLibrary.simpleMessage("成立年份"),
         "free": MessageLookupByLibrary.simpleMessage("免費"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("免費試用期"),
@@ -277,6 +284,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "inApp": MessageLookupByLibrary.simpleMessage("In-app通知"),
         "industry": MessageLookupByLibrary.simpleMessage("行業"),
         "inputDepositAmount": MessageLookupByLibrary.simpleMessage("輸入金額"),
+        "inputWrongEmailAddress":
+            MessageLookupByLibrary.simpleMessage("電郵地址錯誤"),
         "introduceBotPlank":
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Plank"),
         "introduceBotPullup":
@@ -343,6 +352,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordChangeSuccess":
             MessageLookupByLibrary.simpleMessage("Password Change Success"),
         "passwordDoesNotMatch": MessageLookupByLibrary.simpleMessage("兩組密碼不相符"),
+        "passwordLinkHasBeenSent":
+            MessageLookupByLibrary.simpleMessage("已發送重設密碼電郵，\n請檢查你的電郵。"),
         "payDepositToStartRealTrade":
             MessageLookupByLibrary.simpleMessage("入金以開始正式交易"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
@@ -459,6 +470,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "readyToGo": MessageLookupByLibrary.simpleMessage("準備好未？"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
+        "resetPassword": MessageLookupByLibrary.simpleMessage("重設密碼"),
+        "resetPasswordSuccessful":
+            MessageLookupByLibrary.simpleMessage("密碼重設成功"),
+        "resetPasswordSuccessfulMessage":
+            MessageLookupByLibrary.simpleMessage("你的密碼已經被重設。請返回登入頁面重新登入。"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶號碼）。不過，我們亦可能會因核實交易，向你要求更多附加資料。"),
         "riskDisclosureStatementAcknowledgement":
