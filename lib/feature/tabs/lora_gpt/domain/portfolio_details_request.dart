@@ -42,6 +42,11 @@ class PortfolioDetailsRequest extends BaseQueryRequest {
         'bot_type': botType,
       };
 
+  factory PortfolioDetailsRequest.fromJson(Map<String, dynamic> json) =>
+      _$PortfolioDetailsRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PortfolioDetailsRequestToJson(this);
+
   @override
   List<Object> get props => [input, userId, username, platform, botType];
 }
