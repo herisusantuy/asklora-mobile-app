@@ -126,10 +126,27 @@ class BotActiveOrderDetailModel extends BotDetailModel {
             : 'NA';
   }
 
-  String get maxLossPctString => maxLossPct.convertToCurrencyDecimal();
+  String get maxLossPctString {
+    final double maxLossPctDouble = checkDouble(maxLossPct);
+    final String maxLossPctFormatted =
+        maxLossPctDouble.convertToCurrencyDecimal();
+    return (maxLossPctDouble > 0)
+        ? '+$maxLossPctFormatted%'
+        : (maxLossPctDouble < 0)
+            ? '$maxLossPctFormatted%'
+            : '/';
+  }
 
-  String get targetProfitPctString =>
-      targetProfitPct.convertToCurrencyDecimal();
+  String get targetProfitPctString {
+    final double targetProfitPctDouble = checkDouble(targetProfitPct);
+    final String targetProfitPctFormatted =
+        targetProfitPctDouble.convertToCurrencyDecimal();
+    return (targetProfitPctDouble > 0)
+        ? '+$targetProfitPctFormatted%'
+        : (targetProfitPctDouble < 0)
+            ? '$targetProfitPctFormatted%'
+            : '/';
+  }
 
   String get daysToExpireString => '${daysToExpire.abs()}';
 
