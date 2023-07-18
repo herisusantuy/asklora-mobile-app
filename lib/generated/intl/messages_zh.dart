@@ -221,6 +221,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("載入你投資組合時出咗少少問題，Reload一次試下？"),
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("咦，無法獲取資料"),
+        "errorStoringData": MessageLookupByLibrary.simpleMessage("數據存取發生錯誤"),
+        "errorStoringDataDetails": MessageLookupByLibrary.simpleMessage(
+            "Oops！我們在嘗試存儲你的回覆時遇到一些技術困難。讓我們重新做題"),
         "estMaxLossPercent": MessageLookupByLibrary.simpleMessage("預計最大損失%"),
         "estMaxProfitPercent": MessageLookupByLibrary.simpleMessage("預計最大收益%"),
         "estStopLossPercent": MessageLookupByLibrary.simpleMessage("預計止損 %"),

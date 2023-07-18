@@ -558,5 +558,7 @@
   "active": "Active",
   "pending": "Pending",
   "botRecommendationScreenTitle": "Investments tailored  for you",
-  "notFeelingIt": "Not feeling it? Try something different."
+  "notFeelingIt": "Not feeling it? Try something different.",
+  "errorStoringData": "Error Storing Data",
+  "errorStoringDataDetails": "Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions"
 }
