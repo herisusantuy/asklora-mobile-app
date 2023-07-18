@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../generated/l10n.dart';
 import '../../presentation/ai_welcome_screen.dart';
 import '../../presentation/widgets/ai_welcome_subtitle_text.dart';
+import 'ai_investment_style_question_screen.dart';
 
 class AiInvestmentStyleQuestionWelcomeScreen extends StatelessWidget {
   static const String route = '/ai_investment_style_question_welcome_screen';
@@ -18,9 +19,10 @@ class AiInvestmentStyleQuestionWelcomeScreen extends StatelessWidget {
           S.of(context).aiIsqWelcomeSubTitle,
         ),
       ),
-      onBottomButtonTap: () {
-        print('hello');
-      },
+      onBottomButtonTap: () => AiInvestmentStyleQuestionScreen.open(context),
     );
   }
+
+  static void open(BuildContext context) =>
+      Navigator.of(context).pushNamed(route);
 }

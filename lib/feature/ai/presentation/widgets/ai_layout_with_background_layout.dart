@@ -10,7 +10,7 @@ class AiLayoutWithBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         decoration: const BoxDecoration(
-          color: Colors.transparent,
+          color: Colors.black,
           image: DecorationImage(
               image: AssetImage('assets/lora_gpt_background.png'),
               fit: BoxFit.cover),

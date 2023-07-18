@@ -134,4 +134,7 @@ class AiInvestmentStyleQuestionScreen extends StatelessWidget {
         );
     }
   }
+
+  static void open(BuildContext context) =>
+      Navigator.of(context).pushNamed(route);
 }

@@ -35,8 +35,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
   void _onInitiateAI(InitiateAI onEditQuery,
       Emitter<AiInvestmentStyleQuestionState> emit) async {
     final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
-    final askloraId =
-        await _sharedPreference.readIntData(sfKeyAskloraId) ?? 'aldi taher';
+    final askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
 
     emit(state.copyWith(
         sessionId: '', userName: userName, userId: askloraId.toString()));

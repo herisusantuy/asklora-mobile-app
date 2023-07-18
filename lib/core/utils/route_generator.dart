@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../feature/ai/investment_style_question/presentation/ai_investment_style_question_screen.dart';
+import '../../feature/ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../feature/auth/email_activation/presentation/email_activation_screen.dart';
 import '../../feature/auth/otp/presentation/otp_screen.dart';
 import '../../feature/auth/reset_password/presentation/reset_password_screen.dart';
@@ -319,6 +321,14 @@ class RouterGenerator {
       case HomeScreenForm.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const HomeScreenForm());
+      case AiInvestmentStyleQuestionWelcomeScreen.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const AiInvestmentStyleQuestionWelcomeScreen());
+      case AiInvestmentStyleQuestionScreen.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const AiInvestmentStyleQuestionScreen());
       case TabScreen.route:
         return MaterialPageRoute(
             settings: settings,
