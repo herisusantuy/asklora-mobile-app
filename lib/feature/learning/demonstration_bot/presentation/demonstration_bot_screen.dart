@@ -8,6 +8,7 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
+import '../../../../generated/l10n.dart';
 import '../../../bot_stock/domain/bot_recommendation_model.dart';
 import '../../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../../bot_stock/repository/bot_stock_repository.dart';
@@ -117,7 +118,7 @@ class DemonstrationBotScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomTextNew(
-            'Investments for you, by you',
+            S.of(context).investmentsTailoredForYou,
             style: AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
           ),
           const SizedBox(

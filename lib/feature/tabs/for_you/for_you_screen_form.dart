@@ -43,7 +43,7 @@ class ForYouScreenForm extends StatelessWidget {
               return BotStockBackgroundWithPopUp(
                   shouldScrollable: false,
                   header: CustomTextNew(
-                    'Investments for you, by you',
+                    S.of(context).investmentsTailoredForYou,
                     style: AskLoraTextStyles.h2
                         .copyWith(color: AskLoraColors.charcoal),
                   ),

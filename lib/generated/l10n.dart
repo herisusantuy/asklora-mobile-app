@@ -3774,6 +3774,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Investments tailored  for you`
+  String get investmentsTailoredForYou {
+    return Intl.message(
+      'Investments tailored  for you',
+      name: 'investmentsTailoredForYou',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

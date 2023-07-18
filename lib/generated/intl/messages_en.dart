@@ -358,6 +358,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I like your style"),
         "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
             "Let’s get to the heart of personalisation, it’s time to define your investment style."),
+        "investmentsTailoredForYou": MessageLookupByLibrary.simpleMessage(
+            "Investments tailored  for you"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "learnBotstockManagement":
             MessageLookupByLibrary.simpleMessage("Learn Botstock Management"),
