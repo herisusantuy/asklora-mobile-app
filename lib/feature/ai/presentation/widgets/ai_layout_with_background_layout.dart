@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/custom_scaffold.dart';
-import '../../../../core/values/app_values.dart';
 
 class AiLayoutWithBackground extends StatelessWidget {
   final Widget content;
@@ -10,8 +9,14 @@ class AiLayoutWithBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        decoration: AppValues.loraBackgroundBoxDecoration,
+        decoration: const BoxDecoration(
+          color: Colors.transparent,
+          image: DecorationImage(
+              image: AssetImage('assets/lora_gpt_background.png'),
+              fit: BoxFit.cover),
+        ),
         child: CustomScaffold(
+          enableBackNavigation: false,
           appBarBackgroundColor: Colors.transparent,
           backgroundColor: Colors.transparent,
           body: content,

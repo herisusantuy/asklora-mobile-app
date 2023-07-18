@@ -84,6 +84,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "afterPayDepositHeaderTitle":
             MessageLookupByLibrary.simpleMessage("投資賬戶\n即將 Ready！"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
+        "aiIsqWelcomeSubTitle": MessageLookupByLibrary.simpleMessage(
+            "Let’s see what kind of stocks you prefer"),
+        "aiIsqWelcomeTitle": MessageLookupByLibrary.simpleMessage(
+            "It’s time to find out your investment preferences"),
         "allSettings": MessageLookupByLibrary.simpleMessage("設定"),
         "almostFinished": MessageLookupByLibrary.simpleMessage("馬上就好"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(

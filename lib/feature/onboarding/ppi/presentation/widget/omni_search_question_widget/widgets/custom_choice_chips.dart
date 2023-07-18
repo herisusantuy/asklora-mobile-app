@@ -9,13 +9,25 @@ class CustomChoiceChips extends StatefulWidget {
   final bool active;
   final bool enableClosedButton;
   final VoidCallback? onClosed;
+  final Color? activeFillColor;
+  final Color? pressedFillColor;
+  final Color? fillColor;
+  final TextStyle? textStyle;
+  final Color? textColor;
+  final Color? activeTextColor;
 
   const CustomChoiceChips(
       {this.label = '',
       required this.onTap,
       this.active = false,
       this.enableClosedButton = false,
+      this.activeFillColor,
+      this.pressedFillColor,
+      this.fillColor,
       this.onClosed,
+      this.textStyle,
+      this.textColor,
+      this.activeTextColor,
       Key? key})
       : super(key: key);
 
@@ -54,20 +66,23 @@ class _CustomChoiceChipsState extends State<CustomChoiceChips> {
                         ? AskLoraColors.primaryGreen
                         : AskLoraColors.gray),
             color: widget.active
-                ? AskLoraColors.primaryGreen.withOpacity(0.1)
+                ? widget.activeFillColor ??
+                    AskLoraColors.primaryGreen.withOpacity(0.1)
                 : _isPressed
-                    ? AskLoraColors.primaryGreen.withOpacity(0.2)
-                    : Colors.transparent),
+                    ? widget.pressedFillColor ??
+                        AskLoraColors.primaryGreen.withOpacity(0.2)
+                    : widget.fillColor ?? Colors.transparent),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Flexible(
               child: CustomTextNew(
                 widget.label,
-                style: AskLoraTextStyles.subtitle4.copyWith(
-                    color: widget.active
-                        ? AskLoraColors.charcoal
-                        : AskLoraColors.gray),
+                style: (widget.textStyle ?? AskLoraTextStyles.subtitle4)
+                    .copyWith(
+                        color: widget.active
+                            ? widget.activeTextColor ?? AskLoraColors.charcoal
+                            : widget.textColor ?? AskLoraColors.gray),
                 maxLines: 3,
                 ellipsis: true,
               ),

@@ -3,13 +3,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/presentation/animated_text.dart';
-import '../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../core/presentation/lora_memoji_widget.dart';
-import '../../../../../core/presentation/typer_animated_text.dart';
-import '../../../../../core/styles/asklora_colors.dart';
-import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../bloc/lora_gpt_bloc.dart';
+import '../../animated_text.dart';
+import '../../custom_text_new.dart';
+import '../../lora_memoji_widget.dart';
+import '../../typer_animated_text.dart';
+import '../../../styles/asklora_colors.dart';
+import '../../../styles/asklora_text_styles.dart';
+import '../../../../feature/tabs/lora_gpt/bloc/lora_gpt_bloc.dart';
 
 class OutChatBubbleWidget extends StatelessWidget {
   const OutChatBubbleWidget(this.message,

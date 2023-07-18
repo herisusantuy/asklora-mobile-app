@@ -1,10 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import '../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../core/presentation/lora_memoji_widget.dart';
-import '../../../../../core/styles/asklora_colors.dart';
-import '../../../../../core/styles/asklora_text_styles.dart';
-import 'jumping_dots_lora_gpt.dart';
+import '../../custom_text_new.dart';
+import '../../lora_memoji_widget.dart';
+import '../../../styles/asklora_colors.dart';
+import '../../../styles/asklora_text_styles.dart';
+import '../../../../feature/tabs/lora_gpt/presentation/widget/jumping_dots_lora_gpt.dart';
 
 class LoraThinkingWidget extends StatelessWidget {
   const LoraThinkingWidget({super.key});

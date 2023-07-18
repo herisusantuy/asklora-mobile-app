@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'conversation.g.dart';
 
-enum ConversationType { me, lora, loading, reset }
+enum ConversationType { me, lora, loading, reset, next }
 
 abstract class Conversation extends Equatable {
   ConversationType type();
@@ -78,6 +78,11 @@ class Me extends Conversation {
 
   @override
   List<Object?> get props => [query];
+}
+
+class NextButton extends Conversation {
+  @override
+  ConversationType type() => ConversationType.next;
 }
 
 class Loading extends Conversation {

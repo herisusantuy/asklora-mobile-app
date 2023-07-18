@@ -2,6 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'query_request.dart';
 
+part 'portfolio_details_request.g.dart';
+
 @JsonSerializable()
 class PortfolioDetailsRequest extends BaseQueryRequest {
   final String ticker;

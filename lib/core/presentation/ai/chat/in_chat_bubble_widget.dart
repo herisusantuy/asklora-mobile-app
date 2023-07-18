@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import '../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../core/styles/asklora_colors.dart';
-import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../custom_text_new.dart';
+import '../../../styles/asklora_colors.dart';
+import '../../../styles/asklora_text_styles.dart';
 
 class InChatBubbleWidget extends StatelessWidget {
   const InChatBubbleWidget(

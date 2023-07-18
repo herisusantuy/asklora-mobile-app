@@ -4,6 +4,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/presentation/ai/chat/lora_thinking_widget.dart';
+import '../../../../core/presentation/ai/chat/out_chat_bubble_widget.dart';
 import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
@@ -25,9 +27,7 @@ import '../domain/conversation.dart';
 import '../domain/portfolio_query_request.dart';
 import '../repository/lora_gpt_repository.dart';
 import 'widget/drag_indicator_widget.dart';
-import 'widget/in_chat_bubble_widget.dart';
-import 'widget/lora_thinking_widget.dart';
-import 'widget/out_chat_bubble_widget.dart';
+import '../../../../core/presentation/ai/chat/in_chat_bubble_widget.dart';
 import 'widget/utils/breathing_glowing_button.dart';
 
 part 'lora_ai_overlay_screen.dart';
