@@ -3585,6 +3585,26 @@ class S {
     );
   }
 
+  /// `Asklora.\n Your ultimate\nfinancial advisor`
+  String get askloraYouUltimateFinancialAdvisor {
+    return Intl.message(
+      'Asklora.\n Your ultimate\nfinancial advisor',
+      name: 'askloraYouUltimateFinancialAdvisor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ask me anything related to finance`
+  String get askMeAnythingRelatedToFinance {
+    return Intl.message(
+      'Ask me anything related to finance',
+      name: 'askMeAnythingRelatedToFinance',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `I like your style`
   String get investmentResultScreenTitle {
     return Intl.message(
@@ -3750,6 +3770,26 @@ class S {
     return Intl.message(
       'Pending',
       name: 'pending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investments tailored  for you`
+  String get botRecommendationScreenTitle {
+    return Intl.message(
+      'Investments tailored  for you',
+      name: 'botRecommendationScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not feeling it? Try something different.`
+  String get notFeelingIt {
+    return Intl.message(
+      'Not feeling it? Try something different.',
+      name: 'notFeelingIt',
       desc: '',
       args: [],
     );

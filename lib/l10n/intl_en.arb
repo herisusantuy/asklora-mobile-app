@@ -538,6 +538,8 @@
   "agreements": "Agreements",
   "submitApplication": "Submit Application",
   "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible",
+  "askloraYouUltimateFinancialAdvisor": "Asklora.\n Your ultimate\nfinancial advisor",
+  "askMeAnythingRelatedToFinance": "Ask me anything related to finance",
   "investmentResultScreenTitle": "I like your style",
   "investmentResultScreenDescription": "You’re one step closer to AI Investing. \n\nTime to open your account.",
   "privacyFailedScreenTitle": "I'm afraid you're not eligible for Asklora yet.",
@@ -554,5 +556,7 @@
   "extrovertLessThan8": "Introverts change the world!",
   "extrovertMoreThan8": "Social butterfly, amplify that energy!",
   "active": "Active",
-  "pending": "Pending"
+  "pending": "Pending",
+  "botRecommendationScreenTitle": "Investments tailored  for you",
+  "notFeelingIt": "Not feeling it? Try something different."
 }

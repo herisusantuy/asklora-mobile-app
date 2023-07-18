@@ -27,7 +27,7 @@ void main() {
       'aiPageSelected = true when user clicked middle tab (AI)',
       build: () => tabScreenBloc,
       act: (bloc) {
-        bloc.add(const AiButtonSelected());
+        bloc.add(const OpenAiOverlay());
       },
       expect: () => {
         const TabScreenState(
