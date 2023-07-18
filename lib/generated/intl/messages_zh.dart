@@ -80,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("關於 Asklora"),
         "accountInformation": MessageLookupByLibrary.simpleMessage("帳戶資訊"),
         "accountSettings": MessageLookupByLibrary.simpleMessage("帳戶設定"),
+        "active": MessageLookupByLibrary.simpleMessage("交易中"),
         "activities": MessageLookupByLibrary.simpleMessage("交易記錄"),
         "afterPayDepositHeaderTitle":
             MessageLookupByLibrary.simpleMessage("投資賬戶\n即將 Ready！"),
@@ -229,6 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "estTakeProfitPercent": MessageLookupByLibrary.simpleMessage("預計止賺%"),
         "estimatedEndDate": MessageLookupByLibrary.simpleMessage("預計結束日期"),
         "existingPassword": MessageLookupByLibrary.simpleMessage("現有密碼"),
+        "expiresAt": MessageLookupByLibrary.simpleMessage("到期日期"),
         "extrovertLessThan8":
             MessageLookupByLibrary.simpleMessage("每個人都需要me time，獨個觀看世間變幻事情"),
         "extrovertMoreThan8":
@@ -333,6 +335,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "payDepositToStartRealTrade":
             MessageLookupByLibrary.simpleMessage("入金以開始正式交易"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
+        "pending": MessageLookupByLibrary.simpleMessage("待處理"),
         "performance": MessageLookupByLibrary.simpleMessage("表現"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "personalisation": MessageLookupByLibrary.simpleMessage("個人化"),
@@ -468,6 +471,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "startInvesting": MessageLookupByLibrary.simpleMessage("開始投資 "),
         "startInvestingOnMilestone":
             MessageLookupByLibrary.simpleMessage("即將進入投資狀態！"),
+        "startsAt": MessageLookupByLibrary.simpleMessage("開始日期"),
         "submitApplication":
             MessageLookupByLibrary.simpleMessage("Submit Application"),
         "subscription": MessageLookupByLibrary.simpleMessage("訂購計劃"),

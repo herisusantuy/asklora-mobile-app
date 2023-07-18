@@ -3,7 +3,7 @@ part of '../portfolio_screen.dart';
 class BotPortfolioList extends StatelessWidget {
   final double _spacing = 16;
   final double _runSpacing = 8;
-  final double botCardHeight = 194;
+  final double botCardHeight = 196;
   final UserJourney userJourney;
   final PortfolioState portfolioState;
 
