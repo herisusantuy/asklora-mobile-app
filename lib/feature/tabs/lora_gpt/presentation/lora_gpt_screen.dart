@@ -66,6 +66,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
             Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     width: 11,
@@ -92,14 +93,10 @@ class _LoraGptScreenState extends State<LoraGptScreen>
             ),
             Align(
               alignment: Alignment.centerRight,
-              child: InkWell(
+              child: GestureDetector(
                 onTap: () =>
                     context.read<TabScreenBloc>().add(const CloseAiOverLay()),
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: getPngIcon('close_x',
-                      width: 15, height: 15, fit: BoxFit.contain),
-                ),
+                child: const Icon(Icons.close, color: AskLoraColors.white),
               ),
             )
           ],
