@@ -3734,6 +3734,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Investments tailored  for you`
+  String get botRecommendationScreenTitle {
+    return Intl.message(
+      'Investments tailored  for you',
+      name: 'botRecommendationScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not feeling it? Try something different.`
+  String get notFeelingIt {
+    return Intl.message(
+      'Not feeling it? Try something different.',
+      name: 'notFeelingIt',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

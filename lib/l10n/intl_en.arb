@@ -552,5 +552,7 @@
   "neuroticismLessThan8": "You can take on more risks.",
   "neuroticismMoreThan8": "You should reduce some risks.",
   "extrovertLessThan8": "Introverts change the world!",
-  "extrovertMoreThan8": "Social butterfly, amplify that energy!"
+  "extrovertMoreThan8": "Social butterfly, amplify that energy!",
+  "botRecommendationScreenTitle": "Investments tailored  for you",
+  "notFeelingIt": "Not feeling it? Try something different."
 }

@@ -13,7 +13,6 @@ import '../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
-import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -31,13 +30,9 @@ import '../widgets/custom_expansion_panel.dart';
 import 'detail/bot_recommendation_detail_screen.dart';
 
 part 'widgets/bot_learn_more_bottom_sheet.dart';
-
 part 'widgets/bot_recommendation_card.dart';
-
 part 'widgets/bot_recommendation_card_shimmer.dart';
-
 part 'widgets/bot_recommendation_faq.dart';
-
 part 'widgets/bot_recommendation_list.dart';
 
 class BotRecommendationScreen extends StatelessWidget {
@@ -89,7 +84,7 @@ class BotRecommendationScreen extends StatelessWidget {
                   ),
                   if (UserJourney.compareUserJourney(
                       context: context, target: UserJourney.freeBotStock))
-                    _loraMemojiWidget(context),
+                    _buttonChangeInvestmentStyle(context),
                   const SizedBox(
                     height: 50,
                   ),
@@ -114,7 +109,7 @@ class BotRecommendationScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTextNew(
-              'Investments for you, by you',
+              S.of(context).botRecommendationScreenTitle,
               style:
                   AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
             ),
@@ -162,12 +157,14 @@ class BotRecommendationScreen extends StatelessWidget {
         ),
       );
 
-  Widget _loraMemojiWidget(BuildContext context) => Padding(
+  Widget _buttonChangeInvestmentStyle(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 48),
         child: Column(
           children: [
-            const LoraMemojiHeader(
-                text: 'Not feeling it? Try something different.'),
+            const SizedBox(height: 30),
+            CustomTextNew(S.of(context).notFeelingIt,
+                style: AskLoraTextStyles.h4, textAlign: TextAlign.center),
+            const SizedBox(height: 20),
             PrimaryButton(
               label: S.of(context).buttonChangeInvestmentStyle,
               onTap: () => context
