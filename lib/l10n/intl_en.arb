@@ -559,6 +559,23 @@
   "pending": "Pending",
   "botRecommendationScreenTitle": "Investments tailored  for you",
   "notFeelingIt": "Not feeling it? Try something different.",
+  "askloraWireDetails": "Asklora's Wire Details",
+  "buttonViewDetails": "View Details",
+  "wireTransfer": "Wire Transfer",
+  "bankNumber": "Bank Number",
+  "accountNumber": "Account Number",
+  "bankName": "Bank Name",
+  "swiftCode": "Swift Code",
+  "accountName": "Account Name",
+  "companyAddress": "Company Address",
+  "exchangeRateInDepositScreen": "Current Exchange Rate: HKD 1 = USD 0.137 (at HKT {time})",
+  "@exchangeRateInDepositScreen": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "errorStoringData": "Error Storing Data",
   "errorStoringDataDetails": "Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions",
   "emailNotExist": "User does not exist with the given email",
