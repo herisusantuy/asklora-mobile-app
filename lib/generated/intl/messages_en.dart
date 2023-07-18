@@ -270,10 +270,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sorry! You were a bit late, your request has timed out. \n\nLet’s try and activate your account again!"),
         "emailActivationSuccessTitle": m8,
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email Address"),
+        "emailNotExist": MessageLookupByLibrary.simpleMessage(
+            "User does not exist with the given email"),
+        "emailNotVerified":
+            MessageLookupByLibrary.simpleMessage("User email is not verified"),
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
         "endBotStockAcknowledgement": m9,
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
+        "enterValidEmail":
+            MessageLookupByLibrary.simpleMessage("Enter valid email"),
         "enterValidPassword":
             MessageLookupByLibrary.simpleMessage("Enter valid password"),
         "errorGettingInformationInvestmentDetailSubTitle":
@@ -363,6 +369,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Introduce Bot - Pullup"),
         "introduceBotSquat":
             MessageLookupByLibrary.simpleMessage("Introduce Bot - Squat"),
+        "invalidOtp": MessageLookupByLibrary.simpleMessage("Invalid OTP"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Invalid Password"),
         "investmentAmount":
@@ -384,6 +391,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Licensee: Chang Yung Ching"),
         "licenseeNumber":
             MessageLookupByLibrary.simpleMessage("CE No.: AFF918"),
+        "linkPasswordResetIsSent": MessageLookupByLibrary.simpleMessage(
+            "Link for Password reset is sent to email."),
         "manageYourBotstock":
             MessageLookupByLibrary.simpleMessage("Manage Your Botstock"),
         "marketCap": MessageLookupByLibrary.simpleMessage("Market Cap"),
@@ -441,6 +450,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordChangeSuccess":
             MessageLookupByLibrary.simpleMessage("Password Change Success"),
+        "passwordChangeSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Password changed successfully."),
         "passwordDoesNotMatch": MessageLookupByLibrary.simpleMessage(
             "Your password does not match."),
         "payDepositToStartRealTrade": MessageLookupByLibrary.simpleMessage(
@@ -645,6 +656,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "timeCompleted": MessageLookupByLibrary.simpleMessage("Time Completed"),
         "timeRequested": MessageLookupByLibrary.simpleMessage("Time Requested"),
         "to": MessageLookupByLibrary.simpleMessage("To"),
+        "tokenInvalid": MessageLookupByLibrary.simpleMessage(
+            "Token is invalid or expired."),
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
             "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level."),
         "tooltipBotDetailsEstMaxProfit": MessageLookupByLibrary.simpleMessage(

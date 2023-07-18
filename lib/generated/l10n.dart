@@ -3914,6 +3914,86 @@ class S {
       args: [],
     );
   }
+
+  /// `User does not exist with the given email`
+  String get emailNotExist {
+    return Intl.message(
+      'User does not exist with the given email',
+      name: 'emailNotExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User email is not verified`
+  String get emailNotVerified {
+    return Intl.message(
+      'User email is not verified',
+      name: 'emailNotVerified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter valid email`
+  String get enterValidEmail {
+    return Intl.message(
+      'Enter valid email',
+      name: 'enterValidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password changed successfully.`
+  String get passwordChangeSuccessfully {
+    return Intl.message(
+      'Password changed successfully.',
+      name: 'passwordChangeSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Token is invalid or expired.`
+  String get tokenInvalid {
+    return Intl.message(
+      'Token is invalid or expired.',
+      name: 'tokenInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid OTP`
+  String get invalidOtp {
+    return Intl.message(
+      'Invalid OTP',
+      name: 'invalidOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Link for Password reset is sent to email.`
+  String get linkPasswordResetIsSent {
+    return Intl.message(
+      'Link for Password reset is sent to email.',
+      name: 'linkPasswordResetIsSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account is not active yet.`
+  String get accountIsNotActive {
+    return Intl.message(
+      'Your account is not active yet.',
+      name: 'accountIsNotActive',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
