@@ -36,7 +36,6 @@ class CustomCheckboxListTile extends StatelessWidget {
     return Theme(
       data: ThemeData(unselectedWidgetColor: AskLoraColors.gray),
       child: Container(
-        margin: const EdgeInsets.only(bottom: 5),
         decoration: isChecked
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(5),

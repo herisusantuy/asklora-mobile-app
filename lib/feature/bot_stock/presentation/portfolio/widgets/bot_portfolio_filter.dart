@@ -51,6 +51,7 @@ class BotPortfolioFilter extends StatelessWidget {
                             .read<PortfolioBloc>()
                             .add(ActiveFilterChecked(value!)),
                       ),
+                      const SizedBox(height: 5),
                       CustomCheckboxListTile(
                         text: S.of(context).pending,
                         isChecked: state.pendingFilterChecked,
