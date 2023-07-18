@@ -51,7 +51,7 @@ class InChatBubbleWidget extends StatelessWidget {
                         ),
                       ),
                       child: CustomTextNew(message,
-                          style: AskLoraTextStyles.subtitle2
+                          style: AskLoraTextStyles.body2
                               .copyWith(color: AskLoraColors.white))),
                 ),
               ),
