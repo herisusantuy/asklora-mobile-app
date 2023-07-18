@@ -2503,6 +2503,16 @@ class S {
     );
   }
 
+  /// `Check back later to see if\nthere are any new\ntransactions!`
+  String get checkBackLater {
+    return Intl.message(
+      'Check back later to see if\nthere are any new\ntransactions!',
+      name: 'checkBackLater',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Performance`
   String get performance {
     return Intl.message(

@@ -165,6 +165,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "carouselIntro4": MessageLookupByLibrary.simpleMessage("個人化體驗，\n前所未見"),
         "changeBankAccount": MessageLookupByLibrary.simpleMessage("更改銀行戶口"),
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
+        "checkBackLater": MessageLookupByLibrary.simpleMessage("稍後再來查看!"),
         "checkBotStockDetails":
             MessageLookupByLibrary.simpleMessage("查看 Botstock 資訊"),
         "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
@@ -292,6 +293,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
         "nextStep": MessageLookupByLibrary.simpleMessage("下一步"),
         "no": MessageLookupByLibrary.simpleMessage(" 否"),
+        "noTransactions": MessageLookupByLibrary.simpleMessage("暫時沒有交易"),
+        "noTransactionsYet":
+            MessageLookupByLibrary.simpleMessage("你似乎未進行過任何交易！"),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
             "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。"),
         "notes": MessageLookupByLibrary.simpleMessage("說明"),
