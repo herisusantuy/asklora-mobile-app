@@ -3774,6 +3774,106 @@ class S {
       args: [],
     );
   }
+
+  /// `Asklora's Wire Details`
+  String get askloraWireDetails {
+    return Intl.message(
+      'Asklora\'s Wire Details',
+      name: 'askloraWireDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Details`
+  String get buttonViewDetails {
+    return Intl.message(
+      'View Details',
+      name: 'buttonViewDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wire Transfer`
+  String get wireTransfer {
+    return Intl.message(
+      'Wire Transfer',
+      name: 'wireTransfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank Number`
+  String get bankNumber {
+    return Intl.message(
+      'Bank Number',
+      name: 'bankNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Number`
+  String get accountNumber {
+    return Intl.message(
+      'Account Number',
+      name: 'accountNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank Name`
+  String get bankName {
+    return Intl.message(
+      'Bank Name',
+      name: 'bankName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Swift Code`
+  String get swiftCode {
+    return Intl.message(
+      'Swift Code',
+      name: 'swiftCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Name`
+  String get accountName {
+    return Intl.message(
+      'Account Name',
+      name: 'accountName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Company Address`
+  String get companyAddress {
+    return Intl.message(
+      'Company Address',
+      name: 'companyAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Exchange Rate: HKD 1 = USD 0.137 (at HKT {time})`
+  String exchangeRateInDepositScreen(String time) {
+    return Intl.message(
+      'Current Exchange Rate: HKD 1 = USD 0.137 (at HKT $time)',
+      name: 'exchangeRateInDepositScreen',
+      desc: '',
+      args: [time],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

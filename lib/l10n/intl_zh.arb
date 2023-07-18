@@ -446,7 +446,7 @@
   "uploadProofOfRemittance": "上載匯款證明",
   "theProofOfRemittanceShouldShowYourBankAccount": "匯款證明需要顯示你的銀行戶口號碼，全名 及金額。",
   "inputDepositAmount": "輸入金額",
-  "theAmountMustMatch": "金額須與匯款證明一致。",
+  "theAmountMustMatch": "輸入金額須與匯款輸入證明必須一致。",
   "yourDepositCanTakeUp2WorkingDays": "入金程序最多需時 2 個工作天",
   "notes": "說明",
   "returningUserDepositNotes": "我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶號碼）。不過，我們亦可能會因核實交易，向你要求更多附加資料。",
@@ -516,5 +516,22 @@
   "botRecommendationScreenTitle": "最夾你嘅投資風格",
   "notFeelingIt": "唔啱心水？\n當然仲有得揀！",
   "buttonChangeInvestmentStyle": "更改投資風格",
-  "trade": "交易"
+  "trade": "交易",
+  "askloraWireDetails": "Asklora 電匯 詳情",
+  "buttonViewDetails": "查看詳情",
+  "wireTransfer": "電匯",
+  "bankNumber": "銀行號碼",
+  "accountNumber": "戶口號碼",
+  "bankName": "銀行名稱",
+  "swiftCode": "Swift 代碼",
+  "accountName": "戶口名稱",
+  "companyAddress": "銀行地址",
+  "exchangeRateInDepositScreen": "現時匯率: HKD 1 = USD 0.137 (於 HKT {time})",
+  "@exchangeRateInDepositScreen": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  }
 }
