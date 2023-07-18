@@ -3755,6 +3755,26 @@ class S {
     );
   }
 
+  /// `Active`
+  String get active {
+    return Intl.message(
+      'Active',
+      name: 'active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pending {
+    return Intl.message(
+      'Pending',
+      name: 'pending',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Investments tailored  for you`
   String get botRecommendationScreenTitle {
     return Intl.message(

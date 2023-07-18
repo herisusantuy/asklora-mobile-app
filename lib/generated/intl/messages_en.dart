@@ -92,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountNumber": MessageLookupByLibrary.simpleMessage("Account Number"),
         "accountSettings":
             MessageLookupByLibrary.simpleMessage("Account Settings"),
+        "active": MessageLookupByLibrary.simpleMessage("Active"),
         "activities": MessageLookupByLibrary.simpleMessage("Activities"),
         "afterPayDepositHeaderTitle": MessageLookupByLibrary.simpleMessage(
             "Your investment account will be ready soon!"),
@@ -446,6 +447,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pay Deposit to Start Real Trade"),
         "paymentDetails":
             MessageLookupByLibrary.simpleMessage("Payment Details"),
+        "pending": MessageLookupByLibrary.simpleMessage("Pending"),
         "performance": MessageLookupByLibrary.simpleMessage("Performance"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "personalisation":
