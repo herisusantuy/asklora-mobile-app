@@ -71,7 +71,7 @@ void main() {
             passwordValidationError:
                 PasswordValidationError.passwordValidationError,
             confirmPasswordError:
-                PasswordValidationError.passwordValidationError,
+                PasswordValidationError.confirmPasswordValidationError,
           ),
         },
       );
@@ -123,8 +123,7 @@ void main() {
             password: 'Aa1234567',
             confirmPassword: 'Aa1234567',
             passwordValidationError: PasswordValidationError.none,
-            confirmPasswordError:
-                PasswordValidationError.passwordDoesNotMatchError,
+            confirmPasswordError: PasswordValidationError.none,
           ),
         },
       );
