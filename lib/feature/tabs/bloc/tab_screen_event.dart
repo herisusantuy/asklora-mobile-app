@@ -10,8 +10,8 @@ class TabChanged extends TabScreenEvent {
   const TabChanged(this.tabPage);
 }
 
-class OpenAiOverlayClick extends TabScreenEvent {
-  const OpenAiOverlayClick();
+class OnAiOverlayClick extends TabScreenEvent {
+  const OnAiOverlayClick();
 }
 
 class CloseAiOverLay extends TabScreenEvent {
