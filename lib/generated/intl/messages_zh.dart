@@ -100,6 +100,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "bestSuitedFor": MessageLookupByLibrary.simpleMessage("最適合"),
         "botDuration": MessageLookupByLibrary.simpleMessage("Bot 期限"),
         "botManagementFee": MessageLookupByLibrary.simpleMessage("Bot 管理費用"),
+        "botRecommendationScreenTitle":
+            MessageLookupByLibrary.simpleMessage("最夾你嘅投資風格"),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
             MessageLookupByLibrary.simpleMessage("預計批核時間為 2 個工作天。"),
         "botTradeBottomSheetAccountNotYetApprovedTitle":
@@ -135,6 +137,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonBackToHome": MessageLookupByLibrary.simpleMessage("返回主頁"),
         "buttonCancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
         "buttonCancelTrade": MessageLookupByLibrary.simpleMessage("取消交易"),
+        "buttonChangeInvestmentStyle":
+            MessageLookupByLibrary.simpleMessage("更改投資風格"),
         "buttonConfirm": MessageLookupByLibrary.simpleMessage("確定"),
         "buttonContinue": MessageLookupByLibrary.simpleMessage("繼續"),
         "buttonDeposit": MessageLookupByLibrary.simpleMessage("入金"),
@@ -292,6 +296,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
         "nextStep": MessageLookupByLibrary.simpleMessage("下一步"),
         "no": MessageLookupByLibrary.simpleMessage(" 否"),
+        "notFeelingIt": MessageLookupByLibrary.simpleMessage("唔啱心水？\n當然仲有得揀！"),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
             "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。"),
         "notes": MessageLookupByLibrary.simpleMessage("說明"),
@@ -488,6 +493,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lora開始Botstocks交易"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("總金額"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("總盈虧"),
+        "trade": MessageLookupByLibrary.simpleMessage("交易"),
         "tradeCancelledSubtitle":
             MessageLookupByLibrary.simpleMessage("交易已取消，你的投資金額已轉至你嘅賬戶。"),
         "tradeCancelledTitle": MessageLookupByLibrary.simpleMessage("交易已取消"),
