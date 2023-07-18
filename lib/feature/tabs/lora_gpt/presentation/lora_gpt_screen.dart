@@ -60,7 +60,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
 
   Widget get _header => Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-        height: 70,
+        height: 60,
         child: Stack(
           children: [
             Center(

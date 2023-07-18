@@ -32,52 +32,61 @@ class _AiChatListState extends State<AiChatList> {
             ShaderMask(
               shaderCallback: (rect) {
                 return LinearGradient(
-                    begin: Alignment.bottomCenter,
+                    begin: Alignment.topCenter,
                     end: Alignment.center,
                     colors: [Colors.black, Colors.black.withOpacity(0)],
-                    stops: const [0.15, 0.25]).createShader(rect);
+                    stops: const [0.15, 0.30]).createShader(rect);
               },
               blendMode: BlendMode.dstOut,
-              child: NotificationListener<UserScrollNotification>(
-                onNotification: (notification) {
-                  final ScrollDirection direction = notification.direction;
-                  setState(() {
-                    if (direction == ScrollDirection.reverse) {
-                      _showNewChatButton = false;
-                    } else if (direction == ScrollDirection.forward) {
-                      _showNewChatButton = true;
-                    }
-                  });
-                  return true;
+              child: ShaderMask(
+                shaderCallback: (rect) {
+                  return LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.center,
+                      colors: [Colors.black, Colors.black.withOpacity(0)],
+                      stops: const [0.15, 0.25]).createShader(rect);
                 },
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 70),
-                    child: SingleChildScrollView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      padding: const EdgeInsets.only(bottom: 55),
-                      reverse: true,
-                      child: Column(
-                        children: state.conversations
-                            .mapIndexed((index, conversation) {
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 17),
-                            child: _getBubbleChat(
-                                conversation,
-                                index,
-                                state.isTyping &&
-                                    index == state.conversations.length - 1,
-                                state.userName),
-                          );
-                        }).toList(),
+                blendMode: BlendMode.dstOut,
+                child: NotificationListener<UserScrollNotification>(
+                  onNotification: (notification) {
+                    final ScrollDirection direction = notification.direction;
+                    setState(() {
+                      if (direction == ScrollDirection.reverse) {
+                        _showNewChatButton = false;
+                      } else if (direction == ScrollDirection.forward) {
+                        _showNewChatButton = true;
+                      }
+                    });
+                    return true;
+                  },
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        padding: const EdgeInsets.only(bottom: 55),
+                        reverse: true,
+                        child: Column(
+                          children: state.conversations
+                              .mapIndexed((index, conversation) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 17),
+                              child: _getBubbleChat(
+                                  conversation,
+                                  index,
+                                  state.isTyping &&
+                                      index == state.conversations.length - 1,
+                                  state.userName),
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
-                  ),
-                )
+                  )
 
-                ///todo: some backup code in case something fishy happening
-                /*ListView.separated(
+                  ///todo: some backup code in case something fishy happening
+                  /*ListView.separated(
                 padding: const EdgeInsets.symmetric(vertical: 72),
                 reverse: true,
                 itemCount: state.conversations.length,
@@ -99,7 +108,8 @@ class _AiChatListState extends State<AiChatList> {
                 separatorBuilder: (context, index) =>
                     const SizedBox(height: 17),
               )*/
-                ,
+                  ,
+                ),
               ),
             ),
             if (FeatureFlags.isNewChatHide)
