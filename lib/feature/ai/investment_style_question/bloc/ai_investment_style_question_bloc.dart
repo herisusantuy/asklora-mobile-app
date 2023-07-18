@@ -102,7 +102,11 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
             response.data!.investmentStyleQuestionProgress.currentQuestion),
       ));
     } else {
-      tempList.add(Lora('some shit is happening', '', '', false));
+      tempList.add(Lora(
+          'Sorry I cannot connect to the server right now, please try again',
+          '',
+          '',
+          false));
     }
 
     emit(state.copyWith(
