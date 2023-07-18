@@ -533,5 +533,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "errorStoringData": "數據存取發生錯誤",
+  "errorStoringDataDetails": "Oops！我們在嘗試存儲你的回覆時遇到一些技術困難。讓我們重新做題"
 }

@@ -573,5 +573,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "errorStoringData": "Error Storing Data",
+  "errorStoringDataDetails": "Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions"
 }
