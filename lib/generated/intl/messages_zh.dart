@@ -43,63 +43,78 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m9(botName, botSymbol, dateTime) =>
       "${botName} ${botSymbol} 將會在 ${dateTime} 開始";
 
-  static String m10(minDeposit) =>
+  static String m10(time) => "現時匯率: HKD 1 = USD 0.137 (於 HKT ${time})";
+
+  static String m11(minDeposit) =>
       "複製 Asklora 銀行資料，並從你銀行戶口透過 FPS 或 電匯 轉賬不少於 HK\$${minDeposit}。";
 
-  static String m11(minute) => " ~${minute} 分鐘";
+  static String m12(minute) => " ~${minute} 分鐘";
 
-  static String m12(currency) => "購買力 (${currency})";
+  static String m13(currency) => "購買力 (${currency})";
 
-  static String m13(currency) => "當前價格 ${currency}";
+  static String m14(currency) => "當前價格 ${currency}";
 
-  static String m14(bot, startDate, endDate, duration) =>
+  static String m15(bot, startDate, endDate, duration) =>
       "${bot} 於過去 ${duration} 星期之表現  (${startDate} - ${endDate})";
 
-  static String m15(dateTime) => "到期日期 ${dateTime}";
+  static String m16(dateTime) => "到期日期 ${dateTime}";
 
-  static String m16(dateTime) => "${dateTime}日後到期";
+  static String m17(dateTime) => "${dateTime}日後到期";
 
-  static String m17(currency) => "Botstock 總價值 (${currency})";
+  static String m18(currency) => "Botstock 總價值 (${currency})";
 
-  static String m18(currency) => "可提取金額 (${currency})";
+  static String m19(currency) => "可提取金額 (${currency})";
 
-  static String m19(botName, botSymbol, dateTime) =>
+  static String m20(botName, botSymbol, dateTime) =>
       "${botName} ${botSymbol} 將於 ${dateTime} 開始";
 
-  static String m20(minDeposit) =>
+  static String m21(minDeposit) =>
       "請轉賬最少 HK\$${minDeposit} 至 Asklora 銀行戶口。任何少於 HK\$${minDeposit} 的首次入金均會被拒收，並會被徵收手續費。";
 
-  static String m21(minDeposit) =>
+  static String m22(minDeposit) =>
       "我們會提取由你銀行透過 API 或匯款通知書收集的資訊， 確定你指定的銀行戶口。我們只會接受透過此指定戶口進行所有將來的入金與提取。你可轉換指定銀行戶口，但你需要完成最少匯款 HK\$${minDeposit} 以通過相同的認證。";
 
-  static String m22(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
+  static String m23(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("關於"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("關於 Asklora"),
         "accountInformation": MessageLookupByLibrary.simpleMessage("帳戶資訊"),
+        "accountName": MessageLookupByLibrary.simpleMessage("戶口名稱"),
+        "accountNumber": MessageLookupByLibrary.simpleMessage("戶口號碼"),
         "accountSettings": MessageLookupByLibrary.simpleMessage("帳戶設定"),
+        "active": MessageLookupByLibrary.simpleMessage("交易中"),
         "activities": MessageLookupByLibrary.simpleMessage("交易記錄"),
         "afterPayDepositHeaderTitle":
             MessageLookupByLibrary.simpleMessage("投資賬戶\n即將 Ready！"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
         "allSettings": MessageLookupByLibrary.simpleMessage("設定"),
         "almostFinished": MessageLookupByLibrary.simpleMessage("馬上就好"),
+        "askMeAnythingRelatedToFinance":
+            MessageLookupByLibrary.simpleMessage("有咩投資問題都可以問我！"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
-            "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？"),
+            "Hi! 我係 Lora，\n你嘅 AI 顧問。\n\n準備好向投資目標進發未？\n我可以點叫你？"),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("你的名字"),
+        "askloraWireDetails":
+            MessageLookupByLibrary.simpleMessage("Asklora 電匯 詳情"),
+        "askloraYouUltimateFinancialAdvisor":
+            MessageLookupByLibrary.simpleMessage("Asklora.\n你嘅 AI 投資顧問"),
         "atLeast1Lowercase":
             MessageLookupByLibrary.simpleMessage("最少 1 個小寫英文字母"),
         "atLeast1Number": MessageLookupByLibrary.simpleMessage("最少 1 個數字"),
         "atLeast1Uppercase":
             MessageLookupByLibrary.simpleMessage("最少 1 個大寫英文字母"),
+        "bankName": MessageLookupByLibrary.simpleMessage("銀行名稱"),
+        "bankNumber": MessageLookupByLibrary.simpleMessage("銀行號碼"),
         "beforeDepositHeaderTitle": m0,
         "beforeKYCHeaderTitle": m1,
         "bestSuitedFor": MessageLookupByLibrary.simpleMessage("最適合"),
         "botDuration": MessageLookupByLibrary.simpleMessage("Bot 期限"),
         "botManagementFee": MessageLookupByLibrary.simpleMessage("Bot 管理費用"),
+        "botRecommendationScreenTitle":
+            MessageLookupByLibrary.simpleMessage("最夾你嘅投資風格"),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
             MessageLookupByLibrary.simpleMessage("預計批核時間為 2 個工作天。"),
         "botTradeBottomSheetAccountNotYetApprovedTitle":
@@ -135,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonBackToHome": MessageLookupByLibrary.simpleMessage("返回主頁"),
         "buttonCancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
         "buttonCancelTrade": MessageLookupByLibrary.simpleMessage("取消交易"),
+        "buttonChangeInvestmentStyle":
+            MessageLookupByLibrary.simpleMessage("更改投資風格"),
         "buttonConfirm": MessageLookupByLibrary.simpleMessage("確定"),
         "buttonContinue": MessageLookupByLibrary.simpleMessage("繼續"),
         "buttonDeposit": MessageLookupByLibrary.simpleMessage("入金"),
@@ -153,6 +170,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonSignUp": MessageLookupByLibrary.simpleMessage("註冊"),
         "buttonSignUpAgain": MessageLookupByLibrary.simpleMessage("再次註冊"),
         "buttonSubmit": MessageLookupByLibrary.simpleMessage("提交"),
+        "buttonSure": MessageLookupByLibrary.simpleMessage("好"),
+        "buttonTryAgain": MessageLookupByLibrary.simpleMessage("再試一次"),
+        "buttonViewDetails": MessageLookupByLibrary.simpleMessage("查看詳情"),
         "buttonViewTransactionHistory":
             MessageLookupByLibrary.simpleMessage("查看交易歷史"),
         "buttonWithdraw": MessageLookupByLibrary.simpleMessage("提取"),
@@ -165,6 +185,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
         "checkBotStockDetails":
             MessageLookupByLibrary.simpleMessage("查看 Botstock 資訊"),
+        "companyAddress": MessageLookupByLibrary.simpleMessage("銀行地址"),
         "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
         "confirmTrade": MessageLookupByLibrary.simpleMessage("確認買入"),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
@@ -210,16 +231,25 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("載入你投資組合時出咗少少問題，Reload一次試下？"),
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("咦，無法獲取資料"),
+        "errorStoringData": MessageLookupByLibrary.simpleMessage("數據存取發生錯誤"),
+        "errorStoringDataDetails": MessageLookupByLibrary.simpleMessage(
+            "Oops！我們在嘗試存儲你的回覆時遇到一些技術困難。讓我們重新做題"),
         "estMaxLossPercent": MessageLookupByLibrary.simpleMessage("預計最大損失%"),
         "estMaxProfitPercent": MessageLookupByLibrary.simpleMessage("預計最大收益%"),
         "estStopLossPercent": MessageLookupByLibrary.simpleMessage("預計止損 %"),
         "estTakeProfitPercent": MessageLookupByLibrary.simpleMessage("預計止賺%"),
         "estimatedEndDate": MessageLookupByLibrary.simpleMessage("預計結束日期"),
+        "exchangeRateInDepositScreen": m10,
         "existingPassword": MessageLookupByLibrary.simpleMessage("現有密碼"),
+        "expiresAt": MessageLookupByLibrary.simpleMessage("到期日期"),
+        "extrovertLessThan8":
+            MessageLookupByLibrary.simpleMessage("每個人都需要me time，獨個觀看世間變幻事情"),
+        "extrovertMoreThan8":
+            MessageLookupByLibrary.simpleMessage("你一定係交際花, 將你嘅vibe發光發亮!"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("成交價格"),
         "financialProfile":
             MessageLookupByLibrary.simpleMessage("Financial Profile"),
-        "firstTimeCopyAskloraBankDetails": m10,
+        "firstTimeCopyAskloraBankDetails": m11,
         "founded": MessageLookupByLibrary.simpleMessage("成立年份"),
         "free": MessageLookupByLibrary.simpleMessage("免費"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("免費試用期"),
@@ -230,10 +260,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "go": MessageLookupByLibrary.simpleMessage("繼續"),
         "gotIt": MessageLookupByLibrary.simpleMessage("知道了"),
         "greatStart": MessageLookupByLibrary.simpleMessage("開始投資"),
-        "greetingScreenSubTitle":
-            MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
+        "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
+            "訓練開始，會問下基本問題先！\n記住，冇耐性，就輸梗！ "),
         "greetingScreenTitle":
-            MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
+            MessageLookupByLibrary.simpleMessage("Alright! 準備好\n開始你嘅 AI 旅程未？"),
         "halfWayThere": MessageLookupByLibrary.simpleMessage("進展順利"),
         "headquarters": MessageLookupByLibrary.simpleMessage("總部地點"),
         "howItWorks": MessageLookupByLibrary.simpleMessage("如何運作"),
@@ -257,6 +287,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "investmentAmount": MessageLookupByLibrary.simpleMessage("投資金額"),
         "investmentPeriod": MessageLookupByLibrary.simpleMessage("投資期"),
         "investmentPreferences": MessageLookupByLibrary.simpleMessage("投資偏好"),
+        "investmentResultScreenDescription":
+            MessageLookupByLibrary.simpleMessage("仲差少少就可以開波!\n\n開戶喇!"),
+        "investmentResultScreenTitle":
+            MessageLookupByLibrary.simpleMessage("你嘅投資風格已經界定"),
         "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
             "想要 FinFit， 有咩投資秘技？\n界定投資風格先！\n"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
@@ -272,12 +306,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "masterAiTrading":
             MessageLookupByLibrary.simpleMessage("Master AI Trading"),
         "milestones": MessageLookupByLibrary.simpleMessage("目標"),
-        "min": m11,
+        "min": m12,
         "min8Character": MessageLookupByLibrary.simpleMessage("最少 8 個字母"),
         "needHelp": MessageLookupByLibrary.simpleMessage("需要幫助？"),
+        "neuroticismLessThan8":
+            MessageLookupByLibrary.simpleMessage("我哋可以進取少少, 承受一定嘅風險 "),
+        "neuroticismMoreThan8":
+            MessageLookupByLibrary.simpleMessage("我哋一步一步嚟, 控制住風險"),
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
         "nextStep": MessageLookupByLibrary.simpleMessage("下一步"),
         "no": MessageLookupByLibrary.simpleMessage(" 否"),
+        "notFeelingIt": MessageLookupByLibrary.simpleMessage("唔啱心水？\n當然仲有得揀！"),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
             "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。"),
         "notes": MessageLookupByLibrary.simpleMessage("說明"),
@@ -290,7 +329,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("設置的新密碼不能和舊密碼相同"),
         "onBoardingCompletionMessage": MessageLookupByLibrary.simpleMessage(
             "您已經完成了在Asklora開立賬戶的所有步驟！您的賬戶一\n經審核通過，即可開始交易。審核通常需要1至2個工作日。"),
-        "openInvestmentAccount": MessageLookupByLibrary.simpleMessage("開立投資賬戶"),
+        "openInvestmentAccount":
+            MessageLookupByLibrary.simpleMessage("開立新投資賬戶"),
+        "opennessLessThan8":
+            MessageLookupByLibrary.simpleMessage("用AI投資其實可以好簡單"),
+        "opennessMoreThan8": MessageLookupByLibrary.simpleMessage("我哋一定好夾!"),
         "orderCancelled": MessageLookupByLibrary.simpleMessage("訂單己取消"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("訂單已過期"),
         "orderPlaced": MessageLookupByLibrary.simpleMessage("已提交訂單"),
@@ -303,9 +346,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "payDepositToStartRealTrade":
             MessageLookupByLibrary.simpleMessage("入金以開始正式交易"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
+        "pending": MessageLookupByLibrary.simpleMessage("待處理"),
         "performance": MessageLookupByLibrary.simpleMessage("表現"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "personalisation": MessageLookupByLibrary.simpleMessage("個人化"),
+        "personalizationResultScreenTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "Alright!\n\n你嘅答案顯示我嘅科技同你都幾夾，我哋都可以進取少少！"),
         "phone": MessageLookupByLibrary.simpleMessage("電話"),
         "pleaseAddAHkBankAccount": MessageLookupByLibrary.simpleMessage(
             "請確保加入的香港銀行戶口是在你名下。其他人的銀行戶口及聯名戶口將不會接受。"),
@@ -313,19 +360,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
         "pleaseMakeSureYouPressSubmit":
             MessageLookupByLibrary.simpleMessage("請確保於你的銀行轉賬資金後才按「提交」鍵。"),
-        "portfolioBuyingPower": m12,
+        "portfolioBuyingPower": m13,
         "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
             "購買力代表了你可以用來購買Botstock的現金額。你的可提取金額和購買力會出現不一樣的情況。例如，開始Botstock後，你的購買力會相對減少，而Botstock總價值會相對提高。或當你的Botstock已到期或被終止，其價值將會增加至購買力，而在「T+2」日，T為交易當日， 該價值也會同時顯示在可提取金額。 "),
-        "portfolioCurrentPrice": m13,
+        "portfolioCurrentPrice": m14,
         "portfolioDetailButtonCancelBotStock":
             MessageLookupByLibrary.simpleMessage("取消BOTSTOCK"),
         "portfolioDetailButtonEndBotStock":
             MessageLookupByLibrary.simpleMessage("取消Botstock"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("續期Botstock"),
-        "portfolioDetailChartCaption": m14,
-        "portfolioDetailExpiredAt": m15,
-        "portfolioDetailExpiredIn": m16,
+        "portfolioDetailChartCaption": m15,
+        "portfolioDetailExpiredAt": m16,
+        "portfolioDetailExpiredIn": m17,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("平均虧損"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -391,16 +438,24 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("尚未開始任何交易!"),
         "portfolioPopUpNoTradingHasStartedtSubTitle":
             MessageLookupByLibrary.simpleMessage(" 開始交易後你就可以一次過管理所有投資。"),
-        "portfolioTotalBotStock": m17,
+        "portfolioTotalBotStock": m18,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "portfolioTotalValue": MessageLookupByLibrary.simpleMessage("總價值 "),
-        "portfolioWithdrawableAmount": m18,
+        "portfolioWithdrawableAmount": m19,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
         "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
         "privacyEvaluation": MessageLookupByLibrary.simpleMessage("私隱評估"),
+        "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
+            "有可能你的風險評級太低，\n或者年齡未合乎要求。\n\n如有答案填錯，\n麻煩再試一次。"),
+        "privacyFailedScreenTitle":
+            MessageLookupByLibrary.simpleMessage("你尚未符合資格使用Asklora。"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
+        "privacySuccessScreenDescription": MessageLookupByLibrary.simpleMessage(
+            "識揀 Asklora，\n證明你精明過好多人！\n\nOk！係時候再了解你多啲！"),
+        "privacySuccessScreenTitle":
+            MessageLookupByLibrary.simpleMessage("年齡只不過係個數字。"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "readyToGo": MessageLookupByLibrary.simpleMessage("準備好未？"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
@@ -412,7 +467,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("風險披露聲明"),
         "riskDisclosureStatementString": MessageLookupByLibrary.simpleMessage(
             "1. The prices of securities fluctuate, sometimes dramatically. The price of a security may move up or down, and may become valueless. It is as likely that losses will be incurred rather than profit made as a result of buying and selling securities. Investors should not only base on this marketing material to make any investment decision, you should carefully consider whether the investment products or services are suitable for you according to your investment experience, purpose, risk tolerance, financial or related conditions. If you have any questions, please contact us or obtain independent advice.\n\n2. Investment in foreign securities carries additional risks not generally associated with securities in the domestic market. The value or income of foreign securities may be more volatile and could be adversely affected by changes in currency rates of exchange, foreign taxation practices, foreign laws, government practices, regulations, and political events. You may find it more difficult to liquidate investments in foreign securities where they have limited liquidity in the relevant market. Foreign laws, government practices, and regulations may also affect the transferability of foreign securities. Timely and reliable information about the value or the extent of the risks of foreign securities may not be readily available at all times.\n\n3. You acknowledge that you have fully understood the implications of the risks associated with the Electronic Trading Service as set out in the Client Agreement"),
-        "rolloverBotStockAcknowledgement": m19,
+        "rolloverBotStockAcknowledgement": m20,
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
@@ -427,16 +482,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "startInvesting": MessageLookupByLibrary.simpleMessage("開始投資 "),
         "startInvestingOnMilestone":
             MessageLookupByLibrary.simpleMessage("即將進入投資狀態！"),
+        "startsAt": MessageLookupByLibrary.simpleMessage("開始日期"),
         "submitApplication":
             MessageLookupByLibrary.simpleMessage("Submit Application"),
         "subscription": MessageLookupByLibrary.simpleMessage("訂購計劃"),
         "summary": MessageLookupByLibrary.simpleMessage("摘要"),
         "summaryAgreementInformation": MessageLookupByLibrary.simpleMessage(
             "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible"),
+        "swiftCode": MessageLookupByLibrary.simpleMessage("Swift 代碼"),
         "terminateAccount": MessageLookupByLibrary.simpleMessage("終止賬戶"),
         "termsAndConditions": MessageLookupByLibrary.simpleMessage("條款與約束"),
         "theAmountMustMatch":
-            MessageLookupByLibrary.simpleMessage("金額須與匯款證明一致。"),
+            MessageLookupByLibrary.simpleMessage("輸入金額須與匯款輸入證明必須一致。"),
         "theAmountMustMatchWithPor":
             MessageLookupByLibrary.simpleMessage("金額須與匯款證明一致。"),
         "thePorShouldShowYourBank":
@@ -459,6 +516,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lora開始Botstocks交易"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("總金額"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("總盈虧"),
+        "trade": MessageLookupByLibrary.simpleMessage("交易"),
         "tradeCancelledSubtitle":
             MessageLookupByLibrary.simpleMessage("交易已取消，你的投資金額已轉至你嘅賬戶。"),
         "tradeCancelledTitle": MessageLookupByLibrary.simpleMessage("交易已取消"),
@@ -479,7 +537,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提存 "),
         "transactionHistoryTitle": MessageLookupByLibrary.simpleMessage("交易歷史"),
         "transactionHistoryToday": MessageLookupByLibrary.simpleMessage("今日"),
-        "transferAtLeastWithMinimumDeposit": m20,
+        "transferAtLeastWithMinimumDeposit": m21,
         "transferAtLeastWithNoMinimumDeposit":
             MessageLookupByLibrary.simpleMessage(
                 "請由你之前使用的銀行戶口轉賬至Asklora 銀行戶口。"),
@@ -497,18 +555,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "我們只接受由你戶口透過銀行轉賬 (電匯/FPS) 的入金。"),
         "weWillOnlyAcceptHKD": MessageLookupByLibrary.simpleMessage("我們只接受港幣"),
-        "weWillTakeInformationCollectedFromYour": m21,
+        "weWillTakeInformationCollectedFromYour": m22,
         "website": MessageLookupByLibrary.simpleMessage("網站"),
         "welcomeScreenFirstBenefit":
-            MessageLookupByLibrary.simpleMessage("FinFit 教練指導"),
+            MessageLookupByLibrary.simpleMessage("度身訂做AI指導"),
         "welcomeScreenSecondBenefit":
             MessageLookupByLibrary.simpleMessage("個人化體驗"),
-        "welcomeScreenSubTitle":
-            MessageLookupByLibrary.simpleMessage("踢走投資壞習慣！投資夠FinFit，夠自信！"),
+        "welcomeScreenSubTitle": MessageLookupByLibrary.simpleMessage(
+            "踢走投資壞習慣！\n由AI 顧問 Asklora 帶你一齊體驗嶄新科技！"),
         "welcomeScreenThirdBenefit":
             MessageLookupByLibrary.simpleMessage("AI 全自動交易"),
         "welcomeScreenTitle":
-            MessageLookupByLibrary.simpleMessage("投資，你夠 Fit 未？"),
+            MessageLookupByLibrary.simpleMessage("投資都要夠 Fit "),
+        "wireTransfer": MessageLookupByLibrary.simpleMessage("電匯"),
         "withdraw": MessageLookupByLibrary.simpleMessage("提取資金"),
         "withdrawalAmount": MessageLookupByLibrary.simpleMessage("提取金額"),
         "withdrawalRequestSubmittedSubTitle":
@@ -520,7 +579,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提取款項最多需時2個工作天。"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),
         "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
-        "yourBankAccountIsUnderReview": m22,
+        "yourBankAccountIsUnderReview": m23,
         "yourDepositCanTakeUp2WorkingDays":
             MessageLookupByLibrary.simpleMessage("入金程序最多需時 2 個工作天"),
         "yourDepositMayBeRejected": MessageLookupByLibrary.simpleMessage(

@@ -26,10 +26,6 @@ void main() {
         ));
       }
 
-      var mEmojiWidget = find.byKey(
-        const Key('memoji_widget'),
-      );
-
       var nextButton = find.byKey(
         const Key('next_button'),
       );
@@ -38,7 +34,6 @@ void main() {
           (WidgetTester tester) async {
         await buildCarouselScreen(tester);
         await tester.pumpAndSettle();
-        expect(mEmojiWidget, findsOneWidget);
         expect(nextButton, findsOneWidget);
         expect((tester.firstWidget(nextButton) as PrimaryButton).disabled,
             isFalse);

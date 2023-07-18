@@ -1160,10 +1160,10 @@ class S {
     );
   }
 
-  /// `I'm Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? `
+  /// `I'm Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat’s your name? `
   String get askNameScreenPlaceholder {
     return Intl.message(
-      'I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? ',
+      'I\'m Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat’s your name? ',
       name: 'askNameScreenPlaceholder',
       desc: '',
       args: [],
@@ -1200,20 +1200,20 @@ class S {
     );
   }
 
-  /// `Alright! Are you ready for the FinFit journey? `
+  /// `Ready to start your AI revolution?`
   String get greetingScreenTitle {
     return Intl.message(
-      'Alright! Are you ready for the FinFit journey? ',
+      'Ready to start your AI revolution?',
       name: 'greetingScreenTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!`
+  /// `Let’s start the training with simple questions!\n\n  Remember - to lose patience is to lose the battle!`
   String get greetingScreenSubTitle {
     return Intl.message(
-      'Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!',
+      'Let’s start the training with simple questions!\n\n  Remember - to lose patience is to lose the battle!',
       name: 'greetingScreenSubTitle',
       desc: '',
       args: [],
@@ -3680,6 +3680,336 @@ class S {
     return Intl.message(
       'Back to login',
       name: 'backToLogin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asklora.\n Your ultimate\nfinancial advisor`
+  String get askloraYouUltimateFinancialAdvisor {
+    return Intl.message(
+      'Asklora.\n Your ultimate\nfinancial advisor',
+      name: 'askloraYouUltimateFinancialAdvisor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ask me anything related to finance`
+  String get askMeAnythingRelatedToFinance {
+    return Intl.message(
+      'Ask me anything related to finance',
+      name: 'askMeAnythingRelatedToFinance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I like your style`
+  String get investmentResultScreenTitle {
+    return Intl.message(
+      'I like your style',
+      name: 'investmentResultScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You’re one step closer to AI Investing. \n\nTime to open your account.`
+  String get investmentResultScreenDescription {
+    return Intl.message(
+      'You’re one step closer to AI Investing. \n\nTime to open your account.',
+      name: 'investmentResultScreenDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I'm afraid you're not eligible for Asklora yet.`
+  String get privacyFailedScreenTitle {
+    return Intl.message(
+      'I\'m afraid you\'re not eligible for Asklora yet.',
+      name: 'privacyFailedScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.`
+  String get privacyFailedScreenDescription {
+    return Intl.message(
+      'It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.',
+      name: 'privacyFailedScreenDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I appreciate your honesty.`
+  String get privacySuccessScreenTitle {
+    return Intl.message(
+      'I appreciate your honesty.',
+      name: 'privacySuccessScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Age is just a number, but your personality is what sets you apart.\n\nAnswer a few personality questions, and I'll help you find investments that fit your style.`
+  String get privacySuccessScreenDescription {
+    return Intl.message(
+      'Age is just a number, but your personality is what sets you apart.\n\nAnswer a few personality questions, and I\'ll help you find investments that fit your style.',
+      name: 'privacySuccessScreenDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try Again`
+  String get buttonTryAgain {
+    return Intl.message(
+      'Try Again',
+      name: 'buttonTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sure`
+  String get buttonSure {
+    return Intl.message(
+      'Sure',
+      name: 'buttonSure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alright!\n\nBased on your answers, my technology is perfect for you and you can take on more risks.`
+  String get personalizationResultScreenTitle {
+    return Intl.message(
+      'Alright!\n\nBased on your answers, my technology is perfect for you and you can take on more risks.',
+      name: 'personalizationResultScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investing can be simple with AI`
+  String get opennessLessThan8 {
+    return Intl.message(
+      'Investing can be simple with AI',
+      name: 'opennessLessThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Our technology is for you.`
+  String get opennessMoreThan8 {
+    return Intl.message(
+      'Our technology is for you.',
+      name: 'opennessMoreThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can take on more risks.`
+  String get neuroticismLessThan8 {
+    return Intl.message(
+      'You can take on more risks.',
+      name: 'neuroticismLessThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You should reduce some risks.`
+  String get neuroticismMoreThan8 {
+    return Intl.message(
+      'You should reduce some risks.',
+      name: 'neuroticismMoreThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Introverts change the world!`
+  String get extrovertLessThan8 {
+    return Intl.message(
+      'Introverts change the world!',
+      name: 'extrovertLessThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Social butterfly, amplify that energy!`
+  String get extrovertMoreThan8 {
+    return Intl.message(
+      'Social butterfly, amplify that energy!',
+      name: 'extrovertMoreThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active`
+  String get active {
+    return Intl.message(
+      'Active',
+      name: 'active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pending {
+    return Intl.message(
+      'Pending',
+      name: 'pending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investments tailored  for you`
+  String get botRecommendationScreenTitle {
+    return Intl.message(
+      'Investments tailored  for you',
+      name: 'botRecommendationScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not feeling it? Try something different.`
+  String get notFeelingIt {
+    return Intl.message(
+      'Not feeling it? Try something different.',
+      name: 'notFeelingIt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asklora's Wire Details`
+  String get askloraWireDetails {
+    return Intl.message(
+      'Asklora\'s Wire Details',
+      name: 'askloraWireDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Details`
+  String get buttonViewDetails {
+    return Intl.message(
+      'View Details',
+      name: 'buttonViewDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wire Transfer`
+  String get wireTransfer {
+    return Intl.message(
+      'Wire Transfer',
+      name: 'wireTransfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank Number`
+  String get bankNumber {
+    return Intl.message(
+      'Bank Number',
+      name: 'bankNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Number`
+  String get accountNumber {
+    return Intl.message(
+      'Account Number',
+      name: 'accountNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank Name`
+  String get bankName {
+    return Intl.message(
+      'Bank Name',
+      name: 'bankName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Swift Code`
+  String get swiftCode {
+    return Intl.message(
+      'Swift Code',
+      name: 'swiftCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Name`
+  String get accountName {
+    return Intl.message(
+      'Account Name',
+      name: 'accountName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Company Address`
+  String get companyAddress {
+    return Intl.message(
+      'Company Address',
+      name: 'companyAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Exchange Rate: HKD 1 = USD 0.137 (at HKT {time})`
+  String exchangeRateInDepositScreen(String time) {
+    return Intl.message(
+      'Current Exchange Rate: HKD 1 = USD 0.137 (at HKT $time)',
+      name: 'exchangeRateInDepositScreen',
+      desc: '',
+      args: [time],
+    );
+  }
+
+  /// `Error Storing Data`
+  String get errorStoringData {
+    return Intl.message(
+      'Error Storing Data',
+      name: 'errorStoringData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions`
+  String get errorStoringDataDetails {
+    return Intl.message(
+      'Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions',
+      name: 'errorStoringDataDetails',
       desc: '',
       args: [],
     );

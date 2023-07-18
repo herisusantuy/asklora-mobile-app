@@ -68,12 +68,6 @@ class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case SignInScreen.route:
-
-        return MaterialPageRoute(
-            settings: settings,
-            builder: (_) => ResetPasswordScreen(
-                resetPasswordToken: 'Test'));
-
         return MaterialPageRoute(
             settings: settings, builder: (_) => const SignInScreen());
       case SignUpScreen.route:

@@ -8,8 +8,13 @@ import '../../lora_gpt/presentation/lora_ai_screen.dart';
 class AiOverlay extends StatefulWidget {
   final double maxHeight;
   final double maxWidth;
+  final bool enableSliding;
 
-  const AiOverlay({required this.maxHeight, required this.maxWidth, super.key});
+  const AiOverlay(
+      {required this.maxHeight,
+      required this.maxWidth,
+      super.key,
+      this.enableSliding = false});
 
   @override
   State<AiOverlay> createState() => _AiOverlayState();
@@ -56,12 +61,14 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
           width: widget.maxWidth,
           height: widget.maxHeight,
           top: _drawerBottom,
-          child: GestureDetector(
-            onPanDown: _onPanDown,
-            onPanEnd: _onPanEnd,
-            onPanUpdate: _onPanUpdate,
-            child: const LoraAiScreen(),
-          ),
+          child: widget.enableSliding
+              ? GestureDetector(
+                  onPanDown: _onPanDown,
+                  onPanEnd: _onPanEnd,
+                  onPanUpdate: _onPanUpdate,
+                  child: const LoraAiScreen(),
+                )
+              : const LoraAiScreen(),
         ),
       );
 

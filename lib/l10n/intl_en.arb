@@ -125,12 +125,12 @@
   "carouselIntro4": "Personalised experience",
   "about": "About",
   "confirm": "Confirm",
-  "askNameScreenPlaceholder": "I'm Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? ",
+  "askNameScreenPlaceholder": "I'm Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat’s your name? ",
   "askNameScreenTextFieldHint": "Your Name",
   "bankAccountNumber": "Bank Account Number",
   "bestSuitedFor": "Best Suited For",
-  "greetingScreenTitle": "Alright! Are you ready for the FinFit journey? ",
-  "greetingScreenSubTitle": "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!",
+  "greetingScreenTitle": "Ready to start your AI revolution?",
+  "greetingScreenSubTitle": "Let’s start the training with simple questions!\n\n  Remember - to lose patience is to lose the battle!",
   "tooltipBotDetailsStartDate": "Lora’s date to start the Botstocks",
   "tooltipBotDetailsInvestmentPeriod": "The duration you set for Botstock where the Bot will automatically buy and sell.",
   "tooltipBotDetailsEstMaxProfit": "This is the estimated maximum target profit % level for the Bot strategy. The Bot will try to close the trade (sell stocks) and capture profits when profits reach this % level. This is an estimated level.",
@@ -547,6 +547,45 @@
   "forgotPasswordMessage": "Please enter your email. Instructions will be sent to reset your password.",
   "resetPasswordSuccessful": "Password Reset Successful",
   "resetPasswordSuccessfulMessage": "Your password has been reset. Please go back to the Login page and login again.",
-  "backToLogin": "Back to login"
-
+  "backToLogin": "Back to login",
+  "askloraYouUltimateFinancialAdvisor": "Asklora.\n Your ultimate\nfinancial advisor",
+  "askMeAnythingRelatedToFinance": "Ask me anything related to finance",
+  "investmentResultScreenTitle": "I like your style",
+  "investmentResultScreenDescription": "You’re one step closer to AI Investing. \n\nTime to open your account.",
+  "privacyFailedScreenTitle": "I'm afraid you're not eligible for Asklora yet.",
+  "privacyFailedScreenDescription": "It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.",
+  "privacySuccessScreenTitle": "I appreciate your honesty.",
+  "privacySuccessScreenDescription": "Age is just a number, but your personality is what sets you apart.\n\nAnswer a few personality questions, and I'll help you find investments that fit your style.",
+  "buttonTryAgain": "Try Again",
+  "buttonSure": "Sure",
+  "personalizationResultScreenTitle": "Alright!\n\nBased on your answers, my technology is perfect for you and you can take on more risks.",
+  "opennessLessThan8": "Investing can be simple with AI",
+  "opennessMoreThan8": "Our technology is for you.",
+  "neuroticismLessThan8": "You can take on more risks.",
+  "neuroticismMoreThan8": "You should reduce some risks.",
+  "extrovertLessThan8": "Introverts change the world!",
+  "extrovertMoreThan8": "Social butterfly, amplify that energy!",
+  "active": "Active",
+  "pending": "Pending",
+  "botRecommendationScreenTitle": "Investments tailored  for you",
+  "notFeelingIt": "Not feeling it? Try something different.",
+  "askloraWireDetails": "Asklora's Wire Details",
+  "buttonViewDetails": "View Details",
+  "wireTransfer": "Wire Transfer",
+  "bankNumber": "Bank Number",
+  "accountNumber": "Account Number",
+  "bankName": "Bank Name",
+  "swiftCode": "Swift Code",
+  "accountName": "Account Name",
+  "companyAddress": "Company Address",
+  "exchangeRateInDepositScreen": "Current Exchange Rate: HKD 1 = USD 0.137 (at HKT {time})",
+  "@exchangeRateInDepositScreen": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "errorStoringData": "Error Storing Data",
+  "errorStoringDataDetails": "Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions"
 }

@@ -37,6 +37,20 @@ Image getPngImage(String imageName,
     Image.asset('assets/images/$imageName.png',
         height: height, width: width, color: color);
 
+Image getAPngImage(String imageName,
+        {double? height,
+        double? width,
+        Color? color,
+        BoxFit fit = BoxFit.contain}) =>
+    Image.asset(
+      'assets/apng/$imageName.png',
+      height: height,
+      width: width,
+      color: color,
+      fit: fit,
+      filterQuality: FilterQuality.high,
+    );
+
 Widget getSvgImage(String assetName,
         {Color? color, double? height, double? width}) =>
     SvgPicture.asset('assets/images/$assetName.svg',

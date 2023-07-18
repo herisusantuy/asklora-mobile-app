@@ -25,72 +25,90 @@ class _LoraGptScreenState extends State<LoraGptScreen>
   Widget build(BuildContext context) {
     return CustomScaffold(
       enableBackNavigation: false,
-      backgroundColor: Colors.white.withOpacity(0.2),
-      body: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            color: AskLoraColors.black.withOpacity(0.4),
-            image: const DecorationImage(
-                image: AssetImage('assets/lora_gpt_background.png'),
-                fit: BoxFit.cover)),
-        child: Stack(
-          children: [
-            const AiChatList(),
-            _topDarkenTransparencyWidget(context),
-            Positioned(
-              top: 28,
-              left: 0,
-              right: 0,
-              child: _header,
+      backgroundColor: Colors.transparent,
+      body: Column(
+        children: [
+          _debugWidget(context),
+          Expanded(
+            child: Stack(
+              children: [
+                const AiChatList(),
+                _header,
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(left: 15, right: 15, bottom: 12),
+                    child: _bottomContent,
+                  ),
+                ),
+              ],
             ),
-            const Align(
-              alignment: Alignment.topCenter,
-              child: DragIndicatorWidget(),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15, bottom: 12),
-                child: _bottomContent,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget get _header => UnconstrainedBox(
-        constrainedAxis: Axis.horizontal,
-        child: CustomHeader(
-          title: '',
-          body: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 11,
-                height: 11,
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: AskLoraColors.primaryGreen,
-                        spreadRadius: 2,
-                        blurRadius: 7, // changes position of shadow
-                      ),
-                    ],
-                    color: AskLoraColors.primaryGreen),
-              ),
-              const SizedBox(width: 30),
-              CustomTextNew(
+  Widget get _header => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        height: 60,
+        child: Stack(
+          children: [
+            Center(
+              child: CustomTextNew(
                 'Lora',
                 style:
-                    AskLoraTextStyles.h5.copyWith(color: AskLoraColors.white),
-              )
+                    AskLoraTextStyles.h4.copyWith(color: AskLoraColors.white),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: GestureDetector(
+                onTap: () =>
+                    context.read<TabScreenBloc>().add(const CloseAiOverLay()),
+                child: const Icon(Icons.close, color: AskLoraColors.white),
+              ),
+            )
+          ],
+        ),
+      );
+
+  Widget _debugWidget(BuildContext context) {
+    final config = AppConfigWidget.of(context);
+    if (config != null &&
+        (config.baseConfig is DevConfig ||
+            config.baseConfig is StagingConfig)) {
+      return Container(
+        padding: AppValues.screenHorizontalPadding.copyWith(bottom: 4, top: 4),
+        width: MediaQuery.of(context).size.width,
+        color: Colors.white,
+        constraints: const BoxConstraints(maxHeight: 100),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomTextNew(
+                'DEBUG',
+                style: AskLoraTextStyles.body3,
+              ),
+              BlocBuilder<LoraGptBloc, LoraGptState>(
+                  buildWhen: (previous, current) =>
+                      previous.debugText != current.debugText,
+                  builder: (context, state) {
+                    return CustomTextNew(
+                      state.debugText,
+                      style: AskLoraTextStyles.body3,
+                    );
+                  }),
             ],
           ),
         ),
       );
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
 
   Widget get _bottomContent {
     return BlocConsumer<LoraGptBloc, LoraGptState>(
@@ -148,7 +166,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                 child: ElevatedButton(
                     onPressed: () {
                       FocusScope.of(context).unfocus();
-                      if (state.query.isNotEmpty && !state.isTyping) {
+                      if (state.query.trim().isNotEmpty && !state.isTyping) {
                         context.read<LoraGptBloc>().add(const OnSearchQuery());
                       }
                     },
@@ -184,26 +202,4 @@ class _LoraGptScreenState extends State<LoraGptScreen>
       },
     );
   }
-
-  Widget _topDarkenTransparencyWidget(BuildContext context) => Positioned(
-        top: 0,
-        left: 0,
-        right: 0,
-        child: Container(
-          height: MediaQuery.of(context).size.height / 10,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.black,
-                Colors.black.withOpacity(0.8),
-                Colors.black.withOpacity(0.6),
-                Colors.black.withOpacity(0.2),
-                Colors.black.withOpacity(0.04),
-              ],
-            ),
-          ),
-        ),
-      );
 }
