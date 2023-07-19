@@ -1522,10 +1522,10 @@ class S {
     );
   }
 
-  /// `Current Price {currency}`
+  /// `Current Price ({currency})`
   String portfolioCurrentPrice(String currency) {
     return Intl.message(
-      'Current Price $currency',
+      'Current Price ($currency)',
       name: 'portfolioCurrentPrice',
       desc: '',
       args: [currency],
@@ -1582,10 +1582,10 @@ class S {
     );
   }
 
-  /// `% of Bot Assets in Stock`
+  /// `Stock Holding %`
   String get portfolioDetailPerformanceBotAssetsInStock {
     return Intl.message(
-      '% of Bot Assets in Stock',
+      'Stock Holding %',
       name: 'portfolioDetailPerformanceBotAssetsInStock',
       desc: '',
       args: [],
@@ -2493,11 +2493,21 @@ class S {
     );
   }
 
-  /// `Looks like you haven't made \nany transactions yet!`
+  /// `Looks like you haven’t made \nany transactions yet!`
   String get noTransactionsYet {
     return Intl.message(
-      'Looks like you haven\'t made \nany transactions yet!',
+      'Looks like you haven’t made \nany transactions yet!',
       name: 'noTransactionsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check back later to see if\nthere are any new\ntransactions!`
+  String get checkBackLater {
+    return Intl.message(
+      'Check back later to see if\nthere are any new\ntransactions!',
+      name: 'checkBackLater',
       desc: '',
       args: [],
     );

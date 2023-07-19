@@ -199,7 +199,7 @@
   "portfolioDetailPerformanceBotStockValues": "Botstock Values (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "Inv. Amount (HKD)",
   "portfolioDetailPerformanceTotalPL": "Total P&L",
-  "portfolioCurrentPrice": "Current Price {currency}",
+  "portfolioCurrentPrice": "Current Price ({currency})",
   "@portfolioCurrentPrice": {
     "placeholders": {
       "currency": {
@@ -226,7 +226,7 @@
   "portfolioDetailPerformanceNumberOfShares": "No. of Shares",
   "portfolioDetailPerformanceStockValues": "Stock Values (HKD)",
   "portfolioDetailPerformanceCash": "Cash (HKD)",
-  "portfolioDetailPerformanceBotAssetsInStock": "% of Bot Assets in Stock",
+  "portfolioDetailPerformanceBotAssetsInStock": "Stock Holding %",
   "portfolioDetailPerformanceNumberOfSharesTooltip": "Indicates how many shares of a company are currently owned by you.",
   "portfolioDetailKeyInfoTitle": "Key Info",
   "portfolioDetailKeyInfoDaysTillExpiry": "Days Till Expiry",
@@ -361,7 +361,8 @@
   "yourPaymentInformationIsUnderReview": "Your payment information is under review. Your bank account details will be shown here once your account is approved. please note it can take up to 2 working days for the approval process.",
   "needHelp": "Need help?",
   "noTransactions": "No Transactions",
-  "noTransactionsYet": "Looks like you haven't made \nany transactions yet!",
+  "noTransactionsYet": "Looks like you haven’t made \nany transactions yet!",
+  "checkBackLater": "Check back later to see if\nthere are any new\ntransactions!",
   "performance": "Performance",
   "milestones": "Milestones",
   "startInvesting": "Start Investing",
