@@ -7,6 +7,7 @@ import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../../bloc/response/user_response_bloc.dart';
 import '../../domain/fixture.dart';
@@ -126,8 +127,8 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
           title: 'No Botstock recommendations',
           subTitle:
               'Oops! Looks like there aren’t enough recommendations that meet your current investment profile - Let’s go through your Investment Style again to find suitable recommendations.',
-          primaryButtonLabel: 'RETAKE INVESTMENT STYLE',
-          secondaryButtonLabel: 'CANCEL',
+          primaryButtonLabel: S.of(context).retakeInvestmentStyle,
+          secondaryButtonLabel: S.of(context).buttonCancel,
           onSecondaryButtonTap: () => Navigator.pop(context),
           onPrimaryButtonTap: () {
             context.read<QuestionBloc>().add(const ResetInvestmentStylePage());
@@ -141,11 +142,10 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
         );
       default:
         return LoraPopUpMessageModel(
-          title: 'Error Storing Data',
-          subTitle:
-              'Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions',
-          primaryButtonLabel: 'RETAKE INVESTMENT STYLE',
-          secondaryButtonLabel: 'CANCEL',
+          title: S.of(context).errorStoringData,
+          subTitle: S.of(context).errorStoringDataDetails,
+          primaryButtonLabel: S.of(context).retakeInvestmentStyle,
+          secondaryButtonLabel: S.of(context).buttonCancel,
           onSecondaryButtonTap: () => context
               .read<UserResponseBloc>()
               .add(const ResetState(wholeState: false)),

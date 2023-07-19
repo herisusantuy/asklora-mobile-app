@@ -3755,6 +3755,26 @@ class S {
     );
   }
 
+  /// `Active`
+  String get active {
+    return Intl.message(
+      'Active',
+      name: 'active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pending {
+    return Intl.message(
+      'Pending',
+      name: 'pending',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Investments tailored  for you`
   String get botRecommendationScreenTitle {
     return Intl.message(
@@ -3770,6 +3790,206 @@ class S {
     return Intl.message(
       'Not feeling it? Try something different.',
       name: 'notFeelingIt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asklora's Wire Details`
+  String get askloraWireDetails {
+    return Intl.message(
+      'Asklora\'s Wire Details',
+      name: 'askloraWireDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Details`
+  String get buttonViewDetails {
+    return Intl.message(
+      'View Details',
+      name: 'buttonViewDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wire Transfer`
+  String get wireTransfer {
+    return Intl.message(
+      'Wire Transfer',
+      name: 'wireTransfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank Number`
+  String get bankNumber {
+    return Intl.message(
+      'Bank Number',
+      name: 'bankNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Number`
+  String get accountNumber {
+    return Intl.message(
+      'Account Number',
+      name: 'accountNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank Name`
+  String get bankName {
+    return Intl.message(
+      'Bank Name',
+      name: 'bankName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Swift Code`
+  String get swiftCode {
+    return Intl.message(
+      'Swift Code',
+      name: 'swiftCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Name`
+  String get accountName {
+    return Intl.message(
+      'Account Name',
+      name: 'accountName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Company Address`
+  String get companyAddress {
+    return Intl.message(
+      'Company Address',
+      name: 'companyAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Exchange Rate: HKD 1 = USD 0.137 (at HKT {time})`
+  String exchangeRateInDepositScreen(String time) {
+    return Intl.message(
+      'Current Exchange Rate: HKD 1 = USD 0.137 (at HKT $time)',
+      name: 'exchangeRateInDepositScreen',
+      desc: '',
+      args: [time],
+    );
+  }
+
+  /// `Error Storing Data`
+  String get errorStoringData {
+    return Intl.message(
+      'Error Storing Data',
+      name: 'errorStoringData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions`
+  String get errorStoringDataDetails {
+    return Intl.message(
+      'Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions',
+      name: 'errorStoringDataDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User does not exist with the given email`
+  String get emailNotExist {
+    return Intl.message(
+      'User does not exist with the given email',
+      name: 'emailNotExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User email is not verified`
+  String get emailNotVerified {
+    return Intl.message(
+      'User email is not verified',
+      name: 'emailNotVerified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter valid email`
+  String get enterValidEmail {
+    return Intl.message(
+      'Enter valid email',
+      name: 'enterValidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password changed successfully.`
+  String get passwordChangeSuccessfully {
+    return Intl.message(
+      'Password changed successfully.',
+      name: 'passwordChangeSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Token is invalid or expired.`
+  String get tokenInvalid {
+    return Intl.message(
+      'Token is invalid or expired.',
+      name: 'tokenInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid OTP`
+  String get invalidOtp {
+    return Intl.message(
+      'Invalid OTP',
+      name: 'invalidOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Link for Password reset is sent to email.`
+  String get linkPasswordResetIsSent {
+    return Intl.message(
+      'Link for Password reset is sent to email.',
+      name: 'linkPasswordResetIsSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account is not active yet.`
+  String get accountIsNotActive {
+    return Intl.message(
+      'Your account is not active yet.',
+      name: 'accountIsNotActive',
       desc: '',
       args: [],
     );

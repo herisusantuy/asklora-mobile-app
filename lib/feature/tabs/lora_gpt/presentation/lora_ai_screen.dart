@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -31,7 +33,9 @@ import 'widget/out_chat_bubble_widget.dart';
 import 'widget/utils/breathing_glowing_button.dart';
 
 part 'lora_ai_overlay_screen.dart';
+
 part 'lora_gpt_screen.dart';
+
 part 'widget/ai_chat_list.dart';
 
 class LoraAiScreen extends StatelessWidget {
@@ -92,8 +96,19 @@ class LoraAiScreen extends StatelessWidget {
                   }),
             ],
             child: BlocBuilder<LoraGptBloc, LoraGptState>(
-                builder: (context, state) => state.shouldShowOverlay
-                    ? const LoraAiOverlayScreen()
-                    : const LoraGptScreen())));
+                builder: (context, state) => ClipRect(
+                    child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 6.0, sigmaY: 6.0),
+                        child: Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: AskLoraColors.black.withOpacity(0.4),
+                                image: const DecorationImage(
+                                    image: AssetImage(
+                                        'assets/lora_gpt_background.png'),
+                                    fit: BoxFit.cover)),
+                            child: state.shouldShowOverlay
+                                ? const LoraAiOverlayScreen()
+                                : const LoraGptScreen()))))));
   }
 }
