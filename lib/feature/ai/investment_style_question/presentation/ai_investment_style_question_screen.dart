@@ -36,7 +36,8 @@ class AiInvestmentStyleQuestionScreen extends StatelessWidget {
           ..add(const InitiateAI()),
         child: BlocListener<AiInvestmentStyleQuestionBloc,
             AiInvestmentStyleQuestionState>(
-          listenWhen: (previous, current)=>previous.ppiResponseState!=current.ppiResponseState,
+          listenWhen: (previous, current) =>
+              previous.ppiResponseState != current.ppiResponseState,
           listener: (context, state) {
             CustomLoadingOverlay.of(context).show(state.ppiResponseState);
             if (state.ppiResponseState == ResponseState.success) {

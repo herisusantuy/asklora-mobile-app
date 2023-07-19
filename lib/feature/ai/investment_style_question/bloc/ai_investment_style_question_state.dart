@@ -62,5 +62,5 @@ class AiInvestmentStyleQuestionState extends Equatable {
         ppiResponseState
       ];
 
-  bool get isTextFieldSendButtonDisabled=>isTyping||query.isEmpty;
+  bool get isTextFieldSendButtonDisabled => isTyping || query.isEmpty;
 }
