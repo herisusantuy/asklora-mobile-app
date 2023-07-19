@@ -1522,10 +1522,10 @@ class S {
     );
   }
 
-  /// `Current Price {currency}`
+  /// `Current Price ({currency})`
   String portfolioCurrentPrice(String currency) {
     return Intl.message(
-      'Current Price $currency',
+      'Current Price ($currency)',
       name: 'portfolioCurrentPrice',
       desc: '',
       args: [currency],
@@ -1582,10 +1582,10 @@ class S {
     );
   }
 
-  /// `% of Bot Assets in Stock`
+  /// `Stock Holding %`
   String get portfolioDetailPerformanceBotAssetsInStock {
     return Intl.message(
-      '% of Bot Assets in Stock',
+      'Stock Holding %',
       name: 'portfolioDetailPerformanceBotAssetsInStock',
       desc: '',
       args: [],
