@@ -81,6 +81,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "about": MessageLookupByLibrary.simpleMessage("關於"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("關於 Asklora"),
         "accountInformation": MessageLookupByLibrary.simpleMessage("帳戶資訊"),
+        "accountIsNotActive": MessageLookupByLibrary.simpleMessage(
+            "Your account is not active yet."),
         "accountName": MessageLookupByLibrary.simpleMessage("戶口名稱"),
         "accountNumber": MessageLookupByLibrary.simpleMessage("戶口號碼"),
         "accountSettings": MessageLookupByLibrary.simpleMessage("帳戶設定"),
@@ -224,11 +226,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sorry！你嘅請求已經逾時。\n請重新開通帳戶。"),
         "emailActivationSuccessTitle": m8,
         "emailAddress": MessageLookupByLibrary.simpleMessage("電郵地址"),
+        "emailNotExist": MessageLookupByLibrary.simpleMessage("此電郵地址的用戶不存在"),
+        "emailNotVerified": MessageLookupByLibrary.simpleMessage("用戶電郵未認證"),
         "employees": MessageLookupByLibrary.simpleMessage("員工人數"),
         "endBotStockAcknowledgement": m9,
         "endDate": MessageLookupByLibrary.simpleMessage("結束日期"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("到期價值"),
         "enterANewPassword": MessageLookupByLibrary.simpleMessage("請輸入新密碼"),
+        "enterValidEmail": MessageLookupByLibrary.simpleMessage("無效電郵地址"),
+        "enterValidPassword": MessageLookupByLibrary.simpleMessage("無效電郵地址"),
         "errorGettingInformationInvestmentDetailSubTitle":
             MessageLookupByLibrary.simpleMessage("載入你投資細節時出咗少少問題，Reload一次試下？"),
         "errorGettingInformationPortfolioSubTitle":
@@ -292,6 +298,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Pullup"),
         "introduceBotSquat":
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Squat"),
+        "invalidOtp": MessageLookupByLibrary.simpleMessage("Invalid OTP"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("無效密碼"),
         "investmentAmount": MessageLookupByLibrary.simpleMessage("投資金額"),
         "investmentPeriod": MessageLookupByLibrary.simpleMessage("投資期"),
@@ -308,6 +315,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "licenseeName":
             MessageLookupByLibrary.simpleMessage("Licensee: Chang Yung Ching"),
         "licenseeNumber": MessageLookupByLibrary.simpleMessage("CE 編號: AFF918"),
+        "linkPasswordResetIsSent": MessageLookupByLibrary.simpleMessage(
+            "Link for Password reset is sent to email."),
         "manageYourBotstock":
             MessageLookupByLibrary.simpleMessage("管理 Botstock"),
         "marketCap": MessageLookupByLibrary.simpleMessage("市值"),
@@ -351,6 +360,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("密碼"),
         "passwordChangeSuccess":
             MessageLookupByLibrary.simpleMessage("Password Change Success"),
+        "passwordChangeSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Password changed successfully."),
         "passwordDoesNotMatch": MessageLookupByLibrary.simpleMessage("兩組密碼不相符"),
         "passwordLinkHasBeenSent":
             MessageLookupByLibrary.simpleMessage("已發送重設密碼電郵，\n請檢查你的電郵。"),
@@ -517,6 +528,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "theProofOfRemittanceShouldShowYourBankAccount":
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
         "to": MessageLookupByLibrary.simpleMessage("至"),
+        "tokenInvalid": MessageLookupByLibrary.simpleMessage(
+            "Token is invalid or expired."),
         "tooltipBotDetailsEstMaxLoss":
             MessageLookupByLibrary.simpleMessage("Bot將出售以限制損失的最低股票價位。"),
         "tooltipBotDetailsEstMaxProfit":
