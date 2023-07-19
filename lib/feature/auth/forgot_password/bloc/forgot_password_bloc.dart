@@ -8,6 +8,7 @@ import '../../../../core/data/remote/base_api_client.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../repository/auth_repository.dart';
+import '../../utils/auth_utils.dart';
 
 part 'forgot_password_event.dart';
 
@@ -41,8 +42,8 @@ class ForgotPasswordBloc
       state.copyWith(
           email: event.email,
           emailErrorText: (event.email.isValidEmail() || event.email.isEmpty)
-              ? ''
-              : 'Enter valid email'),
+              ? AuthErrorMessage.empty.value
+              : AuthErrorMessage.enterValidEmail.value),
     );
   }
 
@@ -52,17 +53,17 @@ class ForgotPasswordBloc
       emit(state.copyWith(response: BaseResponse.loading()));
       var data = await _authRepository.forgotPassword(email: state.email);
 
-      data.copyWith(message: 'Link for Password reset is sent to email.');
+      data.copyWith(message: AuthErrorMessage.linkPasswordResetIsSent.value);
 
       emit(state.copyWith(response: data));
     } on BadRequestException {
       emit(state.copyWith(
-          response:
-              BaseResponse.error(message: 'Your account is not active yet.')));
+          response: BaseResponse.error(
+              message: AuthErrorMessage.accountIsNotActive.value)));
     } on NotFoundException {
       emit(state.copyWith(
           response: BaseResponse.error(
-              message: 'User does not exist with the given email.')));
+              message: AuthErrorMessage.emailNotExist.value)));
     } catch (e) {
       state.copyWith(response: BaseResponse.error());
     }

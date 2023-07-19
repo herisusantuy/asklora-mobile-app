@@ -1,6 +1,8 @@
 import 'package:asklora_mobile_app/core/presentation/buttons/primary_button.dart';
 import 'package:asklora_mobile_app/feature/auth/forgot_password/presentation/forgot_password_screen.dart';
+import 'package:asklora_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../mocks/mocks.dart';
@@ -13,6 +15,13 @@ void main() {
         final mockObserver = MockNavigatorObserver();
         await tester.pumpWidget(
           MaterialApp(
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
             home: const ForgotPasswordScreen(),
             navigatorObservers: [mockObserver],
           ),

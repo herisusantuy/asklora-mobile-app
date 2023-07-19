@@ -9,6 +9,8 @@ doc/api/
 
 firebase_credentials_dev.json
 
+/lib/core/utils/build_configs/environment.dart
+
 # Avoid committing generated Javascript files:
 *.dart.js
 *.info.json      # Produced by the --dump-info flag.

@@ -52,7 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m13(currency) => "購買力 (${currency})";
 
-  static String m14(currency) => "當前價格 ${currency}";
+  static String m14(currency) => "當前價格 (${currency})";
 
   static String m15(bot, startDate, endDate, duration) =>
       "${bot} 於過去 ${duration} 星期之表現  (${startDate} - ${endDate})";
@@ -65,22 +65,27 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m19(currency) => "可提取金額 (${currency})";
 
-  static String m20(botName, botSymbol, dateTime) =>
+  static String m20(opennessScore, neuroticismScore, extrovertScore) =>
+      "${opennessScore}, ${neuroticismScore}\n\n${extrovertScore}";
+
+  static String m21(botName, botSymbol, dateTime) =>
       "${botName} ${botSymbol} 將於 ${dateTime} 開始";
 
-  static String m21(minDeposit) =>
+  static String m22(minDeposit) =>
       "請轉賬最少 HK\$${minDeposit} 至 Asklora 銀行戶口。任何少於 HK\$${minDeposit} 的首次入金均會被拒收，並會被徵收手續費。";
 
-  static String m22(minDeposit) =>
+  static String m23(minDeposit) =>
       "我們會提取由你銀行透過 API 或匯款通知書收集的資訊， 確定你指定的銀行戶口。我們只會接受透過此指定戶口進行所有將來的入金與提取。你可轉換指定銀行戶口，但你需要完成最少匯款 HK\$${minDeposit} 以通過相同的認證。";
 
-  static String m23(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
+  static String m24(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("關於"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("關於 Asklora"),
         "accountInformation": MessageLookupByLibrary.simpleMessage("帳戶資訊"),
+        "accountIsNotActive": MessageLookupByLibrary.simpleMessage(
+            "Your account is not active yet."),
         "accountName": MessageLookupByLibrary.simpleMessage("戶口名稱"),
         "accountNumber": MessageLookupByLibrary.simpleMessage("戶口號碼"),
         "accountSettings": MessageLookupByLibrary.simpleMessage("帳戶設定"),
@@ -106,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "atLeast1Number": MessageLookupByLibrary.simpleMessage("最少 1 個數字"),
         "atLeast1Uppercase":
             MessageLookupByLibrary.simpleMessage("最少 1 個大寫英文字母"),
+        "backToLogin": MessageLookupByLibrary.simpleMessage("返回登入"),
         "bankName": MessageLookupByLibrary.simpleMessage("銀行名稱"),
         "bankNumber": MessageLookupByLibrary.simpleMessage("銀行號碼"),
         "beforeDepositHeaderTitle": m0,
@@ -148,7 +154,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonAlreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("已有帳戶"),
         "buttonBackToHome": MessageLookupByLibrary.simpleMessage("返回主頁"),
-        "buttonCancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
+        "buttonBackToPortfolio":
+            MessageLookupByLibrary.simpleMessage("返回投資組合頁"),
+        "buttonCancel": MessageLookupByLibrary.simpleMessage("取消"),
         "buttonCancelTrade": MessageLookupByLibrary.simpleMessage("取消交易"),
         "buttonChangeInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("更改投資風格"),
@@ -176,6 +184,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonViewTransactionHistory":
             MessageLookupByLibrary.simpleMessage("查看交易歷史"),
         "buttonWithdraw": MessageLookupByLibrary.simpleMessage("提取"),
+        "cannotRememberEmailAddress": MessageLookupByLibrary.simpleMessage(
+            "忘記登入電郵地址\n請發送電郵至 cs@asklora.ai"),
+        "cantRememberYourEmail": MessageLookupByLibrary.simpleMessage(
+            "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage("投資一樣\n要夠Fit"),
         "carouselIntro2":
             MessageLookupByLibrary.simpleMessage("FinFit教練，Lora 全程教路"),
@@ -183,6 +195,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "carouselIntro4": MessageLookupByLibrary.simpleMessage("個人化體驗，\n前所未見"),
         "changeBankAccount": MessageLookupByLibrary.simpleMessage("更改銀行戶口"),
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
+        "checkBackLater": MessageLookupByLibrary.simpleMessage("稍後再來查看!"),
         "checkBotStockDetails":
             MessageLookupByLibrary.simpleMessage("查看 Botstock 資訊"),
         "companyAddress": MessageLookupByLibrary.simpleMessage("銀行地址"),
@@ -221,10 +234,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sorry！你嘅請求已經逾時。\n請重新開通帳戶。"),
         "emailActivationSuccessTitle": m8,
         "emailAddress": MessageLookupByLibrary.simpleMessage("電郵地址"),
+        "emailNotExist": MessageLookupByLibrary.simpleMessage("此電郵地址的用戶不存在"),
+        "emailNotVerified": MessageLookupByLibrary.simpleMessage("用戶電郵未認證"),
         "employees": MessageLookupByLibrary.simpleMessage("員工人數"),
         "endBotStockAcknowledgement": m9,
         "endDate": MessageLookupByLibrary.simpleMessage("結束日期"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("到期價值"),
+        "enterANewPassword": MessageLookupByLibrary.simpleMessage("請輸入新密碼"),
+        "enterValidEmail": MessageLookupByLibrary.simpleMessage("無效電郵地址"),
+        "enterValidPassword": MessageLookupByLibrary.simpleMessage("無效電郵地址"),
         "errorGettingInformationInvestmentDetailSubTitle":
             MessageLookupByLibrary.simpleMessage("載入你投資細節時出咗少少問題，Reload一次試下？"),
         "errorGettingInformationPortfolioSubTitle":
@@ -250,6 +268,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "financialProfile":
             MessageLookupByLibrary.simpleMessage("Financial Profile"),
         "firstTimeCopyAskloraBankDetails": m11,
+        "forgotPassword": MessageLookupByLibrary.simpleMessage("忘記密碼"),
+        "forgotPasswordMessage":
+            MessageLookupByLibrary.simpleMessage("請輸入你的電郵地址，我們會發送重設密碼的指示給你。"),
         "founded": MessageLookupByLibrary.simpleMessage("成立年份"),
         "free": MessageLookupByLibrary.simpleMessage("免費"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("免費試用期"),
@@ -277,12 +298,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "inApp": MessageLookupByLibrary.simpleMessage("In-app通知"),
         "industry": MessageLookupByLibrary.simpleMessage("行業"),
         "inputDepositAmount": MessageLookupByLibrary.simpleMessage("輸入金額"),
+        "inputWrongEmail": MessageLookupByLibrary.simpleMessage("電郵地址錯誤"),
+        "inputWrongEmailAddress":
+            MessageLookupByLibrary.simpleMessage("電郵地址錯誤"),
         "introduceBotPlank":
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Plank"),
         "introduceBotPullup":
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Pullup"),
         "introduceBotSquat":
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Squat"),
+        "invalidOtp": MessageLookupByLibrary.simpleMessage("Invalid OTP"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("無效密碼"),
         "investmentAmount": MessageLookupByLibrary.simpleMessage("投資金額"),
         "investmentPeriod": MessageLookupByLibrary.simpleMessage("投資期"),
@@ -299,6 +324,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "licenseeName":
             MessageLookupByLibrary.simpleMessage("Licensee: Chang Yung Ching"),
         "licenseeNumber": MessageLookupByLibrary.simpleMessage("CE 編號: AFF918"),
+        "linkPasswordResetIsSent": MessageLookupByLibrary.simpleMessage(
+            "Link for Password reset is sent to email."),
         "manageYourBotstock":
             MessageLookupByLibrary.simpleMessage("管理 Botstock"),
         "marketCap": MessageLookupByLibrary.simpleMessage("市值"),
@@ -310,12 +337,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "min8Character": MessageLookupByLibrary.simpleMessage("最少 8 個字母"),
         "needHelp": MessageLookupByLibrary.simpleMessage("需要幫助？"),
         "neuroticismLessThan8":
-            MessageLookupByLibrary.simpleMessage("我哋可以進取少少, 承受一定嘅風險 "),
+            MessageLookupByLibrary.simpleMessage("我哋可以進取少少, 承受一定嘅風險"),
         "neuroticismMoreThan8":
             MessageLookupByLibrary.simpleMessage("我哋一步一步嚟, 控制住風險"),
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
         "nextStep": MessageLookupByLibrary.simpleMessage("下一步"),
         "no": MessageLookupByLibrary.simpleMessage(" 否"),
+        "noTransactions": MessageLookupByLibrary.simpleMessage("暫時沒有交易"),
+        "noTransactionsYet":
+            MessageLookupByLibrary.simpleMessage("你似乎未進行過任何交易！"),
         "notFeelingIt": MessageLookupByLibrary.simpleMessage("唔啱心水？\n當然仲有得揀！"),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
             "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。"),
@@ -342,7 +372,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("密碼"),
         "passwordChangeSuccess":
             MessageLookupByLibrary.simpleMessage("Password Change Success"),
+        "passwordChangeSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Password changed successfully."),
         "passwordDoesNotMatch": MessageLookupByLibrary.simpleMessage("兩組密碼不相符"),
+        "passwordLinkHasBeenSent":
+            MessageLookupByLibrary.simpleMessage("已發送重設密碼電郵，\n請檢查你的電郵。"),
         "payDepositToStartRealTrade":
             MessageLookupByLibrary.simpleMessage("入金以開始正式交易"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
@@ -356,6 +390,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "phone": MessageLookupByLibrary.simpleMessage("電話"),
         "pleaseAddAHkBankAccount": MessageLookupByLibrary.simpleMessage(
             "請確保加入的香港銀行戶口是在你名下。其他人的銀行戶口及聯名戶口將不會接受。"),
+        "pleaseEnterYouEmail":
+            MessageLookupByLibrary.simpleMessage("請輸入你的電郵地址，我們會發送重設密碼的指示給你。"),
         "pleaseMakeSureYouHaveFinished":
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
         "pleaseMakeSureYouPressSubmit":
@@ -459,6 +495,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "readyToGo": MessageLookupByLibrary.simpleMessage("準備好未？"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
+        "resetPassword": MessageLookupByLibrary.simpleMessage("重設密碼"),
+        "resetPasswordSuccessful":
+            MessageLookupByLibrary.simpleMessage("密碼重設成功"),
+        "resetPasswordSuccessfulMessage":
+            MessageLookupByLibrary.simpleMessage("你的密碼已經被重設。請返回登入頁面重新登入。"),
+        "resultOfPersonalizationQuestion": m20,
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶號碼）。不過，我們亦可能會因核實交易，向你要求更多附加資料。"),
         "riskDisclosureStatementAcknowledgement":
@@ -467,7 +509,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("風險披露聲明"),
         "riskDisclosureStatementString": MessageLookupByLibrary.simpleMessage(
             "1. The prices of securities fluctuate, sometimes dramatically. The price of a security may move up or down, and may become valueless. It is as likely that losses will be incurred rather than profit made as a result of buying and selling securities. Investors should not only base on this marketing material to make any investment decision, you should carefully consider whether the investment products or services are suitable for you according to your investment experience, purpose, risk tolerance, financial or related conditions. If you have any questions, please contact us or obtain independent advice.\n\n2. Investment in foreign securities carries additional risks not generally associated with securities in the domestic market. The value or income of foreign securities may be more volatile and could be adversely affected by changes in currency rates of exchange, foreign taxation practices, foreign laws, government practices, regulations, and political events. You may find it more difficult to liquidate investments in foreign securities where they have limited liquidity in the relevant market. Foreign laws, government practices, and regulations may also affect the transferability of foreign securities. Timely and reliable information about the value or the extent of the risks of foreign securities may not be readily available at all times.\n\n3. You acknowledge that you have fully understood the implications of the risks associated with the Electronic Trading Service as set out in the Client Agreement"),
-        "rolloverBotStockAcknowledgement": m20,
+        "rolloverBotStockAcknowledgement": m21,
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
@@ -501,6 +543,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "theProofOfRemittanceShouldShowYourBankAccount":
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
         "to": MessageLookupByLibrary.simpleMessage("至"),
+        "tokenInvalid": MessageLookupByLibrary.simpleMessage(
+            "Token is invalid or expired."),
         "tooltipBotDetailsEstMaxLoss":
             MessageLookupByLibrary.simpleMessage("Bot將出售以限制損失的最低股票價位。"),
         "tooltipBotDetailsEstMaxProfit":
@@ -537,7 +581,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提存 "),
         "transactionHistoryTitle": MessageLookupByLibrary.simpleMessage("交易歷史"),
         "transactionHistoryToday": MessageLookupByLibrary.simpleMessage("今日"),
-        "transferAtLeastWithMinimumDeposit": m21,
+        "transferAtLeastWithMinimumDeposit": m22,
         "transferAtLeastWithNoMinimumDeposit":
             MessageLookupByLibrary.simpleMessage(
                 "請由你之前使用的銀行戶口轉賬至Asklora 銀行戶口。"),
@@ -555,7 +599,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "我們只接受由你戶口透過銀行轉賬 (電匯/FPS) 的入金。"),
         "weWillOnlyAcceptHKD": MessageLookupByLibrary.simpleMessage("我們只接受港幣"),
-        "weWillTakeInformationCollectedFromYour": m22,
+        "weWillTakeInformationCollectedFromYour": m23,
         "website": MessageLookupByLibrary.simpleMessage("網站"),
         "welcomeScreenFirstBenefit":
             MessageLookupByLibrary.simpleMessage("度身訂做AI指導"),
@@ -579,7 +623,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提取款項最多需時2個工作天。"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),
         "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
-        "yourBankAccountIsUnderReview": m23,
+        "yourBankAccountIsUnderReview": m24,
         "yourDepositCanTakeUp2WorkingDays":
             MessageLookupByLibrary.simpleMessage("入金程序最多需時 2 個工作天"),
         "yourDepositMayBeRejected": MessageLookupByLibrary.simpleMessage(
