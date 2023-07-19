@@ -7,7 +7,9 @@ import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../core/presentation/custom_text_new.dart';
+import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../../generated/l10n.dart';
 import '../../repository/auth_repository.dart';
 import '../bloc/forgot_password_bloc.dart';
 import 'forgot_password_form.dart';
@@ -22,8 +24,8 @@ class ForgotPasswordScreen extends StatelessWidget {
         create: (context) => ForgotPasswordBloc(
             authRepository: AuthRepository(TokenRepository())),
         child: CustomStretchedLayout(
-          header: const CustomHeader(
-            title: 'Forgot Password',
+          header: CustomHeader(
+            title: S.of(context).forgotPassword,
           ),
           content: const ForgotPasswordForm(),
           bottomButton: _forgotPasswordButton(),
@@ -38,16 +40,17 @@ class ForgotPasswordScreen extends StatelessWidget {
         builder: (context, state) {
           return Column(
             children: [
-              const CustomTextNew(
-                'Can’t remember your email address?\nEmail us at cs@asklora.ai',
+              CustomTextNew(
+                S.of(context).cantRememberYourEmail,
                 textAlign: TextAlign.center,
+                style: AskLoraTextStyles.subtitle3,
               ),
               const SizedBox(
                 height: 30,
               ),
               PrimaryButton(
                   key: const Key('forgot_password_submit_button'),
-                  label: 'SUBMIT',
+                  label: S.of(context).buttonSubmit,
                   disabled: !state.email.isValidEmail(),
                   onTap: () => context
                       .read<ForgotPasswordBloc>()
