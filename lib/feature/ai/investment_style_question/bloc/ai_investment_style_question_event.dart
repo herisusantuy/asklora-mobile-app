@@ -46,6 +46,13 @@ class NextQuestion extends AiInvestmentStyleQuestionEvent {
   List<Object?> get props => [];
 }
 
+class SendResultToPpi extends AiInvestmentStyleQuestionEvent {
+  const SendResultToPpi();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class SubmitAnswer extends AiInvestmentStyleQuestionEvent {
   final String answerId;
   final String answerText;
