@@ -557,5 +557,12 @@
   "extrovertMoreThan8": "Social butterfly, amplify that energy!",
   "botRecommendationScreenTitle": "Investments tailored  for you",
   "notFeelingIt": "Not feeling it? Try something different.",
-  "investmentsTailoredForYou": "Investments tailored  for you"
+  "defineAgain": "Define again",
+  "updatedAt": "Updated at {time} HKT, {date}",
+  "@updatedAt": {
+    "placeholder": {
+      "time": "String",
+      "date": "String"
+    }
+  }
 }

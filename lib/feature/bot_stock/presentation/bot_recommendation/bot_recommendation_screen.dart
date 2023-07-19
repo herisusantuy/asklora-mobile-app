@@ -12,6 +12,8 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/pair.dart';
+import '../../../../core/presentation/column_text/column_text_with_tooltip.dart';
+import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
@@ -84,10 +86,10 @@ class BotRecommendationScreen extends StatelessWidget {
                   ),
                   if (UserJourney.compareUserJourney(
                       context: context, target: UserJourney.freeBotStock))
-                    _buttonChangeInvestmentStyle(context),
-                  const SizedBox(
-                    height: 50,
-                  ),
+                    // _buttonChangeInvestmentStyle(context),
+                    const SizedBox(
+                      height: 50,
+                    ),
                   const BotRecommendationFaq(),
                   const SizedBox(
                     height: 28,
@@ -112,6 +114,39 @@ class BotRecommendationScreen extends StatelessWidget {
               S.of(context).botRecommendationScreenTitle,
               style:
                   AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Row(
+              children: [
+                CustomTextNew(
+                  S.of(context).notFeelingIt,
+                  style: AskLoraTextStyles.subtitle2
+                      .copyWith(color: AskLoraColors.primaryMagenta),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                GestureDetector(
+                  onTap: () => context
+                      .read<NavigationBloc<ForYouPage>>()
+                      .add(const PageChanged(ForYouPage.investmentStyle)),
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AskLoraColors.primaryMagenta),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: CustomTextNew(
+                      S.of(context).defineAgain,
+                      style: AskLoraTextStyles.subtitle3
+                          .copyWith(color: AskLoraColors.primaryMagenta),
+                    ),
+                  ),
+                )
+              ],
             ),
             const SizedBox(
               height: 8,

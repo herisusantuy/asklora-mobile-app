@@ -517,5 +517,11 @@
   "notFeelingIt": "唔啱心水？\n當然仲有得揀！",
   "buttonChangeInvestmentStyle": "更改投資風格",
   "trade": "交易",
-  "investmentsTailoredForYou": "最夾你嘅投資風格"
+  "defineAgain": "Define again",
+  "updatedAt": "Updated at {time} HKT, {date}",
+  "@updatedAt": {
+    "placeholder": {
+      "time": "String",
+      "date": "String"
+    }
 }

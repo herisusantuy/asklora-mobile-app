@@ -43,7 +43,7 @@ class ForYouScreenForm extends StatelessWidget {
               return BotStockBackgroundWithPopUp(
                   shouldScrollable: false,
                   header: CustomTextNew(
-                    S.of(context).investmentsTailoredForYou,
+                    S.of(context).botRecommendationScreenTitle,
                     style: AskLoraTextStyles.h2
                         .copyWith(color: AskLoraColors.charcoal),
                   ),

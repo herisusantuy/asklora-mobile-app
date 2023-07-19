@@ -3775,13 +3775,23 @@ class S {
     );
   }
 
-  /// `Investments tailored  for you`
-  String get investmentsTailoredForYou {
+  /// `Define again`
+  String get defineAgain {
     return Intl.message(
-      'Investments tailored  for you',
-      name: 'investmentsTailoredForYou',
+      'Define again',
+      name: 'defineAgain',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Updated at {time} HKT, {date}`
+  String updatedAt(Object time, Object date) {
+    return Intl.message(
+      'Updated at $time HKT, $date',
+      name: 'updatedAt',
+      desc: '',
+      args: [time, date],
     );
   }
 }

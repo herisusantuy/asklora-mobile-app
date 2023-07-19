@@ -118,7 +118,7 @@ class DemonstrationBotScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomTextNew(
-            S.of(context).investmentsTailoredForYou,
+            S.of(context).botRecommendationScreenTitle,
             style: AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
           ),
           const SizedBox(
