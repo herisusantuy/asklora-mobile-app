@@ -101,7 +101,7 @@
   "emailAddress": "電郵地址",
   "officeHoursLabel": "辦公時間",
   "officeHours": "09:00-18:00 (HKT)",
-  "buttonCancel": "CANCEL",
+  "buttonCancel": "取消",
   "buttonConfirm": "確定",
   "buttonNotNow": "稍後再說",
   "buttonReloadPage": "重新加載",
@@ -548,5 +548,10 @@
   "tokenInvalid": "Token is invalid or expired.",
   "invalidOtp": "Invalid OTP",
   "linkPasswordResetIsSent": "Link for Password reset is sent to email.",
-  "accountIsNotActive": "Your account is not active yet."
+  "accountIsNotActive": "Your account is not active yet.",
+  "forgotPassword": "忘記密碼",
+  "pleaseEnterYouEmail": "請輸入你的電郵地址，我們會發送重設密碼的指示給你。",
+  "cantRememberYourEmail": "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai",
+  "inputWrongEmail": "電郵地址錯誤",
+  "buttonBackToPortfolio": "返回投資組合頁"
 }

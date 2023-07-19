@@ -14,6 +14,7 @@ enum AuthErrorMessage {
   invalidOtp('Invalid OTP'),
   linkPasswordResetIsSent('Link for Password reset is sent to email.'),
   accountIsNotActive('Your account is not active yet.'),
+  inputWrongEmailAddress('Input wrong email address'),
   empty('');
 
   final String value;
@@ -49,6 +50,8 @@ extension AuthErrorMessageExtension on AuthErrorMessage {
         return S.of(context).linkPasswordResetIsSent;
       case AuthErrorMessage.accountIsNotActive:
         return S.of(context).accountIsNotActive;
+      case AuthErrorMessage.inputWrongEmailAddress:
+        return S.of(context).inputWrongEmail;
       default:
         return '';
     }
