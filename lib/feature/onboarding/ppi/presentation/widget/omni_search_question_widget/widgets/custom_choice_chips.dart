@@ -15,6 +15,8 @@ class CustomChoiceChips extends StatefulWidget {
   final TextStyle? textStyle;
   final Color? textColor;
   final Color? activeTextColor;
+  final double horizontalPadding;
+  final double verticalPadding;
 
   const CustomChoiceChips(
       {this.label = '',
@@ -28,6 +30,8 @@ class CustomChoiceChips extends StatefulWidget {
       this.textStyle,
       this.textColor,
       this.activeTextColor,
+      this.horizontalPadding = 12.5,
+      this.verticalPadding = 7.5,
       Key? key})
       : super(key: key);
 
@@ -54,8 +58,12 @@ class _CustomChoiceChipsState extends State<CustomChoiceChips> {
       onTap: widget.onTap,
       child: Container(
         padding: EdgeInsets.symmetric(
-            horizontal: widget.active ? 12.5 : 14,
-            vertical: widget.active ? 7.5 : 9),
+            horizontal: widget.active
+                ? widget.horizontalPadding
+                : widget.horizontalPadding + 1.5,
+            vertical: widget.active
+                ? widget.verticalPadding
+                : widget.verticalPadding + 1.5),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(

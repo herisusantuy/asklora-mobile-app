@@ -86,10 +86,11 @@ class AiInvestmentStyleQuestionChatList extends StatelessWidget {
       return Align(
         alignment: Alignment.bottomLeft,
         child: CustomChoiceChips(
+          verticalPadding: 14,
           textColor: AskLoraColors.white,
           textStyle: AskLoraTextStyles.body2,
           pressedFillColor: AskLoraColors.primaryGreen.withOpacity(0.4),
-          fillColor: AskLoraColors.white.withOpacity(0.2),
+          fillColor: Colors.transparent,
           label: 'Press to move onto the next section',
           onTap: () => context
               .read<AiInvestmentStyleQuestionBloc>()
