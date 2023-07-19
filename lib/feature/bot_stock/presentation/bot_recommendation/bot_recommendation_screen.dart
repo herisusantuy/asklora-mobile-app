@@ -12,8 +12,6 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/pair.dart';
-import '../../../../core/presentation/column_text/column_text_with_tooltip.dart';
-import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
