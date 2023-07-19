@@ -9,6 +9,8 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/app_icons.dart';
 import '../../bloc/lora_gpt_bloc.dart';
 
+import 'scrambled_text.dart';
+
 class OutChatBubbleWidget extends StatelessWidget {
   const OutChatBubbleWidget(this.message,
       {super.key, this.animateText = false});
@@ -49,14 +51,11 @@ class OutChatBubbleWidget extends StatelessWidget {
                   ),
                 ),
                 child: animateText
-                    ? AnimatedTextKit(
-                        isRepeatingAnimation: false,
-                        repeatForever: false,
-                        animatedTexts: [
-                          TyperAnimatedText(message,
-                              textStyle: AskLoraTextStyles.body2
-                                  .copyWith(color: AskLoraColors.white))
-                        ],
+                    ? ScrambledText(
+                        text: message,
+                        style: AskLoraTextStyles.body2
+                            .copyWith(color: AskLoraColors.white),
+                        duration: const Duration(seconds: 3),
                         onFinished: () {
                           context
                               .read<LoraGptBloc>()
