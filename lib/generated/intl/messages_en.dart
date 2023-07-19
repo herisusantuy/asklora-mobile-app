@@ -57,7 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m13(currency) => "Buying Power (${currency})";
 
-  static String m14(currency) => "Current Price ${currency}";
+  static String m14(currency) => "Current Price (${currency})";
 
   static String m15(bot, startDate, endDate, duration) =>
       "Past ${duration} performance of ${bot}  (${startDate} - ${endDate})";
@@ -517,7 +517,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioDetailKeyInfoTitle":
             MessageLookupByLibrary.simpleMessage("Key Info"),
         "portfolioDetailPerformanceBotAssetsInStock":
-            MessageLookupByLibrary.simpleMessage("% of Bot Assets in Stock"),
+            MessageLookupByLibrary.simpleMessage("Stock Holding %"),
         "portfolioDetailPerformanceBotStockValues":
             MessageLookupByLibrary.simpleMessage("Botstock Values (HKD)"),
         "portfolioDetailPerformanceCash":
