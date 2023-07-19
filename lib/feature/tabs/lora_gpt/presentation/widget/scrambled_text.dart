@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../../../../../core/styles/asklora_colors.dart';
+
 class Source {
   static const digits = '0123456789';
   static const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -120,37 +122,50 @@ class ScrambledTextState extends State<ScrambledText>
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      _animatedText(
-        text: widget.text,
-        value: _animation.value.toInt(),
-      ),
-      style: widget.style,
-      textDirection: widget.textDirection,
-      locale: widget.locale,
-      maxLines: widget.maxLines,
-      overflow: widget.overflow,
-      softWrap: widget.softWrap,
-      textAlign: widget.textAlign,
-      semanticsLabel: widget.semanticsLabel,
+    return _animatedText(
+      text: widget.text,
+      value: _animation.value.toInt(),
     );
   }
 
-  String _animatedText({required String text, required int value}) {
+  Widget _animatedText({required String text, required int value}) {
     if (!_controller.isAnimating && !_controller.isCompleted) {
-      return widget.initialText ?? '';
+      return Text(widget.initialText ?? '', style: widget.style);
     }
 
     if (value == text.length) {
       widget.onFinished?.call();
-      return text;
+      return Text(text, style: widget.style);
     }
 
     int len = min(widget.numLetters, text.length - value);
     String scrambledPart = _getScrambledPart(len);
     String revealedPart = text.substring(0, value);
 
-    return '$revealedPart$scrambledPart';
+    // Set the style for the revealed part of the text
+    TextStyle revealedTextStyle =
+        widget.style?.copyWith(color: AskLoraColors.white) ??
+            TextStyle(color: AskLoraColors.white);
+
+    // Set the style for the scrambled part of the text
+    TextStyle scrambledTextStyle =
+        widget.style?.copyWith(color: AskLoraColors.white.withOpacity(0.5)) ??
+            TextStyle(color: AskLoraColors.white.withOpacity(0.5));
+
+    // Create a span with the revealed text style
+    TextSpan revealedSpan =
+        TextSpan(text: revealedPart, style: revealedTextStyle);
+
+    // Create a span with the scrambled text style
+    TextSpan scrambledSpan =
+        TextSpan(text: scrambledPart, style: scrambledTextStyle);
+
+    // Create a rich text widget with the revealed and scrambled spans
+    RichText richText = RichText(
+      text: TextSpan(children: [revealedSpan, scrambledSpan]),
+    );
+
+    return richText;
   }
 
   String _getScrambledPart(int len) {
