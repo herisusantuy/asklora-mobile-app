@@ -38,7 +38,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                   alignment: Alignment.bottomCenter,
                   child: Padding(
                     padding:
-                        const EdgeInsets.only(left: 15, right: 15, bottom: 12),
+                        const EdgeInsets.only(left: 20, right: 20, bottom: 12),
                     child: _bottomContent,
                   ),
                 ),
@@ -140,22 +140,23 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                     style: TextFieldStyle.valueTextStyle
                         .copyWith(color: AskLoraColors.white),
                     decoration: InputDecoration(
+                        focusColor: AskLoraColors.white.withOpacity(0.2),
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 17, vertical: 18),
                         enabledBorder: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                           Radius.circular(15.0),
                         )).copyWith(
-                            borderSide: const BorderSide(
-                                color: AskLoraColors.whiteSmoke)),
+                            borderSide:
+                                const BorderSide(color: Colors.transparent)),
                         focusedBorder: TextFieldStyle.focusedBorder.copyWith(
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(15.0))),
                         hintText: 'Ask me anything...',
                         hintStyle: TextFieldStyle.valueTextStyle
                             .copyWith(color: AskLoraColors.white),
-                        fillColor: AskLoraColors.white.withOpacity(0.05),
-                        filled: !focused && controller.text.isEmpty)),
+                        fillColor: AskLoraColors.white.withOpacity(0.2),
+                        filled: true)),
               ),
             ),
             const SizedBox(width: 14),
