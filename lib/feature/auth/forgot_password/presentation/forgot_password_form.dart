@@ -7,6 +7,7 @@ import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../generated/l10n.dart';
+import '../../utils/auth_utils.dart';
 import '../bloc/forgot_password_bloc.dart';
 import 'forgot_password_success_screen.dart';
 
@@ -22,10 +23,16 @@ class ForgotPasswordForm extends StatelessWidget {
         ResponseState responseState = state.response.state;
         CustomLoadingOverlay.of(context).show(responseState);
         if (responseState == ResponseState.success) {
-          CustomInAppNotification.show(context, state.response.data.detail);
+          CustomInAppNotification.show(
+              context,
+              AuthErrorMessage.findByString(state.response.data.detail)
+                  .getErrorMessage(context));
           ForgotPasswordSuccessScreen.open(context);
         } else if (responseState == ResponseState.error) {
-          CustomInAppNotification.show(context, state.response.message);
+          CustomInAppNotification.show(
+              context,
+              AuthErrorMessage.findByString(state.response.message)
+                  .getErrorMessage(context));
           context
               .read<ForgotPasswordBloc>()
               .add(ForgotPasswordEmailChanged(state.email));
@@ -63,7 +70,8 @@ class ForgotPasswordForm extends StatelessWidget {
                 maxLine: 1,
                 labelText: S.of(context).email,
                 hintText: S.of(context).emailAddress,
-                errorText: state.emailErrorText,
+                errorText: AuthErrorMessage.findByString(state.emailErrorText)
+                    .getErrorMessage(context),
                 onChanged: (email) => context
                     .read<ForgotPasswordBloc>()
                     .add(ForgotPasswordEmailChanged(email)));

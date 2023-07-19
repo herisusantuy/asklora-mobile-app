@@ -15,7 +15,6 @@ void main() {
         final mockObserver = MockNavigatorObserver();
         await tester.pumpWidget(
           MaterialApp(
-            home: const ForgotPasswordScreen(),
             localizationsDelegates: const [
               S.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -23,6 +22,7 @@ void main() {
               GlobalCupertinoLocalizations.delegate,
             ],
             supportedLocales: S.delegate.supportedLocales,
+            home: const ForgotPasswordScreen(),
             navigatorObservers: [mockObserver],
           ),
         );

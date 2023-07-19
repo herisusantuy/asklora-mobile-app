@@ -7,6 +7,7 @@ import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../core/presentation/custom_text_new.dart';
+import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../repository/auth_repository.dart';
@@ -42,6 +43,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               CustomTextNew(
                 S.of(context).cannotRememberEmailAddress,
                 textAlign: TextAlign.center,
+                style: AskLoraTextStyles.subtitle3,
               ),
               const SizedBox(
                 height: 30,

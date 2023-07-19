@@ -101,7 +101,7 @@
   "emailAddress": "電郵地址",
   "officeHoursLabel": "辦公時間",
   "officeHours": "09:00-18:00 (HKT)",
-  "buttonCancel": "CANCEL",
+  "buttonCancel": "取消",
   "buttonConfirm": "確定",
   "buttonNotNow": "稍後再說",
   "buttonReloadPage": "重新加載",
@@ -558,5 +558,6 @@
   "tokenInvalid": "Token is invalid or expired.",
   "invalidOtp": "Invalid OTP",
   "linkPasswordResetIsSent": "Link for Password reset is sent to email.",
-  "accountIsNotActive": "Your account is not active yet."
+  "accountIsNotActive": "Your account is not active yet.",
+  "buttonBackToPortfolio": "返回投資組合頁"
 }

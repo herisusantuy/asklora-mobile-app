@@ -151,7 +151,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonAlreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("已有帳戶"),
         "buttonBackToHome": MessageLookupByLibrary.simpleMessage("返回主頁"),
-        "buttonCancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
+        "buttonBackToPortfolio":
+            MessageLookupByLibrary.simpleMessage("返回投資組合頁"),
+        "buttonCancel": MessageLookupByLibrary.simpleMessage("取消"),
         "buttonCancelTrade": MessageLookupByLibrary.simpleMessage("取消交易"),
         "buttonChangeInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("更改投資風格"),
