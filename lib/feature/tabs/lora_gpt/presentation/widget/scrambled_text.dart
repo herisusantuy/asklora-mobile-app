@@ -4,15 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/styles/asklora_colors.dart';
 
-class Source {
-  static const digits = '0123456789';
-  static const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  static const lowercase = 'abcdefghijklmnopqrstuvwxyz';
-  static const alphabets = '$uppercase$lowercase';
-  static const specialCharacters = '`~!@#\$%^&*()_+-=[]{}\\|;:\'".>/?';
-  static const all = '$digits$alphabets$specialCharacters';
-}
-
 class ScrambledText extends StatefulWidget {
   /// The text to display after animation is finished.
   final String text;

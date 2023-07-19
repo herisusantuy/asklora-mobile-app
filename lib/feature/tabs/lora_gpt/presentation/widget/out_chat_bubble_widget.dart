@@ -51,11 +51,19 @@ class OutChatBubbleWidget extends StatelessWidget {
                   ),
                 ),
                 child: animateText
-                    ? ScrambledText(
-                        text: message,
-                        style: AskLoraTextStyles.body2
-                            .copyWith(color: AskLoraColors.white),
-                        duration: const Duration(seconds: 3),
+                    // ? ScrambledText(
+                    //     text: message,
+                    //     style: AskLoraTextStyles.body2
+                    //         .copyWith(color: AskLoraColors.white),
+                    //     duration: const Duration(seconds: 3),
+                    ? AnimatedTextKit(
+                        isRepeatingAnimation: false,
+                        repeatForever: false,
+                        animatedTexts: [
+                          TyperAnimatedText(message,
+                              textStyle: AskLoraTextStyles.body2
+                                  .copyWith(color: AskLoraColors.white))
+                        ],
                         onFinished: () {
                           context
                               .read<LoraGptBloc>()
