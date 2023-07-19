@@ -20,7 +20,8 @@ class DepositWelcomeNotes extends StatelessWidget {
         const SizedBox(
           height: 4,
         ),
-        depositType == DepositType.firstTime
+        (depositType == DepositType.firstTime ||
+                depositType == DepositType.changeBankAccount)
             ? Padding(
                 padding: const EdgeInsets.only(left: 6),
                 child: Column(
