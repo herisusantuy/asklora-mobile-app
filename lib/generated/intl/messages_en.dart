@@ -229,6 +229,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Change Bank Account"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
+        "checkBackLater": MessageLookupByLibrary.simpleMessage(
+            "Check back later to see if\nthere are any new\ntransactions!"),
         "checkBotStockDetails":
             MessageLookupByLibrary.simpleMessage("Check Botstock Details"),
         "companyAddress":

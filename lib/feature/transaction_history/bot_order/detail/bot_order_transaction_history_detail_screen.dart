@@ -20,6 +20,7 @@ import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.
 import '../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../domain/grouped_model.dart';
 import '../../domain/transaction_history_model.dart';
+import '../../presentation/widgets/empty_activity_placeholder.dart';
 import '../../presentation/widgets/transaction_history_group_title.dart';
 import '../../presentation/widgets/transaction_history_tab.dart';
 import '../../../../core/repository/transaction_repository.dart';

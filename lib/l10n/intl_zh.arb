@@ -559,5 +559,12 @@
   "invalidOtp": "Invalid OTP",
   "linkPasswordResetIsSent": "Link for Password reset is sent to email.",
   "accountIsNotActive": "Your account is not active yet.",
-  "buttonBackToPortfolio": "返回投資組合頁"
+  "forgotPassword": "忘記密碼",
+  "pleaseEnterYouEmail": "請輸入你的電郵地址，我們會發送重設密碼的指示給你。",
+  "cantRememberYourEmail": "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai",
+  "inputWrongEmail": "電郵地址錯誤",
+  "buttonBackToPortfolio": "返回投資組合頁",
+  "noTransactions": "暫時沒有交易",
+  "noTransactionsYet": "你似乎未進行過任何交易！",
+  "checkBackLater": "稍後再來查看!"
 }

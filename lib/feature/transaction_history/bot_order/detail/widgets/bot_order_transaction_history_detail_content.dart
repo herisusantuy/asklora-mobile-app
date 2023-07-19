@@ -38,7 +38,7 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
   List<Widget> getTabViews(BuildContext context) {
     List<Widget> tabViews = [
       BotOrderTransactionHistorySummaryScreen(botStatusType: botStatusType),
-      const BotOrderTransactionHistoryActivitiesScreen(),
+      BotOrderTransactionHistoryActivitiesScreen(botStatusType: botStatusType),
     ];
     if (botStatusType == BotStatus.expired) {
       tabViews.add(
