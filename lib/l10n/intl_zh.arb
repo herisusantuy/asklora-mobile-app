@@ -186,7 +186,7 @@
   "portfolioDetailPerformanceBotStockValues": "Botstock 價值 (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "投資金額 (HKD)",
   "portfolioDetailPerformanceTotalPL": "總盈虧",
-  "portfolioCurrentPrice": "當前價格 {currency}",
+  "portfolioCurrentPrice": "當前價格 ({currency})",
   "@portfolioCurrentPrice": {
     "placeholders": {
       "currency": {
