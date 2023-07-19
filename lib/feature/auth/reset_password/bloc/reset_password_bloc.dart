@@ -50,10 +50,9 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
                     state.password == event.confirmPassword) ||
                 event.confirmPassword.isEmpty)
             ? PasswordValidationError.none
-            : (event.confirmPassword.isValidPassword() &&
-                    event.confirmPassword != state.password)
+            : event.confirmPassword != state.password
                 ? PasswordValidationError.passwordDoesNotMatchError
-                : PasswordValidationError.confirmPasswordValidationError,
+                : PasswordValidationError.none,
       ),
     );
   }

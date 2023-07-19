@@ -2,7 +2,6 @@ part of 'reset_password_bloc.dart';
 
 enum PasswordValidationError {
   passwordValidationError,
-  confirmPasswordValidationError,
   passwordDoesNotMatchError,
   none
 }

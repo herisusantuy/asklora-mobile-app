@@ -71,7 +71,7 @@ void main() {
             passwordValidationError:
                 PasswordValidationError.passwordValidationError,
             confirmPasswordError:
-                PasswordValidationError.confirmPasswordValidationError,
+                PasswordValidationError.passwordDoesNotMatchError,
           ),
         },
       );

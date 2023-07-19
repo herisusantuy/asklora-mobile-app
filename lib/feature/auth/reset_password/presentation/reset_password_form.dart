@@ -67,7 +67,7 @@ class ResetPasswordForm extends StatelessWidget {
           validPassword: (isValidPassword) => {},
           hintText: S.of(context).newPassword,
           label: S.of(context).newPassword,
-          errorText: getErrorString(context, state.passwordValidationError),
+          errorText: _getErrorString(context, state.passwordValidationError),
           onChanged: (password) => context
               .read<ResetPasswordBloc>()
               .add(ResetPasswordPasswordChanged(password))));
@@ -83,7 +83,7 @@ class ResetPasswordForm extends StatelessWidget {
                 validPassword: (isValidPassword) => {},
                 hintText: S.of(context).newPassword,
                 label: S.of(context).confirmNewPassword,
-                errorText: getErrorString(context, state.confirmPasswordError),
+                errorText: _getErrorString(context, state.confirmPasswordError),
                 onChanged: (confirmPassword) => context
                     .read<ResetPasswordBloc>()
                     .add(ResetPasswordConfirmPasswordChanged(confirmPassword)));
@@ -93,12 +93,10 @@ class ResetPasswordForm extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 15),
       );
 
-  String getErrorString(
+  String _getErrorString(
       BuildContext context, PasswordValidationError passwordValidationError) {
     switch (passwordValidationError) {
       case PasswordValidationError.passwordValidationError:
-        return S.of(context).enterValidPassword;
-      case PasswordValidationError.confirmPasswordValidationError:
         return S.of(context).enterValidPassword;
       case PasswordValidationError.passwordDoesNotMatchError:
         return S.of(context).passwordDoesNotMatch;

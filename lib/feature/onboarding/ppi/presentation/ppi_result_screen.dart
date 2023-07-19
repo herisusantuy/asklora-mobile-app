@@ -43,31 +43,23 @@ class PpiResultScreen extends StatelessWidget {
                 Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: getAPngImage(
-                          ppiResult == PpiResult.success
-                              ? 'lora_animation_green'
-                              : 'lora_animation_pink',
-                          width: 200,
-                          fit: BoxFit.fitHeight),
-                    ),
-                    CustomTextNew(
-                      title,
-                      style: AskLoraTextStyles.h4
-                          .copyWith(color: AskLoraColors.charcoal),
-                      textAlign: TextAlign.center,
-                    ),
+                        padding: const EdgeInsets.all(20),
+                        child: ppiResult == PpiResult.success
+                            ? loraGreenAnimation
+                            : loraMagentaAnimation),
+                    CustomTextNew(title,
+                        style: AskLoraTextStyles.h4
+                            .copyWith(color: AskLoraColors.charcoal),
+                        textAlign: TextAlign.center),
                     const SizedBox(height: 40),
                     if (additionalMessage.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 36, vertical: 0),
-                        child: CustomTextNew(
-                          additionalMessage,
-                          style: additionalMessageTextStyle ??
-                              AskLoraTextStyles.h4,
-                          textAlign: TextAlign.center,
-                        ),
+                        child: CustomTextNew(additionalMessage,
+                            style: additionalMessageTextStyle ??
+                                AskLoraTextStyles.h4,
+                            textAlign: TextAlign.center),
                       ),
                     if (richText != null) richText!,
                   ],
