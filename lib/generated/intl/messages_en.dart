@@ -122,6 +122,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "at least 1 upper case letter"),
         "backToAccountSettings":
             MessageLookupByLibrary.simpleMessage("Back to account settings"),
+        "backToLogin": MessageLookupByLibrary.simpleMessage("Back to login"),
         "bankAccountNumber":
             MessageLookupByLibrary.simpleMessage("Bank Account Number"),
         "bankName": MessageLookupByLibrary.simpleMessage("Bank Name"),
@@ -213,8 +214,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonViewTransactionHistory":
             MessageLookupByLibrary.simpleMessage("View Transaction History"),
         "buttonWithdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
-        "cantRememberYourEmail": MessageLookupByLibrary.simpleMessage(
-            "Can\'t remember your email address?\nEmail us at cs@asklora.ai"),
+        "cannotRememberEmailAddress": MessageLookupByLibrary.simpleMessage(
+            "Can’t remember your email address?\nEmail us at cs@asklora.ai"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage(
             "Get your Investments in Shape"),
         "carouselIntro2": MessageLookupByLibrary.simpleMessage(
@@ -284,6 +285,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "endBotStockAcknowledgement": m9,
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
+        "enterANewPassword":
+            MessageLookupByLibrary.simpleMessage("Enter a new password"),
         "enterValidEmail":
             MessageLookupByLibrary.simpleMessage("Enter valid email"),
         "enterValidPassword":
@@ -342,6 +345,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "firstTimeCopyAskloraBankDetails": m11,
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
+        "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
+            "Please enter your email. Instructions will be sent to reset your password."),
         "founded": MessageLookupByLibrary.simpleMessage("Founded"),
         "free": MessageLookupByLibrary.simpleMessage("Free"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("Free Trial"),
@@ -371,7 +376,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "industry": MessageLookupByLibrary.simpleMessage("Industry"),
         "inputDepositAmount":
             MessageLookupByLibrary.simpleMessage("Input deposit amount"),
-        "inputWrongEmail":
+        "inputWrongEmailAddress":
             MessageLookupByLibrary.simpleMessage("Input wrong email address"),
         "introduceBotPlank":
             MessageLookupByLibrary.simpleMessage("Introduce Bot - Plank"),
@@ -464,6 +469,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Password changed successfully."),
         "passwordDoesNotMatch": MessageLookupByLibrary.simpleMessage(
             "Your password does not match."),
+        "passwordLinkHasBeenSent": MessageLookupByLibrary.simpleMessage(
+            "A Password reset email has been sent. Please check your email"),
         "payDepositToStartRealTrade": MessageLookupByLibrary.simpleMessage(
             "Pay Deposit to Start Real Trade"),
         "paymentDetails":
@@ -478,8 +485,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "pleaseAddAHkBankAccount": MessageLookupByLibrary.simpleMessage(
             "Please add a HK bank account that is under your name; other people\'s bank accounts or joint accounts will not be accepted."),
-        "pleaseEnterYouEmail": MessageLookupByLibrary.simpleMessage(
-            "Please enter your email. Instructions will be sent to reset your password."),
         "pleaseMakeSureYouHaveFinished": MessageLookupByLibrary.simpleMessage(
             "Please make sure you have finished the transfer and then inform us, if not, your deposit will be delayed."),
         "pleaseMakeSureYouPressSubmit": MessageLookupByLibrary.simpleMessage(
@@ -608,6 +613,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "redeemYourBotstockNow":
             MessageLookupByLibrary.simpleMessage("Redeem Your Botstock Now"),
         "relearn": MessageLookupByLibrary.simpleMessage("relearn"),
+        "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
+        "resetPasswordSuccessful":
+            MessageLookupByLibrary.simpleMessage("Password Reset Successful"),
+        "resetPasswordSuccessfulMessage": MessageLookupByLibrary.simpleMessage(
+            "Your password has been reset. Please go back to the Login page and login again."),
         "retakeInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("Retake Investment Style"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(

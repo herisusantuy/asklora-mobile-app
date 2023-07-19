@@ -6,7 +6,6 @@ import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
-import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../generated/l10n.dart';
 import '../../utils/auth_utils.dart';
 import '../bloc/forgot_password_bloc.dart';
@@ -45,9 +44,9 @@ class ForgotPasswordForm extends StatelessWidget {
             child: Column(
               children: [
                 CustomTextNew(
-                  S.of(context).pleaseEnterYouEmail,
+                  S.of(context).forgotPasswordMessage,
                   textAlign: TextAlign.left,
-                  style: AskLoraTextStyles.body1,
+                  style: const TextStyle(fontSize: 16),
                 ),
                 _emailInput(),
               ],

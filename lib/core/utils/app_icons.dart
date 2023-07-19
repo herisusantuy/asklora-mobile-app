@@ -63,3 +63,13 @@ void precachePngIcon(String iconName, BuildContext context) {
 void precachePngImage(String imageName, BuildContext context) {
   precacheImage(getPngImage(imageName).image, context);
 }
+
+Image get loraGreenAnimation => getAPngImage('lora_animation_green',
+    width: 180, height: 180, fit: BoxFit.fitWidth);
+
+Image get loraMagentaAnimation => getAPngImage(
+      'lora_animation_pink',
+      width: 180,
+      height: 180,
+      fit: BoxFit.fitWidth,
+    );

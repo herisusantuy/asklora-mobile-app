@@ -539,6 +539,16 @@
   "agreements": "Agreements",
   "submitApplication": "Submit Application",
   "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible",
+  "enterANewPassword": "Enter a new password",
+  "resetPassword": "Reset Password",
+  "passwordLinkHasBeenSent": "A Password reset email has been sent. Please check your email",
+  "inputWrongEmailAddress": "Input wrong email address",
+  "cannotRememberEmailAddress": "Can’t remember your email address?\nEmail us at cs@asklora.ai",
+  "forgotPassword": "Forgot Password",
+  "forgotPasswordMessage": "Please enter your email. Instructions will be sent to reset your password.",
+  "resetPasswordSuccessful": "Password Reset Successful",
+  "resetPasswordSuccessfulMessage": "Your password has been reset. Please go back to the Login page and login again.",
+  "backToLogin": "Back to login",
   "askloraYouUltimateFinancialAdvisor": "Asklora.\n Your ultimate\nfinancial advisor",
   "askMeAnythingRelatedToFinance": "Ask me anything related to finance",
   "investmentResultScreenTitle": "I like your style",
@@ -586,9 +596,5 @@
   "tokenInvalid": "Token is invalid or expired.",
   "invalidOtp": "Invalid OTP",
   "linkPasswordResetIsSent": "Link for Password reset is sent to email.",
-  "accountIsNotActive": "Your account is not active yet.",
-  "forgotPassword": "Forgot Password",
-  "pleaseEnterYouEmail": "Please enter your email. Instructions will be sent to reset your password.",
-  "cantRememberYourEmail": "Can't remember your email address?\nEmail us at cs@asklora.ai",
-  "inputWrongEmail": "Input wrong email address"
+  "accountIsNotActive": "Your account is not active yet."
 }
