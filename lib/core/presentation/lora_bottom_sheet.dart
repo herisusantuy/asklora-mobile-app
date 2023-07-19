@@ -148,10 +148,6 @@ class LoraBottomSheetContent extends StatelessWidget {
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: LoraMemojiWidget(loraMemojiType: loraMemojiType),
-                ),
               ],
             ),
           ],

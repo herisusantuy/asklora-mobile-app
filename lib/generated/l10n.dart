@@ -500,30 +500,30 @@ class S {
     );
   }
 
-  /// `Your deposit request is submitted. We’ll let you know via email and app notification as soon as your deposit arrives.`
+  /// `Your deposit request is submitted. We'll let you know via email and app notification as soon as your deposit arrives.`
   String get depositRequestSubmittedSubTitleReturn {
     return Intl.message(
-      'Your deposit request is submitted. We’ll let you know via email and app notification as soon as your deposit arrives.',
+      'Your deposit request is submitted. We\'ll let you know via email and app notification as soon as your deposit arrives.',
       name: 'depositRequestSubmittedSubTitleReturn',
       desc: '',
       args: [],
     );
   }
 
-  /// `We’ve sent an email to\n {emailAddress}\n\nPlease use your phone to click on the activation link!`
+  /// `We've sent an email to\n {emailAddress}\n\nPlease use your phone to click on the activation link!`
   String emailActivationSuccessTitle(String emailAddress) {
     return Intl.message(
-      'We’ve sent an email to\n $emailAddress\n\nPlease use your phone to click on the activation link!',
+      'We\'ve sent an email to\n $emailAddress\n\nPlease use your phone to click on the activation link!',
       name: 'emailActivationSuccessTitle',
       desc: '',
       args: [emailAddress],
     );
   }
 
-  /// `Sorry! You were a bit late, your request has timed out. \n\nLet’s try and activate your account again!`
+  /// `Sorry! You were a bit late, your request has timed out. \n\nLet's try and activate your account again!`
   String get emailActivationFailedTitle {
     return Intl.message(
-      'Sorry! You were a bit late, your request has timed out. \n\nLet’s try and activate your account again!',
+      'Sorry! You were a bit late, your request has timed out. \n\nLet\'s try and activate your account again!',
       name: 'emailActivationFailedTitle',
       desc: '',
       args: [],
@@ -890,10 +890,10 @@ class S {
     );
   }
 
-  /// `Let’s get to the heart of personalisation, it’s time to define your investment style.`
+  /// `Let's get to the heart of personalisation, it's time to define your investment style.`
   String get investmentStyleWelcomeTitle {
     return Intl.message(
-      'Let’s get to the heart of personalisation, it’s time to define your investment style.',
+      'Let\'s get to the heart of personalisation, it\'s time to define your investment style.',
       name: 'investmentStyleWelcomeTitle',
       desc: '',
       args: [],
@@ -1090,10 +1090,10 @@ class S {
     );
   }
 
-  /// `You don’t have any funds to withdraw. You haven’t deposited yet or your deposit might still be processing `
+  /// `You don't have any funds to withdraw. You haven't deposited yet or your deposit might still be processing `
   String get errorWithdrawalUnavailableSubTitle {
     return Intl.message(
-      'You don’t have any funds to withdraw. You haven’t deposited yet or your deposit might still be processing ',
+      'You don\'t have any funds to withdraw. You haven\'t deposited yet or your deposit might still be processing ',
       name: 'errorWithdrawalUnavailableSubTitle',
       desc: '',
       args: [],
@@ -1160,10 +1160,10 @@ class S {
     );
   }
 
-  /// `I'm Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat’s your name? `
+  /// `I'm Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat's your name? `
   String get askNameScreenPlaceholder {
     return Intl.message(
-      'I\'m Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat’s your name? ',
+      'I\'m Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat\'s your name? ',
       name: 'askNameScreenPlaceholder',
       desc: '',
       args: [],
@@ -1210,20 +1210,20 @@ class S {
     );
   }
 
-  /// `Let’s start the training with simple questions!\n\n  Remember - to lose patience is to lose the battle!`
+  /// `Let's start the training with simple questions!\n\n  Remember - to lose patience is to lose the battle!`
   String get greetingScreenSubTitle {
     return Intl.message(
-      'Let’s start the training with simple questions!\n\n  Remember - to lose patience is to lose the battle!',
+      'Let\'s start the training with simple questions!\n\n  Remember - to lose patience is to lose the battle!',
       name: 'greetingScreenSubTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Lora’s date to start the Botstocks`
+  /// `Lora's date to start the Botstocks`
   String get tooltipBotDetailsStartDate {
     return Intl.message(
-      'Lora’s date to start the Botstocks',
+      'Lora\'s date to start the Botstocks',
       name: 'tooltipBotDetailsStartDate',
       desc: '',
       args: [],
@@ -1472,10 +1472,10 @@ class S {
     );
   }
 
-  /// `Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.`
+  /// `Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement'.`
   String get portfolioBuyingPowerToolTip {
     return Intl.message(
-      'Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.',
+      'Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement\'.',
       name: 'portfolioBuyingPowerToolTip',
       desc: '',
       args: [],
@@ -1943,10 +1943,10 @@ class S {
     );
   }
 
-  /// `Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!`
+  /// `Looks like you haven't defined your Investment Style yet. Let's go and see what kind of Botstocks suit you best!`
   String get portfolioPopUpDefineInvestmentSubTitle {
     return Intl.message(
-      'Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!',
+      'Looks like you haven\'t defined your Investment Style yet. Let\'s go and see what kind of Botstocks suit you best!',
       name: 'portfolioPopUpDefineInvestmentSubTitle',
       desc: '',
       args: [],
@@ -2003,10 +2003,10 @@ class S {
     );
   }
 
-  /// `Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.`
+  /// `Looks like you haven't funded your account yet. Deposit HKD 10,000 to activate your account.`
   String get portfolioPopUpFundAccountSubTitle {
     return Intl.message(
-      'Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.',
+      'Looks like you haven\'t funded your account yet. Deposit HKD 10,000 to activate your account.',
       name: 'portfolioPopUpFundAccountSubTitle',
       desc: '',
       args: [],
@@ -2083,10 +2083,10 @@ class S {
     );
   }
 
-  /// `Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!`
+  /// `Looks like you haven't claimed your free Botstock yet. Let's get trading right away!`
   String get portfolioPopUpRedeemYourBotstockSubTitle {
     return Intl.message(
-      'Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!',
+      'Looks like you haven\'t claimed your free Botstock yet. Let\'s get trading right away!',
       name: 'portfolioPopUpRedeemYourBotstockSubTitle',
       desc: '',
       args: [],
@@ -2493,10 +2493,10 @@ class S {
     );
   }
 
-  /// `Looks like you haven’t made \nany transactions yet!`
+  /// `Looks like you haven't made \nany transactions yet!`
   String get noTransactionsYet {
     return Intl.message(
-      'Looks like you haven’t made \nany transactions yet!',
+      'Looks like you haven\'t made \nany transactions yet!',
       name: 'noTransactionsYet',
       desc: '',
       args: [],
@@ -2683,10 +2683,10 @@ class S {
     );
   }
 
-  /// `We’re having some trouble processing your deposit request. Please try again`
+  /// `We're having some trouble processing your deposit request. Please try again`
   String get unableToProcessDepositSubTitle {
     return Intl.message(
-      'We’re having some trouble processing your deposit request. Please try again',
+      'We\'re having some trouble processing your deposit request. Please try again',
       name: 'unableToProcessDepositSubTitle',
       desc: '',
       args: [],
@@ -2703,10 +2703,10 @@ class S {
     );
   }
 
-  /// `We’re having some trouble processing your withdrawal request. Please try again`
+  /// `We're having some trouble processing your withdrawal request. Please try again`
   String get unableToProcessWithdrawalSubTitle {
     return Intl.message(
-      'We’re having some trouble processing your withdrawal request. Please try again',
+      'We\'re having some trouble processing your withdrawal request. Please try again',
       name: 'unableToProcessWithdrawalSubTitle',
       desc: '',
       args: [],
@@ -3135,10 +3135,10 @@ class S {
     );
   }
 
-  /// `You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.`
+  /// `You've completed all the steps to opening an account with Asklora! You'll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.`
   String get onBoardingCompletionMessage {
     return Intl.message(
-      'You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.',
+      'You\'ve completed all the steps to opening an account with Asklora! You\'ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.',
       name: 'onBoardingCompletionMessage',
       desc: '',
       args: [],
@@ -3375,10 +3375,10 @@ class S {
     );
   }
 
-  /// `Please make sure you press ‘SUBMIT’ after you have transferred the funds from your bank.`
+  /// `Please make sure you press 'SUBMIT' after you have transferred the funds from your bank.`
   String get pleaseMakeSureYouPressSubmit {
     return Intl.message(
-      'Please make sure you press ‘SUBMIT’ after you have transferred the funds from your bank.',
+      'Please make sure you press \'SUBMIT\' after you have transferred the funds from your bank.',
       name: 'pleaseMakeSureYouPressSubmit',
       desc: '',
       args: [],
@@ -3615,10 +3615,10 @@ class S {
     );
   }
 
-  /// `You’re one step closer to AI Investing. \n\nTime to open your account.`
+  /// `You're one step closer to AI Investing. \n\nTime to open your account.`
   String get investmentResultScreenDescription {
     return Intl.message(
-      'You’re one step closer to AI Investing. \n\nTime to open your account.',
+      'You\'re one step closer to AI Investing. \n\nTime to open your account.',
       name: 'investmentResultScreenDescription',
       desc: '',
       args: [],
@@ -3755,6 +3755,26 @@ class S {
     );
   }
 
+  /// `Active`
+  String get active {
+    return Intl.message(
+      'Active',
+      name: 'active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pending {
+    return Intl.message(
+      'Pending',
+      name: 'pending',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Investments tailored  for you`
   String get botRecommendationScreenTitle {
     return Intl.message(
@@ -3770,6 +3790,246 @@ class S {
     return Intl.message(
       'Not feeling it? Try something different.',
       name: 'notFeelingIt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asklora's Wire Details`
+  String get askloraWireDetails {
+    return Intl.message(
+      'Asklora\'s Wire Details',
+      name: 'askloraWireDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Details`
+  String get buttonViewDetails {
+    return Intl.message(
+      'View Details',
+      name: 'buttonViewDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wire Transfer`
+  String get wireTransfer {
+    return Intl.message(
+      'Wire Transfer',
+      name: 'wireTransfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank Number`
+  String get bankNumber {
+    return Intl.message(
+      'Bank Number',
+      name: 'bankNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Number`
+  String get accountNumber {
+    return Intl.message(
+      'Account Number',
+      name: 'accountNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank Name`
+  String get bankName {
+    return Intl.message(
+      'Bank Name',
+      name: 'bankName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Swift Code`
+  String get swiftCode {
+    return Intl.message(
+      'Swift Code',
+      name: 'swiftCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Name`
+  String get accountName {
+    return Intl.message(
+      'Account Name',
+      name: 'accountName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Company Address`
+  String get companyAddress {
+    return Intl.message(
+      'Company Address',
+      name: 'companyAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Exchange Rate: HKD 1 = USD 0.137 (at HKT {time})`
+  String exchangeRateInDepositScreen(String time) {
+    return Intl.message(
+      'Current Exchange Rate: HKD 1 = USD 0.137 (at HKT $time)',
+      name: 'exchangeRateInDepositScreen',
+      desc: '',
+      args: [time],
+    );
+  }
+
+  /// `Error Storing Data`
+  String get errorStoringData {
+    return Intl.message(
+      'Error Storing Data',
+      name: 'errorStoringData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oops! We're having some technical difficulties trying to store your responses. Let's try retaking the questions`
+  String get errorStoringDataDetails {
+    return Intl.message(
+      'Oops! We\'re having some technical difficulties trying to store your responses. Let\'s try retaking the questions',
+      name: 'errorStoringDataDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User does not exist with the given email`
+  String get emailNotExist {
+    return Intl.message(
+      'User does not exist with the given email',
+      name: 'emailNotExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User email is not verified`
+  String get emailNotVerified {
+    return Intl.message(
+      'User email is not verified',
+      name: 'emailNotVerified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter valid email`
+  String get enterValidEmail {
+    return Intl.message(
+      'Enter valid email',
+      name: 'enterValidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password changed successfully.`
+  String get passwordChangeSuccessfully {
+    return Intl.message(
+      'Password changed successfully.',
+      name: 'passwordChangeSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Token is invalid or expired.`
+  String get tokenInvalid {
+    return Intl.message(
+      'Token is invalid or expired.',
+      name: 'tokenInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid OTP`
+  String get invalidOtp {
+    return Intl.message(
+      'Invalid OTP',
+      name: 'invalidOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Link for Password reset is sent to email.`
+  String get linkPasswordResetIsSent {
+    return Intl.message(
+      'Link for Password reset is sent to email.',
+      name: 'linkPasswordResetIsSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account is not active yet.`
+  String get accountIsNotActive {
+    return Intl.message(
+      'Your account is not active yet.',
+      name: 'accountIsNotActive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot Password`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot Password',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your email. Instructions will be sent to reset your password.`
+  String get pleaseEnterYouEmail {
+    return Intl.message(
+      'Please enter your email. Instructions will be sent to reset your password.',
+      name: 'pleaseEnterYouEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can't remember your email address?\nEmail us at cs@asklora.ai`
+  String get cantRememberYourEmail {
+    return Intl.message(
+      'Can\'t remember your email address?\nEmail us at cs@asklora.ai',
+      name: 'cantRememberYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input wrong email address`
+  String get inputWrongEmail {
+    return Intl.message(
+      'Input wrong email address',
+      name: 'inputWrongEmail',
       desc: '',
       args: [],
     );

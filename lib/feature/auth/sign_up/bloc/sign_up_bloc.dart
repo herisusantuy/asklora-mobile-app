@@ -6,6 +6,7 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
+import '../../utils/auth_utils.dart';
 import '../repository/sign_up_repository.dart';
 
 part 'sign_up_event.dart';
@@ -38,8 +39,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           isEmailValid: event.username.isValidEmail(),
           usernameErrorText:
               (event.username.isValidEmail() || event.username.isEmpty)
-                  ? ''
-                  : 'Enter valid email'),
+                  ? AuthErrorMessage.empty.value
+                  : AuthErrorMessage.enterValidEmail.value),
     );
   }
 
