@@ -3585,6 +3585,106 @@ class S {
     );
   }
 
+  /// `Enter a new password`
+  String get enterANewPassword {
+    return Intl.message(
+      'Enter a new password',
+      name: 'enterANewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password`
+  String get resetPassword {
+    return Intl.message(
+      'Reset Password',
+      name: 'resetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A Password reset email has been sent. Please check your email`
+  String get passwordLinkHasBeenSent {
+    return Intl.message(
+      'A Password reset email has been sent. Please check your email',
+      name: 'passwordLinkHasBeenSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input wrong email address`
+  String get inputWrongEmailAddress {
+    return Intl.message(
+      'Input wrong email address',
+      name: 'inputWrongEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can’t remember your email address?\nEmail us at cs@asklora.ai`
+  String get cannotRememberEmailAddress {
+    return Intl.message(
+      'Can’t remember your email address?\nEmail us at cs@asklora.ai',
+      name: 'cannotRememberEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot Password`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot Password',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your email. Instructions will be sent to reset your password.`
+  String get forgotPasswordMessage {
+    return Intl.message(
+      'Please enter your email. Instructions will be sent to reset your password.',
+      name: 'forgotPasswordMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password Reset Successful`
+  String get resetPasswordSuccessful {
+    return Intl.message(
+      'Password Reset Successful',
+      name: 'resetPasswordSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your password has been reset. Please go back to the Login page and login again.`
+  String get resetPasswordSuccessfulMessage {
+    return Intl.message(
+      'Your password has been reset. Please go back to the Login page and login again.',
+      name: 'resetPasswordSuccessfulMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to login`
+  String get backToLogin {
+    return Intl.message(
+      'Back to login',
+      name: 'backToLogin',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Asklora.\n Your ultimate\nfinancial advisor`
   String get askloraYouUltimateFinancialAdvisor {
     return Intl.message(
@@ -3990,46 +4090,6 @@ class S {
     return Intl.message(
       'Your account is not active yet.',
       name: 'accountIsNotActive',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Forgot Password`
-  String get forgotPassword {
-    return Intl.message(
-      'Forgot Password',
-      name: 'forgotPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Please enter your email. Instructions will be sent to reset your password.`
-  String get pleaseEnterYouEmail {
-    return Intl.message(
-      'Please enter your email. Instructions will be sent to reset your password.',
-      name: 'pleaseEnterYouEmail',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Can't remember your email address?\nEmail us at cs@asklora.ai`
-  String get cantRememberYourEmail {
-    return Intl.message(
-      'Can\'t remember your email address?\nEmail us at cs@asklora.ai',
-      name: 'cantRememberYourEmail',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Input wrong email address`
-  String get inputWrongEmail {
-    return Intl.message(
-      'Input wrong email address',
-      name: 'inputWrongEmail',
       desc: '',
       args: [],
     );

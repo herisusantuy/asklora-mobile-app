@@ -6,6 +6,7 @@ import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
+import '../../../../generated/l10n.dart';
 import '../../forgot_password/presentation/forgot_password_screen.dart';
 import '../../sign_in/presentation/sign_in_screen.dart';
 import '../bloc/reset_password_bloc.dart';
@@ -20,7 +21,10 @@ class ResetPasswordForm extends StatelessWidget {
           previous.response.state != current.response.state,
       listener: (context, state) {
         CustomLoadingOverlay.of(context).show(state.response.state);
-        CustomInAppNotification.show(context, state.response.message);
+        if (state.response.message.isNotEmpty) {
+          CustomInAppNotification.show(context, state.response.message);
+        }
+
         if (state.response.state == ResponseState.success) {
           SignInScreen.open(context);
         } else if (state.response.state == ResponseState.error) {
@@ -39,10 +43,10 @@ class ResetPasswordForm extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CustomTextNew(
-                  'Enter a new password',
+                CustomTextNew(
+                  S.of(context).enterANewPassword,
                   textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
                 _padding(),
                 _passwordInput(),
@@ -57,15 +61,13 @@ class ResetPasswordForm extends StatelessWidget {
   }
 
   Widget _passwordInput() => BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
-      buildWhen: (previous, current) =>
-          previous.password != current.password ||
-          previous.confirmPassword != current.confirmPassword,
+      buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) => PasswordTextField(
           key: const Key('reset_password_password_input'),
           validPassword: (isValidPassword) => {},
-          hintText: 'New Password',
-          label: 'New Password',
-          errorText: state.passwordErrorText,
+          hintText: S.of(context).newPassword,
+          label: S.of(context).newPassword,
+          errorText: _getErrorString(context, state.passwordValidationError),
           onChanged: (password) => context
               .read<ResetPasswordBloc>()
               .add(ResetPasswordPasswordChanged(password))));
@@ -75,17 +77,31 @@ class ResetPasswordForm extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.password != current.password ||
               previous.confirmPassword != current.confirmPassword,
-          builder: (context, state) => PasswordTextField(
-              key: const Key('reset_password_confirm_password_input'),
-              validPassword: (isValidPassword) => {},
-              hintText: 'Confirm New Password',
-              label: 'Confirm New Password',
-              errorText: state.confirmPasswordErrorText,
-              onChanged: (confirmPassword) => context
-                  .read<ResetPasswordBloc>()
-                  .add(ResetPasswordConfirmPasswordChanged(confirmPassword))));
+          builder: (context, state) {
+            return PasswordTextField(
+                key: const Key('reset_password_confirm_password_input'),
+                validPassword: (isValidPassword) => {},
+                hintText: S.of(context).newPassword,
+                label: S.of(context).confirmNewPassword,
+                errorText: _getErrorString(context, state.confirmPasswordError),
+                onChanged: (confirmPassword) => context
+                    .read<ResetPasswordBloc>()
+                    .add(ResetPasswordConfirmPasswordChanged(confirmPassword)));
+          });
 
   Padding _padding() => const Padding(
         padding: EdgeInsets.symmetric(vertical: 15),
       );
+
+  String _getErrorString(
+      BuildContext context, PasswordValidationError passwordValidationError) {
+    switch (passwordValidationError) {
+      case PasswordValidationError.passwordValidationError:
+        return S.of(context).enterValidPassword;
+      case PasswordValidationError.passwordDoesNotMatchError:
+        return S.of(context).passwordDoesNotMatch;
+      default:
+        return '';
+    }
+  }
 }

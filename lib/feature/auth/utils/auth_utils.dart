@@ -51,7 +51,7 @@ extension AuthErrorMessageExtension on AuthErrorMessage {
       case AuthErrorMessage.accountIsNotActive:
         return S.of(context).accountIsNotActive;
       case AuthErrorMessage.inputWrongEmailAddress:
-        return S.of(context).inputWrongEmail;
+        return S.of(context).inputWrongEmailAddress;
       default:
         return '';
     }
