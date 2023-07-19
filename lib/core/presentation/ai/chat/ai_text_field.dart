@@ -8,11 +8,13 @@ class AiTextField extends StatefulWidget {
   final Function(String) onFieldSubmitted;
   final Function(String) onChanged;
   final VoidCallback onTap;
+  final bool isSendButtonDisabled;
 
   const AiTextField(
       {required this.onFieldSubmitted,
       required this.onChanged,
       required this.onTap,
+      this.isSendButtonDisabled = false,
       super.key});
 
   @override
@@ -78,6 +80,7 @@ class _AiTextFieldState extends State<AiTextField> {
         ),
         const SizedBox(width: 14),
         AiSendTextButton(
+          isDisabled: widget.isSendButtonDisabled,
           size: const Size(55, 55),
           onTap: () {
             widget.onTap();

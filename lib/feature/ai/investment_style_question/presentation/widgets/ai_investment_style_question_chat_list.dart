@@ -53,8 +53,8 @@ class AiInvestmentStyleQuestionChatList extends StatelessWidget {
                   .mapIndexed(
                     (index, conversation) => Padding(
                       padding: const EdgeInsets.only(bottom: 17),
-                      child: _getBubbleChat(context, conversation, index,
-                          !isTyping && index == conversations.length - 1),
+                      child: _getBubbleChat(
+                          context, conversation, index, _isAnimateText(index)),
                     ),
                   )
                   .toList(),
@@ -65,12 +65,18 @@ class AiInvestmentStyleQuestionChatList extends StatelessWidget {
     );
   }
 
+  bool _isAnimateText(int index) =>
+      !isTyping &&
+      (index == conversations.length - 1 ||
+          (index == conversations.length - 2 &&
+              conversations.last is NextButton));
+
   Widget _getBubbleChat(
-      BuildContext context, Conversation e, int index, bool isTyping) {
+      BuildContext context, Conversation e, int index, bool animateText) {
     if (e is Lora) {
       return OutChatBubbleWidget(
         e.response,
-        animateText: isTyping,
+        animateText: animateText,
       );
     } else if (e is Me) {
       return InChatBubbleWidget(message: e.query, name: userName);
@@ -84,7 +90,7 @@ class AiInvestmentStyleQuestionChatList extends StatelessWidget {
           textStyle: AskLoraTextStyles.body2,
           pressedFillColor: AskLoraColors.primaryGreen.withOpacity(0.4),
           fillColor: AskLoraColors.white.withOpacity(0.2),
-          label: 'Move on',
+          label: 'Press to move onto the next section',
           onTap: () => context
               .read<AiInvestmentStyleQuestionBloc>()
               .add(const NextQuestion()),

@@ -81,18 +81,23 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
       NextQuestion event, Emitter<AiInvestmentStyleQuestionState> emit) {
     final tempList = List<Conversation>.of(state.conversations)
       ..removeLast()
-      ..add(Me('Move on'));
+      ..add(Me('Moving onto next section'));
     emit(state.copyWith(query: '', conversations: tempList));
     add(const SubmitQuery(answerId: '1'));
   }
 
   void _onSendResultToPpi(SendResultToPpi event,
       Emitter<AiInvestmentStyleQuestionState> emit) async {
-    List<PpiSelectionRequest> ppiSelectionRequest = [];
+    emit(state.copyWith(ppiResponseState: ResponseState.loading));
+    final List<PpiSelectionRequest> ppiSelectionRequest = [];
     final int ppiUserId =
         await _sharedPreference.readIntData(sfKeyPpiUserId) ?? 0;
 
     ///mapping question choices with AI ISQ result
+    ///quid15 is omnisearch
+    ///quid16 is investment horizon (eg : 2 weeks, 3 months, etc)
+    ///quid17 is risk preference
+    ///quid18 is preferred method
     for (var element in fixture!.getInvestmentStyleQuestion) {
       if (element.questionId == 'quid15') {
         ppiSelectionRequest.add(PpiSelectionRequest(
@@ -129,7 +134,9 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
       debugPrint('success send to ppi');
     } catch (e) {
       debugPrint('error $e');
-      emit(state.copyWith(ppiResponseState: ResponseState.error));
+      emit(state.copyWith(
+          conversations: [...state.conversations, _errorChat],
+          ppiResponseState: ResponseState.error));
     }
   }
 
@@ -144,6 +151,8 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
         questionId: questionId,
         answer: choices.id!.toString(),
       ));
+    } else {
+      debugPrint('Exception Not found');
     }
   }
 

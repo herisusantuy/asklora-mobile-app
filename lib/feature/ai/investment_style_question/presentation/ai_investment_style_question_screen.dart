@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/ai/chat/ai_text_field.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_header.dart';
+import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
@@ -11,6 +13,7 @@ import '../../../onboarding/ppi/presentation/widget/omni_search_question_widget/
 import '../../../onboarding/ppi/repository/ppi_question_repository.dart';
 import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../../../tabs/lora_gpt/repository/lora_gpt_repository.dart';
+import '../../../tabs/presentation/tab_screen.dart';
 import '../../presentation/widgets/ai_layout_with_background_layout.dart';
 import '../bloc/ai_investment_style_question_bloc.dart';
 import '../domain/interaction.dart';
@@ -31,19 +34,29 @@ class AiInvestmentStyleQuestionScreen extends StatelessWidget {
             ppiQuestionRepository: PpiQuestionRepository(),
             ppiResponseRepository: PpiResponseRepository())
           ..add(const InitiateAI()),
-        child: AiLayoutWithBackground(
-          content: Padding(
-            padding: AppValues.screenHorizontalPadding,
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    _chatList,
-                    _bottomContent,
-                  ],
-                ),
-                _header,
-              ],
+        child: BlocListener<AiInvestmentStyleQuestionBloc,
+            AiInvestmentStyleQuestionState>(
+          listenWhen: (previous, current)=>previous.ppiResponseState!=current.ppiResponseState,
+          listener: (context, state) {
+            CustomLoadingOverlay.of(context).show(state.ppiResponseState);
+            if (state.ppiResponseState == ResponseState.success) {
+              TabScreen.openAndRemoveAllRoute(context);
+            }
+          },
+          child: AiLayoutWithBackground(
+            content: Padding(
+              padding: AppValues.screenHorizontalPadding,
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      _chatList,
+                      _bottomContent,
+                    ],
+                  ),
+                  _header,
+                ],
+              ),
             ),
           ),
         ),
