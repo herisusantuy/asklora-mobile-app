@@ -52,7 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m13(currency) => "購買力 (${currency})";
 
-  static String m14(currency) => "當前價格 (${currency})";
+  static String m14(currency) => "當前價格 ${currency}";
 
   static String m15(bot, startDate, endDate, duration) =>
       "${bot} 於過去 ${duration} 星期之表現  (${startDate} - ${endDate})";
