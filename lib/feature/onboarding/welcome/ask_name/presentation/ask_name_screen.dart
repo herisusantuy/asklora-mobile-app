@@ -54,9 +54,8 @@ class AskNameScreen extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               content: Column(
                 children: [
-                  const SizedBox(height: 70),
-                  getAPngImage('lora_animation_green',
-                      width: 208, fit: BoxFit.fitWidth),
+                  const SizedBox(height: 50),
+                  loraGreenAnimation,
                   const SizedBox(height: 10),
                   CustomTextNew(
                     S.of(context).askNameScreenPlaceholder,
