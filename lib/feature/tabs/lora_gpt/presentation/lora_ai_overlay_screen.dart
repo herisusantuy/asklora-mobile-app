@@ -9,11 +9,9 @@ class LoraAiOverlayScreen extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return CustomStretchedLayout(
-          header: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            const SizedBox(height: 40),
-            Image.asset('assets/apng/lora_animation_green.png',
-                height: 200, width: 200, filterQuality: FilterQuality.high)
-          ]),
+          header: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [const SizedBox(height: 40), loraGreenAnimation]),
           content:
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
             CustomTextNew(

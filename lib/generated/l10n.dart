@@ -1522,10 +1522,10 @@ class S {
     );
   }
 
-  /// `Current Price {currency}`
+  /// `Current Price ({currency})`
   String portfolioCurrentPrice(String currency) {
     return Intl.message(
-      'Current Price $currency',
+      'Current Price ($currency)',
       name: 'portfolioCurrentPrice',
       desc: '',
       args: [currency],
@@ -1582,10 +1582,10 @@ class S {
     );
   }
 
-  /// `% of Bot Assets in Stock`
+  /// `Stock Holding %`
   String get portfolioDetailPerformanceBotAssetsInStock {
     return Intl.message(
-      '% of Bot Assets in Stock',
+      'Stock Holding %',
       name: 'portfolioDetailPerformanceBotAssetsInStock',
       desc: '',
       args: [],
@@ -2493,11 +2493,21 @@ class S {
     );
   }
 
-  /// `Looks like you haven't made \nany transactions yet!`
+  /// `Looks like you haven’t made \nany transactions yet!`
   String get noTransactionsYet {
     return Intl.message(
-      'Looks like you haven\'t made \nany transactions yet!',
+      'Looks like you haven’t made \nany transactions yet!',
       name: 'noTransactionsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check back later to see if\nthere are any new\ntransactions!`
+  String get checkBackLater {
+    return Intl.message(
+      'Check back later to see if\nthere are any new\ntransactions!',
+      name: 'checkBackLater',
       desc: '',
       args: [],
     );
@@ -3585,6 +3595,106 @@ class S {
     );
   }
 
+  /// `Enter a new password`
+  String get enterANewPassword {
+    return Intl.message(
+      'Enter a new password',
+      name: 'enterANewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password`
+  String get resetPassword {
+    return Intl.message(
+      'Reset Password',
+      name: 'resetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A Password reset email has been sent. Please check your email`
+  String get passwordLinkHasBeenSent {
+    return Intl.message(
+      'A Password reset email has been sent. Please check your email',
+      name: 'passwordLinkHasBeenSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input wrong email address`
+  String get inputWrongEmailAddress {
+    return Intl.message(
+      'Input wrong email address',
+      name: 'inputWrongEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can’t remember your email address?\nEmail us at cs@asklora.ai`
+  String get cannotRememberEmailAddress {
+    return Intl.message(
+      'Can’t remember your email address?\nEmail us at cs@asklora.ai',
+      name: 'cannotRememberEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot Password`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot Password',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your email. Instructions will be sent to reset your password.`
+  String get forgotPasswordMessage {
+    return Intl.message(
+      'Please enter your email. Instructions will be sent to reset your password.',
+      name: 'forgotPasswordMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password Reset Successful`
+  String get resetPasswordSuccessful {
+    return Intl.message(
+      'Password Reset Successful',
+      name: 'resetPasswordSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your password has been reset. Please go back to the Login page and login again.`
+  String get resetPasswordSuccessfulMessage {
+    return Intl.message(
+      'Your password has been reset. Please go back to the Login page and login again.',
+      name: 'resetPasswordSuccessfulMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to login`
+  String get backToLogin {
+    return Intl.message(
+      'Back to login',
+      name: 'backToLogin',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Asklora.\n Your ultimate\nfinancial advisor`
   String get askloraYouUltimateFinancialAdvisor {
     return Intl.message(
@@ -3695,60 +3805,60 @@ class S {
     );
   }
 
-  /// `Investing can be simple with AI`
+  /// `we investing can be simple with AI`
   String get opennessLessThan8 {
     return Intl.message(
-      'Investing can be simple with AI',
+      'we investing can be simple with AI',
       name: 'opennessLessThan8',
       desc: '',
       args: [],
     );
   }
 
-  /// `Our technology is for you.`
+  /// `our technology is perfect for you.`
   String get opennessMoreThan8 {
     return Intl.message(
-      'Our technology is for you.',
+      'our technology is perfect for you.',
       name: 'opennessMoreThan8',
       desc: '',
       args: [],
     );
   }
 
-  /// `You can take on more risks.`
+  /// `we think you can take on more risk.`
   String get neuroticismLessThan8 {
     return Intl.message(
-      'You can take on more risks.',
+      'we think you can take on more risk.',
       name: 'neuroticismLessThan8',
       desc: '',
       args: [],
     );
   }
 
-  /// `You should reduce some risks.`
+  /// `we think you should take on less risk.`
   String get neuroticismMoreThan8 {
     return Intl.message(
-      'You should reduce some risks.',
+      'we think you should take on less risk.',
       name: 'neuroticismMoreThan8',
       desc: '',
       args: [],
     );
   }
 
-  /// `Introverts change the world!`
+  /// `You also seem to be a bit more reserved. But hey, introverts change the world!`
   String get extrovertLessThan8 {
     return Intl.message(
-      'Introverts change the world!',
+      'You also seem to be a bit more reserved. But hey, introverts change the world!',
       name: 'extrovertLessThan8',
       desc: '',
       args: [],
     );
   }
 
-  /// `Social butterfly, amplify that energy!`
+  /// `You also seem like a social butterfly - amplify that energy!`
   String get extrovertMoreThan8 {
     return Intl.message(
-      'Social butterfly, amplify that energy!',
+      'You also seem like a social butterfly - amplify that energy!',
       name: 'extrovertMoreThan8',
       desc: '',
       args: [],
@@ -3995,16 +4105,6 @@ class S {
     );
   }
 
-  /// `Forgot Password`
-  String get forgotPassword {
-    return Intl.message(
-      'Forgot Password',
-      name: 'forgotPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Please enter your email. Instructions will be sent to reset your password.`
   String get pleaseEnterYouEmail {
     return Intl.message(
@@ -4035,23 +4135,14 @@ class S {
     );
   }
 
-  /// `Define again`
-  String get defineAgain {
+  /// `Based on your answer, {opennessScore} and {neuroticismScore}\n\n{extrovertScore}`
+  String resultOfPersonalizationQuestion(
+      String opennessScore, String neuroticismScore, String extrovertScore) {
     return Intl.message(
-      'Define again',
-      name: 'defineAgain',
+      'Based on your answer, $opennessScore and $neuroticismScore\n\n$extrovertScore',
+      name: 'resultOfPersonalizationQuestion',
       desc: '',
-      args: [],
-    );
-  }
-
-  /// `Updated at {time} HKT, {date}`
-  String updatedAt(String time, String date) {
-    return Intl.message(
-      'Updated at $time HKT, $date',
-      name: 'updatedAt',
-      desc: '',
-      args: [time, date],
+      args: [opennessScore, neuroticismScore, extrovertScore],
     );
   }
 }

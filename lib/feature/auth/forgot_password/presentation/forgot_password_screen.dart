@@ -41,7 +41,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           return Column(
             children: [
               CustomTextNew(
-                S.of(context).cantRememberYourEmail,
+                S.of(context).cannotRememberEmailAddress,
                 textAlign: TextAlign.center,
                 style: AskLoraTextStyles.subtitle3,
               ),
@@ -55,7 +55,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   onTap: () => context
                       .read<ForgotPasswordBloc>()
                       .add(const ForgotPasswordSubmitted())),
-              const SizedBox(height: 15)
+              const SizedBox(height: 30)
             ],
           );
         },

@@ -14,7 +14,7 @@ class _AiChatListState extends State<AiChatList> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+      padding: const EdgeInsets.fromLTRB(0, 0, 20, 15),
       child: BlocConsumer<LoraGptBloc, LoraGptState>(
         listener: (context, state) => {
           if (state.status == ResponseState.error)

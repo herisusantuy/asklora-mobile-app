@@ -199,7 +199,7 @@
   "portfolioDetailPerformanceBotStockValues": "Botstock Values (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "Inv. Amount (HKD)",
   "portfolioDetailPerformanceTotalPL": "Total P&L",
-  "portfolioCurrentPrice": "Current Price {currency}",
+  "portfolioCurrentPrice": "Current Price ({currency})",
   "@portfolioCurrentPrice": {
     "placeholders": {
       "currency": {
@@ -226,7 +226,7 @@
   "portfolioDetailPerformanceNumberOfShares": "No. of Shares",
   "portfolioDetailPerformanceStockValues": "Stock Values (HKD)",
   "portfolioDetailPerformanceCash": "Cash (HKD)",
-  "portfolioDetailPerformanceBotAssetsInStock": "% of Bot Assets in Stock",
+  "portfolioDetailPerformanceBotAssetsInStock": "Stock Holding %",
   "portfolioDetailPerformanceNumberOfSharesTooltip": "Indicates how many shares of a company are currently owned by you.",
   "portfolioDetailKeyInfoTitle": "Key Info",
   "portfolioDetailKeyInfoDaysTillExpiry": "Days Till Expiry",
@@ -361,7 +361,8 @@
   "yourPaymentInformationIsUnderReview": "Your payment information is under review. Your bank account details will be shown here once your account is approved. please note it can take up to 2 working days for the approval process.",
   "needHelp": "Need help?",
   "noTransactions": "No Transactions",
-  "noTransactionsYet": "Looks like you haven't made \nany transactions yet!",
+  "noTransactionsYet": "Looks like you haven’t made \nany transactions yet!",
+  "checkBackLater": "Check back later to see if\nthere are any new\ntransactions!",
   "performance": "Performance",
   "milestones": "Milestones",
   "startInvesting": "Start Investing",
@@ -538,6 +539,16 @@
   "agreements": "Agreements",
   "submitApplication": "Submit Application",
   "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible",
+  "enterANewPassword": "Enter a new password",
+  "resetPassword": "Reset Password",
+  "passwordLinkHasBeenSent": "A Password reset email has been sent. Please check your email",
+  "inputWrongEmailAddress": "Input wrong email address",
+  "cannotRememberEmailAddress": "Can’t remember your email address?\nEmail us at cs@asklora.ai",
+  "forgotPassword": "Forgot Password",
+  "forgotPasswordMessage": "Please enter your email. Instructions will be sent to reset your password.",
+  "resetPasswordSuccessful": "Password Reset Successful",
+  "resetPasswordSuccessfulMessage": "Your password has been reset. Please go back to the Login page and login again.",
+  "backToLogin": "Back to login",
   "askloraYouUltimateFinancialAdvisor": "Asklora.\n Your ultimate\nfinancial advisor",
   "askMeAnythingRelatedToFinance": "Ask me anything related to finance",
   "investmentResultScreenTitle": "I like your style",
@@ -549,12 +560,12 @@
   "buttonTryAgain": "Try Again",
   "buttonSure": "Sure",
   "personalizationResultScreenTitle": "Alright!\n\nBased on your answers, my technology is perfect for you and you can take on more risks.",
-  "opennessLessThan8": "Investing can be simple with AI",
-  "opennessMoreThan8": "Our technology is for you.",
-  "neuroticismLessThan8": "You can take on more risks.",
-  "neuroticismMoreThan8": "You should reduce some risks.",
-  "extrovertLessThan8": "Introverts change the world!",
-  "extrovertMoreThan8": "Social butterfly, amplify that energy!",
+  "opennessLessThan8": "we investing can be simple with AI",
+  "opennessMoreThan8": "our technology is perfect for you.",
+  "neuroticismLessThan8": "we think you can take on more risk.",
+  "neuroticismMoreThan8": "we think you should take on less risk.",
+  "extrovertLessThan8": "You also seem to be a bit more reserved. But hey, introverts change the world!",
+  "extrovertMoreThan8": "You also seem like a social butterfly - amplify that energy!",
   "active": "Active",
   "pending": "Pending",
   "botRecommendationScreenTitle": "Investments tailored  for you",
@@ -586,18 +597,19 @@
   "invalidOtp": "Invalid OTP",
   "linkPasswordResetIsSent": "Link for Password reset is sent to email.",
   "accountIsNotActive": "Your account is not active yet.",
-  "forgotPassword": "Forgot Password",
   "pleaseEnterYouEmail": "Please enter your email. Instructions will be sent to reset your password.",
   "cantRememberYourEmail": "Can't remember your email address?\nEmail us at cs@asklora.ai",
   "inputWrongEmail": "Input wrong email address",
-  "defineAgain": "Define again",
-  "updatedAt": "Updated at {time} HKT, {date}",
-  "@updatedAt": {
+  "resultOfPersonalizationQuestion": "Based on your answer, {opennessScore} and {neuroticismScore}\n\n{extrovertScore}",
+  "@resultOfPersonalizationQuestion": {
     "placeholders": {
-      "time": {
+      "opennessScore": {
         "type": "String"
       },
-      "date": {
+      "neuroticismScore": {
+        "type": "String"
+      },
+      "extrovertScore": {
         "type": "String"
       }
     }
