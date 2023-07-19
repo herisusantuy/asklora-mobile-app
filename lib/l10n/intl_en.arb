@@ -199,7 +199,7 @@
   "portfolioDetailPerformanceBotStockValues": "Botstock Values (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "Inv. Amount (HKD)",
   "portfolioDetailPerformanceTotalPL": "Total P&L",
-  "portfolioCurrentPrice": "Current Price ({currency})",
+  "portfolioCurrentPrice": "Current Price {currency}",
   "@portfolioCurrentPrice": {
     "placeholders": {
       "currency": {
@@ -226,7 +226,7 @@
   "portfolioDetailPerformanceNumberOfShares": "No. of Shares",
   "portfolioDetailPerformanceStockValues": "Stock Values (HKD)",
   "portfolioDetailPerformanceCash": "Cash (HKD)",
-  "portfolioDetailPerformanceBotAssetsInStock": "Stock Holding %",
+  "portfolioDetailPerformanceBotAssetsInStock": "% of Bot Assets in Stock",
   "portfolioDetailPerformanceNumberOfSharesTooltip": "Indicates how many shares of a company are currently owned by you.",
   "portfolioDetailKeyInfoTitle": "Key Info",
   "portfolioDetailKeyInfoDaysTillExpiry": "Days Till Expiry",
