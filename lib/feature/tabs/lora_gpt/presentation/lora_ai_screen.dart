@@ -1,10 +1,11 @@
+import 'dart:ui';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
-import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
@@ -15,8 +16,10 @@ import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/build_configs/app_config_widget.dart';
 import '../../../../core/utils/build_configs/build_config.dart';
+import '../../../../core/utils/feature_flags.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/values/app_values.dart';
+import '../../../../generated/l10n.dart';
 import '../../../bot_stock/presentation/portfolio/bloc/portfolio_bloc.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../bloc/tab_screen_bloc.dart';
@@ -24,7 +27,6 @@ import '../bloc/lora_gpt_bloc.dart';
 import '../domain/conversation.dart';
 import '../domain/portfolio_query_request.dart';
 import '../repository/lora_gpt_repository.dart';
-import 'widget/drag_indicator_widget.dart';
 import 'widget/in_chat_bubble_widget.dart';
 import 'widget/lora_thinking_widget.dart';
 import 'widget/out_chat_bubble_widget.dart';
@@ -94,8 +96,19 @@ class LoraAiScreen extends StatelessWidget {
                   }),
             ],
             child: BlocBuilder<LoraGptBloc, LoraGptState>(
-                builder: (context, state) => state.shouldShowOverlay
-                    ? const LoraAiOverlayScreen()
-                    : const LoraGptScreen())));
+                builder: (context, state) => ClipRect(
+                    child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 6.0, sigmaY: 6.0),
+                        child: Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: AskLoraColors.black.withOpacity(0.4),
+                                image: const DecorationImage(
+                                    image: AssetImage(
+                                        'assets/lora_gpt_background.png'),
+                                    fit: BoxFit.cover)),
+                            child: state.shouldShowOverlay
+                                ? const LoraAiOverlayScreen()
+                                : const LoraGptScreen()))))));
   }
 }

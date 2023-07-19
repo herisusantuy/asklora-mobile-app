@@ -539,6 +539,8 @@
   "agreements": "Agreements",
   "submitApplication": "Submit Application",
   "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible",
+  "askloraYouUltimateFinancialAdvisor": "Asklora.\n Your ultimate\nfinancial advisor",
+  "askMeAnythingRelatedToFinance": "Ask me anything related to finance",
   "investmentResultScreenTitle": "I like your style",
   "investmentResultScreenDescription": "You’re one step closer to AI Investing. \n\nTime to open your account.",
   "privacyFailedScreenTitle": "I'm afraid you're not eligible for Asklora yet.",
@@ -553,5 +555,36 @@
   "neuroticismLessThan8": "You can take on more risks.",
   "neuroticismMoreThan8": "You should reduce some risks.",
   "extrovertLessThan8": "Introverts change the world!",
-  "extrovertMoreThan8": "Social butterfly, amplify that energy!"
+  "extrovertMoreThan8": "Social butterfly, amplify that energy!",
+  "active": "Active",
+  "pending": "Pending",
+  "botRecommendationScreenTitle": "Investments tailored  for you",
+  "notFeelingIt": "Not feeling it? Try something different.",
+  "askloraWireDetails": "Asklora's Wire Details",
+  "buttonViewDetails": "View Details",
+  "wireTransfer": "Wire Transfer",
+  "bankNumber": "Bank Number",
+  "accountNumber": "Account Number",
+  "bankName": "Bank Name",
+  "swiftCode": "Swift Code",
+  "accountName": "Account Name",
+  "companyAddress": "Company Address",
+  "exchangeRateInDepositScreen": "Current Exchange Rate: HKD 1 = USD 0.137 (at HKT {time})",
+  "@exchangeRateInDepositScreen": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "errorStoringData": "Error Storing Data",
+  "errorStoringDataDetails": "Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions",
+  "emailNotExist": "User does not exist with the given email",
+  "emailNotVerified": "User email is not verified",
+  "enterValidEmail": "Enter valid email",
+  "passwordChangeSuccessfully": "Password changed successfully.",
+  "tokenInvalid": "Token is invalid or expired.",
+  "invalidOtp": "Invalid OTP",
+  "linkPasswordResetIsSent": "Link for Password reset is sent to email.",
+  "accountIsNotActive": "Your account is not active yet."
 }

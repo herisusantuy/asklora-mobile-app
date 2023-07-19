@@ -21,7 +21,6 @@ import '../../../../core/presentation/text_fields/amount_text_field.dart';
 import '../../../../core/repository/transaction_repository.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
-import '../../../../core/utils/extensions.dart';
 import '../../../../core/values/app_values.dart';
 import '../../../../generated/l10n.dart';
 import '../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
@@ -31,13 +30,9 @@ import '../utils/deposit_utils.dart';
 import 'deposit_result_screen.dart';
 
 part 'widgets/deposit_notes.dart';
-
 part 'widgets/deposit_step/deposit_base_step.dart';
-
 part 'widgets/deposit_step/transfer_amount_step.dart';
-
 part 'widgets/deposit_step/transfer_detail_step.dart';
-
 part 'widgets/deposit_step/upload_proof_of_remittance_step.dart';
 
 class DepositScreen extends StatelessWidget {

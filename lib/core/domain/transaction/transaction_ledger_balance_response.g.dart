@@ -15,9 +15,6 @@ TransactionLedgerBalanceResponse _$TransactionLedgerBalanceResponseFromJson(
       (json['withdrawable_balance'] as num).toDouble(),
       json['account_name'] as String,
       (json['user_id'] as num).toDouble(),
-      (json['bot_balances'] as List<dynamic>)
-          .map((e) => BotBalance.fromJson(e as Map<String, dynamic>))
-          .toList(),
     );
 
 Map<String, dynamic> _$TransactionLedgerBalanceResponseToJson(
@@ -29,5 +26,4 @@ Map<String, dynamic> _$TransactionLedgerBalanceResponseToJson(
       'withdrawable_balance': instance.withdrawableBalance,
       'account_name': instance.accountName,
       'user_id': instance.userId,
-      'bot_balances': instance.botBalances,
     };
