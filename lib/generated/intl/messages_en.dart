@@ -88,6 +88,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("About Asklora"),
         "accountInformation":
             MessageLookupByLibrary.simpleMessage("Account Information"),
+        "accountIsNotActive": MessageLookupByLibrary.simpleMessage(
+            "Your account is not active yet."),
         "accountName": MessageLookupByLibrary.simpleMessage("Account Name"),
         "accountNumber": MessageLookupByLibrary.simpleMessage("Account Number"),
         "accountSettings":
