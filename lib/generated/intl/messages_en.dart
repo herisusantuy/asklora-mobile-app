@@ -429,7 +429,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTransactions":
             MessageLookupByLibrary.simpleMessage("No Transactions"),
         "noTransactionsYet": MessageLookupByLibrary.simpleMessage(
-            "Looks like you haven\'t made \nany transactions yet!"),
+            "Looks like you haven’t made \nany transactions yet!"),
         "notFeelingIt": MessageLookupByLibrary.simpleMessage(
             "Not feeling it? Try something different."),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(

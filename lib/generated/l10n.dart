@@ -2493,10 +2493,10 @@ class S {
     );
   }
 
-  /// `Looks like you haven't made \nany transactions yet!`
+  /// `Looks like you haven’t made \nany transactions yet!`
   String get noTransactionsYet {
     return Intl.message(
-      'Looks like you haven\'t made \nany transactions yet!',
+      'Looks like you haven’t made \nany transactions yet!',
       name: 'noTransactionsYet',
       desc: '',
       args: [],
