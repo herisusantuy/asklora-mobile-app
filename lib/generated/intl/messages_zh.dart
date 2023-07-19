@@ -65,16 +65,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m19(currency) => "可提取金額 (${currency})";
 
-  static String m20(botName, botSymbol, dateTime) =>
+  static String m20(opennessScore, neuroticismScore, extrovertScore) =>
+      "${opennessScore}, ${neuroticismScore}\n\n${extrovertScore}";
+
+  static String m21(botName, botSymbol, dateTime) =>
       "${botName} ${botSymbol} 將於 ${dateTime} 開始";
 
-  static String m21(minDeposit) =>
+  static String m22(minDeposit) =>
       "請轉賬最少 HK\$${minDeposit} 至 Asklora 銀行戶口。任何少於 HK\$${minDeposit} 的首次入金均會被拒收，並會被徵收手續費。";
 
-  static String m22(minDeposit) =>
+  static String m23(minDeposit) =>
       "我們會提取由你銀行透過 API 或匯款通知書收集的資訊， 確定你指定的銀行戶口。我們只會接受透過此指定戶口進行所有將來的入金與提取。你可轉換指定銀行戶口，但你需要完成最少匯款 HK\$${minDeposit} 以通過相同的認證。";
 
-  static String m23(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
+  static String m24(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -325,7 +328,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "min8Character": MessageLookupByLibrary.simpleMessage("最少 8 個字母"),
         "needHelp": MessageLookupByLibrary.simpleMessage("需要幫助？"),
         "neuroticismLessThan8":
-            MessageLookupByLibrary.simpleMessage("我哋可以進取少少, 承受一定嘅風險 "),
+            MessageLookupByLibrary.simpleMessage("我哋可以進取少少, 承受一定嘅風險"),
         "neuroticismMoreThan8":
             MessageLookupByLibrary.simpleMessage("我哋一步一步嚟, 控制住風險"),
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
@@ -478,6 +481,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "readyToGo": MessageLookupByLibrary.simpleMessage("準備好未？"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
+        "resultOfPersonalizationQuestion": m20,
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶號碼）。不過，我們亦可能會因核實交易，向你要求更多附加資料。"),
         "riskDisclosureStatementAcknowledgement":
@@ -486,7 +490,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("風險披露聲明"),
         "riskDisclosureStatementString": MessageLookupByLibrary.simpleMessage(
             "1. The prices of securities fluctuate, sometimes dramatically. The price of a security may move up or down, and may become valueless. It is as likely that losses will be incurred rather than profit made as a result of buying and selling securities. Investors should not only base on this marketing material to make any investment decision, you should carefully consider whether the investment products or services are suitable for you according to your investment experience, purpose, risk tolerance, financial or related conditions. If you have any questions, please contact us or obtain independent advice.\n\n2. Investment in foreign securities carries additional risks not generally associated with securities in the domestic market. The value or income of foreign securities may be more volatile and could be adversely affected by changes in currency rates of exchange, foreign taxation practices, foreign laws, government practices, regulations, and political events. You may find it more difficult to liquidate investments in foreign securities where they have limited liquidity in the relevant market. Foreign laws, government practices, and regulations may also affect the transferability of foreign securities. Timely and reliable information about the value or the extent of the risks of foreign securities may not be readily available at all times.\n\n3. You acknowledge that you have fully understood the implications of the risks associated with the Electronic Trading Service as set out in the Client Agreement"),
-        "rolloverBotStockAcknowledgement": m20,
+        "rolloverBotStockAcknowledgement": m21,
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
@@ -558,7 +562,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提存 "),
         "transactionHistoryTitle": MessageLookupByLibrary.simpleMessage("交易歷史"),
         "transactionHistoryToday": MessageLookupByLibrary.simpleMessage("今日"),
-        "transferAtLeastWithMinimumDeposit": m21,
+        "transferAtLeastWithMinimumDeposit": m22,
         "transferAtLeastWithNoMinimumDeposit":
             MessageLookupByLibrary.simpleMessage(
                 "請由你之前使用的銀行戶口轉賬至Asklora 銀行戶口。"),
@@ -576,7 +580,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "我們只接受由你戶口透過銀行轉賬 (電匯/FPS) 的入金。"),
         "weWillOnlyAcceptHKD": MessageLookupByLibrary.simpleMessage("我們只接受港幣"),
-        "weWillTakeInformationCollectedFromYour": m22,
+        "weWillTakeInformationCollectedFromYour": m23,
         "website": MessageLookupByLibrary.simpleMessage("網站"),
         "welcomeScreenFirstBenefit":
             MessageLookupByLibrary.simpleMessage("度身訂做AI指導"),
@@ -600,7 +604,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提取款項最多需時2個工作天。"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),
         "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
-        "yourBankAccountIsUnderReview": m23,
+        "yourBankAccountIsUnderReview": m24,
         "yourDepositCanTakeUp2WorkingDays":
             MessageLookupByLibrary.simpleMessage("入金程序最多需時 2 個工作天"),
         "yourDepositMayBeRejected": MessageLookupByLibrary.simpleMessage(

@@ -13,7 +13,7 @@ class CustomScaffold extends Scaffold {
       : super(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
-              backgroundColor: Colors.white,
+              backgroundColor: backgroundColor,
               elevation: 0.0,
               toolbarHeight: 0.0, // Hide the AppBar
             ),

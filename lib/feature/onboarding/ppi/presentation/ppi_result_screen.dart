@@ -16,6 +16,7 @@ class PpiResultScreen extends StatelessWidget {
   final PpiResult? ppiResult;
   final TextStyle? additionalMessageTextStyle;
   final double bottomPadding;
+  final bool isDarkBgColor;
 
   const PpiResultScreen(
       {required this.title,
@@ -25,6 +26,7 @@ class PpiResultScreen extends StatelessWidget {
       this.additionalMessageTextStyle,
       this.richText,
       this.bottomPadding = 35,
+      this.isDarkBgColor = false,
       Key? key})
       : super(key: key);
 
@@ -53,8 +55,10 @@ class PpiResultScreen extends StatelessWidget {
                     ),
                     CustomTextNew(
                       title,
-                      style: AskLoraTextStyles.h4
-                          .copyWith(color: AskLoraColors.charcoal),
+                      style: AskLoraTextStyles.h4.copyWith(
+                          color: isDarkBgColor
+                              ? AskLoraColors.white
+                              : AskLoraColors.charcoal),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 40),
@@ -65,7 +69,10 @@ class PpiResultScreen extends StatelessWidget {
                         child: CustomTextNew(
                           additionalMessage,
                           style: additionalMessageTextStyle ??
-                              AskLoraTextStyles.h4,
+                              AskLoraTextStyles.h4.copyWith(
+                                  color: isDarkBgColor
+                                      ? AskLoraColors.white
+                                      : AskLoraColors.charcoal),
                           textAlign: TextAlign.center,
                         ),
                       ),

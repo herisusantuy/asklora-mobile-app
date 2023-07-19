@@ -70,16 +70,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m19(currency) => "Withdrawable Balance (${currency})";
 
-  static String m20(botName, botSymbol, dateTime) =>
+  static String m20(opennessScore, neuroticismScore, extrovertScore) =>
+      "Based on your answer, ${opennessScore} and ${neuroticismScore}\n\n${extrovertScore}";
+
+  static String m21(botName, botSymbol, dateTime) =>
       "${botName} ${botSymbol} will start at ${dateTime}";
 
-  static String m21(minDeposit) =>
+  static String m22(minDeposit) =>
       "Transfer at least HK\$${minDeposit} to Asklora\'s bank account. Any initial deposit less than HK\$${minDeposit} will be rejected and fees will be charged.";
 
-  static String m22(minDeposit) =>
+  static String m23(minDeposit) =>
       "We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK\$ ${minDeposit} bank transfer is completed.";
 
-  static String m23(dateTime) =>
+  static String m24(dateTime) =>
       "Your Bank Account is under review and will be complete by ${dateTime}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -331,9 +334,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Existing Password"),
         "expiresAt": MessageLookupByLibrary.simpleMessage("Expires at"),
         "extrovertLessThan8": MessageLookupByLibrary.simpleMessage(
-            "Introverts change the world!"),
+            "You also seem to be a bit more reserved. But hey, introverts change the world!"),
         "extrovertMoreThan8": MessageLookupByLibrary.simpleMessage(
-            "Social butterfly, amplify that energy!"),
+            "You also seem like a social butterfly - amplify that energy!"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("Filled Price"),
         "financialProfile":
             MessageLookupByLibrary.simpleMessage("Financial Profile"),
@@ -412,10 +415,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "min8Character":
             MessageLookupByLibrary.simpleMessage("min. 8 characters"),
         "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
-        "neuroticismLessThan8":
-            MessageLookupByLibrary.simpleMessage("You can take on more risks."),
+        "neuroticismLessThan8": MessageLookupByLibrary.simpleMessage(
+            "we think you can take on more risk."),
         "neuroticismMoreThan8": MessageLookupByLibrary.simpleMessage(
-            "You should reduce some risks."),
+            "we think you should take on less risk."),
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "nextStep": MessageLookupByLibrary.simpleMessage("Next step"),
         "no": MessageLookupByLibrary.simpleMessage(" No"),
@@ -445,9 +448,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "openInvestmentAccount":
             MessageLookupByLibrary.simpleMessage("Open Investment Account"),
         "opennessLessThan8": MessageLookupByLibrary.simpleMessage(
-            "Investing can be simple with AI"),
-        "opennessMoreThan8":
-            MessageLookupByLibrary.simpleMessage("Our technology is for you."),
+            "we investing can be simple with AI"),
+        "opennessMoreThan8": MessageLookupByLibrary.simpleMessage(
+            "our technology is perfect for you."),
         "orderCancelled":
             MessageLookupByLibrary.simpleMessage("Order Cancelled"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("Order Expired"),
@@ -606,6 +609,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "redeemYourBotstockNow":
             MessageLookupByLibrary.simpleMessage("Redeem Your Botstock Now"),
         "relearn": MessageLookupByLibrary.simpleMessage("relearn"),
+        "resultOfPersonalizationQuestion": m20,
         "retakeInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("Retake Investment Style"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
@@ -617,7 +621,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Risk Disclosure Statement"),
         "riskDisclosureStatementString": MessageLookupByLibrary.simpleMessage(
             "1. The prices of securities fluctuate, sometimes dramatically. The price of a security may move up or down, and may become valueless. It is as likely that losses will be incurred rather than profit made as a result of buying and selling securities. Investors should not only base on this marketing material to make any investment decision, you should carefully consider whether the investment products or services are suitable for you according to your investment experience, purpose, risk tolerance, financial or related conditions. If you have any questions, please contact us or obtain independent advice.\n\n2. Investment in foreign securities carries additional risks not generally associated with securities in the domestic market. The value or income of foreign securities may be more volatile and could be adversely affected by changes in currency rates of exchange, foreign taxation practices, foreign laws, government practices, regulations, and political events. You may find it more difficult to liquidate investments in foreign securities where they have limited liquidity in the relevant market. Foreign laws, government practices, and regulations may also affect the transferability of foreign securities. Timely and reliable information about the value or the extent of the risks of foreign securities may not be readily available at all times.\n\n3. You acknowledge that you have fully understood the implications of the risks associated with the Electronic Trading Service as set out in the Client Agreement"),
-        "rolloverBotStockAcknowledgement": m20,
+        "rolloverBotStockAcknowledgement": m21,
         "saveForLater": MessageLookupByLibrary.simpleMessage("Save For Later"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
         "setUpFinancialProfile":
@@ -710,7 +714,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transaction History"),
         "transactionHistoryToday":
             MessageLookupByLibrary.simpleMessage("Today"),
-        "transferAtLeastWithMinimumDeposit": m21,
+        "transferAtLeastWithMinimumDeposit": m22,
         "transferAtLeastWithNoMinimumDeposit": MessageLookupByLibrary.simpleMessage(
             "Transfer to Asklora bank account from the same bank account you used."),
         "transferFundToAsklora":
@@ -739,7 +743,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "We will only accept deposits via bank transfer (wire/FPS) from your own account."),
         "weWillOnlyAcceptHKD":
             MessageLookupByLibrary.simpleMessage("We will only accept HKD."),
-        "weWillTakeInformationCollectedFromYour": m22,
+        "weWillTakeInformationCollectedFromYour": m23,
         "website": MessageLookupByLibrary.simpleMessage("Website"),
         "welcomeScreenFirstBenefit": MessageLookupByLibrary.simpleMessage(
             "Guidance from your own personal AI"),
@@ -764,7 +768,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yourBankAccount":
             MessageLookupByLibrary.simpleMessage("Your Bank Account"),
-        "yourBankAccountIsUnderReview": m23,
+        "yourBankAccountIsUnderReview": m24,
         "yourDepositCanTakeUp2WorkingDays":
             MessageLookupByLibrary.simpleMessage(
                 "Your deposit can take up to 2 working days"),

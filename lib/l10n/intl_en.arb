@@ -549,12 +549,12 @@
   "buttonTryAgain": "Try Again",
   "buttonSure": "Sure",
   "personalizationResultScreenTitle": "Alright!\n\nBased on your answers, my technology is perfect for you and you can take on more risks.",
-  "opennessLessThan8": "Investing can be simple with AI",
-  "opennessMoreThan8": "Our technology is for you.",
-  "neuroticismLessThan8": "You can take on more risks.",
-  "neuroticismMoreThan8": "You should reduce some risks.",
-  "extrovertLessThan8": "Introverts change the world!",
-  "extrovertMoreThan8": "Social butterfly, amplify that energy!",
+  "opennessLessThan8": "we investing can be simple with AI",
+  "opennessMoreThan8": "our technology is perfect for you.",
+  "neuroticismLessThan8": "we think you can take on more risk.",
+  "neuroticismMoreThan8": "we think you should take on less risk.",
+  "extrovertLessThan8": "You also seem to be a bit more reserved. But hey, introverts change the world!",
+  "extrovertMoreThan8": "You also seem like a social butterfly - amplify that energy!",
   "active": "Active",
   "pending": "Pending",
   "botRecommendationScreenTitle": "Investments tailored  for you",
@@ -589,5 +589,19 @@
   "forgotPassword": "Forgot Password",
   "pleaseEnterYouEmail": "Please enter your email. Instructions will be sent to reset your password.",
   "cantRememberYourEmail": "Can't remember your email address?\nEmail us at cs@asklora.ai",
-  "inputWrongEmail": "Input wrong email address"
+  "inputWrongEmail": "Input wrong email address",
+  "resultOfPersonalizationQuestion": "Based on your answer, {opennessScore} and {neuroticismScore}\n\n{extrovertScore}",
+  "@resultOfPersonalizationQuestion": {
+    "placeholders": {
+      "opennessScore": {
+        "type": "String"
+      },
+      "neuroticismScore": {
+        "type": "String"
+      },
+      "extrovertScore": {
+        "type": "String"
+      }
+    }
+  }
 }
