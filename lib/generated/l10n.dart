@@ -3805,60 +3805,60 @@ class S {
     );
   }
 
-  /// `Investing can be simple with AI`
+  /// `we investing can be simple with AI`
   String get opennessLessThan8 {
     return Intl.message(
-      'Investing can be simple with AI',
+      'we investing can be simple with AI',
       name: 'opennessLessThan8',
       desc: '',
       args: [],
     );
   }
 
-  /// `Our technology is for you.`
+  /// `our technology is perfect for you.`
   String get opennessMoreThan8 {
     return Intl.message(
-      'Our technology is for you.',
+      'our technology is perfect for you.',
       name: 'opennessMoreThan8',
       desc: '',
       args: [],
     );
   }
 
-  /// `You can take on more risks.`
+  /// `we think you can take on more risk.`
   String get neuroticismLessThan8 {
     return Intl.message(
-      'You can take on more risks.',
+      'we think you can take on more risk.',
       name: 'neuroticismLessThan8',
       desc: '',
       args: [],
     );
   }
 
-  /// `You should reduce some risks.`
+  /// `we think you should take on less risk.`
   String get neuroticismMoreThan8 {
     return Intl.message(
-      'You should reduce some risks.',
+      'we think you should take on less risk.',
       name: 'neuroticismMoreThan8',
       desc: '',
       args: [],
     );
   }
 
-  /// `Introverts change the world!`
+  /// `You also seem to be a bit more reserved. But hey, introverts change the world!`
   String get extrovertLessThan8 {
     return Intl.message(
-      'Introverts change the world!',
+      'You also seem to be a bit more reserved. But hey, introverts change the world!',
       name: 'extrovertLessThan8',
       desc: '',
       args: [],
     );
   }
 
-  /// `Social butterfly, amplify that energy!`
+  /// `You also seem like a social butterfly - amplify that energy!`
   String get extrovertMoreThan8 {
     return Intl.message(
-      'Social butterfly, amplify that energy!',
+      'You also seem like a social butterfly - amplify that energy!',
       name: 'extrovertMoreThan8',
       desc: '',
       args: [],
@@ -4102,6 +4102,47 @@ class S {
       name: 'accountIsNotActive',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Please enter your email. Instructions will be sent to reset your password.`
+  String get pleaseEnterYouEmail {
+    return Intl.message(
+      'Please enter your email. Instructions will be sent to reset your password.',
+      name: 'pleaseEnterYouEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can't remember your email address?\nEmail us at cs@asklora.ai`
+  String get cantRememberYourEmail {
+    return Intl.message(
+      'Can\'t remember your email address?\nEmail us at cs@asklora.ai',
+      name: 'cantRememberYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input wrong email address`
+  String get inputWrongEmail {
+    return Intl.message(
+      'Input wrong email address',
+      name: 'inputWrongEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Based on your answer, {opennessScore} and {neuroticismScore}\n\n{extrovertScore}`
+  String resultOfPersonalizationQuestion(
+      String opennessScore, String neuroticismScore, String extrovertScore) {
+    return Intl.message(
+      'Based on your answer, $opennessScore and $neuroticismScore\n\n$extrovertScore',
+      name: 'resultOfPersonalizationQuestion',
+      desc: '',
+      args: [opennessScore, neuroticismScore, extrovertScore],
     );
   }
 }

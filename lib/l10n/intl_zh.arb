@@ -519,7 +519,7 @@
   "personalizationResultScreenTitle": "Alright!\n\n你嘅答案顯示我嘅科技同你都幾夾，我哋都可以進取少少！",
   "opennessLessThan8": "用AI投資其實可以好簡單",
   "opennessMoreThan8": "我哋一定好夾!",
-  "neuroticismLessThan8": "我哋可以進取少少, 承受一定嘅風險 ",
+  "neuroticismLessThan8": "我哋可以進取少少, 承受一定嘅風險",
   "neuroticismMoreThan8": "我哋一步一步嚟, 控制住風險",
   "extrovertLessThan8": "每個人都需要me time，獨個觀看世間變幻事情",
   "extrovertMoreThan8": "你一定係交際花, 將你嘅vibe發光發亮!",
@@ -564,6 +564,20 @@
   "cantRememberYourEmail": "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai",
   "inputWrongEmail": "電郵地址錯誤",
   "buttonBackToPortfolio": "返回投資組合頁",
+  "resultOfPersonalizationQuestion": "{opennessScore}, {neuroticismScore}\n\n{extrovertScore}",
+  "@resultOfPersonalizationQuestion": {
+    "placeholders": {
+      "opennessScore": {
+        "type": "String"
+      },
+      "neuroticismScore": {
+        "type": "String"
+      },
+      "extrovertScore": {
+        "type": "String"
+      }
+    }
+  },
   "noTransactions": "暫時沒有交易",
   "noTransactionsYet": "你似乎未進行過任何交易！",
   "checkBackLater": "稍後再來查看!"
