@@ -4145,6 +4145,26 @@ class S {
       args: [opennessScore, neuroticismScore, extrovertScore],
     );
   }
+
+  /// `Define again`
+  String get defineAgain {
+    return Intl.message(
+      'Define again',
+      name: 'defineAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Updated at {time} HKT, {date}`
+  String updatedAt(String time, String date) {
+    return Intl.message(
+      'Updated at $time HKT, $date',
+      name: 'updatedAt',
+      desc: '',
+      args: [time, date],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -12,6 +12,7 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/pair.dart';
+import '../../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
@@ -84,10 +85,10 @@ class BotRecommendationScreen extends StatelessWidget {
                   ),
                   if (UserJourney.compareUserJourney(
                       context: context, target: UserJourney.freeBotStock))
-                    _buttonChangeInvestmentStyle(context),
-                  const SizedBox(
-                    height: 50,
-                  ),
+                    // _buttonChangeInvestmentStyle(context),
+                    const SizedBox(
+                      height: 50,
+                    ),
                   const BotRecommendationFaq(),
                   const SizedBox(
                     height: 28,
@@ -112,6 +113,28 @@ class BotRecommendationScreen extends StatelessWidget {
               S.of(context).botRecommendationScreenTitle,
               style:
                   AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Row(
+              children: [
+                CustomTextNew(
+                  S.of(context).notFeelingIt,
+                  style: AskLoraTextStyles.subtitle2
+                      .copyWith(color: AskLoraColors.primaryMagenta),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                ExtraInfoButton(
+                  label: S.of(context).defineAgain,
+                  buttonExtraInfoSize: ButtonExtraInfoSize.small,
+                  onTap: () => context
+                      .read<NavigationBloc<ForYouPage>>()
+                      .add(const PageChanged(ForYouPage.investmentStyle)),
+                ),
+              ],
             ),
             const SizedBox(
               height: 8,

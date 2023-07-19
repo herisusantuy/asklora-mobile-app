@@ -597,7 +597,6 @@
   "invalidOtp": "Invalid OTP",
   "linkPasswordResetIsSent": "Link for Password reset is sent to email.",
   "accountIsNotActive": "Your account is not active yet.",
-  "forgotPassword": "Forgot Password",
   "pleaseEnterYouEmail": "Please enter your email. Instructions will be sent to reset your password.",
   "cantRememberYourEmail": "Can't remember your email address?\nEmail us at cs@asklora.ai",
   "inputWrongEmail": "Input wrong email address",
@@ -615,5 +614,16 @@
       }
     }
   },
-  "accountIsNotActive": "Your account is not active yet."
+  "defineAgain": "Define again",
+  "updatedAt": "Updated at {time} HKT, {date}",
+  "@updatedAt": {
+    "placeholders": {
+      "time": {
+         "type": "String"
+        },
+      "date": {
+         "type": "String"
+        }
+      }
+    }
 }
