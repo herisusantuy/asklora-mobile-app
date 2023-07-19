@@ -12,6 +12,7 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/pair.dart';
+import '../../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
@@ -124,26 +125,15 @@ class BotRecommendationScreen extends StatelessWidget {
                       .copyWith(color: AskLoraColors.primaryMagenta),
                 ),
                 const SizedBox(
-                  width: 10,
+                  width: 5,
                 ),
-                GestureDetector(
+                ExtraInfoButton(
+                  label: S.of(context).defineAgain,
+                  buttonExtraInfoSize: ButtonExtraInfoSize.small,
                   onTap: () => context
                       .read<NavigationBloc<ForYouPage>>()
                       .add(const PageChanged(ForYouPage.investmentStyle)),
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AskLoraColors.primaryMagenta),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: CustomTextNew(
-                      S.of(context).defineAgain,
-                      style: AskLoraTextStyles.subtitle3
-                          .copyWith(color: AskLoraColors.primaryMagenta),
-                    ),
-                  ),
-                )
+                ),
               ],
             ),
             const SizedBox(
