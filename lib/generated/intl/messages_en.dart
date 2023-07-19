@@ -258,7 +258,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("Date Joined"),
-        "defineAgain": MessageLookupByLibrary.simpleMessage("Define again"),
         "defineInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("Define Investment Style"),
         "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
@@ -749,7 +748,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "We\'re having some trouble processing your withdrawal request. Please try again"),
         "unableToProcessWithdrawalTitle": MessageLookupByLibrary.simpleMessage(
             "Unable to Process Withdrawal"),
-        "updatedAt": m22,
         "uploadProofOfRemittance":
             MessageLookupByLibrary.simpleMessage("Upload proof of remittance"),
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
