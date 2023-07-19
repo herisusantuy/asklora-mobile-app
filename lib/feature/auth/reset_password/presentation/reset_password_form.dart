@@ -80,6 +80,7 @@ class ResetPasswordForm extends StatelessWidget {
           builder: (context, state) {
             return PasswordTextField(
                 key: const Key('reset_password_confirm_password_input'),
+                isShowingPasswordValidation: false,
                 validPassword: (isValidPassword) => {},
                 hintText: S.of(context).newPassword,
                 label: S.of(context).confirmNewPassword,
