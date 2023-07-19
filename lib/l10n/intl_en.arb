@@ -560,9 +560,13 @@
   "defineAgain": "Define again",
   "updatedAt": "Updated at {time} HKT, {date}",
   "@updatedAt": {
-    "placeholder": {
-      "time": "String",
-      "date": "String"
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
     }
   }
 }

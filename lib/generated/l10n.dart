@@ -3786,7 +3786,7 @@ class S {
   }
 
   /// `Updated at {time} HKT, {date}`
-  String updatedAt(Object time, Object date) {
+  String updatedAt(String time, String date) {
     return Intl.message(
       'Updated at $time HKT, $date',
       name: 'updatedAt',
