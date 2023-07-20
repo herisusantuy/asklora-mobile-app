@@ -10,7 +10,7 @@ import '../../../onboarding/ppi/domain/ppi_user_response_request.dart';
 import '../../../onboarding/ppi/domain/question.dart';
 import '../../../onboarding/ppi/repository/ppi_question_repository.dart';
 import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
-import '../../../tabs/lora_gpt/domain/conversation.dart';
+import '../../../../core/domain/ai/conversation.dart';
 import '../../../tabs/lora_gpt/repository/lora_gpt_repository.dart';
 import '../domain/interaction.dart';
 import '../domain/investment_style_question_query_request.dart';

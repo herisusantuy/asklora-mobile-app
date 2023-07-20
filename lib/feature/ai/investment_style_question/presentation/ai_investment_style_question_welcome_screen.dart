@@ -19,10 +19,11 @@ class AiInvestmentStyleQuestionWelcomeScreen extends StatelessWidget {
           S.of(context).aiIsqWelcomeSubTitle,
         ),
       ),
-      onBottomButtonTap: () => AiInvestmentStyleQuestionScreen.open(context),
+      onBottomButtonTap: () =>
+          AiInvestmentStyleQuestionOnboardingScreen.open(context),
     );
   }
 
   static void open(BuildContext context) =>
-      Navigator.of(context).pushNamed(route);
+      Navigator.of(context, rootNavigator: true).pushNamed(route);
 }

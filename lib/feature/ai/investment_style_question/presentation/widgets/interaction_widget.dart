@@ -1,4 +1,4 @@
-part of '../ai_investment_style_question_screen.dart';
+part of '../ai_investment_style_question_form.dart';
 
 class InteractionWidget extends StatelessWidget {
   final ISQInteraction interaction;

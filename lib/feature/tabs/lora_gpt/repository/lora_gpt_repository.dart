@@ -1,7 +1,7 @@
 import '../../../../core/domain/base_response.dart';
 import '../../../ai/investment_style_question/domain/investment_style_question_query_request.dart';
 import '../../../ai/investment_style_question/domain/investment_style_question_query_response.dart';
-import '../domain/conversation.dart';
+import '../../../../core/domain/ai/conversation.dart';
 import '../domain/lora_gpt_api_client.dart';
 import '../domain/portfolio_details_request.dart';
 import '../domain/portfolio_query_request.dart';

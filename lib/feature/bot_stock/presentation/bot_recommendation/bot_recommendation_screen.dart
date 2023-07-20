@@ -11,7 +11,6 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
-import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
@@ -19,8 +18,7 @@ import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_messa
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../../generated/l10n.dart';
-import '../../../onboarding/ppi/bloc/question/question_bloc.dart';
-import '../../../onboarding/ppi/presentation/ppi_screen.dart';
+import '../../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../tabs/for_you/for_you_screen_form.dart';
 import '../../../tabs/home/home_screen_form.dart';
@@ -31,9 +29,13 @@ import '../widgets/custom_expansion_panel.dart';
 import 'detail/bot_recommendation_detail_screen.dart';
 
 part 'widgets/bot_learn_more_bottom_sheet.dart';
+
 part 'widgets/bot_recommendation_card.dart';
+
 part 'widgets/bot_recommendation_card_shimmer.dart';
+
 part 'widgets/bot_recommendation_faq.dart';
+
 part 'widgets/bot_recommendation_list.dart';
 
 class BotRecommendationScreen extends StatelessWidget {
@@ -85,10 +87,10 @@ class BotRecommendationScreen extends StatelessWidget {
                   ),
                   if (UserJourney.compareUserJourney(
                       context: context, target: UserJourney.freeBotStock))
-                    // _buttonChangeInvestmentStyle(context),
-                    const SizedBox(
-                      height: 50,
-                    ),
+                    _buttonChangeInvestmentStyle(context),
+                  const SizedBox(
+                    height: 50,
+                  ),
                   const BotRecommendationFaq(),
                   const SizedBox(
                     height: 28,
