@@ -108,7 +108,6 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
       } else if (element.questionId == 'quid16' && element.choices != null) {
         String investmentHorizonMapped =
             _investmentHorizon[state.result!.investmentHorizon] ?? '';
-        print('we got horizon ${investmentHorizonMapped}');
         _addAnswerPpi(
             element.choices!.firstWhereOrNull(
                 (element) => element.name == investmentHorizonMapped),
@@ -134,9 +133,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
     try {
       await _ppiResponseRepository.addBulkAnswer(ppiSelectionRequest);
       emit(state.copyWith(ppiResponseState: ResponseState.success));
-      debugPrint('success send to ppi');
     } catch (e) {
-      debugPrint('error $e');
       emit(state.copyWith(
           conversations: [...state.conversations, _errorChat],
           ppiResponseState: ResponseState.error));
