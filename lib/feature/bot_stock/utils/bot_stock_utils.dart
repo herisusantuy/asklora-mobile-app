@@ -190,7 +190,7 @@ enum BotStatus {
         .firstWhere((element) => element.name == omsStatusString);
   }
 
-  String status(BuildContext context) {
+  String text(BuildContext context) {
     switch (this) {
       case live:
       case liveExpireSoon:
@@ -223,7 +223,7 @@ enum BotOrderSide {
     return BotOrderSide.values.firstWhere((element) => element.name == side);
   }
 
-  String getBotOrderSide(BuildContext context) {
+  String text(BuildContext context) {
     switch (this) {
       case BotOrderSide.buy:
         return S.of(context).buy;

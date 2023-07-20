@@ -67,7 +67,6 @@ class TransferTransactionHistoryCard extends StatelessWidget {
               TransferStatus.findByString(
                       transactionHistoryModel.transferStatus.name)
                   .text(context),
-              // transactionHistoryModel.transferStatus.name,
               style: AskLoraTextStyles.body2
                   .copyWith(color: AskLoraColors.darkGray),
             )

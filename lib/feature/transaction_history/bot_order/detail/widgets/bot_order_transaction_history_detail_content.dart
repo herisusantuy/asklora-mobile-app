@@ -95,7 +95,7 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
         border: Border.all(width: 1.4, color: botStatusType.color),
       ),
       child: AutoSizedTextWidget(
-        BotStatus.findByString(botStatusType.name).status(context),
+        BotStatus.findByString(botStatusType.name).text(context),
         maxLines: 1,
         style: AskLoraTextStyles.subtitle3.copyWith(color: botStatusType.color),
         textAlign: TextAlign.center,

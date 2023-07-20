@@ -58,7 +58,7 @@ class BotOrderTransactionHistoryCard extends StatelessWidget {
             ),
             CustomTextNew(
               BotStatus.findByOmsStatus(transactionHistoryModel.status)
-                  .status(context),
+                  .text(context),
               style: AskLoraTextStyles.body2
                   .copyWith(color: AskLoraColors.darkGray),
             )

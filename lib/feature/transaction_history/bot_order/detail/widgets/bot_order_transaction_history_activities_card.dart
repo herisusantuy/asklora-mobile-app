@@ -27,7 +27,7 @@ class BotOrderTransactionHistoryActivitiesCard extends StatelessWidget {
               Expanded(
                 child: CustomTextNew(
                   BotOrderSide.findByString(botActivitiesTransactionModel.side)
-                      .getBotOrderSide(context),
+                      .text(context),
                   style: AskLoraTextStyles.h6,
                 ),
               ),
