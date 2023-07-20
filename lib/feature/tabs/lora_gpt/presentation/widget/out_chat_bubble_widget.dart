@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/presentation/animated_text.dart';
-import '../../../../../core/presentation/typer_animated_text.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../bloc/lora_gpt_bloc.dart';
+import 'scrambled_text.dart';
 
 class OutChatBubbleWidget extends StatelessWidget {
   const OutChatBubbleWidget(this.message,
@@ -29,14 +28,20 @@ class OutChatBubbleWidget extends StatelessWidget {
               ),
             ),
             child: animateText
-                ? AnimatedTextKit(
-                    isRepeatingAnimation: false,
-                    repeatForever: false,
-                    animatedTexts: [
-                      TyperAnimatedText(message,
-                          textStyle: AskLoraTextStyles.body2
-                              .copyWith(color: AskLoraColors.white))
-                    ],
+                ? ScrambledText(
+                    text: message,
+                    style: AskLoraTextStyles.body2
+                        .copyWith(color: AskLoraColors.white),
+                    duration: const Duration(milliseconds: 17),
+                    scrambledTextStyle: ,
+                    // ? AnimatedTextKit(
+                    //     isRepeatingAnimation: false,
+                    //     repeatForever: false,
+                    //     animatedTexts: [
+                    //       TyperAnimatedText(message,
+                    //           textStyle: AskLoraTextStyles.body2
+                    //               .copyWith(color: AskLoraColors.white))
+                    //     ],
                     onFinished: () {
                       context.read<LoraGptBloc>().add(const OnFinishTyping());
                     })
