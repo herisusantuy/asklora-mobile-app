@@ -1,35 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_colors.dart';
-import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/utils/app_icons.dart';
 import 'jumping_dots_lora_gpt.dart';
 
 class LoraThinkingWidget extends StatelessWidget {
   const LoraThinkingWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Padding(
-                padding: const EdgeInsets.only(left: 5),
-                child: getPngIcon('icon_lora_ai_chat_bubble',
-                    fit: BoxFit.contain)),
-            const SizedBox(width: 12),
-            CustomTextNew(
-              'Lora',
-              style: AskLoraTextStyles.subtitle2
-                  .copyWith(color: AskLoraColors.white),
-            )
-          ],
-        ),
-        const SizedBox(height: 12),
-        Padding(
+  Widget build(BuildContext context) => Align(
+        alignment: Alignment.topLeft,
+        child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 30.0),
           child: Container(
             padding: const EdgeInsets.all(15),
@@ -45,7 +25,5 @@ class LoraThinkingWidget extends StatelessWidget {
             child: JumpingDotsLoraGptWidget(),
           ),
         ),
-      ],
-    );
-  }
+      );
 }
