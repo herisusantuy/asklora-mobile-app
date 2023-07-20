@@ -614,5 +614,16 @@
       }
     }
   },
-  "defineAgain": "Define again"
+  "defineAgain": "Define again",
+  "updatedAt": "Updated at {time} HKT, {date}",
+  "@updatedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  }
 }

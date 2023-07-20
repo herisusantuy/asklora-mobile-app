@@ -4155,6 +4155,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Updated at {time} HKT, {date}`
+  String updatedAt(String time, String date) {
+    return Intl.message(
+      'Updated at $time HKT, $date',
+      name: 'updatedAt',
+      desc: '',
+      args: [time, date],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
