@@ -70,9 +70,9 @@ class ScrambledText extends StatefulWidget {
     this.softWrap,
     this.textAlign,
     this.semanticsLabel,
-    this.numLetters = 3, 
+    this.numLetters = 3,
   }) : super(key: key);
-  
+
   @override
   State<ScrambledText> createState() => ScrambledTextState();
 }
@@ -124,12 +124,12 @@ class ScrambledTextState extends State<ScrambledText>
 
   Widget _animatedText({required String text, required int value}) {
     if (!_controller.isAnimating && !_controller.isCompleted) {
-      return Text(widget.initialText ?? '', style: widget.style);
+      return SelectableText(widget.initialText ?? '', style: widget.style);
     }
 
     if (value == text.length) {
       widget.onFinished?.call();
-      return Text(text, style: widget.style);
+      return SelectableText(text, style: widget.style);
     }
 
     int len = min(widget.numLetters, text.length - value);
@@ -155,11 +155,11 @@ class ScrambledTextState extends State<ScrambledText>
         TextSpan(text: scrambledPart, style: scrambledTextStyle);
 
     // Create a rich text widget with the revealed and scrambled spans
-    RichText richText = RichText(
-      text: TextSpan(children: [revealedSpan, scrambledSpan]),
+    return SelectableText.rich(
+      TextSpan(children: [revealedSpan, scrambledSpan]),
+      style: widget.style,
+      // Add other text properties if needed
     );
-
-    return richText;
   }
 
   String _getScrambledPart(int len) {
