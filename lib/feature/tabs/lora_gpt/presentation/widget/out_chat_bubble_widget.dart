@@ -1,6 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+<<<<
+<<
+<
+HEAD====
+==
+=
+import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/presentation/animated_text.dart';
+import '../../../../../core/presentation/typer_animated_text.dart';
+
+>>
+>
+>
+>
+>
+>
+28
+
+cbf6ca2884fb32c9bd81af8eb593c8e2319aa4
+import
+'
+../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../bloc/lora_gpt_bloc.dart';
@@ -14,7 +36,8 @@ class OutChatBubbleWidget extends StatelessWidget {
   final bool animateText;
 
   @override
-  Widget build(BuildContext context) => Align(
+  Widget build(BuildContext context) =>
+      Align(
         alignment: Alignment.topLeft,
         child: Container(
             padding: const EdgeInsets.all(15),
@@ -29,24 +52,24 @@ class OutChatBubbleWidget extends StatelessWidget {
             ),
             child: animateText
                 ? ScrambledText(
-                    text: message,
-                    style: AskLoraTextStyles.body2
-                        .copyWith(color: AskLoraColors.white),
-                    duration: const Duration(milliseconds: 17),
-                    scrambledTextStyle: ,
-                    // ? AnimatedTextKit(
-                    //     isRepeatingAnimation: false,
-                    //     repeatForever: false,
-                    //     animatedTexts: [
-                    //       TyperAnimatedText(message,
-                    //           textStyle: AskLoraTextStyles.body2
-                    //               .copyWith(color: AskLoraColors.white))
-                    //     ],
-                    onFinished: () {
-                      context.read<LoraGptBloc>().add(const OnFinishTyping());
-                    })
+                text: message,
+                style: AskLoraTextStyles.body2
+                    .copyWith(color: AskLoraColors.white),
+                duration: const Duration(milliseconds: 17),
+                // ? AnimatedTextKit(
+                //     isRepeatingAnimation: false,
+                //     repeatForever: false,
+                //     animatedTexts: [
+                //       TyperAnimatedText(message,
+                //           textStyle: AskLoraTextStyles.body2
+                //               .copyWith(color: AskLoraColors.white))
+                //     ],
+
+                onFinished: () {
+                  context.read<LoraGptBloc>().add(const OnFinishTyping());
+                })
                 : SelectableText(message,
-                    style: AskLoraTextStyles.body2
-                        .copyWith(color: AskLoraColors.white))),
+                style: AskLoraTextStyles.body2
+                    .copyWith(color: AskLoraColors.white))),
       );
 }
