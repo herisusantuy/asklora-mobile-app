@@ -56,12 +56,17 @@ class _LoraGptScreenState extends State<LoraGptScreen>
         child: Stack(
           children: [
             Center(
-              child: CustomTextNew(
-                'Lora',
-                style:
-                    AskLoraTextStyles.h4.copyWith(color: AskLoraColors.white),
-              ),
-            ),
+                child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                  getPngIcon('icon_lora_ai_chat_bubble', fit: BoxFit.contain),
+                  CustomTextNew(
+                    'Lora',
+                    style: AskLoraTextStyles.h4
+                        .copyWith(color: AskLoraColors.white),
+                  ),
+                ])),
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
@@ -140,7 +145,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                     style: TextFieldStyle.valueTextStyle
                         .copyWith(color: AskLoraColors.white),
                     decoration: InputDecoration(
-                        focusColor: AskLoraColors.white.withOpacity(0.2),
+                        focusColor: AskLoraColors.white.withOpacity(0.1),
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 17, vertical: 18),
                         enabledBorder: const OutlineInputBorder(
