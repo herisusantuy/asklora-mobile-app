@@ -9,13 +9,29 @@ class CustomChoiceChips extends StatefulWidget {
   final bool active;
   final bool enableClosedButton;
   final VoidCallback? onClosed;
+  final Color? activeFillColor;
+  final Color? pressedFillColor;
+  final Color? fillColor;
+  final TextStyle? textStyle;
+  final Color? textColor;
+  final Color? activeTextColor;
+  final double horizontalPadding;
+  final double verticalPadding;
 
   const CustomChoiceChips(
       {this.label = '',
       required this.onTap,
       this.active = false,
       this.enableClosedButton = false,
+      this.activeFillColor,
+      this.pressedFillColor,
+      this.fillColor,
       this.onClosed,
+      this.textStyle,
+      this.textColor,
+      this.activeTextColor,
+      this.horizontalPadding = 12.5,
+      this.verticalPadding = 7.5,
       Key? key})
       : super(key: key);
 
@@ -42,8 +58,12 @@ class _CustomChoiceChipsState extends State<CustomChoiceChips> {
       onTap: widget.onTap,
       child: Container(
         padding: EdgeInsets.symmetric(
-            horizontal: widget.active ? 12.5 : 14,
-            vertical: widget.active ? 7.5 : 9),
+            horizontal: widget.active
+                ? widget.horizontalPadding
+                : widget.horizontalPadding + 1.5,
+            vertical: widget.active
+                ? widget.verticalPadding
+                : widget.verticalPadding + 1.5),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
@@ -54,20 +74,23 @@ class _CustomChoiceChipsState extends State<CustomChoiceChips> {
                         ? AskLoraColors.primaryGreen
                         : AskLoraColors.gray),
             color: widget.active
-                ? AskLoraColors.primaryGreen.withOpacity(0.1)
+                ? widget.activeFillColor ??
+                    AskLoraColors.primaryGreen.withOpacity(0.1)
                 : _isPressed
-                    ? AskLoraColors.primaryGreen.withOpacity(0.2)
-                    : Colors.transparent),
+                    ? widget.pressedFillColor ??
+                        AskLoraColors.primaryGreen.withOpacity(0.2)
+                    : widget.fillColor ?? Colors.transparent),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Flexible(
               child: CustomTextNew(
                 widget.label,
-                style: AskLoraTextStyles.subtitle4.copyWith(
-                    color: widget.active
-                        ? AskLoraColors.charcoal
-                        : AskLoraColors.gray),
+                style: (widget.textStyle ?? AskLoraTextStyles.subtitle4)
+                    .copyWith(
+                        color: widget.active
+                            ? widget.activeTextColor ?? AskLoraColors.charcoal
+                            : widget.textColor ?? AskLoraColors.gray),
                 maxLines: 3,
                 ellipsis: true,
               ),

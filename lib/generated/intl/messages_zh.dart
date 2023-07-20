@@ -101,6 +101,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "afterPayDepositHeaderTitle":
             MessageLookupByLibrary.simpleMessage("投資賬戶\n即將 Ready！"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
+        "aiIsqWelcomeSubTitle": MessageLookupByLibrary.simpleMessage(
+            "Let’s see what kind of stocks you prefer"),
+        "aiIsqWelcomeTitle": MessageLookupByLibrary.simpleMessage(
+            "It’s time to find out your investment preferences"),
         "allSettings": MessageLookupByLibrary.simpleMessage("設定"),
         "almostFinished": MessageLookupByLibrary.simpleMessage("馬上就好"),
         "askMeAnythingRelatedToFinance":
@@ -326,7 +330,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "investmentResultScreenTitle":
             MessageLookupByLibrary.simpleMessage("你嘅投資風格已經界定"),
         "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
-            "想要 FinFit， 有咩投資秘技？\n界定投資風格先！\n"),
+            "想知Asklora有咩投資秘技？\n界定你嘅投資風格先！\n"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
         "learnBotstockManagement":
             MessageLookupByLibrary.simpleMessage("學䲾 Botstock 管理"),

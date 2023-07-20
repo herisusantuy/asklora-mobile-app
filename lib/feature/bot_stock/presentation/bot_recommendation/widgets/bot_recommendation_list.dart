@@ -85,9 +85,8 @@ class BotRecommendationList extends StatelessWidget {
                     onTrueCallback: () => context
                         .read<NavigationBloc<ForYouPage>>()
                         .add(const PageChanged(ForYouPage.investmentStyle)),
-                    onFalseCallback: () => PpiScreen.open(context,
-                        arguments: const Pair(QuestionPageType.investmentStyle,
-                            QuestionPageStep.investmentStyle)),
+                    onFalseCallback: () =>
+                        AiInvestmentStyleQuestionWelcomeScreen.open(context),
                   ),
                 ),
               ),

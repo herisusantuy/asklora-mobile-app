@@ -55,13 +55,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
         height: 60,
         child: Stack(
           children: [
-            Center(
-              child: CustomTextNew(
-                'Lora',
-                style:
-                    AskLoraTextStyles.h4.copyWith(color: AskLoraColors.white),
-              ),
-            ),
+            const Center(child: ChatLoraHeader()),
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
@@ -140,7 +134,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                     style: TextFieldStyle.valueTextStyle
                         .copyWith(color: AskLoraColors.white),
                     decoration: InputDecoration(
-                        focusColor: AskLoraColors.white.withOpacity(0.2),
+                        focusColor: AskLoraColors.white.withOpacity(0.1),
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 17, vertical: 18),
                         enabledBorder: const OutlineInputBorder(
