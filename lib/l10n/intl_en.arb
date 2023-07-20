@@ -625,5 +625,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "ourPersonalisedRecommendationsAreUnique": "Our personalised recommendations are unique. The recommended Botstocks are based on your risk tolerance, personality, and investment style."
 }

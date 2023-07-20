@@ -4165,6 +4165,16 @@ class S {
       args: [time, date],
     );
   }
+
+  /// `Our personalised recommendations are unique. The recommended Botstocks are based on your risk tolerance, personality, and investment style.`
+  String get ourPersonalisedRecommendationsAreUnique {
+    return Intl.message(
+      'Our personalised recommendations are unique. The recommended Botstocks are based on your risk tolerance, personality, and investment style.',
+      name: 'ourPersonalisedRecommendationsAreUnique',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

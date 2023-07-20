@@ -472,6 +472,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "orderRejected": MessageLookupByLibrary.simpleMessage("Order Rejected"),
         "orderRollover": MessageLookupByLibrary.simpleMessage("Order Rollover"),
         "orderStarted": MessageLookupByLibrary.simpleMessage("Order Started"),
+        "ourPersonalisedRecommendationsAreUnique":
+            MessageLookupByLibrary.simpleMessage(
+                "Our personalised recommendations are unique. The recommended Botstocks are based on your risk tolerance, personality, and investment style."),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordChangeSuccess":
             MessageLookupByLibrary.simpleMessage("Password Change Success"),

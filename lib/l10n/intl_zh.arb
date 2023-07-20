@@ -528,7 +528,7 @@
   "expiresAt": "到期日期",
   "startsAt": "開始日期",
   "botRecommendationScreenTitle": "最夾你嘅投資風格",
-  "notFeelingIt": "唔啱心水？\n當然仲有得揀！",
+  "notFeelingIt": "唔啱心水？當然仲有得揀！",
   "buttonChangeInvestmentStyle": "更改投資風格",
   "trade": "交易",
   "askloraWireDetails": "Asklora 電匯 詳情",
@@ -592,5 +592,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "ourPersonalisedRecommendationsAreUnique": "每個個人化建議均獨一無二。所建議的 Botstock 都是根據你能承受的風險、個性測試及投資風格所提供。"
 }

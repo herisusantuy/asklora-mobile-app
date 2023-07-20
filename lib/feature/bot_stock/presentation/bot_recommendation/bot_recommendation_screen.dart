@@ -15,6 +15,7 @@ import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/auto_sized_text_widget.dart';
 import '../../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
+import '../../../../core/presentation/custom_text_with_tooltip.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -86,7 +87,6 @@ class BotRecommendationScreen extends StatelessWidget {
                   ),
                   if (UserJourney.compareUserJourney(
                       context: context, target: UserJourney.freeBotStock))
-                    // _buttonChangeInvestmentStyle(context),
                     const SizedBox(
                       height: 50,
                     ),
@@ -116,7 +116,14 @@ class BotRecommendationScreen extends StatelessWidget {
                   AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
             ),
             const SizedBox(
-              height: 24,
+              height: 36,
+            ),
+            CustomTextWithTooltip(
+              title: S.of(context).updatedAt('15.30', '2022/10/20'),
+              tooltipText:
+                  S.of(context).ourPersonalisedRecommendationsAreUnique,
+              titleStyle: AskLoraTextStyles.subtitle3
+                  .copyWith(color: AskLoraColors.darkGray),
             ),
             Row(
               children: [
@@ -180,24 +187,6 @@ class BotRecommendationScreen extends StatelessWidget {
                   ),
                 ],
               ),
-          ],
-        ),
-      );
-
-  Widget _buttonChangeInvestmentStyle(BuildContext context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 48),
-        child: Column(
-          children: [
-            const SizedBox(height: 30),
-            CustomTextNew(S.of(context).notFeelingIt,
-                style: AskLoraTextStyles.h4, textAlign: TextAlign.center),
-            const SizedBox(height: 20),
-            PrimaryButton(
-              label: S.of(context).buttonChangeInvestmentStyle,
-              onTap: () => context
-                  .read<NavigationBloc<ForYouPage>>()
-                  .add(const PageChanged(ForYouPage.investmentStyle)),
-            ),
           ],
         ),
       );
