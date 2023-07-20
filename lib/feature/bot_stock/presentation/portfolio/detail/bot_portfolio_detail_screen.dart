@@ -34,11 +34,17 @@ import '../bloc/portfolio_bloc.dart';
 import 'widgets/bot_portfolio_detail_content.dart';
 
 part 'widgets/bot_portfolio_detail_header.dart';
+
 part 'widgets/buttons/bot_cancel_button.dart';
+
 part 'widgets/buttons/bot_portfolio_buttons.dart';
+
 part 'widgets/buttons/bot_rollover_button.dart';
+
 part 'widgets/buttons/bot_terminate_button.dart';
+
 part 'widgets/key_info.dart';
+
 part 'widgets/performance.dart';
 
 class BotPortfolioDetailScreen extends StatelessWidget {
@@ -58,9 +64,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                     botStockRepository: BotStockRepository(),
                     transactionHistoryRepository: TransactionRepository())
                   ..add(FetchActiveOrderDetail(botOrderId: arguments.botUid))),
-            BlocProvider(
-                create: (_) =>
-                    BackButtonInterceptorBloc()..add(InitiateInterceptor()))
+            BlocProvider(create: (_) => BackButtonInterceptorBloc())
           ],
           child: BlocListener<BackButtonInterceptorBloc,
               BackButtonInterceptorState>(
@@ -73,8 +77,20 @@ class BotPortfolioDetailScreen extends StatelessWidget {
               listenWhen: (previous, current) =>
                   previous.botActiveOrderDetailResponse.state !=
                   current.botActiveOrderDetailResponse.state,
-              listener: (context, state) => CustomLoadingOverlay.of(context)
-                  .show(state.botActiveOrderDetailResponse.state),
+              listener: (context, state) {
+                CustomLoadingOverlay.of(context)
+                    .show(state.botActiveOrderDetailResponse.state);
+
+                if (state.botActiveOrderDetailResponse.state == ResponseState.loading) {
+                  context
+                      .read<BackButtonInterceptorBloc>()
+                      .add(RemoveInterceptor());
+                } else {
+                  context
+                      .read<BackButtonInterceptorBloc>()
+                      .add(InitiateInterceptor());
+                }
+              },
               buildWhen: (previous, current) =>
                   previous.botActiveOrderDetailResponse.state !=
                   current.botActiveOrderDetailResponse.state,

@@ -51,7 +51,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
           }),
           BlocProvider(
               create: (_) =>
-                  BackButtonInterceptorBloc()..add(InitiateInterceptor()))
+                  BackButtonInterceptorBloc())
         ],
         child:
             BlocListener<BackButtonInterceptorBloc, BackButtonInterceptorState>(
@@ -67,6 +67,16 @@ class BotRecommendationDetailScreen extends StatelessWidget {
             listener: (context, state) {
               CustomLoadingOverlay.of(context)
                   .show(state.botDetailResponse.state);
+
+              if (state.botDetailResponse.state == ResponseState.loading) {
+                context
+                    .read<BackButtonInterceptorBloc>()
+                    .add(RemoveInterceptor());
+              } else {
+                context
+                    .read<BackButtonInterceptorBloc>()
+                    .add(InitiateInterceptor());
+              }
             },
             buildWhen: (previous, current) =>
                 previous.botDetailResponse.state !=
