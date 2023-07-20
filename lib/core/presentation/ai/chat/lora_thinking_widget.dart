@@ -1,10 +1,10 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import '../../custom_text_new.dart';
-import '../../lora_memoji_widget.dart';
-import '../../../styles/asklora_colors.dart';
-import '../../../styles/asklora_text_styles.dart';
-import '../../../../feature/tabs/lora_gpt/presentation/widget/jumping_dots_lora_gpt.dart';
+
+import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/app_icons.dart';
+import 'jumping_dots_lora_gpt.dart';
 
 class LoraThinkingWidget extends StatelessWidget {
   const LoraThinkingWidget({super.key});
@@ -16,17 +16,10 @@ class LoraThinkingWidget extends StatelessWidget {
       children: [
         Row(
           children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle, color: AskLoraColors.whiteSmoke),
-              child: const LoraMemojiWidget(
-                loraMemojiType: LoraMemojiType.lora7,
-                height: 30,
-                width: 30,
-              ),
-            ),
+            Padding(
+                padding: const EdgeInsets.only(left: 5),
+                child: getPngIcon('icon_lora_ai_chat_bubble',
+                    fit: BoxFit.contain)),
             const SizedBox(width: 12),
             CustomTextNew(
               'Lora',
@@ -37,29 +30,19 @@ class LoraThinkingWidget extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Padding(
-          padding: const EdgeInsets.only(right: 30.0),
-          child: ClipRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 7,
-                sigmaY: 7,
-              ),
-              child: Container(
-                padding: const EdgeInsets.all(15),
-                margin: const EdgeInsets.only(bottom: 5),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      width: 1.5, color: AskLoraColors.cyan.withOpacity(0.8)),
-                  color: AskLoraColors.white.withOpacity(0.2),
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                  ),
-                ),
-                child: JumpingDotsLoraGptWidget(),
+          padding: const EdgeInsets.only(left: 20, right: 30.0),
+          child: Container(
+            padding: const EdgeInsets.all(15),
+            margin: const EdgeInsets.only(bottom: 5),
+            decoration: BoxDecoration(
+              color: AskLoraColors.white.withOpacity(0.2),
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
               ),
             ),
+            child: JumpingDotsLoraGptWidget(),
           ),
         ),
       ],

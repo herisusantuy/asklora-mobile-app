@@ -54,7 +54,7 @@ class TransferAmountStep extends StatelessWidget {
           height: 10,
         ),
         CustomTextNew(
-          'Current Exchange Rate: HKD 1 = USD 0.137 (at HKT 13:12:14)',
+          S.of(context).exchangeRateInDepositScreen('13:12:14'),
           style:
               AskLoraTextStyles.body4.copyWith(color: AskLoraColors.darkGray),
         ),

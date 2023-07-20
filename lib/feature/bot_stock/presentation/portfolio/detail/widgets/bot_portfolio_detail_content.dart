@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../app/bloc/app_bloc.dart';
 import '../../../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
@@ -12,7 +13,6 @@ import '../../../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
-import '../../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../bot_portfolio_detail_screen.dart';
 
 class BotPortfolioDetailContent extends StatelessWidget {

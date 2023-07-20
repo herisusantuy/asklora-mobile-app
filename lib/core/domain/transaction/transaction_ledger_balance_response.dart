@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../utils/extensions.dart';
-import 'bot_balance.dart';
 
 part 'transaction_ledger_balance_response.g.dart';
 
@@ -20,8 +19,6 @@ class TransactionLedgerBalanceResponse extends Equatable {
   final String accountName;
   @JsonKey(name: 'user_id')
   final double userId;
-  @JsonKey(name: 'bot_balances')
-  final List<BotBalance> botBalances;
 
   const TransactionLedgerBalanceResponse(
     this.fullySettledBalanceHkd,
@@ -30,7 +27,6 @@ class TransactionLedgerBalanceResponse extends Equatable {
     this.withdrawableBalance,
     this.accountName,
     this.userId,
-    this.botBalances,
   );
 
   factory TransactionLedgerBalanceResponse.fromJson(
@@ -51,6 +47,5 @@ class TransactionLedgerBalanceResponse extends Equatable {
         withdrawableBalance,
         accountName,
         userId,
-        botBalances,
       ];
 }

@@ -1,22 +1,20 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../animated_text.dart';
-import '../../custom_text_new.dart';
-import '../../lora_memoji_widget.dart';
-import '../../typer_animated_text.dart';
-import '../../../styles/asklora_colors.dart';
-import '../../../styles/asklora_text_styles.dart';
-import '../../../../feature/tabs/lora_gpt/bloc/lora_gpt_bloc.dart';
+import '../../../../../core/presentation/animated_text.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/presentation/typer_animated_text.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/app_icons.dart';
 
 class OutChatBubbleWidget extends StatelessWidget {
   const OutChatBubbleWidget(this.message,
-      {super.key, this.animateText = false});
+      {super.key, this.animateText = false, this.onFinishedAnimation});
 
   final String message;
   final bool animateText;
+  final VoidCallback? onFinishedAnimation;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -24,17 +22,10 @@ class OutChatBubbleWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle, color: AskLoraColors.whiteSmoke),
-                child: const LoraMemojiWidget(
-                  loraMemojiType: LoraMemojiType.lora3,
-                  height: 30,
-                  width: 30,
-                ),
-              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: getPngIcon('icon_lora_ai_chat_bubble',
+                      fit: BoxFit.contain)),
               const SizedBox(width: 12),
               CustomTextNew(
                 'Lora',
@@ -45,46 +36,36 @@ class OutChatBubbleWidget extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Padding(
-            padding: const EdgeInsets.only(right: 30.0),
-            child: ClipRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(
-                  sigmaX: 7,
-                  sigmaY: 7,
+            padding: const EdgeInsets.only(left: 20, right: 30.0),
+            child: Container(
+                padding: const EdgeInsets.all(15),
+                margin: const EdgeInsets.only(bottom: 5),
+                decoration: BoxDecoration(
+                  color: AskLoraColors.white.withOpacity(0.2),
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
                 ),
-                child: Container(
-                    padding: const EdgeInsets.all(15),
-                    margin: const EdgeInsets.only(bottom: 5),
-                    decoration: BoxDecoration(
-                      color: AskLoraColors.white.withOpacity(0.2),
-                      border: Border.all(
-                          width: 1.5,
-                          color: AskLoraColors.cyan.withOpacity(0.8)),
-                      borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
-                      ),
-                    ),
-                    child: animateText
-                        ? AnimatedTextKit(
-                            isRepeatingAnimation: false,
-                            repeatForever: false,
-                            animatedTexts: [
-                              TyperAnimatedText(message,
-                                  textStyle: AskLoraTextStyles.subtitle2
-                                      .copyWith(color: AskLoraColors.white))
-                            ],
-                            onFinished: () {
-                              context
-                                  .read<LoraGptBloc>()
-                                  .add(const OnFinishTyping());
-                            })
-                        : CustomTextNew(message,
-                            style: AskLoraTextStyles.subtitle2
-                                .copyWith(color: AskLoraColors.white))),
-              ),
-            ),
+                child: animateText
+                    ? AnimatedTextKit(
+                        isRepeatingAnimation: false,
+                        repeatForever: false,
+                        animatedTexts: [
+                          TyperAnimatedText(message,
+                              textStyle: AskLoraTextStyles.body2
+                                  .copyWith(color: AskLoraColors.white))
+                        ],
+                        onFinished: () {
+                          if(onFinishedAnimation!=null){
+                            onFinishedAnimation!();
+                          }
+
+                        })
+                    : SelectableText(message,
+                        style: AskLoraTextStyles.body2
+                            .copyWith(color: AskLoraColors.white))),
           )
         ],
       );

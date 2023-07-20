@@ -55,10 +55,10 @@
   "gotIt": "知道了",
   "headquarters": "總部地點",
   "about": "關於",
-  "askNameScreenPlaceholder": "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？",
+  "askNameScreenPlaceholder": "Hi! 我係 Lora，\n你嘅 AI 顧問。\n\n準備好向投資目標進發未？\n我可以點叫你？",
   "bestSuitedFor": "最適合",
-  "greetingScreenTitle": "Alright! 你準備開始 FinFit 未先？",
-  "greetingScreenSubTitle": "訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ ",
+  "greetingScreenTitle": "Alright! 準備好\n開始你嘅 AI 旅程未？",
+  "greetingScreenSubTitle": "訓練開始，會問下基本問題先！\n記住，冇耐性，就輸梗！ ",
   "accountSettings": "帳戶設定",
   "subscription": "訂購計劃",
   "corePlan": "核心計劃",
@@ -101,7 +101,7 @@
   "emailAddress": "電郵地址",
   "officeHoursLabel": "辦公時間",
   "officeHours": "09:00-18:00 (HKT)",
-  "buttonCancel": "CANCEL",
+  "buttonCancel": "取消",
   "buttonConfirm": "確定",
   "buttonNotNow": "稍後再說",
   "buttonReloadPage": "重新加載",
@@ -186,7 +186,7 @@
   "portfolioDetailPerformanceBotStockValues": "Botstock 價值 (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "投資金額 (HKD)",
   "portfolioDetailPerformanceTotalPL": "總盈虧",
-  "portfolioCurrentPrice": "當前價格 {currency}",
+  "portfolioCurrentPrice": "當前價格 ({currency})",
   "@portfolioCurrentPrice": {
     "placeholders": {
       "currency": {
@@ -333,7 +333,7 @@
   "privacyEvaluation": "私隱評估",
   "personalisation": "個人化",
   "createAnAccount": "開立賬戶",
-  "openInvestmentAccount": "開立投資賬戶",
+  "openInvestmentAccount": "開立新投資賬戶",
   "getTheFirstBotstockForFree": "獲取首個免費 Botstock ",
   "payDepositToStartRealTrade": "入金以開始正式交易",
   "tradeWithBots": "以 Bot 交易",
@@ -446,7 +446,7 @@
   "uploadProofOfRemittance": "上載匯款證明",
   "theProofOfRemittanceShouldShowYourBankAccount": "匯款證明需要顯示你的銀行戶口號碼，全名 及金額。",
   "inputDepositAmount": "輸入金額",
-  "theAmountMustMatch": "金額須與匯款證明一致。",
+  "theAmountMustMatch": "輸入金額須與匯款輸入證明必須一致。",
   "yourDepositCanTakeUp2WorkingDays": "入金程序最多需時 2 個工作天",
   "notes": "說明",
   "returningUserDepositNotes": "我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶號碼）。不過，我們亦可能會因核實交易，向你要求更多附加資料。",
@@ -496,6 +496,103 @@
   "agreements": "Agreements",
   "submitApplication": "Submit Application",
   "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible",
+  "enterANewPassword": "請輸入新密碼",
+  "resetPassword": "重設密碼",
+  "passwordLinkHasBeenSent": "已發送重設密碼電郵，\n請檢查你的電郵。",
+  "inputWrongEmailAddress": "電郵地址錯誤",
+  "cannotRememberEmailAddress": "忘記登入電郵地址\n請發送電郵至 cs@asklora.ai",
+  "forgotPassword": "忘記密碼",
+  "forgotPasswordMessage": "請輸入你的電郵地址，我們會發送重設密碼的指示給你。",
+  "resetPasswordSuccessful": "密碼重設成功",
+  "resetPasswordSuccessfulMessage": "你的密碼已經被重設。請返回登入頁面重新登入。",
+  "backToLogin": "返回登入",
+  "askloraYouUltimateFinancialAdvisor": "Asklora.\n你嘅 AI 投資顧問",
+  "askMeAnythingRelatedToFinance": "有咩投資問題都可以問我！",
+  "investmentResultScreenTitle": "你嘅投資風格已經界定",
+  "investmentResultScreenDescription": "仲差少少就可以開波!\n\n開戶喇!",
+  "privacyFailedScreenTitle": "你尚未符合資格使用Asklora。",
+  "privacyFailedScreenDescription": "有可能你的風險評級太低，\n或者年齡未合乎要求。\n\n如有答案填錯，\n麻煩再試一次。",
+  "privacySuccessScreenTitle": "年齡只不過係個數字。",
+  "privacySuccessScreenDescription": "識揀 Asklora，\n證明你精明過好多人！\n\nOk！係時候再了解你多啲！",
+  "buttonTryAgain": "再試一次",
+  "buttonSure": "好",
+  "personalizationResultScreenTitle": "Alright!\n\n你嘅答案顯示我嘅科技同你都幾夾，我哋都可以進取少少！",
+  "opennessLessThan8": "用AI投資其實可以好簡單",
+  "opennessMoreThan8": "我哋一定好夾!",
+  "neuroticismLessThan8": "我哋可以進取少少, 承受一定嘅風險",
+  "neuroticismMoreThan8": "我哋一步一步嚟, 控制住風險",
+  "extrovertLessThan8": "每個人都需要me time，獨個觀看世間變幻事情",
+  "extrovertMoreThan8": "你一定係交際花, 將你嘅vibe發光發亮!",
+  "active": "交易中",
+  "pending": "待處理",
+  "expiresAt": "到期日期",
+  "startsAt": "開始日期",
+  "botRecommendationScreenTitle": "最夾你嘅投資風格",
+  "notFeelingIt": "唔啱心水？\n當然仲有得揀！",
+  "buttonChangeInvestmentStyle": "更改投資風格",
+  "trade": "交易",
+  "askloraWireDetails": "Asklora 電匯 詳情",
+  "buttonViewDetails": "查看詳情",
+  "wireTransfer": "電匯",
+  "bankNumber": "銀行號碼",
+  "accountNumber": "戶口號碼",
+  "bankName": "銀行名稱",
+  "swiftCode": "Swift 代碼",
+  "accountName": "戶口名稱",
+  "companyAddress": "銀行地址",
+  "exchangeRateInDepositScreen": "現時匯率: HKD 1 = USD 0.137 (於 HKT {time})",
+  "@exchangeRateInDepositScreen": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "errorStoringData": "數據存取發生錯誤",
+  "errorStoringDataDetails": "Oops！我們在嘗試存儲你的回覆時遇到一些技術困難。讓我們重新做題",
+  "emailNotExist": "此電郵地址的用戶不存在",
+  "emailNotVerified": "用戶電郵未認證",
+  "enterValidPassword": "無效電郵地址",
+  "enterValidEmail": "無效電郵地址",
+  "passwordChangeSuccessfully": "Password changed successfully.",
+  "tokenInvalid": "Token is invalid or expired.",
+  "invalidOtp": "Invalid OTP",
+  "linkPasswordResetIsSent": "Link for Password reset is sent to email.",
+  "accountIsNotActive": "Your account is not active yet.",
+  "forgotPassword": "忘記密碼",
+  "pleaseEnterYouEmail": "請輸入你的電郵地址，我們會發送重設密碼的指示給你。",
+  "cantRememberYourEmail": "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai",
+  "inputWrongEmail": "電郵地址錯誤",
+  "buttonBackToPortfolio": "返回投資組合頁",
+  "resultOfPersonalizationQuestion": "{opennessScore}, {neuroticismScore}\n\n{extrovertScore}",
+  "@resultOfPersonalizationQuestion": {
+    "placeholders": {
+      "opennessScore": {
+        "type": "String"
+      },
+      "neuroticismScore": {
+        "type": "String"
+      },
+      "extrovertScore": {
+        "type": "String"
+      }
+    }
+  },
+  "noTransactions": "暫時沒有交易",
+  "noTransactionsYet": "你似乎未進行過任何交易！",
+  "checkBackLater": "稍後再來查看!",
+  "defineAgain": "Define again",
+  "updatedAt": "Updated at {time} HKT, {date}",
+  "@updatedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "aiIsqWelcomeTitle": "It’s time to find out your investment preferences",
   "aiIsqWelcomeSubTitle": "Let’s see what kind of stocks you prefer"
 }

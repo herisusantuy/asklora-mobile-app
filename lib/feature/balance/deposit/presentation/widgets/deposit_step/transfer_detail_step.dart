@@ -36,7 +36,7 @@ class TransferDetailStep extends StatelessWidget {
           children: [
             Expanded(
               child: CustomTextNew(
-                "LORA'S FPS ID",
+                "Asklora's FPS ID",
                 style: AskLoraTextStyles.subtitleAllCap1
                     .copyWith(color: AskLoraColors.charcoal),
               ),
@@ -72,31 +72,28 @@ class TransferDetailStep extends StatelessWidget {
           height: 22,
         ),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Expanded(
               child: CustomTextNew(
-                "LORA'S WIRE DETAILS",
+                S.of(context).askloraWireDetails,
                 style: AskLoraTextStyles.subtitleAllCap1
                     .copyWith(color: AskLoraColors.charcoal),
               ),
             ),
             Flexible(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  const String label = 'VIEW DETAILS';
-                  return SizedBox(
-                    height: label.textHeight(AskLoraTextStyles.button2, 60),
-                    child: PrimaryButton(
-                      expandableHeight: true,
-                      label: label,
-                      onTap: () => _showWireDetails(context),
-                      buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
-                      buttonPrimarySize: ButtonPrimarySize.small,
+              child: GestureDetector(
+                  onTap: () => _showWireDetails(context),
+                  child: UnconstrainedBox(
+                    child: Container(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      decoration: const BoxDecoration(
+                          border: Border(bottom: BorderSide(width: .5))),
+                      child: CustomTextNew(S.of(context).buttonViewDetails,
+                          style: AskLoraTextStyles.subtitle4),
                     ),
-                  );
-                },
-              ),
-            )
+                  )),
+            ),
           ],
         ),
       ],
@@ -124,7 +121,7 @@ class TransferDetailStep extends StatelessWidget {
               Expanded(
                   child: CustomTextNew(
                 value,
-                style: AskLoraTextStyles.body1
+                style: AskLoraTextStyles.subtitle1
                     .copyWith(color: AskLoraColors.charcoal),
               )),
               GestureDetector(
@@ -161,8 +158,8 @@ class TransferDetailStep extends StatelessWidget {
                   Align(
                       alignment: Alignment.center,
                       child: CustomTextNew(
-                        'Wire Transfer',
-                        style: AskLoraTextStyles.h6
+                        S.of(context).wireTransfer,
+                        style: AskLoraTextStyles.h4
                             .copyWith(color: AskLoraColors.charcoal),
                       )),
                   GestureDetector(
@@ -176,24 +173,29 @@ class TransferDetailStep extends StatelessWidget {
                   )
                 ],
               ),
-              _wireDetail(context: context, title: 'Bank Number', value: '016'),
               _wireDetail(
                   context: context,
-                  title: 'Account Number',
+                  title: S.of(context).bankNumber,
+                  value: '016'),
+              _wireDetail(
+                  context: context,
+                  title: S.of(context).accountNumber,
                   value: '1234567890'),
               _wireDetail(
                   context: context,
-                  title: 'Bank Name',
+                  title: S.of(context).bankName,
                   value: 'DBS Bank (Hong Kong) Limited'),
               _wireDetail(
-                  context: context, title: 'Swift Code', value: 'DHBKHKHH'),
+                  context: context,
+                  title: S.of(context).swiftCode,
+                  value: 'DHBKHKHH'),
               _wireDetail(
                   context: context,
-                  title: 'Account Name',
+                  title: S.of(context).accountName,
                   value: 'LORA Advisors Limited'),
               _wireDetail(
                   context: context,
-                  title: 'Company Address',
+                  title: S.of(context).companyAddress,
                   value: "G/F, The Center, 99 Queen's Road Central, Hong Kong"),
             ],
           ),

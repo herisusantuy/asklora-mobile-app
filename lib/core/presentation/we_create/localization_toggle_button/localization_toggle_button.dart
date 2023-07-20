@@ -122,11 +122,15 @@ class LocaleType {
           (element) => element.languageCode == languageCode) ??
       supportedLocales()[0];
 
+  static const englishLocale =
+      LocaleType('en', 'US', 'ENG', 'English', 'Manrope');
+  static const chineseLocale =
+      LocaleType('zh', 'HK', '中', '繁體中文', 'NotoSansTC');
+
   static List<LocaleType> supportedLocales() => [
-        const LocaleType('en', 'US', 'ENG', 'English', 'Manrope'),
-        const LocaleType('zh', 'HK', '中', '繁體中文', 'NotoSansTC')
+        englishLocale,
+        chineseLocale,
       ];
 
-  static LocaleType defaultLocale() =>
-      const LocaleType('en', 'US', 'ENG', 'English', 'Manrope');
+  static LocaleType defaultLocale() => englishLocale;
 }
