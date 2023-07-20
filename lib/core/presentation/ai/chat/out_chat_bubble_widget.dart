@@ -17,7 +17,7 @@ class OutChatBubbleWidget extends StatelessWidget {
         alignment: Alignment.topLeft,
         child: Container(
             padding: const EdgeInsets.all(15),
-            margin: const EdgeInsets.only(bottom: 5, left: 20, right: 40),
+            margin: const EdgeInsets.only(bottom: 5, right: 40),
             decoration: BoxDecoration(
               color: AskLoraColors.white.withOpacity(0.15),
               borderRadius: const BorderRadius.only(
