@@ -30,7 +30,7 @@ import '../../bloc/tab_screen_bloc.dart';
 import '../bloc/lora_gpt_bloc.dart';
 import '../domain/portfolio_query_request.dart';
 import '../repository/lora_gpt_repository.dart';
-import 'widget/utils/glowing_button.dart';
+import '../../../../core/presentation/ai/buttons/glowing_button.dart';
 
 part 'lora_ai_overlay_screen.dart';
 

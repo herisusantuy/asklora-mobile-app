@@ -6,8 +6,8 @@ import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
-import '../../../core/presentation/ai/breathing_glowing_button.dart';
 import '../../../core/values/app_values.dart';
+import '../../../core/presentation/ai/buttons/glowing_button.dart';
 import 'widgets/ai_layout_with_background_layout.dart';
 
 class AiWelcomeScreen extends StatelessWidget {
@@ -39,7 +39,7 @@ class AiWelcomeScreen extends StatelessWidget {
             ),
             if (child != null) child!,
           ]),
-          bottomButton: BreathingGlowingButton(
+          bottomButton: GlowingButton(
             height: 75.0,
             width: 75.0,
             onTap: onBottomButtonTap,
