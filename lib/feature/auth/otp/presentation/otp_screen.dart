@@ -109,12 +109,12 @@ class OtpScreen extends StatelessWidget {
   }
 
   Widget _otpInput(BuildContext context) {
-    return BlocBuilder<OtpBloc, OtpState>(
-      buildWhen: (previous, current) => previous.otp != current.otp,
-      builder: (context, state) {
-        return Stack(
-          children: [
-            MasterTextField(
+    return Stack(
+      children: [
+        BlocBuilder<OtpBloc, OtpState>(
+          buildWhen: (previous, current) => previous.otp != current.otp,
+          builder: (context, state) {
+            return MasterTextField(
               key: const Key('otp_box'),
               initialValue: state.otp,
               labelText: 'OTP',
@@ -128,37 +128,37 @@ class OtpScreen extends StatelessWidget {
               onChanged: (otp) {
                 context.read<OtpBloc>().add(OtpTyped(otp));
               },
-            ),
-            Positioned(
-              top: 18,
-              right: 15,
-              child: BlocBuilder<OtpBloc, OtpState>(
-                buildWhen: (previous, current) =>
-                    previous.resetTime != current.resetTime,
-                builder: (context, state) {
-                  return GestureDetector(
-                      key: const Key('request_otp_button'),
-                      onTap: state.resetTime != 0
-                          ? null
-                          : () => context
-                              .read<OtpBloc>()
-                              .add(SmsOtpRequested(email)),
-                      child: CustomTextNew(
-                        state.resetTime == 0
-                            ? S.of(context).sendOtp
-                            : S.of(context).reSendOtp(
-                                _formatTimeToSeconds(state.resetTime)),
-                        style: AskLoraTextStyles.subtitle3.copyWith(
-                            color: state.resetTime != 0
-                                ? AskLoraColors.gray
-                                : AskLoraColors.charcoal),
-                      ));
-                },
-              ),
-            )
-          ],
-        );
-      },
+            );
+          },
+        ),
+        Positioned(
+          top: 18,
+          right: 15,
+          child: BlocBuilder<OtpBloc, OtpState>(
+            buildWhen: (previous, current) =>
+                previous.resetTime != current.resetTime,
+            builder: (context, state) {
+              return GestureDetector(
+                  key: const Key('request_otp_button'),
+                  onTap: state.resetTime != 0
+                      ? null
+                      : () =>
+                          context.read<OtpBloc>().add(SmsOtpRequested(email)),
+                  child: CustomTextNew(
+                    state.resetTime == 0
+                        ? S.of(context).sendOtp
+                        : S
+                            .of(context)
+                            .reSendOtp(_formatTimeToSeconds(state.resetTime)),
+                    style: AskLoraTextStyles.subtitle3.copyWith(
+                        color: state.resetTime != 0
+                            ? AskLoraColors.gray
+                            : AskLoraColors.charcoal),
+                  ));
+            },
+          ),
+        )
+      ],
     );
   }
 

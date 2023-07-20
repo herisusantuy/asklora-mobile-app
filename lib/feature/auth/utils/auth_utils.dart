@@ -16,7 +16,7 @@ enum AuthErrorMessage {
   accountIsNotActive('Your account is not active yet.'),
   inputWrongEmailAddress('Input wrong email address'),
   otpSentToYourPhone('Otp SMS is sent to your phone'),
-  otpSentToYourEmail('Otp SMS is sent to your phone'),
+  otpSentToYourEmail('Otp SMS is sent to your Email'),
   verifyOtpSuccess('Verify OTP Success'),
   empty('');
 
