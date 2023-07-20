@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/presentation/animated_text.dart';
-import '../../../../../core/presentation/typer_animated_text.dart';
+
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../feature/tabs/lora_gpt/presentation/widget/scrambled_text.dart';
 
 class OutChatBubbleWidget extends StatelessWidget {
   const OutChatBubbleWidget(this.message,
@@ -17,7 +17,7 @@ class OutChatBubbleWidget extends StatelessWidget {
         alignment: Alignment.topLeft,
         child: Container(
             padding: const EdgeInsets.all(15),
-            margin: const EdgeInsets.only(bottom: 5, right: 40),
+            margin: const EdgeInsets.only(bottom: 5, left: 20, right: 40),
             decoration: BoxDecoration(
               color: AskLoraColors.white.withOpacity(0.15),
               borderRadius: const BorderRadius.only(
@@ -27,14 +27,20 @@ class OutChatBubbleWidget extends StatelessWidget {
               ),
             ),
             child: animateText
-                ? AnimatedTextKit(
-                    isRepeatingAnimation: false,
-                    repeatForever: false,
-                    animatedTexts: [
-                      TyperAnimatedText(message,
-                          textStyle: AskLoraTextStyles.body2
-                              .copyWith(color: AskLoraColors.white))
-                    ],
+                ? ScrambledText(
+                    text: message,
+                    style: AskLoraTextStyles.body2
+                        .copyWith(color: AskLoraColors.white),
+                    duration: const Duration(milliseconds: 17),
+                    // ? AnimatedTextKit(
+                    //     isRepeatingAnimation: false,
+                    //     repeatForever: false,
+                    //     animatedTexts: [
+                    //       TyperAnimatedText(message,
+                    //           textStyle: AskLoraTextStyles.body2
+                    //               .copyWith(color: AskLoraColors.white))
+                    //     ],
+
                     onFinished: () {
                       if (onFinishedAnimation != null) {
                         onFinishedAnimation!();
