@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
-import '../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/text_fields/style/text_field_style.dart';
 import '../../../../core/styles/asklora_colors.dart';
@@ -30,7 +29,7 @@ import '../repository/lora_gpt_repository.dart';
 import 'widget/in_chat_bubble_widget.dart';
 import 'widget/lora_thinking_widget.dart';
 import 'widget/out_chat_bubble_widget.dart';
-import 'widget/utils/breathing_glowing_button.dart';
+import 'widget/utils/glowing_button.dart';
 
 part 'lora_ai_overlay_screen.dart';
 
