@@ -81,7 +81,8 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                 CustomLoadingOverlay.of(context)
                     .show(state.botActiveOrderDetailResponse.state);
 
-                if (state.botActiveOrderDetailResponse.state == ResponseState.loading) {
+                if (state.botActiveOrderDetailResponse.state ==
+                    ResponseState.loading) {
                   context
                       .read<BackButtonInterceptorBloc>()
                       .add(RemoveInterceptor());

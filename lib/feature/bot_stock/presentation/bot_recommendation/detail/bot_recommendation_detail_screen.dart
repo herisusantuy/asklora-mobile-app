@@ -49,9 +49,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
             _fetchBotDetail(botStockBloc);
             return botStockBloc;
           }),
-          BlocProvider(
-              create: (_) =>
-                  BackButtonInterceptorBloc())
+          BlocProvider(create: (_) => BackButtonInterceptorBloc())
         ],
         child:
             BlocListener<BackButtonInterceptorBloc, BackButtonInterceptorState>(
