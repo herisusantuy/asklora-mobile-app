@@ -348,10 +348,10 @@ class ToggleableTextBloc extends StatelessWidget {
             },
             child: BlocBuilder<ToggleTextBloc, ToggleState>(
               builder: (context, state) {
-                bool _showPriceDifference = state.showPriceDifference;
+                bool showPriceDifference = state.showPriceDifference;
 
                 return CustomTextNew(
-                  _showPriceDifference
+                  showPriceDifference
                       ? (priceDifference < 0
                           ? '${priceDifference.convertToCurrencyDecimal()}'
                           : '+${priceDifference.convertToCurrencyDecimal()}')
