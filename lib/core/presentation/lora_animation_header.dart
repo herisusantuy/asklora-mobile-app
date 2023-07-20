@@ -8,7 +8,7 @@ import 'ai/lora_animation_green.dart';
 import 'ai/lora_animation_magenta.dart';
 import 'custom_text_new.dart';
 
-enum LoraAnimationType { green, red }
+enum LoraAnimationType { green, magenta }
 
 class LoraAnimationHeader extends StatelessWidget {
   final String text;
@@ -39,8 +39,8 @@ class LoraAnimationHeader extends StatelessWidget {
 
   Pair<String, Widget> _getHeaderProps() {
     switch (loraAnimationType) {
-      case LoraAnimationType.red:
-        return const Pair('memoji_background_magenta', LoraAnimationGreen());
+      case LoraAnimationType.green:
+        return const Pair('memoji_background_green', LoraAnimationGreen());
       default:
         return const Pair('memoji_background_magenta', LoraAnimationMagenta());
     }

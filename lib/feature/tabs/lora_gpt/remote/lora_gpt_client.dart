@@ -11,8 +11,6 @@ class LoraGptApiClient extends BaseApiClient {
   @override
   String get baseUrl => loraGptBaseUrl;
 
-  // @override
-  // String get token => 'Bearer 90u1-6+pn2=as91jk';
   @override
   String get token => 'Bearer 90u1-6+pn2=as91jk';
 }
