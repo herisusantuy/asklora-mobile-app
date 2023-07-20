@@ -98,7 +98,7 @@ class ScrambledTextState extends State<ScrambledText>
 
     CurvedAnimation curvedAnimation = CurvedAnimation(
       parent: _controller,
-      curve: widget.curve,
+      curve: Curves.linear,
     );
 
     _animation = Tween<double>(
