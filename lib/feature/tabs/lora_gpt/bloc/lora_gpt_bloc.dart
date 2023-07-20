@@ -6,7 +6,7 @@ import '../../../../core/domain/endpoints.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
 import '../../bloc/tab_screen_bloc.dart';
-import '../domain/conversation.dart';
+import '../../../../core/domain/ai/conversation.dart';
 import '../domain/portfolio_details_request.dart';
 import '../domain/portfolio_query_request.dart';
 import '../domain/query_request.dart';

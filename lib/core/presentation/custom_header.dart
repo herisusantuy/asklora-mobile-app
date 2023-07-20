@@ -9,13 +9,15 @@ class CustomHeader extends StatelessWidget {
   final String title;
   final bool isShowBottomBorder;
   final Widget? body;
+  final Color titleColor;
 
   const CustomHeader(
       {Key? key,
       this.onTapBack,
       required this.title,
       this.isShowBottomBorder = false,
-      this.body})
+      this.body,
+      this.titleColor = AskLoraColors.charcoal})
       : super(key: key);
 
   @override
@@ -44,7 +46,7 @@ class CustomHeader extends StatelessWidget {
                 ? body
                 : CustomTextNew(
                     title,
-                    style: AskLoraTextStyles.h5,
+                    style: AskLoraTextStyles.h5.copyWith(color: titleColor),
                   ),
           )
         ],

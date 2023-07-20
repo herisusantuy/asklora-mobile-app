@@ -890,10 +890,10 @@ class S {
     );
   }
 
-  /// `Let's get to the heart of personalisation, it's time to define your investment style.`
+  /// `It’s time to define your investment style.  Show me what you’re made of!`
   String get investmentStyleWelcomeTitle {
     return Intl.message(
-      'Let\'s get to the heart of personalisation, it\'s time to define your investment style.',
+      'It’s time to define your investment style.  Show me what you’re made of!',
       name: 'investmentStyleWelcomeTitle',
       desc: '',
       args: [],
@@ -4221,6 +4221,26 @@ class S {
     return Intl.message(
       'Sell',
       name: 'sell',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `It’s time to find out your investment preferences`
+  String get aiIsqWelcomeTitle {
+    return Intl.message(
+      'It’s time to find out your investment preferences',
+      name: 'aiIsqWelcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let’s see what kind of stocks you prefer`
+  String get aiIsqWelcomeSubTitle {
+    return Intl.message(
+      'Let’s see what kind of stocks you prefer',
+      name: 'aiIsqWelcomeSubTitle',
       desc: '',
       args: [],
     );

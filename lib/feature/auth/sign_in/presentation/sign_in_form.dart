@@ -48,7 +48,7 @@ class SignInForm extends StatelessWidget {
               KycScreen.open(context);
               break;
             case UserJourney.investmentStyle:
-              InvestmentStyleWelcomeScreen.open(context);
+              InvestmentStyleWelcomeScreen.openAndRemoveAllRoute(context);
               break;
             default:
               TabScreen.openAndRemoveAllRoute(context);

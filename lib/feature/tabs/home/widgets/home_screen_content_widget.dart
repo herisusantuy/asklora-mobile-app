@@ -41,12 +41,8 @@ class HomeScreenContentWidget extends StatelessWidget {
                 'What strategy and stocks fit you? Fill in the Investment style questions and I will figure it out right away! The more I know about you, the better recommendations I can offer!',
             buttonLabel: S.of(context).defineInvestmentStyle,
             secondaryButtonLabel: S.of(context).howItWorks,
-            onSecondaryButtonTap: () {},
-            onPrimaryButtonTap: () => PpiScreen.open(
-              context,
-              arguments: const Pair(QuestionPageType.investmentStyle,
-                  QuestionPageStep.investmentStyle),
-            ),
+            onPrimaryButtonTap: () =>
+                AiInvestmentStyleQuestionWelcomeScreen.open(context),
             backgroundColor: AskLoraColors.primaryGreen,
           ),
           _spaceHeightSmall,

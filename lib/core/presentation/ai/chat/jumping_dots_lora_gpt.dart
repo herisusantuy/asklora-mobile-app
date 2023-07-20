@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/styles/asklora_colors.dart';
+import '../../../styles/asklora_colors.dart';
 
 class DotWidget extends StatefulWidget {
   const DotWidget() : super(key: const Key('ad'));

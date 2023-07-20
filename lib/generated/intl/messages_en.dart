@@ -105,6 +105,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your investment account will be ready soon!"),
         "agree": MessageLookupByLibrary.simpleMessage("Agree"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
+        "aiIsqWelcomeSubTitle": MessageLookupByLibrary.simpleMessage(
+            "Let’s see what kind of stocks you prefer"),
+        "aiIsqWelcomeTitle": MessageLookupByLibrary.simpleMessage(
+            "It’s time to find out your investment preferences"),
         "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "almostFinished":
             MessageLookupByLibrary.simpleMessage("Almost finished!"),
@@ -412,7 +416,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "investmentResultScreenTitle":
             MessageLookupByLibrary.simpleMessage("I like your style"),
         "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
-            "Let\'s get to the heart of personalisation, it\'s time to define your investment style."),
+            "It’s time to define your investment style.  Show me what you’re made of!"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "learnBotstockManagement":
             MessageLookupByLibrary.simpleMessage("Learn Botstock Management"),
