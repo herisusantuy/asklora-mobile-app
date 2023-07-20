@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/animated_text.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
@@ -58,10 +57,9 @@ class OutChatBubbleWidget extends StatelessWidget {
                                   .copyWith(color: AskLoraColors.white))
                         ],
                         onFinished: () {
-                          if(onFinishedAnimation!=null){
+                          if (onFinishedAnimation != null) {
                             onFinishedAnimation!();
                           }
-
                         })
                     : SelectableText(message,
                         style: AskLoraTextStyles.body2
