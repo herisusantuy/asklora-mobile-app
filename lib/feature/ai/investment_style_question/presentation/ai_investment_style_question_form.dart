@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/ai/chat/ai_text_field.dart';
+import '../../../../core/presentation/ai/chat/chat_lora_header.dart';
 import '../../../../core/presentation/ai/chat/in_chat_bubble_widget.dart';
 import '../../../../core/presentation/ai/chat/lora_thinking_widget.dart';
 import '../../../../core/presentation/ai/chat/out_chat_bubble_widget.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
-import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
@@ -23,6 +23,7 @@ import '../bloc/ai_investment_style_question_bloc.dart';
 import '../domain/interaction.dart';
 
 part 'widgets/interaction_widget.dart';
+
 part 'widgets/ai_investment_style_question_chat_list.dart';
 
 class AiInvestmentStyleQuestionForm extends StatelessWidget {
@@ -69,13 +70,7 @@ class AiInvestmentStyleQuestionForm extends StatelessWidget {
 
   Widget get _header => const Align(
         alignment: Alignment.topCenter,
-        child: UnconstrainedBox(
-          constrainedAxis: Axis.horizontal,
-          child: CustomHeader(
-            title: 'Lora',
-            titleColor: AskLoraColors.white,
-          ),
-        ),
+        child: ChatLoraHeader(),
       );
 
   Widget get _chatList => Expanded(

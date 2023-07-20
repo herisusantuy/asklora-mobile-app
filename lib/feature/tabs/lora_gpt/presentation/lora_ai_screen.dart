@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/ai/conversation.dart';
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/presentation/ai/chat/chat_lora_header.dart';
 import '../../../../core/presentation/ai/chat/in_chat_bubble_widget.dart';
 import '../../../../core/presentation/ai/chat/lora_thinking_widget.dart';
 import '../../../../core/presentation/ai/chat/out_chat_bubble_widget.dart';
