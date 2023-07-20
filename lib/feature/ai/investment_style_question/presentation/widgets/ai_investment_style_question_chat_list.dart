@@ -39,7 +39,7 @@ class AiInvestmentStyleQuestionChatList extends StatelessWidget {
               begin: Alignment.bottomCenter,
               end: Alignment.center,
               colors: [Colors.black, Colors.black.withOpacity(0)],
-              stops: const [0.0, 0.1]).createShader(rect);
+              stops: const [0.0, 0.08]).createShader(rect);
         },
         blendMode: BlendMode.dstOut,
         child: SizedBox(
