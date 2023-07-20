@@ -619,11 +619,11 @@
   "@updatedAt": {
     "placeholders": {
       "time": {
-         "type": "String"
-        },
+        "type": "String"
+      },
       "date": {
-         "type": "String"
-        }
+        "type": "String"
       }
     }
+  }
 }
