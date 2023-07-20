@@ -890,10 +890,10 @@ class S {
     );
   }
 
-  /// `Let's get to the heart of personalisation, it's time to define your investment style.`
+  /// `It’s time to define your investment style.  Show me what you’re made of!`
   String get investmentStyleWelcomeTitle {
     return Intl.message(
-      'Let\'s get to the heart of personalisation, it\'s time to define your investment style.',
+      'It’s time to define your investment style.  Show me what you’re made of!',
       name: 'investmentStyleWelcomeTitle',
       desc: '',
       args: [],

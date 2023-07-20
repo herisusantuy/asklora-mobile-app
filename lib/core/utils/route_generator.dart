@@ -29,6 +29,7 @@ import '../../feature/learning/learning_bot_stock_screen.dart';
 import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
 import '../../feature/onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../feature/onboarding/ppi/presentation/investment_style_question/investment_style_result_end_screen.dart';
+import '../../feature/onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 import '../../feature/onboarding/ppi/presentation/ppi_screen.dart';
 import '../../feature/onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
 import '../../feature/onboarding/welcome/greeting/greeting_screen.dart';
@@ -316,6 +317,10 @@ class RouterGenerator {
       case HomeScreenForm.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const HomeScreenForm());
+      case InvestmentStyleWelcomeScreen.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const InvestmentStyleWelcomeScreen());
       case InvestmentStyleResultScreen.route:
         return MaterialPageRoute(
             settings: settings,
