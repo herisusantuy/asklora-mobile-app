@@ -8,6 +8,7 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/otp/get_otp_request.dart';
 import '../../../../core/domain/otp/get_sms_otp_request.dart';
 import '../../../../core/domain/otp/verify_otp_request.dart';
+import '../../utils/auth_utils.dart';
 import '../repository/otp_repository.dart';
 
 part 'otp_event.dart';
@@ -26,6 +27,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     on<OtpSubmitted>(_onOtpSubmitted);
     on<OtpRequested>(_onOtpRequested);
     on<OtpTimeResetUpdate>(_onOtpTimeResetUpdate);
+    on<OtpTyped>(_onOtpTyped);
     on<SmsOtpRequested>(_onSmsOtpRequested);
   }
 
@@ -35,7 +37,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       var data = await _otpRepository.getOtp(
           getOtpRequest: GetOtpRequest(event.email, OtpType.register.value));
 
-      data.copyWith(message: 'OTP code sent to your email');
+      data.copyWith(message: AuthErrorMessage.otpSentToYourEmail.value);
       emit(state.copyWith(
           response: data, disableRequest: true, resetTime: _resetTime));
 
@@ -45,7 +47,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     } on NotFoundException {
       emit(state.copyWith(
           response: BaseResponse.error(
-              message: 'User does not exist with the given email')));
+              message: AuthErrorMessage.emailNotExist.value)));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
     }
@@ -57,11 +59,12 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       var data = await _otpRepository.getSmsOtp(
           getSmsOtpRequest: GetSmsOtpRequest(event.email));
 
-      data.copyWith(message: 'Otp SMS is sent to your phone');
+      data.copyWith(message: AuthErrorMessage.otpSentToYourPhone.value);
       emit(state.copyWith(
         response: data,
         disableRequest: true,
         resetTime: _resetTime,
+        phoneNumber: data.data?.phoneNumber,
       ));
 
       resetTimeStreamSubscription = ticker().listen((_) {
@@ -70,7 +73,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     } on NotFoundException {
       emit(state.copyWith(
           response: BaseResponse.error(
-              message: 'User does not exist with the given email')));
+              message: AuthErrorMessage.emailNotExist.value)));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
     }
@@ -83,6 +86,15 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         response: BaseResponse.unknown()));
   }
 
+  void _onOtpTyped(OtpTyped event, Emitter<OtpState> emit) {
+    if (event.otp.length != 6) {
+      emit(state.copyWith(
+          otp: event.otp, otpError: AuthErrorMessage.invalidOtp.value));
+    } else {
+      emit(state.copyWith(otp: event.otp, otpError: ''));
+    }
+  }
+
   void _onOtpSubmitted(
     OtpSubmitted event,
     Emitter<OtpState> emit,
@@ -92,11 +104,12 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       var data = await _otpRepository.verifyOtp(
           verifyOtpRequest: event.verifyOtpRequest);
       cancelStreamSubscription();
-      data.copyWith(message: 'Verify OTP Success');
+      data.copyWith(message: AuthErrorMessage.verifyOtpSuccess.value);
       emit(state.copyWith(response: data));
     } on UnauthorizedException {
-      emit(
-          state.copyWith(response: BaseResponse.error(message: 'Invalid OTP')));
+      emit(state.copyWith(
+          response:
+              BaseResponse.error(message: AuthErrorMessage.invalidOtp.value)));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
     }

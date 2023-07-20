@@ -230,7 +230,7 @@ void main() async {
                       GetOtpRequest('kk@test.com', OtpType.register.value)))
               .thenAnswer((_) => Future.value(
                   const BaseResponse<GetOtpResponse>(
-                      data: GetOtpResponse('Success'),
+                      data: GetOtpResponse('Success', ''),
                       state: ResponseState.success)));
           return signUpBloc;
         },
