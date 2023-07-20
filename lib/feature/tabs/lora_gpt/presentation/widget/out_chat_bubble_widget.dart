@@ -55,7 +55,7 @@ class OutChatBubbleWidget extends StatelessWidget {
                         text: message,
                         style: AskLoraTextStyles.body2
                             .copyWith(color: AskLoraColors.white),
-                        duration: const Duration(milliseconds: 10),
+                        duration: const Duration(milliseconds: 15),
                     // ? AnimatedTextKit(
                     //     isRepeatingAnimation: false,
                     //     repeatForever: false,
