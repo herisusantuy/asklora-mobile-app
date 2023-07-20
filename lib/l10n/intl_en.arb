@@ -613,5 +613,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "defineAgain": "Define again"
 }

@@ -4145,6 +4145,16 @@ class S {
       args: [opennessScore, neuroticismScore, extrovertScore],
     );
   }
+
+  /// `Define again`
+  String get defineAgain {
+    return Intl.message(
+      'Define again',
+      name: 'defineAgain',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
