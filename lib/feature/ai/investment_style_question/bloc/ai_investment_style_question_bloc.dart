@@ -106,9 +106,12 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
           answer: state.result!.keywords.join(', '),
         ));
       } else if (element.questionId == 'quid16' && element.choices != null) {
+        String investmentHorizonMapped =
+            _investmentHorizon[state.result!.investmentHorizon] ?? '';
+        print('we got horizon ${investmentHorizonMapped}');
         _addAnswerPpi(
             element.choices!.firstWhereOrNull(
-                (element) => element.name == state.result!.investmentHorizon),
+                (element) => element.name == investmentHorizonMapped),
             ppiSelectionRequest,
             element.questionId!,
             ppiUserId);
@@ -180,6 +183,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
     tempList.add(Loading());
 
     emit(state.copyWith(
+      query: '',
       isTyping: true,
       conversations: tempList,
     ));
@@ -208,7 +212,6 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
                 .investmentStyleQuestionResult));
       }
       emit(state.copyWith(
-        query: '',
         isTyping: false,
         conversations: tempList,
         interaction: _getInteraction(response.data!.choices,
@@ -256,4 +259,12 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
   void _onFinishTyping(OnFinishTyping onFinishTyping,
           Emitter<AiInvestmentStyleQuestionState> emit) =>
       emit(state.copyWith(isTyping: false));
+
+  final Map<String, String> _investmentHorizon = {
+    '12 months': '1 year',
+    '6 months': 'Half a year',
+    '3 months': '3 Months',
+    '1 month': '1 Month',
+    '2 weeks': '2 Weeks'
+  };
 }

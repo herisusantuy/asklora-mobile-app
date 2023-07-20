@@ -10,8 +10,11 @@ class InteractionWidget extends StatelessWidget {
     switch (interaction.type()) {
       case ISQInteractionType.textField:
         return BlocBuilder<AiInvestmentStyleQuestionBloc,
-            AiInvestmentStyleQuestionState>(builder: (context, state) {
-          return AiTextField(
+            AiInvestmentStyleQuestionState>(
+          buildWhen: (previous, current) =>
+              previous.isTextFieldSendButtonDisabled !=
+              current.isTextFieldSendButtonDisabled,
+          builder: (context, state) => AiTextField(
             isSendButtonDisabled: state.isTextFieldSendButtonDisabled,
             onFieldSubmitted: (_) {},
             onChanged: (value) => context
@@ -20,8 +23,8 @@ class InteractionWidget extends StatelessWidget {
             onTap: () => context
                 .read<AiInvestmentStyleQuestionBloc>()
                 .add(const SubmitQuery()),
-          );
-        });
+          ),
+        );
       case ISQInteractionType.choices:
         return Wrap(
           spacing: 12,
