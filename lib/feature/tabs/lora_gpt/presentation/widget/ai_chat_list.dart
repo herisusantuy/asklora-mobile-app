@@ -71,7 +71,8 @@ class _AiChatListState extends State<AiChatList> {
                           children: state.conversations
                               .mapIndexed((index, conversation) {
                             return Padding(
-                              padding: const EdgeInsets.only(bottom: 17, left: 20),
+                              padding:
+                                  const EdgeInsets.only(bottom: 17, left: 20),
                               child: _getBubbleChat(
                                   conversation,
                                   index,
