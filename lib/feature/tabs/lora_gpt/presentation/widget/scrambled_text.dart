@@ -91,7 +91,10 @@ class ScrambledTextState extends State<ScrambledText>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(duration: widget.duration, vsync: this);
+
+    final totalDuration = (widget.duration * widget.text.length);
+
+    _controller = AnimationController(duration: totalDuration, vsync: this);
 
     CurvedAnimation curvedAnimation = CurvedAnimation(
       parent: _controller,
