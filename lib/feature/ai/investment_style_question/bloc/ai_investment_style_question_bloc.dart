@@ -46,7 +46,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
   final LoraGptRepository _loraGptRepository;
   final PpiQuestionRepository _ppiQuestionRepository;
   final PpiResponseRepository _ppiResponseRepository;
-  Fixture? fixture;
+  late final Fixture? fixture;
 
   void _onInitiateAI(InitiateAI onEditQuery,
       Emitter<AiInvestmentStyleQuestionState> emit) async {
