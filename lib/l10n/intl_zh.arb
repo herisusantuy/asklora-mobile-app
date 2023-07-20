@@ -65,7 +65,7 @@
   "freeTrial": "免費試用期",
   "allSettings": "設定",
   "investmentPreferences": "投資偏好",
-  "investmentStyleWelcomeTitle": "想要 FinFit， 有咩投資秘技？\n界定投資風格先！\n",
+  "investmentStyleWelcomeTitle": "想知Asklora有咩投資秘技？\n界定你嘅投資風格先！\n",
   "transactionHistory": "交易歷史",
   "accountInformation": "帳戶資訊",
   "changePassword": "更改密碼",
@@ -559,7 +559,6 @@
   "invalidOtp": "Invalid OTP",
   "linkPasswordResetIsSent": "Link for Password reset is sent to email.",
   "accountIsNotActive": "Your account is not active yet.",
-  "forgotPassword": "忘記密碼",
   "pleaseEnterYouEmail": "請輸入你的電郵地址，我們會發送重設密碼的指示給你。",
   "cantRememberYourEmail": "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai",
   "inputWrongEmail": "電郵地址錯誤",
@@ -592,5 +591,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "aiIsqWelcomeTitle": "It’s time to find out your investment preferences",
+  "aiIsqWelcomeSubTitle": "Let’s see what kind of stocks you prefer"
 }

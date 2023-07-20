@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../bloc/lora_gpt_bloc.dart';
-import 'scrambled_text.dart';
+import '../../../../feature/tabs/lora_gpt/presentation/widget/scrambled_text.dart';
 
 class OutChatBubbleWidget extends StatelessWidget {
   const OutChatBubbleWidget(this.message,
-      {super.key, this.animateText = false});
+      {super.key, this.animateText = false, this.onFinishedAnimation});
 
   final String message;
   final bool animateText;
+  final VoidCallback? onFinishedAnimation;
 
   @override
   Widget build(BuildContext context) => Align(
         alignment: Alignment.topLeft,
         child: Container(
             padding: const EdgeInsets.all(15),
-            margin: const EdgeInsets.only(bottom: 5, left: 20, right: 40),
+            margin: const EdgeInsets.only(bottom: 5, right: 40),
             decoration: BoxDecoration(
               color: AskLoraColors.white.withOpacity(0.15),
               borderRadius: const BorderRadius.only(
@@ -43,7 +42,9 @@ class OutChatBubbleWidget extends StatelessWidget {
                     //     ],
 
                     onFinished: () {
-                      context.read<LoraGptBloc>().add(const OnFinishTyping());
+                      if (onFinishedAnimation != null) {
+                        onFinishedAnimation!();
+                      }
                     })
                 : SelectableText(message,
                     style: AskLoraTextStyles.body2
