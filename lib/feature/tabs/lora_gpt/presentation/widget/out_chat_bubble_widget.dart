@@ -17,34 +17,31 @@ class OutChatBubbleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Align(
         alignment: Alignment.topLeft,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20, right: 40.0),
-          child: Container(
-              padding: const EdgeInsets.all(15),
-              margin: const EdgeInsets.only(bottom: 5),
-              decoration: BoxDecoration(
-                color: AskLoraColors.white.withOpacity(0.15),
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
+        child: Container(
+            padding: const EdgeInsets.all(15),
+            margin: const EdgeInsets.only(bottom: 5, left: 20, right: 40),
+            decoration: BoxDecoration(
+              color: AskLoraColors.white.withOpacity(0.15),
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
               ),
-              child: animateText
-                  ? AnimatedTextKit(
-                      isRepeatingAnimation: false,
-                      repeatForever: false,
-                      animatedTexts: [
-                        TyperAnimatedText(message,
-                            textStyle: AskLoraTextStyles.body2
-                                .copyWith(color: AskLoraColors.white))
-                      ],
-                      onFinished: () {
-                        context.read<LoraGptBloc>().add(const OnFinishTyping());
-                      })
-                  : SelectableText(message,
-                      style: AskLoraTextStyles.body2
-                          .copyWith(color: AskLoraColors.white))),
-        ),
+            ),
+            child: animateText
+                ? AnimatedTextKit(
+                    isRepeatingAnimation: false,
+                    repeatForever: false,
+                    animatedTexts: [
+                      TyperAnimatedText(message,
+                          textStyle: AskLoraTextStyles.body2
+                              .copyWith(color: AskLoraColors.white))
+                    ],
+                    onFinished: () {
+                      context.read<LoraGptBloc>().add(const OnFinishTyping());
+                    })
+                : SelectableText(message,
+                    style: AskLoraTextStyles.body2
+                        .copyWith(color: AskLoraColors.white))),
       );
 }
