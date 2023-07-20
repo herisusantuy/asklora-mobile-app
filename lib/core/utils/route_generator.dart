@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import '../../feature/ai/investment_style_question/presentation/ai_investment_style_question_screen.dart';
+import '../../feature/ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../feature/auth/email_activation/presentation/email_activation_screen.dart';
 import '../../feature/auth/otp/presentation/otp_screen.dart';
 import '../../feature/auth/reset_password/presentation/reset_password_screen.dart';
@@ -27,6 +28,7 @@ import '../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../../feature/learning/learning_bot_stock_screen.dart';
 import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
 import '../../feature/onboarding/ppi/bloc/question/question_bloc.dart';
+import '../../feature/onboarding/ppi/presentation/investment_style_question/investment_style_result_end_screen.dart';
 import '../../feature/onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 import '../../feature/onboarding/ppi/presentation/ppi_screen.dart';
 import '../../feature/onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
@@ -128,10 +130,6 @@ class RouterGenerator {
             settings: settings,
             builder: (_) => ResetPasswordScreen(
                 resetPasswordToken: settings.arguments as String));
-      case InvestmentStyleWelcomeScreen.route:
-        return MaterialPageRoute(
-            settings: settings,
-            builder: (_) => const InvestmentStyleWelcomeScreen());
       case GiftBotStockWelcomeScreen.route:
         return MaterialPageRoute(
             settings: settings,
@@ -319,6 +317,22 @@ class RouterGenerator {
       case HomeScreenForm.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const HomeScreenForm());
+      case InvestmentStyleWelcomeScreen.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const InvestmentStyleWelcomeScreen());
+      case InvestmentStyleResultScreen.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const InvestmentStyleResultScreen());
+      case AiInvestmentStyleQuestionWelcomeScreen.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const AiInvestmentStyleQuestionWelcomeScreen());
+      case AiInvestmentStyleQuestionOnboardingScreen.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const AiInvestmentStyleQuestionOnboardingScreen());
       case TabScreen.route:
         return MaterialPageRoute(
             settings: settings,

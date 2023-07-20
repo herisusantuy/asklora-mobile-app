@@ -5,7 +5,13 @@ import '../../styles/asklora_colors.dart';
 import '../../styles/asklora_text_styles.dart';
 import '../custom_text_new.dart';
 
-enum ButtonPrimaryType { solidCharcoal, solidGreen, ghostCharcoal, ghostGreen }
+enum ButtonPrimaryType {
+  solidCharcoal,
+  solidGreen,
+  ghostCharcoal,
+  ghostGreen,
+  whiteTransparency
+}
 
 enum ButtonPrimarySize { small, mid, big }
 
@@ -108,6 +114,17 @@ class PrimaryButton extends StatelessWidget {
             shape: _getBorder(
                 disabled ? AskLoraColors.gray : AskLoraColors.primaryGreen,
                 AskLoraColors.primaryGreen.withOpacity(0.9)));
+      case ButtonPrimaryType.whiteTransparency:
+        return _defaultButtonStyle.copyWith(
+            minimumSize: _getButtonMinimumSize,
+            backgroundColor: _getColor(
+                Colors.transparent, AskLoraColors.white.withOpacity(0.2)),
+            foregroundColor: _getColor(
+                disabled ? AskLoraColors.gray : AskLoraColors.white,
+                AskLoraColors.white.withOpacity(0.9)),
+            shape: _getBorder(
+                disabled ? AskLoraColors.gray : AskLoraColors.white,
+                AskLoraColors.white.withOpacity(0.9)));
     }
   }
 

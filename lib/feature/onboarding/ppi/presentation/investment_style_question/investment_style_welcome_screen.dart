@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
-import '../../../../../core/presentation/lora_memoji_header.dart';
-import '../../../../../core/values/app_values.dart';
+import '../../../../../core/presentation/custom_stretched_layout.dart';
+import '../../../../../core/presentation/lora_animation_header.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../../../tabs/presentation/tab_screen.dart';
-import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
-import '../ppi_screen.dart';
 
 class InvestmentStyleWelcomeScreen extends StatelessWidget {
   static const String route = '/investment_style_welcome_screen';
@@ -16,39 +13,24 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
   const InvestmentStyleWelcomeScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return CustomScaffold(
-      enableBackNavigation: false,
-      body: Padding(
-        padding: AppValues.screenHorizontalPadding,
-        child: LayoutBuilder(builder: (_, constraint) {
-          return SingleChildScrollView(
-              child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: constraint.maxHeight),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                LoraMemojiHeader(
-                    text: S.of(context).investmentStyleWelcomeTitle),
-                ButtonPair(
-                    primaryButtonOnClick: () {
-                      PpiScreen.open(context,
-                          arguments: const Pair(
-                              QuestionPageType.investmentStyle,
-                              QuestionPageStep.investmentStyle));
-                    },
-                    secondaryButtonOnClick: () =>
-                        TabScreen.openAndRemoveAllRoute(context),
-                    primaryButtonLabel: S.of(context).defineInvestmentStyle,
-                    secondaryButtonLabel: S.of(context).buttonMaybeLater)
-              ],
-            ),
-          ));
-        }),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => CustomScaffold(
+        enableBackNavigation: false,
+        body: CustomStretchedLayout(
+          content: LoraAnimationHeader(
+              text: S.of(context).investmentStyleWelcomeTitle),
+          bottomButton: ButtonPair(
+              primaryButtonOnClick: () =>
+                  AiInvestmentStyleQuestionWelcomeScreen.open(context),
+              secondaryButtonOnClick: () =>
+                  TabScreen.openAndRemoveAllRoute(context),
+              primaryButtonLabel: S.of(context).defineInvestmentStyle,
+              secondaryButtonLabel: S.of(context).buttonMaybeLater),
+        ),
+      );
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
+
+  static void openAndRemoveAllRoute(BuildContext context) =>
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false);
 }

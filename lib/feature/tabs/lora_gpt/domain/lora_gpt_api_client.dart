@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import '../../../../core/domain/endpoints.dart';
+import '../../../ai/investment_style_question/domain/investment_style_question_query_request.dart';
 import '../remote/lora_gpt_client.dart';
 import 'portfolio_query_request.dart';
 
@@ -28,4 +29,9 @@ class LoraGptClient {
     return await LoraGptApiClient().post(
         endpoint: endpointPortfolio, queryParameters: params, payload: json);
   }
+
+  Future<Response> investmentStyle(
+          InvestmentStyleQuestionQueryRequest request) async =>
+      await LoraGptApiClient().get(
+          endpoint: endpointInvestmentStyle, queryParameters: request.toJson());
 }

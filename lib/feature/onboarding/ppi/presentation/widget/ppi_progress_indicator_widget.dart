@@ -7,21 +7,7 @@ class PpiProgressIndicatorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (questionPageType == QuestionPageType.investmentStyle) {
-      return BlocBuilder<QuestionBloc, QuestionState>(
-          buildWhen: (previous, current) =>
-              previous.currentInvestmentStylePages !=
-                  current.currentInvestmentStylePages ||
-              previous.totalInvestmentStylePages !=
-                  current.totalInvestmentStylePages,
-          builder: (context, state) => CustomLinearProgressIndicator(
-                padding: const EdgeInsets.all(10),
-                progress: state.currentInvestmentStylePages > 0
-                    ? state.currentInvestmentStylePages /
-                        state.totalInvestmentStylePages
-                    : 0,
-              ));
-    } else if (questionPageType == QuestionPageType.personalisation) {
+    if (questionPageType == QuestionPageType.personalisation) {
       return BlocBuilder<QuestionBloc, QuestionState>(
         buildWhen: (previous, current) =>
             previous.currentPersonalisationPages !=
