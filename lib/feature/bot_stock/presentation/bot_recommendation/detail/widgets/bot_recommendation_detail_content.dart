@@ -113,18 +113,34 @@ class BotRecommendationDetailContent extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    CustomTextNew(
-                      (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
-                      style: AskLoraTextStyles.h5
-                          .copyWith(color: AskLoraColors.charcoal),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    CustomTextNew(
-                      '${getPriceDifference().convertToCurrencyDecimal()} ${getPercentDifference().convertToCurrencyDecimal()}%',
-                      style: AskLoraTextStyles.body2
-                          .copyWith(color: AskLoraColors.charcoal),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CustomTextNew(
+                          (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
+                          style: AskLoraTextStyles.h5
+                              .copyWith(color: AskLoraColors.charcoal),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: (getPercentDifference() < 0)
+                                ? AskLoraColors.primaryMagenta
+                                : AskLoraColors.primaryGreen,
+                          ),
+                          child: CustomTextNew(
+                            (getPercentDifference() < 0)
+                                ? '${getPercentDifference().convertToCurrencyDecimal()}%'
+                                : '+${getPercentDifference().convertToCurrencyDecimal()}%',
+                            style: AskLoraTextStyles.subtitle3
+                                .copyWith(color: AskLoraColors.white),
+                          ),
+                        ),
+                      ],
                     )
                   ],
                 ),
