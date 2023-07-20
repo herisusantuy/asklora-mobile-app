@@ -110,38 +110,40 @@ class BotRecommendationDetailContent extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CustomTextNew(
-                          (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
-                          style: AskLoraTextStyles.h5
-                              .copyWith(color: AskLoraColors.charcoal),
+                    Container(
+                      constraints: const BoxConstraints(minWidth: 60),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CustomTextNew(
+                              (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
+                              style: AskLoraTextStyles.h5
+                                  .copyWith(color: AskLoraColors.charcoal),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              constraints: const BoxConstraints(minWidth: 60),
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: (getPercentDifference() < 0)
+                                    ? AskLoraColors.primaryMagenta
+                                    : AskLoraColors.primaryGreen,
+                              ),
+                              child: _ToggleableText(
+                                percentDifference: getPercentDifference(),
+                                priceDifference: getPriceDifference(),
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: (getPercentDifference() < 0)
-                                ? AskLoraColors.primaryMagenta
-                                : AskLoraColors.primaryGreen,
-                          ),
-                          child: CustomTextNew(
-                            (getPercentDifference() < 0)
-                                ? '${getPercentDifference().convertToCurrencyDecimal()}%'
-                                : '+${getPercentDifference().convertToCurrencyDecimal()}%',
-                            style: AskLoraTextStyles.subtitle3
-                                .copyWith(color: AskLoraColors.white),
-                          ),
-                        ),
-                      ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -313,5 +315,46 @@ class BotRecommendationDetailContent extends StatelessWidget {
       return ((currentPrice / prevClosePrice) - 1) * 100;
     }
     return 0;
+  }
+}
+
+class _ToggleableText extends StatefulWidget {
+  final double percentDifference;
+  final double priceDifference;
+
+  const _ToggleableText({
+    Key? key,
+    required this.percentDifference,
+    required this.priceDifference,
+  }) : super(key: key);
+
+  @override
+  __ToggleableTextState createState() => __ToggleableTextState();
+}
+
+class __ToggleableTextState extends State<_ToggleableText> {
+  bool _showPriceDifference = false;
+
+  void _toggleText() {
+    setState(() {
+      _showPriceDifference = !_showPriceDifference;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _toggleText,
+      child: CustomTextNew(
+        _showPriceDifference
+            ? (widget.priceDifference < 0
+                ? '${widget.priceDifference.convertToCurrencyDecimal()}'
+                : '+${widget.priceDifference.convertToCurrencyDecimal()}')
+            : (widget.percentDifference < 0
+                ? '${widget.percentDifference.convertToCurrencyDecimal()}%'
+                : '+${widget.percentDifference.convertToCurrencyDecimal()}%'),
+        style: AskLoraTextStyles.subtitle3.copyWith(color: AskLoraColors.white),
+      ),
+    );
   }
 }
