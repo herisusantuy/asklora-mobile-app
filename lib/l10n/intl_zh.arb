@@ -592,5 +592,12 @@
         "type": "String"
       }
     }
-  }
+  },
+  "cancelled": "已取消",
+  "expired": "已到期",
+  "rejected": "Rejected",
+  "completed": "完全的",
+  "subscription": "訂購計劃",
+  "buy": "買入",
+  "sell": "賣出"
 }

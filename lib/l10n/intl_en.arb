@@ -619,11 +619,18 @@
   "@updatedAt": {
     "placeholders": {
       "time": {
-         "type": "String"
-        },
+        "type": "String"
+      },
       "date": {
-         "type": "String"
-        }
+        "type": "String"
       }
     }
+  },
+  "cancelled": "Cancelled",
+  "expired": "Expired",
+  "rejected": "Rejected",
+  "completed": "Completed",
+  "subscription": "Subscription",
+  "buy": "Buy",
+  "sell": "Sell"
 }
