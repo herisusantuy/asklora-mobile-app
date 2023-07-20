@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
@@ -7,6 +8,9 @@ import '../../../../../../core/utils/extensions.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../chart/presentation/chart_animation.dart';
+import '../../../../bloc/toggle_price_label_bloc.dart';
+import '../../../../bloc/toggle_price_label_event.dart';
+import '../../../../bloc/toggle_price_label_state.dart';
 import '../../../../domain/bot_recommendation_detail_model.dart';
 import '../../../../domain/bot_recommendation_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
@@ -136,7 +140,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                                     ? AskLoraColors.primaryMagenta
                                     : AskLoraColors.primaryGreen,
                               ),
-                              child: _ToggleableText(
+                              child: ToggleableTextBloc(
                                 percentDifference: getPercentDifference(),
                                 priceDifference: getPriceDifference(),
                               ),
@@ -318,42 +322,49 @@ class BotRecommendationDetailContent extends StatelessWidget {
   }
 }
 
-class _ToggleableText extends StatefulWidget {
+class ToggleableTextBloc extends StatelessWidget {
   final double percentDifference;
   final double priceDifference;
 
-  const _ToggleableText({
+  const ToggleableTextBloc({
     Key? key,
     required this.percentDifference,
     required this.priceDifference,
   }) : super(key: key);
 
   @override
-  __ToggleableTextState createState() => __ToggleableTextState();
-}
-
-class __ToggleableTextState extends State<_ToggleableText> {
-  bool _showPriceDifference = false;
-
-  void _toggleText() {
-    setState(() {
-      _showPriceDifference = !_showPriceDifference;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _toggleText,
-      child: CustomTextNew(
-        _showPriceDifference
-            ? (widget.priceDifference < 0
-                ? '${widget.priceDifference.convertToCurrencyDecimal()}'
-                : '+${widget.priceDifference.convertToCurrencyDecimal()}')
-            : (widget.percentDifference < 0
-                ? '${widget.percentDifference.convertToCurrencyDecimal()}%'
-                : '+${widget.percentDifference.convertToCurrencyDecimal()}%'),
-        style: AskLoraTextStyles.subtitle3.copyWith(color: AskLoraColors.white),
+    return BlocProvider<ToggleTextBloc>(
+      create: (_) => ToggleTextBloc(),
+      child: Builder(
+        builder: (context) {
+          // Get the bloc from the context
+          final bloc = BlocProvider.of<ToggleTextBloc>(context);
+
+          return GestureDetector(
+            onTap: () {
+              // Trigger the event to toggle price difference
+              bloc.add(TogglePriceDifferenceEvent());
+            },
+            child: BlocBuilder<ToggleTextBloc, ToggleState>(
+              builder: (context, state) {
+                bool _showPriceDifference = state.showPriceDifference;
+
+                return CustomTextNew(
+                  _showPriceDifference
+                      ? (priceDifference < 0
+                          ? '${priceDifference.convertToCurrencyDecimal()}'
+                          : '+${priceDifference.convertToCurrencyDecimal()}')
+                      : (percentDifference < 0
+                          ? '${percentDifference.convertToCurrencyDecimal()}%'
+                          : '+${percentDifference.convertToCurrencyDecimal()}%'),
+                  style: AskLoraTextStyles.subtitle3
+                      .copyWith(color: AskLoraColors.white),
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }
