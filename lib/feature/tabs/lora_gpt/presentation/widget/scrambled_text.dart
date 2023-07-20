@@ -70,7 +70,7 @@ class ScrambledText extends StatefulWidget {
     this.softWrap,
     this.textAlign,
     this.semanticsLabel,
-    this.numLetters = 3,
+    this.numLetters = 5,
   }) : super(key: key);
 
   @override
