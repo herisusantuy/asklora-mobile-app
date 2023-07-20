@@ -11,6 +11,7 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/presentation/auto_sized_text_widget.dart';
 import '../../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
@@ -121,10 +122,13 @@ class BotRecommendationScreen extends StatelessWidget {
             ),
             Row(
               children: [
-                CustomTextNew(
-                  S.of(context).notFeelingIt,
-                  style: AskLoraTextStyles.subtitle2
-                      .copyWith(color: AskLoraColors.primaryMagenta),
+                Flexible(
+                  flex: 3,
+                  child: AutoSizedTextWidget(
+                    S.of(context).notFeelingIt,
+                    style: AskLoraTextStyles.subtitle3
+                        .copyWith(color: AskLoraColors.primaryMagenta),
+                  ),
                 ),
                 const SizedBox(
                   width: 5,
