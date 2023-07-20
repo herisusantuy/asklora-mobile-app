@@ -17,7 +17,6 @@ import '../../../core/utils/storage/profile_data.dart';
 import '../../../core/utils/storage/secure_storage.dart';
 import '../../../core/utils/storage/shared_preference.dart';
 import '../../../generated/l10n.dart';
-import '../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../auth/repository/auth_repository.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
 import '../../onboarding/welcome/welcome_screen.dart';
@@ -102,9 +101,7 @@ class SettingsScreen extends StatelessWidget {
                   title: S.of(context).accountSettings,
                   onTap: () => AccountSettingScreen.open(context)),
               _settingsMenu(
-                  title: S.of(context).investmentPreferences,
-                  onTap: () =>
-                      AiInvestmentStyleQuestionWelcomeScreen.open(context)),
+                  title: S.of(context).investmentPreferences, onTap: () {}),
               _settingsMenu(
                   title: S.of(context).transactionHistory,
                   onTap: () => TransactionHistoryScreen.open(context)),
