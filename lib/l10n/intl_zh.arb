@@ -606,6 +606,13 @@
       }
     }
   },
+  "cancelled": "已取消",
+  "expired": "已到期",
+  "rejected": "Rejected",
+  "completed": "完全的",
+  "subscription": "訂購計劃",
+  "buy": "買入",
+  "sell": "賣出",
   "aiIsqWelcomeTitle": "It’s time to find out your investment preferences",
   "aiIsqWelcomeSubTitle": "Let’s see what kind of stocks you prefer"
 }
