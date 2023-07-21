@@ -56,13 +56,10 @@ class CustomShowcaseView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               if (pointerPosition == PointerPosition.top)
-                Column(
-                  children: [
-                    GestureDetector(
-                        onTap: onToolTipClick,
-                        child: const TutorialTouchGuide()),
-                    const SizedBox(height: 10),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: GestureDetector(
+                      onTap: onToolTipClick, child: const TutorialTouchGuide()),
                 ),
               GestureDetector(
                 onTap: onToolTipClick,
