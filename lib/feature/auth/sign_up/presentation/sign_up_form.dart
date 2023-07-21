@@ -13,6 +13,7 @@ import '../../../../generated/l10n.dart';
 import '../../../auth/sign_in/presentation/sign_in_screen.dart';
 import '../../../onboarding/welcome/welcome_screen.dart';
 import '../../email_activation/presentation/email_activation_screen.dart';
+import '../../utils/auth_utils.dart';
 import '../bloc/sign_up_bloc.dart';
 
 class SignUpForm extends StatelessWidget {
@@ -86,7 +87,9 @@ class SignUpForm extends StatelessWidget {
                 maxLine: 1,
                 labelText: S.of(context).email,
                 hintText: S.of(context).emailAddress,
-                errorText: state.usernameErrorText,
+                errorText:
+                    AuthErrorMessage.findByString(state.usernameErrorText)
+                        .getErrorMessage(context),
                 onChanged: (email) => context
                     .read<SignUpBloc>()
                     .add(SignUpUsernameChanged(email)));

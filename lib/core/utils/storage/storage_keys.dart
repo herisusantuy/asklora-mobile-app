@@ -18,3 +18,6 @@ const String sfKeyAccountData = 'account_data';
 const String sfKeyLocalisationData = 'localisation_data';
 const String sfKeyBotDetailsTutorial = 'bot_details_tutorial';
 const String sfKeyTradeSummaryTutorial = 'trade"_summary_tutorial';
+const String sfKeyBotChartTutorial = 'bot_chart_tutorial';
+const String sfKeyChatLoraTabTutorial = 'chat_lora_tab_tutorial';
+const String sfKeyChatLoraButtonTutorial = 'chat_lora_button_tutorial';

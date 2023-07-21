@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../../bloc/response/user_response_bloc.dart';
@@ -45,11 +45,12 @@ class PersonalisationResultEndScreen extends StatelessWidget {
           final scores = state.snapShot?.data?.scores;
 
           return PpiResultScreen(
-            loraMemojiType: LoraMemojiType.lora7,
+            isDarkBgColor: true,
             ppiResult: PpiResult.success,
-            memojiText: 'Do you know?',
-            additionalMessage: _getMessage(scores),
+            title: 'Alright!',
+            additionalMessage: _getMessage(context, scores),
             bottomButton: PrimaryButton(
+                buttonPrimaryType: ButtonPrimaryType.solidGreen,
                 key: const Key('next_button'),
                 label: 'Got It',
                 onTap: () => SignUpScreen.open(context)),
@@ -60,25 +61,26 @@ class PersonalisationResultEndScreen extends StatelessWidget {
     );
   }
 
-  String _getMessage(Scores? scores) {
+  String _getMessage(BuildContext context, Scores? scores) {
     const high = 9;
     String message = '';
     if (scores == null) {
       return message;
     }
-    if (scores.openness >= high && scores.neuroticism >= high) {
-      message =
-          'You are pretty open-minded to new things!\nLet’s be a little bit aggressive!';
-    } else if (scores.openness >= high && scores.neuroticism < high) {
-      message =
-          'You are one of those people who’s down for trying anything new!\nLet’s be more aggressive!';
-    } else if (scores.openness < high && scores.neuroticism >= high) {
-      message =
-          'You prefer a stable and safe journey!\nLet’s aim to make small wins in a steady manner!';
-    } else if (scores.openness < high && scores.neuroticism < high) {
-      message =
-          'You prefer a stable and safe journey!\nLet’s try a more balanced strategy!';
-    }
+    String resultFromOpennessScore = scores.openness >= high
+        ? S.of(context).opennessMoreThan8
+        : S.of(context).opennessLessThan8;
+    String resultFromNeuroticismScore = scores.neuroticism >= high
+        ? S.of(context).neuroticismMoreThan8
+        : S.of(context).neuroticismLessThan8;
+    String resultFromExtrovertScore = scores.extrovert >= high
+        ? S.of(context).extrovertMoreThan8
+        : S.of(context).extrovertLessThan8;
+
+    message = S.of(context).resultOfPersonalizationQuestion(
+        resultFromOpennessScore,
+        resultFromNeuroticismScore,
+        resultFromExtrovertScore);
     return message;
   }
 }

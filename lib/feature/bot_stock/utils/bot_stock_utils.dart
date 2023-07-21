@@ -99,6 +99,7 @@ enum OmsStatus {
   live('live'),
   waitingTermination('waiting_termination'),
   earlyTerminated('early_terminated'),
+  cancelled('cancelled'),
   expired('expired'),
   nearlyKnockOut('nearly_knock_out'),
   knockOut('knock_out');
@@ -130,13 +131,19 @@ enum BotStatus {
     ],
     AskLoraColors.primaryGreen,
   ),
-  canceled(
-    'Canceled',
+  cancelled(
+    'Cancelled',
     [
-      OmsStatus.rejectedOms,
+      OmsStatus.cancelled,
     ],
     AskLoraColors.primaryMagenta,
   ),
+  rejected(
+      'Rejected',
+      [
+        OmsStatus.rejectedOms,
+      ],
+      AskLoraColors.primaryMagenta),
   pending(
     'Pending',
     [

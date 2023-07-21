@@ -36,11 +36,13 @@ class Tabs extends StatelessWidget {
                       CustomShowcaseView(
                         tutorialKey: TutorialJourney.chatLoraTab,
                         onToolTipClick: () {
-                          Future.delayed(const Duration(milliseconds: 300),
-                              () => ShowCaseWidget.of(context).next());
                           context
                               .read<TabScreenBloc>()
-                              .add(const AiButtonSelected());
+                              .add(const OnAiOverlayClick());
+
+                          ///this delay is necessary to wait for AI page to be opened
+                          Future.delayed(const Duration(milliseconds: 350),
+                              () => ShowCaseWidget.of(context).next());
                         },
                         tooltipPosition: TooltipPosition.top,
                         targetBorderRadius: BorderRadius.circular(35),
@@ -65,7 +67,7 @@ class Tabs extends StatelessWidget {
                         child: _tabPng(
                             onTap: () => context
                                 .read<TabScreenBloc>()
-                                .add(const AiButtonSelected()),
+                                .add(const OnAiOverlayClick()),
                             iconAsset: 'bottom_nav_ai',
                             activeIconAsset: 'bottom_nav_ai_selected',
                             active: state.aiPageSelected),

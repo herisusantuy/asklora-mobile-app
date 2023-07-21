@@ -29,9 +29,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     on<CreateBotOrder>(_onCreateBotOrder);
     on<FetchBotDetail>(_onFetchBotDetail);
     on<TradeBotStockAmountChanged>(_onTradeBotStockAmountChanged);
-    on<InitBotDetailsTutorial>(_onInitBotDetailsTutorial);
     on<InitBotTradeSummaryTutorial>(_onInitBotTradeSummaryTutorial);
-    on<BotDetailsTutorialFinished>(_onBotDetailsTutorialFinished);
     on<BotTradeSummaryTutorialFinished>(_onBotTradeSummaryTutorialFinished);
   }
 
@@ -93,13 +91,6 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     }
   }
 
-  _onInitBotDetailsTutorial(
-      InitBotDetailsTutorial event, Emitter<BotStockState> emit) async {
-    final bool isBotDetailsTutorial =
-        await _tutorialRepository.isBotDetailsTutorial();
-    emit(state.copyWith(isBotDetailsTutorial: isBotDetailsTutorial));
-  }
-
   _onInitBotTradeSummaryTutorial(
       InitBotTradeSummaryTutorial event, Emitter<BotStockState> emit) async {
     final isBotTradeSummaryTutorial =
@@ -112,19 +103,10 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     emit(state.copyWith(botStockTradeAmount: event.amount));
   }
 
-  _onBotDetailsTutorialFinished(
-      BotDetailsTutorialFinished event, Emitter<BotStockState> emit) async {
-    await _tutorialRepository.botDetailsTutorialFinished();
-    final bool isBotDetailsTutorialFinished =
-        await _tutorialRepository.isBotDetailsTutorial();
-    emit(state.copyWith(isBotDetailsTutorial: isBotDetailsTutorialFinished));
-  }
-
   _onBotTradeSummaryTutorialFinished(BotTradeSummaryTutorialFinished event,
       Emitter<BotStockState> emit) async {
-    await _tutorialRepository.setTradeSummaryTutorialFinished();
     final bool isBotTradeSummaryTutorial =
-        await _tutorialRepository.isBotDetailsTutorial();
+        await _tutorialRepository.setTradeSummaryTutorialFinished();
     emit(state.copyWith(isBotTradeSummaryTutorial: isBotTradeSummaryTutorial));
   }
 }

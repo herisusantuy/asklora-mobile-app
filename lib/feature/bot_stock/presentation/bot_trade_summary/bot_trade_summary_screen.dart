@@ -24,10 +24,12 @@ import '../../../tabs/presentation/tab_screen.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../domain/bot_recommendation_detail_model.dart';
 import '../../domain/bot_recommendation_model.dart';
+import '../../domain/orders/bot_create_order_response.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_bottom_sheet.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../bot_stock_result_screen.dart';
+import '../portfolio/detail/bot_portfolio_detail_screen.dart';
 import '../widgets/bot_stock_form.dart';
 
 class BotTradeSummaryModel {
@@ -35,12 +37,14 @@ class BotTradeSummaryModel {
   final BotRecommendationModel botRecommendationModel;
   final BotRecommendationDetailModel botDetailModel;
   final BotType botType;
+  final VoidCallback onCreateOrderSuccessCallback;
 
   BotTradeSummaryModel(
       {required this.botType,
       required this.amount,
       required this.botRecommendationModel,
-      required this.botDetailModel});
+      required this.botDetailModel,
+      required this.onCreateOrderSuccessCallback});
 }
 
 class BotTradeSummaryScreen extends StatelessWidget {
@@ -96,6 +100,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
 
                   if (state.createBotOrderResponse.state ==
                       ResponseState.success) {
+                    botTradeSummaryModel.onCreateOrderSuccessCallback();
                     if (!UserJourney.compareUserJourney(
                         context: context, target: UserJourney.deposit)) {
                       context.read<AppBloc>().add(
@@ -109,13 +114,23 @@ class BotTradeSummaryScreen extends StatelessWidget {
                       BotStockBottomSheet.freeBotStockSuccessfullyAdded(
                           context);
                     } else {
-                      BotStockResultScreen.open(
+                      BotStockResultScreen.openReplace(
                           context: context,
                           arguments: BotStockResultArgument(
                             title: S.of(context).tradeRequestReceived,
-                            desc: _tradeRequestSuccessMessage(context),
+                            desc: _tradeRequestSuccessMessage(
+                                context, state.createBotOrderResponse.data!),
                             labelBottomButton:
                                 S.of(context).checkBotStockDetails,
+                            onButtonTap: (context) =>
+                                BotPortfolioDetailScreen.openReplace(
+                              context: context,
+                              arguments: BotPortfolioDetailArguments(
+                                botUid: state.createBotOrderResponse.data!.uid,
+                                botName:
+                                    state.createBotOrderResponse.data!.botName,
+                              ),
+                            ),
                           ));
                     }
                   } else if (state.createBotOrderResponse.state ==
@@ -257,22 +272,22 @@ class BotTradeSummaryScreen extends StatelessWidget {
           leftTitle: botTradeSummaryModel.botType == BotType.plank
               ? S.of(context).estStopLossPercent
               : S.of(context).estMaxLossPercent,
-          leftSubTitle: botTradeSummaryModel.botDetailModel.estStopLossPct
-              .convertToCurrencyDecimal(),
+          leftSubTitle:
+              botTradeSummaryModel.botDetailModel.estStopLossPctFormatted,
           rightTitle: botTradeSummaryModel.botType == BotType.plank
               ? S.of(context).estTakeProfitPercent
               : S.of(context).estMaxProfitPercent,
-          rightSubTitle: botTradeSummaryModel.botDetailModel.estTakeProfitPct
-              .convertToCurrencyDecimal(),
+          rightSubTitle:
+              botTradeSummaryModel.botDetailModel.estTakeProfitPctFormatted,
         ),
       ];
 
-  String _tradeRequestSuccessMessage(BuildContext context) =>
+  String _tradeRequestSuccessMessage(
+          BuildContext context, BotCreateOrderResponse createOrderResponse) =>
       S.of(context).rolloverBotStockAcknowledgement(
-          botTradeSummaryModel.botDetailModel.botInfo.botName,
-          botTradeSummaryModel.botDetailModel.stockInfo.symbol,
-          botTradeSummaryModel
-              .botDetailModel.formattedAcknowledgementEstEndDate);
+          createOrderResponse.botAppsName,
+          createOrderResponse.symbol,
+          createOrderResponse.optimalTimeFormatted);
 
   static void open(
           {required BuildContext context,
@@ -285,4 +300,12 @@ class BotTradeSummaryScreen extends StatelessWidget {
     // context.read<TutorialBloc>().add(TradeSummaryTutorialFinished());
     context.read<BotStockBloc>().add(BotTradeSummaryTutorialFinished());
   }
+
+  static void openWithBackCallBack(
+          {required BuildContext context,
+          required BotTradeSummaryModel botTradeSummaryModel,
+          required VoidCallback backCallBack}) =>
+      Navigator.of(context, rootNavigator: true)
+          .pushNamed(route, arguments: botTradeSummaryModel)
+          .then((value) => backCallBack());
 }

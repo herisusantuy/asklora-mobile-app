@@ -8,7 +8,8 @@ import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
+import '../../../../core/presentation/custom_linear_progress_indicator/custom_linear_progress_indicator.dart';
+import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../generated/l10n.dart';
@@ -16,8 +17,6 @@ import '../bloc/question/question_bloc.dart';
 import '../bloc/response/user_response_bloc.dart';
 import '../repository/ppi_question_repository.dart';
 import '../repository/ppi_response_repository.dart';
-import 'investment_style_question/investment_style_question_screen.dart';
-import 'investment_style_question/investment_style_result_end_screen.dart';
 import 'personalisation_question/personalisation_question_screen.dart';
 import 'personalisation_question/personalisation_result_end_screen.dart';
 import 'privacy_question/privacy_question_screen.dart';
@@ -48,49 +47,60 @@ class PpiScreen extends StatelessWidget {
                 jsonCacheSharedPreferences: JsonCacheSharedPreferences())),
         BlocProvider(
             create: (_) => QuestionBloc(
-                ppiQuestionRepository: PpiQuestionRepository(),
-                questionPageType: questionPageType,
-                sharedPreference: SharedPreference())
-              ..add(const LoadQuestions())),
+                  ppiQuestionRepository: PpiQuestionRepository(),
+                  questionPageType: questionPageType,
+                )..add(const LoadQuestions())),
         BlocProvider(
             create: (_) =>
                 NavigationBloc<QuestionPageStep>(initialQuestionPage)),
       ],
-      child: CustomScaffold(
-        enableBackNavigation: false,
-        body: BlocBuilder<QuestionBloc, QuestionState>(
-          buildWhen: (previous, current) =>
-              previous.response.state != current.response.state,
-          builder: (context, state) => CustomLayoutWithBlurPopUp(
-            loraPopUpMessageModel: LoraPopUpMessageModel(
-              title: S.of(context).errorGettingInformationTitle,
-              subTitle: S
-                  .of(context)
-                  .errorGettingInformationInvestmentStyleQuestionSubTitle,
-              primaryButtonLabel: S.of(context).buttonReloadPage,
-              secondaryButtonLabel: S.of(context).buttonCancel,
-              onSecondaryButtonTap: () => Navigator.pop(context),
-              onPrimaryButtonTap: () =>
-                  context.read<QuestionBloc>().add(const LoadQuestions()),
-            ),
-            showPopUp: state.response.state == ResponseState.error,
-            content: BlocConsumer<NavigationBloc<QuestionPageStep>,
-                NavigationState<QuestionPageStep>>(
-              listenWhen: (_, current) => current.lastPage == true,
-              listener: (context, state) {
-                Navigator.pop(context);
-              },
-              builder: (context, state) => Column(
-                children: [
-                  PpiProgressIndicatorWidget(
-                    questionPageType: questionPageType,
+      child: BlocBuilder<NavigationBloc<QuestionPageStep>,
+          NavigationState<QuestionPageStep>>(
+        buildWhen: (previous, current) => previous.page != current.page,
+        builder: (context, state) {
+          return CustomScaffold(
+            backgroundColor:
+                state.page == QuestionPageStep.personalisationResultEnd
+                    ? AskLoraColors.charcoal
+                    : AskLoraColors.white,
+            enableBackNavigation: false,
+            body: BlocBuilder<QuestionBloc, QuestionState>(
+              buildWhen: (previous, current) =>
+                  previous.response.state != current.response.state,
+              builder: (context, state) => CustomLayoutWithBlurPopUp(
+                loraPopUpMessageModel: LoraPopUpMessageModel(
+                  title: S.of(context).errorGettingInformationTitle,
+                  subTitle: S
+                      .of(context)
+                      .errorGettingInformationInvestmentStyleQuestionSubTitle,
+                  primaryButtonLabel: S.of(context).buttonReloadPage,
+                  secondaryButtonLabel: S.of(context).buttonCancel,
+                  onSecondaryButtonTap: () => Navigator.pop(context),
+                  onPrimaryButtonTap: () =>
+                      context.read<QuestionBloc>().add(const LoadQuestions()),
+                ),
+                showPopUp: state.response.state == ResponseState.error,
+                content: BlocConsumer<NavigationBloc<QuestionPageStep>,
+                    NavigationState<QuestionPageStep>>(
+                  listenWhen: (_, current) => current.lastPage == true,
+                  listener: (context, state) {
+                    Navigator.pop(context);
+                  },
+                  builder: (context, state) => Column(
+                    children: [
+                      if (state.page !=
+                          QuestionPageStep.personalisationResultEnd)
+                        PpiProgressIndicatorWidget(
+                          questionPageType: questionPageType,
+                        ),
+                      Expanded(child: _pages(state)),
+                    ],
                   ),
-                  Expanded(child: _pages(state)),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -117,13 +127,6 @@ class PpiScreen extends StatelessWidget {
               );
             case QuestionPageStep.personalisationResultEnd:
               return const PersonalisationResultEndScreen();
-            case QuestionPageStep.investmentStyle:
-              return InvestmentStyleQuestionScreen(
-                key: UniqueKey(),
-                initialIndex: state.investmentStyleQuestionIndex,
-              );
-            case QuestionPageStep.investmentStyleResultEnd:
-              return const InvestmentStyleResultEndScreen();
             default:
               return const SizedBox.shrink();
           }

@@ -8,7 +8,7 @@ abstract class WithdrawalEvent extends Equatable {
 }
 
 class WithdrawalAmountChanged extends WithdrawalEvent {
-  final double withdrawalAmount;
+  final String withdrawalAmount;
 
   const WithdrawalAmountChanged(this.withdrawalAmount) : super();
 
@@ -17,7 +17,7 @@ class WithdrawalAmountChanged extends WithdrawalEvent {
 }
 
 class SubmitWithdrawal extends WithdrawalEvent {
-  final double withdrawalAmount;
+  final String withdrawalAmount;
 
   const SubmitWithdrawal(this.withdrawalAmount);
 }

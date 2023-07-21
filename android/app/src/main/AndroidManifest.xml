@@ -36,6 +36,9 @@
                 <data
                     android:host="app.verify"
                     android:scheme="asklora" />
+                <data
+                    android:host="app.reset"
+                    android:scheme="asklora" />
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.

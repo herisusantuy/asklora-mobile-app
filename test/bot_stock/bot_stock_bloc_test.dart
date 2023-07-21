@@ -35,8 +35,8 @@ void main() async {
         BaseResponse.complete(defaultBotRecommendation);
 
     final BaseResponse<BotCreateOrderResponse> botCreateOrderSuccessResponse =
-        BaseResponse.complete(const BotCreateOrderResponse(
-            'a', 'b', 'c', 'd', true, 'a', true, '2023-06-06', 'APPLE'));
+        BaseResponse.complete(const BotCreateOrderResponse('a', 'b', 'c', 'd',
+            true, 'a', true, '2023-06-06', 'APPLE', '2023-06-07'));
     final BaseResponse<BotCreateOrderResponse> botCreateOrderFailedResponse =
         BaseResponse.error();
 
@@ -48,7 +48,7 @@ void main() async {
 
     final BaseResponse<TransactionLedgerBalanceResponse> ledgerBalanceResponse =
         BaseResponse.complete(
-            const TransactionLedgerBalanceResponse(0, 0, 0, 0, '', 0, []));
+            const TransactionLedgerBalanceResponse(0, 0, 0, 0, '', 0));
 
     final BaseResponse<TransactionLedgerBalanceResponse>
         ledgerBalanceErrorResponse = BaseResponse.error();
@@ -86,8 +86,6 @@ void main() async {
     final BaseResponse<BotRecommendationDetailModel> botDetailErrorResponse =
         BaseResponse.error();
 
-    final bool isBotTutorialStarted = false;
-
     setUpAll(() async {
       botStockRepository = MockBotStockRepository();
       transactionRepository = MockTransactionRepository();
@@ -103,8 +101,7 @@ void main() async {
     });
 
     test('Bot Stock Bloc init state response should be default one', () {
-      expect(
-          botStockBloc.state, const BotStockState(isBotDetailsTutorial: false));
+      expect(botStockBloc.state, const BotStockState());
     });
 
     blocTest<BotStockBloc, BotStockState>(
@@ -113,8 +110,6 @@ void main() async {
         build: () {
           when(botStockRepository.fetchBotRecommendation())
               .thenAnswer((_) => Future.value(botStockResponse));
-          when(tutorialRepository.isBotDetailsTutorial())
-              .thenAnswer((_) => Future.value(isBotTutorialStarted));
           return botStockBloc;
         },
         act: (bloc) => bloc.add(FetchBotRecommendation()),
@@ -214,12 +209,12 @@ void main() async {
             ticker: 'AAPL', botId: 'abc', isFreeBot: false)),
         expect: () => {
               BotStockState(
-                  botDetailResponse: BaseResponse.loading(),
-                  isBotDetailsTutorial: false),
+                botDetailResponse: BaseResponse.loading(),
+              ),
               BotStockState(
-                  botDetailResponse: BaseResponse.error(
-                      message: 'Error when fetching balance'),
-                  isBotDetailsTutorial: false)
+                botDetailResponse:
+                    BaseResponse.error(message: 'Error when fetching balance'),
+              )
             });
 
     blocTest<BotStockBloc, BotStockState>(

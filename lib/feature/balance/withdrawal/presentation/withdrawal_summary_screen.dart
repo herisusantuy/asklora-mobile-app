@@ -15,6 +15,7 @@ import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
+import '../utils/withdrawal_utils.dart';
 import '../../../settings/domain/bank_account.dart';
 import '../../widgets/balance_base_form.dart';
 import '../bloc/withdrawal_bloc.dart';
@@ -53,7 +54,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
             body: CustomLayoutWithBlurPopUp(
               showPopUp: state.response.state == ResponseState.error,
               content: BalanceBaseForm(
-                title: 'Withdrawal',
+                title: S.of(context).buttonWithdraw,
                 content: Column(
                   children: [
                     getPngImage('money'),
@@ -77,7 +78,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
                       child: _textInfo(
                           title: S.of(context).to,
                           subTitle:
-                              '${args.bankAccount.name} (${args.bankAccount.accountNumber})'),
+                              '${args.bankAccount.name} (${maskAccountNumber(args.bankAccount.accountNumber, end: args.bankAccount.accountNumber.length - 3)})'),
                     ),
                     const SizedBox(
                       height: 21,
@@ -143,7 +144,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
                   label: S.of(context).buttonConfirm,
                   onTap: () => context
                       .read<WithdrawalBloc>()
-                      .add(SubmitWithdrawal(args.withdrawalAmount)));
+                      .add(SubmitWithdrawal(args.withdrawalAmount.toString())));
             })
           ],
         ),

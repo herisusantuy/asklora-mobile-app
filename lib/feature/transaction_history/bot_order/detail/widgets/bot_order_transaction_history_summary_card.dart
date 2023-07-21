@@ -50,8 +50,13 @@ class BotOrderTransactionHistorySummaryCard extends StatelessWidget {
           if (additionalText != null)
             Align(
               alignment: Alignment.centerRight,
-              child: CustomTextNew(
-                additionalText!,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: CustomTextNew(
+                  additionalText!,
+                  style: AskLoraTextStyles.body3
+                      .copyWith(color: AskLoraColors.darkGray),
+                ),
               ),
             ),
         ],

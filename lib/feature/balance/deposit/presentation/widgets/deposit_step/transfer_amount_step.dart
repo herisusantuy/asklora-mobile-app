@@ -14,14 +14,16 @@ class TransferAmountStep extends StatelessWidget {
       drawLine: drawLine,
       contents: [
         CustomTextNew(
-          'Transfer ${depositType.minDeposit != 0 ? 'HK\$${depositType.minDeposit.convertToCurrencyDecimal()} ' : ''}to LORA',
+          S.of(context).inputDepositAmount,
           style: AskLoraTextStyles.h6.copyWith(color: AskLoraColors.charcoal),
         ),
         const SizedBox(
           height: 10,
         ),
         CustomTextNew(
-          'The amount must match with the proof of remittance.',
+          depositType == DepositType.firstTime
+              ? S.of(context).theAmountMustMatchWithPor
+              : S.of(context).theAmountMustMatch,
           style:
               AskLoraTextStyles.body2.copyWith(color: AskLoraColors.charcoal),
         ),
@@ -52,7 +54,7 @@ class TransferAmountStep extends StatelessWidget {
           height: 10,
         ),
         CustomTextNew(
-          'Current Exchange Rate: HKD 1 = USD 0.137 (at HKT 13:12:14)',
+          S.of(context).exchangeRateInDepositScreen('13:12:14'),
           style:
               AskLoraTextStyles.body4.copyWith(color: AskLoraColors.darkGray),
         ),

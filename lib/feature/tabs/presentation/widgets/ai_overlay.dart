@@ -1,3 +1,4 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,8 +8,13 @@ import '../../lora_gpt/presentation/lora_ai_screen.dart';
 class AiOverlay extends StatefulWidget {
   final double maxHeight;
   final double maxWidth;
+  final bool enableSliding;
 
-  const AiOverlay({required this.maxHeight, required this.maxWidth, super.key});
+  const AiOverlay(
+      {required this.maxHeight,
+      required this.maxWidth,
+      super.key,
+      this.enableSliding = false});
 
   @override
   State<AiOverlay> createState() => _AiOverlayState();
@@ -39,6 +45,11 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
     super.initState();
   }
 
+  bool _backButtonInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    _closeAiOverlay();
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) =>
       BlocListener<TabScreenBloc, TabScreenState>(
@@ -50,16 +61,19 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
           width: widget.maxWidth,
           height: widget.maxHeight,
           top: _drawerBottom,
-          child: GestureDetector(
-            onPanDown: _onPanDown,
-            onPanEnd: _onPanEnd,
-            onPanUpdate: _onPanUpdate,
-            child: const LoraAiScreen(),
-          ),
+          child: widget.enableSliding
+              ? GestureDetector(
+                  onPanDown: _onPanDown,
+                  onPanEnd: _onPanEnd,
+                  onPanUpdate: _onPanUpdate,
+                  child: const LoraAiScreen(),
+                )
+              : const LoraAiScreen(),
         ),
       );
 
   void _openAiOverlay() {
+    BackButtonInterceptor.add(_backButtonInterceptor);
     _controller = AnimationController(
         duration: openAndCloseAnimationDuration, vsync: this);
     _animation = Tween<double>(begin: 0, end: 1).animate(_controller!)
@@ -73,6 +87,7 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
   }
 
   void _closeAiOverlay() {
+    BackButtonInterceptor.remove(_backButtonInterceptor);
     final double startingPoint = _drawerBottom;
     _controller = AnimationController(
         duration: openAndCloseAnimationDuration, vsync: this);

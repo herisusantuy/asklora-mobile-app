@@ -24,11 +24,14 @@ class BotPortfolioCard extends StatelessWidget {
               path: SubTabPage.portfolioBotStockDetails.value,
               arguments: {
                 'botType': botType.internalName,
-                'symbol': botActiveOrderModel.symbol
+                'symbol': botActiveOrderModel.ticker
               }
             ))));
         BotPortfolioDetailScreen.open(
-            context: context, botActiveOrderModel: botActiveOrderModel);
+            context: context,
+            arguments: BotPortfolioDetailArguments(
+                botUid: botActiveOrderModel.uid,
+                botName: botActiveOrderModel.botName));
       },
       child: Stack(
         children: [

@@ -19,6 +19,7 @@ import '../../../onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
 import '../../../tabs/presentation/tab_screen.dart';
 import '../../forgot_password/presentation/forgot_password_screen.dart';
 import '../../otp/presentation/otp_screen.dart';
+import '../../utils/auth_utils.dart';
 import '../bloc/sign_in_bloc.dart';
 
 class SignInForm extends StatelessWidget {
@@ -29,11 +30,13 @@ class SignInForm extends StatelessWidget {
     return BlocListener<SignInBloc, SignInState>(
         listener: (context, state) async {
       CustomLoadingOverlay.of(context).show(state.response.state);
-
       var responseState = state.response.state;
       if (responseState == ResponseState.error) {
         context.read<SignInBloc>().add(SignInEmailChanged(state.emailAddress));
-        CustomInAppNotification.show(context, state.response.message);
+        CustomInAppNotification.show(
+            context,
+            AuthErrorMessage.findByString(state.response.message)
+                .getErrorMessage(context));
       } else if (responseState == ResponseState.success) {
         context.read<AppBloc>().add(const GetUserJourneyFromLocal());
         var arguments = Pair(state.emailAddress, state.password);
@@ -45,7 +48,7 @@ class SignInForm extends StatelessWidget {
               KycScreen.open(context);
               break;
             case UserJourney.investmentStyle:
-              InvestmentStyleWelcomeScreen.open(context);
+              InvestmentStyleWelcomeScreen.openAndRemoveAllRoute(context);
               break;
             default:
               TabScreen.openAndRemoveAllRoute(context);
@@ -63,8 +66,8 @@ class SignInForm extends StatelessWidget {
                   children: <Widget>[
                     Column(
                       children: [
-                        const LoraMemojiHeader(
-                            text: 'Welcome back!\nReady to go?'),
+                        LoraMemojiHeader(
+                            text: 'Welcome back!\n${S.of(context).readyToGo}'),
                         context.padding(),
                         _emailInput(),
                         context.padding(topPadding: 10),
@@ -95,7 +98,8 @@ class SignInForm extends StatelessWidget {
           maxLine: 1,
           labelText: S.of(context).emailAddress,
           hintText: S.of(context).emailAddress,
-          errorText: state.emailAddressErrorText,
+          errorText: AuthErrorMessage.findByString(state.emailAddressErrorText)
+              .getErrorMessage(context),
           onChanged: (email) =>
               context.read<SignInBloc>().add(SignInEmailChanged(email))));
 

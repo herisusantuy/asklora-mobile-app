@@ -14,6 +14,14 @@ SaveKycRequest _$SaveKycRequestFromJson(Map<String, dynamic> json) =>
           json['proofs_of_address'] as Map<String, dynamic>),
       immediateFamilyAffiliation: json['immediateFamilyAffiliation'] as bool?,
       associatesAffiliation: json['associatesAffiliation'] as bool?,
+      isBoundByAskloraAgreementChecked:
+          json['isBoundByAskloraAgreementChecked'] as bool?,
+      isUnderstandOnTheAgreementChecked:
+          json['isUnderstandOnTheAgreementChecked'] as bool?,
+      isRiskDisclosureAgreementChecked:
+          json['isRiskDisclosureAgreementChecked'] as bool?,
+      isSignatureChecked: json['isSignatureChecked'] as bool?,
+      legalNameSignature: json['legalNameSignature'] as String?,
     );
 
 Map<String, dynamic> _$SaveKycRequestToJson(SaveKycRequest instance) =>
@@ -22,4 +30,12 @@ Map<String, dynamic> _$SaveKycRequestToJson(SaveKycRequest instance) =>
       'immediateFamilyAffiliation': instance.immediateFamilyAffiliation,
       'associatesAffiliation': instance.associatesAffiliation,
       'proofs_of_address': instance.personalInfoRequest.toJson(),
+      'isBoundByAskloraAgreementChecked':
+          instance.isBoundByAskloraAgreementChecked,
+      'isUnderstandOnTheAgreementChecked':
+          instance.isUnderstandOnTheAgreementChecked,
+      'isRiskDisclosureAgreementChecked':
+          instance.isRiskDisclosureAgreementChecked,
+      'isSignatureChecked': instance.isSignatureChecked,
+      'legalNameSignature': instance.legalNameSignature,
     };

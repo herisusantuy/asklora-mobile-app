@@ -13,54 +13,48 @@ class DepositWelcomeNotes extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomTextNew(
-          'Notes :',
+          '${S.of(context).notes}:',
           style:
               AskLoraTextStyles.body4.copyWith(color: AskLoraColors.darkGray),
         ),
         const SizedBox(
           height: 4,
         ),
-        depositType == DepositType.firstTime
+        (depositType == DepositType.firstTime ||
+                depositType == DepositType.changeBankAccount)
             ? Padding(
                 padding: const EdgeInsets.only(left: 6),
                 child: Column(
-                  children: _firstTimeNotes,
+                  children: _firstTimeNotes(context),
                 ),
               )
-            : _returningUserNotes
+            : _returningUserNotes(context)
       ],
     );
   }
 
-  List<Widget> get _firstTimeNotes => [
+  List<Widget> _firstTimeNotes(BuildContext context) => [
         _depositNote(
           label: '1.',
-          text:
-              'We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK\$ ${DepositType.firstTime.minDepositString} bank transfer is completed.',
+          text: S.of(context).weWillTakeInformationCollectedFromYour(
+              DepositType.firstTime.minDepositString),
         ),
         _depositNote(
           label: '2.',
-          text:
-              "Please add a HK bank account that is under your name; other people's bank accounts or joint accounts will not be accepted.",
+          text: S.of(context).pleaseAddAHkBankAccount,
         ),
         _depositNote(
           label: '3.',
-          text:
-              'We will only accept deposits via bank transfer (wire/FPS) from your own account.',
+          text: S.of(context).weWillOnlyAcceptDepositViaBankTransfer,
         ),
         _depositNote(
           label: '4.',
-          text:
-              'Any deposit less than HK\$${DepositType.firstTime.minDepositString} will be rejected and fees will be charged.',
-        ),
-        _depositNote(
-          label: '5.',
-          text: 'We will only accept HKD.',
+          text: S.of(context).weWillOnlyAcceptHKD,
         ),
       ];
 
-  Widget get _returningUserNotes => CustomTextNew(
-        'We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.',
+  Widget _returningUserNotes(BuildContext context) => CustomTextNew(
+        S.of(context).returningUserDepositNotes,
         style: AskLoraTextStyles.body4.copyWith(color: AskLoraColors.darkGray),
       );
 
@@ -69,6 +63,7 @@ class DepositWelcomeNotes extends StatelessWidget {
         child: CustomExpandedRow(
           label,
           text: text,
+          padding: EdgeInsets.zero,
           leftTextStyle:
               AskLoraTextStyles.body4.copyWith(color: AskLoraColors.darkGray),
           rightTextStyle:

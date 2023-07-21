@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Agree`
+  String get agree {
+    return Intl.message(
+      'Agree',
+      name: 'agree',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Get Help`
   String get getHelp {
     return Intl.message(
@@ -460,6 +470,16 @@ class S {
     );
   }
 
+  /// `Due to regulatory requirements, you need to deposit at least HK${amount} if you want to change bank account`
+  String depositRegulatoryRequirements(String amount) {
+    return Intl.message(
+      'Due to regulatory requirements, you need to deposit at least HK\$$amount if you want to change bank account',
+      name: 'depositRegulatoryRequirements',
+      desc: '',
+      args: [amount],
+    );
+  }
+
   /// `Deposit Request Submitted`
   String get depositRequestSubmittedTitle {
     return Intl.message(
@@ -480,30 +500,30 @@ class S {
     );
   }
 
-  /// `Your deposit request is submitted. We’ll let you know via email and app notification as soon as your deposit arrives.`
+  /// `Your deposit request is submitted. We'll let you know via email and app notification as soon as your deposit arrives.`
   String get depositRequestSubmittedSubTitleReturn {
     return Intl.message(
-      'Your deposit request is submitted. We’ll let you know via email and app notification as soon as your deposit arrives.',
+      'Your deposit request is submitted. We\'ll let you know via email and app notification as soon as your deposit arrives.',
       name: 'depositRequestSubmittedSubTitleReturn',
       desc: '',
       args: [],
     );
   }
 
-  /// `We’ve sent an email to\n {emailAddress}\n\nPlease use your phone to click on the activation link!`
+  /// `We've sent an email to\n {emailAddress}\n\nPlease use your phone to click on the activation link!`
   String emailActivationSuccessTitle(String emailAddress) {
     return Intl.message(
-      'We’ve sent an email to\n $emailAddress\n\nPlease use your phone to click on the activation link!',
+      'We\'ve sent an email to\n $emailAddress\n\nPlease use your phone to click on the activation link!',
       name: 'emailActivationSuccessTitle',
       desc: '',
       args: [emailAddress],
     );
   }
 
-  /// `Sorry! You were a bit late, your request has timed out. \n\nLet’s try and activate your account again!`
+  /// `Sorry! You were a bit late, your request has timed out. \n\nLet's try and activate your account again!`
   String get emailActivationFailedTitle {
     return Intl.message(
-      'Sorry! You were a bit late, your request has timed out. \n\nLet’s try and activate your account again!',
+      'Sorry! You were a bit late, your request has timed out. \n\nLet\'s try and activate your account again!',
       name: 'emailActivationFailedTitle',
       desc: '',
       args: [],
@@ -870,10 +890,10 @@ class S {
     );
   }
 
-  /// `Let’s get to the heart of personalisation, it’s time to define your investment style.`
+  /// `It’s time to define your investment style.  Show me what you’re made of!`
   String get investmentStyleWelcomeTitle {
     return Intl.message(
-      'Let’s get to the heart of personalisation, it’s time to define your investment style.',
+      'It’s time to define your investment style.  Show me what you’re made of!',
       name: 'investmentStyleWelcomeTitle',
       desc: '',
       args: [],
@@ -935,6 +955,36 @@ class S {
     return Intl.message(
       'Shares',
       name: 'shares',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Cancelled`
+  String get orderCancelled {
+    return Intl.message(
+      'Order Cancelled',
+      name: 'orderCancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Rejected`
+  String get orderRejected {
+    return Intl.message(
+      'Order Rejected',
+      name: 'orderRejected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Placed`
+  String get orderPlaced {
+    return Intl.message(
+      'Order Placed',
+      name: 'orderPlaced',
       desc: '',
       args: [],
     );
@@ -1040,10 +1090,10 @@ class S {
     );
   }
 
-  /// `You don’t have any funds to withdraw. You haven’t deposited yet or your deposit might still be processing `
+  /// `You don't have any funds to withdraw. You haven't deposited yet or your deposit might still be processing `
   String get errorWithdrawalUnavailableSubTitle {
     return Intl.message(
-      'You don’t have any funds to withdraw. You haven’t deposited yet or your deposit might still be processing ',
+      'You don\'t have any funds to withdraw. You haven\'t deposited yet or your deposit might still be processing ',
       name: 'errorWithdrawalUnavailableSubTitle',
       desc: '',
       args: [],
@@ -1110,10 +1160,10 @@ class S {
     );
   }
 
-  /// `I'm Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? `
+  /// `I'm Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat's your name? `
   String get askNameScreenPlaceholder {
     return Intl.message(
-      'I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? ',
+      'I\'m Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat\'s your name? ',
       name: 'askNameScreenPlaceholder',
       desc: '',
       args: [],
@@ -1150,30 +1200,30 @@ class S {
     );
   }
 
-  /// `Alright! Are you ready for the FinFit journey? `
+  /// `Ready to start your AI revolution?`
   String get greetingScreenTitle {
     return Intl.message(
-      'Alright! Are you ready for the FinFit journey? ',
+      'Ready to start your AI revolution?',
       name: 'greetingScreenTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!`
+  /// `Let's start the training with simple questions!\n\n  Remember - to lose patience is to lose the battle!`
   String get greetingScreenSubTitle {
     return Intl.message(
-      'Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!',
+      'Let\'s start the training with simple questions!\n\n  Remember - to lose patience is to lose the battle!',
       name: 'greetingScreenSubTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Lora’s date to start the Botstocks`
+  /// `Lora's date to start the Botstocks`
   String get tooltipBotDetailsStartDate {
     return Intl.message(
-      'Lora’s date to start the Botstocks',
+      'Lora\'s date to start the Botstocks',
       name: 'tooltipBotDetailsStartDate',
       desc: '',
       args: [],
@@ -1422,10 +1472,10 @@ class S {
     );
   }
 
-  /// `Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.`
+  /// `Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement'.`
   String get portfolioBuyingPowerToolTip {
     return Intl.message(
-      'Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.',
+      'Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement\'.',
       name: 'portfolioBuyingPowerToolTip',
       desc: '',
       args: [],
@@ -1472,10 +1522,10 @@ class S {
     );
   }
 
-  /// `Current Price {currency}`
+  /// `Current Price ({currency})`
   String portfolioCurrentPrice(String currency) {
     return Intl.message(
-      'Current Price $currency',
+      'Current Price ($currency)',
       name: 'portfolioCurrentPrice',
       desc: '',
       args: [currency],
@@ -1532,10 +1582,10 @@ class S {
     );
   }
 
-  /// `% of Bot Assets in Stock`
+  /// `Stock Holding %`
   String get portfolioDetailPerformanceBotAssetsInStock {
     return Intl.message(
-      '% of Bot Assets in Stock',
+      'Stock Holding %',
       name: 'portfolioDetailPerformanceBotAssetsInStock',
       desc: '',
       args: [],
@@ -1834,10 +1884,10 @@ class S {
   }
 
   /// `Enter valid password`
-  String get invalidPassword {
+  String get enterValidPassword {
     return Intl.message(
       'Enter valid password',
-      name: 'invalidPassword',
+      name: 'enterValidPassword',
       desc: '',
       args: [],
     );
@@ -1893,10 +1943,10 @@ class S {
     );
   }
 
-  /// `Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!`
+  /// `Looks like you haven't defined your Investment Style yet. Let's go and see what kind of Botstocks suit you best!`
   String get portfolioPopUpDefineInvestmentSubTitle {
     return Intl.message(
-      'Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!',
+      'Looks like you haven\'t defined your Investment Style yet. Let\'s go and see what kind of Botstocks suit you best!',
       name: 'portfolioPopUpDefineInvestmentSubTitle',
       desc: '',
       args: [],
@@ -1953,10 +2003,10 @@ class S {
     );
   }
 
-  /// `Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.`
+  /// `Looks like you haven't funded your account yet. Deposit HKD 10,000 to activate your account.`
   String get portfolioPopUpFundAccountSubTitle {
     return Intl.message(
-      'Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.',
+      'Looks like you haven\'t funded your account yet. Deposit HKD 10,000 to activate your account.',
       name: 'portfolioPopUpFundAccountSubTitle',
       desc: '',
       args: [],
@@ -2033,10 +2083,10 @@ class S {
     );
   }
 
-  /// `Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!`
+  /// `Looks like you haven't claimed your free Botstock yet. Let's get trading right away!`
   String get portfolioPopUpRedeemYourBotstockSubTitle {
     return Intl.message(
-      'Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!',
+      'Looks like you haven\'t claimed your free Botstock yet. Let\'s get trading right away!',
       name: 'portfolioPopUpRedeemYourBotstockSubTitle',
       desc: '',
       args: [],
@@ -2453,6 +2503,16 @@ class S {
     );
   }
 
+  /// `Check back later to see if\nthere are any new\ntransactions!`
+  String get checkBackLater {
+    return Intl.message(
+      'Check back later to see if\nthere are any new\ntransactions!',
+      name: 'checkBackLater',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Performance`
   String get performance {
     return Intl.message(
@@ -2633,10 +2693,10 @@ class S {
     );
   }
 
-  /// `We’re having some trouble processing your deposit request. Please try again`
+  /// `We're having some trouble processing your deposit request. Please try again`
   String get unableToProcessDepositSubTitle {
     return Intl.message(
-      'We’re having some trouble processing your deposit request. Please try again',
+      'We\'re having some trouble processing your deposit request. Please try again',
       name: 'unableToProcessDepositSubTitle',
       desc: '',
       args: [],
@@ -2653,10 +2713,10 @@ class S {
     );
   }
 
-  /// `We’re having some trouble processing your withdrawal request. Please try again`
+  /// `We're having some trouble processing your withdrawal request. Please try again`
   String get unableToProcessWithdrawalSubTitle {
     return Intl.message(
-      'We’re having some trouble processing your withdrawal request. Please try again',
+      'We\'re having some trouble processing your withdrawal request. Please try again',
       name: 'unableToProcessWithdrawalSubTitle',
       desc: '',
       args: [],
@@ -2693,10 +2753,10 @@ class S {
     );
   }
 
-  /// `Start your new investing journey with Lora - \nYour FinFit Coach`
+  /// `Start your AI revolution with\nAsklora. Go crush it.`
   String get signUpTitle {
     return Intl.message(
-      'Start your new investing journey with Lora - \nYour FinFit Coach',
+      'Start your AI revolution with\nAsklora. Go crush it.',
       name: 'signUpTitle',
       desc: '',
       args: [],
@@ -2833,10 +2893,10 @@ class S {
     );
   }
 
-  /// `Your Withdrawal request is submitted.`
+  /// `Your withdrawal request is submitted.`
   String get withdrawalRequestSubmittedTitle {
     return Intl.message(
-      'Your Withdrawal request is submitted.',
+      'Your withdrawal request is submitted.',
       name: 'withdrawalRequestSubmittedTitle',
       desc: '',
       args: [],
@@ -3245,10 +3305,10 @@ class S {
     );
   }
 
-  /// `You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.`
+  /// `You've completed all the steps to opening an account with Asklora! You'll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.`
   String get onBoardingCompletionMessage {
     return Intl.message(
-      'You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.',
+      'You\'ve completed all the steps to opening an account with Asklora! You\'ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.',
       name: 'onBoardingCompletionMessage',
       desc: '',
       args: [],
@@ -3265,11 +3325,1022 @@ class S {
     );
   }
 
-  /// `Go AA`
+  /// `Go`
   String get go {
     return Intl.message(
-      'Go AA',
+      'Go',
       name: 'go',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit via FPS or Wire Transfer`
+  String get depositViaFpsOrWireTransfer {
+    return Intl.message(
+      'Deposit via FPS or Wire Transfer',
+      name: 'depositViaFpsOrWireTransfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer to Asklora bank account from the same bank account you used.`
+  String get transferAtLeastWithNoMinimumDeposit {
+    return Intl.message(
+      'Transfer to Asklora bank account from the same bank account you used.',
+      name: 'transferAtLeastWithNoMinimumDeposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer at least HK${minDeposit} to Asklora's bank account. Any initial deposit less than HK${minDeposit} will be rejected and fees will be charged.`
+  String transferAtLeastWithMinimumDeposit(String minDeposit) {
+    return Intl.message(
+      'Transfer at least HK\$$minDeposit to Asklora\'s bank account. Any initial deposit less than HK\$$minDeposit will be rejected and fees will be charged.',
+      name: 'transferAtLeastWithMinimumDeposit',
+      desc: '',
+      args: [minDeposit],
+    );
+  }
+
+  /// `Upload proof of remittance`
+  String get uploadProofOfRemittance {
+    return Intl.message(
+      'Upload proof of remittance',
+      name: 'uploadProofOfRemittance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The proof of remittance should show your bank account number, full name, and amount.`
+  String get theProofOfRemittanceShouldShowYourBankAccount {
+    return Intl.message(
+      'The proof of remittance should show your bank account number, full name, and amount.',
+      name: 'theProofOfRemittanceShouldShowYourBankAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input deposit amount`
+  String get inputDepositAmount {
+    return Intl.message(
+      'Input deposit amount',
+      name: 'inputDepositAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The amount must match with the actual transferred amount.`
+  String get theAmountMustMatch {
+    return Intl.message(
+      'The amount must match with the actual transferred amount.',
+      name: 'theAmountMustMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your deposit can take up to 2 working days`
+  String get yourDepositCanTakeUp2WorkingDays {
+    return Intl.message(
+      'Your deposit can take up to 2 working days',
+      name: 'yourDepositCanTakeUp2WorkingDays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notes`
+  String get notes {
+    return Intl.message(
+      'Notes',
+      name: 'notes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.`
+  String get returningUserDepositNotes {
+    return Intl.message(
+      'We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.',
+      name: 'returningUserDepositNotes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK$ {minDeposit} bank transfer is completed.`
+  String weWillTakeInformationCollectedFromYour(String minDeposit) {
+    return Intl.message(
+      'We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK\$ $minDeposit bank transfer is completed.',
+      name: 'weWillTakeInformationCollectedFromYour',
+      desc: '',
+      args: [minDeposit],
+    );
+  }
+
+  /// `Please add a HK bank account that is under your name; other people's bank accounts or joint accounts will not be accepted.`
+  String get pleaseAddAHkBankAccount {
+    return Intl.message(
+      'Please add a HK bank account that is under your name; other people\'s bank accounts or joint accounts will not be accepted.',
+      name: 'pleaseAddAHkBankAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We will only accept deposits via bank transfer (wire/FPS) from your own account.`
+  String get weWillOnlyAcceptDepositViaBankTransfer {
+    return Intl.message(
+      'We will only accept deposits via bank transfer (wire/FPS) from your own account.',
+      name: 'weWillOnlyAcceptDepositViaBankTransfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We will only accept HKD.`
+  String get weWillOnlyAcceptHKD {
+    return Intl.message(
+      'We will only accept HKD.',
+      name: 'weWillOnlyAcceptHKD',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer initial funds to Asklora`
+  String get transferInitialFundToAsklora {
+    return Intl.message(
+      'Transfer initial funds to Asklora',
+      name: 'transferInitialFundToAsklora',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer funds to Asklora`
+  String get transferFundToAsklora {
+    return Intl.message(
+      'Transfer funds to Asklora',
+      name: 'transferFundToAsklora',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy Asklora's bank details and transfer no less than HK${minDeposit} from your bank account via FPS or Wire transfer.`
+  String firstTimeCopyAskloraBankDetails(String minDeposit) {
+    return Intl.message(
+      'Copy Asklora\'s bank details and transfer no less than HK\$$minDeposit from your bank account via FPS or Wire transfer.',
+      name: 'firstTimeCopyAskloraBankDetails',
+      desc: '',
+      args: [minDeposit],
+    );
+  }
+
+  /// `Copy Asklora's bank details and transfer from your bank account via FPS or Wire transfer.`
+  String get copyAskloraBankDetails {
+    return Intl.message(
+      'Copy Asklora\'s bank details and transfer from your bank account via FPS or Wire transfer.',
+      name: 'copyAskloraBankDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The amount must match with the proof of remittance.`
+  String get theAmountMustMatchWithPor {
+    return Intl.message(
+      'The amount must match with the proof of remittance.',
+      name: 'theAmountMustMatchWithPor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The proof of remittance should show your bank account number, full name, and amount.`
+  String get thePorShouldShowYourBank {
+    return Intl.message(
+      'The proof of remittance should show your bank account number, full name, and amount.',
+      name: 'thePorShouldShowYourBank',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please make sure you have finished the transfer and then inform us, if not, your deposit will be delayed.`
+  String get pleaseMakeSureYouHaveFinished {
+    return Intl.message(
+      'Please make sure you have finished the transfer and then inform us, if not, your deposit will be delayed.',
+      name: 'pleaseMakeSureYouHaveFinished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please make sure you press 'SUBMIT' after you have transferred the funds from your bank.`
+  String get pleaseMakeSureYouPressSubmit {
+    return Intl.message(
+      'Please make sure you press \'SUBMIT\' after you have transferred the funds from your bank.',
+      name: 'pleaseMakeSureYouPressSubmit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your deposit may be rejected if the informed amount is different from the actual transferred amount.`
+  String get yourDepositMayBeRejected {
+    return Intl.message(
+      'Your deposit may be rejected if the informed amount is different from the actual transferred amount.',
+      name: 'yourDepositMayBeRejected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We accept HKD only.`
+  String get weAcceptHKDOnly {
+    return Intl.message(
+      'We accept HKD only.',
+      name: 'weAcceptHKDOnly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get buttonSubmit {
+    return Intl.message(
+      'Submit',
+      name: 'buttonSubmit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `min. 8 characters`
+  String get min8Character {
+    return Intl.message(
+      'min. 8 characters',
+      name: 'min8Character',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `at least 1 lowercase letter`
+  String get atLeast1Lowercase {
+    return Intl.message(
+      'at least 1 lowercase letter',
+      name: 'atLeast1Lowercase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `at least 1 upper case letter`
+  String get atLeast1Uppercase {
+    return Intl.message(
+      'at least 1 upper case letter',
+      name: 'atLeast1Uppercase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `at least 1 number`
+  String get atLeast1Number {
+    return Intl.message(
+      'at least 1 number',
+      name: 'atLeast1Number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ready to go?`
+  String get readyToGo {
+    return Intl.message(
+      'Ready to go?',
+      name: 'readyToGo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid Password`
+  String get invalidPassword {
+    return Intl.message(
+      'Invalid Password',
+      name: 'invalidPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Agreements`
+  String get signAgreements {
+    return Intl.message(
+      'Sign Agreements',
+      name: 'signAgreements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Licensee: Chang Yung Ching`
+  String get licenseeName {
+    return Intl.message(
+      'Licensee: Chang Yung Ching',
+      name: 'licenseeName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CE No.: AFF918`
+  String get licenseeNumber {
+    return Intl.message(
+      'CE No.: AFF918',
+      name: 'licenseeNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Risk Disclosure Statement`
+  String get riskDisclosureStatementLabel {
+    return Intl.message(
+      'Risk Disclosure Statement',
+      name: 'riskDisclosureStatementLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1. The prices of securities fluctuate, sometimes dramatically. The price of a security may move up or down, and may become valueless. It is as likely that losses will be incurred rather than profit made as a result of buying and selling securities. Investors should not only base on this marketing material to make any investment decision, you should carefully consider whether the investment products or services are suitable for you according to your investment experience, purpose, risk tolerance, financial or related conditions. If you have any questions, please contact us or obtain independent advice.\n\n2. Investment in foreign securities carries additional risks not generally associated with securities in the domestic market. The value or income of foreign securities may be more volatile and could be adversely affected by changes in currency rates of exchange, foreign taxation practices, foreign laws, government practices, regulations, and political events. You may find it more difficult to liquidate investments in foreign securities where they have limited liquidity in the relevant market. Foreign laws, government practices, and regulations may also affect the transferability of foreign securities. Timely and reliable information about the value or the extent of the risks of foreign securities may not be readily available at all times.\n\n3. You acknowledge that you have fully understood the implications of the risks associated with the Electronic Trading Service as set out in the Client Agreement`
+  String get riskDisclosureStatementString {
+    return Intl.message(
+      '1. The prices of securities fluctuate, sometimes dramatically. The price of a security may move up or down, and may become valueless. It is as likely that losses will be incurred rather than profit made as a result of buying and selling securities. Investors should not only base on this marketing material to make any investment decision, you should carefully consider whether the investment products or services are suitable for you according to your investment experience, purpose, risk tolerance, financial or related conditions. If you have any questions, please contact us or obtain independent advice.\n\n2. Investment in foreign securities carries additional risks not generally associated with securities in the domestic market. The value or income of foreign securities may be more volatile and could be adversely affected by changes in currency rates of exchange, foreign taxation practices, foreign laws, government practices, regulations, and political events. You may find it more difficult to liquidate investments in foreign securities where they have limited liquidity in the relevant market. Foreign laws, government practices, and regulations may also affect the transferability of foreign securities. Timely and reliable information about the value or the extent of the risks of foreign securities may not be readily available at all times.\n\n3. You acknowledge that you have fully understood the implications of the risks associated with the Electronic Trading Service as set out in the Client Agreement',
+      name: 'riskDisclosureStatementString',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I have read, understood, and agree with the Risk Disclosure Statement.`
+  String get riskDisclosureStatementAcknowledgement {
+    return Intl.message(
+      'I have read, understood, and agree with the Risk Disclosure Statement.',
+      name: 'riskDisclosureStatementAcknowledgement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Personal Info`
+  String get personalInfo {
+    return Intl.message(
+      'Personal Info',
+      name: 'personalInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Financial Profile`
+  String get financialProfile {
+    return Intl.message(
+      'Financial Profile',
+      name: 'financialProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Agreements`
+  String get agreements {
+    return Intl.message(
+      'Agreements',
+      name: 'agreements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit Application`
+  String get submitApplication {
+    return Intl.message(
+      'Submit Application',
+      name: 'submitApplication',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible`
+  String get summaryAgreementInformation {
+    return Intl.message(
+      'The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible',
+      name: 'summaryAgreementInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a new password`
+  String get enterANewPassword {
+    return Intl.message(
+      'Enter a new password',
+      name: 'enterANewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password`
+  String get resetPassword {
+    return Intl.message(
+      'Reset Password',
+      name: 'resetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A Password reset email has been sent. Please check your email`
+  String get passwordLinkHasBeenSent {
+    return Intl.message(
+      'A Password reset email has been sent. Please check your email',
+      name: 'passwordLinkHasBeenSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input wrong email address`
+  String get inputWrongEmailAddress {
+    return Intl.message(
+      'Input wrong email address',
+      name: 'inputWrongEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can’t remember your email address?\nEmail us at cs@asklora.ai`
+  String get cannotRememberEmailAddress {
+    return Intl.message(
+      'Can’t remember your email address?\nEmail us at cs@asklora.ai',
+      name: 'cannotRememberEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot Password`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot Password',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your email. Instructions will be sent to reset your password.`
+  String get forgotPasswordMessage {
+    return Intl.message(
+      'Please enter your email. Instructions will be sent to reset your password.',
+      name: 'forgotPasswordMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password Reset Successful`
+  String get resetPasswordSuccessful {
+    return Intl.message(
+      'Password Reset Successful',
+      name: 'resetPasswordSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your password has been reset. Please go back to the Login page and login again.`
+  String get resetPasswordSuccessfulMessage {
+    return Intl.message(
+      'Your password has been reset. Please go back to the Login page and login again.',
+      name: 'resetPasswordSuccessfulMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to login`
+  String get backToLogin {
+    return Intl.message(
+      'Back to login',
+      name: 'backToLogin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asklora.\n Your ultimate\nfinancial advisor`
+  String get askloraYouUltimateFinancialAdvisor {
+    return Intl.message(
+      'Asklora.\n Your ultimate\nfinancial advisor',
+      name: 'askloraYouUltimateFinancialAdvisor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ask me anything related to finance`
+  String get askMeAnythingRelatedToFinance {
+    return Intl.message(
+      'Ask me anything related to finance',
+      name: 'askMeAnythingRelatedToFinance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I like your style`
+  String get investmentResultScreenTitle {
+    return Intl.message(
+      'I like your style',
+      name: 'investmentResultScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You're one step closer to AI Investing. \n\nTime to open your account.`
+  String get investmentResultScreenDescription {
+    return Intl.message(
+      'You\'re one step closer to AI Investing. \n\nTime to open your account.',
+      name: 'investmentResultScreenDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I'm afraid you're not eligible for Asklora yet.`
+  String get privacyFailedScreenTitle {
+    return Intl.message(
+      'I\'m afraid you\'re not eligible for Asklora yet.',
+      name: 'privacyFailedScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.`
+  String get privacyFailedScreenDescription {
+    return Intl.message(
+      'It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.',
+      name: 'privacyFailedScreenDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I appreciate your honesty.`
+  String get privacySuccessScreenTitle {
+    return Intl.message(
+      'I appreciate your honesty.',
+      name: 'privacySuccessScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Age is just a number, but your personality is what sets you apart.\n\nAnswer a few personality questions, and I'll help you find investments that fit your style.`
+  String get privacySuccessScreenDescription {
+    return Intl.message(
+      'Age is just a number, but your personality is what sets you apart.\n\nAnswer a few personality questions, and I\'ll help you find investments that fit your style.',
+      name: 'privacySuccessScreenDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try Again`
+  String get buttonTryAgain {
+    return Intl.message(
+      'Try Again',
+      name: 'buttonTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sure`
+  String get buttonSure {
+    return Intl.message(
+      'Sure',
+      name: 'buttonSure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alright!\n\nBased on your answers, my technology is perfect for you and you can take on more risks.`
+  String get personalizationResultScreenTitle {
+    return Intl.message(
+      'Alright!\n\nBased on your answers, my technology is perfect for you and you can take on more risks.',
+      name: 'personalizationResultScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `we investing can be simple with AI`
+  String get opennessLessThan8 {
+    return Intl.message(
+      'we investing can be simple with AI',
+      name: 'opennessLessThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `our technology is perfect for you.`
+  String get opennessMoreThan8 {
+    return Intl.message(
+      'our technology is perfect for you.',
+      name: 'opennessMoreThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `we think you can take on more risk.`
+  String get neuroticismLessThan8 {
+    return Intl.message(
+      'we think you can take on more risk.',
+      name: 'neuroticismLessThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `we think you should take on less risk.`
+  String get neuroticismMoreThan8 {
+    return Intl.message(
+      'we think you should take on less risk.',
+      name: 'neuroticismMoreThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You also seem to be a bit more reserved. But hey, introverts change the world!`
+  String get extrovertLessThan8 {
+    return Intl.message(
+      'You also seem to be a bit more reserved. But hey, introverts change the world!',
+      name: 'extrovertLessThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You also seem like a social butterfly - amplify that energy!`
+  String get extrovertMoreThan8 {
+    return Intl.message(
+      'You also seem like a social butterfly - amplify that energy!',
+      name: 'extrovertMoreThan8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active`
+  String get active {
+    return Intl.message(
+      'Active',
+      name: 'active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pending {
+    return Intl.message(
+      'Pending',
+      name: 'pending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investments tailored  for you`
+  String get botRecommendationScreenTitle {
+    return Intl.message(
+      'Investments tailored  for you',
+      name: 'botRecommendationScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not feeling it? Try something different.`
+  String get notFeelingIt {
+    return Intl.message(
+      'Not feeling it? Try something different.',
+      name: 'notFeelingIt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asklora's Wire Details`
+  String get askloraWireDetails {
+    return Intl.message(
+      'Asklora\'s Wire Details',
+      name: 'askloraWireDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Details`
+  String get buttonViewDetails {
+    return Intl.message(
+      'View Details',
+      name: 'buttonViewDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wire Transfer`
+  String get wireTransfer {
+    return Intl.message(
+      'Wire Transfer',
+      name: 'wireTransfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank Number`
+  String get bankNumber {
+    return Intl.message(
+      'Bank Number',
+      name: 'bankNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Number`
+  String get accountNumber {
+    return Intl.message(
+      'Account Number',
+      name: 'accountNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank Name`
+  String get bankName {
+    return Intl.message(
+      'Bank Name',
+      name: 'bankName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Swift Code`
+  String get swiftCode {
+    return Intl.message(
+      'Swift Code',
+      name: 'swiftCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Name`
+  String get accountName {
+    return Intl.message(
+      'Account Name',
+      name: 'accountName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Company Address`
+  String get companyAddress {
+    return Intl.message(
+      'Company Address',
+      name: 'companyAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Exchange Rate: HKD 1 = USD 0.137 (at HKT {time})`
+  String exchangeRateInDepositScreen(String time) {
+    return Intl.message(
+      'Current Exchange Rate: HKD 1 = USD 0.137 (at HKT $time)',
+      name: 'exchangeRateInDepositScreen',
+      desc: '',
+      args: [time],
+    );
+  }
+
+  /// `Error Storing Data`
+  String get errorStoringData {
+    return Intl.message(
+      'Error Storing Data',
+      name: 'errorStoringData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oops! We're having some technical difficulties trying to store your responses. Let's try retaking the questions`
+  String get errorStoringDataDetails {
+    return Intl.message(
+      'Oops! We\'re having some technical difficulties trying to store your responses. Let\'s try retaking the questions',
+      name: 'errorStoringDataDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User does not exist with the given email`
+  String get emailNotExist {
+    return Intl.message(
+      'User does not exist with the given email',
+      name: 'emailNotExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User email is not verified`
+  String get emailNotVerified {
+    return Intl.message(
+      'User email is not verified',
+      name: 'emailNotVerified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter valid email`
+  String get enterValidEmail {
+    return Intl.message(
+      'Enter valid email',
+      name: 'enterValidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password changed successfully.`
+  String get passwordChangeSuccessfully {
+    return Intl.message(
+      'Password changed successfully.',
+      name: 'passwordChangeSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Token is invalid or expired.`
+  String get tokenInvalid {
+    return Intl.message(
+      'Token is invalid or expired.',
+      name: 'tokenInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid OTP`
+  String get invalidOtp {
+    return Intl.message(
+      'Invalid OTP',
+      name: 'invalidOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Link for Password reset is sent to email.`
+  String get linkPasswordResetIsSent {
+    return Intl.message(
+      'Link for Password reset is sent to email.',
+      name: 'linkPasswordResetIsSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account is not active yet.`
+  String get accountIsNotActive {
+    return Intl.message(
+      'Your account is not active yet.',
+      name: 'accountIsNotActive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your email. Instructions will be sent to reset your password.`
+  String get pleaseEnterYouEmail {
+    return Intl.message(
+      'Please enter your email. Instructions will be sent to reset your password.',
+      name: 'pleaseEnterYouEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can't remember your email address?\nEmail us at cs@asklora.ai`
+  String get cantRememberYourEmail {
+    return Intl.message(
+      'Can\'t remember your email address?\nEmail us at cs@asklora.ai',
+      name: 'cantRememberYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input wrong email address`
+  String get inputWrongEmail {
+    return Intl.message(
+      'Input wrong email address',
+      name: 'inputWrongEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Based on your answer, {opennessScore} and {neuroticismScore}\n\n{extrovertScore}`
+  String resultOfPersonalizationQuestion(
+      String opennessScore, String neuroticismScore, String extrovertScore) {
+    return Intl.message(
+      'Based on your answer, $opennessScore and $neuroticismScore\n\n$extrovertScore',
+      name: 'resultOfPersonalizationQuestion',
+      desc: '',
+      args: [opennessScore, neuroticismScore, extrovertScore],
+    );
+  }
+
+  /// `Define again`
+  String get defineAgain {
+    return Intl.message(
+      'Define again',
+      name: 'defineAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Updated at {time} HKT, {date}`
+  String updatedAt(String time, String date) {
+    return Intl.message(
+      'Updated at $time HKT, $date',
+      name: 'updatedAt',
+      desc: '',
+      args: [time, date],
+    );
+  }
+
+  /// `It’s time to find out your investment preferences`
+  String get aiIsqWelcomeTitle {
+    return Intl.message(
+      'It’s time to find out your investment preferences',
+      name: 'aiIsqWelcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let’s see what kind of stocks you prefer`
+  String get aiIsqWelcomeSubTitle {
+    return Intl.message(
+      'Let’s see what kind of stocks you prefer',
+      name: 'aiIsqWelcomeSubTitle',
       desc: '',
       args: [],
     );

@@ -12,6 +12,7 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
+import '../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../core/repository/transaction_repository.dart';
 import '../../../core/repository/tutorial_repository.dart';
@@ -40,6 +41,7 @@ import '../../tabs/home/home_screen_form.dart';
 import 'widgets/ai_overlay.dart';
 
 part 'widgets/tab_pages.dart';
+
 part 'widgets/tabs.dart';
 
 class TabScreen extends StatelessWidget {
@@ -51,6 +53,10 @@ class TabScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
         providers: [
+          BlocProvider(
+            create: (_) =>
+                TutorialBloc(tutorialRepository: TutorialRepository()),
+          ),
           BlocProvider(
             create: (_) =>
                 AccountInformationBloc(accountRepository: AccountRepository())
@@ -112,50 +118,57 @@ class TabScreen extends StatelessWidget {
               content: state.response.data != null
                   ? BlocProvider(
                       create: (_) => TabScreenBloc(
-                        initialTabPage: state.response.data!.canTrade
-                            ? TabPage.forYou
-                            : TabPage.home,
-                      ),
+                          initialTabPage: initialTabPage ??
+                              (state.response.data!.canTrade
+                                  ? TabPage.forYou
+                                  : TabPage.home)),
                       child: ShowCaseWidget(
-                        disableBarrierInteraction: true,
-                        disableMovingAnimation: true,
-                        showCaseViewScrollPosition:
-                            ShowCaseViewScrollPosition.scrollToTop,
-                        blurValue: 2.5,
-                        builder: Builder(builder: (context) {
-                          return BlocListener<TabScreenBloc, TabScreenState>(
-                            listenWhen: (previous, current) =>
-                                previous.tabScreenBackState !=
-                                current.tabScreenBackState,
-                            listener: (context, state) {
-                              if (state.tabScreenBackState ==
-                                  TabScreenBackState.openConfirmation) {
-                                CustomInAppNotification.show(
-                                    context, S.of(context).pressBackAgain,
-                                    type: PopupType.grey);
-                              } else if (state.tabScreenBackState ==
-                                  TabScreenBackState.closeApp) {
-                                SystemNavigator.pop();
-                              }
+                          disableBarrierInteraction: true,
+                          disableMovingAnimation: true,
+                          showCaseViewScrollPosition:
+                              ShowCaseViewScrollPosition.scrollToTop,
+                          blurValue: 2.5,
+                          builder: Builder(
+                            builder: (context) {
+                              return BlocListener<TabScreenBloc,
+                                  TabScreenState>(
+                                listenWhen: (previous, current) =>
+                                    previous.tabScreenBackState !=
+                                    current.tabScreenBackState,
+                                listener: (context, state) {
+                                  if (state.tabScreenBackState ==
+                                      TabScreenBackState.openConfirmation) {
+                                    CustomInAppNotification.show(
+                                        context, S.of(context).pressBackAgain,
+                                        type: PopupType.grey);
+                                  } else if (state.tabScreenBackState ==
+                                      TabScreenBackState.closeApp) {
+                                    SystemNavigator.pop();
+                                  }
+                                },
+                                child: Builder(
+                                  builder: (context) => WillPopScope(
+                                    onWillPop: () async {
+                                      context
+                                          .read<TabScreenBloc>()
+                                          .add(BackButtonClicked());
+                                      return false;
+                                    },
+                                    child: Column(
+                                      children: [
+                                        TabPages(
+                                            canTrade:
+                                                state.response.data!.canTrade),
+                                        Tabs(
+                                            canTrade:
+                                                state.response.data!.canTrade)
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
                             },
-                            child: WillPopScope(
-                              onWillPop: () async {
-                                context
-                                    .read<TabScreenBloc>()
-                                    .add(BackButtonClicked());
-                                return false;
-                              },
-                              child: Column(
-                                children: [
-                                  TabPages(
-                                      canTrade: state.response.data!.canTrade),
-                                  const Tabs(canTrade: true)
-                                ],
-                              ),
-                            ),
-                          );
-                        }),
-                      ),
+                          )),
                     )
                   : const SizedBox.shrink(),
 

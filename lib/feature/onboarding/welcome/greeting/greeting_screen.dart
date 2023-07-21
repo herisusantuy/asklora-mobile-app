@@ -5,8 +5,8 @@ import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../core/presentation/custom_text_new.dart';
-import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
+import '../../../../core/utils/app_icons.dart';
 import '../../../../generated/l10n.dart';
 import '../../ppi/bloc/question/question_bloc.dart';
 import '../../ppi/presentation/ppi_screen.dart';
@@ -25,7 +25,16 @@ class GreetingScreen extends StatelessWidget {
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          LoraMemojiHeader(text: S.of(context).greetingScreenTitle),
+          const SizedBox(height: 70),
+          getAPngImage('lora_animation_green',
+              width: 208, fit: BoxFit.fitWidth),
+          const SizedBox(height: 10),
+          CustomTextNew(
+            S.of(context).greetingScreenTitle,
+            style: AskLoraTextStyles.h4,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 35),
           Align(
             alignment: Alignment.center,
             child: CustomTextNew(

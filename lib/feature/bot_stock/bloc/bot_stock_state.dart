@@ -9,7 +9,6 @@ class BotStockState extends Equatable {
     this.faqActiveIndex,
     this.botStockTradeAmount = 0,
     this.buyingPower = 0,
-    this.isBotDetailsTutorial = false,
     this.isBotTradeSummaryTutorial = false,
   });
 
@@ -19,7 +18,6 @@ class BotStockState extends Equatable {
   final int? faqActiveIndex;
   final double botStockTradeAmount;
   final double buyingPower;
-  final bool isBotDetailsTutorial;
   final bool isBotTradeSummaryTutorial;
 
   @override
@@ -31,7 +29,6 @@ class BotStockState extends Equatable {
       botDetailResponse,
       botStockTradeAmount,
       buyingPower,
-      isBotDetailsTutorial,
       isBotTradeSummaryTutorial
     ];
   }
@@ -43,7 +40,6 @@ class BotStockState extends Equatable {
     int? faqActiveIndex,
     double? botStockTradeAmount,
     double? buyingPower,
-    bool? isBotDetailsTutorial,
     bool? isBotTradeSummaryTutorial,
   }) {
     return BotStockState(
@@ -55,7 +51,6 @@ class BotStockState extends Equatable {
       faqActiveIndex: faqActiveIndex ?? this.faqActiveIndex,
       botStockTradeAmount: botStockTradeAmount ?? this.botStockTradeAmount,
       buyingPower: buyingPower ?? this.buyingPower,
-      isBotDetailsTutorial: isBotDetailsTutorial ?? this.isBotDetailsTutorial,
       isBotTradeSummaryTutorial:
           isBotTradeSummaryTutorial ?? this.isBotTradeSummaryTutorial,
     );

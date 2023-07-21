@@ -4,19 +4,13 @@ import '../utils/storage/storage_keys.dart';
 class TutorialRepository {
   final SharedPreference _sharedPreference = SharedPreference();
 
-  Future<bool> botDetailsTutorialFinished() async {
-    bool response =
-        await _sharedPreference.writeBoolData(sfKeyBotDetailsTutorial, false);
-    return response;
+  Future<bool> saveTutorialState(bool tutorialState) async {
+    await _sharedPreference.writeBoolData(
+        sfKeyBotDetailsTutorial, tutorialState);
+    return tutorialState;
   }
 
-  Future<bool> setTradeSummaryTutorialFinished() async {
-    bool response =
-        await _sharedPreference.writeBoolData(sfKeyTradeSummaryTutorial, false);
-    return response;
-  }
-
-  Future<bool> isBotDetailsTutorial() async {
+  Future<bool> fetchTutorialState() async {
     bool? response =
         await _sharedPreference.readBoolData(sfKeyBotDetailsTutorial);
     return response ?? true;
@@ -26,5 +20,11 @@ class TutorialRepository {
     bool? response =
         await _sharedPreference.readBoolData(sfKeyTradeSummaryTutorial);
     return response ?? true;
+  }
+
+  Future<bool> setTradeSummaryTutorialFinished() async {
+    bool response =
+        await _sharedPreference.writeBoolData(sfKeyTradeSummaryTutorial, false);
+    return response;
   }
 }

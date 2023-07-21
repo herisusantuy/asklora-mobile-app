@@ -33,16 +33,6 @@ class PersonalisationQuestionIndexChanged extends QuestionEvent {
   List<Object> get props => [personalisationQuestionIndex];
 }
 
-class InvestmentStyleQuestionIndexChanged extends QuestionEvent {
-  const InvestmentStyleQuestionIndexChanged(this.investmentStyleQuestionIndex)
-      : super();
-
-  final int investmentStyleQuestionIndex;
-
-  @override
-  List<Object> get props => [investmentStyleQuestionIndex];
-}
-
 class CurrentPersonalisationPageIncremented extends QuestionEvent {
   const CurrentPersonalisationPageIncremented() : super();
 
@@ -57,13 +47,6 @@ class CurrentPrivacyPageIncremented extends QuestionEvent {
   List<Object> get props => [];
 }
 
-class CurrentInvestmentStylePageIncremented extends QuestionEvent {
-  const CurrentInvestmentStylePageIncremented() : super();
-
-  @override
-  List<Object> get props => [];
-}
-
 class CurrentPrivacyPageDecremented extends QuestionEvent {
   const CurrentPrivacyPageDecremented() : super();
 
@@ -73,20 +56,6 @@ class CurrentPrivacyPageDecremented extends QuestionEvent {
 
 class CurrentPersonalisationPageDecremented extends QuestionEvent {
   const CurrentPersonalisationPageDecremented() : super();
-
-  @override
-  List<Object> get props => [];
-}
-
-class CurrentInvestmentStylePageDecremented extends QuestionEvent {
-  const CurrentInvestmentStylePageDecremented() : super();
-
-  @override
-  List<Object> get props => [];
-}
-
-class ResetInvestmentStylePage extends QuestionEvent {
-  const ResetInvestmentStylePage() : super();
 
   @override
   List<Object> get props => [];
