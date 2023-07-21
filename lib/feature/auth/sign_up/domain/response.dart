@@ -21,10 +21,8 @@ class SignUpResponse extends Equatable {
 @JsonSerializable()
 class GetOtpResponse extends Equatable {
   final String detail;
-  @JsonKey(name: 'phone_number')
-  final String phoneNumber;
 
-  const GetOtpResponse(this.detail, this.phoneNumber);
+  const GetOtpResponse(this.detail);
 
   factory GetOtpResponse.fromJson(Map<String, dynamic> json) =>
       _$GetOtpResponseFromJson(json);
@@ -32,5 +30,5 @@ class GetOtpResponse extends Equatable {
   Map<String, dynamic> toJson() => _$GetOtpResponseToJson(this);
 
   @override
-  List<Object?> get props => [detail, phoneNumber];
+  List<Object?> get props => [detail];
 }

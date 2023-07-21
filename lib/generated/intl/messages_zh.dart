@@ -177,6 +177,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonDeposit": MessageLookupByLibrary.simpleMessage("入金"),
         "buttonDone": MessageLookupByLibrary.simpleMessage("完成"),
         "buttonForgetPassword": MessageLookupByLibrary.simpleMessage("忘記密碼？"),
+        "buttonGoBack": MessageLookupByLibrary.simpleMessage("返回"),
         "buttonHaveAnAccount": MessageLookupByLibrary.simpleMessage("已有賬戶？"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("立即開始"),
         "buttonMaybeLater": MessageLookupByLibrary.simpleMessage("稍後再說"),
@@ -339,6 +340,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "想知Asklora有咩投資秘技？\n界定你嘅投資風格先！\n"),
         "isqNextButton": MessageLookupByLibrary.simpleMessage(
             "Press to move onto the next section"),
+        "kycRejectedExplanationOfAffiliate":
+            MessageLookupByLibrary.simpleMessage("我們不接受上述類別人士\n開立賬戶。"),
+        "kycRejectedScreenTitle":
+            MessageLookupByLibrary.simpleMessage("Sorry，原來你唔合資格用 Asklora！"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
         "learnBotstockManagement":
             MessageLookupByLibrary.simpleMessage("學䲾 Botstock 管理"),

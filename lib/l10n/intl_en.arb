@@ -415,20 +415,6 @@
   },
   "viewDepositGuide": "View Deposit Guide",
   "pressBackAgain": "Press back again to exit Asklora",
-  "hereYouCanFind": "Here, you can find the ",
-  "botStocksDetails": "Botstock’s details and estimated returns.",
-  "thisInteractiveGraph": "This interactive graph shows the Botstock’s past ",
-  "twoWeekPerformance": "2 weeks performance ",
-  "toGiveYou": "to give you a better idea of its trading potential!",
-  "ifYouveGot": "If you’ve got ",
-  "anyQuestion": "any questions ",
-  "aboutYourInvestment": "about your investment, tap this icon to summon your ",
-  "personalAIAssistant": "personal AI assistant Asklora! ",
-  "simplyTypeAQuestion": "Simply type a question and tap the ",
-  "sendIcon": "send icon ",
-  "toStartAConversation": "to start a conversation. Swipe down ",
-  "topBar": "top bar ",
-  "toDismissAsklora": "to dismiss Asklora. ",
   "tradeSummary": "Trade Summary",
   "marketPrice": "Market Price",
   "endDate": "End Date",
@@ -640,6 +626,8 @@
       }
     }
   },
+  "aiIsqWelcomeTitle": "It's time to find out your investment preferences",
+  "aiIsqWelcomeSubTitle": "Let's see what kind of stocks you prefer",
   "isqNextButton": "Press to move onto the next section",
   "cancelled": "Cancelled",
   "expired": "Expired",
@@ -671,5 +659,8 @@
         "type": "String"
       }
     }
-  }
+  },
+  "kycRejectedScreenTitle": "Sorry ! You are not eligible for Asklora",
+  "kycRejectedExplanationOfAffiliate": "We do not accept any members who are affiliated with the organisations mentioned above",
+  "buttonGoBack": "Go Back"
 }

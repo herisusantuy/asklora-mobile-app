@@ -2963,146 +2963,6 @@ class S {
     );
   }
 
-  /// `Here, you can find the `
-  String get hereYouCanFind {
-    return Intl.message(
-      'Here, you can find the ',
-      name: 'hereYouCanFind',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Botstock’s details and estimated returns.`
-  String get botStocksDetails {
-    return Intl.message(
-      'Botstock’s details and estimated returns.',
-      name: 'botStocksDetails',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `This interactive graph shows the Botstock’s past `
-  String get thisInteractiveGraph {
-    return Intl.message(
-      'This interactive graph shows the Botstock’s past ',
-      name: 'thisInteractiveGraph',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `2 weeks performance `
-  String get twoWeekPerformance {
-    return Intl.message(
-      '2 weeks performance ',
-      name: 'twoWeekPerformance',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `to give you a better idea of its trading potential!`
-  String get toGiveYou {
-    return Intl.message(
-      'to give you a better idea of its trading potential!',
-      name: 'toGiveYou',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `If you’ve got `
-  String get ifYouveGot {
-    return Intl.message(
-      'If you’ve got ',
-      name: 'ifYouveGot',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `any questions `
-  String get anyQuestion {
-    return Intl.message(
-      'any questions ',
-      name: 'anyQuestion',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `about your investment, tap this icon to summon your `
-  String get aboutYourInvestment {
-    return Intl.message(
-      'about your investment, tap this icon to summon your ',
-      name: 'aboutYourInvestment',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `personal AI assistant Asklora! `
-  String get personalAIAssistant {
-    return Intl.message(
-      'personal AI assistant Asklora! ',
-      name: 'personalAIAssistant',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Simply type a question and tap the `
-  String get simplyTypeAQuestion {
-    return Intl.message(
-      'Simply type a question and tap the ',
-      name: 'simplyTypeAQuestion',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `send icon `
-  String get sendIcon {
-    return Intl.message(
-      'send icon ',
-      name: 'sendIcon',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `to start a conversation. Swipe down `
-  String get toStartAConversation {
-    return Intl.message(
-      'to start a conversation. Swipe down ',
-      name: 'toStartAConversation',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `top bar `
-  String get topBar {
-    return Intl.message(
-      'top bar ',
-      name: 'topBar',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `to dismiss Asklora. `
-  String get toDismissAsklora {
-    return Intl.message(
-      'to dismiss Asklora. ',
-      name: 'toDismissAsklora',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Trade Summary`
   String get tradeSummary {
     return Intl.message(
@@ -4306,6 +4166,26 @@ class S {
     );
   }
 
+  /// `It's time to find out your investment preferences`
+  String get aiIsqWelcomeTitle {
+    return Intl.message(
+      'It\'s time to find out your investment preferences',
+      name: 'aiIsqWelcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's see what kind of stocks you prefer`
+  String get aiIsqWelcomeSubTitle {
+    return Intl.message(
+      'Let\'s see what kind of stocks you prefer',
+      name: 'aiIsqWelcomeSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Press to move onto the next section`
   String get isqNextButton {
     return Intl.message(
@@ -4371,26 +4251,6 @@ class S {
     return Intl.message(
       'Sell',
       name: 'sell',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `It's time to find out your investment preferences`
-  String get aiIsqWelcomeTitle {
-    return Intl.message(
-      'It\'s time to find out your investment preferences',
-      name: 'aiIsqWelcomeTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Let's see what kind of stocks you prefer`
-  String get aiIsqWelcomeSubTitle {
-    return Intl.message(
-      'Let\'s see what kind of stocks you prefer',
-      name: 'aiIsqWelcomeSubTitle',
       desc: '',
       args: [],
     );
@@ -4473,6 +4333,36 @@ class S {
       name: 'reSendOtp',
       desc: '',
       args: [seconds],
+    );
+  }
+
+  /// `Sorry ! You are not eligible for Asklora`
+  String get kycRejectedScreenTitle {
+    return Intl.message(
+      'Sorry ! You are not eligible for Asklora',
+      name: 'kycRejectedScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We do not accept any members who are affiliated with the organisations mentioned above`
+  String get kycRejectedExplanationOfAffiliate {
+    return Intl.message(
+      'We do not accept any members who are affiliated with the organisations mentioned above',
+      name: 'kycRejectedExplanationOfAffiliate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go Back`
+  String get buttonGoBack {
+    return Intl.message(
+      'Go Back',
+      name: 'buttonGoBack',
+      desc: '',
+      args: [],
     );
   }
 }

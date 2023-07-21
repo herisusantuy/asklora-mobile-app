@@ -40,12 +40,3 @@ class SmsOtpRequested extends OtpEvent {
   @override
   List<Object> get props => [email];
 }
-
-class OtpTyped extends OtpEvent {
-  final String otp;
-
-  const OtpTyped(this.otp) : super();
-
-  @override
-  List<Object> get props => [otp];
-}
