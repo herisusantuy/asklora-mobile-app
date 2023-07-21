@@ -606,5 +606,8 @@
   "bankAccountNumber": "銀行戶口號碼",
   "status": "狀態",
   "timeCompleted": "完成時間",
-  "withdrawalHistory": "提款歷史"
+  "withdrawalHistory": "提款歷史",
+  "kycRejectedScreenTitle": "Sorry，原來你唔合資格用 Asklora！",
+  "kycRejectedExplanationOfAffiliate": "我們不接受上述類別人士\n開立賬戶。",
+  "buttonGoBack": "返回"
 }

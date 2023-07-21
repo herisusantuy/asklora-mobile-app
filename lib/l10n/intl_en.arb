@@ -636,5 +636,8 @@
   "aiIsqWelcomeTitle": "It's time to find out your investment preferences",
   "aiIsqWelcomeSubTitle": "Let's see what kind of stocks you prefer",
   "depositHistory": "Deposit History",
-  "withdrawalHistory": "Withdrawal History"
+  "withdrawalHistory": "Withdrawal History",
+  "kycRejectedScreenTitle": "Sorry ! You are not eligible for Asklora",
+  "kycRejectedExplanationOfAffiliate": "We do not accept any members who are affiliated with the organisations mentioned above",
+  "buttonGoBack": "Go Back"
 }

@@ -6,11 +6,14 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
+import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
+import '../../../../core/styles/asklora_colors.dart';
+import '../../../../core/styles/asklora_text_styles.dart';
+import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../onboarding/kyc/presentation/kyc_screen.dart';
@@ -66,8 +69,17 @@ class SignInForm extends StatelessWidget {
                   children: <Widget>[
                     Column(
                       children: [
-                        LoraMemojiHeader(
-                            text: 'Welcome back!\n${S.of(context).readyToGo}'),
+                        // LoraMemojiHeader(
+                        //     text: 'Welcome back!\n${S.of(context).readyToGo}'),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
+                          child: loraGreenAnimation,
+                        ),
+                        CustomTextNew(
+                            'Welcome back!\n${S.of(context).readyToGo}',
+                            textAlign: TextAlign.center,
+                            style: AskLoraTextStyles.h4
+                                .copyWith(color: AskLoraColors.charcoal)),
                         context.padding(),
                         _emailInput(),
                         context.padding(topPadding: 10),

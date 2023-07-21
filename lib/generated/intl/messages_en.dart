@@ -201,6 +201,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonDone": MessageLookupByLibrary.simpleMessage("Done"),
         "buttonForgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget Password?"),
+        "buttonGoBack": MessageLookupByLibrary.simpleMessage("Go Back"),
         "buttonHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Have An Account?"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("Let\'s Begin"),
@@ -419,6 +420,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I like your style"),
         "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
             "It’s time to define your investment style.  Show me what you’re made of!"),
+        "kycRejectedExplanationOfAffiliate": MessageLookupByLibrary.simpleMessage(
+            "We do not accept any members who are affiliated with the organisations mentioned above"),
+        "kycRejectedScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "Sorry ! You are not eligible for Asklora"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "learnBotstockManagement":
             MessageLookupByLibrary.simpleMessage("Learn Botstock Management"),

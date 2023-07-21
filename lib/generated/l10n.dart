@@ -4265,6 +4265,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Sorry ! You are not eligible for Asklora`
+  String get kycRejectedScreenTitle {
+    return Intl.message(
+      'Sorry ! You are not eligible for Asklora',
+      name: 'kycRejectedScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We do not accept any members who are affiliated with the organisations mentioned above`
+  String get kycRejectedExplanationOfAffiliate {
+    return Intl.message(
+      'We do not accept any members who are affiliated with the organisations mentioned above',
+      name: 'kycRejectedExplanationOfAffiliate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go Back`
+  String get buttonGoBack {
+    return Intl.message(
+      'Go Back',
+      name: 'buttonGoBack',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
