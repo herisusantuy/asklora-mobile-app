@@ -98,7 +98,7 @@
   "free": "Free",
   "botStockId": "Botstock ID",
   "investmentAmount": "Investment Amount",
-  "investmentStyleWelcomeTitle": "Let's get to the heart of personalisation, it's time to define your investment style.",
+  "investmentStyleWelcomeTitle": "It’s time to define your investment style.  Show me what you’re made of!",
   "tradeFee": "Trade Fee",
   "endedAmount": "Ended Amount",
   "summary": "Summary",
@@ -401,7 +401,7 @@
   "welcomeScreenThirdBenefit": "Automated trading strategies",
   "withdrawalAmount": "Withdrawal Amount",
   "withdrawalWorkingDays": "Your withdrawal can take up to 2 working days.",
-  "withdrawalRequestSubmittedTitle": "Your withdrawal request is submitted.",
+  "withdrawalRequestSubmittedTitle": "Withdrawal Request Submitted",
   "withdrawalRequestSubmittedSubTitle": "You will be informed via email and app notification as soon as the funds are paid to your account.",
   "withdraw": "Withdraw",
   "relearn": "relearn",
@@ -420,7 +420,7 @@
   "endDate": "End Date",
   "confirmTrade": "Confirm Trade",
   "checkBotStockDetails": "Check Botstock Details",
-  "tradeRequestReceived": "Trade Request Received",
+  "tradeRequestSubmitted": "Trade Request Submitted",
   "tradeCancelledTitle": "Trade Cancelled",
   "tradeCancelledSubtitle": "The trade has been cancelled and your investment amount has been returned to your account",
   "rolloverBotStockAcknowledgement": "{botName} {botSymbol} will start at {dateTime}",
@@ -626,5 +626,16 @@
       }
     }
   },
+  "aiIsqWelcomeTitle": "It’s time to find out your investment preferences",
+  "aiIsqWelcomeSubTitle": "Let’s see what kind of stocks you prefer",
+  "isqNextButton": "Press to move onto the next section",
+  "cancelled": "Cancelled",
+  "expired": "Expired",
+  "rejected": "Rejected",
+  "completed": "Completed",
+  "buy": "Buy",
+  "sell": "Sell",
+  "depositHistory": "Deposit History",
+  "withdrawalHistory": "Withdrawal History",
   "ourPersonalisedRecommendationsAreUnique": "Our personalised recommendations are unique. The recommended Botstocks are based on your risk tolerance, personality, and investment style."
 }

@@ -88,7 +88,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
               BotStockResultScreen.openReplace(
                   context: context,
                   arguments: BotStockResultArgument(
-                    title: S.of(context).tradeRequestReceived,
+                    title: S.of(context).tradeRequestSubmitted,
                     desc: _tradeRequestSuccessMessage(
                         context, state.createBotOrderResponse.data!),
                     labelBottomButton: S.of(context).checkBotStockDetails,

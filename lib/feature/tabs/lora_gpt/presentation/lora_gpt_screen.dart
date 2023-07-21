@@ -55,18 +55,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
         height: 60,
         child: Stack(
           children: [
-            Center(
-                child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                  getPngIcon('icon_lora_ai_chat_bubble', fit: BoxFit.contain),
-                  CustomTextNew(
-                    'Lora',
-                    style: AskLoraTextStyles.h4
-                        .copyWith(color: AskLoraColors.white),
-                  ),
-                ])),
+            const Center(child: ChatLoraHeader()),
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(

@@ -890,10 +890,10 @@ class S {
     );
   }
 
-  /// `Let's get to the heart of personalisation, it's time to define your investment style.`
+  /// `It’s time to define your investment style.  Show me what you’re made of!`
   String get investmentStyleWelcomeTitle {
     return Intl.message(
-      'Let\'s get to the heart of personalisation, it\'s time to define your investment style.',
+      'It’s time to define your investment style.  Show me what you’re made of!',
       name: 'investmentStyleWelcomeTitle',
       desc: '',
       args: [],
@@ -2893,10 +2893,10 @@ class S {
     );
   }
 
-  /// `Your withdrawal request is submitted.`
+  /// `Withdrawal Request Submitted`
   String get withdrawalRequestSubmittedTitle {
     return Intl.message(
-      'Your withdrawal request is submitted.',
+      'Withdrawal Request Submitted',
       name: 'withdrawalRequestSubmittedTitle',
       desc: '',
       args: [],
@@ -3013,11 +3013,11 @@ class S {
     );
   }
 
-  /// `Trade Request Received`
-  String get tradeRequestReceived {
+  /// `Trade Request Submitted`
+  String get tradeRequestSubmitted {
     return Intl.message(
-      'Trade Request Received',
-      name: 'tradeRequestReceived',
+      'Trade Request Submitted',
+      name: 'tradeRequestSubmitted',
       desc: '',
       args: [],
     );
@@ -4163,6 +4163,116 @@ class S {
       name: 'updatedAt',
       desc: '',
       args: [time, date],
+    );
+  }
+
+  /// `It’s time to find out your investment preferences`
+  String get aiIsqWelcomeTitle {
+    return Intl.message(
+      'It’s time to find out your investment preferences',
+      name: 'aiIsqWelcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let’s see what kind of stocks you prefer`
+  String get aiIsqWelcomeSubTitle {
+    return Intl.message(
+      'Let’s see what kind of stocks you prefer',
+      name: 'aiIsqWelcomeSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Press to move onto the next section`
+  String get isqNextButton {
+    return Intl.message(
+      'Press to move onto the next section',
+      name: 'isqNextButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancelled`
+  String get cancelled {
+    return Intl.message(
+      'Cancelled',
+      name: 'cancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expired`
+  String get expired {
+    return Intl.message(
+      'Expired',
+      name: 'expired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rejected`
+  String get rejected {
+    return Intl.message(
+      'Rejected',
+      name: 'rejected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get completed {
+    return Intl.message(
+      'Completed',
+      name: 'completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Buy`
+  String get buy {
+    return Intl.message(
+      'Buy',
+      name: 'buy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sell`
+  String get sell {
+    return Intl.message(
+      'Sell',
+      name: 'sell',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit History`
+  String get depositHistory {
+    return Intl.message(
+      'Deposit History',
+      name: 'depositHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Withdrawal History`
+  String get withdrawalHistory {
+    return Intl.message(
+      'Withdrawal History',
+      name: 'withdrawalHistory',
+      desc: '',
+      args: [],
     );
   }
 

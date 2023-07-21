@@ -13,18 +13,15 @@ void main() async {
   group('Question Bloc Tests', () {
     late PpiQuestionRepository ppiQuestionRepository;
     late QuestionBloc questionBloc;
-    late SharedPreference sharedPreference;
 
     setUpAll(() async {
       ppiQuestionRepository = MockPpiQuestionRepository();
-      sharedPreference = MockSharedPreference();
     });
 
     setUp(() async {
       questionBloc = QuestionBloc(
           ppiQuestionRepository: ppiQuestionRepository,
-          questionPageType: QuestionPageType.privacy,
-          sharedPreference: sharedPreference);
+          questionPageType: QuestionPageType.privacy);
     });
 
     test('Question Bloc init response should be BaseResponse', () {
@@ -54,15 +51,6 @@ void main() async {
         act: (bloc) => bloc.add(const PrivacyQuestionIndexChanged(2)),
         expect: () => {
               const QuestionState(privacyQuestionIndex: 2),
-            });
-
-    blocTest<QuestionBloc, QuestionState>(
-        'emits investmentStyleQuestionIndex 3 WHEN '
-        'changed the investment question index to 3',
-        build: () => questionBloc,
-        act: (bloc) => bloc.add(const InvestmentStyleQuestionIndexChanged(3)),
-        expect: () => {
-              const QuestionState(investmentStyleQuestionIndex: 3),
             });
 
     tearDown(() => {questionBloc.close()});
