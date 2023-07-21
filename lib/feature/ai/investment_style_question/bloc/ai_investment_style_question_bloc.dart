@@ -1,8 +1,10 @@
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/domain/ai/conversation.dart';
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/utils/log.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
 import '../../../onboarding/ppi/domain/fixture.dart';
@@ -10,7 +12,6 @@ import '../../../onboarding/ppi/domain/ppi_user_response_request.dart';
 import '../../../onboarding/ppi/domain/question.dart';
 import '../../../onboarding/ppi/repository/ppi_question_repository.dart';
 import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
-import '../../../../core/domain/ai/conversation.dart';
 import '../../../tabs/lora_gpt/repository/lora_gpt_repository.dart';
 import '../domain/interaction.dart';
 import '../domain/investment_style_question_query_request.dart';
@@ -152,7 +153,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
         answer: choices.id!.toString(),
       ));
     } else {
-      debugPrint('Exception Not found');
+      Logger.log('Exception while processing AI ISQ into PPI ISQ.');
     }
   }
 
@@ -179,6 +180,8 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
 
     tempList.add(Loading());
 
+    final query = state.query;
+
     emit(state.copyWith(
       query: '',
       isTyping: true,
@@ -189,7 +192,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
         params: InvestmentStyleQuestionQueryRequest(
             userId: state.userId,
             username: state.userName,
-            input: state.query,
+            input: query,
             start: event.isNewSession,
             answer: int.parse(event.answerId)));
 

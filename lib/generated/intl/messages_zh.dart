@@ -102,9 +102,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("投資賬戶\n即將 Ready！"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
         "aiIsqWelcomeSubTitle": MessageLookupByLibrary.simpleMessage(
-            "Let\'s see what kind of stocks you prefer"),
+            "Let’s see what kind of stocks you prefer"),
         "aiIsqWelcomeTitle": MessageLookupByLibrary.simpleMessage(
-            "It\'s time to find out your investment preferences"),
+            "It’s time to find out your investment preferences"),
         "allSettings": MessageLookupByLibrary.simpleMessage("設定"),
         "almostFinished": MessageLookupByLibrary.simpleMessage("馬上就好"),
         "askMeAnythingRelatedToFinance":
@@ -196,6 +196,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonViewTransactionHistory":
             MessageLookupByLibrary.simpleMessage("查看交易歷史"),
         "buttonWithdraw": MessageLookupByLibrary.simpleMessage("提取"),
+        "buy": MessageLookupByLibrary.simpleMessage("買入"),
+        "cancelled": MessageLookupByLibrary.simpleMessage("已取消"),
         "cannotRememberEmailAddress": MessageLookupByLibrary.simpleMessage(
             "忘記登入電郵地址\n請發送電郵至 cs@asklora.ai"),
         "cantRememberYourEmail": MessageLookupByLibrary.simpleMessage(
@@ -211,6 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "checkBotStockDetails":
             MessageLookupByLibrary.simpleMessage("查看 Botstock 資訊"),
         "companyAddress": MessageLookupByLibrary.simpleMessage("銀行地址"),
+        "completed": MessageLookupByLibrary.simpleMessage("完全的"),
         "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
         "confirmTrade": MessageLookupByLibrary.simpleMessage("確認買入"),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
@@ -272,6 +275,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "estimatedEndDate": MessageLookupByLibrary.simpleMessage("預計結束日期"),
         "exchangeRateInDepositScreen": m10,
         "existingPassword": MessageLookupByLibrary.simpleMessage("現有密碼"),
+        "expired": MessageLookupByLibrary.simpleMessage("已到期"),
         "expiresAt": MessageLookupByLibrary.simpleMessage("到期日期"),
         "extrovertLessThan8":
             MessageLookupByLibrary.simpleMessage("每個人都需要me time，獨個觀看世間變幻事情"),
@@ -515,6 +519,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "reSendOtp": m21,
         "readyToGo": MessageLookupByLibrary.simpleMessage("準備好未？"),
+        "rejected": MessageLookupByLibrary.simpleMessage("Rejected"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("重設密碼"),
         "resetPasswordSuccessful":
@@ -533,6 +538,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rolloverBotStockAcknowledgement": m23,
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
+        "sell": MessageLookupByLibrary.simpleMessage("賣出"),
         "sendOtp": MessageLookupByLibrary.simpleMessage("發送 OTP"),
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
         "shares": MessageLookupByLibrary.simpleMessage("數量"),
