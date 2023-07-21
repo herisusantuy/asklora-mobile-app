@@ -1,18 +1,18 @@
 part of 'backdoor_screen_bloc.dart';
 
 class BackdoorScreenState extends Equatable {
-  final String email;
+  final String baseUrl;
 
-  const BackdoorScreenState({this.email = ''});
+  const BackdoorScreenState({this.baseUrl = ''});
 
   BackdoorScreenState copyWith({
-    String? email,
+    String? baseUrl,
   }) {
     return BackdoorScreenState(
-      email: email ?? this.email,
+      baseUrl: baseUrl ?? this.baseUrl,
     );
   }
 
   @override
-  List<Object?> get props => [email];
+  List<Object?> get props => [baseUrl];
 }

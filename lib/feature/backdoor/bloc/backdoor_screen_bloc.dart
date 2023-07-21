@@ -20,7 +20,7 @@ class BackdoorScreenBloc
 
   void _onBaseUrlChange(
       OnBaseUrlChanged event, Emitter<BackdoorScreenState> emit) async {
-    emit(state.copyWith(email: event.baseUrl));
+    emit(state.copyWith(baseUrl: event.baseUrl));
     await _backdoorRepository.saveBaseUrl(event.baseUrl);
 
     if (Environment().config is DevConfig) {
