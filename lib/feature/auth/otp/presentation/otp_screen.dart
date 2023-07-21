@@ -84,24 +84,24 @@ class OtpScreen extends StatelessWidget {
                   }
                 }))
           ],
-          child: BlocBuilder<OtpBloc, OtpState>(
-            buildWhen: (previous, current) =>
-                previous.response.state != current.response.state,
-            builder: (context, state) {
-              return CustomStretchedLayout(
-                header: CustomHeader(title: S.of(context).otpScreenTitle),
-                content: Column(
-                  children: [
-                    CustomTextNew(
+          child: CustomStretchedLayout(
+            header: CustomHeader(title: S.of(context).otpScreenTitle),
+            content: Column(
+              children: [
+                BlocBuilder<OtpBloc, OtpState>(
+                  buildWhen: (previous, current) =>
+                      previous.response.state != current.response.state,
+                  builder: (context, state) {
+                    return CustomTextNew(
                       S.of(context).otpScreenDescription(state.phoneNumber),
-                    ),
-                    const SizedBox(height: 36),
-                    _otpInput(context)
-                  ],
+                    );
+                  },
                 ),
-                bottomButton: _bottomButton(context),
-              );
-            },
+                const SizedBox(height: 36),
+                _otpInput(context)
+              ],
+            ),
+            bottomButton: _bottomButton(context),
           ),
         );
       }),
