@@ -626,6 +626,31 @@
       }
     }
   },
+  "otpScreenTitle": "Mobile OTP",
+  "otpScreenDescription": "We've sent you a code via SMS to verify your phone number (+852 {phoneNumber}). Please enter the OTP code below.",
+  "@otpScreenDescription": {
+    "placeholders": {
+      "phoneNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "buttonVerify": "Verify",
+  "otpSentToYourPhone": "Otp SMS is sent to your phone",
+  "verifyOtpSuccess": "Verify OTP Success",
+  "otpSentToYourEmail": "OTP code sent to your email",
+  "otpDigit": "000000 (6 digit)",
+  "sendOtp": "SEND OTP",
+  "reSendOtp": "RE-SEND IN {seconds}S",
+  "@reSendOtp": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "aiIsqWelcomeTitle": "It's time to find out your investment preferences",
+  "aiIsqWelcomeSubTitle": "Let's see what kind of stocks you prefer",
   "aiIsqWelcomeTitle": "It’s time to find out your investment preferences",
   "aiIsqWelcomeSubTitle": "Let’s see what kind of stocks you prefer",
   "isqNextButton": "Press to move onto the next section",

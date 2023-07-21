@@ -63,7 +63,7 @@ void main() async {
                   getOtpRequest: GetOtpRequest(
                       'test123@example.com', OtpType.register.value)))
               .thenAnswer((_) => Future.value(BaseResponse.complete(
-                  const GetOtpResponse('OTP code sent to your email'))));
+                  const GetOtpResponse('OTP code sent to your email', ''))));
           return otpBloc;
         },
         act: (bloc) => bloc.add(const OtpRequested('test123@example.com')),
@@ -71,7 +71,7 @@ void main() async {
               OtpState(response: BaseResponse.loading()),
               const OtpState(
                 response: BaseResponse<GetOtpResponse>(
-                    data: GetOtpResponse('OTP code sent to your email'),
+                    data: GetOtpResponse('OTP code sent to your email', ''),
                     state: ResponseState.success),
                 resetTime: 60,
                 disableRequest: true,
@@ -103,7 +103,7 @@ void main() async {
                   verifyOtpRequest:
                       const VerifyOtpRequest('test123@example.com', '112233')))
               .thenAnswer((_) => Future.value(BaseResponse.complete(
-                  const GetOtpResponse('Verify OTP Success'))));
+                  const GetOtpResponse('Verify OTP Success', '112233'))));
           return otpBloc;
         },
         act: (bloc) => bloc.add(const OtpSubmitted(
@@ -112,7 +112,7 @@ void main() async {
               OtpState(response: BaseResponse.loading()),
               const OtpState(
                   response: BaseResponse<GetOtpResponse>(
-                      data: GetOtpResponse('Verify OTP Success'),
+                      data: GetOtpResponse('Verify OTP Success', '112233'),
                       state: ResponseState.success))
             });
 
