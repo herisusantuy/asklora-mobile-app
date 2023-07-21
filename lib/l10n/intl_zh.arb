@@ -592,8 +592,29 @@
       }
     }
   },
-  "aiIsqWelcomeTitle": "It's time to find out your investment preferences",
-  "aiIsqWelcomeSubTitle": "Let's see what kind of stocks you prefer",
+  "otpScreenTitle": "一次性密碼",
+  "otpScreenDescription": "我們已透過SMS傳送一組號碼以核實你所登記電話，請於下面輸入一次性密碼 (OTP)。",
+  "@otpScreenDescription": {
+    "placeholders": {
+      "phoneNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "buttonVerify": "核實",
+  "otpSentToYourPhone": "Otp SMS is sent to your phone",
+  "verifyOtpSuccess": "Verify OTP Success",
+  "otpSentToYourEmail": "OTP code sent to your email",
+  "otpDigit": "000000 (6 位數字)",
+  "sendOtp": "發送 OTP",
+  "reSendOtp": "在{seconds}秒後重發 ",
+  "@reSendOtp": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
   "isqNextButton": "Press to move onto the next section",
   "cancelled": "已取消",
   "expired": "已到期",
