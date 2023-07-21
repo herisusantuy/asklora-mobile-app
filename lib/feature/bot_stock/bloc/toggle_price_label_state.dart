@@ -1,3 +1,4 @@
+part of 'toggle_price_label_bloc.dart';
 
 // states
 abstract class ToggleState {

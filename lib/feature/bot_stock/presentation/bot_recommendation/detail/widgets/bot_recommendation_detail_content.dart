@@ -9,8 +9,6 @@ import '../../../../../../core/values/app_values.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../chart/presentation/chart_animation.dart';
 import '../../../../bloc/toggle_price_label_bloc.dart';
-import '../../../../bloc/toggle_price_label_event.dart';
-import '../../../../bloc/toggle_price_label_state.dart';
 import '../../../../domain/bot_recommendation_detail_model.dart';
 import '../../../../domain/bot_recommendation_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
