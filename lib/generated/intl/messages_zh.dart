@@ -211,7 +211,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("查看 Botstock 資訊"),
         "companyAddress": MessageLookupByLibrary.simpleMessage("銀行地址"),
         "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
-        "confirmTrade": MessageLookupByLibrary.simpleMessage("確認買入"),
+        "confirmTrade": MessageLookupByLibrary.simpleMessage(" \"確認買入\""),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
         "continueAccountOpening":
             MessageLookupByLibrary.simpleMessage("開立投資賬戶"),
@@ -519,6 +519,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "resultOfPersonalizationQuestion": m20,
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶號碼）。不過，我們亦可能會因核實交易，向你要求更多附加資料。"),
+        "reviewYourTradeSummary":
+            MessageLookupByLibrary.simpleMessage("查看你嘅交易摘要，點擊 "),
         "riskDisclosureStatementAcknowledgement":
             MessageLookupByLibrary.simpleMessage("我已閱讀、理解，及同意風險披露聲明。"),
         "riskDisclosureStatementLabel":
@@ -566,6 +568,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("至"),
         "toDismissAsklora":
             MessageLookupByLibrary.simpleMessage("to dismiss Asklora. "),
+        "toExecuteIt": MessageLookupByLibrary.simpleMessage(" 就可以立即執行指示！"),
         "toGiveYou":
             MessageLookupByLibrary.simpleMessage("嘅表現，希望幫到你理解Botstock係點樣交易！"),
         "toStartAConversation": MessageLookupByLibrary.simpleMessage(

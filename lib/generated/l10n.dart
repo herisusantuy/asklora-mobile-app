@@ -2973,10 +2973,10 @@ class S {
     );
   }
 
-  /// `to execute it!`
+  /// ` to execute it!`
   String get toExecuteIt {
     return Intl.message(
-      'to execute it!',
+      ' to execute it!',
       name: 'toExecuteIt',
       desc: '',
       args: [],
@@ -3153,10 +3153,10 @@ class S {
     );
   }
 
-  /// `Confirm Trade`
+  /// ` "Confirm Trade"`
   String get confirmTrade {
     return Intl.message(
-      'Confirm Trade',
+      ' "Confirm Trade"',
       name: 'confirmTrade',
       desc: '',
       args: [],

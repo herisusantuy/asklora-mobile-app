@@ -256,7 +256,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm & Continue"),
         "confirmNewPassword":
             MessageLookupByLibrary.simpleMessage("Confirm New Password"),
-        "confirmTrade": MessageLookupByLibrary.simpleMessage("Confirm Trade"),
+        "confirmTrade":
+            MessageLookupByLibrary.simpleMessage(" \"Confirm Trade\""),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "continueAccountOpening":
             MessageLookupByLibrary.simpleMessage("Continue Account Opening"),
@@ -649,6 +650,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Retake Investment Style"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
+        "reviewYourTradeSummary": MessageLookupByLibrary.simpleMessage(
+            "Review your trade summary and hit "),
         "riskDisclosureStatementAcknowledgement":
             MessageLookupByLibrary.simpleMessage(
                 "I have read, understood, and agree with the Risk Disclosure Statement."),
@@ -712,6 +715,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("To"),
         "toDismissAsklora":
             MessageLookupByLibrary.simpleMessage("to dismiss Asklora. "),
+        "toExecuteIt": MessageLookupByLibrary.simpleMessage(" to execute it!"),
         "toGiveYou": MessageLookupByLibrary.simpleMessage(
             "to give you a better idea of its trading potential!"),
         "toStartAConversation": MessageLookupByLibrary.simpleMessage(
