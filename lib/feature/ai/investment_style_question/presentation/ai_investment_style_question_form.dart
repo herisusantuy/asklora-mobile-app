@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/presentation/ai/ai_shimmer.dart';
 import '../../../../core/presentation/ai/chat/ai_text_field.dart';
 import '../../../../core/presentation/ai/chat/chat_lora_header.dart';
 import '../../../../core/presentation/ai/chat/in_chat_bubble_widget.dart';
@@ -11,6 +12,7 @@ import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
+import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/values/app_values.dart';
 import '../../../onboarding/ppi/presentation/widget/omni_search_question_widget/widgets/custom_choice_chips.dart';
@@ -25,6 +27,8 @@ import '../domain/interaction.dart';
 part 'widgets/interaction_widget.dart';
 
 part 'widgets/ai_investment_style_question_chat_list.dart';
+
+part 'widgets/ai_investment_style_question_next_button.dart';
 
 class AiInvestmentStyleQuestionForm extends StatelessWidget {
   final VoidCallback onFinished;

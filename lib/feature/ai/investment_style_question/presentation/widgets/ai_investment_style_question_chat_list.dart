@@ -66,26 +66,16 @@ class AiInvestmentStyleQuestionChatList extends StatelessWidget {
       return OutChatBubbleWidget(
         e.response,
         animateText: animateText,
+        onFinishedAnimation: () => context
+            .read<AiInvestmentStyleQuestionBloc>()
+            .add(const FinishChatAnimation()),
       );
     } else if (e is Me) {
       return InChatBubbleWidget(message: e.query, name: userName);
     } else if (e is Loading) {
       return const LoraThinkingWidget();
     } else if (e is NextButton) {
-      return Align(
-        alignment: Alignment.bottomLeft,
-        child: CustomChoiceChips(
-          verticalPadding: 14,
-          textColor: AskLoraColors.white,
-          textStyle: AskLoraTextStyles.body2,
-          pressedFillColor: AskLoraColors.primaryGreen.withOpacity(0.4),
-          fillColor: Colors.transparent,
-          label: 'Press to move onto the next section',
-          onTap: () => context
-              .read<AiInvestmentStyleQuestionBloc>()
-              .add(const NextQuestion()),
-        ),
-      );
+      return const AiInvestmentStyleQuestionNextButton();
     } else {
       return const SizedBox.shrink();
     }
