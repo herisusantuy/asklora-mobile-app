@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../app/bloc/app_bloc.dart';
 import '../../../core/domain/base_response.dart';
-import '../../../core/domain/pair.dart';
 import '../../../core/presentation/bot_stock_background_with_pop_up.dart';
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
@@ -12,11 +11,10 @@ import '../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../generated/l10n.dart';
+import '../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../onboarding/kyc/presentation/kyc_screen.dart';
-import '../../onboarding/ppi/bloc/question/question_bloc.dart';
-import '../../onboarding/ppi/presentation/ppi_screen.dart';
 import 'bloc/for_you_bloc.dart';
 import 'investment_style/presentation/for_you_investment_style_screen.dart';
 
@@ -43,7 +41,7 @@ class ForYouScreenForm extends StatelessWidget {
               return BotStockBackgroundWithPopUp(
                   shouldScrollable: false,
                   header: CustomTextNew(
-                    'Investments for you, by you',
+                    S.of(context).botRecommendationScreenTitle,
                     style: AskLoraTextStyles.h2
                         .copyWith(color: AskLoraColors.charcoal),
                   ),
@@ -109,9 +107,8 @@ class ForYouScreenForm extends StatelessWidget {
               subTitle:
                   'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
               primaryButtonLabel: S.of(context).defineInvestmentStyle,
-              onPrimaryButtonTap: () => PpiScreen.open(context,
-                  arguments: const Pair(QuestionPageType.investmentStyle,
-                      QuestionPageStep.investmentStyle)));
+              onPrimaryButtonTap: () =>
+                  AiInvestmentStyleQuestionWelcomeScreen.open(context));
         case UserJourney.kyc:
           return LoraPopUpMessageModel(
               title: 'No Botstock recommendation.',

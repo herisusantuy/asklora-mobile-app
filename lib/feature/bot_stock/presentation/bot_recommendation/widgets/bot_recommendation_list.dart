@@ -77,7 +77,7 @@ class BotRecommendationList extends StatelessWidget {
                   subTitle:
                       'Oops! Looks like there aren’t enough recommendations that meet your current investment profile - Let’s go through your Investment Style again to find suitable recommendations.',
                   subTitleColor: AskLoraColors.white,
-                  primaryButtonLabel: 'RETAKE INVESTMENT STYLE',
+                  primaryButtonLabel: S.of(context).retakeInvestmentStyle,
                   buttonPrimaryType: ButtonPrimaryType.solidGreen,
                   onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
                     context: context,
@@ -85,9 +85,8 @@ class BotRecommendationList extends StatelessWidget {
                     onTrueCallback: () => context
                         .read<NavigationBloc<ForYouPage>>()
                         .add(const PageChanged(ForYouPage.investmentStyle)),
-                    onFalseCallback: () => PpiScreen.open(context,
-                        arguments: const Pair(QuestionPageType.investmentStyle,
-                            QuestionPageStep.investmentStyle)),
+                    onFalseCallback: () =>
+                        AiInvestmentStyleQuestionWelcomeScreen.open(context),
                   ),
                 ),
               ),

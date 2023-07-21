@@ -5,6 +5,8 @@ import '../../../core/domain/endpoints.dart';
 import '../../../core/presentation/custom_header.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
+import '../../../core/presentation/custom_text_input.dart';
+import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/utils/utils.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
@@ -35,8 +37,22 @@ class GetHelpScreen extends StatelessWidget {
                   title: S.of(context).customerService,
                   onTap: () => CustomerServiceScreen.open(context),
                 ),
+                ..._getDebugWidget()
               ],
             )));
+  }
+
+  List<Widget> _getDebugWidget() {
+    return [
+      const SizedBox(
+        height: 15,
+      ),
+      const CustomTextNew('Debug Menu'),
+      CustomTextInput(
+        labelText: 'URL',
+        onChanged: (str) {},
+      )
+    ];
   }
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);

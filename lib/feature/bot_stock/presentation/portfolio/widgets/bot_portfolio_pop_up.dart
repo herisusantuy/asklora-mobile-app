@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../../tabs/presentation/tab_screen.dart';
 import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
-import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
-import '../../../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../gift/gift_bot_stock_welcome_screen.dart';
 import '../utils/portfolio_utils.dart';
 
@@ -57,9 +54,8 @@ class BotPortfolioPopUp extends StatelessWidget {
             title: S.of(context).portfolioPopUpDefineInvestmentTitle,
             subTitle: S.of(context).portfolioPopUpDefineInvestmentSubTitle,
             primaryButtonLabel: S.of(context).defineInvestmentStyle,
-            onPrimaryButtonTap: () => PpiScreen.open(context,
-                arguments: const Pair(QuestionPageType.investmentStyle,
-                    QuestionPageStep.investmentStyle)));
+            onPrimaryButtonTap: () =>
+                AiInvestmentStyleQuestionWelcomeScreen.open(context));
       case BotPortfolioPopUpType.kyc:
         return LoraPopUpMessageModel(
             title: S.of(context).portfolioPopUpContinueAccountOpeningTitle,

@@ -10,14 +10,11 @@ class BotBalance extends Equatable {
   @JsonKey(name: 'fully_settled_balance_usd')
   final double fullySettledBalanceUsd;
   final String name;
-  @JsonKey(name: 'fully_settled_share_positions')
-  final Map<String, String>? fullySettledSharePositions;
 
   const BotBalance(
     this.fullySettledBalanceHkd,
     this.fullySettledBalanceUsd,
     this.name,
-    this.fullySettledSharePositions,
   );
 
   factory BotBalance.fromJson(Map<String, dynamic> json) =>

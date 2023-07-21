@@ -38,7 +38,7 @@ class Tabs extends StatelessWidget {
                         onToolTipClick: () {
                           context
                               .read<TabScreenBloc>()
-                              .add(const AiButtonSelected());
+                              .add(const OnAiOverlayClick());
 
                           ///this delay is necessary to wait for AI page to be opened
                           Future.delayed(const Duration(milliseconds: 350),
@@ -67,7 +67,7 @@ class Tabs extends StatelessWidget {
                         child: _tabPng(
                             onTap: () => context
                                 .read<TabScreenBloc>()
-                                .add(const AiButtonSelected()),
+                                .add(const OnAiOverlayClick()),
                             iconAsset: 'bottom_nav_ai',
                             activeIconAsset: 'bottom_nav_ai_selected',
                             active: state.aiPageSelected),

@@ -8,12 +8,13 @@ class CustomScaffold extends Scaffold {
       VoidCallback? onTapBack,
       bool enableBackNavigation = true,
       bool useSafeArea = true,
+      Color? appBarBackgroundColor,
       super.backgroundColor = Colors.white,
       super.bottomNavigationBar})
       : super(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
-              backgroundColor: Colors.white,
+              backgroundColor: appBarBackgroundColor ?? Colors.white,
               elevation: 0.0,
               toolbarHeight: 0.0, // Hide the AppBar
             ),
