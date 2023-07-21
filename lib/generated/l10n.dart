@@ -4326,6 +4326,66 @@ class S {
     );
   }
 
+  /// `Cancelled`
+  String get cancelled {
+    return Intl.message(
+      'Cancelled',
+      name: 'cancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expired`
+  String get expired {
+    return Intl.message(
+      'Expired',
+      name: 'expired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rejected`
+  String get rejected {
+    return Intl.message(
+      'Rejected',
+      name: 'rejected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get completed {
+    return Intl.message(
+      'Completed',
+      name: 'completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Buy`
+  String get buy {
+    return Intl.message(
+      'Buy',
+      name: 'buy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sell`
+  String get sell {
+    return Intl.message(
+      'Sell',
+      name: 'sell',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `It’s time to find out your investment preferences`
   String get aiIsqWelcomeTitle {
     return Intl.message(

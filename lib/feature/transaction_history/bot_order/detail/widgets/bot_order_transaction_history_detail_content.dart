@@ -81,12 +81,13 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
             Flexible(
                 flex: 3,
                 child: Align(
-                    alignment: Alignment.centerRight, child: _statusWidget()))
+                    alignment: Alignment.centerRight,
+                    child: _statusWidget(context)))
           ],
         ),
       );
 
-  Widget _statusWidget() {
+  Widget _statusWidget(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 5, 16, 7),
       decoration: BoxDecoration(
@@ -94,7 +95,7 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
         border: Border.all(width: 1.4, color: botStatusType.color),
       ),
       child: AutoSizedTextWidget(
-        botStatusType.name,
+        BotStatus.findByString(botStatusType.name).text(context),
         maxLines: 1,
         style: AskLoraTextStyles.subtitle3.copyWith(color: botStatusType.color),
         textAlign: TextAlign.center,
