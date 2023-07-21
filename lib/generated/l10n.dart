@@ -2893,10 +2893,10 @@ class S {
     );
   }
 
-  /// `Your withdrawal request is submitted.`
+  /// `Withdrawal Request Submitted`
   String get withdrawalRequestSubmittedTitle {
     return Intl.message(
-      'Your withdrawal request is submitted.',
+      'Withdrawal Request Submitted',
       name: 'withdrawalRequestSubmittedTitle',
       desc: '',
       args: [],
@@ -3013,11 +3013,11 @@ class S {
     );
   }
 
-  /// `Trade Request Received`
-  String get tradeRequestReceived {
+  /// `Trade Request Submitted`
+  String get tradeRequestSubmitted {
     return Intl.message(
-      'Trade Request Received',
-      name: 'tradeRequestReceived',
+      'Trade Request Submitted',
+      name: 'tradeRequestSubmitted',
       desc: '',
       args: [],
     );

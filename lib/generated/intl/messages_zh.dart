@@ -572,7 +572,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("交易已取消，你的投資金額已轉至你嘅賬戶。"),
         "tradeCancelledTitle": MessageLookupByLibrary.simpleMessage("交易已取消"),
         "tradeFee": MessageLookupByLibrary.simpleMessage("交易費用"),
-        "tradeRequestReceived": MessageLookupByLibrary.simpleMessage("已收到交易指令"),
+        "tradeRequestSubmitted":
+            MessageLookupByLibrary.simpleMessage("已經收到交易指令"),
         "tradeSummary": MessageLookupByLibrary.simpleMessage("交易摘要"),
         "tradeWithANewBotstock":
             MessageLookupByLibrary.simpleMessage("以一隻新 Botstock 交易"),

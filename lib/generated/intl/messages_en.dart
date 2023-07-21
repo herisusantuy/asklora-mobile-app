@@ -717,8 +717,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tradeCancelledTitle":
             MessageLookupByLibrary.simpleMessage("Trade Cancelled"),
         "tradeFee": MessageLookupByLibrary.simpleMessage("Trade Fee"),
-        "tradeRequestReceived":
-            MessageLookupByLibrary.simpleMessage("Trade Request Received"),
+        "tradeRequestSubmitted":
+            MessageLookupByLibrary.simpleMessage("Trade Request Submitted"),
         "tradeSummary": MessageLookupByLibrary.simpleMessage("Trade Summary"),
         "tradeWithANewBotstock":
             MessageLookupByLibrary.simpleMessage("Trade with a New Botstock"),
@@ -788,7 +788,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "withdrawalRequestSubmittedSubTitle": MessageLookupByLibrary.simpleMessage(
             "You will be informed via email and app notification as soon as the funds are paid to your account."),
         "withdrawalRequestSubmittedTitle": MessageLookupByLibrary.simpleMessage(
-            "Your withdrawal request is submitted."),
+            "Withdrawal Request Submitted"),
         "withdrawalWorkingDays": MessageLookupByLibrary.simpleMessage(
             "Your withdrawal can take up to 2 working days."),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
