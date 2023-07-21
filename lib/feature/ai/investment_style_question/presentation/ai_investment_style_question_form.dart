@@ -15,6 +15,7 @@ import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/values/app_values.dart';
+import '../../../../generated/l10n.dart';
 import '../../../onboarding/ppi/presentation/widget/omni_search_question_widget/widgets/custom_choice_chips.dart';
 import '../../../onboarding/ppi/repository/ppi_question_repository.dart';
 import '../../../onboarding/ppi/repository/ppi_response_repository.dart';

@@ -4185,6 +4185,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Press to move onto the next section`
+  String get isqNextButton {
+    return Intl.message(
+      'Press to move onto the next section',
+      name: 'isqNextButton',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

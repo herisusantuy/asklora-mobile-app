@@ -627,5 +627,6 @@
     }
   },
   "aiIsqWelcomeTitle": "It’s time to find out your investment preferences",
-  "aiIsqWelcomeSubTitle": "Let’s see what kind of stocks you prefer"
+  "aiIsqWelcomeSubTitle": "Let’s see what kind of stocks you prefer",
+  "isqNextButton": "Press to move onto the next section"
 }

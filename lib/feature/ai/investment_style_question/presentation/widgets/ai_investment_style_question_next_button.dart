@@ -13,7 +13,9 @@ class AiInvestmentStyleQuestionNextButton extends StatelessWidget {
           builder: (context, state) {
             return state.isChatAnimationRunning
                 ? AiShimmerWidget(
-                    width: 'Press to move onto the next section'
+                    width: S
+                            .of(context)
+                            .isqNextButton
                             .textWidth(AskLoraTextStyles.body2) +
                         30.2,
                     height: 52)
@@ -24,7 +26,7 @@ class AiInvestmentStyleQuestionNextButton extends StatelessWidget {
                     pressedFillColor:
                         AskLoraColors.primaryGreen.withOpacity(0.4),
                     fillColor: Colors.transparent,
-                    label: 'Press to move onto the next section',
+                    label: S.of(context).isqNextButton,
                     onTap: () => context
                         .read<AiInvestmentStyleQuestionBloc>()
                         .add(const NextQuestion()),
