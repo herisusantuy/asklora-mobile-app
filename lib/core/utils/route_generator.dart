@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../feature/ai/investment_style_question/presentation/ai_investment_style_question_screen.dart';
+import '../../feature/onboarding/ppi/presentation/investment_style_question/ai_investment_style_question_onboarding_screen.dart';
 import '../../feature/ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../feature/auth/email_activation/presentation/email_activation_screen.dart';
 import '../../feature/auth/otp/presentation/otp_screen.dart';

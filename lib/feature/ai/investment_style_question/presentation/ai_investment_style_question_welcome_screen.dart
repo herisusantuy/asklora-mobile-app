@@ -3,7 +3,7 @@ import '../../../../generated/l10n.dart';
 import '../../../tabs/for_you/investment_style/presentation/ai_investment_style_question_for_you_screen.dart';
 import '../../presentation/ai_welcome_screen.dart';
 import '../../presentation/widgets/ai_welcome_subtitle_text.dart';
-import 'ai_investment_style_question_screen.dart';
+import '../../../onboarding/ppi/presentation/investment_style_question/ai_investment_style_question_onboarding_screen.dart';
 
 enum ISQType { onboarding, forYou }
 
