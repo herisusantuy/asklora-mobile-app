@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-enum ISQInteractionType { textField, choices, summary }
+enum ISQInteractionType { textField, choices, summary, empty }
 
 abstract class ISQInteraction extends Equatable {
   ISQInteractionType type();
@@ -37,4 +37,11 @@ class SummaryInteraction extends ISQInteraction {
   ISQInteractionType type() => ISQInteractionType.summary;
 
   const SummaryInteraction();
+}
+
+class EmptyInteraction extends ISQInteraction {
+  @override
+  ISQInteractionType type() => ISQInteractionType.empty;
+
+  const EmptyInteraction();
 }

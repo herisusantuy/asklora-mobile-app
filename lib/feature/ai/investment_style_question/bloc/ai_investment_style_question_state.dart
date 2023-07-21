@@ -10,6 +10,7 @@ class AiInvestmentStyleQuestionState extends Equatable {
   final ISQInteraction interaction;
   final InvestmentStyleQuestionResult? result;
   final ResponseState ppiResponseState;
+  final bool isChatAnimationRunning;
 
   static const String platform = 'asklora';
 
@@ -23,6 +24,7 @@ class AiInvestmentStyleQuestionState extends Equatable {
     this.interaction = const TextFieldInteraction(),
     this.result,
     this.ppiResponseState = ResponseState.unknown,
+    this.isChatAnimationRunning = false,
   });
 
   AiInvestmentStyleQuestionState copyWith({
@@ -35,6 +37,7 @@ class AiInvestmentStyleQuestionState extends Equatable {
     ISQInteraction? interaction,
     InvestmentStyleQuestionResult? result,
     ResponseState? ppiResponseState,
+    bool? isChatAnimationRunning,
   }) {
     return AiInvestmentStyleQuestionState(
       query: query ?? this.query,
@@ -46,6 +49,8 @@ class AiInvestmentStyleQuestionState extends Equatable {
       interaction: interaction ?? this.interaction,
       result: result ?? this.result,
       ppiResponseState: ppiResponseState ?? this.ppiResponseState,
+      isChatAnimationRunning:
+          isChatAnimationRunning ?? this.isChatAnimationRunning,
     );
   }
 
@@ -59,8 +64,10 @@ class AiInvestmentStyleQuestionState extends Equatable {
         userId,
         interaction,
         result ?? '',
-        ppiResponseState
+        ppiResponseState,
+        isChatAnimationRunning
       ];
 
-  bool get isTextFieldSendButtonDisabled => isTyping || query.isEmpty;
+  bool get isTextFieldSendButtonDisabled =>
+      isTyping || query.isEmpty || isChatAnimationRunning;
 }

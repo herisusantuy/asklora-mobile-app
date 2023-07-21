@@ -108,9 +108,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "agree": MessageLookupByLibrary.simpleMessage("Agree"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
         "aiIsqWelcomeSubTitle": MessageLookupByLibrary.simpleMessage(
-            "Let’s see what kind of stocks you prefer"),
+            "Let\'s see what kind of stocks you prefer"),
         "aiIsqWelcomeTitle": MessageLookupByLibrary.simpleMessage(
-            "It’s time to find out your investment preferences"),
+            "It\'s time to find out your investment preferences"),
         "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "almostFinished":
             MessageLookupByLibrary.simpleMessage("Almost finished!"),
@@ -280,6 +280,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "depositAmount": MessageLookupByLibrary.simpleMessage("Deposit Amount"),
         "depositFundToStartInvesting": MessageLookupByLibrary.simpleMessage(
             "Deposit funds to start investing"),
+        "depositHistory":
+            MessageLookupByLibrary.simpleMessage("Deposit History"),
         "depositRegulatoryRequirements": m7,
         "depositRequestSubmittedSubTitleFirstTime":
             MessageLookupByLibrary.simpleMessage(
@@ -426,6 +428,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I like your style"),
         "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
             "It’s time to define your investment style.  Show me what you’re made of!"),
+        "isqNextButton": MessageLookupByLibrary.simpleMessage(
+            "Press to move onto the next section"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "learnBotstockManagement":
             MessageLookupByLibrary.simpleMessage("Learn Botstock Management"),
@@ -749,8 +753,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tradeCancelledTitle":
             MessageLookupByLibrary.simpleMessage("Trade Cancelled"),
         "tradeFee": MessageLookupByLibrary.simpleMessage("Trade Fee"),
-        "tradeRequestReceived":
-            MessageLookupByLibrary.simpleMessage("Trade Request Received"),
+        "tradeRequestSubmitted":
+            MessageLookupByLibrary.simpleMessage("Trade Request Submitted"),
         "tradeSummary": MessageLookupByLibrary.simpleMessage("Trade Summary"),
         "tradeWithANewBotstock":
             MessageLookupByLibrary.simpleMessage("Trade with a New Botstock"),
@@ -819,10 +823,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "withdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
         "withdrawalAmount":
             MessageLookupByLibrary.simpleMessage("Withdrawal Amount"),
+        "withdrawalHistory":
+            MessageLookupByLibrary.simpleMessage("Withdrawal History"),
         "withdrawalRequestSubmittedSubTitle": MessageLookupByLibrary.simpleMessage(
             "You will be informed via email and app notification as soon as the funds are paid to your account."),
         "withdrawalRequestSubmittedTitle": MessageLookupByLibrary.simpleMessage(
-            "Your withdrawal request is submitted."),
+            "Withdrawal Request Submitted"),
         "withdrawalWorkingDays": MessageLookupByLibrary.simpleMessage(
             "Your withdrawal can take up to 2 working days."),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),

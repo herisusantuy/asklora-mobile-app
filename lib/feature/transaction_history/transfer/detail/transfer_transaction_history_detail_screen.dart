@@ -7,6 +7,7 @@ import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/values/app_values.dart';
 import '../../../../generated/l10n.dart';
 import '../../domain/transaction_history_model.dart';
+import '../../utils/transaction_history_util.dart';
 
 class TransferTransactionHistoryDetailScreen extends StatelessWidget {
   final TransactionHistoryModel transactionHistoryModel;
@@ -22,7 +23,9 @@ class TransferTransactionHistoryDetailScreen extends StatelessWidget {
       body: Column(
         children: [
           CustomHeader(
-              title: '${transactionHistoryModel.transferType.title} History'),
+              title: TransferType.findByTitle(
+                      transactionHistoryModel.transferType.title)
+                  .titleText(context)),
           const SizedBox(
             height: 30,
           ),
@@ -34,7 +37,10 @@ class TransferTransactionHistoryDetailScreen extends StatelessWidget {
           _withdrawalInformation(S.of(context).bankAccountNumber,
               transactionHistoryModel.bankAccountNumberString),
           _withdrawalInformation(
-              S.of(context).status, transactionHistoryModel.transferStatus.name,
+              S.of(context).status,
+              TransferStatus.findByString(
+                      transactionHistoryModel.transferStatus.name)
+                  .text(context),
               subTitleColor: transactionHistoryModel.transferStatus.color),
           _withdrawalInformation(S.of(context).timeCompleted,
               transactionHistoryModel.timeCompletedFormatted)
