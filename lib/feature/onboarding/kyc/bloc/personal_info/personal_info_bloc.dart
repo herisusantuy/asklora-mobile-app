@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
@@ -36,7 +35,6 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
     on<PersonalInfoReset>(_onPersonalInfoReset);
     on<PersonalInfoSubmitted>(_onPersonalInfoSubmitted);
     on<InitiatePersonalInfo>(_onInitiatePersonalInfo);
-    on<ResetResidentAnswer>(_onResetResidentAnswer);
   }
 
   final AccountRepository _accountRepository;
@@ -63,8 +61,8 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
                 personalInfoRequest!.countryOfBirth!.isNotEmpty
             ? getCountryByIso3(personalInfoRequest.countryOfBirth!)?.name
             : null,
-        isUnitedStateResident: () => personalInfoRequest?.isUnitedStateResident,
-        isHongKongPermanentResident: () =>
+        isUnitedStateResident: personalInfoRequest?.isUnitedStateResident,
+        isHongKongPermanentResident:
             personalInfoRequest?.isHongKongPermanentResident,
       ),
     );
@@ -134,7 +132,7 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
       PersonalInfoIsHongKongPermanentResidentChanged event,
       Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(
-        isHongKongPermanentResident: () => event.isHongKongPermanentResident));
+        isHongKongPermanentResident: event.isHongKongPermanentResident));
   }
 
   _onHkIdNumberChange(
@@ -145,7 +143,7 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
   _onIsUnitedStateResidentChange(PersonalInfoIsUnitedStateResidentChanged event,
       Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(
-      isUnitedStateResident: () => event.isUnitedStateResident,
+      isUnitedStateResident: event.isUnitedStateResident,
     ));
   }
 
@@ -190,13 +188,5 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
           personalInfoRequest: event.personalInfoRequest);
       emit(state.copyWith(response: data));
     }
-  }
-
-  _onResetResidentAnswer(
-      ResetResidentAnswer event, Emitter<PersonalInfoState> emit) {
-    emit(state.copyWith(
-      isHongKongPermanentResident: () => null,
-      isUnitedStateResident: () => null,
-    ));
   }
 }

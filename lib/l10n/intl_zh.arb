@@ -632,5 +632,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "withdrawalHistory": "提款歷史"
 }

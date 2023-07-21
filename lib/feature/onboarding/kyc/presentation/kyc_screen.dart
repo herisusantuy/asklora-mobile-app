@@ -9,7 +9,6 @@ import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
-import '../../../../generated/l10n.dart';
 import '../../../auth/otp/repository/otp_repository.dart';
 import '../../../tabs/presentation/tab_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
@@ -189,11 +188,9 @@ class KycScreen extends StatelessWidget {
                 progress: 0.05,
               );
             case KycPageStep.personalInfoRejected:
-              return KycRejectedScreen(
+              return const KycRejectedScreen(
                 rejectedReason:
                     'Asklora is only available to Hong Kong Residents who are NOT US Citizens',
-                onGoBack: () =>
-                    context.read<PersonalInfoBloc>().add(ResetResidentAnswer()),
               );
             case KycPageStep.personalInfo:
               return const PersonalInfoScreen(
@@ -250,11 +247,9 @@ class KycScreen extends StatelessWidget {
                 sourceOfWealthState: context.read<SourceOfWealthBloc>().state,
               );
             case KycPageStep.disclosureRejected:
-              return KycRejectedScreen(
-                rejectedReason: S.of(context).kycRejectedExplanationOfAffiliate,
-                onGoBack: () => context
-                    .read<DisclosureAffiliationBloc>()
-                    .add(ResetAffiliatedAnswer()),
+              return const KycRejectedScreen(
+                rejectedReason:
+                    'We do not accept any members who are affiliated with the organisations mentioned above',
               );
             case KycPageStep.verifyIdentity:
               return const VerifyIdentityScreen(

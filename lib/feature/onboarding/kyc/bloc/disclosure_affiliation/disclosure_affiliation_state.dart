@@ -20,7 +20,7 @@ class DisclosureAffiliationState extends Equatable {
   });
 
   DisclosureAffiliationState copyWith({
-    ValueGetter<bool?>? isAffiliatedPerson,
+    bool? isAffiliatedPerson,
     bool? isAffiliatedAssociates,
     bool? isAffiliatedCommission,
     String? affiliatedPersonFirstName,
@@ -29,9 +29,7 @@ class DisclosureAffiliationState extends Equatable {
     String? affiliatedAssociatesLastName,
   }) {
     return DisclosureAffiliationState(
-      isAffiliatedPerson: isAffiliatedPerson != null
-          ? isAffiliatedPerson()
-          : this.isAffiliatedPerson,
+      isAffiliatedPerson: isAffiliatedPerson ?? this.isAffiliatedPerson,
       isAffiliatedAssociates:
           isAffiliatedAssociates ?? this.isAffiliatedAssociates,
       isAffiliatedCommission:

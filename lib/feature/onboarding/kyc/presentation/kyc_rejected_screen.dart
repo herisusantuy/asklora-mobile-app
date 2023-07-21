@@ -9,19 +9,14 @@ import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/values/app_values.dart';
-import '../../../../generated/l10n.dart';
-import '../../../tabs/presentation/tab_screen.dart';
 import '../bloc/kyc_bloc.dart';
+import 'kyc_screen.dart';
 
 class KycRejectedScreen extends StatelessWidget {
   final String rejectedReason;
-  final Function? onGoBack;
 
-  const KycRejectedScreen({
-    required this.rejectedReason,
-    this.onGoBack,
-    Key? key,
-  }) : super(key: key);
+  const KycRejectedScreen({required this.rejectedReason, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +35,8 @@ class KycRejectedScreen extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      CustomStatusWidget(
-                        title: S.of(context).kycRejectedScreenTitle,
+                      const CustomStatusWidget(
+                        title: 'Sorry! You are not eligible for Asklora',
                         statusType: StatusType.failed,
                       ),
                       const SizedBox(height: 30),
@@ -54,7 +49,7 @@ class KycRejectedScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  _bottomButton(context, onGoBack)
+                  _bottomButton(context)
                 ],
               ),
             ),
@@ -64,13 +59,11 @@ class KycRejectedScreen extends StatelessWidget {
     );
   }
 
-  Widget _bottomButton(BuildContext context, Function? onGoBack) => ButtonPair(
-        primaryButtonOnClick: () {
-          context.read<NavigationBloc<KycPageStep>>().add(const PagePop());
-          onGoBack!();
-        },
-        secondaryButtonOnClick: () => TabScreen.openAndRemoveAllRoute(context),
-        primaryButtonLabel: S.of(context).buttonGoBack,
-        secondaryButtonLabel: S.of(context).buttonBackToHome,
+  Widget _bottomButton(BuildContext context) => ButtonPair(
+        primaryButtonOnClick: () => KycScreen.open(context),
+        secondaryButtonOnClick: () =>
+            context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
+        primaryButtonLabel: 'DONE',
+        secondaryButtonLabel: 'GO BACK',
       );
 }
