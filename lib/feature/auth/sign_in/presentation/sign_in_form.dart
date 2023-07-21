@@ -69,8 +69,6 @@ class SignInForm extends StatelessWidget {
                   children: <Widget>[
                     Column(
                       children: [
-                        // LoraMemojiHeader(
-                        //     text: 'Welcome back!\n${S.of(context).readyToGo}'),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
                           child: loraGreenAnimation,
