@@ -1,6 +1,7 @@
 part of 'lora_gpt_bloc.dart';
 
 class LoraGptState extends Equatable {
+  final String debugText;
   final ResponseState status;
   final String query;
   final String userName;
@@ -16,6 +17,7 @@ class LoraGptState extends Equatable {
   static const String platform = 'asklora';
 
   const LoraGptState({
+    this.debugText = '',
     this.query = '',
     this.sessionId = '',
     this.status = ResponseState.unknown,
@@ -30,6 +32,7 @@ class LoraGptState extends Equatable {
   });
 
   LoraGptState copyWith({
+    String? debugText,
     String? query,
     String? sessionId,
     String? userName,
@@ -43,6 +46,7 @@ class LoraGptState extends Equatable {
     TabPage? tabPage,
   }) {
     return LoraGptState(
+      debugText: debugText ?? this.debugText,
       query: query ?? this.query,
       sessionId: sessionId ?? this.sessionId,
       conversations: conversations ?? this.conversations,
@@ -90,6 +94,7 @@ class LoraGptState extends Equatable {
 
   @override
   List<Object> get props => [
+        debugText,
         query,
         sessionId,
         conversations,

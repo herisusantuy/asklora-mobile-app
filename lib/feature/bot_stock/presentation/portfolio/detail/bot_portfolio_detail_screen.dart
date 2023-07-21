@@ -64,14 +64,15 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                     botStockRepository: BotStockRepository(),
                     transactionHistoryRepository: TransactionRepository())
                   ..add(FetchActiveOrderDetail(botOrderId: arguments.botUid))),
-            BlocProvider(
-                create: (_) =>
-                    BackButtonInterceptorBloc()..add(InitiateInterceptor()))
+            BlocProvider(create: (_) => BackButtonInterceptorBloc())
           ],
           child: BlocListener<BackButtonInterceptorBloc,
               BackButtonInterceptorState>(
             listener: (context, state) {
               if (state is OnPressedBack) {
+                context
+                    .read<BackButtonInterceptorBloc>()
+                    .add(RemoveInterceptor());
                 Navigator.pop(context);
               }
             },
@@ -79,8 +80,21 @@ class BotPortfolioDetailScreen extends StatelessWidget {
               listenWhen: (previous, current) =>
                   previous.botActiveOrderDetailResponse.state !=
                   current.botActiveOrderDetailResponse.state,
-              listener: (context, state) => CustomLoadingOverlay.of(context)
-                  .show(state.botActiveOrderDetailResponse.state),
+              listener: (context, state) {
+                CustomLoadingOverlay.of(context)
+                    .show(state.botActiveOrderDetailResponse.state);
+
+                if (state.botActiveOrderDetailResponse.state ==
+                    ResponseState.loading) {
+                  context
+                      .read<BackButtonInterceptorBloc>()
+                      .add(RemoveInterceptor());
+                } else {
+                  context
+                      .read<BackButtonInterceptorBloc>()
+                      .add(InitiateInterceptor());
+                }
+              },
               buildWhen: (previous, current) =>
                   previous.botActiveOrderDetailResponse.state !=
                   current.botActiveOrderDetailResponse.state,

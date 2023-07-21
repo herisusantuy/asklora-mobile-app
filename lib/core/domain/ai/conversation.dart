@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'conversation.g.dart';
 
-enum ConversationType { me, lora, loading, reset }
+enum ConversationType { me, lora, loading, reset, next }
 
 abstract class Conversation extends Equatable {
   ConversationType type();
@@ -36,10 +36,11 @@ class Lora extends Conversation {
   Map<String, dynamic> toJson() => _$LoraToJson(this);
 
   @override
-  List<Object?> get props => [response, requestId, respType, newSession];
+  List<Object?> get props =>
+      [type(), response, requestId, respType, newSession];
 
   static Lora get defaultMessage => Lora(
-      '👋Hi! I’m Lora. Let me know if you have any questions or requests on stocks investments.',
+      "👋Hi! I'm Lora. Let me know if you have any questions or requests on stocks investments.",
       '',
       '',
       false);
@@ -77,15 +78,29 @@ class Me extends Conversation {
   ConversationType type() => ConversationType.me;
 
   @override
-  List<Object?> get props => [query];
+  List<Object?> get props => [query, type()];
+}
+
+class NextButton extends Conversation {
+  @override
+  ConversationType type() => ConversationType.next;
+
+  @override
+  List<Object?> get props => [type()];
 }
 
 class Loading extends Conversation {
   @override
-  ConversationType type() => ConversationType.reset;
+  ConversationType type() => ConversationType.loading;
+
+  @override
+  List<Object?> get props => [type()];
 }
 
 class Reset extends Conversation {
   @override
-  ConversationType type() => ConversationType.loading;
+  ConversationType type() => ConversationType.reset;
+
+  @override
+  List<Object?> get props => [type()];
 }

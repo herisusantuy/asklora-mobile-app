@@ -45,7 +45,7 @@ void main() async {
 
     final BaseResponse<TransactionLedgerBalanceResponse> ledgerBalanceResponse =
         BaseResponse.complete(
-            const TransactionLedgerBalanceResponse(0, 0, 0, 0, '', 0, []));
+            const TransactionLedgerBalanceResponse(0, 0, 0, 0, '', 0));
 
     final BaseResponse<TransactionLedgerBalanceResponse>
         ledgerBalanceErrorResponse = BaseResponse.error();

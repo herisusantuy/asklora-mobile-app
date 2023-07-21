@@ -14,8 +14,8 @@ import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../generated/l10n.dart';
+import '../../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../../onboarding/ppi/bloc/response/user_response_bloc.dart';
-import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../../../onboarding/welcome/ask_name/bloc/lora_ask_name_bloc.dart';
 import '../../../onboarding/welcome/ask_name/repository/add_user_name_repository.dart';
@@ -56,7 +56,7 @@ class EmailActivationScreen extends StatelessWidget {
                 context
                     .read<AppBloc>()
                     .add(const SaveUserJourney(UserJourney.investmentStyle));
-                InvestmentStyleWelcomeScreen.open(context);
+                AiInvestmentStyleQuestionWelcomeScreen.open(context);
               }
               switch (state.response.state) {
                 case ResponseState.error:

@@ -2,18 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../app/bloc/app_bloc.dart';
-import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../../../learning/learning_bot_stock_screen.dart';
 import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
-import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
-import '../../../../onboarding/ppi/presentation/ppi_screen.dart';
 import 'domain/on_boarding_status_model.dart';
 
 part 'widgets/on_boarding_status_button.dart';
@@ -110,9 +108,7 @@ class OnBoardingStatus extends StatelessWidget {
         return OnBoardingStatusModel(
           title: S.of(context).greatStart,
           subTitle: S.of(context).defineInvestmentStyle,
-          onTap: () => PpiScreen.open(context,
-              arguments: const Pair(QuestionPageType.investmentStyle,
-                  QuestionPageStep.investmentStyle)),
+          onTap: () => AiInvestmentStyleQuestionWelcomeScreen.open(context),
           progress: 0.17,
         );
       case UserJourney.kyc:

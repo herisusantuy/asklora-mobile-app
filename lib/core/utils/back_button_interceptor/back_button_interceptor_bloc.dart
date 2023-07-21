@@ -31,8 +31,15 @@ class BackButtonInterceptorBloc
   }
 
   bool interceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    add(OnPressedBackInterceptor());
-    return true;
+    ///this will check if some interceptor already triggered (last interceptor being added)
+    ///then will stop this interceptor being called
+    ///basically if this is not the latest interceptor then it will skip intercepting
+    if (stopDefaultButtonEvent) {
+      return false;
+    } else {
+      add(OnPressedBackInterceptor());
+      return true;
+    }
   }
 
   @override

@@ -54,11 +54,25 @@ class BotRecommendationDetailModel extends Equatable {
   String get estTakeProfitPriceFormatted =>
       checkDouble(estTakeProfitPrice).convertToCurrencyDecimal();
 
-  String get estStopLossPctFormatted =>
-      '${estStopLossPct.convertToCurrencyDecimal()}%';
+  String get estStopLossPctFormatted {
+    final String estStopLossPctString =
+        estStopLossPct.convertToCurrencyDecimal();
+    return (estStopLossPct > 0)
+        ? '+$estStopLossPctString%'
+        : (estStopLossPct < 0)
+            ? '$estStopLossPctString%'
+            : '/';
+  }
 
-  String get estTakeProfitPctFormatted =>
-      '${estTakeProfitPct.convertToCurrencyDecimal()}%';
+  String get estTakeProfitPctFormatted {
+    final String estTakeProfitPctString =
+        estTakeProfitPct.convertToCurrencyDecimal();
+    return (estTakeProfitPct > 0)
+        ? '+$estTakeProfitPctString%'
+        : (estTakeProfitPct < 0)
+            ? '$estTakeProfitPctString%'
+            : '/';
+  }
 
   const BotRecommendationDetailModel(
     this.botInfo,
