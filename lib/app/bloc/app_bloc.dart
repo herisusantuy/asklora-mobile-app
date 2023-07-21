@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
+import '../../core/utils/build_configs/build_config.dart';
 import '../../core/utils/storage/secure_storage.dart';
 import '../../core/utils/storage/shared_preference.dart';
 import '../../core/utils/storage/storage_keys.dart';
+import '../../feature/backdoor/domain/backdoor_repository.dart';
 import '../repository/user_journey_repository.dart';
 
 part 'app_event.dart';
@@ -36,6 +38,15 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   void _onAppLaunched(AppLaunched event, Emitter<AppState> emit) async {
+    if (Environment().config is DevConfig) {
+      final backDoorBaseUrl = await BackdoorRepository().getBaseUrl();
+      var config = Environment().config;
+      (config as DevConfig).backDoorBaseUrl =
+          (backDoorBaseUrl == null || backDoorBaseUrl.isEmpty)
+              ? null
+              : backDoorBaseUrl;
+    }
+
     bool isTokenValid = await _tokenRepository.isTokenValid();
     LocaleType localeType = LocaleType.findByLanguageCode(
         await _sharedPreference.readData(sfKeyLocalisationData));

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../core/domain/pair.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/utils/date_utils.dart';
+import '../../../generated/l10n.dart';
 import '../domain/bot_recommendation_model.dart';
 
 List<Pair<String, String>> botRecommendationFaqs = [
@@ -183,9 +184,51 @@ enum BotStatus {
     }
     return botStatus ?? BotStatus.pending;
   }
+
+  static BotStatus findByString(String omsStatusString) {
+    return BotStatus.values
+        .firstWhere((element) => element.name == omsStatusString);
+  }
+
+  String text(BuildContext context) {
+    switch (this) {
+      case live:
+      case liveExpireSoon:
+        return S.of(context).active;
+      case pending:
+        return S.of(context).pending;
+      case cancelled:
+        return S.of(context).cancelled;
+      case expired:
+        return S.of(context).expired;
+      case rejected:
+        return S.of(context).rejected;
+    }
+  }
 }
 
 String newExpiryDateOnRollover(String? expireDate) => expireDate != null
     ? formatDateTimeAsString(
         DateTime.parse(expireDate).add(const Duration(days: 14)))
     : '';
+
+enum BotOrderSide {
+  sell('SELL'),
+  buy('BUY');
+
+  final String name;
+  const BotOrderSide(this.name);
+
+  static BotOrderSide findByString(String side) {
+    return BotOrderSide.values.firstWhere((element) => element.name == side);
+  }
+
+  String text(BuildContext context) {
+    switch (this) {
+      case BotOrderSide.buy:
+        return S.of(context).buy;
+      case BotOrderSide.sell:
+        return S.of(context).sell;
+    }
+  }
+}

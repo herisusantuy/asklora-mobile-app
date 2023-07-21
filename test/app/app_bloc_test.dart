@@ -3,6 +3,7 @@ import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/token_repository.dart';
 import 'package:asklora_mobile_app/core/domain/token/token_api_client.dart';
 import 'package:asklora_mobile_app/core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
+import 'package:asklora_mobile_app/core/utils/build_configs/build_config.dart';
 import 'package:asklora_mobile_app/core/utils/storage/storage_keys.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
@@ -36,6 +37,9 @@ void main() async {
     });
 
     setUp(() async {
+      /// Skip the Backdoor block
+      Environment().config = StagingConfig();
+
       appBloc = AppBloc(
           tokenRepository: tokenRepository,
           userJourneyRepository: userJourneyRepository,
