@@ -223,6 +223,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonViewTransactionHistory":
             MessageLookupByLibrary.simpleMessage("View Transaction History"),
         "buttonWithdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
+        "buy": MessageLookupByLibrary.simpleMessage("Buy"),
+        "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
         "cannotRememberEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Can’t remember your email address?\nEmail us at cs@asklora.ai"),
         "cantRememberYourEmail": MessageLookupByLibrary.simpleMessage(
@@ -246,6 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Check Botstock Details"),
         "companyAddress":
             MessageLookupByLibrary.simpleMessage("Company Address"),
+        "completed": MessageLookupByLibrary.simpleMessage("Completed"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmAndContinue":
             MessageLookupByLibrary.simpleMessage("Confirm & Continue"),
@@ -348,6 +351,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "exchangeRateInDepositScreen": m10,
         "existingPassword":
             MessageLookupByLibrary.simpleMessage("Existing Password"),
+        "expired": MessageLookupByLibrary.simpleMessage("Expired"),
         "expiresAt": MessageLookupByLibrary.simpleMessage("Expires at"),
         "extrovertLessThan8": MessageLookupByLibrary.simpleMessage(
             "You also seem to be a bit more reserved. But hey, introverts change the world!"),
@@ -630,6 +634,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "readyToGo": MessageLookupByLibrary.simpleMessage("Ready to go?"),
         "redeemYourBotstockNow":
             MessageLookupByLibrary.simpleMessage("Redeem Your Botstock Now"),
+        "rejected": MessageLookupByLibrary.simpleMessage("Rejected"),
         "relearn": MessageLookupByLibrary.simpleMessage("relearn"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
         "resetPasswordSuccessful":
@@ -651,6 +656,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rolloverBotStockAcknowledgement": m21,
         "saveForLater": MessageLookupByLibrary.simpleMessage("Save For Later"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
+        "sell": MessageLookupByLibrary.simpleMessage("Sell"),
         "setUpFinancialProfile":
             MessageLookupByLibrary.simpleMessage("Set Up Financial Profile"),
         "shares": MessageLookupByLibrary.simpleMessage("Shares"),

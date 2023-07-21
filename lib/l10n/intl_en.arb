@@ -626,6 +626,13 @@
       }
     }
   },
+  "cancelled": "Cancelled",
+  "expired": "Expired",
+  "rejected": "Rejected",
+  "completed": "Completed",
+  "subscription": "Subscription",
+  "buy": "Buy",
+  "sell": "Sell",
   "aiIsqWelcomeTitle": "It’s time to find out your investment preferences",
   "aiIsqWelcomeSubTitle": "Let’s see what kind of stocks you prefer",
   "depositHistory": "Deposit History"
