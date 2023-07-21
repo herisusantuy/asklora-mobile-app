@@ -24,7 +24,7 @@ class BotTerminateButton extends StatelessWidget {
             BotStockResultScreen.openWithBackCallBack(
               context: context,
               arguments: BotStockResultArgument(
-                  title: S.of(context).tradeRequestReceived,
+                  title: S.of(context).tradeRequestSubmitted,
                   desc: S.of(context).endBotStockAcknowledgement(
                       botType.name,
                       botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol,
