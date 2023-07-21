@@ -332,6 +332,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("你嘅投資風格已經界定"),
         "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
             "想知Asklora有咩投資秘技？\n界定你嘅投資風格先！\n"),
+        "isqNextButton": MessageLookupByLibrary.simpleMessage(
+            "Press to move onto the next section"),
         "kycRejectedExplanationOfAffiliate":
             MessageLookupByLibrary.simpleMessage("我們不接受上述類別人士\n開立賬戶。"),
         "kycRejectedScreenTitle":

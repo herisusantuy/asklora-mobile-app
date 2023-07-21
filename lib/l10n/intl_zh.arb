@@ -592,6 +592,9 @@
       }
     }
   },
+  "aiIsqWelcomeTitle": "It's time to find out your investment preferences",
+  "aiIsqWelcomeSubTitle": "Let's see what kind of stocks you prefer",
+  "isqNextButton": "Press to move onto the next section",
   "cancelled": "已取消",
   "expired": "已到期",
   "rejected": "已拒絕",

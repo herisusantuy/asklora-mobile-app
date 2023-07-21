@@ -4166,6 +4166,36 @@ class S {
     );
   }
 
+  /// `It's time to find out your investment preferences`
+  String get aiIsqWelcomeTitle {
+    return Intl.message(
+      'It\'s time to find out your investment preferences',
+      name: 'aiIsqWelcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's see what kind of stocks you prefer`
+  String get aiIsqWelcomeSubTitle {
+    return Intl.message(
+      'Let\'s see what kind of stocks you prefer',
+      name: 'aiIsqWelcomeSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Press to move onto the next section`
+  String get isqNextButton {
+    return Intl.message(
+      'Press to move onto the next section',
+      name: 'isqNextButton',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Cancelled`
   String get cancelled {
     return Intl.message(
@@ -4221,26 +4251,6 @@ class S {
     return Intl.message(
       'Sell',
       name: 'sell',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `It's time to find out your investment preferences`
-  String get aiIsqWelcomeTitle {
-    return Intl.message(
-      'It\'s time to find out your investment preferences',
-      name: 'aiIsqWelcomeTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Let's see what kind of stocks you prefer`
-  String get aiIsqWelcomeSubTitle {
-    return Intl.message(
-      'Let\'s see what kind of stocks you prefer',
-      name: 'aiIsqWelcomeSubTitle',
       desc: '',
       args: [],
     );
