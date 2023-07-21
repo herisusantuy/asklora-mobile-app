@@ -633,5 +633,25 @@
   "withdrawalHistory": "提款歷史",
   "kycRejectedScreenTitle": "Sorry，原來你唔合資格用 Asklora！",
   "kycRejectedExplanationOfAffiliate": "我們不接受上述類別人士\n開立賬戶。",
-  "buttonGoBack": "返回"
+  "buttonGoBack": "返回",
+  "otpScreenTitle": "一次性密碼",
+  "otpScreenDescription": "我們已透過SMS傳送一組號碼以核實你所登記電話，請於下面輸入一次性密碼 (OTP)。",
+  "@otpScreenDescription": {
+    "placeholders": {
+      "phoneNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "otpDigit": "000000 (6 位數字)",
+  "buttonVerify": "核實",
+  "sendOtp": "發送 OTP",
+  "reSendOtp": "在{seconds}秒後重發 ",
+  "@reSendOtp": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  }
 }

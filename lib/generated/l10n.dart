@@ -4415,6 +4415,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Mobile OTP`
+  String get otpScreenTitle {
+    return Intl.message(
+      'Mobile OTP',
+      name: 'otpScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We've sent you a code via SMS to verify your phone number (+852 {phoneNumber}). Please enter the OTP code below.`
+  String otpScreenDescription(String phoneNumber) {
+    return Intl.message(
+      'We\'ve sent you a code via SMS to verify your phone number (+852 $phoneNumber). Please enter the OTP code below.',
+      name: 'otpScreenDescription',
+      desc: '',
+      args: [phoneNumber],
+    );
+  }
+
+  /// `000000 (6 digit)`
+  String get otpDigit {
+    return Intl.message(
+      '000000 (6 digit)',
+      name: 'otpDigit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify`
+  String get buttonVerify {
+    return Intl.message(
+      'Verify',
+      name: 'buttonVerify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SEND OTP`
+  String get sendOtp {
+    return Intl.message(
+      'SEND OTP',
+      name: 'sendOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `RE-SEND IN {seconds}S`
+  String reSendOtp(String seconds) {
+    return Intl.message(
+      'RE-SEND IN ${seconds}S',
+      name: 'reSendOtp',
+      desc: '',
+      args: [seconds],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

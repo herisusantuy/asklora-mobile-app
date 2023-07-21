@@ -98,7 +98,7 @@
   "free": "Free",
   "botStockId": "Botstock ID",
   "investmentAmount": "Investment Amount",
-  "investmentStyleWelcomeTitle": "It’s time to define your investment style.\u2028\u2028Show me what you’re made of!",
+  "investmentStyleWelcomeTitle": "It’s time to define your investment style.  Show me what you’re made of!",
   "tradeFee": "Trade Fee",
   "endedAmount": "Ended Amount",
   "summary": "Summary",
@@ -651,5 +651,25 @@
   "aiIsqWelcomeTitle": "It's time to find out your investment preferences",
   "aiIsqWelcomeSubTitle": "Let's see what kind of stocks you prefer",
   "depositHistory": "Deposit History",
-  "withdrawalHistory": "Withdrawal History"
+  "withdrawalHistory": "Withdrawal History",
+  "otpScreenTitle": "Mobile OTP",
+  "otpScreenDescription": "We've sent you a code via SMS to verify your phone number (+852 {phoneNumber}). Please enter the OTP code below.",
+  "@otpScreenDescription": {
+    "placeholders": {
+      "phoneNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "otpDigit": "000000 (6 digit)",
+  "buttonVerify": "Verify",
+  "sendOtp": "SEND OTP",
+  "reSendOtp": "RE-SEND IN {seconds}S",
+  "@reSendOtp": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  }
 }
