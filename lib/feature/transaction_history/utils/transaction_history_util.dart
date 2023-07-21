@@ -18,12 +18,27 @@ enum TransferType {
     return transferType;
   }
 
+  static TransferType findByTitle(String transferTypeString) {
+    TransferType transferType = TransferType.values
+        .firstWhere((element) => element.title == transferTypeString);
+    return transferType;
+  }
+
   String text(BuildContext context) {
     switch (this) {
       case TransferType.deposit:
         return S.of(context).deposit;
       case TransferType.withdraw:
         return S.of(context).buttonWithdraw;
+    }
+  }
+
+  String titleText(BuildContext context) {
+    switch (this) {
+      case TransferType.deposit:
+        return S.of(context).depositHistory;
+      case TransferType.withdraw:
+        return S.of(context).withdrawalHistory;
     }
   }
 

@@ -97,9 +97,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("投資賬戶\n即將 Ready！"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
         "aiIsqWelcomeSubTitle": MessageLookupByLibrary.simpleMessage(
-            "Let’s see what kind of stocks you prefer"),
+            "Let\'s see what kind of stocks you prefer"),
         "aiIsqWelcomeTitle": MessageLookupByLibrary.simpleMessage(
-            "It’s time to find out your investment preferences"),
+            "It\'s time to find out your investment preferences"),
         "allSettings": MessageLookupByLibrary.simpleMessage("設定"),
         "almostFinished": MessageLookupByLibrary.simpleMessage("馬上就好"),
         "askMeAnythingRelatedToFinance":
@@ -208,7 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "checkBotStockDetails":
             MessageLookupByLibrary.simpleMessage("查看 Botstock 資訊"),
         "companyAddress": MessageLookupByLibrary.simpleMessage("銀行地址"),
-        "completed": MessageLookupByLibrary.simpleMessage("完全的"),
+        "completed": MessageLookupByLibrary.simpleMessage("已完成"),
         "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
         "confirmTrade": MessageLookupByLibrary.simpleMessage("確認買入"),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
@@ -507,7 +507,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("年齡只不過係個數字。"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "readyToGo": MessageLookupByLibrary.simpleMessage("準備好未？"),
-        "rejected": MessageLookupByLibrary.simpleMessage("Rejected"),
+        "rejected": MessageLookupByLibrary.simpleMessage("已拒絕"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("重設密碼"),
         "resetPasswordSuccessful":
@@ -634,6 +634,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "wireTransfer": MessageLookupByLibrary.simpleMessage("電匯"),
         "withdraw": MessageLookupByLibrary.simpleMessage("提取資金"),
         "withdrawalAmount": MessageLookupByLibrary.simpleMessage("提取金額"),
+        "withdrawalHistory": MessageLookupByLibrary.simpleMessage("提款歷史"),
         "withdrawalRequestSubmittedSubTitle":
             MessageLookupByLibrary.simpleMessage(
                 "當資金已繳付至你戶口後，我們會盡快透過電郵或應用程式通知。"),

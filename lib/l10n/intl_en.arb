@@ -633,7 +633,8 @@
   "subscription": "Subscription",
   "buy": "Buy",
   "sell": "Sell",
-  "aiIsqWelcomeTitle": "It’s time to find out your investment preferences",
-  "aiIsqWelcomeSubTitle": "Let’s see what kind of stocks you prefer",
-  "depositHistory": "Deposit History"
+  "aiIsqWelcomeTitle": "It's time to find out your investment preferences",
+  "aiIsqWelcomeSubTitle": "Let's see what kind of stocks you prefer",
+  "depositHistory": "Deposit History",
+  "withdrawalHistory": "Withdrawal History"
 }

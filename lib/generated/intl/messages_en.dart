@@ -106,9 +106,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "agree": MessageLookupByLibrary.simpleMessage("Agree"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
         "aiIsqWelcomeSubTitle": MessageLookupByLibrary.simpleMessage(
-            "Let’s see what kind of stocks you prefer"),
+            "Let\'s see what kind of stocks you prefer"),
         "aiIsqWelcomeTitle": MessageLookupByLibrary.simpleMessage(
-            "It’s time to find out your investment preferences"),
+            "It\'s time to find out your investment preferences"),
         "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "almostFinished":
             MessageLookupByLibrary.simpleMessage("Almost finished!"),
@@ -793,6 +793,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "withdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
         "withdrawalAmount":
             MessageLookupByLibrary.simpleMessage("Withdrawal Amount"),
+        "withdrawalHistory":
+            MessageLookupByLibrary.simpleMessage("Withdrawal History"),
         "withdrawalRequestSubmittedSubTitle": MessageLookupByLibrary.simpleMessage(
             "You will be informed via email and app notification as soon as the funds are paid to your account."),
         "withdrawalRequestSubmittedTitle": MessageLookupByLibrary.simpleMessage(
