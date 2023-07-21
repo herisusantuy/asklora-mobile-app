@@ -18,7 +18,7 @@ enum TransferType {
     return transferType;
   }
 
-  String getTransferType(BuildContext context) {
+  String text(BuildContext context) {
     switch (this) {
       case TransferType.deposit:
         return S.of(context).deposit;

@@ -31,7 +31,7 @@ class TransferTransactionHistoryCard extends StatelessWidget {
                 Expanded(
                   child: CustomTextNew(
                       TransferType.findByString(transactionHistoryModel.title)
-                          .getTransferType(context),
+                          .text(context),
                       style: AskLoraTextStyles.subtitle1),
                 ),
                 const SizedBox(
