@@ -4276,6 +4276,16 @@ class S {
     );
   }
 
+  /// `Press to move onto the next section`
+  String get isqNextButton {
+    return Intl.message(
+      'Press to move onto the next section',
+      name: 'isqNextButton',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Cancelled`
   String get cancelled {
     return Intl.message(
