@@ -25,7 +25,6 @@ class KycRejectedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('add print');
     return CustomScaffold(
       enableBackNavigation: false,
       body: Padding(
