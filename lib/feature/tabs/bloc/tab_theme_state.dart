@@ -1,4 +1,4 @@
-part of 'background_props_bloc.dart';
+part of 'tab_theme_bloc.dart';
 
 enum BackgroundImageType {
   ///TODO : add white bg asset later
@@ -11,20 +11,20 @@ enum BackgroundImageType {
   const BackgroundImageType({this.imageAsset});
 }
 
-class BackgroundPropsState extends Equatable {
+class TabThemeState extends Equatable {
   final BackgroundImageType backgroundImageType;
 
-  const BackgroundPropsState({
+  const TabThemeState({
     this.backgroundImageType = BackgroundImageType.none,
   });
 
   @override
   List<Object> get props => [backgroundImageType];
 
-  BackgroundPropsState copyWith({
+  TabThemeState copyWith({
     BackgroundImageType? backgroundImageType,
   }) {
-    return BackgroundPropsState(
+    return TabThemeState(
       backgroundImageType: backgroundImageType ?? this.backgroundImageType,
     );
   }

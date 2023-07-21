@@ -31,7 +31,7 @@ import '../../tabs/for_you/for_you_screen_form.dart';
 import '../../tabs/for_you/investment_style/bloc/for_you_question_bloc.dart';
 import '../../tabs/for_you/repository/for_you_repository.dart';
 import '../../tabs/home/home_screen_form.dart';
-import '../background/bloc/background_props_bloc.dart';
+import '../bloc/tab_theme_bloc.dart';
 import 'widgets/ai_overlay.dart';
 
 part 'widgets/tab_pages.dart';
@@ -48,7 +48,7 @@ class TabScreen extends StatelessWidget {
   Widget build(BuildContext context) => MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => BackgroundPropsBloc(),
+            create: (_) => TabThemeBloc(),
           ),
           BlocProvider(
             create: (_) =>
@@ -97,8 +97,8 @@ class TabScreen extends StatelessWidget {
                   ppiResponseRepository: PpiResponseRepository(),
                   jsonCacheSharedPreferences: JsonCacheSharedPreferences())),
         ],
-        child: BlocBuilder<BackgroundPropsBloc, BackgroundPropsState>(
-            builder: (context, state) {
+        child:
+            BlocBuilder<TabThemeBloc, TabThemeState>(builder: (context, state) {
           return Container(
             decoration: BoxDecoration(
               image: state.backgroundImageType != BackgroundImageType.none
@@ -141,7 +141,7 @@ class TabScreen extends StatelessWidget {
                                     current.currentTabPage,
                             listener: (context, state) {
                               if (state.currentTabPage != TabPage.forYou) {
-                                context.read<BackgroundPropsBloc>().add(
+                                context.read<TabThemeBloc>().add(
                                     const BackgroundImageTypeChanged(
                                         BackgroundImageType.none));
                               }
