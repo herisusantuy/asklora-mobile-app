@@ -9,40 +9,33 @@ import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/utils/extensions.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../core/presentation/auto_sized_text_widget.dart';
-import '../../../../core/presentation/round_colored_box.dart';
-import '../../../../core/values/app_values.dart';
-import '../../../bot_stock/presentation/bot_performance/bot_performance_chart.dart';
 import '../../../../core/presentation/column_text/column_text_with_tooltip.dart';
 import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
+import '../../../../core/presentation/round_colored_box.dart';
+import '../../../../core/repository/transaction_repository.dart';
+import '../../../../core/values/app_values.dart';
+import '../../../bot_stock/presentation/bot_performance/bot_performance_chart.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../domain/grouped_model.dart';
 import '../../domain/transaction_history_model.dart';
 import '../../presentation/widgets/empty_activity_placeholder.dart';
 import '../../presentation/widgets/transaction_history_group_title.dart';
 import '../../presentation/widgets/transaction_history_tab.dart';
-import '../../../../core/repository/transaction_repository.dart';
 import '../../utils/transaction_history_util.dart';
+import 'bloc/bot_transaction_history_detail_bloc.dart';
 import 'domain/bot_activities_transaction_history_model.dart';
 import 'domain/bot_detail_transaction_history_response.dart';
 import 'domain/bot_summary_transaction_history_model.dart';
-import 'bloc/bot_transaction_history_detail_bloc.dart';
-
-part 'widgets/bot_order_transaction_history_detail_content.dart';
-
-part 'bot_order_transaction_history_summary_screen.dart';
 
 part 'bot_order_transaction_history_activities_screen.dart';
-
 part 'bot_order_transaction_history_performance_screen.dart';
-
-part 'widgets/bot_order_transaction_history_summary_card.dart';
-
-part 'widgets/bot_order_transaction_history_activities_group_widget.dart';
-
+part 'bot_order_transaction_history_summary_screen.dart';
 part 'widgets/bot_order_transaction_history_activities_card.dart';
+part 'widgets/bot_order_transaction_history_activities_group_widget.dart';
+part 'widgets/bot_order_transaction_history_detail_content.dart';
+part 'widgets/bot_order_transaction_history_summary_card.dart';
 
 class BotOrderTransactionHistoryDetailScreen extends StatelessWidget {
   final TransactionHistoryModel transactionHistoryModel;
