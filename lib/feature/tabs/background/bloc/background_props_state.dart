@@ -1,8 +1,9 @@
 part of 'background_props_bloc.dart';
 
 enum BackgroundImageType {
-  white(imageAsset: 'assets/lora_gpt_background.png'),
-  black(imageAsset: 'assets/lora_gpt_background.png'),
+  ///TODO : add white bg asset later
+  light(imageAsset: 'assets/lora_gpt_background.png'),
+  dark(imageAsset: 'assets/lora_gpt_background.png'),
   none;
 
   final String? imageAsset;

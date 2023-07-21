@@ -72,7 +72,7 @@ class ForYouScreenForm extends StatelessWidget {
                       case ForYouPage.investmentStyle:
                         context.read<BackgroundPropsBloc>().add(
                             const BackgroundImageTypeChanged(
-                                BackgroundImageType.black));
+                                BackgroundImageType.dark));
                         return const AiInvestmentStyleQuestionWelcomeScreen(
                           isqType: ISQType.forYou,
                         );
