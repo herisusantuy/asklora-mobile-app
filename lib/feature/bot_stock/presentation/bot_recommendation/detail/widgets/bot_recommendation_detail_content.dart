@@ -329,7 +329,7 @@ class ToggleableTextBloc extends StatelessWidget {
 
           // Calculate the width of the price and the percentage text
           String priceText = priceDifference < 0
-              ? '${priceDifference.convertToCurrencyDecimal()}'
+              ? priceDifference.convertToCurrencyDecimal()
               : '+${priceDifference.convertToCurrencyDecimal()}';
           String percentageText = percentDifference < 0
               ? '${percentDifference.convertToCurrencyDecimal()}%'
