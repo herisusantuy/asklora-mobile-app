@@ -55,36 +55,41 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m12(minute) => "~${minute} min";
 
-  static String m13(currency) => "Buying Power (${currency})";
+  static String m13(phoneNumber) =>
+      "We\'ve sent you a code via SMS to verify your phone number (+852 ${phoneNumber}). Please enter the OTP code below.";
 
-  static String m14(currency) => "Current Price (${currency})";
+  static String m14(currency) => "Buying Power (${currency})";
 
-  static String m15(bot, startDate, endDate, duration) =>
+  static String m15(currency) => "Current Price (${currency})";
+
+  static String m16(bot, startDate, endDate, duration) =>
       "Past ${duration} performance of ${bot}  (${startDate} - ${endDate})";
 
-  static String m16(dateTime) => "Expired at ${dateTime}";
+  static String m17(dateTime) => "Expired at ${dateTime}";
 
-  static String m17(dateTime) => "Expired in ${dateTime} days";
+  static String m18(dateTime) => "Expired in ${dateTime} days";
 
-  static String m18(currency) => "Total Botstock Values (${currency})";
+  static String m19(currency) => "Total Botstock Values (${currency})";
 
-  static String m19(currency) => "Withdrawable Balance (${currency})";
+  static String m20(currency) => "Withdrawable Balance (${currency})";
 
-  static String m20(opennessScore, neuroticismScore, extrovertScore) =>
+  static String m21(seconds) => "RE-SEND IN ${seconds}S";
+
+  static String m22(opennessScore, neuroticismScore, extrovertScore) =>
       "Based on your answer, ${opennessScore} and ${neuroticismScore}\n\n${extrovertScore}";
 
-  static String m21(botName, botSymbol, dateTime) =>
+  static String m23(botName, botSymbol, dateTime) =>
       "${botName} ${botSymbol} will start at ${dateTime}";
 
-  static String m22(minDeposit) =>
+  static String m24(minDeposit) =>
       "Transfer at least HK\$${minDeposit} to Asklora\'s bank account. Any initial deposit less than HK\$${minDeposit} will be rejected and fees will be charged.";
 
-  static String m23(time, date) => "Updated at ${time} HKT, ${date}";
+  static String m25(time, date) => "Updated at ${time} HKT, ${date}";
 
-  static String m24(minDeposit) =>
+  static String m26(minDeposit) =>
       "We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK\$ ${minDeposit} bank transfer is completed.";
 
-  static String m25(dateTime) =>
+  static String m27(dateTime) =>
       "Your Bank Account is under review and will be complete by ${dateTime}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -223,6 +228,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonSubmit": MessageLookupByLibrary.simpleMessage("Submit"),
         "buttonSure": MessageLookupByLibrary.simpleMessage("Sure"),
         "buttonTryAgain": MessageLookupByLibrary.simpleMessage("Try Again"),
+        "buttonVerify": MessageLookupByLibrary.simpleMessage("Verify"),
         "buttonViewDetails":
             MessageLookupByLibrary.simpleMessage("View Details"),
         "buttonViewTransactionHistory":
@@ -493,6 +499,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "orderRejected": MessageLookupByLibrary.simpleMessage("Order Rejected"),
         "orderRollover": MessageLookupByLibrary.simpleMessage("Order Rollover"),
         "orderStarted": MessageLookupByLibrary.simpleMessage("Order Started"),
+        "otpDigit": MessageLookupByLibrary.simpleMessage("000000 (6 digit)"),
+        "otpScreenDescription": m13,
+        "otpScreenTitle": MessageLookupByLibrary.simpleMessage("Mobile OTP"),
+        "otpSentToYourEmail":
+            MessageLookupByLibrary.simpleMessage("OTP code sent to your email"),
+        "otpSentToYourPhone": MessageLookupByLibrary.simpleMessage(
+            "Otp SMS is sent to your phone"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordChangeSuccess":
             MessageLookupByLibrary.simpleMessage("Password Change Success"),
@@ -524,22 +537,22 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please make sure you have finished the transfer and then inform us, if not, your deposit will be delayed."),
         "pleaseMakeSureYouPressSubmit": MessageLookupByLibrary.simpleMessage(
             "Please make sure you press \'SUBMIT\' after you have transferred the funds from your bank."),
-        "portfolioBuyingPower": m13,
+        "portfolioBuyingPower": m14,
         "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
             "Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement\'."),
-        "portfolioCurrentPrice": m14,
+        "portfolioCurrentPrice": m15,
         "portfolioDetailButtonCancelBotStock":
             MessageLookupByLibrary.simpleMessage("Cancel Botstock"),
         "portfolioDetailButtonEndBotStock":
             MessageLookupByLibrary.simpleMessage("End Botstock"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("Rollover Botstock"),
-        "portfolioDetailChartCaption": m15,
+        "portfolioDetailChartCaption": m16,
         "portfolioDetailChartEmptyMessage":
             MessageLookupByLibrary.simpleMessage(
                 "Performance data will be available once the Botstock starts"),
-        "portfolioDetailExpiredAt": m16,
-        "portfolioDetailExpiredIn": m17,
+        "portfolioDetailExpiredAt": m17,
+        "portfolioDetailExpiredIn": m18,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("Avg. Loss"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -621,11 +634,11 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Looks like you haven\'t claimed your free Botstock yet. Let\'s get trading right away!"),
         "portfolioPopUpRedeemYourBotstockTitle":
             MessageLookupByLibrary.simpleMessage("Redeem Your Free Botstock"),
-        "portfolioTotalBotStock": m18,
+        "portfolioTotalBotStock": m19,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("Total P/L"),
         "portfolioTotalValue":
             MessageLookupByLibrary.simpleMessage("Total Portfolio Value"),
-        "portfolioWithdrawableAmount": m19,
+        "portfolioWithdrawableAmount": m20,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage(
@@ -644,6 +657,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I appreciate your honesty."),
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push-Notification"),
+        "reSendOtp": m21,
         "readyToGo": MessageLookupByLibrary.simpleMessage("Ready to go?"),
         "redeemYourBotstockNow":
             MessageLookupByLibrary.simpleMessage("Redeem Your Botstock Now"),
@@ -654,7 +668,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Password Reset Successful"),
         "resetPasswordSuccessfulMessage": MessageLookupByLibrary.simpleMessage(
             "Your password has been reset. Please go back to the Login page and login again."),
-        "resultOfPersonalizationQuestion": m20,
+        "resultOfPersonalizationQuestion": m22,
         "retakeInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("Retake Investment Style"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
@@ -668,11 +682,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Risk Disclosure Statement"),
         "riskDisclosureStatementString": MessageLookupByLibrary.simpleMessage(
             "1. The prices of securities fluctuate, sometimes dramatically. The price of a security may move up or down, and may become valueless. It is as likely that losses will be incurred rather than profit made as a result of buying and selling securities. Investors should not only base on this marketing material to make any investment decision, you should carefully consider whether the investment products or services are suitable for you according to your investment experience, purpose, risk tolerance, financial or related conditions. If you have any questions, please contact us or obtain independent advice.\n\n2. Investment in foreign securities carries additional risks not generally associated with securities in the domestic market. The value or income of foreign securities may be more volatile and could be adversely affected by changes in currency rates of exchange, foreign taxation practices, foreign laws, government practices, regulations, and political events. You may find it more difficult to liquidate investments in foreign securities where they have limited liquidity in the relevant market. Foreign laws, government practices, and regulations may also affect the transferability of foreign securities. Timely and reliable information about the value or the extent of the risks of foreign securities may not be readily available at all times.\n\n3. You acknowledge that you have fully understood the implications of the risks associated with the Electronic Trading Service as set out in the Client Agreement"),
-        "rolloverBotStockAcknowledgement": m21,
+        "rolloverBotStockAcknowledgement": m23,
         "saveForLater": MessageLookupByLibrary.simpleMessage("Save For Later"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
         "sell": MessageLookupByLibrary.simpleMessage("Sell"),
         "sendIcon": MessageLookupByLibrary.simpleMessage("send icon "),
+        "sendOtp": MessageLookupByLibrary.simpleMessage("SEND OTP"),
         "setUpFinancialProfile":
             MessageLookupByLibrary.simpleMessage("Set Up Financial Profile"),
         "shares": MessageLookupByLibrary.simpleMessage("Shares"),
@@ -775,7 +790,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transaction History"),
         "transactionHistoryToday":
             MessageLookupByLibrary.simpleMessage("Today"),
-        "transferAtLeastWithMinimumDeposit": m22,
+        "transferAtLeastWithMinimumDeposit": m24,
         "transferAtLeastWithNoMinimumDeposit": MessageLookupByLibrary.simpleMessage(
             "Transfer to Asklora bank account from the same bank account you used."),
         "transferFundToAsklora":
@@ -793,10 +808,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "We\'re having some trouble processing your withdrawal request. Please try again"),
         "unableToProcessWithdrawalTitle": MessageLookupByLibrary.simpleMessage(
             "Unable to Process Withdrawal"),
-        "updatedAt": m23,
+        "updatedAt": m25,
         "uploadProofOfRemittance":
             MessageLookupByLibrary.simpleMessage("Upload proof of remittance"),
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
+        "verifyOtpSuccess":
+            MessageLookupByLibrary.simpleMessage("Verify OTP Success"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
         "viewDepositGuide":
             MessageLookupByLibrary.simpleMessage("View Deposit Guide"),
@@ -807,7 +824,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "We will only accept deposits via bank transfer (wire/FPS) from your own account."),
         "weWillOnlyAcceptHKD":
             MessageLookupByLibrary.simpleMessage("We will only accept HKD."),
-        "weWillTakeInformationCollectedFromYour": m24,
+        "weWillTakeInformationCollectedFromYour": m26,
         "website": MessageLookupByLibrary.simpleMessage("Website"),
         "welcomeScreenFirstBenefit": MessageLookupByLibrary.simpleMessage(
             "Guidance from your own personal AI"),
@@ -834,7 +851,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yourBankAccount":
             MessageLookupByLibrary.simpleMessage("Your Bank Account"),
-        "yourBankAccountIsUnderReview": m25,
+        "yourBankAccountIsUnderReview": m27,
         "yourDepositCanTakeUp2WorkingDays":
             MessageLookupByLibrary.simpleMessage(
                 "Your deposit can take up to 2 working days"),
