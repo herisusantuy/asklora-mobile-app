@@ -17,6 +17,7 @@ class CustomShowcaseView extends StatelessWidget {
   final TooltipPosition tooltipPosition;
   final BorderRadius targetBorderRadius;
   final EdgeInsets targetPadding;
+
   final double overlayOpacity;
   final Color overlayColor;
   final PointerPosition pointerPosition;

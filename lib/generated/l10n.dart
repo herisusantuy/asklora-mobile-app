@@ -2963,6 +2963,26 @@ class S {
     );
   }
 
+  /// `Review your trade summary and hit `
+  String get reviewYourTradeSummary {
+    return Intl.message(
+      'Review your trade summary and hit ',
+      name: 'reviewYourTradeSummary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` to execute it!`
+  String get toExecuteIt {
+    return Intl.message(
+      ' to execute it!',
+      name: 'toExecuteIt',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Here, you can find the `
   String get hereYouCanFind {
     return Intl.message(
@@ -3133,10 +3153,10 @@ class S {
     );
   }
 
-  /// `Confirm Trade`
+  /// ` "Confirm Trade"`
   String get confirmTrade {
     return Intl.message(
-      'Confirm Trade',
+      ' "Confirm Trade"',
       name: 'confirmTrade',
       desc: '',
       args: [],

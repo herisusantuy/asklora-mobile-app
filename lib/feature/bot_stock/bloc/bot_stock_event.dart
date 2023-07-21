@@ -49,3 +49,7 @@ class FetchBotDetail extends BotStockEvent {
   @override
   List<Object> get props => [ticker, botId];
 }
+
+class InitBotTradeSummaryTutorial extends BotStockEvent {}
+
+class BotTradeSummaryTutorialFinished extends BotStockEvent {}

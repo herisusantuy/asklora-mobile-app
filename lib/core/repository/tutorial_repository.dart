@@ -15,4 +15,16 @@ class TutorialRepository {
         await _sharedPreference.readBoolData(sfKeyBotDetailsTutorial);
     return response ?? true;
   }
+
+  Future<bool> isTradeSummaryTutorial() async {
+    bool? response =
+        await _sharedPreference.readBoolData(sfKeyTradeSummaryTutorial);
+    return response ?? true;
+  }
+
+  Future<bool> setTradeSummaryTutorialFinished() async {
+    bool response =
+        await _sharedPreference.writeBoolData(sfKeyTradeSummaryTutorial, false);
+    return response;
+  }
 }
