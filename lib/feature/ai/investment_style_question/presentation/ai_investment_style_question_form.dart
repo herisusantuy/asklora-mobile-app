@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/base_response.dart';
-import '../../../../core/presentation/ai/ai_shimmer.dart';
+import '../../../../core/presentation/shimmer_widget.dart';
 import '../../../../core/presentation/ai/chat/ai_text_field.dart';
 import '../../../../core/presentation/ai/chat/chat_lora_header.dart';
 import '../../../../core/presentation/ai/chat/in_chat_bubble_widget.dart';

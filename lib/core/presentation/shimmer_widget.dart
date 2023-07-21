@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../styles/asklora_colors.dart';
-import '../shimmer.dart';
+import '../styles/asklora_colors.dart';
+import 'shimmer.dart';
 
-class AiShimmerWidget extends StatelessWidget {
+class ShimmerWidget extends StatelessWidget {
   final double width;
   final double height;
-  const AiShimmerWidget({required this.width, required this.height, super.key});
+  const ShimmerWidget({required this.width, required this.height, super.key});
 
   @override
   Widget build(BuildContext context) => Shimmer.fromColors(

@@ -12,7 +12,7 @@ class AiInvestmentStyleQuestionNextButton extends StatelessWidget {
               previous.isChatAnimationRunning != current.isChatAnimationRunning,
           builder: (context, state) {
             return state.isChatAnimationRunning
-                ? AiShimmerWidget(
+                ? ShimmerWidget(
                     width: S
                             .of(context)
                             .isqNextButton

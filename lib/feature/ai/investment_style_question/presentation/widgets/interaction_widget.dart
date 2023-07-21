@@ -39,7 +39,7 @@ class InteractionWidget extends StatelessWidget {
                     .choices
                     .entries
                     .map((value) => state.isChatAnimationRunning
-                        ? AiShimmerWidget(
+                        ? ShimmerWidget(
                             width:
                                 value.value.textWidth(AskLoraTextStyles.body2) +
                                     30.2,
@@ -70,8 +70,7 @@ class InteractionWidget extends StatelessWidget {
               return Column(
                 children: [
                   state.isChatAnimationRunning
-                      ? const AiShimmerWidget(
-                          width: double.infinity, height: 55)
+                      ? const ShimmerWidget(width: double.infinity, height: 55)
                       : PrimaryButton(
                           label: 'Continue',
                           onTap: () => context
@@ -84,8 +83,7 @@ class InteractionWidget extends StatelessWidget {
                     height: 10,
                   ),
                   state.isChatAnimationRunning
-                      ? const AiShimmerWidget(
-                          width: double.infinity, height: 55)
+                      ? const ShimmerWidget(width: double.infinity, height: 55)
                       : PrimaryButton(
                           label: 'Change My Preferences',
                           onTap: () => context
