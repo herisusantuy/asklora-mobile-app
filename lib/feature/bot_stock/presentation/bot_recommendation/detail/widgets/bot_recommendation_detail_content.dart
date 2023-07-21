@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:math';
 
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
@@ -115,36 +116,23 @@ class BotRecommendationDetailContent extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Container(
-                      constraints: const BoxConstraints(minWidth: 60),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            CustomTextNew(
-                              (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
-                              style: AskLoraTextStyles.h5
-                                  .copyWith(color: AskLoraColors.charcoal),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              constraints: const BoxConstraints(minWidth: 60),
-                              alignment: Alignment.center,
-                              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
-                                color: (getPercentDifference() < 0)
-                                    ? AskLoraColors.primaryMagenta
-                                    : AskLoraColors.primaryGreen,
-                              ),
-                              child: ToggleableTextBloc(
-                                percentDifference: getPercentDifference(),
-                                priceDifference: getPriceDifference(),
-                              ),
-                            ),
-                          ],
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CustomTextNew(
+                          (botDetailModel?.price ?? 0)
+                              .convertToCurrencyDecimal(),
+                          style: AskLoraTextStyles.h5
+                              .copyWith(color: AskLoraColors.charcoal),
                         ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        ToggleableTextBloc(
+                          percentDifference: getPercentDifference(),
+                          priceDifference: getPriceDifference(),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -339,6 +327,37 @@ class ToggleableTextBloc extends StatelessWidget {
           // Get the bloc from the context
           final bloc = BlocProvider.of<ToggleTextBloc>(context);
 
+          // Calculate the width of the price and the percentage text
+          String priceText = priceDifference < 0
+              ? '${priceDifference.convertToCurrencyDecimal()}'
+              : '+${priceDifference.convertToCurrencyDecimal()}';
+          String percentageText = percentDifference < 0
+              ? '${percentDifference.convertToCurrencyDecimal()}%'
+              : '+${percentDifference.convertToCurrencyDecimal()}%';
+
+          TextPainter pricePainter = TextPainter(
+            text: TextSpan(
+                text: priceText,
+                style: AskLoraTextStyles.subtitle3
+                    .copyWith(color: AskLoraColors.white)),
+            textDirection: TextDirection.ltr,
+          );
+
+          TextPainter percentagePainter = TextPainter(
+            text: TextSpan(
+                text: percentageText,
+                style: AskLoraTextStyles.subtitle3
+                    .copyWith(color: AskLoraColors.white)),
+            textDirection: TextDirection.ltr,
+          );
+
+          pricePainter.layout();
+          percentagePainter.layout();
+
+          // Calculate the container width based on the longer text
+          double containerWidth =
+              max(pricePainter.width, percentagePainter.width) + 10;
+
           return GestureDetector(
             onTap: () {
               // Trigger the event to toggle price difference
@@ -348,16 +367,21 @@ class ToggleableTextBloc extends StatelessWidget {
               builder: (context, state) {
                 bool showPriceDifference = state.showPriceDifference;
 
-                return CustomTextNew(
-                  showPriceDifference
-                      ? (priceDifference < 0
-                          ? '${priceDifference.convertToCurrencyDecimal()}'
-                          : '+${priceDifference.convertToCurrencyDecimal()}')
-                      : (percentDifference < 0
-                          ? '${percentDifference.convertToCurrencyDecimal()}%'
-                          : '+${percentDifference.convertToCurrencyDecimal()}%'),
-                  style: AskLoraTextStyles.subtitle3
-                      .copyWith(color: AskLoraColors.white),
+                return Container(
+                  width: containerWidth,
+                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: (percentDifference < 0)
+                        ? AskLoraColors.primaryMagenta
+                        : AskLoraColors.primaryGreen,
+                  ),
+                  child: CustomTextNew(
+                    showPriceDifference ? priceText : percentageText,
+                    style: AskLoraTextStyles.subtitle3
+                        .copyWith(color: AskLoraColors.white),
+                    textAlign: TextAlign.center,
+                  ),
                 );
               },
             ),
