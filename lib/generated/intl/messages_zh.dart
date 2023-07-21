@@ -118,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "atLeast1Uppercase":
             MessageLookupByLibrary.simpleMessage("最少 1 個大寫英文字母"),
         "backToLogin": MessageLookupByLibrary.simpleMessage("返回登入"),
+        "bankAccountNumber": MessageLookupByLibrary.simpleMessage("銀行戶口號碼"),
         "bankName": MessageLookupByLibrary.simpleMessage("銀行名稱"),
         "bankNumber": MessageLookupByLibrary.simpleMessage("銀行號碼"),
         "beforeDepositHeaderTitle": m0,
@@ -223,6 +224,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "depositAmount": MessageLookupByLibrary.simpleMessage("存入金額"),
         "depositFundToStartInvesting":
             MessageLookupByLibrary.simpleMessage("存入資金開始投資"),
+        "depositHistory": MessageLookupByLibrary.simpleMessage("入金歷史"),
         "depositRegulatoryRequirements": m7,
         "depositRequestSubmittedSubTitleFirstTime":
             MessageLookupByLibrary.simpleMessage(
@@ -532,6 +534,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "startInvestingOnMilestone":
             MessageLookupByLibrary.simpleMessage("即將進入投資狀態！"),
         "startsAt": MessageLookupByLibrary.simpleMessage("開始日期"),
+        "status": MessageLookupByLibrary.simpleMessage("狀態"),
         "submitApplication":
             MessageLookupByLibrary.simpleMessage("Submit Application"),
         "subscription": MessageLookupByLibrary.simpleMessage("訂購計劃"),
@@ -549,6 +552,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
         "theProofOfRemittanceShouldShowYourBankAccount":
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
+        "timeCompleted": MessageLookupByLibrary.simpleMessage("完成時間"),
+        "timeRequested": MessageLookupByLibrary.simpleMessage("請求時間"),
         "to": MessageLookupByLibrary.simpleMessage("至"),
         "tokenInvalid": MessageLookupByLibrary.simpleMessage(
             "Token is invalid or expired."),

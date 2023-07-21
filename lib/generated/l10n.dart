@@ -4185,6 +4185,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Deposit History`
+  String get depositHistory {
+    return Intl.message(
+      'Deposit History',
+      name: 'depositHistory',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

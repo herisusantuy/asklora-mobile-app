@@ -271,6 +271,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "depositAmount": MessageLookupByLibrary.simpleMessage("Deposit Amount"),
         "depositFundToStartInvesting": MessageLookupByLibrary.simpleMessage(
             "Deposit funds to start investing"),
+        "depositHistory":
+            MessageLookupByLibrary.simpleMessage("Deposit History"),
         "depositRegulatoryRequirements": m7,
         "depositRequestSubmittedSubTitleFirstTime":
             MessageLookupByLibrary.simpleMessage(
