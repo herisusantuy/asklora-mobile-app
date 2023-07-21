@@ -85,6 +85,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("關於"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("關於 Asklora"),
+        "aboutYourInvestment":
+            MessageLookupByLibrary.simpleMessage("關於投資嘅問題，可以點擊此處 "),
         "accountInformation": MessageLookupByLibrary.simpleMessage("帳戶資訊"),
         "accountIsNotActive": MessageLookupByLibrary.simpleMessage(
             "Your account is not active yet."),
@@ -102,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "It’s time to find out your investment preferences"),
         "allSettings": MessageLookupByLibrary.simpleMessage("設定"),
         "almostFinished": MessageLookupByLibrary.simpleMessage("馬上就好"),
+        "anyQuestion": MessageLookupByLibrary.simpleMessage("任何"),
         "askMeAnythingRelatedToFinance":
             MessageLookupByLibrary.simpleMessage("有咩投資問題都可以問我！"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
@@ -127,6 +130,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "botManagementFee": MessageLookupByLibrary.simpleMessage("Bot 管理費用"),
         "botRecommendationScreenTitle":
             MessageLookupByLibrary.simpleMessage("最夾你嘅投資風格"),
+        "botStocksDetails":
+            MessageLookupByLibrary.simpleMessage("Botstock 嘅詳情同預計回報。 "),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
             MessageLookupByLibrary.simpleMessage("預計批核時間為 2 個工作天。"),
         "botTradeBottomSheetAccountNotYetApprovedTitle":
@@ -294,6 +299,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Alright! 準備好\n開始你嘅 AI 旅程未？"),
         "halfWayThere": MessageLookupByLibrary.simpleMessage("進展順利"),
         "headquarters": MessageLookupByLibrary.simpleMessage("總部地點"),
+        "hereYouCanFind": MessageLookupByLibrary.simpleMessage("你可以係度搵到 "),
         "howItWorks": MessageLookupByLibrary.simpleMessage("如何運作"),
         "iAmADirector": MessageLookupByLibrary.simpleMessage(
             "我是香港證券及期貨事務監察委員會註冊持牌機構的董事、員工、或註冊持牌人士。(除了Lora Advisors Limited）"),
@@ -302,6 +308,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "我是上市公司的高級行政人員或持有 10% 或以上的股份。"),
         "iAmASeniorPolitical":
             MessageLookupByLibrary.simpleMessage("我是高級政治人物。"),
+        "ifYouveGot": MessageLookupByLibrary.simpleMessage("如果你有"),
         "inApp": MessageLookupByLibrary.simpleMessage("In-app通知"),
         "industry": MessageLookupByLibrary.simpleMessage("行業"),
         "inputDepositAmount": MessageLookupByLibrary.simpleMessage("輸入金額"),
@@ -389,6 +396,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
         "pending": MessageLookupByLibrary.simpleMessage("待處理"),
         "performance": MessageLookupByLibrary.simpleMessage("表現"),
+        "personalAIAssistant":
+            MessageLookupByLibrary.simpleMessage("問你嘅AI助手Asklora! "),
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "personalisation": MessageLookupByLibrary.simpleMessage("個人化"),
         "personalizationResultScreenTitle":
@@ -519,6 +528,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rolloverBotStockAcknowledgement": m21,
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
+        "sendIcon": MessageLookupByLibrary.simpleMessage("send icon "),
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
         "shares": MessageLookupByLibrary.simpleMessage("數量"),
         "signAgreements": MessageLookupByLibrary.simpleMessage("簽署協議"),
@@ -526,6 +536,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(" 真係要登出？"),
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage(" 踏入AI新世代，\n展開AI投資之旅"),
+        "simplyTypeAQuestion": MessageLookupByLibrary.simpleMessage(
+            "Simply type a question and tap the "),
         "startABotstock": MessageLookupByLibrary.simpleMessage("開始交易"),
         "startDate": MessageLookupByLibrary.simpleMessage("最佳開始日期"),
         "startInvesting": MessageLookupByLibrary.simpleMessage("開始投資 "),
@@ -549,7 +561,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
         "theProofOfRemittanceShouldShowYourBankAccount":
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
+        "thisInteractiveGraph":
+            MessageLookupByLibrary.simpleMessage("你可以係下面見到Botstock最近"),
         "to": MessageLookupByLibrary.simpleMessage("至"),
+        "toDismissAsklora":
+            MessageLookupByLibrary.simpleMessage("to dismiss Asklora. "),
+        "toGiveYou":
+            MessageLookupByLibrary.simpleMessage("嘅表現，希望幫到你理解Botstock係點樣交易！"),
+        "toStartAConversation": MessageLookupByLibrary.simpleMessage(
+            "to start a conversation. Swipe down "),
         "tokenInvalid": MessageLookupByLibrary.simpleMessage(
             "Token is invalid or expired."),
         "tooltipBotDetailsEstMaxLoss":
@@ -565,6 +585,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "你定下的投資時間，Botstock將會於此期間內自動買賣股票。"),
         "tooltipBotDetailsStartDate":
             MessageLookupByLibrary.simpleMessage("Lora開始Botstocks交易"),
+        "topBar": MessageLookupByLibrary.simpleMessage("top bar "),
         "totalAmount": MessageLookupByLibrary.simpleMessage("總金額"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "trade": MessageLookupByLibrary.simpleMessage("交易"),
@@ -597,6 +618,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferInitialFundToAsklora":
             MessageLookupByLibrary.simpleMessage("轉賬首筆資金予Asklora"),
         "transferTo": MessageLookupByLibrary.simpleMessage("轉賬至"),
+        "twoWeekPerformance": MessageLookupByLibrary.simpleMessage("兩個星期"),
         "updatedAt": m23,
         "uploadProofOfRemittance":
             MessageLookupByLibrary.simpleMessage("上載匯款證明"),
