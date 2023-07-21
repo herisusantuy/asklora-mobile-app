@@ -15,8 +15,8 @@ import '../../ai/investment_style_question/presentation/ai_investment_style_ques
 import '../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../onboarding/kyc/presentation/kyc_screen.dart';
+import '../background/bloc/background_props_bloc.dart';
 import 'bloc/for_you_bloc.dart';
-import 'investment_style/presentation/for_you_investment_style_screen.dart';
 
 enum ForYouPage { investmentStyle, botRecommendation }
 
@@ -70,8 +70,16 @@ class ForYouScreenForm extends StatelessWidget {
                   builder: (context, state) {
                     switch (state.page) {
                       case ForYouPage.investmentStyle:
-                        return const ForYouInvestmentStyleScreen();
+                        context.read<BackgroundPropsBloc>().add(
+                            const BackgroundImageTypeChanged(
+                                BackgroundImageType.black));
+                        return const AiInvestmentStyleQuestionWelcomeScreen(
+                          isqType: ISQType.forYou,
+                        );
                       case ForYouPage.botRecommendation:
+                        context.read<BackgroundPropsBloc>().add(
+                            const BackgroundImageTypeChanged(
+                                BackgroundImageType.none));
                         return const BotRecommendationScreen(
                           enableBackNavigation: false,
                         );

@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import '../../../../generated/l10n.dart';
+import '../../../tabs/for_you/investment_style/presentation/ai_investment_style_question_for_you_screen.dart';
 import '../../presentation/ai_welcome_screen.dart';
 import '../../presentation/widgets/ai_welcome_subtitle_text.dart';
 import 'ai_investment_style_question_screen.dart';
 
+enum ISQType { onboarding, forYou }
+
 class AiInvestmentStyleQuestionWelcomeScreen extends StatelessWidget {
+  final ISQType isqType;
   static const String route = '/ai_investment_style_question_welcome_screen';
 
-  const AiInvestmentStyleQuestionWelcomeScreen({super.key});
+  const AiInvestmentStyleQuestionWelcomeScreen(
+      {this.isqType = ISQType.onboarding, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +24,13 @@ class AiInvestmentStyleQuestionWelcomeScreen extends StatelessWidget {
           S.of(context).aiIsqWelcomeSubTitle,
         ),
       ),
-      onBottomButtonTap: () =>
-          AiInvestmentStyleQuestionOnboardingScreen.open(context),
+      onBottomButtonTap: () {
+        if (isqType == ISQType.onboarding) {
+          AiInvestmentStyleQuestionOnboardingScreen.open(context);
+        } else {
+          AiInvestmentStyleQuestionForYouScreen.open(context);
+        }
+      },
     );
   }
 

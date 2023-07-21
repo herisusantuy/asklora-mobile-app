@@ -52,6 +52,7 @@ import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/settings/presentation/terms_condition_screen.dart';
 import '../../feature/tabs/bloc/tab_screen_bloc.dart';
 import '../../feature/tabs/for_you/for_you_screen_form.dart';
+import '../../feature/tabs/for_you/investment_style/presentation/ai_investment_style_question_for_you_screen.dart';
 import '../../feature/tabs/home/home_screen_form.dart';
 import '../../feature/tabs/presentation/tab_screen.dart';
 import '../../feature/transaction_history/bot_order/detail/bot_order_transaction_history_detail_screen.dart';
@@ -333,6 +334,10 @@ class RouterGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (_) => const AiInvestmentStyleQuestionOnboardingScreen());
+      case AiInvestmentStyleQuestionForYouScreen.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const AiInvestmentStyleQuestionForYouScreen());
       case TabScreen.route:
         return MaterialPageRoute(
             settings: settings,

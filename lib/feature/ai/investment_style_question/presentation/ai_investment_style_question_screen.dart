@@ -18,5 +18,5 @@ class AiInvestmentStyleQuestionOnboardingScreen extends StatelessWidget {
       );
 
   static void open(BuildContext context) =>
-      Navigator.of(context).pushNamed(route);
+      Navigator.of(context, rootNavigator: true).pushNamed(route);
 }
