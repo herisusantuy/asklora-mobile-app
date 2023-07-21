@@ -2893,10 +2893,10 @@ class S {
     );
   }
 
-  /// `Your withdrawal request is submitted.`
+  /// `Withdrawal Request Submitted`
   String get withdrawalRequestSubmittedTitle {
     return Intl.message(
-      'Your withdrawal request is submitted.',
+      'Withdrawal Request Submitted',
       name: 'withdrawalRequestSubmittedTitle',
       desc: '',
       args: [],
@@ -3153,11 +3153,11 @@ class S {
     );
   }
 
-  /// `Trade Request Received`
-  String get tradeRequestReceived {
+  /// `Trade Request Submitted`
+  String get tradeRequestSubmitted {
     return Intl.message(
-      'Trade Request Received',
-      name: 'tradeRequestReceived',
+      'Trade Request Submitted',
+      name: 'tradeRequestSubmitted',
       desc: '',
       args: [],
     );
@@ -4306,6 +4306,36 @@ class S {
     );
   }
 
+  /// `It's time to find out your investment preferences`
+  String get aiIsqWelcomeTitle {
+    return Intl.message(
+      'It\'s time to find out your investment preferences',
+      name: 'aiIsqWelcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's see what kind of stocks you prefer`
+  String get aiIsqWelcomeSubTitle {
+    return Intl.message(
+      'Let\'s see what kind of stocks you prefer',
+      name: 'aiIsqWelcomeSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Press to move onto the next section`
+  String get isqNextButton {
+    return Intl.message(
+      'Press to move onto the next section',
+      name: 'isqNextButton',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Cancelled`
   String get cancelled {
     return Intl.message(
@@ -4366,21 +4396,21 @@ class S {
     );
   }
 
-  /// `It’s time to find out your investment preferences`
-  String get aiIsqWelcomeTitle {
+  /// `Deposit History`
+  String get depositHistory {
     return Intl.message(
-      'It’s time to find out your investment preferences',
-      name: 'aiIsqWelcomeTitle',
+      'Deposit History',
+      name: 'depositHistory',
       desc: '',
       args: [],
     );
   }
 
-  /// `Let’s see what kind of stocks you prefer`
-  String get aiIsqWelcomeSubTitle {
+  /// `Withdrawal History`
+  String get withdrawalHistory {
     return Intl.message(
-      'Let’s see what kind of stocks you prefer',
-      name: 'aiIsqWelcomeSubTitle',
+      'Withdrawal History',
+      name: 'withdrawalHistory',
       desc: '',
       args: [],
     );

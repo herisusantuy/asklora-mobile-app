@@ -70,8 +70,8 @@ class ResetSession extends AiInvestmentStyleQuestionEvent {
   List<Object?> get props => [];
 }
 
-class OnFinishTyping extends AiInvestmentStyleQuestionEvent {
-  const OnFinishTyping();
+class FinishChatAnimation extends AiInvestmentStyleQuestionEvent {
+  const FinishChatAnimation();
 
   @override
   List<Object?> get props => [];
