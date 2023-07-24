@@ -15,6 +15,7 @@ import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../auth/sign_in/presentation/sign_in_screen.dart';
+import '../../backdoor/presentation/backdoor_screen.dart';
 import 'ask_name/presentation/ask_name_screen.dart';
 
 part 'pages/welcome_page.dart';

@@ -2,6 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'query_request.dart';
 
+part 'portfolio_details_request.g.dart';
+
 @JsonSerializable()
 class PortfolioDetailsRequest extends BaseQueryRequest {
   final String ticker;
@@ -39,6 +41,11 @@ class PortfolioDetailsRequest extends BaseQueryRequest {
         'platform': platform,
         'bot_type': botType,
       };
+
+  factory PortfolioDetailsRequest.fromJson(Map<String, dynamic> json) =>
+      _$PortfolioDetailsRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PortfolioDetailsRequestToJson(this);
 
   @override
   List<Object> get props => [input, userId, username, platform, botType];

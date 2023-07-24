@@ -17,8 +17,6 @@ import '../bloc/question/question_bloc.dart';
 import '../bloc/response/user_response_bloc.dart';
 import '../repository/ppi_question_repository.dart';
 import '../repository/ppi_response_repository.dart';
-import 'investment_style_question/investment_style_question_screen.dart';
-import 'investment_style_question/investment_style_result_end_screen.dart';
 import 'personalisation_question/personalisation_question_screen.dart';
 import 'personalisation_question/personalisation_result_end_screen.dart';
 import 'privacy_question/privacy_question_screen.dart';
@@ -49,10 +47,9 @@ class PpiScreen extends StatelessWidget {
                 jsonCacheSharedPreferences: JsonCacheSharedPreferences())),
         BlocProvider(
             create: (_) => QuestionBloc(
-                ppiQuestionRepository: PpiQuestionRepository(),
-                questionPageType: questionPageType,
-                sharedPreference: SharedPreference())
-              ..add(const LoadQuestions())),
+                  ppiQuestionRepository: PpiQuestionRepository(),
+                  questionPageType: questionPageType,
+                )..add(const LoadQuestions())),
         BlocProvider(
             create: (_) =>
                 NavigationBloc<QuestionPageStep>(initialQuestionPage)),
@@ -130,13 +127,6 @@ class PpiScreen extends StatelessWidget {
               );
             case QuestionPageStep.personalisationResultEnd:
               return const PersonalisationResultEndScreen();
-            case QuestionPageStep.investmentStyle:
-              return InvestmentStyleQuestionScreen(
-                key: UniqueKey(),
-                initialIndex: state.investmentStyleQuestionIndex,
-              );
-            case QuestionPageStep.investmentStyleResultEnd:
-              return const InvestmentStyleResultEndScreen();
             default:
               return const SizedBox.shrink();
           }

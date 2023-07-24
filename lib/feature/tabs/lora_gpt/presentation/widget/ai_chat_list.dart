@@ -71,7 +71,8 @@ class _AiChatListState extends State<AiChatList> {
                           children: state.conversations
                               .mapIndexed((index, conversation) {
                             return Padding(
-                              padding: const EdgeInsets.only(bottom: 17),
+                              padding:
+                                  const EdgeInsets.only(bottom: 17, left: 20),
                               child: _getBubbleChat(
                                   conversation,
                                   index,
@@ -168,6 +169,8 @@ class _AiChatListState extends State<AiChatList> {
       return OutChatBubbleWidget(
         e.response,
         animateText: isTyping,
+        onFinishedAnimation: () =>
+            context.read<LoraGptBloc>().add(const OnFinishTyping()),
       );
     } else if (e is Me) {
       return InChatBubbleWidget(message: e.query, name: userName);

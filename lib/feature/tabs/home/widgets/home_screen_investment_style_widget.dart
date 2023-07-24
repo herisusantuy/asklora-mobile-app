@@ -106,12 +106,8 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
               padding: const EdgeInsets.only(top: 30.0),
               child: PrimaryButton(
                 label: S.of(context).defineInvestmentStyle,
-                onTap: () => PpiScreen.open(
+                onTap: () => AiInvestmentStyleQuestionWelcomeScreen.open(
                   context,
-                  arguments: const Pair(
-                    QuestionPageType.investmentStyle,
-                    QuestionPageStep.investmentStyle,
-                  ),
                 ),
               ),
             ),

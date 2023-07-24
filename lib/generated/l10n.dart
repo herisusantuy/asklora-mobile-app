@@ -700,16 +700,6 @@ class S {
     );
   }
 
-  /// `Subscription`
-  String get subscription {
-    return Intl.message(
-      'Subscription',
-      name: 'subscription',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Core Plan`
   String get corePlan {
     return Intl.message(
@@ -890,10 +880,10 @@ class S {
     );
   }
 
-  /// `Let's get to the heart of personalisation, it's time to define your investment style.`
+  /// `It’s time to define your investment style.  Show me what you’re made of!`
   String get investmentStyleWelcomeTitle {
     return Intl.message(
-      'Let\'s get to the heart of personalisation, it\'s time to define your investment style.',
+      'It’s time to define your investment style.  Show me what you’re made of!',
       name: 'investmentStyleWelcomeTitle',
       desc: '',
       args: [],
@@ -1522,13 +1512,13 @@ class S {
     );
   }
 
-  /// `Current Price ({currency})`
-  String portfolioCurrentPrice(String currency) {
+  /// `Current Price`
+  String get portfolioCurrentPrice {
     return Intl.message(
-      'Current Price ($currency)',
+      'Current Price',
       name: 'portfolioCurrentPrice',
       desc: '',
-      args: [currency],
+      args: [],
     );
   }
 
@@ -2413,10 +2403,10 @@ class S {
     );
   }
 
-  /// `Confirm & Continue`
+  /// `Confirm And Continue`
   String get confirmAndContinue {
     return Intl.message(
-      'Confirm & Continue',
+      'Confirm And Continue',
       name: 'confirmAndContinue',
       desc: '',
       args: [],
@@ -3013,11 +3003,11 @@ class S {
     );
   }
 
-  /// `Trade Request Received`
-  String get tradeRequestReceived {
+  /// `Trade Request Submitted`
+  String get tradeRequestSubmitted {
     return Intl.message(
-      'Trade Request Received',
-      name: 'tradeRequestReceived',
+      'Trade Request Submitted',
+      name: 'tradeRequestSubmitted',
       desc: '',
       args: [],
     );
@@ -4166,11 +4156,491 @@ class S {
     );
   }
 
-  /// `The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!`
-  String get botManagementFeeTooltip {
+  /// `Mobile OTP`
+  String get otpScreenTitle {
     return Intl.message(
-      'The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!',
-      name: 'botManagementFeeTooltip',
+      'Mobile OTP',
+      name: 'otpScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We've sent you a code via SMS to verify your phone number (+852 {phoneNumber}). Please enter the OTP code below.`
+  String otpScreenDescription(String phoneNumber) {
+    return Intl.message(
+      'We\'ve sent you a code via SMS to verify your phone number (+852 $phoneNumber). Please enter the OTP code below.',
+      name: 'otpScreenDescription',
+      desc: '',
+      args: [phoneNumber],
+    );
+  }
+
+  /// `Verify`
+  String get buttonVerify {
+    return Intl.message(
+      'Verify',
+      name: 'buttonVerify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Otp SMS is sent to your phone`
+  String get otpSentToYourPhone {
+    return Intl.message(
+      'Otp SMS is sent to your phone',
+      name: 'otpSentToYourPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify OTP Success`
+  String get verifyOtpSuccess {
+    return Intl.message(
+      'Verify OTP Success',
+      name: 'verifyOtpSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP code sent to your email`
+  String get otpSentToYourEmail {
+    return Intl.message(
+      'OTP code sent to your email',
+      name: 'otpSentToYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `000000 (6 digit)`
+  String get otpDigit {
+    return Intl.message(
+      '000000 (6 digit)',
+      name: 'otpDigit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SEND OTP`
+  String get sendOtp {
+    return Intl.message(
+      'SEND OTP',
+      name: 'sendOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `RE-SEND IN {seconds}S`
+  String reSendOtp(String seconds) {
+    return Intl.message(
+      'RE-SEND IN ${seconds}S',
+      name: 'reSendOtp',
+      desc: '',
+      args: [seconds],
+    );
+  }
+
+  /// `It's time to find out your investment preferences`
+  String get aiIsqWelcomeTitle {
+    return Intl.message(
+      'It\'s time to find out your investment preferences',
+      name: 'aiIsqWelcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's see what kind of stocks you prefer`
+  String get aiIsqWelcomeSubTitle {
+    return Intl.message(
+      'Let\'s see what kind of stocks you prefer',
+      name: 'aiIsqWelcomeSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Press to move onto the next section`
+  String get isqNextButton {
+    return Intl.message(
+      'Press to move onto the next section',
+      name: 'isqNextButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancelled`
+  String get cancelled {
+    return Intl.message(
+      'Cancelled',
+      name: 'cancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expired`
+  String get expired {
+    return Intl.message(
+      'Expired',
+      name: 'expired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rejected`
+  String get rejected {
+    return Intl.message(
+      'Rejected',
+      name: 'rejected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get completed {
+    return Intl.message(
+      'Completed',
+      name: 'completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription`
+  String get subscription {
+    return Intl.message(
+      'Subscription',
+      name: 'subscription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Buy`
+  String get buy {
+    return Intl.message(
+      'Buy',
+      name: 'buy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sell`
+  String get sell {
+    return Intl.message(
+      'Sell',
+      name: 'sell',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit History`
+  String get depositHistory {
+    return Intl.message(
+      'Deposit History',
+      name: 'depositHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Withdrawal History`
+  String get withdrawalHistory {
+    return Intl.message(
+      'Withdrawal History',
+      name: 'withdrawalHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account opening and deposit are the last few steps before investing.`
+  String get accountOpeningAndDeposit {
+    return Intl.message(
+      'Account opening and deposit are the last few steps before investing.',
+      name: 'accountOpeningAndDeposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get ready for AI trading.`
+  String get getReadyForTrading {
+    return Intl.message(
+      'Get ready for AI trading.',
+      name: 'getReadyForTrading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set up Personal Info`
+  String get setupPersonalInfo {
+    return Intl.message(
+      'Set up Personal Info',
+      name: 'setupPersonalInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify identify`
+  String get verifyIdentity {
+    return Intl.message(
+      'Verify identify',
+      name: 'verifyIdentity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The items you will need…`
+  String get theItemYouWillNeed {
+    return Intl.message(
+      'The items you will need…',
+      name: 'theItemYouWillNeed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HKID`
+  String get hkId {
+    return Intl.message(
+      'HKID',
+      name: 'hkId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Proof of Residential Address`
+  String get porAddress {
+    return Intl.message(
+      'Proof of Residential Address',
+      name: 'porAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(We accept utility bill, bank statement, or government correspondence within the last 3 months)`
+  String get weAcceptUtilityBill {
+    return Intl.message(
+      '(We accept utility bill, bank statement, or government correspondence within the last 3 months)',
+      name: 'weAcceptUtilityBill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Once you've started, you can resume the process whenever you want.`
+  String get onceYouHaveStarted {
+    return Intl.message(
+      'Once you\'ve started, you can resume the process whenever you want.',
+      name: 'onceYouHaveStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open Account Now`
+  String get openAccountNow {
+    return Intl.message(
+      'Open Account Now',
+      name: 'openAccountNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you a United States tax resident, green card holder, or citizen?`
+  String get usResidentQuestion {
+    return Intl.message(
+      'Are you a United States tax resident, green card holder, or citizen?',
+      name: 'usResidentQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you a Hong Kong resident? By clicking yes, you acknowledge that you are also a Hong Kong tax resident`
+  String get hkResidentQuestion {
+    return Intl.message(
+      'Are you a Hong Kong resident? By clicking yes, you acknowledge that you are also a Hong Kong tax resident',
+      name: 'hkResidentQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please make sure your name matches the information on your identification document.`
+  String get personalInfoFormDesc {
+    return Intl.message(
+      'Please make sure your name matches the information on your identification document.',
+      name: 'personalInfoFormDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Legal English First Name`
+  String get legalFirstName {
+    return Intl.message(
+      'Legal English First Name',
+      name: 'legalFirstName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Legal English Last Name`
+  String get legalLastName {
+    return Intl.message(
+      'Legal English Last Name',
+      name: 'legalLastName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HKID Number`
+  String get hkIdNumber {
+    return Intl.message(
+      'HKID Number',
+      name: 'hkIdNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nationality`
+  String get nationality {
+    return Intl.message(
+      'Nationality',
+      name: 'nationality',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date of Birth`
+  String get dateOfBirth {
+    return Intl.message(
+      'Date of Birth',
+      name: 'dateOfBirth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Country of Birth`
+  String get countryOfBirth {
+    return Intl.message(
+      'Country of Birth',
+      name: 'countryOfBirth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HK Phone Number`
+  String get hkPhoneNo {
+    return Intl.message(
+      'HK Phone Number',
+      name: 'hkPhoneNo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please provide your residential address. This will also be your mailing address.`
+  String get pleaseProvideYourResidentialAddress {
+    return Intl.message(
+      'Please provide your residential address. This will also be your mailing address.',
+      name: 'pleaseProvideYourResidentialAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload Address Proof`
+  String get uploadAddressProof {
+    return Intl.message(
+      'Upload Address Proof',
+      name: 'uploadAddressProof',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your address proof must contain your full name, full residential address and the issuing agency.\n\nWe accept water/electricity/gas bills, bank statement, or government correspondence within the last 3 months.`
+  String get yourAddressProofMustContainFullName {
+    return Intl.message(
+      'Your address proof must contain your full name, full residential address and the issuing agency.\n\nWe accept water/electricity/gas bills, bank statement, or government correspondence within the last 3 months.',
+      name: 'yourAddressProofMustContainFullName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address Proof`
+  String get addressProof {
+    return Intl.message(
+      'Address Proof',
+      name: 'addressProof',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Employment`
+  String get employment {
+    return Intl.message(
+      'Employment',
+      name: 'employment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Employment Status*`
+  String get employmentStatus {
+    return Intl.message(
+      'Employment Status*',
+      name: 'employmentStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Select`
+  String get pleaseSelect {
+    return Intl.message(
+      'Please Select',
+      name: 'pleaseSelect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nature of Business`
+  String get natureOfBusiness {
+    return Intl.message(
+      'Nature of Business',
+      name: 'natureOfBusiness',
       desc: '',
       args: [],
     );

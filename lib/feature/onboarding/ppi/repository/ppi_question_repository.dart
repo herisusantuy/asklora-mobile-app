@@ -38,6 +38,22 @@ class PpiQuestionRepository {
     return Fixture.instance.fixInvestmentStyleQuestion(questions);
   }
 
+  Future<Fixture?> fetchInvestmentStyleQuestionsWithTryCatch(
+      String accountId) async {
+    try {
+      final response =
+          await _ppiApiRepository.fetchInvestmentStyleQuestions(accountId);
+      List<Question> questions = List.empty(growable: true);
+
+      questions = (jsonDecode(jsonEncode(response.data)) as List)
+          .map((i) => Question.fromJson(i))
+          .toList();
+      return Fixture.instance.fixInvestmentStyleQuestion(questions);
+    } catch (_) {
+      return null;
+    }
+  }
+
   Future<Fixture> getQuestions() async {
     return Fixture.instance;
   }

@@ -66,7 +66,7 @@ class Tabs extends StatelessWidget {
       GestureDetector(
         onTap: onTap,
         child: Container(
-          color: AskLoraColors.white,
+          color: Colors.transparent,
           width: clickAreaSize,
           height: clickAreaSize,
           child: getSvgIcon(active ? activeIconAsset : iconAsset,
@@ -84,7 +84,7 @@ class Tabs extends StatelessWidget {
       GestureDetector(
         onTap: onTap,
         child: Container(
-          color: AskLoraColors.white,
+          color: Colors.transparent,
           width: clickAreaSize,
           height: clickAreaSize,
           child: getPngIcon(active ? activeIconAsset : iconAsset,

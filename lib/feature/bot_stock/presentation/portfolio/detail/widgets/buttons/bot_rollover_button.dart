@@ -23,7 +23,7 @@ class BotRolloverButton extends StatelessWidget {
             BotStockResultScreen.open(
               context: context,
               arguments: BotStockResultArgument(
-                  title: S.of(context).tradeRequestReceived,
+                  title: S.of(context).tradeRequestSubmitted,
                   desc:
                       '${botType.name} ${botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol} will rollover at ${newExpiryDateOnRollover(state.rolloverBotStockResponse.data!.newExpireDate)}',
                   labelBottomButton: S.of(context).buttonBackToHome),
