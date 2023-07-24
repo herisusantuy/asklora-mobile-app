@@ -52,7 +52,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
           _spaceHeight,
           _regionDropdown,
           _spaceHeight,
-          _countryDropdown(context),
+          _countryDropdown,
           _spaceHeight,
           _detailInformationOfCountryInput,
         ],
@@ -97,13 +97,15 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
                 hintText: S.of(context).pleaseSelect,
                 initialValue: state.natureOfBusiness?.value ?? '',
                 itemsList: NatureOfBusiness.values
-                    .map((e) =>
-                        NatureOfBusiness.findByStringValue(e.value).text(context))
+                    .map((e) => NatureOfBusiness.findByStringValue(e.value)
+                        .text(context))
                     .toList(),
                 onChanged: (value) => context.read<FinancialProfileBloc>().add(
-                    FinancialProfileNatureOfBusinessChanged(NatureOfBusiness
-                        .values
-                        .firstWhere((element) => NatureOfBusiness.findByStringValue(element.value).text(context) == value))));
+                    FinancialProfileNatureOfBusinessChanged(
+                        NatureOfBusiness.values.firstWhere((element) =>
+                            NatureOfBusiness.findByStringValue(element.value)
+                                .text(context) ==
+                            value))));
           } else {
             return const SizedBox.shrink();
           }
@@ -284,7 +286,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
         });
   }
 
-  Widget _countryDropdown(BuildContext context) => Padding(
+  Widget get _countryDropdown => Padding(
         padding: const EdgeInsets.only(top: 0),
         child: BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
             buildWhen: (previous, current) =>
