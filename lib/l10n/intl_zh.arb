@@ -546,9 +546,9 @@
   "emailNotVerified": "用戶電郵未認證",
   "enterValidPassword": "無效電郵地址",
   "enterValidEmail": "無效電郵地址",
-  "passwordChangeSuccessfully": "Password changed successfully.",
+  "passwordChangeSuccessfully": "密碼更改成功",
   "tokenInvalid": "Token is invalid or expired.",
-  "invalidOtp": "Invalid OTP",
+  "invalidOtp": "無效 OTP",
   "linkPasswordResetIsSent": "Link for Password reset is sent to email.",
   "accountIsNotActive": "Your account is not active yet.",
   "pleaseEnterYouEmail": "請輸入你的電郵地址，我們會發送重設密碼的指示給你。",
@@ -572,8 +572,8 @@
   "noTransactions": "暫時沒有交易",
   "noTransactionsYet": "你似乎未進行過任何交易！",
   "checkBackLater": "稍後再來查看!",
-  "defineAgain": "Define again",
-  "updatedAt": "Updated at {time} HKT, {date}",
+  "defineAgain": "重新界定",
+  "updatedAt": "於 {time} HKT, {date} 更新",
   "@updatedAt": {
     "placeholders": {
       "time": {
@@ -607,8 +607,8 @@
       }
     }
   },
-  "aiIsqWelcomeTitle": "It's time to find out your investment preferences",
-  "aiIsqWelcomeSubTitle": "Let's see what kind of stocks you prefer",
+  "aiIsqWelcomeTitle": "想知Asklora有咩投資秘技？",
+  "aiIsqWelcomeSubTitle": "界定你嘅投資風格先！",
   "isqNextButton": "Press to move onto the next section",
   "cancelled": "已取消",
   "expired": "已到期",
