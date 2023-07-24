@@ -1,4 +1,4 @@
-part of 'toggle_price_label_bloc.dart';
+part of 'toggleable_price_text_bloc.dart';
 
 // events
 abstract class ToggleEvent {}

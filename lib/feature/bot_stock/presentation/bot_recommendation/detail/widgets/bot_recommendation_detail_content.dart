@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'dart:math';
 
+import '../../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
+import '../../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
@@ -9,15 +9,13 @@ import '../../../../../../core/utils/extensions.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../chart/presentation/chart_animation.dart';
-import '../../../../bloc/toggle_price_label_bloc.dart';
 import '../../../../domain/bot_recommendation_detail_model.dart';
 import '../../../../domain/bot_recommendation_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
-import '../../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
 import '../../../widgets/iex_data_provider_link.dart';
-import '../../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import 'bot_price_level_indicator.dart';
+import 'toggable_price_text.dart';
 
 class BotRecommendationDetailContent extends StatelessWidget {
   final BotRecommendationModel botRecommendationModel;
@@ -128,7 +126,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                         const SizedBox(
                           height: 5,
                         ),
-                        ToggleableTextBloc(
+                        ToggleablePriceText(
                           percentDifference: getPercentDifference(),
                           priceDifference: getPriceDifference(),
                         ),
@@ -305,90 +303,5 @@ class BotRecommendationDetailContent extends StatelessWidget {
       return ((currentPrice / prevClosePrice) - 1) * 100;
     }
     return 0;
-  }
-}
-
-class ToggleableTextBloc extends StatelessWidget {
-  final double percentDifference;
-  final double priceDifference;
-
-  const ToggleableTextBloc({
-    Key? key,
-    required this.percentDifference,
-    required this.priceDifference,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider<ToggleTextBloc>(
-      create: (_) => ToggleTextBloc(),
-      child: Builder(
-        builder: (context) {
-          // Get the bloc from the context
-          final bloc = BlocProvider.of<ToggleTextBloc>(context);
-
-          // Calculate the width of the price and the percentage text
-          String priceText = priceDifference < 0
-              ? priceDifference.convertToCurrencyDecimal()
-              : '+${priceDifference.convertToCurrencyDecimal()}';
-          String percentageText = percentDifference < 0
-              ? '${percentDifference.convertToCurrencyDecimal()}%'
-              : '+${percentDifference.convertToCurrencyDecimal()}%';
-
-          TextPainter pricePainter = TextPainter(
-            text: TextSpan(
-                text: priceText,
-                style: AskLoraTextStyles.subtitle3
-                    .copyWith(color: AskLoraColors.white)),
-            textDirection: TextDirection.ltr,
-          );
-
-          TextPainter percentagePainter = TextPainter(
-            text: TextSpan(
-                text: percentageText,
-                style: AskLoraTextStyles.subtitle3
-                    .copyWith(color: AskLoraColors.white)),
-            textDirection: TextDirection.ltr,
-          );
-
-          pricePainter.layout();
-          percentagePainter.layout();
-
-          // Calculate the container width based on the longer text
-          double containerWidth =
-              max(pricePainter.width, percentagePainter.width) + 10;
-
-          return GestureDetector(
-            onTap: () {
-              // Trigger the event to toggle price difference
-              bloc.add(TogglePriceDifferenceEvent());
-            },
-            child: BlocBuilder<ToggleTextBloc, ToggleState>(
-              builder: (context, state) {
-                bool showPriceDifference = state.showPriceDifference;
-
-                return Container(
-                  width: containerWidth,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: (percentDifference < 0)
-                        ? AskLoraColors.primaryMagenta
-                        : AskLoraColors.primaryGreen,
-                  ),
-                  child: CustomTextNew(
-                    showPriceDifference ? priceText : percentageText,
-                    style: AskLoraTextStyles.subtitle3
-                        .copyWith(color: AskLoraColors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                );
-              },
-            ),
-          );
-        },
-      ),
-    );
   }
 }

@@ -1,6 +1,5 @@
-part of 'toggle_price_label_bloc.dart';
+part of 'toggleable_price_text_bloc.dart';
 
-// states
 abstract class ToggleState {
   final bool showPriceDifference;
 
