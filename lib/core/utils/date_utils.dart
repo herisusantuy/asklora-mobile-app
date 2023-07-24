@@ -30,3 +30,9 @@ String convertDateToEst(String dateTime, {String dateFormat = 'dd/MM/yyyy'}) {
       .format(DateTime.parse(dateTime).subtract(const Duration(hours: 4))));
   return formatDateTimeAsString(date, dateFormat: dateFormat);
 }
+
+String convertDateToHkt(String dateTime, {String dateFormat = 'dd/MM/yyyy'}) {
+  DateTime date = DateFormat(dateFormat).parse(DateFormat(dateFormat)
+      .format(DateTime.parse(dateTime).add(const Duration(hours: 8))));
+  return formatDateTimeAsString(date, dateFormat: dateFormat);
+}
