@@ -1,8 +1,8 @@
 import 'package:asklora_mobile_app/app/bloc/app_bloc.dart';
 import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart';
-import 'package:asklora_mobile_app/core/domain/validation_enum.dart';
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart';
+import 'package:asklora_mobile_app/core/domain/validation_enum.dart';
 import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
 import 'package:asklora_mobile_app/core/utils/storage/storage_keys.dart';
 import 'package:asklora_mobile_app/feature/auth/repository/auth_repository.dart';
@@ -97,7 +97,7 @@ void main() async {
                 emailAddress: '',
                 isEmailValid: false,
                 password: '',
-                emailAddressValidationText: ValidationCode.empty));
+                emailAddressValidation: ValidationCode.empty));
       },
     );
 
@@ -113,14 +113,14 @@ void main() async {
                 response: BaseResponse.unknown(),
                 emailAddress: 'qweasdzxc',
                 isEmailValid: false,
-                emailAddressValidationText: ValidationCode.enterValidEmail,
+                emailAddressValidation: ValidationCode.enterValidEmail,
                 password: '',
               ),
               SignInState(
                 response: BaseResponse.unknown(),
                 emailAddress: 'qweasdzxc',
                 isEmailValid: false,
-                emailAddressValidationText: ValidationCode.enterValidEmail,
+                emailAddressValidation: ValidationCode.enterValidEmail,
                 password: 'TestQWE123',
               )
             });
@@ -133,7 +133,7 @@ void main() async {
                 response: BaseResponse.unknown(),
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,
-                emailAddressValidationText: ValidationCode.empty,
+                emailAddressValidation: ValidationCode.empty,
                 password: '',
               )
             });
@@ -172,21 +172,21 @@ void main() async {
                 response: BaseResponse.unknown(),
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,
-                emailAddressValidationText: ValidationCode.empty,
+                emailAddressValidation: ValidationCode.empty,
                 password: '',
               ),
               SignInState(
                 response: BaseResponse.unknown(),
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,
-                emailAddressValidationText: ValidationCode.empty,
+                emailAddressValidation: ValidationCode.empty,
                 password: 'TestQWE123',
               ),
               SignInState(
                 response: BaseResponse.loading(),
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,
-                emailAddressValidationText: ValidationCode.empty,
+                emailAddressValidation: ValidationCode.empty,
                 password: 'TestQWE123',
               ),
               const SignInState(
@@ -196,7 +196,7 @@ void main() async {
                     state: ResponseState.success),
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,
-                emailAddressValidationText: ValidationCode.empty,
+                emailAddressValidation: ValidationCode.empty,
                 password: 'TestQWE123',
               )
             });

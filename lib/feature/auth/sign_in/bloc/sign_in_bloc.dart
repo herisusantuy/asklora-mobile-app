@@ -51,7 +51,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         response: BaseResponse.unknown(),
         emailAddress: event.emailAddress,
         isEmailValid: event.emailAddress.isValidEmail(),
-        emailAddressValidationText:
+        emailAddressValidation:
             (event.emailAddress.toLowerCase().isValidEmail() ||
                     event.emailAddress.isEmpty)
                 ? ValidationCode.empty

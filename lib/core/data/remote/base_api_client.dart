@@ -309,6 +309,6 @@ class AskloraApiClientException extends DioError {
 
   @override
   String toString() {
-    return 'The connection has timed out, please try again.';
+    return 'Something went wrong while fetching the api.';
   }
 }

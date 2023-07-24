@@ -4,7 +4,7 @@ class SignInState extends Equatable {
   final BaseResponse<SignInResponse> response;
   final String emailAddress;
   final bool isEmailValid;
-  final ValidationCode emailAddressValidationText;
+  final ValidationCode emailAddressValidation;
   final String password;
   final bool isOtpRequired;
 
@@ -12,7 +12,7 @@ class SignInState extends Equatable {
       {this.response = const BaseResponse(),
       this.emailAddress = '',
       this.isEmailValid = false,
-      this.emailAddressValidationText = ValidationCode.empty,
+      this.emailAddressValidation = ValidationCode.empty,
       this.password = '',
       this.isOtpRequired = false})
       : super();
@@ -22,7 +22,7 @@ class SignInState extends Equatable {
         response,
         emailAddress,
         isEmailValid,
-        emailAddressValidationText,
+        emailAddressValidation,
         password,
         isOtpRequired
       ];
@@ -31,15 +31,15 @@ class SignInState extends Equatable {
       {BaseResponse<SignInResponse>? response,
       String? emailAddress,
       bool? isEmailValid,
-      ValidationCode? emailAddressValidationText,
+      ValidationCode? emailAddressValidation,
       String? password,
       bool? isOtpRequired}) {
     return SignInState(
       response: response ?? this.response,
       emailAddress: emailAddress ?? this.emailAddress,
       isEmailValid: isEmailValid ?? this.isEmailValid,
-      emailAddressValidationText:
-          emailAddressValidationText ?? this.emailAddressValidationText,
+      emailAddressValidation:
+          emailAddressValidation ?? this.emailAddressValidation,
       password: password ?? this.password,
       isOtpRequired: isOtpRequired ?? this.isOtpRequired,
     );
