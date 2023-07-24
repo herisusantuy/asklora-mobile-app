@@ -880,10 +880,10 @@ class S {
     );
   }
 
-  /// `It’s time to define your investment style.  Show me what you’re made of!`
+  /// `It’s time to define your investment style.Show me what you’re made of!`
   String get investmentStyleWelcomeTitle {
     return Intl.message(
-      'It’s time to define your investment style.  Show me what you’re made of!',
+      'It’s time to define your investment style.Show me what you’re made of!',
       name: 'investmentStyleWelcomeTitle',
       desc: '',
       args: [],
@@ -4941,16 +4941,6 @@ class S {
     return Intl.message(
       'Address Proof',
       name: 'addressProof',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Subscription`
-  String get subscription {
-    return Intl.message(
-      'Subscription',
-      name: 'subscription',
       desc: '',
       args: [],
     );
