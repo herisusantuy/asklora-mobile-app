@@ -60,7 +60,6 @@
   "greetingScreenTitle": "Alright! 準備好\n開始你嘅 AI 旅程未？",
   "greetingScreenSubTitle": "訓練開始，會問下基本問題先！\n記住，冇耐性，就輸梗！ ",
   "accountSettings": "帳戶設定",
-  "subscription": "訂購計劃",
   "corePlan": "核心計劃",
   "freeTrial": "免費試用期",
   "allSettings": "設定",
@@ -186,14 +185,7 @@
   "portfolioDetailPerformanceBotStockValues": "Botstock 價值 (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "投資金額 (HKD)",
   "portfolioDetailPerformanceTotalPL": "總盈虧",
-  "portfolioCurrentPrice": "當前價格 ({currency})",
-  "@portfolioCurrentPrice": {
-    "placeholders": {
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
+  "portfolioCurrentPrice": "當前價格",
   "portfolioDetailExpiredAt": "到期日期 {dateTime}",
   "@portfolioDetailExpiredAt": {
     "placeholders": {
@@ -617,18 +609,13 @@
   },
   "aiIsqWelcomeTitle": "It's time to find out your investment preferences",
   "aiIsqWelcomeSubTitle": "Let's see what kind of stocks you prefer",
-  "aiIsqWelcomeTitle": "It’s time to find out your investment preferences",
-  "aiIsqWelcomeSubTitle": "Let’s see what kind of stocks you prefer",
   "isqNextButton": "Press to move onto the next section",
   "cancelled": "已取消",
   "expired": "已到期",
   "rejected": "已拒絕",
   "completed": "已完成",
-  "subscription": "訂購計劃",
   "buy": "買入",
   "sell": "賣出",
-  "aiIsqWelcomeTitle": "It's time to find out your investment preferences",
-  "aiIsqWelcomeSubTitle": "Let's see what kind of stocks you prefer",
   "depositHistory": "入金歷史",
   "timeRequested": "請求時間",
   "bankAccountNumber": "銀行戶口號碼",
@@ -637,5 +624,31 @@
   "withdrawalHistory": "提款歷史",
   "kycRejectedScreenTitle": "Sorry，原來你唔合資格用 Asklora！",
   "kycRejectedExplanationOfAffiliate": "我們不接受上述類別人士\n開立賬戶。",
-  "buttonGoBack": "返回"
+  "buttonGoBack": "返回",
+  "accountOpeningAndDeposit": "以下部分係確保你帳戶安全，我哋你的將安全放在第一位。",
+  "getReadyForTrading": "準備好AI 交易",
+  "setupPersonalInfo": "設定個人資料",
+  "verifyIdentity": "核實身份",
+  "theItemYouWillNeed": "你需要以下文件..",
+  "hkId": "香港身份證",
+  "porAddress": "住址證明",
+  "weAcceptUtilityBill": "(我們接受最近3個月的水/電/煤氣繳費單、銀行結單或政府函件)",
+  "onceYouHaveStarted": "當你開始後，你亦可以隨時於任何時間再繼續。",
+  "openAccountNow": "立即開戶",
+  "usResidentQuestion": "你是否擁有美國稅務居民身份、持有綠卡，或公民身份？",
+  "hkResidentQuestion": "你是否香港居民？如果你選擇【是】， 你將會被視爲香港稅務居民。",
+  "personalInfoFormDesc": "請確保名字與身份證明文件一致。",
+  "personalInfo": "個人資料",
+  "legalFirstName": "法定英文名字",
+  "legalLastName": "法定英文姓氏",
+  "hkIdNumber": "香港身份證號碼",
+  "nationality": "國籍",
+  "dateOfBirth": "出生日期",
+  "countryOfBirth": "出生地點",
+  "hkPhoneNo": "香港電話號碼",
+  "pleaseProvideYourResidentialAddress": "請提供你的住宅地址。這也將是你的郵寄地址。",
+  "uploadAddressProof": "上傳住址證明",
+  "yourAddressProofMustContainFullName": " 你的住址證明必須包含你全名、詳細住址及發行機構。\n\n我們接受最近3個月的水/電/煤氣繳費單、銀行結單或政府函件。",
+  "addressProof": "住址證明",
+  "confirmAndContinue": "確認並繼續"
 }

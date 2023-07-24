@@ -38,9 +38,10 @@ class BotActiveOrderModel extends Equatable {
 
   String startOrExpireDateStr(BuildContext context) {
     if (botStatus == BotStatus.pending) {
-      return '${S.of(context).startsAt} ${formatDateTimeAsString(optimalTime, dateFormat: 'HH:mm, dd/MM')}';
+      return '${S.of(context).startsAt} ${convertDateToHkt(optimalTime, dateFormat: 'HH:mm, dd/MM')}';
     } else {
-      return '${S.of(context).expiresAt} ${formatDateTimeAsString(expireDate, dateFormat: 'HH:mm, dd/MM')}';
+      ///expired time is harcoded by BE request as expire_date doesn't have time
+      return '${S.of(context).expiresAt} ${expireDate != null ? '02:00,' : ''} ${formatDateTimeAsString(expireDate, dateFormat: 'dd/MM')}';
     }
   }
 
