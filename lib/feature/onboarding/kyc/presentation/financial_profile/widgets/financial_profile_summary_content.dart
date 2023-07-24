@@ -4,6 +4,7 @@ import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/utils/feature_flags.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../../bloc/financial_profile/financial_profile_bloc.dart';
 import '../../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
@@ -38,7 +39,7 @@ class FinancialProfileSummaryContent extends StatelessWidget {
         ),
         _spaceHeight,
         SummaryTextInfo(
-            titleWidget: _affiliatedQuestionWidget,
+            titleWidget: _affiliatedQuestionWidget(context),
             subTitle: disclosureAffiliationState.isAffiliatedPerson != null
                 ? disclosureAffiliationState.isAffiliatedPerson!
                     ? 'Yes'
@@ -48,16 +49,18 @@ class FinancialProfileSummaryContent extends StatelessWidget {
         /// TODO: Confirm with James if we want to show the source of wealth and employment or not.
         /// Disabling the source of wealth and employment as there are few demo with potential investors.
         if (!FeatureFlags.isDemoEnable)
-          ..._getEmploymentDetailsAndSourceOfWealthSummary(),
-        ..._getAffiliatedPerson,
+          ..._getEmploymentDetailsAndSourceOfWealthSummary(context),
+        ..._getAffiliatedPerson(context),
       ],
     );
   }
 
-  List<Widget> _getEmploymentDetailsAndSourceOfWealthSummary() => [
-        ..._getEmploymentDetailsContent(),
+  List<Widget> _getEmploymentDetailsAndSourceOfWealthSummary(
+          BuildContext context) =>
+      [
+        ..._getEmploymentDetailsContent(context),
         _spaceHeight,
-        ..._sourceOfWealthSummary,
+        ..._sourceOfWealthSummary(context),
         _spaceHeight,
       ];
 
@@ -65,27 +68,23 @@ class FinancialProfileSummaryContent extends StatelessWidget {
         height: 10,
       );
 
-  Widget get _affiliatedQuestionWidget => Column(
+  Widget _affiliatedQuestionWidget(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomTextNew(
-            'Do any of the following apply to you or a member of your immediate family ?',
+            S.of(context).doAnyOfTheFollowingApply,
             style: AskLoraTextStyles.body2.copyWith(color: AskLoraColors.gray),
           ),
           _spaceHeightAffiliated,
           _dotText(
-            'I am affiliated or work with US registered broker-dealer or FINRA.',
+            S.of(context).iAmASeniorExecutive,
           ),
           _spaceHeightAffiliated,
-          _dotText(
-              'I am a senior executive at or a 10% or greater shareholder of a publicly traded company.'),
+          _dotText(S.of(context).iAmASeniorPolitical),
           _spaceHeightAffiliated,
-          _dotText('I am a senior political figure.'),
+          _dotText(S.of(context).iAmAFamily),
           _spaceHeightAffiliated,
-          _dotText(
-              'I am a family member or relative of a senior political figure.'),
-          _spaceHeightAffiliated,
-          _dotText(
-              'I am a director, employee, or licensed person registered with the Hong Kong Securities and Futures Commission.'),
+          _dotText(S.of(context).iAmADirector),
         ],
       );
 
@@ -95,16 +94,16 @@ class FinancialProfileSummaryContent extends StatelessWidget {
         color: AskLoraColors.gray,
       );
 
-  List<Widget> get _getAffiliatedPerson {
+  List<Widget> _getAffiliatedPerson(BuildContext context) {
     return [
       SummaryTextInfo(
           title:
               'Are your immediate family or/and you affiliated with any director, office or employee if LORA Technologies Limited ot its associates?',
           subTitle: disclosureAffiliationState.isAffiliatedAssociates != null
               ? disclosureAffiliationState.isAffiliatedAssociates!
-                  ? 'Yes'
-                  : 'No'
-              : 'Unknown'),
+                  ? S.of(context).yes
+                  : S.of(context).no
+              : S.of(context).unknown),
       if (disclosureAffiliationState.affiliatedAssociatesFirstName.isNotEmpty)
         Padding(
           padding: const EdgeInsets.only(top: _spaceHeightDouble),
@@ -124,10 +123,10 @@ class FinancialProfileSummaryContent extends StatelessWidget {
     ];
   }
 
-  List<Widget> get _sourceOfWealthSummary {
+  List<Widget> _sourceOfWealthSummary(BuildContext context) {
     return [
       CustomTextNew(
-        'Source Of Wealth',
+        S.of(context).sourceOfWealth,
         style: AskLoraTextStyles.body2.copyWith(color: AskLoraColors.gray),
       ),
       const SizedBox(
@@ -149,17 +148,17 @@ class FinancialProfileSummaryContent extends StatelessWidget {
     ];
   }
 
-  List<Widget> _getEmploymentDetailsContent() {
+  List<Widget> _getEmploymentDetailsContent(BuildContext context) {
     return [
       _spaceHeight,
       SummaryTextInfo(
-          title: 'Employment Status',
+          title: S.of(context).employmentStatus,
           subTitle: financialProfileState.employmentStatus.name),
       if (financialProfileState.employmentStatus == EmploymentStatus.employed ||
           financialProfileState.employmentStatus ==
               EmploymentStatus.selfEmployed)
         _summaryTextInfoWithPadding(
-            title: 'Nature of Business',
+            title: S.of(context).natureOfBusiness,
             subTitle:
                 financialProfileState.natureOfBusiness != NatureOfBusiness.other
                     ? financialProfileState.natureOfBusiness?.value ?? ''
