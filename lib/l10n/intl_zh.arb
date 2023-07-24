@@ -647,5 +647,6 @@
   "yourAddressProofMustContainFullName": " 你的住址證明必須包含你全名、詳細住址及發行機構。\n\n我們接受最近3個月的水/電/煤氣繳費單、銀行結單或政府函件。",
   "addressProof": "住址證明",
   "confirmAndContinue": "確認並繼續",
-  "botManagementFeeTooltip": "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!"
+  "botManagementFeeTooltip": "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!",
+  "subscription": "訂購"
 }

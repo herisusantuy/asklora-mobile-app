@@ -732,6 +732,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "submitApplication":
             MessageLookupByLibrary.simpleMessage("Submit Application"),
+        "subscription": MessageLookupByLibrary.simpleMessage("Subscription"),
         "summary": MessageLookupByLibrary.simpleMessage("Summary"),
         "summaryAgreementInformation": MessageLookupByLibrary.simpleMessage(
             "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible"),
