@@ -880,10 +880,10 @@ class S {
     );
   }
 
-  /// `It’s time to define your investment style.  Show me what you’re made of!`
+  /// `It’s time to define your investment style.Show me what you’re made of!`
   String get investmentStyleWelcomeTitle {
     return Intl.message(
-      'It’s time to define your investment style.  Show me what you’re made of!',
+      'It’s time to define your investment style.Show me what you’re made of!',
       name: 'investmentStyleWelcomeTitle',
       desc: '',
       args: [],
@@ -4356,6 +4356,356 @@ class S {
     );
   }
 
+  /// `Employment`
+  String get employment {
+    return Intl.message(
+      'Employment',
+      name: 'employment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Employment Status*`
+  String get employmentStatus {
+    return Intl.message(
+      'Employment Status*',
+      name: 'employmentStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Select`
+  String get pleaseSelect {
+    return Intl.message(
+      'Please Select',
+      name: 'pleaseSelect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Employed`
+  String get employed {
+    return Intl.message(
+      'Employed',
+      name: 'employed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Self-Employed`
+  String get selfEmployed {
+    return Intl.message(
+      'Self-Employed',
+      name: 'selfEmployed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retired`
+  String get retired {
+    return Intl.message(
+      'Retired',
+      name: 'retired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Student`
+  String get student {
+    return Intl.message(
+      'Student',
+      name: 'student',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Business Owner`
+  String get businessOwner {
+    return Intl.message(
+      'Business Owner',
+      name: 'businessOwner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Homemaker`
+  String get homeMaker {
+    return Intl.message(
+      'Homemaker',
+      name: 'homeMaker',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unemployed`
+  String get unEmployed {
+    return Intl.message(
+      'Unemployed',
+      name: 'unEmployed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `At-Home Trader`
+  String get homeTrader {
+    return Intl.message(
+      'At-Home Trader',
+      name: 'homeTrader',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown`
+  String get unknown {
+    return Intl.message(
+      'Unknown',
+      name: 'unknown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nature of Business`
+  String get natureOfBusiness {
+    return Intl.message(
+      'Nature of Business',
+      name: 'natureOfBusiness',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nature of Business description`
+  String get natureOfBusinessDesc {
+    return Intl.message(
+      'Nature of Business description',
+      name: 'natureOfBusinessDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Architecture / Engineering`
+  String get architectureEngineering {
+    return Intl.message(
+      'Architecture / Engineering',
+      name: 'architectureEngineering',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Arts / Design`
+  String get artDesign {
+    return Intl.message(
+      'Arts / Design',
+      name: 'artDesign',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Business, Non-Finance`
+  String get businessNonFinance {
+    return Intl.message(
+      'Business, Non-Finance',
+      name: 'businessNonFinance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Community / Social Service`
+  String get communitySocialService {
+    return Intl.message(
+      'Community / Social Service',
+      name: 'communitySocialService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Computer / Information Technology`
+  String get computerInformationTechnology {
+    return Intl.message(
+      'Computer / Information Technology',
+      name: 'computerInformationTechnology',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction`
+  String get construction {
+    return Intl.message(
+      'Construction',
+      name: 'construction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Education / Training / Library`
+  String get educationTrainingLibrary {
+    return Intl.message(
+      'Education / Training / Library',
+      name: 'educationTrainingLibrary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Farming, Fishing and Forestry`
+  String get farmingFishingForestry {
+    return Intl.message(
+      'Farming, Fishing and Forestry',
+      name: 'farmingFishingForestry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Finance/ Broker Dealer /Bank`
+  String get financeBrokerDealerBank {
+    return Intl.message(
+      'Finance/ Broker Dealer /Bank',
+      name: 'financeBrokerDealerBank',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Food and Beverage`
+  String get foodBeverage {
+    return Intl.message(
+      'Food and Beverage',
+      name: 'foodBeverage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Healthcare`
+  String get healthcare {
+    return Intl.message(
+      'Healthcare',
+      name: 'healthcare',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Installation, Maintenance, and Repair`
+  String get installationMaintenanceRepair {
+    return Intl.message(
+      'Installation, Maintenance, and Repair',
+      name: 'installationMaintenanceRepair',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Legal`
+  String get legal {
+    return Intl.message(
+      'Legal',
+      name: 'legal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Life, Physical and Social Service`
+  String get lifePhysicalSocialService {
+    return Intl.message(
+      'Life, Physical and Social Service',
+      name: 'lifePhysicalSocialService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Media and Communications`
+  String get mediaCommunications {
+    return Intl.message(
+      'Media and Communications',
+      name: 'mediaCommunications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Law Enforcement, Government, Protective Service`
+  String get lawEnforcementGovernmentProtectiveService {
+    return Intl.message(
+      'Law Enforcement, Government, Protective Service',
+      name: 'lawEnforcementGovernmentProtectiveService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Personal Care / Service`
+  String get personalCareService {
+    return Intl.message(
+      'Personal Care / Service',
+      name: 'personalCareService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Production and Manufacturing`
+  String get productionManufacturing {
+    return Intl.message(
+      'Production and Manufacturing',
+      name: 'productionManufacturing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation and Material Moving`
+  String get transportationMaterialMoving {
+    return Intl.message(
+      'Transportation and Material Moving',
+      name: 'transportationMaterialMoving',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other`
+  String get other {
+    return Intl.message(
+      'Other',
+      name: 'other',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Source of Wealth`
+  String get sourceOfWealth {
+    return Intl.message(
+      'Source of Wealth',
+      name: 'sourceOfWealth',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Account opening and deposit are the last few steps before investing.`
   String get accountOpeningAndDeposit {
     return Intl.message(
@@ -4386,10 +4736,10 @@ class S {
     );
   }
 
-  /// `Verify identify`
+  /// `Verify identity`
   String get verifyIdentity {
     return Intl.message(
-      'Verify identify',
+      'Verify identity',
       name: 'verifyIdentity',
       desc: '',
       args: [],
@@ -4596,46 +4946,6 @@ class S {
     );
   }
 
-  /// `Employment`
-  String get employment {
-    return Intl.message(
-      'Employment',
-      name: 'employment',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Employment Status*`
-  String get employmentStatus {
-    return Intl.message(
-      'Employment Status*',
-      name: 'employmentStatus',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Please Select`
-  String get pleaseSelect {
-    return Intl.message(
-      'Please Select',
-      name: 'pleaseSelect',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Nature of Business`
-  String get natureOfBusiness {
-    return Intl.message(
-      'Nature of Business',
-      name: 'natureOfBusiness',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Please read the the Asklora Customer Agreement. You must click on the agreement and check all the boxes in order to proceed.`
   String get pleaseReadTheAskloraCustomerAgreement {
     return Intl.message(
@@ -4671,16 +4981,6 @@ class S {
     return Intl.message(
       'Asklora Customer Agreement.pdf',
       name: 'AskloraAgreementFile',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Subscription`
-  String get subscription {
-    return Intl.message(
-      'Subscription',
-      name: 'subscription',
       desc: '',
       args: [],
     );
@@ -4941,6 +5241,76 @@ class S {
     return Intl.message(
       'Agreed',
       name: 'agreed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription`
+  String get subscription {
+    return Intl.message(
+      'Subscription',
+      name: 'subscription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We'll need to verify your identity via your HKID.`
+  String get weNeedToVerifyYourId {
+    return Intl.message(
+      'We\'ll need to verify your identity via your HKID.',
+      name: 'weNeedToVerifyYourId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get ready for the verification process. You will..`
+  String get getReadyForTheVerification {
+    return Intl.message(
+      'Get ready for the verification process. You will..',
+      name: 'getReadyForTheVerification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a photo of the front of your HKID`
+  String get takePhotoFront {
+    return Intl.message(
+      'Take a photo of the front of your HKID',
+      name: 'takePhotoFront',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a photo of the front of your HKID`
+  String get takePhotoBack {
+    return Intl.message(
+      'Take a photo of the front of your HKID',
+      name: 'takePhotoBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a selfie`
+  String get takeSelfie {
+    return Intl.message(
+      'Take a selfie',
+      name: 'takeSelfie',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify Now`
+  String get verifyNow {
+    return Intl.message(
+      'Verify Now',
+      name: 'verifyNow',
       desc: '',
       args: [],
     );
