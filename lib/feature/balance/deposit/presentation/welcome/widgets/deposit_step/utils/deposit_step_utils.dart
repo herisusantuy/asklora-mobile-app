@@ -4,7 +4,7 @@ List<DepositStepModel> firstTimeDepositStep(BuildContext context) => [
       DepositStepModel(
         title: S.of(context).depositViaFpsOrWireTransfer,
         subTitle: S.of(context).transferAtLeastWithMinimumDeposit(
-            DepositType.type1.minDepositString),
+            DepositType.firstTime.minDepositString),
       ),
       DepositStepModel(
         title: S.of(context).inputDepositAmount,
