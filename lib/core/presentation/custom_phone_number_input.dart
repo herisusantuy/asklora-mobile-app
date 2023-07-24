@@ -13,20 +13,22 @@ class CustomPhoneNumberInput extends StatelessWidget {
   final Function(String) onChangePhoneNumber;
   final String? initialValueOfPhoneNumber;
   final String errorText;
+  final String label;
 
-  const CustomPhoneNumberInput({
-    Key? key,
-    this.initialValueOfPhoneNumber,
-    required this.onChangePhoneNumber,
-    this.errorText = '',
-  }) : super(key: key);
+  const CustomPhoneNumberInput(
+      {Key? key,
+      this.initialValueOfPhoneNumber,
+      required this.onChangePhoneNumber,
+      this.errorText = '',
+      this.label = 'Phone Number'})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomTextNew('Phone Number', style: AskLoraTextStyles.body2),
+        CustomTextNew(label, style: AskLoraTextStyles.body2),
         const SizedBox(height: 5),
         ClearableTextFormField(
           prefix: UnconstrainedBox(
