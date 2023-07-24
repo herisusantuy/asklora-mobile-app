@@ -28,15 +28,15 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
       progress: progress,
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-      title: 'Set Up Financial Profile',
+      title: S.of(context).personalInfo,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomText(
-            'Employment',
+          CustomText(
+            S.of(context).employment,
             fontWeight: FontWeight.bold,
             type: FontType.h2,
-            margin: EdgeInsets.only(bottom: 30, left: 0),
+            margin: const EdgeInsets.only(bottom: 30, left: 0),
           ),
           _employmentStatusDropdown,
           _spaceHeight,
@@ -67,16 +67,20 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
             previous.employmentStatus != current.employmentStatus,
         builder: (context, state) => CustomDropdown(
             key: const Key('account_employment_status_select'),
-            labelText: 'Employment Status*',
-            hintText: 'Please select',
-            itemsList: EmploymentStatus.values.map((e) => e.name).toList()
+            labelText: S.of(context).employmentStatus,
+            hintText: S.of(context).pleaseSelect,
+            itemsList: EmploymentStatus.values
+                .map((e) =>
+                    EmploymentStatus.findByStringName(e.name).text(context))
+                .toList()
               ..remove(EmploymentStatus.unknown.name),
             initialValue: state.employmentStatus != EmploymentStatus.unknown
-                ? state.employmentStatus.name
+                ? EmploymentStatus.findByStringName(state.employmentStatus.name)
+                    .text(context)
                 : '',
             onChanged: (value) => context.read<FinancialProfileBloc>().add(
-                FinancialProfileEmploymentStatusChanged(EmploymentStatus.values
-                    .firstWhere((element) => element.name == value)))));
+                FinancialProfileEmploymentStatusChanged(
+                    EmploymentStatus.values.firstWhere((element) => EmploymentStatus.findByStringName(element.name).text(context) == value)))));
   }
 
   Widget get _getNatureOfBusinessDropdown {
@@ -89,14 +93,17 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
               state.employmentStatus == EmploymentStatus.selfEmployed) {
             return CustomDropdown(
                 key: const Key('account_nature_of_business_select'),
-                labelText: 'Nature Of Business*',
-                hintText: 'Please select',
+                labelText: S.of(context).natureOfBusiness,
+                hintText: S.of(context).pleaseSelect,
                 initialValue: state.natureOfBusiness?.value ?? '',
-                itemsList: NatureOfBusiness.values.map((e) => e.value).toList(),
+                itemsList: NatureOfBusiness.values
+                    .map((e) =>
+                        NatureOfBusiness.findByStringValue(e.value).text(context))
+                    .toList(),
                 onChanged: (value) => context.read<FinancialProfileBloc>().add(
                     FinancialProfileNatureOfBusinessChanged(NatureOfBusiness
                         .values
-                        .firstWhere((element) => element.value == value))));
+                        .firstWhere((element) => NatureOfBusiness.findByStringValue(element.value).text(context) == value))));
           } else {
             return const SizedBox.shrink();
           }
@@ -122,7 +129,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
                 key: const Key('account_other_nature_of_business_desc_input'),
                 onChanged: (value) => context.read<FinancialProfileBloc>().add(
                     FinancialProfileNatureOfBusinessDescriptionChanged(value)),
-                hintText: 'Nature of Business Description',
+                hintText: S.of(context).natureOfBusinessDesc,
               ),
             );
           } else {

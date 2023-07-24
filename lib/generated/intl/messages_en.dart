@@ -115,6 +115,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "almostFinished":
             MessageLookupByLibrary.simpleMessage("Almost finished!"),
+        "architectureEngineering":
+            MessageLookupByLibrary.simpleMessage("Architecture / Engineering"),
+        "artDesign": MessageLookupByLibrary.simpleMessage("Arts / Design"),
         "askMeAnythingRelatedToFinance": MessageLookupByLibrary.simpleMessage(
             "Ask me anything related to finance"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
@@ -184,6 +187,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "botTradeBottomSheetRolloverDisclosureTitle":
             MessageLookupByLibrary.simpleMessage(
                 "If you extend the Botstock period, you will incur additional fees"),
+        "businessNonFinance":
+            MessageLookupByLibrary.simpleMessage("Business, Non-Finance"),
+        "businessOwner": MessageLookupByLibrary.simpleMessage("Business Owner"),
         "buttonAlreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Already Have An Account?"),
         "buttonBack": MessageLookupByLibrary.simpleMessage("Back"),
@@ -250,15 +256,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Check back later to see if\nthere are any new\ntransactions!"),
         "checkBotStockDetails":
             MessageLookupByLibrary.simpleMessage("Check Botstock Details"),
+        "communitySocialService":
+            MessageLookupByLibrary.simpleMessage("Community / Social Service"),
         "companyAddress":
             MessageLookupByLibrary.simpleMessage("Company Address"),
         "completed": MessageLookupByLibrary.simpleMessage("Completed"),
+        "computerInformationTechnology": MessageLookupByLibrary.simpleMessage(
+            "Computer / Information Technology"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmAndContinue":
             MessageLookupByLibrary.simpleMessage("Confirm & Continue"),
         "confirmNewPassword":
             MessageLookupByLibrary.simpleMessage("Confirm New Password"),
         "confirmTrade": MessageLookupByLibrary.simpleMessage("Confirm Trade"),
+        "construction": MessageLookupByLibrary.simpleMessage("Construction"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "continueAccountOpening":
             MessageLookupByLibrary.simpleMessage("Continue Account Opening"),
@@ -293,6 +304,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Deposit via FPS or Wire Transfer"),
         "doAnyOfTheFollowingApply": MessageLookupByLibrary.simpleMessage(
             "Do any of the following apply to you or a member of your immediate family ?"),
+        "educationTrainingLibrary": MessageLookupByLibrary.simpleMessage(
+            "Education / Training / Library"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailActivationFailedTitle": MessageLookupByLibrary.simpleMessage(
             "Sorry! You were a bit late, your request has timed out. \n\nLet\'s try and activate your account again!"),
@@ -302,7 +315,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "User does not exist with the given email"),
         "emailNotVerified":
             MessageLookupByLibrary.simpleMessage("User email is not verified"),
+        "employed": MessageLookupByLibrary.simpleMessage("Employed"),
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
+        "employment": MessageLookupByLibrary.simpleMessage("Employment"),
+        "employmentStatus":
+            MessageLookupByLibrary.simpleMessage("Employment Status"),
         "endBotStockAcknowledgement": m9,
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
@@ -361,10 +378,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "You also seem to be a bit more reserved. But hey, introverts change the world!"),
         "extrovertMoreThan8": MessageLookupByLibrary.simpleMessage(
             "You also seem like a social butterfly - amplify that energy!"),
+        "farmingFishingForestry": MessageLookupByLibrary.simpleMessage(
+            "Farming, Fishing and Forestry"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("Filled Price"),
+        "financeBrokerDealerBank": MessageLookupByLibrary.simpleMessage(
+            "Finance/ Broker Dealer /Bank"),
         "financialProfile":
             MessageLookupByLibrary.simpleMessage("Financial Profile"),
         "firstTimeCopyAskloraBankDetails": m11,
+        "foodBeverage":
+            MessageLookupByLibrary.simpleMessage("Food and Beverage"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
         "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
@@ -385,6 +408,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ready to start your AI revolution?"),
         "halfWayThere": MessageLookupByLibrary.simpleMessage("Halfway there!"),
         "headquarters": MessageLookupByLibrary.simpleMessage("Headquarters"),
+        "healthcare": MessageLookupByLibrary.simpleMessage("Healthcare"),
+        "homeMaker": MessageLookupByLibrary.simpleMessage("Homemaker"),
+        "homeTrader": MessageLookupByLibrary.simpleMessage("At-Home Trader"),
         "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works"),
         "iAmADirector": MessageLookupByLibrary.simpleMessage(
             "I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission. (Excluding Lora Advisors Limited)"),
@@ -402,6 +428,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Input wrong email address"),
         "inputWrongEmailAddress":
             MessageLookupByLibrary.simpleMessage("Input wrong email address"),
+        "installationMaintenanceRepair": MessageLookupByLibrary.simpleMessage(
+            "Installation, Maintenance, and Repair"),
         "introduceBotPlank":
             MessageLookupByLibrary.simpleMessage("Introduce Bot - Plank"),
         "introduceBotPullup":
@@ -426,12 +454,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "isqNextButton": MessageLookupByLibrary.simpleMessage(
             "Press to move onto the next section"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "lawEnforcementGovernmentProtectiveService":
+            MessageLookupByLibrary.simpleMessage(
+                "Law Enforcement, Government, Protective Service"),
         "learnBotstockManagement":
             MessageLookupByLibrary.simpleMessage("Learn Botstock Management"),
+        "legal": MessageLookupByLibrary.simpleMessage("Legal"),
         "licenseeName":
             MessageLookupByLibrary.simpleMessage("Licensee: Chang Yung Ching"),
         "licenseeNumber":
             MessageLookupByLibrary.simpleMessage("CE No.: AFF918"),
+        "lifePhysicalSocialService": MessageLookupByLibrary.simpleMessage(
+            "Life, Physical and Social Service"),
         "linkPasswordResetIsSent": MessageLookupByLibrary.simpleMessage(
             "Link for Password reset is sent to email."),
         "manageYourBotstock":
@@ -440,10 +474,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "marketPrice": MessageLookupByLibrary.simpleMessage("Market Price"),
         "masterAiTrading":
             MessageLookupByLibrary.simpleMessage("Master AI Trading"),
+        "mediaCommunications":
+            MessageLookupByLibrary.simpleMessage("Media and Communications"),
         "milestones": MessageLookupByLibrary.simpleMessage("Milestones"),
         "min": m12,
         "min8Character":
             MessageLookupByLibrary.simpleMessage("min. 8 characters"),
+        "natureOfBusiness":
+            MessageLookupByLibrary.simpleMessage("Nature of Business"),
+        "natureOfBusinessDesc": MessageLookupByLibrary.simpleMessage(
+            "Nature of Business description"),
         "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
         "neuroticismLessThan8": MessageLookupByLibrary.simpleMessage(
             "we think you can take on more risk."),
@@ -488,6 +528,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "orderRejected": MessageLookupByLibrary.simpleMessage("Order Rejected"),
         "orderRollover": MessageLookupByLibrary.simpleMessage("Order Rollover"),
         "orderStarted": MessageLookupByLibrary.simpleMessage("Order Started"),
+        "other": MessageLookupByLibrary.simpleMessage("Other"),
         "otpDigit": MessageLookupByLibrary.simpleMessage("000000 (6 digit)"),
         "otpScreenDescription": m13,
         "otpScreenTitle": MessageLookupByLibrary.simpleMessage("Mobile OTP"),
@@ -510,6 +551,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Payment Details"),
         "pending": MessageLookupByLibrary.simpleMessage("Pending"),
         "performance": MessageLookupByLibrary.simpleMessage("Performance"),
+        "personalCareService":
+            MessageLookupByLibrary.simpleMessage("Personal Care / Service"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "personalisation":
             MessageLookupByLibrary.simpleMessage("Personalisation"),
@@ -524,6 +567,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please make sure you have finished the transfer and then inform us, if not, your deposit will be delayed."),
         "pleaseMakeSureYouPressSubmit": MessageLookupByLibrary.simpleMessage(
             "Please make sure you press \'SUBMIT\' after you have transferred the funds from your bank."),
+        "pleaseSelect": MessageLookupByLibrary.simpleMessage("Please Select"),
         "portfolioBuyingPower": m14,
         "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
             "Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement\'."),
@@ -643,6 +687,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Age is just a number, but your personality is what sets you apart.\n\nAnswer a few personality questions, and I\'ll help you find investments that fit your style."),
         "privacySuccessScreenTitle":
             MessageLookupByLibrary.simpleMessage("I appreciate your honesty."),
+        "productionManufacturing": MessageLookupByLibrary.simpleMessage(
+            "Production and Manufacturing"),
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push-Notification"),
         "reSendOtp": m20,
@@ -659,6 +705,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resultOfPersonalizationQuestion": m21,
         "retakeInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("Retake Investment Style"),
+        "retired": MessageLookupByLibrary.simpleMessage("Retired"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
         "riskDisclosureStatementAcknowledgement":
@@ -671,6 +718,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rolloverBotStockAcknowledgement": m22,
         "saveForLater": MessageLookupByLibrary.simpleMessage("Save For Later"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
+        "selfEmployed": MessageLookupByLibrary.simpleMessage("Self-Employed"),
         "sell": MessageLookupByLibrary.simpleMessage("Sell"),
         "sendOtp": MessageLookupByLibrary.simpleMessage("SEND OTP"),
         "setUpFinancialProfile":
@@ -683,6 +731,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Are you sure you want to sign out ?"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage(
             "Start your AI revolution with\nAsklora. Go crush it."),
+        "sourceOfWealth":
+            MessageLookupByLibrary.simpleMessage("Source of Wealth"),
         "startABotstock":
             MessageLookupByLibrary.simpleMessage("Start A Botstock"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
@@ -692,6 +742,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Start investing"),
         "startsAt": MessageLookupByLibrary.simpleMessage("Starts at"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
+        "student": MessageLookupByLibrary.simpleMessage("Student"),
         "submitApplication":
             MessageLookupByLibrary.simpleMessage("Submit Application"),
         "subscription": MessageLookupByLibrary.simpleMessage("Subscription"),
@@ -771,6 +822,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferInitialFundToAsklora": MessageLookupByLibrary.simpleMessage(
             "Transfer initial funds to Asklora"),
         "transferTo": MessageLookupByLibrary.simpleMessage("Transfer to"),
+        "transportationMaterialMoving": MessageLookupByLibrary.simpleMessage(
+            "Transportation and Material Moving"),
+        "unEmployed": MessageLookupByLibrary.simpleMessage("Unemployed"),
         "unableToProcessDepositSubTitle": MessageLookupByLibrary.simpleMessage(
             "We\'re having some trouble processing your deposit request. Please try again"),
         "unableToProcessDepositTitle":
@@ -779,6 +833,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "We\'re having some trouble processing your withdrawal request. Please try again"),
         "unableToProcessWithdrawalTitle": MessageLookupByLibrary.simpleMessage(
             "Unable to Process Withdrawal"),
+        "unknown": MessageLookupByLibrary.simpleMessage("Unknown"),
         "updatedAt": m24,
         "uploadProofOfRemittance":
             MessageLookupByLibrary.simpleMessage("Upload proof of remittance"),
