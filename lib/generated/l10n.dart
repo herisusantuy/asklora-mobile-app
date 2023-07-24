@@ -700,16 +700,6 @@ class S {
     );
   }
 
-  /// `Subscription`
-  String get subscription {
-    return Intl.message(
-      'Subscription',
-      name: 'subscription',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Core Plan`
   String get corePlan {
     return Intl.message(
@@ -1522,13 +1512,13 @@ class S {
     );
   }
 
-  /// `Current Price ({currency})`
-  String portfolioCurrentPrice(String currency) {
+  /// `Current Price`
+  String get portfolioCurrentPrice {
     return Intl.message(
-      'Current Price ($currency)',
+      'Current Price',
       name: 'portfolioCurrentPrice',
       desc: '',
-      args: [currency],
+      args: [],
     );
   }
 
@@ -4321,6 +4311,16 @@ class S {
     return Intl.message(
       'Completed',
       name: 'completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription`
+  String get subscription {
+    return Intl.message(
+      'Subscription',
+      name: 'subscription',
       desc: '',
       args: [],
     );

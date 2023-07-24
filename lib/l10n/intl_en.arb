@@ -79,7 +79,6 @@
   "gotIt": "Got It",
   "headquarters": "Headquarters",
   "accountSettings": "Account Settings",
-  "subscription": "Subscription",
   "corePlan": "Core Plan",
   "freeTrial": "Free Trial",
   "allSettings": "All Settings",
@@ -199,14 +198,7 @@
   "portfolioDetailPerformanceBotStockValues": "Botstock Values (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "Inv. Amount (HKD)",
   "portfolioDetailPerformanceTotalPL": "Total P&L",
-  "portfolioCurrentPrice": "Current Price ({currency})",
-  "@portfolioCurrentPrice": {
-    "placeholders": {
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
+  "portfolioCurrentPrice": "Current Price",
   "portfolioDetailExpiredAt": "Expired at {dateTime}",
   "@portfolioDetailExpiredAt": {
     "placeholders": {
@@ -651,8 +643,6 @@
   },
   "aiIsqWelcomeTitle": "It's time to find out your investment preferences",
   "aiIsqWelcomeSubTitle": "Let's see what kind of stocks you prefer",
-  "aiIsqWelcomeTitle": "It’s time to find out your investment preferences",
-  "aiIsqWelcomeSubTitle": "Let’s see what kind of stocks you prefer",
   "isqNextButton": "Press to move onto the next section",
   "cancelled": "Cancelled",
   "expired": "Expired",
@@ -661,8 +651,6 @@
   "subscription": "Subscription",
   "buy": "Buy",
   "sell": "Sell",
-  "aiIsqWelcomeTitle": "It's time to find out your investment preferences",
-  "aiIsqWelcomeSubTitle": "Let's see what kind of stocks you prefer",
   "depositHistory": "Deposit History",
   "withdrawalHistory": "Withdrawal History",
   "accountOpeningAndDeposit": "Account opening and deposit are the last few steps before investing.",
