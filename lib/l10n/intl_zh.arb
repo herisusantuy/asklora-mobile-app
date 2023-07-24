@@ -650,6 +650,5 @@
   "uploadAddressProof": "上傳住址證明",
   "yourAddressProofMustContainFullName": " 你的住址證明必須包含你全名、詳細住址及發行機構。\n\n我們接受最近3個月的水/電/煤氣繳費單、銀行結單或政府函件。",
   "addressProof": "住址證明",
-  "confirmAndContinue": "確認並繼續",
-  "test": "Test"
+  "confirmAndContinue": "確認並繼續"
 }
