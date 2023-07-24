@@ -683,5 +683,11 @@
   "yourAddressProofMustContainFullName": " 你的住址證明必須包含你全名、詳細住址及發行機構。\n\n我們接受最近3個月的水/電/煤氣繳費單、銀行結單或政府函件。",
   "addressProof": "住址證明",
   "confirmAndContinue": "確認並繼續",
-  "subscription": "訂購"
+  "subscription": "訂購",
+  "weNeedToVerifyYourId": "我們需要你的身份證核實你的身份。",
+  "getReadyForTheVerification": "核實程序即將開始，你將要......",
+  "takePhotoFront": "拍攝香港身份證正面",
+  "takePhotoBack": "拍攝香港身份證背面",
+  "takeSelfie": "自拍照一張",
+  "verifyNow": "立即核實"
 }
