@@ -33,7 +33,7 @@ class AddressProofScreen extends StatelessWidget {
       progress: progress,
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-      title: 'Set Up Personal Info',
+      title: S.of(context).personalInfo,
       content: GestureDetector(
         onTap: () {
           FocusScopeNode focus = FocusScope.of(context);
@@ -55,7 +55,7 @@ class AddressProofScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomTextNew(
-                'Please provide your residential address. This will also be your mailing address.',
+                S.of(context).pleaseProvideYourResidentialAddress,
                 key: const Key('sub_title'),
                 style: AskLoraTextStyles.body1
                     .copyWith(color: AskLoraColors.charcoal),
@@ -101,14 +101,14 @@ class AddressProofScreen extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.addressProofImages != current.addressProofImages,
           builder: (context, state) => CustomImagePicker(
-                hintText: 'Upload Address Proof',
+                hintText: S.of(context).uploadAddressProof,
                 key: const Key('address_proof_image_picker'),
-                title: 'Upload Address Proof*',
+                title: S.of(context).uploadAddressProof,
                 initialValue: state.addressProofImages,
                 disabledPick: state.addressProofImages.length >=
                     AddressProofState.maximumProofOfAddressImagesAllowed,
                 additionalText:
-                    'Your address proof must contain your full name, full residential address and the issuing agency.\n\nWe accept utility bill, bank statement, or government correspondence within the last 3 months.',
+                    S.of(context).yourAddressProofMustContainFullName,
                 allowMultiple: false,
                 onImageDeleted: (image) =>
                     context.read<AddressProofBloc>().add(ImageDeleted(image)),

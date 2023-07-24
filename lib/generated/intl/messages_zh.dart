@@ -93,9 +93,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your account is not active yet."),
         "accountName": MessageLookupByLibrary.simpleMessage("戶口名稱"),
         "accountNumber": MessageLookupByLibrary.simpleMessage("戶口號碼"),
+        "accountOpeningAndDeposit":
+            MessageLookupByLibrary.simpleMessage("以下部分係確保你帳戶安全，我哋你的將安全放在第一位。"),
         "accountSettings": MessageLookupByLibrary.simpleMessage("帳戶設定"),
         "active": MessageLookupByLibrary.simpleMessage("交易中"),
         "activities": MessageLookupByLibrary.simpleMessage("交易記錄"),
+        "addressProof": MessageLookupByLibrary.simpleMessage("住址證明"),
         "afterPayDepositHeaderTitle":
             MessageLookupByLibrary.simpleMessage("投資賬戶\n即將 Ready！"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
@@ -213,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("查看 Botstock 資訊"),
         "companyAddress": MessageLookupByLibrary.simpleMessage("銀行地址"),
         "completed": MessageLookupByLibrary.simpleMessage("已完成"),
+        "confirmAndContinue": MessageLookupByLibrary.simpleMessage("確認並繼續"),
         "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
         "confirmTrade": MessageLookupByLibrary.simpleMessage("確認買入"),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
@@ -221,10 +225,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "copyAskloraBankDetails": MessageLookupByLibrary.simpleMessage(
             "複製 Asklora 銀行資料，並從你銀行戶口透過 FPS或電匯轉。"),
         "corePlan": MessageLookupByLibrary.simpleMessage("核心計劃"),
+        "countryOfBirth": MessageLookupByLibrary.simpleMessage("出生地點"),
         "createAnAccount": MessageLookupByLibrary.simpleMessage("開立賬戶"),
         "currentPrice": MessageLookupByLibrary.simpleMessage("當前價格"),
         "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),
+        "dateOfBirth": MessageLookupByLibrary.simpleMessage("出生日期"),
         "defineAgain": MessageLookupByLibrary.simpleMessage("Define again"),
         "defineInvestmentStyle": MessageLookupByLibrary.simpleMessage("界定投資風格"),
         "deposit": MessageLookupByLibrary.simpleMessage("存入資金"),
@@ -293,6 +299,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "freeTrial": MessageLookupByLibrary.simpleMessage("免費試用期"),
         "fullName": MessageLookupByLibrary.simpleMessage("姓名"),
         "getHelp": MessageLookupByLibrary.simpleMessage("獲得幫助"),
+        "getReadyForTrading": MessageLookupByLibrary.simpleMessage("準備好AI 交易"),
         "getTheFirstBotstockForFree":
             MessageLookupByLibrary.simpleMessage("獲取首個免費 Botstock "),
         "go": MessageLookupByLibrary.simpleMessage("繼續"),
@@ -304,6 +311,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Alright! 準備好\n開始你嘅 AI 旅程未？"),
         "halfWayThere": MessageLookupByLibrary.simpleMessage("進展順利"),
         "headquarters": MessageLookupByLibrary.simpleMessage("總部地點"),
+        "hkId": MessageLookupByLibrary.simpleMessage("香港身份證"),
+        "hkIdNumber": MessageLookupByLibrary.simpleMessage("香港身份證號碼"),
+        "hkPhoneNo": MessageLookupByLibrary.simpleMessage("香港電話號碼"),
+        "hkResidentQuestion": MessageLookupByLibrary.simpleMessage(
+            "你是否香港居民？如果你選擇【是】， 你將會被視爲香港稅務居民。"),
         "howItWorks": MessageLookupByLibrary.simpleMessage("如何運作"),
         "iAmADirector": MessageLookupByLibrary.simpleMessage(
             "我是香港證券及期貨事務監察委員會註冊持牌機構的董事、員工、或註冊持牌人士。(除了Lora Advisors Limited）"),
@@ -340,6 +352,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("語言"),
         "learnBotstockManagement":
             MessageLookupByLibrary.simpleMessage("學䲾 Botstock 管理"),
+        "legalFirstName": MessageLookupByLibrary.simpleMessage("法定英文名字"),
+        "legalLastName": MessageLookupByLibrary.simpleMessage("法定英文姓氏"),
         "licenseeName":
             MessageLookupByLibrary.simpleMessage("Licensee: Chang Yung Ching"),
         "licenseeNumber": MessageLookupByLibrary.simpleMessage("CE 編號: AFF918"),
@@ -354,6 +368,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "milestones": MessageLookupByLibrary.simpleMessage("目標"),
         "min": m12,
         "min8Character": MessageLookupByLibrary.simpleMessage("最少 8 個字母"),
+        "nationality": MessageLookupByLibrary.simpleMessage("國籍"),
         "needHelp": MessageLookupByLibrary.simpleMessage("需要幫助？"),
         "neuroticismLessThan8":
             MessageLookupByLibrary.simpleMessage("我哋可以進取少少, 承受一定嘅風險"),
@@ -378,6 +393,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("設置的新密碼不能和舊密碼相同"),
         "onBoardingCompletionMessage": MessageLookupByLibrary.simpleMessage(
             "您已經完成了在Asklora開立賬戶的所有步驟！您的賬戶一\n經審核通過，即可開始交易。審核通常需要1至2個工作日。"),
+        "onceYouHaveStarted":
+            MessageLookupByLibrary.simpleMessage("當你開始後，你亦可以隨時於任何時間再繼續。"),
+        "openAccountNow": MessageLookupByLibrary.simpleMessage("立即開戶"),
         "openInvestmentAccount":
             MessageLookupByLibrary.simpleMessage("開立新投資賬戶"),
         "opennessLessThan8":
@@ -408,7 +426,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
         "pending": MessageLookupByLibrary.simpleMessage("待處理"),
         "performance": MessageLookupByLibrary.simpleMessage("表現"),
-        "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
+        "personalInfo": MessageLookupByLibrary.simpleMessage("個人資料"),
+        "personalInfoFormDesc":
+            MessageLookupByLibrary.simpleMessage("請確保名字與身份證明文件一致。"),
         "personalisation": MessageLookupByLibrary.simpleMessage("個人化"),
         "personalizationResultScreenTitle":
             MessageLookupByLibrary.simpleMessage(
@@ -422,6 +442,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
         "pleaseMakeSureYouPressSubmit":
             MessageLookupByLibrary.simpleMessage("請確保於你的銀行轉賬資金後才按「提交」鍵。"),
+        "pleaseProvideYourResidentialAddress":
+            MessageLookupByLibrary.simpleMessage("請提供你的住宅地址。這也將是你的郵寄地址。"),
+        "porAddress": MessageLookupByLibrary.simpleMessage("住址證明"),
         "portfolioBuyingPower": m14,
         "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
             "購買力代表了你可以用來購買Botstock的現金額。你的可提取金額和購買力會出現不一樣的情況。例如，開始Botstock後，你的購買力會相對減少，而Botstock總價值會相對提高。或當你的Botstock已到期或被終止，其價值將會增加至購買力，而在「T+2」日，T為交易當日， 該價值也會同時顯示在可提取金額。 "),
@@ -543,6 +566,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sell": MessageLookupByLibrary.simpleMessage("賣出"),
         "sendOtp": MessageLookupByLibrary.simpleMessage("發送 OTP"),
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
+        "setupPersonalInfo": MessageLookupByLibrary.simpleMessage("設定個人資料"),
         "shares": MessageLookupByLibrary.simpleMessage("數量"),
         "signAgreements": MessageLookupByLibrary.simpleMessage("簽署協議"),
         "signIn": MessageLookupByLibrary.simpleMessage("登入"),
@@ -569,6 +593,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("輸入金額須與匯款輸入證明必須一致。"),
         "theAmountMustMatchWithPor":
             MessageLookupByLibrary.simpleMessage("金額須與匯款證明一致。"),
+        "theItemYouWillNeed": MessageLookupByLibrary.simpleMessage("你需要以下文件.."),
         "thePorShouldShowYourBank":
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
         "theProofOfRemittanceShouldShowYourBankAccount":
@@ -625,13 +650,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("轉賬首筆資金予Asklora"),
         "transferTo": MessageLookupByLibrary.simpleMessage("轉賬至"),
         "updatedAt": m24,
+        "uploadAddressProof": MessageLookupByLibrary.simpleMessage("上傳住址證明"),
         "uploadProofOfRemittance":
             MessageLookupByLibrary.simpleMessage("上載匯款證明"),
+        "usResidentQuestion":
+            MessageLookupByLibrary.simpleMessage("你是否擁有美國稅務居民身份、持有綠卡，或公民身份？"),
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
+        "verifyIdentity": MessageLookupByLibrary.simpleMessage("核實身份"),
         "verifyOtpSuccess":
             MessageLookupByLibrary.simpleMessage("Verify OTP Success"),
         "viewDepositGuide": MessageLookupByLibrary.simpleMessage("查看入金提示"),
         "weAcceptHKDOnly": MessageLookupByLibrary.simpleMessage("我們只接受港幣。"),
+        "weAcceptUtilityBill": MessageLookupByLibrary.simpleMessage(
+            "(我們接受最近3個月的水/電/煤氣繳費單、銀行結單或政府函件)"),
         "weWillOnlyAcceptDepositViaBankTransfer":
             MessageLookupByLibrary.simpleMessage(
                 "我們只接受由你戶口透過銀行轉賬 (電匯/FPS) 的入金。"),
@@ -660,6 +691,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "withdrawalWorkingDays":
             MessageLookupByLibrary.simpleMessage("提取款項最多需時2個工作天。"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),
+        "yourAddressProofMustContainFullName":
+            MessageLookupByLibrary.simpleMessage(
+                " 你的住址證明必須包含你全名、詳細住址及發行機構。\n\n我們接受最近3個月的水/電/煤氣繳費單、銀行結單或政府函件。"),
         "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
         "yourBankAccountIsUnderReview": m26,
         "yourDepositCanTakeUp2WorkingDays":
