@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/core/domain/validation_enum.dart';
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/otp/get_otp_request.dart';
 import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
@@ -47,9 +48,9 @@ void main() async {
               isEmailValid: false,
               isPasswordValid: false,
               username: '',
-              usernameErrorText: '',
+              userNameValidation: ValidationCode.empty,
               password: '',
-              passwordErrorText: ''));
+              passwordValidation: ValidationCode.empty));
     });
 
     blocTest<SignUpBloc, SignUpState>(
@@ -63,9 +64,9 @@ void main() async {
                   isEmailValid: false,
                   isPasswordValid: false,
                   username: 'kkkkkk',
-                  usernameErrorText: 'Enter valid email',
+                  userNameValidation: ValidationCode.enterValidEmail,
                   password: '',
-                  passwordErrorText: '')
+                  passwordValidation: ValidationCode.empty)
             });
 
     blocTest<SignUpBloc, SignUpState>(
@@ -79,9 +80,9 @@ void main() async {
                   isEmailValid: false,
                   isPasswordValid: false,
                   username: 'test@test.c@',
-                  usernameErrorText: 'Enter valid email',
+                  userNameValidation: ValidationCode.enterValidEmail,
                   password: '',
-                  passwordErrorText: '')
+                  passwordValidation: ValidationCode.empty)
             });
 
     blocTest<SignUpBloc, SignUpState>(
@@ -95,9 +96,9 @@ void main() async {
                   isEmailValid: true,
                   isPasswordValid: false,
                   username: 'test@test.com',
-                  usernameErrorText: '',
+                  userNameValidation: ValidationCode.empty,
                   password: '',
-                  passwordErrorText: '')
+                  passwordValidation: ValidationCode.empty)
             });
 
     blocTest<SignUpBloc, SignUpState>(
@@ -111,9 +112,9 @@ void main() async {
                   isEmailValid: false,
                   isPasswordValid: false,
                   username: '',
-                  usernameErrorText: '',
+                  userNameValidation: ValidationCode.empty,
                   password: 'abcde',
-                  passwordErrorText: 'Enter valid password')
+                  passwordValidation: ValidationCode.enterValidPassword)
             });
 
     blocTest<SignUpBloc, SignUpState>(
@@ -127,9 +128,9 @@ void main() async {
                   isEmailValid: false,
                   isPasswordValid: false,
                   username: '',
-                  usernameErrorText: '',
+                  userNameValidation: ValidationCode.empty,
                   password: 'abcdefge',
-                  passwordErrorText: 'Enter valid password')
+                  passwordValidation: ValidationCode.enterValidPassword)
             });
 
     blocTest<SignUpBloc, SignUpState>(
@@ -139,13 +140,14 @@ void main() async {
         act: (bloc) => bloc.add(const SignUpPasswordChanged('Password1')),
         expect: () => {
               SignUpState(
-                  response: BaseResponse.unknown(),
-                  isEmailValid: false,
-                  isPasswordValid: true,
-                  username: '',
-                  usernameErrorText: '',
-                  password: 'Password1',
-                  passwordErrorText: '')
+                response: BaseResponse.unknown(),
+                isEmailValid: false,
+                isPasswordValid: true,
+                username: '',
+                userNameValidation: ValidationCode.empty,
+                password: 'Password1',
+                passwordValidation: ValidationCode.empty,
+              )
             });
 
     blocTest<SignUpBloc, SignUpState>(
@@ -162,17 +164,17 @@ void main() async {
                   isEmailValid: false,
                   isPasswordValid: false,
                   username: 'abcd',
-                  usernameErrorText: 'Enter valid email',
+                  userNameValidation: ValidationCode.enterValidEmail,
                   password: '',
-                  passwordErrorText: ''),
+                  passwordValidation: ValidationCode.empty),
               SignUpState(
                   response: BaseResponse.unknown(),
                   isEmailValid: false,
                   isPasswordValid: false,
                   username: 'abcd',
-                  usernameErrorText: 'Enter valid email',
+                  userNameValidation: ValidationCode.enterValidEmail,
                   password: 'pass',
-                  passwordErrorText: 'Enter valid password')
+                  passwordValidation: ValidationCode.enterValidPassword)
             });
 
     blocTest<SignUpBloc, SignUpState>(
@@ -189,17 +191,17 @@ void main() async {
                   isEmailValid: true,
                   isPasswordValid: false,
                   username: 'kk@test.com',
-                  usernameErrorText: '',
+                  userNameValidation: ValidationCode.empty,
                   password: '',
-                  passwordErrorText: ''),
+                  passwordValidation: ValidationCode.empty),
               SignUpState(
                   response: BaseResponse.unknown(),
                   isEmailValid: true,
                   isPasswordValid: true,
                   username: 'kk@test.com',
-                  usernameErrorText: '',
+                  userNameValidation: ValidationCode.empty,
                   password: 'Password1',
-                  passwordErrorText: '')
+                  passwordValidation: ValidationCode.empty)
             });
 
     blocTest<SignUpBloc, SignUpState>(
@@ -257,9 +259,9 @@ void main() async {
                   isEmailValid: true,
                   isPasswordValid: true,
                   username: 'kk@test.com',
-                  usernameErrorText: '',
+                  userNameValidation: ValidationCode.empty,
                   password: 'Password1',
-                  passwordErrorText: ''),
+                  passwordValidation: ValidationCode.empty),
               const SignUpState(
                   response: BaseResponse<SignUpResponse>(
                       data: SignUpResponse('Sign Up Successful'),
@@ -267,9 +269,9 @@ void main() async {
                   isEmailValid: true,
                   isPasswordValid: true,
                   username: 'kk@test.com',
-                  usernameErrorText: '',
+                  userNameValidation: ValidationCode.empty,
                   password: 'Password1',
-                  passwordErrorText: '')
+                  passwordValidation: ValidationCode.empty)
             });
 
     tearDown(() => {signUpBloc.close()});

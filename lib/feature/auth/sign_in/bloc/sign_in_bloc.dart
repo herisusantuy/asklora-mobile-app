@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../../app/repository/user_journey_repository.dart';
 import '../../../../core/data/remote/base_api_client.dart';
+import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../../core/utils/log.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
 import '../../../onboarding/kyc/domain/get_account/get_account_response.dart';
@@ -13,7 +15,6 @@ import '../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../../repository/auth_repository.dart';
-import '../../utils/auth_utils.dart';
 import '../domain/sign_in_response.dart';
 
 part 'sign_in_event.dart';
@@ -50,11 +51,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         response: BaseResponse.unknown(),
         emailAddress: event.emailAddress,
         isEmailValid: event.emailAddress.isValidEmail(),
-        emailAddressErrorText:
+        emailAddressValidationText:
             (event.emailAddress.toLowerCase().isValidEmail() ||
                     event.emailAddress.isEmpty)
-                ? AuthErrorMessage.empty.value
-                : AuthErrorMessage.enterValidEmail.value));
+                ? ValidationCode.empty
+                : ValidationCode.enterValidEmail));
   }
 
   void _onPasswordChanged(
@@ -116,7 +117,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
             response: BaseResponse.complete(
                 data.copyWith(userJourney: userJourney))));
       }
-    } on UnauthorizedException {
+      /*} on UnauthorizedException {
       emit(state.copyWith(
           response: BaseResponse.error(
               message: AuthErrorMessage.invalidPassword.value)));
@@ -127,7 +128,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     } on NotAcceptableException {
       emit(state.copyWith(
           response: BaseResponse.error(
-              message: AuthErrorMessage.emailNotVerified.value)));
+              message: AuthErrorMessage.emailNotVerified.value)));*/
+    } on AskloraApiClientException catch (e) {
+      emit(state.copyWith(
+          response: BaseResponse.error(validationCode: e.askloraError.type)));
+      Logger.log(
+          'Krishna AskloraApiClientException ${e.askloraError.code} ${e.askloraError.detail}');
     } catch (e) {
       _authRepository.removeStorageOnSignInFailed();
       emit(state.copyWith(response: BaseResponse.error()));
@@ -161,10 +167,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         _authRepository.removeStorageOnSignInFailed();
         emit(state.copyWith(response: BaseResponse.error()));
       }
-    } on UnauthorizedException {
+    } on AskloraApiClientException catch (e) {
       emit(state.copyWith(
-          response: BaseResponse.error(message: 'Invalid Password')));
-    } on NotFoundException {
+          response: BaseResponse.error(validationCode: e.askloraError.type)));
+    }
+
+    /*on NotFoundException {
       emit(state.copyWith(
           response: BaseResponse.error(
               message: 'User does not exist with the given email')));
@@ -174,7 +182,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     } on BadRequestException {
       emit(
           state.copyWith(response: BaseResponse.error(message: 'Invalid OTP')));
-    } catch (e) {
+    }*/
+    catch (e) {
       _authRepository.removeStorageOnSignInFailed();
       emit(state.copyWith(response: BaseResponse.error()));
     }

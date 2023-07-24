@@ -5,9 +5,11 @@ import '../../domain/endpoints.dart';
 import '../../domain/token/model/token_refresh_response.dart';
 import '../../domain/token/repository/repository.dart';
 import '../../domain/token/repository/token_repository.dart';
+import '../../domain/validation_enum.dart';
 import '../../utils/build_configs/build_config.dart';
 import '../../utils/header_util.dart';
 import '../../utils/logging_interceptor.dart';
+import 'asklora_error.dart';
 
 class BaseApiClient {
   late Dio _dio;
@@ -149,36 +151,51 @@ class AppInterceptors extends Interceptor {
       case DioErrorType.receiveTimeout:
         throw DeadlineExceededException(err.requestOptions);
       case DioErrorType.badResponse:
+        final askloraError = err.response != null
+            ? AskloraError.fromJson(err.response!.data)
+            : AskloraError(detail: '', code: ValidationCode.unknown.code);
         switch (err.response?.statusCode) {
           case 400:
-            throw BadRequestException(err.requestOptions);
+            throw BadRequestException(err.requestOptions, askloraError);
           case 401:
+
+            /// TODO: Remove this check once the BE apply this new code all across the place.
+
             final message = err.response?.data['message'];
             if (message == 'Token invalid' ||
-                message == 'Token invalid / expired') {
+                message == 'Token invalid / expired' ||
+                askloraError.type == ValidationCode.invalidToken) {
               _handleExpiredToken(err, handler);
               return;
             } else {
-              throw UnauthorizedException(err.requestOptions);
+              throw UnauthorizedException(err.requestOptions,
+                  AskloraError.fromJson(err.response!.data));
             }
           case 403:
-            throw ForbiddenException(err.requestOptions);
+            throw ForbiddenException(
+                err.requestOptions, AskloraError.fromJson(err.response!.data));
           case 404:
-            throw NotFoundException(err.requestOptions);
+            throw NotFoundException(
+                err.requestOptions, AskloraError.fromJson(err.response!.data));
           case 406:
-            throw NotAcceptableException(err.requestOptions);
+            throw NotAcceptableException(
+                err.requestOptions, AskloraError.fromJson(err.response!.data));
           case 409:
-            throw ConflictException(err.requestOptions);
+            throw ConflictException(
+                err.requestOptions, AskloraError.fromJson(err.response!.data));
           case 451:
-            throw LegalReasonException(err.requestOptions);
+            throw LegalReasonException(
+                err.requestOptions, AskloraError.fromJson(err.response!.data));
           case 500:
-            throw InternalServerErrorException(err.requestOptions);
+            throw InternalServerErrorException(
+                err.requestOptions, AskloraError.fromJson(err.response!.data));
         }
         break;
       case DioErrorType.cancel:
         break;
       case DioErrorType.unknown:
-        throw NoInternetConnectionException(err.requestOptions);
+        throw NoInternetConnectionException(err.requestOptions,
+            AskloraError(code: ValidationCode.noInternetConnection.code));
       case DioErrorType.badCertificate:
         // TODO: Handle this case.
         break;
@@ -191,8 +208,9 @@ class AppInterceptors extends Interceptor {
   }
 }
 
-class BadRequestException extends DioError {
-  BadRequestException(RequestOptions r) : super(requestOptions: r);
+class BadRequestException extends AskloraApiClientException {
+  BadRequestException(RequestOptions r, askloraError)
+      : super(r, askloraError: askloraError);
 
   @override
   String toString() {
@@ -200,17 +218,9 @@ class BadRequestException extends DioError {
   }
 }
 
-class InternalServerErrorException extends DioError {
-  InternalServerErrorException(RequestOptions r) : super(requestOptions: r);
-
-  @override
-  String toString() {
-    return 'Unknown error occurred, please try again later.';
-  }
-}
-
-class ConflictException extends DioError {
-  ConflictException(RequestOptions r) : super(requestOptions: r);
+class ConflictException extends AskloraApiClientException {
+  ConflictException(RequestOptions r, askloraError)
+      : super(r, askloraError: askloraError);
 
   @override
   String toString() {
@@ -218,8 +228,9 @@ class ConflictException extends DioError {
   }
 }
 
-class UnauthorizedException extends DioError {
-  UnauthorizedException(RequestOptions r) : super(requestOptions: r);
+class UnauthorizedException extends AskloraApiClientException {
+  UnauthorizedException(RequestOptions r, askloraError)
+      : super(r, askloraError: askloraError);
 
   @override
   String toString() {
@@ -227,8 +238,9 @@ class UnauthorizedException extends DioError {
   }
 }
 
-class NotFoundException extends DioError {
-  NotFoundException(RequestOptions r) : super(requestOptions: r);
+class NotFoundException extends AskloraApiClientException {
+  NotFoundException(RequestOptions r, askloraError)
+      : super(r, askloraError: askloraError);
 
   @override
   String toString() {
@@ -236,8 +248,9 @@ class NotFoundException extends DioError {
   }
 }
 
-class ForbiddenException extends DioError {
-  ForbiddenException(RequestOptions r) : super(requestOptions: r);
+class ForbiddenException extends AskloraApiClientException {
+  ForbiddenException(RequestOptions r, askloraError)
+      : super(r, askloraError: askloraError);
 
   @override
   String toString() {
@@ -245,8 +258,9 @@ class ForbiddenException extends DioError {
   }
 }
 
-class LegalReasonException extends DioError {
-  LegalReasonException(RequestOptions r) : super(requestOptions: r);
+class LegalReasonException extends AskloraApiClientException {
+  LegalReasonException(RequestOptions r, askloraError)
+      : super(r, askloraError: askloraError);
 
   @override
   String toString() {
@@ -254,8 +268,19 @@ class LegalReasonException extends DioError {
   }
 }
 
-class NotAcceptableException extends DioError {
-  NotAcceptableException(RequestOptions r) : super(requestOptions: r);
+class InternalServerErrorException extends AskloraApiClientException {
+  InternalServerErrorException(RequestOptions r, askloraError)
+      : super(r, askloraError: askloraError);
+
+  @override
+  String toString() {
+    return 'Unknown error occurred, please try again later.';
+  }
+}
+
+class NotAcceptableException extends AskloraApiClientException {
+  NotAcceptableException(RequestOptions r, askloraError)
+      : super(r, askloraError: askloraError);
 
   @override
   String toString() {
@@ -263,8 +288,9 @@ class NotAcceptableException extends DioError {
   }
 }
 
-class NoInternetConnectionException extends DioError {
-  NoInternetConnectionException(RequestOptions r) : super(requestOptions: r);
+class NoInternetConnectionException extends AskloraApiClientException {
+  NoInternetConnectionException(RequestOptions r, askloraError)
+      : super(r, askloraError: askloraError);
 
   @override
   String toString() {
@@ -274,6 +300,18 @@ class NoInternetConnectionException extends DioError {
 
 class DeadlineExceededException extends DioError {
   DeadlineExceededException(RequestOptions r) : super(requestOptions: r);
+
+  @override
+  String toString() {
+    return 'The connection has timed out, please try again.';
+  }
+}
+
+class AskloraApiClientException extends DioError {
+  AskloraApiClientException(RequestOptions r, {required this.askloraError})
+      : super(requestOptions: r);
+
+  final AskloraError askloraError;
 
   @override
   String toString() {

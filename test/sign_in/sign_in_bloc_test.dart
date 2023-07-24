@@ -1,5 +1,6 @@
 import 'package:asklora_mobile_app/app/bloc/app_bloc.dart';
 import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart';
+import 'package:asklora_mobile_app/core/domain/validation_enum.dart';
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart';
 import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
@@ -92,11 +93,11 @@ void main() async {
         expect(
             signInBloc.state,
             const SignInState(
-              response: BaseResponse(),
-              emailAddress: '',
-              isEmailValid: false,
-              password: '',
-            ));
+                response: BaseResponse(),
+                emailAddress: '',
+                isEmailValid: false,
+                password: '',
+                emailAddressValidationText: ValidationCode.empty));
       },
     );
 
@@ -112,14 +113,14 @@ void main() async {
                 response: BaseResponse.unknown(),
                 emailAddress: 'qweasdzxc',
                 isEmailValid: false,
-                emailAddressErrorText: 'Enter valid email',
+                emailAddressValidationText: ValidationCode.enterValidEmail,
                 password: '',
               ),
               SignInState(
                 response: BaseResponse.unknown(),
                 emailAddress: 'qweasdzxc',
                 isEmailValid: false,
-                emailAddressErrorText: 'Enter valid email',
+                emailAddressValidationText: ValidationCode.enterValidEmail,
                 password: 'TestQWE123',
               )
             });
@@ -132,7 +133,7 @@ void main() async {
                 response: BaseResponse.unknown(),
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,
-                emailAddressErrorText: '',
+                emailAddressValidationText: ValidationCode.empty,
                 password: '',
               )
             });
@@ -171,21 +172,21 @@ void main() async {
                 response: BaseResponse.unknown(),
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,
-                emailAddressErrorText: '',
+                emailAddressValidationText: ValidationCode.empty,
                 password: '',
               ),
               SignInState(
                 response: BaseResponse.unknown(),
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,
-                emailAddressErrorText: '',
+                emailAddressValidationText: ValidationCode.empty,
                 password: 'TestQWE123',
               ),
               SignInState(
                 response: BaseResponse.loading(),
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,
-                emailAddressErrorText: '',
+                emailAddressValidationText: ValidationCode.empty,
                 password: 'TestQWE123',
               ),
               const SignInState(
@@ -195,7 +196,7 @@ void main() async {
                     state: ResponseState.success),
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,
-                emailAddressErrorText: '',
+                emailAddressValidationText: ValidationCode.empty,
                 password: 'TestQWE123',
               )
             });
