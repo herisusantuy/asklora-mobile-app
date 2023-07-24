@@ -57,139 +57,145 @@ class BotRecommendationScreen extends StatelessWidget {
             buildWhen: (previous, current) =>
                 previous.botRecommendationResponse !=
                 current.botRecommendationResponse,
-            builder: (context, state) => CustomLayoutWithBlurPopUp(
-              loraPopUpMessageModel: LoraPopUpMessageModel(
-                title: S.of(context).errorGettingInformationTitle,
-                subTitle: S
-                    .of(context)
-                    .errorGettingInformationInvestmentDetailSubTitle,
-                primaryButtonLabel: S.of(context).buttonReloadPage,
-                onSecondaryButtonTap: () => Navigator.pop(context),
-                onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
-                    context: context,
-                    target: UserJourney.freeBotStock,
-                    onTrueCallback: () => context
-                        .read<BotStockBloc>()
-                        .add(FetchBotRecommendation()),
-                    onFalseCallback: () => context
-                        .read<BotStockBloc>()
-                        .add(FetchFreeBotRecommendation())),
-              ),
-              showPopUp:
-                  state.botRecommendationResponse.state == ResponseState.error,
-              content: ListView(
-                padding: const EdgeInsets.only(bottom: 35),
-                children: [
-                  _header(
+            builder: (context, state) {
+              return CustomLayoutWithBlurPopUp(
+                loraPopUpMessageModel: LoraPopUpMessageModel(
+                  title: S.of(context).errorGettingInformationTitle,
+                  subTitle: S
+                      .of(context)
+                      .errorGettingInformationInvestmentDetailSubTitle,
+                  primaryButtonLabel: S.of(context).buttonReloadPage,
+                  onSecondaryButtonTap: () => Navigator.pop(context),
+                  onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
                       context: context,
-                      userJourney: context.read<AppBloc>().state.userJourney),
-                  BotRecommendationList(
-                    verticalMargin: 14,
-                    botStockState: state,
-                  ),
-                  if (UserJourney.compareUserJourney(
-                      context: context, target: UserJourney.freeBotStock))
-                    const SizedBox(
-                      height: 50,
+                      target: UserJourney.freeBotStock,
+                      onTrueCallback: () => context
+                          .read<BotStockBloc>()
+                          .add(FetchBotRecommendation()),
+                      onFalseCallback: () => context
+                          .read<BotStockBloc>()
+                          .add(FetchFreeBotRecommendation())),
+                ),
+                showPopUp: state.botRecommendationResponse.state ==
+                    ResponseState.error,
+                content: ListView(
+                  padding: const EdgeInsets.only(bottom: 35),
+                  children: [
+                    _header(
+                        context: context,
+                        userJourney: context.read<AppBloc>().state.userJourney,
+                        updated: state.botRecommendationResponse.data
+                                ?.updatedFormatted ??
+                            '-'),
+                    BotRecommendationList(
+                      verticalMargin: 14,
+                      botStockState: state,
                     ),
-                  const BotRecommendationFaq(),
-                  const SizedBox(
-                    height: 28,
-                  ),
-                  const UnconstrainedBox(
-                      child: HomeScreenNeedHelpButtonWidget())
-                ],
-              ),
-            ),
+                    if (UserJourney.compareUserJourney(
+                        context: context, target: UserJourney.freeBotStock))
+                      const SizedBox(
+                        height: 50,
+                      ),
+                    const BotRecommendationFaq(),
+                    const SizedBox(
+                      height: 28,
+                    ),
+                    const UnconstrainedBox(
+                        child: HomeScreenNeedHelpButtonWidget())
+                  ],
+                ),
+              );
+            },
           ),
         ));
   }
 
   Widget _header(
-          {required BuildContext context, required UserJourney userJourney}) =>
-      Padding(
-        padding: AppValues.screenHorizontalPadding,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomTextNew(
-              S.of(context).botRecommendationScreenTitle,
-              style:
-                  AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
-            ),
-            const SizedBox(
-              height: 36,
-            ),
-            CustomTextWithTooltip(
-              title: S.of(context).updatedAt('15.30', '2022/10/20'),
-              tooltipText:
-                  S.of(context).ourPersonalisedRecommendationsAreUnique,
-              titleStyle: AskLoraTextStyles.subtitle3
-                  .copyWith(color: AskLoraColors.darkGray),
-            ),
-            Row(
+      {required BuildContext context,
+      required UserJourney userJourney,
+      required String updated}) {
+    return Padding(
+      padding: AppValues.screenHorizontalPadding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomTextNew(
+            S.of(context).botRecommendationScreenTitle,
+            style: AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
+          ),
+          const SizedBox(
+            height: 36,
+          ),
+          CustomTextWithTooltip(
+            title: S.of(context).updatedAt(updated),
+            tooltipText: S.of(context).ourPersonalisedRecommendationsAreUnique,
+            titleStyle: AskLoraTextStyles.subtitle3
+                .copyWith(color: AskLoraColors.darkGray),
+          ),
+          Row(
+            children: [
+              Flexible(
+                flex: 3,
+                child: AutoSizedTextWidget(
+                  S.of(context).notFeelingIt,
+                  style: AskLoraTextStyles.subtitle3
+                      .copyWith(color: AskLoraColors.primaryMagenta),
+                ),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              ExtraInfoButton(
+                label: S.of(context).defineAgain,
+                buttonExtraInfoSize: ButtonExtraInfoSize.small,
+                onTap: () => context
+                    .read<NavigationBloc<ForYouPage>>()
+                    .add(const PageChanged(ForYouPage.investmentStyle)),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          if (userJourney == UserJourney.freeBotStock)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Flexible(
-                  flex: 3,
-                  child: AutoSizedTextWidget(
-                    S.of(context).notFeelingIt,
-                    style: AskLoraTextStyles.subtitle3
-                        .copyWith(color: AskLoraColors.primaryMagenta),
-                  ),
+                CustomTextNew(
+                  'Hi! Check out my 20 recommended Botstocks just for you.',
+                  style: AskLoraTextStyles.body1
+                      .copyWith(color: AskLoraColors.charcoal),
                 ),
                 const SizedBox(
-                  width: 5,
+                  height: 24,
                 ),
-                ExtraInfoButton(
-                  label: S.of(context).defineAgain,
-                  buttonExtraInfoSize: ButtonExtraInfoSize.small,
-                  onTap: () => context
-                      .read<NavigationBloc<ForYouPage>>()
-                      .add(const PageChanged(ForYouPage.investmentStyle)),
+                CustomTextNew(
+                  'Select a Botstock to trade it for FREE!',
+                  style: AskLoraTextStyles.subtitle2
+                      .copyWith(color: AskLoraColors.charcoal),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                GestureDetector(
+                  onTap: () => showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    builder: (context) => const BotLearnMoreBottomSheet(),
+                  ),
+                  child: CustomTextNew(
+                    'Redemption Instructions',
+                    style: AskLoraTextStyles.subtitle1.copyWith(
+                      color: AskLoraColors.charcoal,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
                 ),
               ],
             ),
-            const SizedBox(
-              height: 8,
-            ),
-            if (userJourney == UserJourney.freeBotStock)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomTextNew(
-                    'Hi! Check out my 20 recommended Botstocks just for you.',
-                    style: AskLoraTextStyles.body1
-                        .copyWith(color: AskLoraColors.charcoal),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  CustomTextNew(
-                    'Select a Botstock to trade it for FREE!',
-                    style: AskLoraTextStyles.subtitle2
-                        .copyWith(color: AskLoraColors.charcoal),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  GestureDetector(
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      builder: (context) => const BotLearnMoreBottomSheet(),
-                    ),
-                    child: CustomTextNew(
-                      'Redemption Instructions',
-                      style: AskLoraTextStyles.subtitle1.copyWith(
-                        color: AskLoraColors.charcoal,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-          ],
-        ),
-      );
+        ],
+      ),
+    );
+  }
 }

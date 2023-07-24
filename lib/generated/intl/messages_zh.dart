@@ -74,7 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m22(minDeposit) =>
       "請轉賬最少 HK\$${minDeposit} 至 Asklora 銀行戶口。任何少於 HK\$${minDeposit} 的首次入金均會被拒收，並會被徵收手續費。";
 
-  static String m23(time, date) => "Updated at ${time} HKT, ${date}";
+  static String m23(updated) => "Updated at ${updated}";
 
   static String m24(minDeposit) =>
       "我們會提取由你銀行透過 API 或匯款通知書收集的資訊， 確定你指定的銀行戶口。我們只會接受透過此指定戶口進行所有將來的入金與提取。你可轉換指定銀行戶口，但你需要完成最少匯款 HK\$${minDeposit} 以通過相同的認證。";

@@ -4156,13 +4156,13 @@ class S {
     );
   }
 
-  /// `Updated at {time} HKT, {date}`
-  String updatedAt(String time, String date) {
+  /// `Updated at {updated}`
+  String updatedAt(String updated) {
     return Intl.message(
-      'Updated at $time HKT, $date',
+      'Updated at $updated',
       name: 'updatedAt',
       desc: '',
-      args: [time, date],
+      args: [updated],
     );
   }
 

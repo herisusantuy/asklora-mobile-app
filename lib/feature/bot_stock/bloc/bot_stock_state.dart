@@ -10,7 +10,7 @@ class BotStockState extends Equatable {
       this.botStockTradeAmount = 0,
       this.buyingPower = 0});
 
-  final BaseResponse<List<BotRecommendationModel>> botRecommendationResponse;
+  final BaseResponse<BotRecommendationResponse> botRecommendationResponse;
   final BaseResponse<BotCreateOrderResponse> createBotOrderResponse;
   final BaseResponse<BotRecommendationDetailModel> botDetailResponse;
   final int? faqActiveIndex;
@@ -30,7 +30,7 @@ class BotStockState extends Equatable {
   }
 
   BotStockState copyWith({
-    BaseResponse<List<BotRecommendationModel>>? botRecommendationResponse,
+    BaseResponse<BotRecommendationResponse>? botRecommendationResponse,
     BaseResponse<BotCreateOrderResponse>? createBotOrderResponse,
     BaseResponse<BotRecommendationDetailModel>? botDetailResponse,
     int? faqActiveIndex,

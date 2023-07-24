@@ -581,13 +581,10 @@
   "noTransactionsYet": "你似乎未進行過任何交易！",
   "checkBackLater": "稍後再來查看!",
   "defineAgain": "Define again",
-  "updatedAt": "Updated at {time} HKT, {date}",
+  "updatedAt": "Updated at {updated}",
   "@updatedAt": {
     "placeholders": {
-      "time": {
-        "type": "String"
-      },
-      "date": {
+      "updated": {
         "type": "String"
       }
     }

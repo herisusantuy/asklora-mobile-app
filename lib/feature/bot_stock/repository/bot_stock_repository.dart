@@ -86,27 +86,31 @@ class BotStockRepository {
     return finalChartData;
   }
 
-  Future<BaseResponse<List<BotRecommendationModel>>>
+  Future<BaseResponse<BotRecommendationResponse>>
       fetchBotRecommendation() async {
     try {
       var response = await _botStockApiClient.fetchBotRecommendation(
           await _sharedPreference.readData(sfKeyPpiAccountId) ?? '');
       return BaseResponse.complete(
-          BotRecommendationResponse.fromJson(response.data).data);
+          BotRecommendationResponse.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error();
     }
   }
 
-  Future<BaseResponse<List<BotRecommendationModel>>> fetchFreeBotRecommendation(
+  Future<BaseResponse<BotRecommendationResponse>> fetchFreeBotRecommendation(
       {bool isFreeBot = false}) async {
     try {
       var response = await _botStockApiClient.fetchBotRecommendation(
           await _sharedPreference.readData(sfKeyPpiAccountId) ?? '');
-      return BaseResponse.complete(List<BotRecommendationModel>.from(
-          BotRecommendationResponse.fromJson(response.data)
-              .data
-              .map((model) => model.copyWith(freeBot: true))));
+      var botRecommendationResponse =
+          BotRecommendationResponse.fromJson(response.data);
+
+      return BaseResponse.complete(BotRecommendationResponse(
+          updated: botRecommendationResponse.updated,
+          data: botRecommendationResponse.data
+              .map((model) => model.copyWith(freeBot: true))
+              .toList()));
     } catch (e) {
       return BaseResponse.error();
     }

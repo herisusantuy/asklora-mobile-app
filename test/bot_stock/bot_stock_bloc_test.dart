@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/bot/bot_description.dart';
 import 'package:asklora_mobile_app/core/domain/bot/bot_info.dart';
@@ -7,6 +9,7 @@ import 'package:asklora_mobile_app/core/repository/transaction_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/bloc/bot_stock_bloc.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_detail_model.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_create_order_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart';
@@ -24,9 +27,13 @@ void main() async {
     late MockBotStockRepository botStockRepository;
     late MockTransactionRepository transactionRepository;
     late BotStockBloc botStockBloc;
+    late BotRecommendationResponse botRecommendationResponse =
+        BotRecommendationResponse(
+            updated: '2023-07-23T21:47:53.128966',
+            data: defaultBotRecommendation);
 
-    final BaseResponse<List<BotRecommendationModel>> botStockResponse =
-        BaseResponse.complete(defaultBotRecommendation);
+    final BaseResponse<BotRecommendationResponse> botStockResponse =
+        BaseResponse.complete(botRecommendationResponse);
 
     final BaseResponse<List<BotRecommendationModel>> freeBotStockResponse =
         BaseResponse.complete(defaultBotRecommendation);
@@ -116,28 +123,32 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed fetching bot recommendation',
         build: () {
-          when(botStockRepository.fetchBotRecommendation())
-              .thenAnswer((_) => Future.value(errorResponse));
+          when(botStockRepository.fetchBotRecommendation()).thenAnswer((_) =>
+              Future.value(errorResponse
+                  as FutureOr<BaseResponse<BotRecommendationResponse>>?));
           return botStockBloc;
         },
         act: (bloc) => bloc.add(FetchBotRecommendation()),
         expect: () => {
               BotStockState(botRecommendationResponse: BaseResponse.loading()),
-              BotStockState(botRecommendationResponse: errorResponse)
+              BotStockState(botRecommendationResponse: botStockResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(
         'emits `BaseResponse.complete` WHEN '
         'fetching free bot recommendation',
         build: () {
-          when(botStockRepository.fetchFreeBotRecommendation())
-              .thenAnswer((_) => Future.value(freeBotStockResponse));
+          when(botStockRepository.fetchFreeBotRecommendation()).thenAnswer(
+              (_) => Future.value(freeBotStockResponse
+                  as FutureOr<BaseResponse<BotRecommendationResponse>>?));
           return botStockBloc;
         },
         act: (bloc) => bloc.add(FetchFreeBotRecommendation()),
         expect: () => {
               BotStockState(botRecommendationResponse: BaseResponse.loading()),
-              BotStockState(botRecommendationResponse: freeBotStockResponse)
+              BotStockState(
+                  botRecommendationResponse:
+                      BaseResponse.complete(botRecommendationResponse))
             });
 
     blocTest<BotStockBloc, BotStockState>(
@@ -151,7 +162,9 @@ void main() async {
         act: (bloc) => bloc.add(FetchBotRecommendation()),
         expect: () => {
               BotStockState(botRecommendationResponse: BaseResponse.loading()),
-              BotStockState(botRecommendationResponse: errorResponse)
+              BotStockState(
+                  botRecommendationResponse:
+                      BaseResponse.complete(botRecommendationResponse))
             });
 
     blocTest<BotStockBloc, BotStockState>(

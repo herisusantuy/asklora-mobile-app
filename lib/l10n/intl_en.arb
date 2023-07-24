@@ -615,13 +615,10 @@
     }
   },
   "defineAgain": "Define again",
-  "updatedAt": "Updated at {time} HKT, {date}",
+  "updatedAt": "Updated at {updated}",
   "@updatedAt": {
     "placeholders": {
-      "time": {
-        "type": "String"
-      },
-      "date": {
+      "updated": {
         "type": "String"
       }
     }

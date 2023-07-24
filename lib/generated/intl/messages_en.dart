@@ -79,7 +79,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m22(minDeposit) =>
       "Transfer at least HK\$${minDeposit} to Asklora\'s bank account. Any initial deposit less than HK\$${minDeposit} will be rejected and fees will be charged.";
 
-  static String m23(time, date) => "Updated at ${time} HKT, ${date}";
+  static String m23(updated) => "Updated at ${updated}";
 
   static String m24(minDeposit) =>
       "We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK\$ ${minDeposit} bank transfer is completed.";
