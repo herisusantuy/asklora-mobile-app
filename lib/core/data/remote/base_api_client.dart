@@ -159,7 +159,7 @@ class AppInterceptors extends Interceptor {
             throw BadRequestException(err.requestOptions, askloraError);
           case 401:
 
-            /// TODO: Remove this check once the BE apply this new code all across the place.
+            /// TODO: Remove `Token invalid` and `Token invalid` checks once the BE apply this new code all across the place.
 
             final message = err.response?.data['message'];
             if (message == 'Token invalid' ||
@@ -168,27 +168,21 @@ class AppInterceptors extends Interceptor {
               _handleExpiredToken(err, handler);
               return;
             } else {
-              throw UnauthorizedException(err.requestOptions,
-                  AskloraError.fromJson(err.response!.data));
+              throw UnauthorizedException(err.requestOptions, askloraError);
             }
           case 403:
-            throw ForbiddenException(
-                err.requestOptions, AskloraError.fromJson(err.response!.data));
+            throw ForbiddenException(err.requestOptions, askloraError);
           case 404:
-            throw NotFoundException(
-                err.requestOptions, AskloraError.fromJson(err.response!.data));
+            throw NotFoundException(err.requestOptions, askloraError);
           case 406:
-            throw NotAcceptableException(
-                err.requestOptions, AskloraError.fromJson(err.response!.data));
+            throw NotAcceptableException(err.requestOptions, askloraError);
           case 409:
-            throw ConflictException(
-                err.requestOptions, AskloraError.fromJson(err.response!.data));
+            throw ConflictException(err.requestOptions, askloraError);
           case 451:
-            throw LegalReasonException(
-                err.requestOptions, AskloraError.fromJson(err.response!.data));
+            throw LegalReasonException(err.requestOptions, askloraError);
           case 500:
             throw InternalServerErrorException(
-                err.requestOptions, AskloraError.fromJson(err.response!.data));
+                err.requestOptions, askloraError);
         }
         break;
       case DioErrorType.cancel:
