@@ -645,9 +645,11 @@
   "expired": "Expired",
   "rejected": "Rejected",
   "completed": "Completed",
+  "subscription": "Subscription",
   "buy": "Buy",
   "sell": "Sell",
   "depositHistory": "Deposit History",
   "withdrawalHistory": "Withdrawal History",
   "ourPersonalisedRecommendationsAreUnique": "Our personalised recommendations are unique. The recommended Botstocks are based on your risk tolerance, personality, and investment style."
+
 }

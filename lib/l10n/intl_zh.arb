@@ -611,6 +611,7 @@
   "expired": "已到期",
   "rejected": "已拒絕",
   "completed": "已完成",
+  "subscription": "訂購計劃",
   "buy": "買入",
   "sell": "賣出",
   "depositHistory": "入金歷史",
