@@ -383,6 +383,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "freeTrial": MessageLookupByLibrary.simpleMessage("Free Trial"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
         "getHelp": MessageLookupByLibrary.simpleMessage("Get Help"),
+        "getReadyForTheVerification": MessageLookupByLibrary.simpleMessage(
+            "Get ready for the verification process. You will.."),
         "getReadyForTrading":
             MessageLookupByLibrary.simpleMessage("Get ready for AI trading."),
         "getTheFirstBotstockForFree": MessageLookupByLibrary.simpleMessage(
@@ -739,6 +741,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "suspendedScreenTitle":
             MessageLookupByLibrary.simpleMessage("Account Suspended"),
         "swiftCode": MessageLookupByLibrary.simpleMessage("Swift Code"),
+        "takePhotoBack": MessageLookupByLibrary.simpleMessage(
+            "Take a photo of the front of your HKID"),
+        "takePhotoFront": MessageLookupByLibrary.simpleMessage(
+            "Take a photo of the front of your HKID"),
+        "takeSelfie": MessageLookupByLibrary.simpleMessage("Take a selfie"),
         "terminateAccount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
@@ -826,7 +833,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Are you a United States tax resident, green card holder, or citizen?"),
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
         "verifyIdentity":
-            MessageLookupByLibrary.simpleMessage("Verify identify"),
+            MessageLookupByLibrary.simpleMessage("Verify identity"),
+        "verifyNow": MessageLookupByLibrary.simpleMessage("Verify Now"),
         "verifyOtpSuccess":
             MessageLookupByLibrary.simpleMessage("Verify OTP Success"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
@@ -836,6 +844,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("We accept HKD only."),
         "weAcceptUtilityBill": MessageLookupByLibrary.simpleMessage(
             "(We accept utility bill, bank statement, or government correspondence within the last 3 months)"),
+        "weNeedToVerifyYourId": MessageLookupByLibrary.simpleMessage(
+            "We\'ll need to verify your identity via your HKID."),
         "weWillOnlyAcceptDepositViaBankTransfer":
             MessageLookupByLibrary.simpleMessage(
                 "We will only accept deposits via bank transfer (wire/FPS) from your own account."),

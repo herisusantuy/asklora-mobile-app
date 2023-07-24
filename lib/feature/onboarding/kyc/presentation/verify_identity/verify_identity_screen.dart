@@ -30,7 +30,7 @@ class VerifyIdentityScreen extends StatelessWidget {
     return KycBaseForm(
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-      title: 'Verify Identity',
+      title: S.of(context).verifyIdentity,
       content: BlocListener<KycBloc, KycState>(
         listenWhen: (previous, current) =>
             previous.onfidoResponse.state != current.onfidoResponse.state,
@@ -58,7 +58,7 @@ class VerifyIdentityScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTextNew(
-              'We’ll need to verify your identity via your HKID.',
+              S.of(context).weNeedToVerifyYourId,
               key: const Key('sub_title'),
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
@@ -66,7 +66,7 @@ class VerifyIdentityScreen extends StatelessWidget {
             const SizedBox(
               height: 42,
             ),
-            _verificationSteps
+            _verificationSteps(context)
           ],
         ),
       ),
@@ -92,15 +92,15 @@ class VerifyIdentityScreen extends StatelessWidget {
     }
   }
 
-  Widget get _verificationSteps => const RoundColoredBox(
+  Widget _verificationSteps(BuildContext context) => RoundColoredBox(
       key: Key('verification_steps'),
-      title: 'Get ready for the verification process. You will..',
+      title: S.of(context).getReadyForTheVerification,
       content: CustomStepper(
         currentStep: 0,
         steps: [
-          'Take a photo of the front of your HKID',
-          'Take a photo of the back of your HKID',
-          'Take a selfie',
+          S.of(context).takePhotoFront,
+          S.of(context).takePhotoBack,
+          S.of(context).takeSelfie,
         ],
       ));
 
@@ -112,7 +112,7 @@ class VerifyIdentityScreen extends StatelessWidget {
         secondaryButtonOnClick: () => context
             .read<KycBloc>()
             .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
-        primaryButtonLabel: 'Verify Now',
+        primaryButtonLabel: S.of(context).verifyNow,
         secondaryButtonLabel: S.of(context).saveForLater,
       );
 }

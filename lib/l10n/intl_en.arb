@@ -655,7 +655,7 @@
   "accountOpeningAndDeposit": "Account opening and deposit are the last few steps before investing.",
   "getReadyForTrading": "Get ready for AI trading.",
   "setupPersonalInfo": "Set up Personal Info",
-  "verifyIdentity": "Verify identify",
+  "verifyIdentity": "Verify identity",
   "theItemYouWillNeed": "The items you will need…",
   "hkId": "HKID",
   "porAddress": "Proof of Residential Address",
@@ -679,5 +679,12 @@
   "employment": "Employment",
   "employmentStatus": "Employment Status*",
   "pleaseSelect": "Please Select",
-  "natureOfBusiness": "Nature of Business"
+  "natureOfBusiness": "Nature of Business",
+  "subscription": "Subscription",
+  "weNeedToVerifyYourId": "We'll need to verify your identity via your HKID.",
+  "getReadyForTheVerification": "Get ready for the verification process. You will..",
+  "takePhotoFront": "Take a photo of the front of your HKID",
+  "takePhotoBack": "Take a photo of the front of your HKID",
+  "takeSelfie": "Take a selfie",
+  "verifyNow": "Verify Now"
 }
