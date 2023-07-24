@@ -36,20 +36,20 @@ class TaxAgreementScreen extends StatelessWidget {
     return KycBaseForm(
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-      title: 'Sign Agreements',
+      title: S.of(context).signAgreements,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const KycSubTitle(
-            key: Key('sub_title'),
-            subTitle: 'W-8BEN Form',
+          KycSubTitle(
+            key: const Key('sub_title'),
+            subTitle: S.of(context).formW8ben,
           ),
           const SizedBox(
             height: 24,
           ),
           ViewFileButton(
               key: const Key('w8_ben_form'),
-              label: 'W-8BEN Form',
+              label: S.of(context).w8benForm,
               onTap: () => context
                   .read<SigningAgreementBloc>()
                   .add(const W8BenFormOpened())),
@@ -57,40 +57,32 @@ class TaxAgreementScreen extends StatelessWidget {
             height: 24,
           ),
           CustomTextNew(
-            'Under penalties of perjury, I declare that I have examined the information in lines 1-7 and to the best of my knowledge and belief it is true, correct, and complete. I further certify under penalties of perjury that:',
+            S.of(context).taxAgreementDesc1,
             key: const Key('statements'),
             style:
                 AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
           ),
           _spaceHeight,
-          const DotText(
-              'I am the individual that is the beneficial owner (or am authorized to sign for the individual that is the beneficial owner) of all the income or proceeds to which this form relates or am using this form to document myself for chapter 4 purposes;'),
+          DotText(S.of(context).taxAgreementDescPoint1),
           _spaceHeight,
-          const DotText(
-              'The person named on line 1 of this form is not a U.S. person;'),
+          DotText(S.of(context).taxAgreementDescPoint2),
           _spaceHeight,
-          const DotText('This form relates to:'),
+          DotText(S.of(context).taxAgreementDescPoint3),
           _spaceHeight,
-          _dotTextSlightRight(
-              'income not effectively connected with the conduct of a trade or business in the United States;'),
+          _dotTextSlightRight(S.of(context).taxAgreementDescPoint3SubPoint1),
           _spaceHeight,
-          _dotTextSlightRight(
-              'income effectively connected with the conduct of a trade or business in the United States but is not subject to tax under an applicable income tax treaty;'),
+          _dotTextSlightRight(S.of(context).taxAgreementDescPoint3SubPoint2),
           _spaceHeight,
-          _dotTextSlightRight(
-              'the partner’s share of a partnership’s effectively connected taxable income; or'),
+          _dotTextSlightRight(S.of(context).taxAgreementDescPoint3SubPoint3),
           _spaceHeight,
-          _dotTextSlightRight(
-              'the partner’s amount realized from the transfer of a partnership interest subject to withholding under section 1446(f);'),
+          _dotTextSlightRight(S.of(context).taxAgreementDescPoint3SubPoint4),
           _spaceHeight,
-          const DotText(
-              'The person named on line 1 of this form is a resident of the treaty country listed on line 9 of the form (if any) within the meaning of the income tax treaty between the United States and that country; and'),
+          DotText(S.of(context).taxAgreementDescPoint4),
           _spaceHeight,
-          const DotText(
-              'For broker transactions or barter exchanges, the beneficial owner is an exempt foreign person as defined in the instructions to IRS Form W-8BEN.'),
+          DotText(S.of(context).taxAgreementDescPoint5),
           _spaceHeight,
           CustomTextNew(
-            'Furthermore, I authorize this form to be provided to any withholding agent that has control, receipt, or custody of the income of which I am the beneficial owner or any withholding agent that can disburse or make payments of the income of which I am the beneficial owner. I agree that I will submit a new form within 30 days if any certification made on this form becomes incorrect.',
+            S.of(context).taxAgreementDesc2,
             style:
                 AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
           ),
@@ -98,7 +90,7 @@ class TaxAgreementScreen extends StatelessWidget {
             height: 46,
           ),
           CustomTextNew(
-            'The US Internal Revenue Service does not require your consent to any provisions of this document other than the certifications required to establish your status as a non-U.S. person, and if applicable, obtain a reduced rate of withholding.',
+            S.of(context).taxAgreementDesc3,
             style:
                 AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
           ),
@@ -109,7 +101,7 @@ class TaxAgreementScreen extends StatelessWidget {
           const SizedBox(
             height: 46,
           ),
-          _signatureSection,
+          _signatureSection(context),
           _legalNameInput
         ],
       ),
@@ -125,8 +117,7 @@ class TaxAgreementScreen extends StatelessWidget {
           builder: (context, state) => CustomCheckbox(
                 checkboxKey: const Key('signature_check_value'),
                 key: const Key('signature_check'),
-                text:
-                    'By checking this box, you consent to the collection and distribution of tax forms in an electronic format in lieu of paper',
+                text: S.of(context).taxAgreementCheckboxDesc,
                 fontHeight: 1.4,
                 isChecked: state.isSignatureChecked,
                 fontType: FontType.smallText,
@@ -135,45 +126,45 @@ class TaxAgreementScreen extends StatelessWidget {
                     .add(SignatureChecked(value!)),
               ));
 
-  Widget get _signatureSection => Padding(
+  Widget _signatureSection(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 28,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomTextNew('Signature',
+            CustomTextNew(S.of(context).taxAgreementSignatureTitle,
                 style: AskLoraTextStyles.h5
                     .copyWith(color: AskLoraColors.charcoal)),
             const SizedBox(
               height: 8,
             ),
             CustomTextNew(
-              'By typing my signature and clicking ‘Agree’ below, I confirm that:',
+              S.of(context).taxAgreementSignatureDesc,
               style: AskLoraTextStyles.body2
                   .copyWith(color: AskLoraColors.charcoal),
             ),
             _spaceHeight,
             CustomTextNew(
-              '(1) All information and/or documentation provided by me during the account application process is accurate, complete and up-to-date; ',
+              S.of(context).taxAgreementSignatureDescPoint1,
               style: AskLoraTextStyles.body2
                   .copyWith(color: AskLoraColors.charcoal),
             ),
             _spaceHeight,
             CustomTextNew(
-              '(2) I have read and understood all of the information provided to me by LORA Advisors; ',
+              S.of(context).taxAgreementSignatureDescPoint2,
               style: AskLoraTextStyles.body2
                   .copyWith(color: AskLoraColors.charcoal),
             ),
             _spaceHeight,
             CustomTextNew(
-              '(3) I consent and agree to the terms of all the above agreements and disclosures provided to me during the account application process: and ',
+              S.of(context).taxAgreementSignatureDescPoint3,
               style: AskLoraTextStyles.body2
                   .copyWith(color: AskLoraColors.charcoal),
             ),
             _spaceHeight,
             CustomTextNew(
-              '(4) I understand and agree that my electronic signature is the legal equivalent of a manual written signature.',
+              S.of(context).taxAgreementSignatureDescPoint4,
               style: AskLoraTextStyles.body2
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -181,7 +172,7 @@ class TaxAgreementScreen extends StatelessWidget {
               height: 46,
             ),
             CustomTextNew(
-              'Sign this electronically by typing your name exactly as shown below.',
+              S.of(context).signInElectronically,
               style: AskLoraTextStyles.body2.copyWith(
                 color: AskLoraColors.charcoal,
               ),
@@ -199,7 +190,7 @@ class TaxAgreementScreen extends StatelessWidget {
             return RichText(
                 text: TextSpan(children: [
               TextSpan(
-                  text: 'Accepted signature(s): ',
+                  text: S.of(context).acceptedSignature,
                   style: AskLoraTextStyles.body2
                       .copyWith(color: AskLoraColors.charcoal)),
               TextSpan(
