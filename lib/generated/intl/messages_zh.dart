@@ -55,36 +55,34 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m14(currency) => "購買力 (${currency})";
 
-  static String m15(currency) => "當前價格 (${currency})";
-
-  static String m16(bot, startDate, endDate, duration) =>
+  static String m15(bot, startDate, endDate, duration) =>
       "${bot} 於過去 ${duration} 星期之表現  (${startDate} - ${endDate})";
 
-  static String m17(dateTime) => "到期日期 ${dateTime}";
+  static String m16(dateTime) => "到期日期 ${dateTime}";
 
-  static String m18(dateTime) => "${dateTime}日後到期";
+  static String m17(dateTime) => "${dateTime}日後到期";
 
-  static String m19(currency) => "Botstock 總價值 (${currency})";
+  static String m18(currency) => "Botstock 總價值 (${currency})";
 
-  static String m20(currency) => "可提取金額 (${currency})";
+  static String m19(currency) => "可提取金額 (${currency})";
 
-  static String m21(seconds) => "在${seconds}秒後重發 ";
+  static String m20(seconds) => "在${seconds}秒後重發 ";
 
-  static String m22(opennessScore, neuroticismScore, extrovertScore) =>
+  static String m21(opennessScore, neuroticismScore, extrovertScore) =>
       "${opennessScore}, ${neuroticismScore}\n\n${extrovertScore}";
 
-  static String m23(botName, botSymbol, dateTime) =>
+  static String m22(botName, botSymbol, dateTime) =>
       "${botName} ${botSymbol} 將於 ${dateTime} 開始";
 
-  static String m24(minDeposit) =>
+  static String m23(minDeposit) =>
       "請轉賬最少 HK\$${minDeposit} 至 Asklora 銀行戶口。任何少於 HK\$${minDeposit} 的首次入金均會被拒收，並會被徵收手續費。";
 
-  static String m25(time, date) => "Updated at ${time} HKT, ${date}";
+  static String m24(time, date) => "Updated at ${time} HKT, ${date}";
 
-  static String m26(minDeposit) =>
+  static String m25(minDeposit) =>
       "我們會提取由你銀行透過 API 或匯款通知書收集的資訊， 確定你指定的銀行戶口。我們只會接受透過此指定戶口進行所有將來的入金與提取。你可轉換指定銀行戶口，但你需要完成最少匯款 HK\$${minDeposit} 以通過相同的認證。";
 
-  static String m27(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
+  static String m26(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -427,16 +425,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioBuyingPower": m14,
         "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
             "購買力代表了你可以用來購買Botstock的現金額。你的可提取金額和購買力會出現不一樣的情況。例如，開始Botstock後，你的購買力會相對減少，而Botstock總價值會相對提高。或當你的Botstock已到期或被終止，其價值將會增加至購買力，而在「T+2」日，T為交易當日， 該價值也會同時顯示在可提取金額。 "),
-        "portfolioCurrentPrice": m15,
+        "portfolioCurrentPrice": MessageLookupByLibrary.simpleMessage("當前價格"),
         "portfolioDetailButtonCancelBotStock":
             MessageLookupByLibrary.simpleMessage("取消BOTSTOCK"),
         "portfolioDetailButtonEndBotStock":
             MessageLookupByLibrary.simpleMessage("取消Botstock"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("續期Botstock"),
-        "portfolioDetailChartCaption": m16,
-        "portfolioDetailExpiredAt": m17,
-        "portfolioDetailExpiredIn": m18,
+        "portfolioDetailChartCaption": m15,
+        "portfolioDetailExpiredAt": m16,
+        "portfolioDetailExpiredIn": m17,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("平均虧損"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -502,10 +500,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("尚未開始任何交易!"),
         "portfolioPopUpNoTradingHasStartedtSubTitle":
             MessageLookupByLibrary.simpleMessage(" 開始交易後你就可以一次過管理所有投資。"),
-        "portfolioTotalBotStock": m19,
+        "portfolioTotalBotStock": m18,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "portfolioTotalValue": MessageLookupByLibrary.simpleMessage("總價值 "),
-        "portfolioWithdrawableAmount": m20,
+        "portfolioWithdrawableAmount": m19,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
@@ -521,7 +519,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacySuccessScreenTitle":
             MessageLookupByLibrary.simpleMessage("年齡只不過係個數字。"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
-        "reSendOtp": m21,
+        "reSendOtp": m20,
         "readyToGo": MessageLookupByLibrary.simpleMessage("準備好未？"),
         "rejected": MessageLookupByLibrary.simpleMessage("已拒絕"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
@@ -530,7 +528,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("密碼重設成功"),
         "resetPasswordSuccessfulMessage":
             MessageLookupByLibrary.simpleMessage("你的密碼已經被重設。請返回登入頁面重新登入。"),
-        "resultOfPersonalizationQuestion": m22,
+        "resultOfPersonalizationQuestion": m21,
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶號碼）。不過，我們亦可能會因核實交易，向你要求更多附加資料。"),
         "riskDisclosureStatementAcknowledgement":
@@ -539,7 +537,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("風險披露聲明"),
         "riskDisclosureStatementString": MessageLookupByLibrary.simpleMessage(
             "1. The prices of securities fluctuate, sometimes dramatically. The price of a security may move up or down, and may become valueless. It is as likely that losses will be incurred rather than profit made as a result of buying and selling securities. Investors should not only base on this marketing material to make any investment decision, you should carefully consider whether the investment products or services are suitable for you according to your investment experience, purpose, risk tolerance, financial or related conditions. If you have any questions, please contact us or obtain independent advice.\n\n2. Investment in foreign securities carries additional risks not generally associated with securities in the domestic market. The value or income of foreign securities may be more volatile and could be adversely affected by changes in currency rates of exchange, foreign taxation practices, foreign laws, government practices, regulations, and political events. You may find it more difficult to liquidate investments in foreign securities where they have limited liquidity in the relevant market. Foreign laws, government practices, and regulations may also affect the transferability of foreign securities. Timely and reliable information about the value or the extent of the risks of foreign securities may not be readily available at all times.\n\n3. You acknowledge that you have fully understood the implications of the risks associated with the Electronic Trading Service as set out in the Client Agreement"),
-        "rolloverBotStockAcknowledgement": m23,
+        "rolloverBotStockAcknowledgement": m22,
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
         "sell": MessageLookupByLibrary.simpleMessage("賣出"),
@@ -617,7 +615,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提存 "),
         "transactionHistoryTitle": MessageLookupByLibrary.simpleMessage("交易歷史"),
         "transactionHistoryToday": MessageLookupByLibrary.simpleMessage("今日"),
-        "transferAtLeastWithMinimumDeposit": m24,
+        "transferAtLeastWithMinimumDeposit": m23,
         "transferAtLeastWithNoMinimumDeposit":
             MessageLookupByLibrary.simpleMessage(
                 "請由你之前使用的銀行戶口轉賬至Asklora 銀行戶口。"),
@@ -626,7 +624,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferInitialFundToAsklora":
             MessageLookupByLibrary.simpleMessage("轉賬首筆資金予Asklora"),
         "transferTo": MessageLookupByLibrary.simpleMessage("轉賬至"),
-        "updatedAt": m25,
+        "updatedAt": m24,
         "uploadProofOfRemittance":
             MessageLookupByLibrary.simpleMessage("上載匯款證明"),
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
@@ -638,7 +636,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "我們只接受由你戶口透過銀行轉賬 (電匯/FPS) 的入金。"),
         "weWillOnlyAcceptHKD": MessageLookupByLibrary.simpleMessage("我們只接受港幣"),
-        "weWillTakeInformationCollectedFromYour": m26,
+        "weWillTakeInformationCollectedFromYour": m25,
         "website": MessageLookupByLibrary.simpleMessage("網站"),
         "welcomeScreenFirstBenefit":
             MessageLookupByLibrary.simpleMessage("度身訂做AI指導"),
@@ -663,7 +661,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提取款項最多需時2個工作天。"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),
         "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
-        "yourBankAccountIsUnderReview": m27,
+        "yourBankAccountIsUnderReview": m26,
         "yourDepositCanTakeUp2WorkingDays":
             MessageLookupByLibrary.simpleMessage("入金程序最多需時 2 個工作天"),
         "yourDepositMayBeRejected": MessageLookupByLibrary.simpleMessage(
