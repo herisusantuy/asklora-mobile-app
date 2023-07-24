@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/bot/bot_description.dart';
 import 'package:asklora_mobile_app/core/domain/bot/bot_info.dart';
@@ -35,8 +33,8 @@ void main() async {
     final BaseResponse<BotRecommendationResponse> botStockResponse =
         BaseResponse.complete(botRecommendationResponse);
 
-    final BaseResponse<List<BotRecommendationModel>> freeBotStockResponse =
-        BaseResponse.complete(defaultBotRecommendation);
+    final BaseResponse<BotRecommendationResponse> freeBotStockResponse =
+        BaseResponse.complete(botRecommendationResponse);
 
     final BaseResponse<BotCreateOrderResponse> botCreateOrderSuccessResponse =
         BaseResponse.complete(const BotCreateOrderResponse('a', 'b', 'c', 'd',
@@ -44,7 +42,7 @@ void main() async {
     final BaseResponse<BotCreateOrderResponse> botCreateOrderFailedResponse =
         BaseResponse.error();
 
-    final BaseResponse<List<BotRecommendationModel>> errorResponse =
+    final BaseResponse<BotRecommendationResponse> errorResponse =
         BaseResponse.error();
 
     const BotRecommendationModel botRecommendationModel =
@@ -123,32 +121,28 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed fetching bot recommendation',
         build: () {
-          when(botStockRepository.fetchBotRecommendation()).thenAnswer((_) =>
-              Future.value(errorResponse
-                  as FutureOr<BaseResponse<BotRecommendationResponse>>?));
+          when(botStockRepository.fetchBotRecommendation())
+              .thenAnswer((_) => Future.value(errorResponse));
           return botStockBloc;
         },
         act: (bloc) => bloc.add(FetchBotRecommendation()),
         expect: () => {
               BotStockState(botRecommendationResponse: BaseResponse.loading()),
-              BotStockState(botRecommendationResponse: botStockResponse)
+              BotStockState(botRecommendationResponse: errorResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(
         'emits `BaseResponse.complete` WHEN '
         'fetching free bot recommendation',
         build: () {
-          when(botStockRepository.fetchFreeBotRecommendation()).thenAnswer(
-              (_) => Future.value(freeBotStockResponse
-                  as FutureOr<BaseResponse<BotRecommendationResponse>>?));
+          when(botStockRepository.fetchFreeBotRecommendation())
+              .thenAnswer((_) => Future.value(freeBotStockResponse));
           return botStockBloc;
         },
         act: (bloc) => bloc.add(FetchFreeBotRecommendation()),
         expect: () => {
               BotStockState(botRecommendationResponse: BaseResponse.loading()),
-              BotStockState(
-                  botRecommendationResponse:
-                      BaseResponse.complete(botRecommendationResponse))
+              BotStockState(botRecommendationResponse: freeBotStockResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(
@@ -162,9 +156,7 @@ void main() async {
         act: (bloc) => bloc.add(FetchBotRecommendation()),
         expect: () => {
               BotStockState(botRecommendationResponse: BaseResponse.loading()),
-              BotStockState(
-                  botRecommendationResponse:
-                      BaseResponse.complete(botRecommendationResponse))
+              BotStockState(botRecommendationResponse: errorResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(
