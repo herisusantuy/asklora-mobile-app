@@ -682,5 +682,6 @@
   "employment": "Employment",
   "employmentStatus": "Employment Status*",
   "pleaseSelect": "Please Select",
-  "natureOfBusiness": "Nature of Business"
+  "natureOfBusiness": "Nature of Business",
+  "subscription": "Subscription"
 }
