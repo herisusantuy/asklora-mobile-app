@@ -8,6 +8,7 @@ import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../../core/presentation/lora_animation_header.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
@@ -69,15 +70,8 @@ class SignInForm extends StatelessWidget {
                   children: <Widget>[
                     Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
-                          child: loraGreenAnimation,
-                        ),
-                        CustomTextNew(
-                            'Welcome back!\n${S.of(context).readyToGo}',
-                            textAlign: TextAlign.center,
-                            style: AskLoraTextStyles.h4
-                                .copyWith(color: AskLoraColors.charcoal)),
+                        LoraAnimationHeader(
+                            text: 'Welcome back!\n${S.of(context).readyToGo}'),
                         context.padding(),
                         _emailInput(),
                         context.padding(topPadding: 10),
