@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
@@ -192,7 +193,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
             children: [
               if (botDetailModel != null)
                 _detailedInformation(context, botDetailModel!),
-              PairColumnTextWithTooltip(
+              PairColumnTextWithBottomSheet(
                   leftTitle: S.of(context).startDate,
                   leftSubTitle: '${botDetailModel?.formattedStartDate}',
                   rightTitle: S.of(context).investmentPeriod,
@@ -262,7 +263,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
             botType: botType,
           ),
           const SizedBox(height: 28),
-          PairColumnTextWithTooltip(
+          PairColumnTextWithBottomSheet(
               leftTitle: botType == BotType.plank
                   ? S.of(context).estStopLossPercent
                   : S.of(context).estMaxLossPercent,

@@ -95,7 +95,7 @@ class PortfolioBalance extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
         content: Column(
           children: [
-            PairColumnTextWithTooltip(
+            PairColumnTextWithBottomSheet(
               columnTextCrossAxisAlignment: CrossAxisAlignment.center,
               leftTitle: S.of(context).portfolioBuyingPower(currencyType.name),
               leftSubTitle: currencyType == CurrencyType.hkd
@@ -105,6 +105,7 @@ class PortfolioBalance extends StatelessWidget {
               rightTitle: S.of(context).portfolioTotalPL,
               rightSubTitle: data.totalPnLStr,
               rightSubTitleColor: data.totalPnLColor,
+              buttonLabel: S.of(context).buttonBackToPortfolio,
               spaceWidth: 6,
             ),
             const SizedBox(

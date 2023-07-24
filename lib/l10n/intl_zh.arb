@@ -528,7 +528,7 @@
   "expiresAt": "到期日期",
   "startsAt": "開始日期",
   "botRecommendationScreenTitle": "最夾你嘅投資風格",
-  "notFeelingIt": "唔啱心水？\n當然仲有得揀！",
+  "notFeelingIt": "唔啱心水？當然仲有得揀！",
   "buttonChangeInvestmentStyle": "更改投資風格",
   "trade": "交易",
   "askloraWireDetails": "Asklora 電匯 詳情",
@@ -592,5 +592,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "botManagementFeeTooltip": "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!"
 }

@@ -13,6 +13,7 @@ import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/transaction/transaction_balance_response.dart';
 import '../../../../core/presentation/auto_sized_text_widget.dart';
 import '../../../../core/presentation/column_text/pair_column_text_with_auto_sized_text.dart';
+import '../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
 import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../core/presentation/custom_checkbox_list_tile.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';

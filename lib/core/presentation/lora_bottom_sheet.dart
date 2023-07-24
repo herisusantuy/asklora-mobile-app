@@ -5,6 +5,7 @@ import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
+import '../styles/asklora_colors.dart';
 import 'buttons/primary_button.dart';
 
 class LoraBottomSheet {
@@ -88,7 +89,7 @@ class LoraBottomSheetContent extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   child: Container(
                     padding:
-                        AppValues.screenHorizontalPadding.copyWith(top: 64),
+                        AppValues.screenHorizontalPadding.copyWith(top: 20),
                     margin: const EdgeInsets.only(top: 70),
                     width: double.infinity,
                     decoration: const BoxDecoration(
@@ -99,6 +100,21 @@ class LoraBottomSheetContent extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
+                        GestureDetector(
+                          onTap: () => Navigator.pop(context),
+                          child: Container(
+                            width: 150,
+                            height: 10,
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              color: AskLoraColors.gray,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
                         Padding(
                           padding: AppValues.screenHorizontalPadding,
                           child: CustomTextNew(

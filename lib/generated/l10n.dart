@@ -4165,6 +4165,16 @@ class S {
       args: [time, date],
     );
   }
+
+  /// `The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!`
+  String get botManagementFeeTooltip {
+    return Intl.message(
+      'The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!',
+      name: 'botManagementFeeTooltip',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

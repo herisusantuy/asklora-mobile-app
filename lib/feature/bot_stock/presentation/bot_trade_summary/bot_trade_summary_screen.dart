@@ -7,6 +7,7 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
 import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
@@ -126,14 +127,13 @@ class BotTradeSummaryScreen extends StatelessWidget {
                 RoundColoredBox(
                   content: Column(
                     children: [
-                      PairColumnTextWithTooltip(
+                      PairColumnTextWithBottomSheet(
                         leftTitle: '${S.of(context).investmentAmount} (HKD)',
                         rightTitle: '${S.of(context).botManagementFee} (HKD)',
                         leftSubTitle: botTradeSummaryModel.amount
                             .convertToCurrencyDecimal(),
                         rightSubTitle: S.of(context).free,
-                        rightTooltipText:
-                            'The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!',
+                        rightTooltipText: S.of(context).botManagementFeeTooltip,
                       ),
                       _spaceBetweenInfo,
                       ..._detailedInformation(context),

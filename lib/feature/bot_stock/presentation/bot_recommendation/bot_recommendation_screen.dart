@@ -90,12 +90,6 @@ class BotRecommendationScreen extends StatelessWidget {
                     const SizedBox(
                       height: 50,
                     ),
-                  const BotRecommendationFaq(),
-                  const SizedBox(
-                    height: 28,
-                  ),
-                  const UnconstrainedBox(
-                      child: HomeScreenNeedHelpButtonWidget())
                 ],
               ),
             ),

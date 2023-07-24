@@ -121,6 +121,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "bestSuitedFor": MessageLookupByLibrary.simpleMessage("最適合"),
         "botDuration": MessageLookupByLibrary.simpleMessage("Bot 期限"),
         "botManagementFee": MessageLookupByLibrary.simpleMessage("Bot 管理費用"),
+        "botManagementFeeTooltip": MessageLookupByLibrary.simpleMessage(
+            "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!"),
         "botRecommendationScreenTitle":
             MessageLookupByLibrary.simpleMessage("最夾你嘅投資風格"),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
@@ -349,7 +351,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTransactions": MessageLookupByLibrary.simpleMessage("暫時沒有交易"),
         "noTransactionsYet":
             MessageLookupByLibrary.simpleMessage("你似乎未進行過任何交易！"),
-        "notFeelingIt": MessageLookupByLibrary.simpleMessage("唔啱心水？\n當然仲有得揀！"),
+        "notFeelingIt": MessageLookupByLibrary.simpleMessage("唔啱心水？當然仲有得揀！"),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
             "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。"),
         "notes": MessageLookupByLibrary.simpleMessage("說明"),
