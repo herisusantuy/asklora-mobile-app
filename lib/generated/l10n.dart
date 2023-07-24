@@ -4249,17 +4249,17 @@ class S {
   /// `It's time to find out your investment preferences`
   String get aiIsqWelcomeTitle {
     return Intl.message(
-      'It’s time to find out your investment preferences',
+      'It\'s time to find out your investment preferences',
       name: 'aiIsqWelcomeTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Let’s see what kind of stocks you prefer`
+  /// `Let's see what kind of stocks you prefer`
   String get aiIsqWelcomeSubTitle {
     return Intl.message(
-      'Let’s see what kind of stocks you prefer',
+      'Let\'s see what kind of stocks you prefer',
       name: 'aiIsqWelcomeSubTitle',
       desc: '',
       args: [],
@@ -4311,16 +4311,6 @@ class S {
     return Intl.message(
       'Completed',
       name: 'completed',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Subscription`
-  String get subscription {
-    return Intl.message(
-      'Subscription',
-      name: 'subscription',
       desc: '',
       args: [],
     );
