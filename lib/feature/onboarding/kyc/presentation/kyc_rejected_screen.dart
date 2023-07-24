@@ -67,7 +67,9 @@ class KycRejectedScreen extends StatelessWidget {
   Widget _bottomButton(BuildContext context, Function? onGoBack) => ButtonPair(
         primaryButtonOnClick: () {
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop());
-          onGoBack!();
+          if (onGoBack != null) {
+            onGoBack();
+          }
         },
         secondaryButtonOnClick: () => TabScreen.openAndRemoveAllRoute(context),
         primaryButtonLabel: S.of(context).buttonGoBack,

@@ -36,11 +36,7 @@ class DisclosureAffiliationBloc
 
   _onAffiliatedPersonChanged(
       AffiliatedPersonChanged event, Emitter<DisclosureAffiliationState> emit) {
-    if (event.isAffiliatedPerson) {
-      emit(state.copyWith(isAffiliatedPerson: () => event.isAffiliatedPerson));
-    } else {
-      emit(state.copyWith(isAffiliatedPerson: () => event.isAffiliatedPerson));
-    }
+    emit(state.copyWith(isAffiliatedPerson: () => event.isAffiliatedPerson));
   }
 
   _onResetAffiliatedPersonAnswer(
