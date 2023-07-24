@@ -92,8 +92,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "AskloraAgreementFile": MessageLookupByLibrary.simpleMessage(
+            "Asklora Customer Agreement.pdf"),
         "about": MessageLookupByLibrary.simpleMessage("About"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("About Asklora"),
+        "acceptedSignature":
+            MessageLookupByLibrary.simpleMessage("Accepted signature(s):"),
         "accountInformation":
             MessageLookupByLibrary.simpleMessage("Account Information"),
         "accountIsNotActive": MessageLookupByLibrary.simpleMessage(
@@ -110,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "afterPayDepositHeaderTitle": MessageLookupByLibrary.simpleMessage(
             "Your investment account will be ready soon!"),
         "agree": MessageLookupByLibrary.simpleMessage("Agree"),
+        "agreed": MessageLookupByLibrary.simpleMessage("Agreed"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
         "aiIsqWelcomeSubTitle": MessageLookupByLibrary.simpleMessage(
             "Let\'s see what kind of stocks you prefer"),
@@ -127,6 +132,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "I\'m Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat\'s your name? "),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("Your Name"),
+        "askloraCustomerAgreement":
+            MessageLookupByLibrary.simpleMessage("Asklora Customer Agreement"),
         "askloraWireDetails":
             MessageLookupByLibrary.simpleMessage("Asklora\'s Wire Details"),
         "askloraYouUltimateFinancialAdvisor":
@@ -398,6 +405,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
         "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
             "Please enter your email. Instructions will be sent to reset your password."),
+        "formW8ben": MessageLookupByLibrary.simpleMessage("Form W-8BEN"),
         "founded": MessageLookupByLibrary.simpleMessage("Founded"),
         "free": MessageLookupByLibrary.simpleMessage("Free"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("Free Trial"),
@@ -435,6 +443,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "I am a senior executive at or a 10% or greater shareholder of a publicly traded company."),
         "iAmASeniorPolitical": MessageLookupByLibrary.simpleMessage(
             "I am a senior political figure."),
+        "iHaveReadAndAgreed": MessageLookupByLibrary.simpleMessage(
+            "I have read, understood, and agree to be bound by LORA Advisors Limited’s account terms, and all other terms, disclosures and disclaimers applicable to me."),
+        "iUnderstandSigningAgreement": MessageLookupByLibrary.simpleMessage(
+            "I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Customer Agreement."),
         "inApp": MessageLookupByLibrary.simpleMessage("In-App"),
         "industry": MessageLookupByLibrary.simpleMessage("Industry"),
         "inputDepositAmount":
@@ -595,6 +607,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please make sure you press \'SUBMIT\' after you have transferred the funds from your bank."),
         "pleaseProvideYourResidentialAddress": MessageLookupByLibrary.simpleMessage(
             "Please provide your residential address. This will also be your mailing address."),
+        "pleaseReadTheAskloraCustomerAgreement":
+            MessageLookupByLibrary.simpleMessage(
+                "Please read the the Asklora Customer Agreement. You must click on the agreement and check all the boxes in order to proceed."),
         "pleaseSelect": MessageLookupByLibrary.simpleMessage("Please Select"),
         "porAddress": MessageLookupByLibrary.simpleMessage(
             "Proof of Residential Address"),
@@ -738,6 +753,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "retired": MessageLookupByLibrary.simpleMessage("Retired"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
+        "riskDisclosureStatement":
+            MessageLookupByLibrary.simpleMessage("Risk Disclosure Statement"),
         "riskDisclosureStatementAcknowledgement":
             MessageLookupByLibrary.simpleMessage(
                 "I have read, understood, and agree with the Risk Disclosure Statement."),
@@ -759,6 +776,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signAgreements":
             MessageLookupByLibrary.simpleMessage("Sign Agreements"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "signInElectronically": MessageLookupByLibrary.simpleMessage(
+            "Sign this electronically by typing your name exactly as shown below."),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to sign out ?"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage(
@@ -791,6 +810,44 @@ class MessageLookup extends MessageLookupByLibrary {
         "takePhotoFront": MessageLookupByLibrary.simpleMessage(
             "Take a photo of the front of your HKID"),
         "takeSelfie": MessageLookupByLibrary.simpleMessage("Take a selfie"),
+        "taxAgreementCheckboxDesc": MessageLookupByLibrary.simpleMessage(
+            "By checking this box, you consent to the collection and distribution of tax forms in an electronic format in lieu of paper"),
+        "taxAgreementDesc1": MessageLookupByLibrary.simpleMessage(
+            "Under penalties of perjury, I declare that I have examined the information in lines 1-7 and to the best of my knowledge and belief it is true, correct, and complete. I further certify under penalties of perjury that:"),
+        "taxAgreementDesc2": MessageLookupByLibrary.simpleMessage(
+            "Furthermore, I authorize this form to be provided to any withholding agent that has control, receipt, or custody of the income of which I am the beneficial owner or any withholding agent that can disburse or make payments of the income of which I am the beneficial owner. I agree I will submit a new form within 30 days if any certification made on this form becomes incorrect."),
+        "taxAgreementDesc3": MessageLookupByLibrary.simpleMessage(
+            "The US Internal Revenue Service does not require your consent to any provisions of this document other than the certifications required to establish your status as a non-U.S. person, and if applicable, obtain a reduced rate of witholding."),
+        "taxAgreementDescPoint1": MessageLookupByLibrary.simpleMessage(
+            "I am the individual that is the beneficial owner (or am authorized to sign for the individual that is the beneficial owner) of all the income or proceeds to which this form relates or am using this form to document myself for chapter 4 purposes;"),
+        "taxAgreementDescPoint2": MessageLookupByLibrary.simpleMessage(
+            "The person named on line 1 of this form is not a U.S. person;"),
+        "taxAgreementDescPoint3":
+            MessageLookupByLibrary.simpleMessage("This form relates to:"),
+        "taxAgreementDescPoint3SubPoint1": MessageLookupByLibrary.simpleMessage(
+            "income not effectively connected with the conduct of a trade or business in the United States;"),
+        "taxAgreementDescPoint3SubPoint2": MessageLookupByLibrary.simpleMessage(
+            "income effectively connected with the conduct of a trade or business in the United States but is not subject to tax under an applicable income tax treaty;"),
+        "taxAgreementDescPoint3SubPoint3": MessageLookupByLibrary.simpleMessage(
+            "the partner\'s share of a partnership\'s effectively connected taxable income;"),
+        "taxAgreementDescPoint3SubPoint4": MessageLookupByLibrary.simpleMessage(
+            "or the partner\'s amount realized from the transfer of a partnership interest subject to withholding under section 1446(f);"),
+        "taxAgreementDescPoint4": MessageLookupByLibrary.simpleMessage(
+            "The person named on line 1 of this form is a resident of the treaty country listed on line 9 of the form (if any) within the meaning of the income tax treaty between the United States and that country;"),
+        "taxAgreementDescPoint5": MessageLookupByLibrary.simpleMessage(
+            "and For broker transactions or barter exchanges, the beneficial owner is an exempt foreign person as defined in the instructions to IRS Form W-8BEN."),
+        "taxAgreementSignatureDesc": MessageLookupByLibrary.simpleMessage(
+            "By typing my signature and clicking ‘Agree’ below, I confirm that:"),
+        "taxAgreementSignatureDescPoint1": MessageLookupByLibrary.simpleMessage(
+            "(1) All information and/or documentation provided by me during the account application process is accurate, complete and up-to-date; "),
+        "taxAgreementSignatureDescPoint2": MessageLookupByLibrary.simpleMessage(
+            "(2) I have read and understood all of the information provided to me by LORA Advisors;"),
+        "taxAgreementSignatureDescPoint3": MessageLookupByLibrary.simpleMessage(
+            "(3) I consent and agree to the terms of all the above agreements and disclosures provided to me during the account application process: and"),
+        "taxAgreementSignatureDescPoint4": MessageLookupByLibrary.simpleMessage(
+            "(4) I understand and agree that my electronic signature is the legal equivalent of a manual written signature."),
+        "taxAgreementSignatureTitle":
+            MessageLookupByLibrary.simpleMessage("Signature"),
         "terminateAccount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
@@ -889,6 +946,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "version": MessageLookupByLibrary.simpleMessage("Version"),
         "viewDepositGuide":
             MessageLookupByLibrary.simpleMessage("View Deposit Guide"),
+        "w8benForm": MessageLookupByLibrary.simpleMessage("W-8BEN Form"),
         "weAcceptHKDOnly":
             MessageLookupByLibrary.simpleMessage("We accept HKD only."),
         "weAcceptUtilityBill": MessageLookupByLibrary.simpleMessage(

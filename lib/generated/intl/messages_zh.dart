@@ -86,8 +86,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "AskloraAgreementFile":
+            MessageLookupByLibrary.simpleMessage("Asklora 客戶協議.pdf"),
         "about": MessageLookupByLibrary.simpleMessage("關於"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("關於 Asklora"),
+        "acceptedSignature":
+            MessageLookupByLibrary.simpleMessage("Accepted signature(s):"),
         "accountInformation": MessageLookupByLibrary.simpleMessage("帳戶資訊"),
         "accountIsNotActive": MessageLookupByLibrary.simpleMessage(
             "Your account is not active yet."),
@@ -101,6 +105,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressProof": MessageLookupByLibrary.simpleMessage("住址證明"),
         "afterPayDepositHeaderTitle":
             MessageLookupByLibrary.simpleMessage("投資賬戶\n即將 Ready！"),
+        "agree": MessageLookupByLibrary.simpleMessage("Agree"),
+        "agreed": MessageLookupByLibrary.simpleMessage("Agreed"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
         "aiIsqWelcomeSubTitle": MessageLookupByLibrary.simpleMessage(
             "Let\'s see what kind of stocks you prefer"),
@@ -117,6 +123,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hi! 我係 Lora，\n你嘅 AI 顧問。\n\n準備好向投資目標進發未？\n我可以點叫你？"),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("你的名字"),
+        "askloraCustomerAgreement":
+            MessageLookupByLibrary.simpleMessage("Asklora Customer Agreement"),
         "askloraWireDetails":
             MessageLookupByLibrary.simpleMessage("Asklora 電匯 詳情"),
         "askloraYouUltimateFinancialAdvisor":
@@ -316,6 +324,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPassword": MessageLookupByLibrary.simpleMessage("忘記密碼"),
         "forgotPasswordMessage":
             MessageLookupByLibrary.simpleMessage("請輸入你的電郵地址，我們會發送重設密碼的指示給你。"),
+        "formW8ben": MessageLookupByLibrary.simpleMessage("Form W-8BEN"),
         "founded": MessageLookupByLibrary.simpleMessage("成立年份"),
         "free": MessageLookupByLibrary.simpleMessage("免費"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("免費試用期"),
@@ -351,6 +360,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "我是上市公司的高級行政人員或持有 10% 或以上的股份。"),
         "iAmASeniorPolitical":
             MessageLookupByLibrary.simpleMessage("我是高級政治人物。"),
+        "iHaveReadAndAgreed": MessageLookupByLibrary.simpleMessage(
+            "我已細閱、理解及同意受 LORA Advisors Limited 戶口條款約束，引用的所有其他條款， 披露及免責聲明對我同樣適用。"),
+        "iUnderstandSigningAgreement": MessageLookupByLibrary.simpleMessage(
+            "我理解我以電子方式簽署協議，我的電子簽署會與親筆簽署及提交申請協議同樣有效。"),
         "inApp": MessageLookupByLibrary.simpleMessage("In-app通知"),
         "industry": MessageLookupByLibrary.simpleMessage("行業"),
         "inputDepositAmount": MessageLookupByLibrary.simpleMessage("輸入金額"),
@@ -387,8 +400,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "legal": MessageLookupByLibrary.simpleMessage("Legal"),
         "legalFirstName": MessageLookupByLibrary.simpleMessage("法定英文名字"),
         "legalLastName": MessageLookupByLibrary.simpleMessage("法定英文姓氏"),
-        "licenseeName":
-            MessageLookupByLibrary.simpleMessage("Licensee: Chang Yung Ching"),
+        "licenseeName": MessageLookupByLibrary.simpleMessage("持牌人：張永經"),
         "licenseeNumber": MessageLookupByLibrary.simpleMessage("CE 編號: AFF918"),
         "lifePhysicalSocialService": MessageLookupByLibrary.simpleMessage(
             "Life, Physical and Social Service"),
@@ -486,6 +498,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("請確保於你的銀行轉賬資金後才按「提交」鍵。"),
         "pleaseProvideYourResidentialAddress":
             MessageLookupByLibrary.simpleMessage("請提供你的住宅地址。這也將是你的郵寄地址。"),
+        "pleaseReadTheAskloraCustomerAgreement":
+            MessageLookupByLibrary.simpleMessage(
+                "請細閱 Asklora 客戶協議。你必須剔選所有勾選框並提供你的簽名才能繼續。"),
         "pleaseSelect": MessageLookupByLibrary.simpleMessage("請選擇"),
         "porAddress": MessageLookupByLibrary.simpleMessage("住址證明"),
         "portfolioBuyingPower": m14,
@@ -600,6 +615,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "retired": MessageLookupByLibrary.simpleMessage("退休"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶號碼）。不過，我們亦可能會因核實交易，向你要求更多附加資料。"),
+        "riskDisclosureStatement":
+            MessageLookupByLibrary.simpleMessage("Risk Disclosure Statement"),
         "riskDisclosureStatementAcknowledgement":
             MessageLookupByLibrary.simpleMessage("我已閱讀、理解，及同意風險披露聲明。"),
         "riskDisclosureStatementLabel":
@@ -617,6 +634,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "shares": MessageLookupByLibrary.simpleMessage("數量"),
         "signAgreements": MessageLookupByLibrary.simpleMessage("簽署協議"),
         "signIn": MessageLookupByLibrary.simpleMessage("登入"),
+        "signInElectronically": MessageLookupByLibrary.simpleMessage(
+            "Sign this electronically by typing your name exactly as shown below."),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(" 真係要登出？"),
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage(" 踏入AI新世代，\n展開AI投資之旅"),
@@ -639,6 +658,42 @@ class MessageLookup extends MessageLookupByLibrary {
         "takePhotoBack": MessageLookupByLibrary.simpleMessage("拍攝香港身份證背面"),
         "takePhotoFront": MessageLookupByLibrary.simpleMessage("拍攝香港身份證正面"),
         "takeSelfie": MessageLookupByLibrary.simpleMessage("自拍照一張"),
+        "taxAgreementCheckboxDesc": MessageLookupByLibrary.simpleMessage(
+            "By checking this box, you consent to the collection and distribution of tax forms in an electronic format in lieu of paper"),
+        "taxAgreementDesc2": MessageLookupByLibrary.simpleMessage(
+            "Furthermore, I authorize this form to be provided to any withholding agent that has control, receipt, or custody of the income of which I am the beneficial owner or any withholding agent that can disburse or make payments of the income of which I am the beneficial owner. I agree I will submit a new form within 30 days if any certification made on this form becomes incorrect."),
+        "taxAgreementDesc3": MessageLookupByLibrary.simpleMessage(
+            "The US Internal Revenue Service does not require your consent to any provisions of this document other than the certifications required to establish your status as a non-U.S. person, and if applicable, obtain a reduced rate of witholding."),
+        "taxAgreementDescPoint1": MessageLookupByLibrary.simpleMessage(
+            "I am the individual that is the beneficial owner (or am authorized to sign for the individual that is the beneficial owner) of all the income or proceeds to which this form relates or am using this form to document myself for chapter 4 purposes;"),
+        "taxAgreementDescPoint2": MessageLookupByLibrary.simpleMessage(
+            "The person named on line 1 of this form is not a U.S. person;"),
+        "taxAgreementDescPoint3":
+            MessageLookupByLibrary.simpleMessage("This form relates to:"),
+        "taxAgreementDescPoint3SubPoint1": MessageLookupByLibrary.simpleMessage(
+            "income not effectively connected with the conduct of a trade or business in the United States;"),
+        "taxAgreementDescPoint3SubPoint2": MessageLookupByLibrary.simpleMessage(
+            "income effectively connected with the conduct of a trade or business in the United States but is not subject to tax under an applicable income tax treaty;"),
+        "taxAgreementDescPoint3SubPoint3": MessageLookupByLibrary.simpleMessage(
+            "the partner\'s share of a partnership\'s effectively connected taxable income;"),
+        "taxAgreementDescPoint3SubPoint4": MessageLookupByLibrary.simpleMessage(
+            "or the partner\'s amount realized from the transfer of a partnership interest subject to withholding under section 1446(f);"),
+        "taxAgreementDescPoint4": MessageLookupByLibrary.simpleMessage(
+            "The person named on line 1 of this form is a resident of the treaty country listed on line 9 of the form (if any) within the meaning of the income tax treaty between the United States and that country;"),
+        "taxAgreementDescPoint5": MessageLookupByLibrary.simpleMessage(
+            "and For broker transactions or barter exchanges, the beneficial owner is an exempt foreign person as defined in the instructions to IRS Form W-8BEN."),
+        "taxAgreementSignatureDesc": MessageLookupByLibrary.simpleMessage(
+            "By typing my signature and clicking ‘Agree’ below, I confirm that:"),
+        "taxAgreementSignatureDescPoint1": MessageLookupByLibrary.simpleMessage(
+            "(1) All information and/or documentation provided by me during the account application process is accurate, complete and up-to-date; "),
+        "taxAgreementSignatureDescPoint2": MessageLookupByLibrary.simpleMessage(
+            "(2) I have read and understood all of the information provided to me by LORA Advisors;"),
+        "taxAgreementSignatureDescPoint3": MessageLookupByLibrary.simpleMessage(
+            "(3) I consent and agree to the terms of all the above agreements and disclosures provided to me during the account application process: and"),
+        "taxAgreementSignatureDescPoint4": MessageLookupByLibrary.simpleMessage(
+            "(4) I understand and agree that my electronic signature is the legal equivalent of a manual written signature."),
+        "taxAgreementSignatureTitle":
+            MessageLookupByLibrary.simpleMessage("Signature"),
         "terminateAccount": MessageLookupByLibrary.simpleMessage("終止賬戶"),
         "termsAndConditions": MessageLookupByLibrary.simpleMessage("條款與約束"),
         "theAmountMustMatch":
@@ -717,6 +772,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verifyOtpSuccess":
             MessageLookupByLibrary.simpleMessage("Verify OTP Success"),
         "viewDepositGuide": MessageLookupByLibrary.simpleMessage("查看入金提示"),
+        "w8benForm": MessageLookupByLibrary.simpleMessage("W-8BEN Form"),
         "weAcceptHKDOnly": MessageLookupByLibrary.simpleMessage("我們只接受港幣。"),
         "weAcceptUtilityBill": MessageLookupByLibrary.simpleMessage(
             "(我們接受最近3個月的水/電/煤氣繳費單、銀行結單或政府函件)"),

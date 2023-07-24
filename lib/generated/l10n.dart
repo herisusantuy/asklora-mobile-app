@@ -4946,6 +4946,306 @@ class S {
     );
   }
 
+  /// `Please read the the Asklora Customer Agreement. You must click on the agreement and check all the boxes in order to proceed.`
+  String get pleaseReadTheAskloraCustomerAgreement {
+    return Intl.message(
+      'Please read the the Asklora Customer Agreement. You must click on the agreement and check all the boxes in order to proceed.',
+      name: 'pleaseReadTheAskloraCustomerAgreement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I have read, understood, and agree to be bound by LORA Advisors Limited’s account terms, and all other terms, disclosures and disclaimers applicable to me.`
+  String get iHaveReadAndAgreed {
+    return Intl.message(
+      'I have read, understood, and agree to be bound by LORA Advisors Limited’s account terms, and all other terms, disclosures and disclaimers applicable to me.',
+      name: 'iHaveReadAndAgreed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Customer Agreement.`
+  String get iUnderstandSigningAgreement {
+    return Intl.message(
+      'I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Customer Agreement.',
+      name: 'iUnderstandSigningAgreement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asklora Customer Agreement.pdf`
+  String get AskloraAgreementFile {
+    return Intl.message(
+      'Asklora Customer Agreement.pdf',
+      name: 'AskloraAgreementFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Under penalties of perjury, I declare that I have examined the information in lines 1-7 and to the best of my knowledge and belief it is true, correct, and complete. I further certify under penalties of perjury that:`
+  String get taxAgreementDesc1 {
+    return Intl.message(
+      'Under penalties of perjury, I declare that I have examined the information in lines 1-7 and to the best of my knowledge and belief it is true, correct, and complete. I further certify under penalties of perjury that:',
+      name: 'taxAgreementDesc1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am the individual that is the beneficial owner (or am authorized to sign for the individual that is the beneficial owner) of all the income or proceeds to which this form relates or am using this form to document myself for chapter 4 purposes;`
+  String get taxAgreementDescPoint1 {
+    return Intl.message(
+      'I am the individual that is the beneficial owner (or am authorized to sign for the individual that is the beneficial owner) of all the income or proceeds to which this form relates or am using this form to document myself for chapter 4 purposes;',
+      name: 'taxAgreementDescPoint1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The person named on line 1 of this form is not a U.S. person;`
+  String get taxAgreementDescPoint2 {
+    return Intl.message(
+      'The person named on line 1 of this form is not a U.S. person;',
+      name: 'taxAgreementDescPoint2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This form relates to:`
+  String get taxAgreementDescPoint3 {
+    return Intl.message(
+      'This form relates to:',
+      name: 'taxAgreementDescPoint3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `income not effectively connected with the conduct of a trade or business in the United States;`
+  String get taxAgreementDescPoint3SubPoint1 {
+    return Intl.message(
+      'income not effectively connected with the conduct of a trade or business in the United States;',
+      name: 'taxAgreementDescPoint3SubPoint1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `income effectively connected with the conduct of a trade or business in the United States but is not subject to tax under an applicable income tax treaty;`
+  String get taxAgreementDescPoint3SubPoint2 {
+    return Intl.message(
+      'income effectively connected with the conduct of a trade or business in the United States but is not subject to tax under an applicable income tax treaty;',
+      name: 'taxAgreementDescPoint3SubPoint2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `the partner's share of a partnership's effectively connected taxable income;`
+  String get taxAgreementDescPoint3SubPoint3 {
+    return Intl.message(
+      'the partner\'s share of a partnership\'s effectively connected taxable income;',
+      name: 'taxAgreementDescPoint3SubPoint3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `or the partner's amount realized from the transfer of a partnership interest subject to withholding under section 1446(f);`
+  String get taxAgreementDescPoint3SubPoint4 {
+    return Intl.message(
+      'or the partner\'s amount realized from the transfer of a partnership interest subject to withholding under section 1446(f);',
+      name: 'taxAgreementDescPoint3SubPoint4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The person named on line 1 of this form is a resident of the treaty country listed on line 9 of the form (if any) within the meaning of the income tax treaty between the United States and that country;`
+  String get taxAgreementDescPoint4 {
+    return Intl.message(
+      'The person named on line 1 of this form is a resident of the treaty country listed on line 9 of the form (if any) within the meaning of the income tax treaty between the United States and that country;',
+      name: 'taxAgreementDescPoint4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `and For broker transactions or barter exchanges, the beneficial owner is an exempt foreign person as defined in the instructions to IRS Form W-8BEN.`
+  String get taxAgreementDescPoint5 {
+    return Intl.message(
+      'and For broker transactions or barter exchanges, the beneficial owner is an exempt foreign person as defined in the instructions to IRS Form W-8BEN.',
+      name: 'taxAgreementDescPoint5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Furthermore, I authorize this form to be provided to any withholding agent that has control, receipt, or custody of the income of which I am the beneficial owner or any withholding agent that can disburse or make payments of the income of which I am the beneficial owner. I agree I will submit a new form within 30 days if any certification made on this form becomes incorrect.`
+  String get taxAgreementDesc2 {
+    return Intl.message(
+      'Furthermore, I authorize this form to be provided to any withholding agent that has control, receipt, or custody of the income of which I am the beneficial owner or any withholding agent that can disburse or make payments of the income of which I am the beneficial owner. I agree I will submit a new form within 30 days if any certification made on this form becomes incorrect.',
+      name: 'taxAgreementDesc2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The US Internal Revenue Service does not require your consent to any provisions of this document other than the certifications required to establish your status as a non-U.S. person, and if applicable, obtain a reduced rate of witholding.`
+  String get taxAgreementDesc3 {
+    return Intl.message(
+      'The US Internal Revenue Service does not require your consent to any provisions of this document other than the certifications required to establish your status as a non-U.S. person, and if applicable, obtain a reduced rate of witholding.',
+      name: 'taxAgreementDesc3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By checking this box, you consent to the collection and distribution of tax forms in an electronic format in lieu of paper`
+  String get taxAgreementCheckboxDesc {
+    return Intl.message(
+      'By checking this box, you consent to the collection and distribution of tax forms in an electronic format in lieu of paper',
+      name: 'taxAgreementCheckboxDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signature`
+  String get taxAgreementSignatureTitle {
+    return Intl.message(
+      'Signature',
+      name: 'taxAgreementSignatureTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By typing my signature and clicking ‘Agree’ below, I confirm that:`
+  String get taxAgreementSignatureDesc {
+    return Intl.message(
+      'By typing my signature and clicking ‘Agree’ below, I confirm that:',
+      name: 'taxAgreementSignatureDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(1) All information and/or documentation provided by me during the account application process is accurate, complete and up-to-date; `
+  String get taxAgreementSignatureDescPoint1 {
+    return Intl.message(
+      '(1) All information and/or documentation provided by me during the account application process is accurate, complete and up-to-date; ',
+      name: 'taxAgreementSignatureDescPoint1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(2) I have read and understood all of the information provided to me by LORA Advisors;`
+  String get taxAgreementSignatureDescPoint2 {
+    return Intl.message(
+      '(2) I have read and understood all of the information provided to me by LORA Advisors;',
+      name: 'taxAgreementSignatureDescPoint2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(3) I consent and agree to the terms of all the above agreements and disclosures provided to me during the account application process: and`
+  String get taxAgreementSignatureDescPoint3 {
+    return Intl.message(
+      '(3) I consent and agree to the terms of all the above agreements and disclosures provided to me during the account application process: and',
+      name: 'taxAgreementSignatureDescPoint3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(4) I understand and agree that my electronic signature is the legal equivalent of a manual written signature.`
+  String get taxAgreementSignatureDescPoint4 {
+    return Intl.message(
+      '(4) I understand and agree that my electronic signature is the legal equivalent of a manual written signature.',
+      name: 'taxAgreementSignatureDescPoint4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign this electronically by typing your name exactly as shown below.`
+  String get signInElectronically {
+    return Intl.message(
+      'Sign this electronically by typing your name exactly as shown below.',
+      name: 'signInElectronically',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accepted signature(s):`
+  String get acceptedSignature {
+    return Intl.message(
+      'Accepted signature(s):',
+      name: 'acceptedSignature',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asklora Customer Agreement`
+  String get askloraCustomerAgreement {
+    return Intl.message(
+      'Asklora Customer Agreement',
+      name: 'askloraCustomerAgreement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Risk Disclosure Statement`
+  String get riskDisclosureStatement {
+    return Intl.message(
+      'Risk Disclosure Statement',
+      name: 'riskDisclosureStatement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `W-8BEN Form`
+  String get w8benForm {
+    return Intl.message(
+      'W-8BEN Form',
+      name: 'w8benForm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Form W-8BEN`
+  String get formW8ben {
+    return Intl.message(
+      'Form W-8BEN',
+      name: 'formW8ben',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Agreed`
+  String get agreed {
+    return Intl.message(
+      'Agreed',
+      name: 'agreed',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Subscription`
   String get subscription {
     return Intl.message(
