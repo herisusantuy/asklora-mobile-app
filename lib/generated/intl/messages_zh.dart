@@ -77,7 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m23(minDeposit) =>
       "請轉賬最少 HK\$${minDeposit} 至 Asklora 銀行戶口。任何少於 HK\$${minDeposit} 的首次入金均會被拒收，並會被徵收手續費。";
 
-  static String m24(time, date) => "Updated at ${time} HKT, ${date}";
+  static String m24(time, date) => "於 ${time} HKT, ${date} 更新";
 
   static String m25(minDeposit) =>
       "我們會提取由你銀行透過 API 或匯款通知書收集的資訊， 確定你指定的銀行戶口。我們只會接受透過此指定戶口進行所有將來的入金與提取。你可轉換指定銀行戶口，但你需要完成最少匯款 HK\$${minDeposit} 以通過相同的認證。";
@@ -108,10 +108,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "agree": MessageLookupByLibrary.simpleMessage("Agree"),
         "agreed": MessageLookupByLibrary.simpleMessage("Agreed"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
-        "aiIsqWelcomeSubTitle": MessageLookupByLibrary.simpleMessage(
-            "Let\'s see what kind of stocks you prefer"),
-        "aiIsqWelcomeTitle": MessageLookupByLibrary.simpleMessage(
-            "It\'s time to find out your investment preferences"),
+        "aiIsqWelcomeSubTitle":
+            MessageLookupByLibrary.simpleMessage("界定你嘅投資風格先！"),
+        "aiIsqWelcomeTitle":
+            MessageLookupByLibrary.simpleMessage("想知Asklora有咩投資秘技？"),
         "allSettings": MessageLookupByLibrary.simpleMessage("設定"),
         "almostFinished": MessageLookupByLibrary.simpleMessage("馬上就好"),
         "architectureEngineering":
@@ -250,7 +250,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("出生日期"),
-        "defineAgain": MessageLookupByLibrary.simpleMessage("Define again"),
+        "defineAgain": MessageLookupByLibrary.simpleMessage("重新界定"),
         "defineInvestmentStyle": MessageLookupByLibrary.simpleMessage("界定投資風格"),
         "deposit": MessageLookupByLibrary.simpleMessage("存入資金"),
         "depositAmount": MessageLookupByLibrary.simpleMessage("存入金額"),
@@ -287,8 +287,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "endDate": MessageLookupByLibrary.simpleMessage("結束日期"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("到期價值"),
         "enterANewPassword": MessageLookupByLibrary.simpleMessage("請輸入新密碼"),
-        "enterValidEmail": MessageLookupByLibrary.simpleMessage("無效電郵地址"),
-        "enterValidPassword": MessageLookupByLibrary.simpleMessage("無效電郵地址"),
+        "enterValidEmail": MessageLookupByLibrary.simpleMessage("請輸入有效電郵地址"),
+        "enterValidPassword": MessageLookupByLibrary.simpleMessage("請輸入有效密碼"),
         "errorGettingInformationInvestmentDetailSubTitle":
             MessageLookupByLibrary.simpleMessage("載入你投資細節時出咗少少問題，Reload一次試下？"),
         "errorGettingInformationPortfolioSubTitle":
@@ -378,7 +378,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Pullup"),
         "introduceBotSquat":
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Squat"),
-        "invalidOtp": MessageLookupByLibrary.simpleMessage("Invalid OTP"),
+        "invalidOtp": MessageLookupByLibrary.simpleMessage("無效OTP"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("無效密碼"),
         "investmentAmount": MessageLookupByLibrary.simpleMessage("投資金額"),
         "investmentPeriod": MessageLookupByLibrary.simpleMessage("投資期"),
@@ -404,8 +404,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "licenseeNumber": MessageLookupByLibrary.simpleMessage("CE 編號: AFF918"),
         "lifePhysicalSocialService": MessageLookupByLibrary.simpleMessage(
             "Life, Physical and Social Service"),
-        "linkPasswordResetIsSent": MessageLookupByLibrary.simpleMessage(
-            "Link for Password reset is sent to email."),
+        "linkPasswordResetIsSent":
+            MessageLookupByLibrary.simpleMessage("重設密碼連結已發送至電子郵件。"),
         "manageYourBotstock":
             MessageLookupByLibrary.simpleMessage("管理 Botstock"),
         "marketCap": MessageLookupByLibrary.simpleMessage("市值"),
@@ -468,15 +468,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("密碼"),
         "passwordChangeSuccess":
             MessageLookupByLibrary.simpleMessage("Password Change Success"),
-        "passwordChangeSuccessfully": MessageLookupByLibrary.simpleMessage(
-            "Password changed successfully."),
+        "passwordChangeSuccessfully":
+            MessageLookupByLibrary.simpleMessage("密碼更改成功"),
         "passwordDoesNotMatch": MessageLookupByLibrary.simpleMessage("兩組密碼不相符"),
         "passwordLinkHasBeenSent":
             MessageLookupByLibrary.simpleMessage("已發送重設密碼電郵，\n請檢查你的電郵。"),
         "payDepositToStartRealTrade":
             MessageLookupByLibrary.simpleMessage("入金以開始正式交易"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
-        "pending": MessageLookupByLibrary.simpleMessage("待處理"),
+        "pending": MessageLookupByLibrary.simpleMessage("處理中"),
         "performance": MessageLookupByLibrary.simpleMessage("表現"),
         "personalCareService":
             MessageLookupByLibrary.simpleMessage("Personal Care / Service"),
@@ -593,7 +593,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
             "有可能你的風險評級太低，\n或者年齡未合乎要求。\n\n如有答案填錯，\n麻煩再試一次。"),
         "privacyFailedScreenTitle":
-            MessageLookupByLibrary.simpleMessage("你尚未符合資格使用Asklora。"),
+            MessageLookupByLibrary.simpleMessage("你尚未符合資格使用Asklora"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
         "privacySuccessScreenDescription": MessageLookupByLibrary.simpleMessage(
             "識揀 Asklora，\n證明你精明過好多人！\n\nOk！係時候再了解你多啲！"),

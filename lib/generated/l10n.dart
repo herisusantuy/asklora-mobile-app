@@ -4186,10 +4186,10 @@ class S {
     );
   }
 
-  /// `Otp SMS is sent to your phone`
+  /// `OTP SMS is sent to your phone`
   String get otpSentToYourPhone {
     return Intl.message(
-      'Otp SMS is sent to your phone',
+      'OTP SMS is sent to your phone',
       name: 'otpSentToYourPhone',
       desc: '',
       args: [],

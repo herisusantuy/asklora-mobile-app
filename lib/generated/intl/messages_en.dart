@@ -571,7 +571,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "otpSentToYourEmail":
             MessageLookupByLibrary.simpleMessage("OTP code sent to your email"),
         "otpSentToYourPhone": MessageLookupByLibrary.simpleMessage(
-            "Otp SMS is sent to your phone"),
+            "OTP SMS is sent to your phone"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordChangeSuccess":
             MessageLookupByLibrary.simpleMessage("Password Change Success"),
