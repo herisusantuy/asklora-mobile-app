@@ -82,15 +82,15 @@ class PersonalInfoScreen extends StatelessWidget {
             _spaceHeight,
             _selectGender,
             _spaceHeight,
-            _hkIdNumberInput(context),
+            _hkIdNumberInput,
             _spaceHeight,
-            _nationality(context),
+            _nationality,
             _spaceHeight,
-            _dateOfBirth(context),
+            _dateOfBirth,
             _spaceHeight,
-            _countryOfBirth(context),
+            _countryOfBirth,
             _spaceHeight,
-            _phoneNumberInput(context)
+            _phoneNumberInput
           ],
         ),
       ),
@@ -98,7 +98,7 @@ class PersonalInfoScreen extends StatelessWidget {
     );
   }
 
-  Widget _countryOfBirth(BuildContext context) =>
+  Widget get _countryOfBirth =>
       BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
         buildWhen: (previous, current) =>
             previous.countryCodeOfBirth != current.countryCodeOfBirth,
@@ -112,7 +112,7 @@ class PersonalInfoScreen extends StatelessWidget {
         ),
       );
 
-  Widget _phoneNumberInput(BuildContext context) =>
+  Widget get _phoneNumberInput =>
       BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
           buildWhen: (previous, current) =>
               previous.phoneNumber != current.phoneNumber,
@@ -144,7 +144,7 @@ class PersonalInfoScreen extends StatelessWidget {
         ],
       );
 
-  Widget _hkIdNumberInput(BuildContext context) =>
+  Widget get _hkIdNumberInput =>
       BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
         buildWhen: (previous, current) =>
             previous.hkIdNumber != current.hkIdNumber ||
@@ -171,8 +171,7 @@ class PersonalInfoScreen extends StatelessWidget {
         },
       );
 
-  Widget _nationality(BuildContext context) =>
-      BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
+  Widget get _nationality => BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
         buildWhen: (previous, current) =>
             previous.nationalityCode != current.nationalityCode,
         builder: (context, state) => CustomCountryPicker(
@@ -186,8 +185,7 @@ class PersonalInfoScreen extends StatelessWidget {
         ),
       );
 
-  Widget _dateOfBirth(BuildContext context) =>
-      BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
+  Widget get _dateOfBirth => BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
         buildWhen: (previous, current) =>
             previous.dateOfBirth != current.dateOfBirth ||
             previous.response.state != current.response.state,
