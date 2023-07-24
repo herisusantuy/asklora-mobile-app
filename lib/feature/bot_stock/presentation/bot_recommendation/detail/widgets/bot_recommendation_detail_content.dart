@@ -369,7 +369,8 @@ class ToggleableTextBloc extends StatelessWidget {
 
                 return Container(
                   width: containerWidth,
-                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     color: (percentDifference < 0)

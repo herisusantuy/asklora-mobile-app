@@ -8,5 +8,6 @@ abstract class ToggleState {
 }
 
 class ShowPriceDifferenceState extends ToggleState {
-  ShowPriceDifferenceState(bool showPriceDifference) : super(showPriceDifference);
+  ShowPriceDifferenceState(bool showPriceDifference)
+      : super(showPriceDifference);
 }
