@@ -4316,16 +4316,6 @@ class S {
     );
   }
 
-  /// `Subscription`
-  String get subscription {
-    return Intl.message(
-      'Subscription',
-      name: 'subscription',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Buy`
   String get buy {
     return Intl.message(
