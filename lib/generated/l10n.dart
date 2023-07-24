@@ -4316,16 +4316,6 @@ class S {
     );
   }
 
-  /// `Subscription`
-  String get subscription {
-    return Intl.message(
-      'Subscription',
-      name: 'subscription',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Buy`
   String get buy {
     return Intl.message(
@@ -4396,10 +4386,10 @@ class S {
     );
   }
 
-  /// `Verify identify`
+  /// `Verify identity`
   String get verifyIdentity {
     return Intl.message(
-      'Verify identify',
+      'Verify identity',
       name: 'verifyIdentity',
       desc: '',
       args: [],
@@ -4641,6 +4631,76 @@ class S {
     return Intl.message(
       'Nature of Business',
       name: 'natureOfBusiness',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription`
+  String get subscription {
+    return Intl.message(
+      'Subscription',
+      name: 'subscription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We'll need to verify your identity via your HKID.`
+  String get weNeedToVerifyYourId {
+    return Intl.message(
+      'We\'ll need to verify your identity via your HKID.',
+      name: 'weNeedToVerifyYourId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get ready for the verification process. You will..`
+  String get getReadyForTheVerification {
+    return Intl.message(
+      'Get ready for the verification process. You will..',
+      name: 'getReadyForTheVerification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a photo of the front of your HKID`
+  String get takePhotoFront {
+    return Intl.message(
+      'Take a photo of the front of your HKID',
+      name: 'takePhotoFront',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a photo of the front of your HKID`
+  String get takePhotoBack {
+    return Intl.message(
+      'Take a photo of the front of your HKID',
+      name: 'takePhotoBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a selfie`
+  String get takeSelfie {
+    return Intl.message(
+      'Take a selfie',
+      name: 'takeSelfie',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify Now`
+  String get verifyNow {
+    return Intl.message(
+      'Verify Now',
+      name: 'verifyNow',
       desc: '',
       args: [],
     );

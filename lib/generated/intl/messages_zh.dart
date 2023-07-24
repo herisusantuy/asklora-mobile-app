@@ -299,6 +299,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "freeTrial": MessageLookupByLibrary.simpleMessage("免費試用期"),
         "fullName": MessageLookupByLibrary.simpleMessage("姓名"),
         "getHelp": MessageLookupByLibrary.simpleMessage("獲得幫助"),
+        "getReadyForTheVerification":
+            MessageLookupByLibrary.simpleMessage("核實程序即將開始，你將要......"),
         "getReadyForTrading": MessageLookupByLibrary.simpleMessage("準備好AI 交易"),
         "getTheFirstBotstockForFree":
             MessageLookupByLibrary.simpleMessage("獲取首個免費 Botstock "),
@@ -582,11 +584,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "status": MessageLookupByLibrary.simpleMessage("狀態"),
         "submitApplication":
             MessageLookupByLibrary.simpleMessage("Submit Application"),
-        "subscription": MessageLookupByLibrary.simpleMessage("訂購計劃"),
+        "subscription": MessageLookupByLibrary.simpleMessage("訂購"),
         "summary": MessageLookupByLibrary.simpleMessage("摘要"),
         "summaryAgreementInformation": MessageLookupByLibrary.simpleMessage(
             "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible"),
         "swiftCode": MessageLookupByLibrary.simpleMessage("Swift 代碼"),
+        "takePhotoBack": MessageLookupByLibrary.simpleMessage("拍攝香港身份證背面"),
+        "takePhotoFront": MessageLookupByLibrary.simpleMessage("拍攝香港身份證正面"),
+        "takeSelfie": MessageLookupByLibrary.simpleMessage("自拍照一張"),
         "terminateAccount": MessageLookupByLibrary.simpleMessage("終止賬戶"),
         "termsAndConditions": MessageLookupByLibrary.simpleMessage("條款與約束"),
         "theAmountMustMatch":
@@ -657,12 +662,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("你是否擁有美國稅務居民身份、持有綠卡，或公民身份？"),
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
         "verifyIdentity": MessageLookupByLibrary.simpleMessage("核實身份"),
+        "verifyNow": MessageLookupByLibrary.simpleMessage("立即核實"),
         "verifyOtpSuccess":
             MessageLookupByLibrary.simpleMessage("Verify OTP Success"),
         "viewDepositGuide": MessageLookupByLibrary.simpleMessage("查看入金提示"),
         "weAcceptHKDOnly": MessageLookupByLibrary.simpleMessage("我們只接受港幣。"),
         "weAcceptUtilityBill": MessageLookupByLibrary.simpleMessage(
             "(我們接受最近3個月的水/電/煤氣繳費單、銀行結單或政府函件)"),
+        "weNeedToVerifyYourId":
+            MessageLookupByLibrary.simpleMessage("我們需要你的身份證核實你的身份。"),
         "weWillOnlyAcceptDepositViaBankTransfer":
             MessageLookupByLibrary.simpleMessage(
                 "我們只接受由你戶口透過銀行轉賬 (電匯/FPS) 的入金。"),
