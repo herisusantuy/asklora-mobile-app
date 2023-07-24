@@ -2413,10 +2413,10 @@ class S {
     );
   }
 
-  /// `Confirm & Continue`
+  /// `Confirm And Continue`
   String get confirmAndContinue {
     return Intl.message(
-      'Confirm & Continue',
+      'Confirm And Continue',
       name: 'confirmAndContinue',
       desc: '',
       args: [],
@@ -4361,6 +4361,286 @@ class S {
     return Intl.message(
       'Withdrawal History',
       name: 'withdrawalHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account opening and deposit are the last few steps before investing.`
+  String get accountOpeningAndDeposit {
+    return Intl.message(
+      'Account opening and deposit are the last few steps before investing.',
+      name: 'accountOpeningAndDeposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get ready for AI trading.`
+  String get getReadyForTrading {
+    return Intl.message(
+      'Get ready for AI trading.',
+      name: 'getReadyForTrading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set up Personal Info`
+  String get setupPersonalInfo {
+    return Intl.message(
+      'Set up Personal Info',
+      name: 'setupPersonalInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify identify`
+  String get verifyIdentity {
+    return Intl.message(
+      'Verify identify',
+      name: 'verifyIdentity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The items you will need…`
+  String get theItemYouWillNeed {
+    return Intl.message(
+      'The items you will need…',
+      name: 'theItemYouWillNeed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HKID`
+  String get hkId {
+    return Intl.message(
+      'HKID',
+      name: 'hkId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Proof of Residential Address`
+  String get porAddress {
+    return Intl.message(
+      'Proof of Residential Address',
+      name: 'porAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(We accept utility bill, bank statement, or government correspondence within the last 3 months)`
+  String get weAcceptUtilityBill {
+    return Intl.message(
+      '(We accept utility bill, bank statement, or government correspondence within the last 3 months)',
+      name: 'weAcceptUtilityBill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Once you've started, you can resume the process whenever you want.`
+  String get onceYouHaveStarted {
+    return Intl.message(
+      'Once you\'ve started, you can resume the process whenever you want.',
+      name: 'onceYouHaveStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open Account Now`
+  String get openAccountNow {
+    return Intl.message(
+      'Open Account Now',
+      name: 'openAccountNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you a United States tax resident, green card holder, or citizen?`
+  String get usResidentQuestion {
+    return Intl.message(
+      'Are you a United States tax resident, green card holder, or citizen?',
+      name: 'usResidentQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you a Hong Kong resident? By clicking yes, you acknowledge that you are also a Hong Kong tax resident`
+  String get hkResidentQuestion {
+    return Intl.message(
+      'Are you a Hong Kong resident? By clicking yes, you acknowledge that you are also a Hong Kong tax resident',
+      name: 'hkResidentQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please make sure your name matches the information on your identification document.`
+  String get personalInfoFormDesc {
+    return Intl.message(
+      'Please make sure your name matches the information on your identification document.',
+      name: 'personalInfoFormDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Legal English First Name`
+  String get legalFirstName {
+    return Intl.message(
+      'Legal English First Name',
+      name: 'legalFirstName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Legal English Last Name`
+  String get legalLastName {
+    return Intl.message(
+      'Legal English Last Name',
+      name: 'legalLastName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HKID Number`
+  String get hkIdNumber {
+    return Intl.message(
+      'HKID Number',
+      name: 'hkIdNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nationality`
+  String get nationality {
+    return Intl.message(
+      'Nationality',
+      name: 'nationality',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date of Birth`
+  String get dateOfBirth {
+    return Intl.message(
+      'Date of Birth',
+      name: 'dateOfBirth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Country of Birth`
+  String get countryOfBirth {
+    return Intl.message(
+      'Country of Birth',
+      name: 'countryOfBirth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HK Phone Number`
+  String get hkPhoneNo {
+    return Intl.message(
+      'HK Phone Number',
+      name: 'hkPhoneNo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please provide your residential address. This will also be your mailing address.`
+  String get pleaseProvideYourResidentialAddress {
+    return Intl.message(
+      'Please provide your residential address. This will also be your mailing address.',
+      name: 'pleaseProvideYourResidentialAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload Address Proof`
+  String get uploadAddressProof {
+    return Intl.message(
+      'Upload Address Proof',
+      name: 'uploadAddressProof',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your address proof must contain your full name, full residential address and the issuing agency.\n\nWe accept water/electricity/gas bills, bank statement, or government correspondence within the last 3 months.`
+  String get yourAddressProofMustContainFullName {
+    return Intl.message(
+      'Your address proof must contain your full name, full residential address and the issuing agency.\n\nWe accept water/electricity/gas bills, bank statement, or government correspondence within the last 3 months.',
+      name: 'yourAddressProofMustContainFullName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address Proof`
+  String get addressProof {
+    return Intl.message(
+      'Address Proof',
+      name: 'addressProof',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Employment`
+  String get employment {
+    return Intl.message(
+      'Employment',
+      name: 'employment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Employment Status*`
+  String get employmentStatus {
+    return Intl.message(
+      'Employment Status*',
+      name: 'employmentStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Select`
+  String get pleaseSelect {
+    return Intl.message(
+      'Please Select',
+      name: 'pleaseSelect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nature of Business`
+  String get natureOfBusiness {
+    return Intl.message(
+      'Nature of Business',
+      name: 'natureOfBusiness',
       desc: '',
       args: [],
     );
