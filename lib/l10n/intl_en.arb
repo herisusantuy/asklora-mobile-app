@@ -628,7 +628,7 @@
     }
   },
   "buttonVerify": "Verify",
-  "otpSentToYourPhone": "Otp SMS is sent to your phone",
+  "otpSentToYourPhone": "OTP SMS is sent to your phone",
   "verifyOtpSuccess": "Verify OTP Success",
   "otpSentToYourEmail": "OTP code sent to your email",
   "otpDigit": "000000 (6 digit)",

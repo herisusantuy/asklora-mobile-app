@@ -263,8 +263,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "endDate": MessageLookupByLibrary.simpleMessage("結束日期"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("到期價值"),
         "enterANewPassword": MessageLookupByLibrary.simpleMessage("請輸入新密碼"),
-        "enterValidEmail": MessageLookupByLibrary.simpleMessage("無效電郵地址"),
-        "enterValidPassword": MessageLookupByLibrary.simpleMessage("無效電郵地址"),
+        "enterValidEmail": MessageLookupByLibrary.simpleMessage("請輸入有效電郵地址"),
+        "enterValidPassword": MessageLookupByLibrary.simpleMessage("請輸入有效密碼"),
         "errorGettingInformationInvestmentDetailSubTitle":
             MessageLookupByLibrary.simpleMessage("載入你投資細節時出咗少少問題，Reload一次試下？"),
         "errorGettingInformationPortfolioSubTitle":
@@ -336,7 +336,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Pullup"),
         "introduceBotSquat":
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Squat"),
-        "invalidOtp": MessageLookupByLibrary.simpleMessage("無效 OTP"),
+        "invalidOtp": MessageLookupByLibrary.simpleMessage("無效OTP"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("無效密碼"),
         "investmentAmount": MessageLookupByLibrary.simpleMessage("投資金額"),
         "investmentPeriod": MessageLookupByLibrary.simpleMessage("投資期"),
@@ -357,8 +357,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "licenseeName":
             MessageLookupByLibrary.simpleMessage("Licensee: Chang Yung Ching"),
         "licenseeNumber": MessageLookupByLibrary.simpleMessage("CE 編號: AFF918"),
-        "linkPasswordResetIsSent": MessageLookupByLibrary.simpleMessage(
-            "Link for Password reset is sent to email."),
+        "linkPasswordResetIsSent":
+            MessageLookupByLibrary.simpleMessage("重設密碼連結已發送至電子郵件。"),
         "manageYourBotstock":
             MessageLookupByLibrary.simpleMessage("管理 Botstock"),
         "marketCap": MessageLookupByLibrary.simpleMessage("市值"),
@@ -535,7 +535,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
             "有可能你的風險評級太低，\n或者年齡未合乎要求。\n\n如有答案填錯，\n麻煩再試一次。"),
         "privacyFailedScreenTitle":
-            MessageLookupByLibrary.simpleMessage("你尚未符合資格使用Asklora。"),
+            MessageLookupByLibrary.simpleMessage("你尚未符合資格使用Asklora"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
         "privacySuccessScreenDescription": MessageLookupByLibrary.simpleMessage(
             "識揀 Asklora，\n證明你精明過好多人！\n\nOk！係時候再了解你多啲！"),
