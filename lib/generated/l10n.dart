@@ -2893,10 +2893,10 @@ class S {
     );
   }
 
-  /// `Your withdrawal request is submitted.`
+  /// `Withdrawal Request Submitted`
   String get withdrawalRequestSubmittedTitle {
     return Intl.message(
-      'Your withdrawal request is submitted.',
+      'Withdrawal Request Submitted',
       name: 'withdrawalRequestSubmittedTitle',
       desc: '',
       args: [],
