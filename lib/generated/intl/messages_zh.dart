@@ -424,7 +424,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "payDepositToStartRealTrade":
             MessageLookupByLibrary.simpleMessage("入金以開始正式交易"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
-        "pending": MessageLookupByLibrary.simpleMessage("待處理"),
+        "pending": MessageLookupByLibrary.simpleMessage("處理中"),
         "performance": MessageLookupByLibrary.simpleMessage("表現"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("個人資料"),
         "personalInfoFormDesc":
