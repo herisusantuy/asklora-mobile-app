@@ -60,7 +60,6 @@
   "greetingScreenTitle": "Alright! 準備好\n開始你嘅 AI 旅程未？",
   "greetingScreenSubTitle": "訓練開始，會問下基本問題先！\n記住，冇耐性，就輸梗！ ",
   "accountSettings": "帳戶設定",
-  "subscription": "訂購計劃",
   "corePlan": "核心計劃",
   "freeTrial": "免費試用期",
   "allSettings": "設定",
@@ -186,14 +185,7 @@
   "portfolioDetailPerformanceBotStockValues": "Botstock 價值 (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "投資金額 (HKD)",
   "portfolioDetailPerformanceTotalPL": "總盈虧",
-  "portfolioCurrentPrice": "當前價格 ({currency})",
-  "@portfolioCurrentPrice": {
-    "placeholders": {
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
+  "portfolioCurrentPrice": "當前價格",
   "portfolioDetailExpiredAt": "到期日期 {dateTime}",
   "@portfolioDetailExpiredAt": {
     "placeholders": {
@@ -589,8 +581,31 @@
       }
     }
   },
-  "aiIsqWelcomeTitle": "It’s time to find out your investment preferences",
-  "aiIsqWelcomeSubTitle": "Let’s see what kind of stocks you prefer",
+  "otpScreenTitle": "一次性密碼",
+  "otpScreenDescription": "我們已透過SMS傳送一組號碼以核實你所登記電話，請於下面輸入一次性密碼 (OTP)。",
+  "@otpScreenDescription": {
+    "placeholders": {
+      "phoneNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "buttonVerify": "核實",
+  "otpSentToYourPhone": "Otp SMS is sent to your phone",
+  "verifyOtpSuccess": "Verify OTP Success",
+  "otpSentToYourEmail": "OTP code sent to your email",
+  "otpDigit": "000000 (6 位數字)",
+  "sendOtp": "發送 OTP",
+  "reSendOtp": "在{seconds}秒後重發 ",
+  "@reSendOtp": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "aiIsqWelcomeTitle": "It's time to find out your investment preferences",
+  "aiIsqWelcomeSubTitle": "Let's see what kind of stocks you prefer",
   "isqNextButton": "Press to move onto the next section",
   "cancelled": "已取消",
   "expired": "已到期",

@@ -700,16 +700,6 @@ class S {
     );
   }
 
-  /// `Subscription`
-  String get subscription {
-    return Intl.message(
-      'Subscription',
-      name: 'subscription',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Core Plan`
   String get corePlan {
     return Intl.message(
@@ -1522,13 +1512,13 @@ class S {
     );
   }
 
-  /// `Current Price ({currency})`
-  String portfolioCurrentPrice(String currency) {
+  /// `Current Price`
+  String get portfolioCurrentPrice {
     return Intl.message(
-      'Current Price ($currency)',
+      'Current Price',
       name: 'portfolioCurrentPrice',
       desc: '',
-      args: [currency],
+      args: [],
     );
   }
 
@@ -4166,7 +4156,97 @@ class S {
     );
   }
 
-  /// `It’s time to find out your investment preferences`
+  /// `Mobile OTP`
+  String get otpScreenTitle {
+    return Intl.message(
+      'Mobile OTP',
+      name: 'otpScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We've sent you a code via SMS to verify your phone number (+852 {phoneNumber}). Please enter the OTP code below.`
+  String otpScreenDescription(String phoneNumber) {
+    return Intl.message(
+      'We\'ve sent you a code via SMS to verify your phone number (+852 $phoneNumber). Please enter the OTP code below.',
+      name: 'otpScreenDescription',
+      desc: '',
+      args: [phoneNumber],
+    );
+  }
+
+  /// `Verify`
+  String get buttonVerify {
+    return Intl.message(
+      'Verify',
+      name: 'buttonVerify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Otp SMS is sent to your phone`
+  String get otpSentToYourPhone {
+    return Intl.message(
+      'Otp SMS is sent to your phone',
+      name: 'otpSentToYourPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify OTP Success`
+  String get verifyOtpSuccess {
+    return Intl.message(
+      'Verify OTP Success',
+      name: 'verifyOtpSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP code sent to your email`
+  String get otpSentToYourEmail {
+    return Intl.message(
+      'OTP code sent to your email',
+      name: 'otpSentToYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `000000 (6 digit)`
+  String get otpDigit {
+    return Intl.message(
+      '000000 (6 digit)',
+      name: 'otpDigit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SEND OTP`
+  String get sendOtp {
+    return Intl.message(
+      'SEND OTP',
+      name: 'sendOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `RE-SEND IN {seconds}S`
+  String reSendOtp(String seconds) {
+    return Intl.message(
+      'RE-SEND IN ${seconds}S',
+      name: 'reSendOtp',
+      desc: '',
+      args: [seconds],
+    );
+  }
+
+  /// `It's time to find out your investment preferences`
   String get aiIsqWelcomeTitle {
     return Intl.message(
       'It’s time to find out your investment preferences',
@@ -4231,6 +4311,16 @@ class S {
     return Intl.message(
       'Completed',
       name: 'completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription`
+  String get subscription {
+    return Intl.message(
+      'Subscription',
+      name: 'subscription',
       desc: '',
       args: [],
     );
