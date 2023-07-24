@@ -45,7 +45,7 @@ class PersonalInfoScreen extends StatelessWidget {
       progress: progress,
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-      title: 'Set Up Personal Info',
+      title: S.of(context).personalInfo,
       content: GestureDetector(
         onTap: () {
           FocusScopeNode focus = FocusScope.of(context);
@@ -54,9 +54,10 @@ class PersonalInfoScreen extends StatelessWidget {
           }
         },
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTextNew(
-              'Please make sure your name matches the information on your identification document.',
+              S.of(context).personalInfoFormDesc,
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -64,7 +65,7 @@ class PersonalInfoScreen extends StatelessWidget {
             _textInput(
                 initialValue: context.read<PersonalInfoBloc>().state.firstName,
                 key: const Key('first_name'),
-                label: 'Legal English First Name*',
+                label: S.of(context).legalFirstName,
                 textInputFormatterList: [inputFormatter, onlyAllowOneSpace()],
                 onChanged: (value) => context
                     .read<PersonalInfoBloc>()
@@ -73,7 +74,7 @@ class PersonalInfoScreen extends StatelessWidget {
             _textInput(
                 initialValue: context.read<PersonalInfoBloc>().state.lastName,
                 key: const Key('last_name'),
-                label: 'Legal English Last Name*',
+                label: S.of(context).legalLastName,
                 textInputFormatterList: [inputFormatter, onlyAllowOneSpace()],
                 onChanged: (value) => context
                     .read<PersonalInfoBloc>()
@@ -103,7 +104,7 @@ class PersonalInfoScreen extends StatelessWidget {
             previous.countryCodeOfBirth != current.countryCodeOfBirth,
         builder: (context, state) => CustomCountryPicker(
           key: const Key('country_of_birth'),
-          label: 'Country Of Birth*',
+          label: S.of(context).countryOfBirth,
           initialValue: state.countryNameOfBirth,
           onSelect: (Country country) => context.read<PersonalInfoBloc>().add(
               PersonalInfoCountryOfBirthChanged(
@@ -117,6 +118,7 @@ class PersonalInfoScreen extends StatelessWidget {
               previous.phoneNumber != current.phoneNumber,
           builder: (context, state) => CustomPhoneNumberInput(
                 key: const Key('phone_number'),
+                label: S.of(context).hkPhoneNo,
                 initialValueOfPhoneNumber: state.phoneNumber,
                 onChangePhoneNumber: (phoneNumber) => context
                     .read<PersonalInfoBloc>()
@@ -150,7 +152,7 @@ class PersonalInfoScreen extends StatelessWidget {
         builder: (context, state) {
           return MasterTextField(
             key: const Key('hk_id_number'),
-            labelText: 'HKID Number*',
+            labelText: S.of(context).hkIdNumber,
             hintText: 'A1234567',
             initialValue: state.hkIdNumber,
             textCapitalization: TextCapitalization.words,
@@ -174,7 +176,7 @@ class PersonalInfoScreen extends StatelessWidget {
             previous.nationalityCode != current.nationalityCode,
         builder: (context, state) => CustomCountryPicker(
           key: const Key('nationality'),
-          label: 'Nationality*',
+          label: S.of(context).nationality,
           hintText: 'Select Nationality',
           initialValue: state.nationalityName,
           onSelect: (Country country) => context.read<PersonalInfoBloc>().add(
@@ -191,7 +193,7 @@ class PersonalInfoScreen extends StatelessWidget {
           DateTime dateOfBirth = DateTime.parse(state.dateOfBirth);
           return CustomDatePicker(
             key: const Key('date_of_birth'),
-            label: 'Date of Birth*',
+            label: S.of(context).dateOfBirth,
             selectedDate: dateOfBirth,
             initialDateTime: dateOfBirth,
             maximumDate: DateTime.now(),

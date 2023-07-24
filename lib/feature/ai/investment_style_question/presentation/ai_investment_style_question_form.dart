@@ -56,7 +56,7 @@ class AiInvestmentStyleQuestionForm extends StatelessWidget {
           },
           child: AiLayoutWithBackground(
             content: Padding(
-              padding: AppValues.screenHorizontalPadding,
+              padding: AppValues.screenHorizontalPadding.copyWith(top: 8),
               child: Stack(
                 children: [
                   Column(

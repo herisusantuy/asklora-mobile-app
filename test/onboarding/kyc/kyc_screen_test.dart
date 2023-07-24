@@ -39,7 +39,6 @@ void main() {
           'Show progress screen with memoji, kyc step, items needed and bottom button',
           (WidgetTester tester) async {
         await buildKycScreen(tester, KycPageStep.progress);
-        expect(find.byKey(const Key('memoji_widget')), findsOneWidget);
         expect(find.byKey(const Key('kyc_steps')), findsOneWidget);
         expect(find.byKey(const Key('kyc_items_needed')), findsOneWidget);
       });
