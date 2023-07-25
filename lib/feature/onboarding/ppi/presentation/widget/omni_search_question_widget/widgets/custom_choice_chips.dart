@@ -12,6 +12,8 @@ class CustomChoiceChips extends StatefulWidget {
   final Color? activeFillColor;
   final Color? pressedFillColor;
   final Color? fillColor;
+  final Color? activeBorderColor;
+  final Color? borderColor;
   final TextStyle? textStyle;
   final Color? textColor;
   final Color? activeTextColor;
@@ -26,6 +28,8 @@ class CustomChoiceChips extends StatefulWidget {
       this.activeFillColor,
       this.pressedFillColor,
       this.fillColor,
+      this.borderColor,
+      this.activeBorderColor,
       this.onClosed,
       this.textStyle,
       this.textColor,
@@ -71,8 +75,8 @@ class _CustomChoiceChipsState extends State<CustomChoiceChips> {
                 color: _isPressed
                     ? AskLoraColors.gray
                     : widget.active
-                        ? AskLoraColors.primaryGreen
-                        : AskLoraColors.gray),
+                        ? widget.activeBorderColor ?? AskLoraColors.primaryGreen
+                        : widget.borderColor ?? AskLoraColors.gray),
             color: widget.active
                 ? widget.activeFillColor ??
                     AskLoraColors.primaryGreen.withOpacity(0.1)

@@ -12,6 +12,7 @@ import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../generated/l10n.dart';
 import '../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
+import '../../../core/presentation/ai/utils/ai_utils.dart';
 import '../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../onboarding/kyc/presentation/kyc_screen.dart';
@@ -72,9 +73,10 @@ class ForYouScreenForm extends StatelessWidget {
                       case ForYouPage.investmentStyle:
                         context.read<TabThemeBloc>().add(
                             const BackgroundImageTypeChanged(
-                                BackgroundImageType.dark));
+                                BackgroundImageType.light));
                         return const AiInvestmentStyleQuestionWelcomeScreen(
                           isqType: ISQType.forYou,
+                          aiThemeType: AiThemeType.light,
                         );
                       case ForYouPage.botRecommendation:
                         context.read<TabThemeBloc>().add(

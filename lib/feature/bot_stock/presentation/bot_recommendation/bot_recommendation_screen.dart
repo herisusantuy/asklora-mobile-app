@@ -123,15 +123,14 @@ class BotRecommendationScreen extends StatelessWidget {
             S.of(context).botRecommendationScreenTitle,
             style: AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
           ),
-          const SizedBox(
-            height: 36,
-          ),
+          const SizedBox(height: 16),
           CustomTextWithTooltip(
             title: S.of(context).updatedAt(updated),
             tooltipText: S.of(context).ourPersonalisedRecommendationsAreUnique,
             titleStyle: AskLoraTextStyles.subtitle3
                 .copyWith(color: AskLoraColors.darkGray),
           ),
+          const SizedBox(height: 12),
           Row(
             children: [
               Flexible(
@@ -143,7 +142,7 @@ class BotRecommendationScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                width: 5,
+                width: 5
               ),
               ExtraInfoButton(
                 label: S.of(context).defineAgain,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../../widgets/kyc_sub_title.dart';
 import '../../widgets/summary_text_info.dart';
@@ -21,15 +22,18 @@ class SignAgreementSummaryContent extends StatelessWidget {
             subTitle: title,
           ),
           _spaceHeight,
-          const SummaryTextInfo(
-              title: 'Asklora Customer Agreement', subTitle: '(Agreed)'),
+          SummaryTextInfo(
+              title: S.of(context).askloraCustomerAgreement,
+              subTitle: '(${S.of(context).agreed})'),
           _spaceHeight,
-          const SummaryTextInfo(
-            title: 'Risk Disclosure Statement',
-            subTitle: '(Agreed)',
+          SummaryTextInfo(
+            title: S.of(context).riskDisclosureStatement,
+            subTitle: '(${S.of(context).agreed})',
           ),
           _spaceHeight,
-          const SummaryTextInfo(title: 'W-8BEN Form', subTitle: '(Agreed)'),
+          SummaryTextInfo(
+              title: S.of(context).w8benForm,
+              subTitle: '(${S.of(context).agreed})'),
           _spaceHeight,
           SummaryTextInfo(
               title: 'Electronic Signature',

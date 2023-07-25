@@ -7,7 +7,7 @@ import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../../../core/presentation/lora_memoji_header.dart';
+import '../../../../core/presentation/lora_animation_header.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
@@ -34,9 +34,7 @@ class SignInForm extends StatelessWidget {
       if (responseState == ResponseState.error) {
         context.read<SignInBloc>().add(SignInEmailChanged(state.emailAddress));
         CustomInAppNotification.show(
-            context,
-            AuthErrorMessage.findByString(state.response.message)
-                .getErrorMessage(context));
+            context, state.response.validationCode.getErrorMessage(context));
       } else if (responseState == ResponseState.success) {
         context.read<AppBloc>().add(const GetUserJourneyFromLocal());
         var arguments = Pair(state.emailAddress, state.password);
@@ -66,7 +64,7 @@ class SignInForm extends StatelessWidget {
                   children: <Widget>[
                     Column(
                       children: [
-                        LoraMemojiHeader(
+                        LoraAnimationHeader(
                             text: 'Welcome back!\n${S.of(context).readyToGo}'),
                         context.padding(),
                         _emailInput(),
@@ -98,8 +96,7 @@ class SignInForm extends StatelessWidget {
           maxLine: 1,
           labelText: S.of(context).emailAddress,
           hintText: S.of(context).emailAddress,
-          errorText: AuthErrorMessage.findByString(state.emailAddressErrorText)
-              .getErrorMessage(context),
+          errorText: state.emailAddressValidation.getErrorMessage(context),
           onChanged: (email) =>
               context.read<SignInBloc>().add(SignInEmailChanged(email))));
 

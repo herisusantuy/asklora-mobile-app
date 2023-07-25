@@ -47,7 +47,11 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       resetTimeStreamSubscription = ticker().listen((_) {
         add(const OtpTimeResetUpdate());
       });
-    } on NotFoundException {
+    } on AskloraApiClientException catch (e) {
+      emit(state.copyWith(
+          response: BaseResponse.error(validationCode: e.askloraError.type)));
+    }
+    /*on NotFoundException {
       emit(state.copyWith(
           response: BaseResponse.error(
               message: 'User does not exist with the given email')));
@@ -56,7 +60,8 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
           response: BaseResponse.error(
               message:
                   ' Your phone number is invalid, please update it first')));
-    } catch (e) {
+    }*/
+    catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }
   }
@@ -86,10 +91,16 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       cancelStreamSubscription();
       data.copyWith(message: 'Verify OTP Success');
       emit(OtpValidationSuccess());
-    } on BadRequestException {
+    } on AskloraApiClientException catch (e) {
+      emit(state.copyWith(
+          response: BaseResponse.error(validationCode: e.askloraError.type),
+          otp: 'The OTP is incorrect'));
+    }
+    /* on BadRequestException {
       emit(state.copyWith(
           response: BaseResponse.unknown(), otpError: 'The OTP is incorrect'));
-    } catch (e) {
+    }*/
+    catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }
   }

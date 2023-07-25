@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/styles/asklora_colors.dart';
+import '../utils/ai_utils.dart';
 import 'jumping_dots_lora_gpt.dart';
 
 class LoraThinkingWidget extends StatelessWidget {
-  const LoraThinkingWidget({super.key});
+  final AiThemeType aiThemeType;
+
+  const LoraThinkingWidget({this.aiThemeType = AiThemeType.dark, super.key});
 
   @override
   Widget build(BuildContext context) => Align(
@@ -13,7 +14,7 @@ class LoraThinkingWidget extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         margin: const EdgeInsets.only(bottom: 5, right: 40),
         decoration: BoxDecoration(
-          color: AskLoraColors.white.withOpacity(0.2),
+          color: aiThemeType.loraThingkingWidgetColor,
           borderRadius: const BorderRadius.only(
             topRight: Radius.circular(20),
             bottomLeft: Radius.circular(20),

@@ -70,9 +70,9 @@ class PersonalInfoState extends Equatable {
     String? phoneNumber,
     String? nationalityCode,
     String? nationalityName,
-    bool? isHongKongPermanentResident,
+    ValueGetter<bool?>? isHongKongPermanentResident,
     String? hkIdNumber,
-    bool? isUnitedStateResident,
+    ValueGetter<bool?>? isUnitedStateResident,
     String? phoneNumberErrorText,
     BaseResponse? response,
     String? hkIdErrorText,
@@ -88,11 +88,13 @@ class PersonalInfoState extends Equatable {
       phoneNumber: phoneNumber ?? this.phoneNumber,
       nationalityCode: nationalityCode ?? this.nationalityCode,
       nationalityName: nationalityName ?? this.nationalityName,
-      isHongKongPermanentResident:
-          isHongKongPermanentResident ?? this.isHongKongPermanentResident,
+      isHongKongPermanentResident: isHongKongPermanentResident != null
+          ? isHongKongPermanentResident()
+          : this.isHongKongPermanentResident,
       hkIdNumber: hkIdNumber ?? this.hkIdNumber,
-      isUnitedStateResident:
-          isUnitedStateResident ?? this.isUnitedStateResident,
+      isUnitedStateResident: isUnitedStateResident != null
+          ? isUnitedStateResident()
+          : this.isUnitedStateResident,
       phoneNumberErrorText: phoneNumberErrorText ?? this.phoneNumberErrorText,
       response: response ?? this.response,
       hkIdErrorText: hkIdErrorText ?? this.hkIdErrorText,
