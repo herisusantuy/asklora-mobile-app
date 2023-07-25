@@ -7,7 +7,7 @@ import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../../../core/presentation/lora_memoji_header.dart';
+import '../../../../core/presentation/lora_animation_header.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
@@ -66,7 +66,7 @@ class SignInForm extends StatelessWidget {
                   children: <Widget>[
                     Column(
                       children: [
-                        LoraMemojiHeader(
+                        LoraAnimationHeader(
                             text: 'Welcome back!\n${S.of(context).readyToGo}'),
                         context.padding(),
                         _emailInput(),

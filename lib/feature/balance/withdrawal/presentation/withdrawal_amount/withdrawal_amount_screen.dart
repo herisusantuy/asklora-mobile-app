@@ -40,7 +40,7 @@ class WithdrawalAmountScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 22.0),
                 child: CustomTextNew(
-                  S.of(context).buttonWithdraw,
+                  S.of(context).withdraw,
                   style: AskLoraTextStyles.h5
                       .copyWith(color: AskLoraColors.charcoal),
                 ),

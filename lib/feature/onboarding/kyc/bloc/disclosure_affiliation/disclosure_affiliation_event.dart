@@ -16,6 +16,8 @@ class AffiliatedPersonChanged extends DisclosuresAffiliationEvent {
   List<Object> get props => [isAffiliatedPerson];
 }
 
+class ResetAffiliatedAnswer extends DisclosuresAffiliationEvent {}
+
 class AffiliatedCommissionChanged extends DisclosuresAffiliationEvent {
   final bool isAffiliatedCommission;
 

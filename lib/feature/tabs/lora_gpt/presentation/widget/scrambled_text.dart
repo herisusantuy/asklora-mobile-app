@@ -30,6 +30,9 @@ class ScrambledText extends StatefulWidget {
   /// The style of the text with specified color, fontWeight, fontSize
   final TextStyle? style;
 
+  /// The style of the scrambled text with specified color, fontWeight, fontSize
+  final TextStyle? scrambledStyle;
+
   /// Represents directionality of text.
   final TextDirection? textDirection;
 
@@ -59,6 +62,7 @@ class ScrambledText extends StatefulWidget {
     this.initialText,
     this.shouldPlayOnStart = true,
     this.style,
+    this.scrambledStyle,
     this.randomString = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
     required this.duration,
     this.onFinished,
@@ -138,13 +142,12 @@ class ScrambledTextState extends State<ScrambledText>
 
     // Set the style for the revealed part of the text
     TextStyle revealedTextStyle =
-        widget.style?.copyWith(color: AskLoraColors.white) ??
-            TextStyle(color: AskLoraColors.white);
+        widget.style ?? const TextStyle(color: AskLoraColors.white);
 
     // Set the style for the scrambled part of the text
-    TextStyle scrambledTextStyle =
+    TextStyle scrambledTextStyle = widget.scrambledStyle ??
         widget.style?.copyWith(color: AskLoraColors.white.withOpacity(0.5)) ??
-            TextStyle(color: AskLoraColors.white.withOpacity(0.5));
+        TextStyle(color: AskLoraColors.white.withOpacity(0.5));
 
     // Create a span with the revealed text style
     TextSpan revealedSpan =
