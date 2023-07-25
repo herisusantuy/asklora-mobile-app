@@ -226,7 +226,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
       S.of(context).rolloverBotStockAcknowledgement(
           createOrderResponse.botAppsName,
           createOrderResponse.symbol,
-          createOrderResponse.optimalTimeFormatted);
+          createOrderResponse.optimalTimeHKTString);
 
   static void open(
           {required BuildContext context,
