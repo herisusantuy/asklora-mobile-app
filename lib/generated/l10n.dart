@@ -5315,6 +5315,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Your investment account application is under review!`
+  String get kycResultScreenTitle {
+    return Intl.message(
+      'Your investment account application is under review!',
+      name: 'kycResultScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You will be informed when your application is approved.\n\nPlease remember to collect your gift.`
+  String get kycResultScreenDesc {
+    return Intl.message(
+      'You will be informed when your application is approved.\n\nPlease remember to collect your gift.',
+      name: 'kycResultScreenDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit Funds`
+  String get depositFund {
+    return Intl.message(
+      'Deposit Funds',
+      name: 'depositFund',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

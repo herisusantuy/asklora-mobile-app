@@ -300,6 +300,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Define Investment Style"),
         "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "depositAmount": MessageLookupByLibrary.simpleMessage("Deposit Amount"),
+        "depositFund": MessageLookupByLibrary.simpleMessage("Deposit Funds"),
         "depositFundToStartInvesting": MessageLookupByLibrary.simpleMessage(
             "Deposit funds to start investing"),
         "depositHistory":
@@ -480,6 +481,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "It’s time to define your investment style.Show me what you’re made of!"),
         "isqNextButton": MessageLookupByLibrary.simpleMessage(
             "Press to move onto the next section"),
+        "kycResultScreenDesc": MessageLookupByLibrary.simpleMessage(
+            "You will be informed when your application is approved.\n\nPlease remember to collect your gift."),
+        "kycResultScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "Your investment account application is under review!"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lawEnforcementGovernmentProtectiveService":
             MessageLookupByLibrary.simpleMessage(

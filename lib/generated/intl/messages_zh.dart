@@ -254,6 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defineInvestmentStyle": MessageLookupByLibrary.simpleMessage("界定投資風格"),
         "deposit": MessageLookupByLibrary.simpleMessage("存入資金"),
         "depositAmount": MessageLookupByLibrary.simpleMessage("存入金額"),
+        "depositFund": MessageLookupByLibrary.simpleMessage("存入資金"),
         "depositFundToStartInvesting":
             MessageLookupByLibrary.simpleMessage("存入資金開始投資"),
         "depositHistory": MessageLookupByLibrary.simpleMessage("入金歷史"),
@@ -391,6 +392,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "想知Asklora有咩投資秘技？\n界定你嘅投資風格先！\n"),
         "isqNextButton": MessageLookupByLibrary.simpleMessage(
             "Press to move onto the next section"),
+        "kycResultScreenDesc": MessageLookupByLibrary.simpleMessage(
+            "你嘅投資賬戶正在審核中\n一有進度Asklora會馬上同你聯絡"),
+        "kycResultScreenTitle":
+            MessageLookupByLibrary.simpleMessage("幫緊你,幫緊你!"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
         "lawEnforcementGovernmentProtectiveService":
             MessageLookupByLibrary.simpleMessage(
