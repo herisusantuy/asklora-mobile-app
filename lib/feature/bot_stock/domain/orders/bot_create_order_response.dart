@@ -41,7 +41,7 @@ class BotCreateOrderResponse {
       '${BotType.findByString(botAppsName).upperCaseName} $symbol';
 
   String get optimalTimeFormatted =>
-      '${convertDateToEst(optimalTime, dateFormat: 'dd/MM/yyyy HH:mm')} EST';
+      '${convertDateToHktString(optimalTime, dateFormat: 'dd/MM/yyyy HH:mm')} HKT';
 
   factory BotCreateOrderResponse.fromJson(Map<String, dynamic> json) =>
       _$BotCreateOrderResponseFromJson(json);

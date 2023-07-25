@@ -28,7 +28,7 @@ class TerminateOrderResponse {
       _$TerminateOrderResponseFromJson(json);
 
   String get optimalTimeFormatted {
-    return '${convertDateToEst(optimalTime, dateFormat: 'dd/MM/yyyy HH:mm')} EST';
+    return '${convertDateToHktString(optimalTime, dateFormat: 'dd/MM/yyyy HH:mm')} HKT';
   }
 
   Map<String, dynamic> toJson() => _$TerminateOrderResponseToJson(this);
