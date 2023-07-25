@@ -255,6 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defineInvestmentStyle": MessageLookupByLibrary.simpleMessage("界定投資風格"),
         "deposit": MessageLookupByLibrary.simpleMessage("存入資金"),
         "depositAmount": MessageLookupByLibrary.simpleMessage("存入金額"),
+        "depositFund": MessageLookupByLibrary.simpleMessage("存入資金"),
         "depositFundToStartInvesting":
             MessageLookupByLibrary.simpleMessage("存入資金開始投資"),
         "depositHistory": MessageLookupByLibrary.simpleMessage("入金歷史"),
@@ -396,6 +397,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("我們不接受上述類別人士\n開立賬戶。"),
         "kycRejectedScreenTitle":
             MessageLookupByLibrary.simpleMessage("Sorry，原來你唔合資格用 Asklora！"),
+        "kycResultScreenDesc": MessageLookupByLibrary.simpleMessage(
+            "你嘅投資賬戶正在審核中\n一有進度Asklora會馬上同你聯絡"),
+        "kycResultScreenTitle":
+            MessageLookupByLibrary.simpleMessage("幫緊你,幫緊你!"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
         "lawEnforcementGovernmentProtectiveService":
             MessageLookupByLibrary.simpleMessage(

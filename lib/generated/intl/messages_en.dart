@@ -301,6 +301,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Define Investment Style"),
         "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "depositAmount": MessageLookupByLibrary.simpleMessage("Deposit Amount"),
+        "depositFund": MessageLookupByLibrary.simpleMessage("Deposit Funds"),
         "depositFundToStartInvesting": MessageLookupByLibrary.simpleMessage(
             "Deposit funds to start investing"),
         "depositHistory":
@@ -485,6 +486,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "We do not accept any members who are affiliated with the organisations mentioned above"),
         "kycRejectedScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Sorry ! You are not eligible for Asklora"),
+        "kycResultScreenDesc": MessageLookupByLibrary.simpleMessage(
+            "You will be informed when your application is approved.\n\nPlease remember to collect your gift."),
+        "kycResultScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "Your investment account application is under review!"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lawEnforcementGovernmentProtectiveService":
             MessageLookupByLibrary.simpleMessage(

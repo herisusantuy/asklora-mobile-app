@@ -754,5 +754,8 @@
   "takePhotoFront": "Take a photo of the front of your HKID",
   "takePhotoBack": "Take a photo of the front of your HKID",
   "takeSelfie": "Take a selfie",
-  "verifyNow": "Verify Now"
+  "verifyNow": "Verify Now",
+  "kycResultScreenTitle": "Your investment account application is under review!",
+  "kycResultScreenDesc": "You will be informed when your application is approved.\n\nPlease remember to collect your gift.",
+  "depositFund": "Deposit Funds"
 }
