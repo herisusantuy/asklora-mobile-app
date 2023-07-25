@@ -37,7 +37,7 @@ class BotSummaryTransactionHistoryModel extends Equatable {
   String get feeString => 'HKD ${checkDouble(fee).convertToCurrencyDecimal()}';
 
   String get createdFormattedString {
-    return '${convertDateToEst(date, dateFormat: 'dd/MM/yyyy HH:mm:ss')} EST';
+    return '${convertDateToHktString(date, dateFormat: 'dd/MM/yyyy HH:mm:ss')} HKT';
   }
 
   BotSummaryType get botSummaryType => BotSummaryType.findByString(type);

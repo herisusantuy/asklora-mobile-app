@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../utils/ai_utils.dart';
 import '../../../../feature/tabs/lora_gpt/presentation/widget/scrambled_text.dart';
 
 class OutChatBubbleWidget extends StatelessWidget {
   const OutChatBubbleWidget(this.message,
-      {super.key, this.animateText = false, this.onFinishedAnimation});
+      {super.key,
+      this.animateText = false,
+      this.onFinishedAnimation,
+      this.aiThemeType = AiThemeType.dark});
 
   final String message;
   final bool animateText;
   final VoidCallback? onFinishedAnimation;
+  final AiThemeType aiThemeType;
 
   @override
   Widget build(BuildContext context) => Align(
@@ -19,7 +22,7 @@ class OutChatBubbleWidget extends StatelessWidget {
             padding: const EdgeInsets.all(15),
             margin: const EdgeInsets.only(bottom: 5, right: 40),
             decoration: BoxDecoration(
-              color: AskLoraColors.white.withOpacity(0.15),
+              color: aiThemeType.outChatBubbleWidgetColor,
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(20),
                 bottomLeft: Radius.circular(20),
@@ -28,9 +31,11 @@ class OutChatBubbleWidget extends StatelessWidget {
             ),
             child: animateText
                 ? ScrambledText(
+                    scrambledStyle: AskLoraTextStyles.body2
+                        .copyWith(color: aiThemeType.scrambledTextColor),
                     text: message,
                     style: AskLoraTextStyles.body2
-                        .copyWith(color: AskLoraColors.white),
+                        .copyWith(color: aiThemeType.primaryFontColor),
                     duration: const Duration(milliseconds: 17),
                     // ? AnimatedTextKit(
                     //     isRepeatingAnimation: false,
@@ -48,6 +53,6 @@ class OutChatBubbleWidget extends StatelessWidget {
                     })
                 : SelectableText(message,
                     style: AskLoraTextStyles.body2
-                        .copyWith(color: AskLoraColors.white))),
+                        .copyWith(color: aiThemeType.primaryFontColor))),
       );
 }

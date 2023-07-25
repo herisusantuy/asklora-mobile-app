@@ -4356,6 +4356,36 @@ class S {
     );
   }
 
+  /// `Sorry ! You are not eligible for Asklora`
+  String get kycRejectedScreenTitle {
+    return Intl.message(
+      'Sorry ! You are not eligible for Asklora',
+      name: 'kycRejectedScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We do not accept any members who are affiliated with the organisations mentioned above`
+  String get kycRejectedExplanationOfAffiliate {
+    return Intl.message(
+      'We do not accept any members who are affiliated with the organisations mentioned above',
+      name: 'kycRejectedExplanationOfAffiliate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go Back`
+  String get buttonGoBack {
+    return Intl.message(
+      'Go Back',
+      name: 'buttonGoBack',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Employment`
   String get employment {
     return Intl.message(
@@ -4366,21 +4396,11 @@ class S {
     );
   }
 
-  /// `Employment Status*`
+  /// `Employment Status`
   String get employmentStatus {
     return Intl.message(
-      'Employment Status*',
+      'Employment Status',
       name: 'employmentStatus',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Please Select`
-  String get pleaseSelect {
-    return Intl.message(
-      'Please Select',
-      name: 'pleaseSelect',
       desc: '',
       args: [],
     );
@@ -4946,6 +4966,26 @@ class S {
     );
   }
 
+  /// `Please Select`
+  String get pleaseSelect {
+    return Intl.message(
+      'Please Select',
+      name: 'pleaseSelect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription`
+  String get subscription {
+    return Intl.message(
+      'Subscription',
+      name: 'subscription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Please read the the Asklora Customer Agreement. You must click on the agreement and check all the boxes in order to proceed.`
   String get pleaseReadTheAskloraCustomerAgreement {
     return Intl.message(
@@ -5246,16 +5286,6 @@ class S {
     );
   }
 
-  /// `Subscription`
-  String get subscription {
-    return Intl.message(
-      'Subscription',
-      name: 'subscription',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `We'll need to verify your identity via your HKID.`
   String get weNeedToVerifyYourId {
     return Intl.message(
@@ -5311,6 +5341,36 @@ class S {
     return Intl.message(
       'Verify Now',
       name: 'verifyNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your investment account application is under review!`
+  String get kycResultScreenTitle {
+    return Intl.message(
+      'Your investment account application is under review!',
+      name: 'kycResultScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You will be informed when your application is approved.\n\nPlease remember to collect your gift.`
+  String get kycResultScreenDesc {
+    return Intl.message(
+      'You will be informed when your application is approved.\n\nPlease remember to collect your gift.',
+      name: 'kycResultScreenDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit Funds`
+  String get depositFund {
+    return Intl.message(
+      'Deposit Funds',
+      name: 'depositFund',
       desc: '',
       args: [],
     );

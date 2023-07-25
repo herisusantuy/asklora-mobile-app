@@ -67,7 +67,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
             previous.employmentStatus != current.employmentStatus,
         builder: (context, state) => CustomDropdown(
             key: const Key('account_employment_status_select'),
-            labelText: S.of(context).employmentStatus,
+            labelText: '${S.of(context).employmentStatus}*',
             hintText: S.of(context).pleaseSelect,
             itemsList: EmploymentStatus.values
                 .map((e) =>

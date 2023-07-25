@@ -6,8 +6,11 @@ import '../../../utils/app_icons.dart';
 class AiSendTextButton extends StatelessWidget {
   final bool isDisabled;
   final VoidCallback onTap;
+  final Color borderColor;
   final Color? enabledButtonColor;
   final Color? disabledButtonColor;
+  final Color? enabledIconColor;
+  final Color? disabledIconColor;
   final Size? size;
 
   const AiSendTextButton(
@@ -15,6 +18,9 @@ class AiSendTextButton extends StatelessWidget {
       required this.onTap,
       this.enabledButtonColor,
       this.disabledButtonColor,
+      this.borderColor = AskLoraColors.white,
+      this.enabledIconColor = AskLoraColors.gray,
+      this.disabledIconColor = AskLoraColors.gray,
       this.size,
       super.key});
 
@@ -27,7 +33,7 @@ class AiSendTextButton extends StatelessWidget {
             onTap();
           },
           style: ElevatedButton.styleFrom(
-            side: const BorderSide(color: AskLoraColors.white),
+            side: BorderSide(color: borderColor),
             backgroundColor: isDisabled
                 ? disabledButtonColor ?? AskLoraColors.gray.withOpacity(0.2)
                 : enabledButtonColor ?? AskLoraColors.primaryGreen,
@@ -36,18 +42,11 @@ class AiSendTextButton extends StatelessWidget {
             fixedSize: size,
           ),
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  spreadRadius: 2,
-                  blurRadius: 7,
-                  offset: const Offset(0, 3), // changes position of shadow
-                ),
-              ],
             ),
-            child: getSvgIcon('icon_sent_text', color: AskLoraColors.white),
+            child: getSvgIcon('icon_sent_text',
+                color: isDisabled ? disabledIconColor : enabledIconColor),
           ),
         ),
       );
