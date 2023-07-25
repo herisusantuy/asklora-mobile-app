@@ -92,7 +92,7 @@ class SettingsScreen extends StatelessWidget {
                 height: 40,
               ),
 
-              ///ADD THIS BACK FOR THE REAL MONEY LUNCH
+              ///ADD THIS BACK FOR THE REAL MONEY LAUNCH
               // _settingsMenu(
               //     title: S.of(context).subscription,
               //     subTitle:
@@ -107,8 +107,6 @@ class SettingsScreen extends StatelessWidget {
               _settingsMenu(
                   title: S.of(context).aboutAsklora,
                   onTap: () => AboutAskloraScreen.open(context)),
-              // _signOutButton(context),
-              // _getAppVersion()
             ],
           ),
           bottomButton: _signOutButton,
