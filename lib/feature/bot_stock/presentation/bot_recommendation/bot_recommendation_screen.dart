@@ -141,9 +141,7 @@ class BotRecommendationScreen extends StatelessWidget {
                       .copyWith(color: AskLoraColors.primaryMagenta),
                 ),
               ),
-              const SizedBox(
-                width: 5
-              ),
+              const SizedBox(width: 5),
               ExtraInfoButton(
                 label: S.of(context).defineAgain,
                 buttonExtraInfoSize: ButtonExtraInfoSize.small,
