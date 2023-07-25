@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-
-import '../../../styles/asklora_colors.dart';
 import '../../../styles/asklora_text_styles.dart';
 import '../../../utils/app_icons.dart';
 import '../../custom_text_new.dart';
+import '../utils/ai_utils.dart';
 
 class ChatLoraHeader extends StatelessWidget {
-  const ChatLoraHeader({super.key});
+  final AiThemeType aiThemeType;
+
+  const ChatLoraHeader({this.aiThemeType = AiThemeType.dark, super.key});
 
   @override
   Widget build(BuildContext context) => Row(
@@ -20,7 +21,8 @@ class ChatLoraHeader extends StatelessWidget {
             ),
             CustomTextNew(
               'Lora',
-              style: AskLoraTextStyles.h4.copyWith(color: AskLoraColors.white),
+              style: AskLoraTextStyles.h4
+                  .copyWith(color: aiThemeType.primaryFontColor),
             ),
           ]);
 }

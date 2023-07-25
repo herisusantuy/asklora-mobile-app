@@ -10,6 +10,7 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/domain/transaction/transaction_balance_response.dart';
 import '../../../../core/presentation/auto_sized_text_widget.dart';
 import '../../../../core/presentation/column_text/pair_column_text.dart';
@@ -89,7 +90,8 @@ class PortfolioScreen extends StatelessWidget {
               ),
               showPopUp: (state.botActiveOrderResponse.state ==
                           ResponseState.error &&
-                      state.botActiveOrderResponse.errorCode != 403) ||
+                      state.botActiveOrderResponse.validationCode !=
+                          ValidationCode.tradeAuthorization) ||
                   state.transactionBalanceResponse.state == ResponseState.error,
               content: ListView(
                 padding: AppValues.screenHorizontalPadding

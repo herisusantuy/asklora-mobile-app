@@ -52,7 +52,7 @@ class BotRecommendationCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomTextNew(
-                  '${botType.upperCaseName} ${botRecommendationModel.tickerSymbol}',
+                  botRecommendationModel.tickerSymbol,
                   style: AskLoraTextStyles.h5,
                   maxLines: 1,
                   ellipsis: true,
@@ -70,14 +70,14 @@ class BotRecommendationCard extends StatelessWidget {
                   height: 13,
                 ),
                 CustomTextNew(
-                  S.of(context).currentPrice,
+                  botRecommendationModel.botAppType,
                   style: AskLoraTextStyles.body4,
                 ),
                 const SizedBox(
                   height: 1,
                 ),
                 CustomTextNew(
-                  botRecommendationModel.latestPriceFormatted,
+                  '\$${botRecommendationModel.latestPriceFormatted}',
                   style: AskLoraTextStyles.subtitle2,
                 ),
                 const SizedBox(

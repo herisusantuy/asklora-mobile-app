@@ -29,13 +29,9 @@ import '../widgets/custom_expansion_panel.dart';
 import 'detail/bot_recommendation_detail_screen.dart';
 
 part 'widgets/bot_learn_more_bottom_sheet.dart';
-
 part 'widgets/bot_recommendation_card.dart';
-
 part 'widgets/bot_recommendation_card_shimmer.dart';
-
 part 'widgets/bot_recommendation_faq.dart';
-
 part 'widgets/bot_recommendation_list.dart';
 
 class BotRecommendationScreen extends StatelessWidget {

@@ -7,6 +7,7 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/presentation/column_text/pair_column_text.dart';
 import '../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
@@ -108,7 +109,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
             SuspendedAccountScreen.open(context);
           } else if (state.createBotOrderResponse.state ==
               ResponseState.error) {
-            if (state.createBotOrderResponse.errorCode == 403) {
+            if (state.createBotOrderResponse.validationCode ==
+                ValidationCode.tradeAuthorization) {
               BotStockBottomSheet.notYetRegisteredToBroker(context);
 
               ///TODO : INSUFFICIENT BALANCE ERROR IS SAME 403 THEREFORE WILL BE IMPLEMENTED LATER WHEN GOT NEW ENUM STATUS_CODE
@@ -228,7 +230,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
       S.of(context).rolloverBotStockAcknowledgement(
           createOrderResponse.botAppsName,
           createOrderResponse.symbol,
-          createOrderResponse.optimalTimeFormatted);
+          createOrderResponse.optimalTimeHKTString);
 
   static void open(
           {required BuildContext context,
