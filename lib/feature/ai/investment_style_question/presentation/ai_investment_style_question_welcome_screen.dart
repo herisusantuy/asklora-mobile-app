@@ -4,31 +4,39 @@ import '../../../tabs/for_you/investment_style/presentation/ai_investment_style_
 import '../../presentation/ai_welcome_screen.dart';
 import '../../presentation/widgets/ai_welcome_subtitle_text.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/ai_investment_style_question_onboarding_screen.dart';
+import '../../../../core/presentation/ai/utils/ai_utils.dart';
 
 enum ISQType { onboarding, forYou }
 
 class AiInvestmentStyleQuestionWelcomeScreen extends StatelessWidget {
   final ISQType isqType;
+  final AiThemeType aiThemeType;
   static const String route = '/ai_investment_style_question_welcome_screen';
 
   const AiInvestmentStyleQuestionWelcomeScreen(
-      {this.isqType = ISQType.onboarding, super.key});
+      {this.isqType = ISQType.onboarding,
+      this.aiThemeType = AiThemeType.light,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
     return AiWelcomeScreen(
+      enableBackgroundImage: isqType == ISQType.onboarding,
+      aiThemeType: aiThemeType,
       title: S.of(context).aiIsqWelcomeTitle,
       child: Padding(
         padding: const EdgeInsets.only(top: 29),
         child: AiWelcomeSubtitleText(
-          S.of(context).aiIsqWelcomeSubTitle,
+          aiThemeType: aiThemeType,
+          subTitle: S.of(context).aiIsqWelcomeSubTitle,
         ),
       ),
       onBottomButtonTap: () {
         if (isqType == ISQType.onboarding) {
           AiInvestmentStyleQuestionOnboardingScreen.open(context);
         } else {
-          AiInvestmentStyleQuestionForYouScreen.open(context);
+          AiInvestmentStyleQuestionForYouScreen.open(context,
+              aiThemeType: aiThemeType);
         }
       },
     );
