@@ -74,9 +74,14 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
             platformFiles: state.proofOfRemittanceImages);
         emit(state.copyWith(response: data));
       }
-    } on LegalReasonException {
+    } on AskloraApiClientException catch (e) {
+      emit(state.copyWith(
+          response: BaseResponse.error(validationCode: e.askloraError.type)));
+    }
+    /*on LegalReasonException {
       emit(state.copyWith(response: BaseResponse.suspended()));
-    } catch (e) {
+    }*/
+    catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }
   }

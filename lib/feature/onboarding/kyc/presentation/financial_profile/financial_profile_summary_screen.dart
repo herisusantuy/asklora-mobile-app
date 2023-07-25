@@ -31,13 +31,13 @@ class FinancialProfileSummaryScreen extends StatelessWidget {
     return KycBaseForm(
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-      title: 'Set Up Financial Profile',
+      title: S.of(context).setUpFinancialProfile,
       content: FinancialProfileSummaryContent(
         key: const Key('financial_profile_summary_content'),
         disclosureAffiliationState: disclosureAffiliationState,
         financialProfileState: financialProfileState,
         sourceOfWealthState: sourceOfWealthState,
-        title: 'Summary',
+        title: S.of(context).summary,
       ),
       bottomButton: _bottomButton(context),
       progress: progress,

@@ -23,7 +23,6 @@ import '../../../../generated/l10n.dart';
 import '../../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../tabs/for_you/for_you_screen_form.dart';
-import '../../../tabs/home/home_screen_form.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../domain/bot_recommendation_model.dart';
 import '../../utils/bot_stock_utils.dart';
@@ -31,13 +30,9 @@ import '../widgets/custom_expansion_panel.dart';
 import 'detail/bot_recommendation_detail_screen.dart';
 
 part 'widgets/bot_learn_more_bottom_sheet.dart';
-
 part 'widgets/bot_recommendation_card.dart';
-
 part 'widgets/bot_recommendation_card_shimmer.dart';
-
 part 'widgets/bot_recommendation_faq.dart';
-
 part 'widgets/bot_recommendation_list.dart';
 
 class BotRecommendationScreen extends StatelessWidget {
@@ -91,17 +86,6 @@ class BotRecommendationScreen extends StatelessWidget {
                       verticalMargin: 14,
                       botStockState: state,
                     ),
-                    if (UserJourney.compareUserJourney(
-                        context: context, target: UserJourney.freeBotStock))
-                      const SizedBox(
-                        height: 50,
-                      ),
-                    const BotRecommendationFaq(),
-                    const SizedBox(
-                      height: 28,
-                    ),
-                    const UnconstrainedBox(
-                        child: HomeScreenNeedHelpButtonWidget())
                   ],
                 ),
               );
@@ -131,6 +115,9 @@ class BotRecommendationScreen extends StatelessWidget {
             tooltipText: S.of(context).ourPersonalisedRecommendationsAreUnique,
             titleStyle: AskLoraTextStyles.subtitle3
                 .copyWith(color: AskLoraColors.darkGray),
+          ),
+          const SizedBox(
+            height: 8,
           ),
           Row(
             children: [

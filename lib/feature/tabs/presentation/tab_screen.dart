@@ -97,10 +97,10 @@ class TabScreen extends StatelessWidget {
                   ppiResponseRepository: PpiResponseRepository(),
                   jsonCacheSharedPreferences: JsonCacheSharedPreferences())),
         ],
-        child:
-            BlocBuilder<TabThemeBloc, TabThemeState>(builder: (context, state) {
-          return Container(
+        child: BlocBuilder<TabThemeBloc, TabThemeState>(
+          builder: (context, state) => Container(
             decoration: BoxDecoration(
+              color: state.backgroundImageType.baseBackgroundColor,
               image: state.backgroundImageType != BackgroundImageType.none
                   ? DecorationImage(
                       image: AssetImage(state.backgroundImageType.imageAsset!),
@@ -109,13 +109,9 @@ class TabScreen extends StatelessWidget {
             ),
             child: CustomScaffold(
               appBarBackgroundColor:
-                  state.backgroundImageType != BackgroundImageType.none
-                      ? Colors.transparent
-                      : Colors.white,
+                  state.backgroundImageType.appBarBackgroundColor,
               backgroundColor:
-                  state.backgroundImageType != BackgroundImageType.none
-                      ? Colors.transparent
-                      : Colors.white,
+                  state.backgroundImageType.scaffoldBackgroundColor,
               enableBackNavigation: false,
               body:
                   BlocConsumer<AccountInformationBloc, AccountInformationState>(
@@ -191,8 +187,8 @@ class TabScreen extends StatelessWidget {
                 ),
               ),
             ),
-          );
-        }),
+          ),
+        ),
       );
 
   static void openAndRemoveAllRoute(BuildContext context,

@@ -94,13 +94,13 @@ class BotRecommendationDetailModel extends Equatable {
   );
 
   String get formattedStartDate =>
-      convertDateToEst(startDate, dateFormat: 'dd/MM/yyyy');
+      convertDateToEstString(startDate, dateFormat: 'dd/MM/yyyy');
 
   String get formattedEstEndDate =>
-      convertDateToEst(estEndDate, dateFormat: 'dd/MM/yyyy');
+      convertDateToEstString(estEndDate, dateFormat: 'dd/MM/yyyy');
 
   String get formattedAcknowledgementEstEndDate {
-    return '${convertDateToEst(estEndDate, dateFormat: 'dd/MM/yyyy HH:mm')} EST';
+    return '${convertDateToEstString(estEndDate, dateFormat: 'dd/MM/yyyy HH:mm')} EST';
   }
 
   String format(DateTime sourceDateTime) {

@@ -60,10 +60,13 @@ class BotActivitiesTransactionHistoryModel {
     return '${investmentAmountDouble.abs().convertToCurrencyDecimal()}*';
   }
 
-  String get createdFormattedString {
-    DateTime localTime = formatDateTimeToLocal(created);
-    return formatDateTimeAsString(localTime, dateFormat: 'HH:mm:ss');
-  }
+  String get createdTimeHKTString =>
+      convertDateToHktString(created, dateFormat: 'HH:mm:ss');
+
+  String get createdDateHKTString =>
+      convertDateToHktString(created, dateFormat: 'dd/mm/yyyy');
+
+  DateTime get createdHKT => convertDateToHkt(created);
 
   String get filledAvgPriceString {
     final double filledAvgPriceDouble = checkDouble(filledAvgPrice);

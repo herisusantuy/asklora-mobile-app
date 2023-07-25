@@ -1,7 +1,10 @@
 part of '../ai_investment_style_question_form.dart';
 
 class AiInvestmentStyleQuestionNextButton extends StatelessWidget {
-  const AiInvestmentStyleQuestionNextButton({super.key});
+  final AiThemeType aiThemeType;
+
+  const AiInvestmentStyleQuestionNextButton(
+      {required this.aiThemeType, super.key});
 
   @override
   Widget build(BuildContext context) => Align(
@@ -20,8 +23,9 @@ class AiInvestmentStyleQuestionNextButton extends StatelessWidget {
                         30.2,
                     height: 52)
                 : CustomChoiceChips(
+                    borderColor: aiThemeType.chatNextButtonBorderColor,
                     verticalPadding: 14,
-                    textColor: AskLoraColors.white,
+                    textColor: aiThemeType.secondaryFontColor,
                     textStyle: AskLoraTextStyles.body2,
                     pressedFillColor:
                         AskLoraColors.primaryGreen.withOpacity(0.4),

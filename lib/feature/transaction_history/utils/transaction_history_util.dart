@@ -29,7 +29,7 @@ enum TransferType {
       case TransferType.deposit:
         return S.of(context).deposit;
       case TransferType.withdraw:
-        return S.of(context).buttonWithdraw;
+        return S.of(context).withdraw;
     }
   }
 

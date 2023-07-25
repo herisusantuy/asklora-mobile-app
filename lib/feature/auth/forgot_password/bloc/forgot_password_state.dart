@@ -7,27 +7,27 @@ class ForgotPasswordState extends Equatable {
       {this.response = const BaseResponse(),
       this.deeplinkStatus = DeeplinkStatus.inProgress,
       this.email = '',
-      this.emailErrorText = '',
+      this.emailValidation = ValidationCode.empty,
       this.resetPasswordToken = ''})
       : super();
 
   final BaseResponse response;
   final DeeplinkStatus deeplinkStatus;
   final String email;
-  final String emailErrorText;
+  final ValidationCode emailValidation;
   final String resetPasswordToken;
 
   ForgotPasswordState copyWith(
       {BaseResponse? response,
       DeeplinkStatus? deeplinkStatus,
       String? email,
-      String? emailErrorText,
+      ValidationCode? emailValidation,
       String? resetPasswordToken}) {
     return ForgotPasswordState(
       response: response ?? this.response,
       deeplinkStatus: deeplinkStatus ?? this.deeplinkStatus,
       email: email ?? this.email,
-      emailErrorText: emailErrorText ?? this.emailErrorText,
+      emailValidation: emailValidation ?? this.emailValidation,
       resetPasswordToken: resetPasswordToken ?? this.resetPasswordToken,
     );
   }
@@ -38,7 +38,7 @@ class ForgotPasswordState extends Equatable {
       response,
       deeplinkStatus,
       email,
-      emailErrorText,
+      // emailErrorText,
       resetPasswordToken
     ];
   }
