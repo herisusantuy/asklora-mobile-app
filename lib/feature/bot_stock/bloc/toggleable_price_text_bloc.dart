@@ -28,14 +28,12 @@ class ToggleablePriceTextBloc extends Bloc<ToggleEvent, ToggleState> {
   }
 
   Future<void> _loadUserChoice() async {
-    final choice = await _getUserChoice();
-    add(TogglePriceDifferenceEvent(showPriceDifference: choice ?? false));
+    final choice =
+        await _sharedPreference.readBoolData(sfShowPriceDifference) ?? false;
+    add(TogglePriceDifferenceEvent(showPriceDifference: choice));
   }
 
   Future<void> _saveUserChoice(bool showPriceDifference) async =>
       _sharedPreference.writeBoolData(
           sfShowPriceDifference, showPriceDifference);
-
-  Future<bool?> _getUserChoice() async =>
-      _sharedPreference.readBoolData(sfShowPriceDifference);
 }
