@@ -11,7 +11,7 @@ class ColumnTextWithBottomSheet extends StatelessWidget {
   final String title;
   final String subTitle;
   final Color? subTitleColor;
-  final String? bottomSheetText;
+  final String bottomSheetText;
   final CrossAxisAlignment crossAxisAlignment;
   final String? bottomSheetButtonLabel;
 

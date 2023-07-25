@@ -43,7 +43,7 @@ class PairColumnTextWithBottomSheet extends StatelessWidget {
                   crossAxisAlignment: columnTextCrossAxisAlignment,
                   title: leftTitle,
                   subTitle: leftSubTitle,
-                  bottomSheetText: leftBottomSheetText,
+                  bottomSheetText: leftBottomSheetText!,
                   bottomSheetButtonLabel:
                       buttonLabel ?? S.of(context).buttonBack,
                 )
@@ -64,7 +64,7 @@ class PairColumnTextWithBottomSheet extends StatelessWidget {
                   crossAxisAlignment: columnTextCrossAxisAlignment,
                   title: rightTitle,
                   subTitle: rightSubTitle,
-                  bottomSheetText: rightBottomSheetText)
+                  bottomSheetText: rightBottomSheetText!)
               : ColumnText(
                   subTitleColor: rightSubTitleColor,
                   crossAxisAlignment: columnTextCrossAxisAlignment,
