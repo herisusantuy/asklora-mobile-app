@@ -96,6 +96,8 @@ class PersonalInfoIsHongKongPermanentResidentChanged extends PersonalInfoEvent {
   List<Object> get props => [isHongKongPermanentResident];
 }
 
+class ResetResidentAnswer extends PersonalInfoEvent {}
+
 class PersonalInfoHkIdNumberChanged extends PersonalInfoEvent {
   final String hkIdNumber;
 

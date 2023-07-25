@@ -126,7 +126,6 @@ class DepositStep extends StatelessWidget {
             CustomTextNew(
               subTitle,
               style: AskLoraTextStyles.body2.copyWith(color: subTitleColor),
-              maxLines: 3,
             ),
           ],
         ),
