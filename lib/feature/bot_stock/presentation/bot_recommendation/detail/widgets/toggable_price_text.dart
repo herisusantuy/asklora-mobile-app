@@ -70,8 +70,7 @@ class ToggleablePriceText extends StatelessWidget {
               builder: (context, state) {
                 return Container(
                   width: containerWidth,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 2),
+                  padding: const EdgeInsets.symmetric(vertical: 2),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     color: (percentDifference < 0)
