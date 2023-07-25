@@ -59,8 +59,10 @@ class _LoraGptScreenState extends State<LoraGptScreen>
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
-                onTap: () =>
-                    context.read<TabScreenBloc>().add(const CloseAiOverLay()),
+                onTap: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  context.read<TabScreenBloc>().add(const CloseAiOverLay());
+                },
                 child: const Icon(Icons.close, color: AskLoraColors.white),
               ),
             )

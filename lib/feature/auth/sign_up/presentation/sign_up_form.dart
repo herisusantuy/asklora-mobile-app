@@ -29,7 +29,7 @@ class SignUpForm extends StatelessWidget {
         case ResponseState.error:
           context.read<SignUpBloc>().add(SignUpUsernameChanged(state.username));
           CustomInAppNotification.show(
-              context, state.response.validationCode.getErrorMessage(context));
+              context, state.response.validationCode.getText(context));
           break;
         case ResponseState.success:
           EmailActivationScreen.open(context, state.username);
@@ -88,7 +88,7 @@ class SignUpForm extends StatelessWidget {
                 maxLine: 1,
                 labelText: S.of(context).email,
                 hintText: S.of(context).emailAddress,
-                errorText: state.userNameValidation.getErrorMessage(context),
+                errorText: state.userNameValidation.getText(context),
                 onChanged: (email) => context
                     .read<SignUpBloc>()
                     .add(SignUpUsernameChanged(email)));

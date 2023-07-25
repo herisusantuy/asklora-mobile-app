@@ -26,9 +26,14 @@ class BaseResponse<T> extends Equatable {
     return BaseResponse(state: ResponseState.loading, data: previousData);
   }
 
-  static BaseResponse<T> complete<T>(T data, {String message = ''}) {
+  static BaseResponse<T> complete<T>(T data,
+      {String message = '',
+      ValidationCode validationCode = ValidationCode.empty}) {
     return BaseResponse(
-        state: ResponseState.success, data: data, message: message);
+        state: ResponseState.success,
+        data: data,
+        message: message,
+        validationCode: validationCode);
   }
 
   static BaseResponse<T> error<T>(
@@ -37,7 +42,7 @@ class BaseResponse<T> extends Equatable {
     return BaseResponse(
         state: ResponseState.error,
         message: message,
-        validationCode: validationCode ?? ValidationCode.empty);
+        validationCode: validationCode ?? ValidationCode.unknown);
   }
 
   static BaseResponse<T> suspended<T>(

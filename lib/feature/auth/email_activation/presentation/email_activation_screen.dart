@@ -20,6 +20,7 @@ import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../../../onboarding/welcome/ask_name/bloc/lora_ask_name_bloc.dart';
 import '../../../onboarding/welcome/ask_name/repository/add_user_name_repository.dart';
 import '../../sign_up/repository/sign_up_repository.dart';
+import '../../utils/auth_utils.dart';
 import '../email_activation_bloc.dart';
 
 class EmailActivationScreen extends StatelessWidget {
@@ -61,7 +62,8 @@ class EmailActivationScreen extends StatelessWidget {
               switch (state.response.state) {
                 case ResponseState.error:
                 case ResponseState.success:
-                  CustomInAppNotification.show(context, state.response.message);
+                  CustomInAppNotification.show(
+                      context, state.response.validationCode.getText(context));
                   break;
                 default:
                   break;

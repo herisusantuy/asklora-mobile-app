@@ -19,7 +19,7 @@ Map<String, dynamic> _$SignUpResponseToJson(SignUpResponse instance) =>
 GetOtpResponse _$GetOtpResponseFromJson(Map<String, dynamic> json) =>
     GetOtpResponse(
       json['detail'] as String,
-      json['phone_number'] as String,
+      json['phone_number'] as String?,
     );
 
 Map<String, dynamic> _$GetOtpResponseToJson(GetOtpResponse instance) =>
