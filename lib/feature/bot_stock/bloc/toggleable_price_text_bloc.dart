@@ -21,10 +21,10 @@ class ToggleablePriceTextBloc extends Bloc<ToggleEvent, ToggleState> {
       TogglePriceDifferenceEvent event, Emitter<ToggleState> emit) {
     final showPriceDifference =
         event.showPriceDifference ?? !state.showPriceDifference;
-    final newState = ShowPriceDifferenceState(showPriceDifference);
-    emit(newState);
+    
+    emit(ShowPriceDifferenceState(showPriceDifference));
 
-    _saveUserChoice(newState.showPriceDifference);
+    _saveUserChoice(showPriceDifference);
   }
 
   Future<void> _loadUserChoice() async {
