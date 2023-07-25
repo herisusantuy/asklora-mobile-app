@@ -52,15 +52,16 @@ class Performance extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        PairColumnTextWithTooltip(
-            leftTitle: '${S.of(context).portfolioCurrentPrice} (USD)',
-            leftSubTitle: botActiveOrderDetailModel.currentPriceString,
-            rightTitle: S.of(context).portfolioDetailPerformanceNumberOfShares,
-            rightSubTitle: botActiveOrderDetailModel.botShareString,
-            rightTooltipText:
-                S.of(context).portfolioDetailPerformanceNumberOfSharesTooltip),
+        PairColumnTextWithBottomSheet(
+          leftTitle: S.of(context).portfolioCurrentPrice,
+          leftSubTitle: botActiveOrderDetailModel.currentPriceString,
+          rightTitle: S.of(context).portfolioDetailPerformanceNumberOfShares,
+          rightSubTitle: botActiveOrderDetailModel.botShareString,
+          rightBottomSheetText:
+              S.of(context).portfolioDetailPerformanceNumberOfSharesTooltip,
+        ),
         _spaceBetweenInfo,
-        PairColumnTextWithTooltip(
+        PairColumnText(
           leftTitle: S.of(context).portfolioDetailPerformanceStockValues,
           leftSubTitle: botActiveOrderDetailModel.stockValuesString,
           rightTitle: S.of(context).portfolioDetailPerformanceCash,
