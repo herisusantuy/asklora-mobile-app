@@ -42,20 +42,23 @@ class AiWelcomeScreen extends StatelessWidget {
         body: CustomStretchedLayout(
           padding:
               AppValues.screenHorizontalPadding.copyWith(bottom: 40, top: 40),
-          content:
-              Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            const LoraAnimationGreen(),
-            const SizedBox(
-              height: 64,
-            ),
-            CustomTextNew(
-              title,
-              style: AskLoraTextStyles.h3
-                  .copyWith(color: aiThemeType.primaryFontColor),
-              textAlign: TextAlign.center,
-            ),
-            if (child != null) child!,
-          ]),
+          content: SizedBox(
+            width: double.infinity,
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+              const LoraAnimationGreen(),
+              const SizedBox(
+                height: 64,
+              ),
+              CustomTextNew(
+                title,
+                style: AskLoraTextStyles.h3
+                    .copyWith(color: aiThemeType.primaryFontColor),
+                textAlign: TextAlign.center,
+              ),
+              if (child != null) child!,
+            ]),
+          ),
           bottomButton: GlowingButton(
             height: 75.0,
             width: 75.0,
