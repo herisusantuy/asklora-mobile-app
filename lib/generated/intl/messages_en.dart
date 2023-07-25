@@ -334,7 +334,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
         "employment": MessageLookupByLibrary.simpleMessage("Employment"),
         "employmentStatus":
-            MessageLookupByLibrary.simpleMessage("Employment Status*"),
+            MessageLookupByLibrary.simpleMessage("Employment Status"),
         "endBotStockAcknowledgement": m9,
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),

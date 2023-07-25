@@ -4396,21 +4396,11 @@ class S {
     );
   }
 
-  /// `Employment Status*`
+  /// `Employment Status`
   String get employmentStatus {
     return Intl.message(
-      'Employment Status*',
+      'Employment Status',
       name: 'employmentStatus',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Please Select`
-  String get pleaseSelect {
-    return Intl.message(
-      'Please Select',
-      name: 'pleaseSelect',
       desc: '',
       args: [],
     );
@@ -4971,6 +4961,16 @@ class S {
     return Intl.message(
       'Address Proof',
       name: 'addressProof',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Select`
+  String get pleaseSelect {
+    return Intl.message(
+      'Please Select',
+      name: 'pleaseSelect',
       desc: '',
       args: [],
     );
