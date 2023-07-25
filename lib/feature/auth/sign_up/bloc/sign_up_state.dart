@@ -6,25 +6,25 @@ class SignUpState extends Equatable {
       this.username = '',
       this.password = '',
       this.isEmailValid = false,
-      this.usernameErrorText = '',
-      this.passwordErrorText = '',
+      this.userNameValidation = ValidationCode.empty,
+      this.passwordValidation = ValidationCode.empty,
       this.isPasswordValid = false})
       : super();
 
   final BaseResponse response;
   final String username;
   final String password;
-  final String usernameErrorText;
+  final ValidationCode userNameValidation;
   final bool isPasswordValid;
-  final String passwordErrorText;
+  final ValidationCode passwordValidation;
   final bool isEmailValid;
 
   SignUpState copyWith({
     BaseResponse? response,
     String? username,
     String? password,
-    String? usernameErrorText,
-    String? passwordErrorText,
+    ValidationCode? userNameValidation,
+    ValidationCode? passwordValidation,
     bool? isEmailValid,
     bool? isPasswordValid,
   }) {
@@ -34,8 +34,8 @@ class SignUpState extends Equatable {
       password: password ?? this.password,
       isEmailValid: isEmailValid ?? this.isEmailValid,
       isPasswordValid: isPasswordValid ?? this.isPasswordValid,
-      usernameErrorText: usernameErrorText ?? this.usernameErrorText,
-      passwordErrorText: passwordErrorText ?? this.passwordErrorText,
+      userNameValidation: userNameValidation ?? this.userNameValidation,
+      passwordValidation: passwordValidation ?? this.passwordValidation,
     );
   }
 
@@ -46,7 +46,7 @@ class SignUpState extends Equatable {
         password,
         isEmailValid,
         isPasswordValid,
-        usernameErrorText,
-        passwordErrorText,
+        userNameValidation,
+        passwordValidation,
       ];
 }

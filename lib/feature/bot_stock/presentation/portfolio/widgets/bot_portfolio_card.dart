@@ -55,7 +55,7 @@ class BotPortfolioCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextNew(
-                      '${botType.upperCaseName} ${botActiveOrderModel.symbol}',
+                      botActiveOrderModel.symbol,
                       style: AskLoraTextStyles.h5,
                       maxLines: 1,
                       ellipsis: true,
@@ -76,9 +76,10 @@ class BotPortfolioCard extends StatelessWidget {
                   height: 13,
                 ),
                 PairColumnTextWithAutoSizedText(
-                  leftTitle: S.of(context).portfolioCurrentPrice,
+                  leftTitle: botActiveOrderModel.botAppsName,
                   rightTitle: S.of(context).portfolioTotalPL,
-                  leftSubTitle: botActiveOrderModel.currentPrice.toString(),
+                  leftSubTitle:
+                      '\$${botActiveOrderModel.currentPrice.toString()}',
                   rightSubTitle: botActiveOrderModel.totalPnLPctString,
                   maxLines: 1,
                 ),

@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/core/domain/validation_enum.dart';
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/auth/forgot_password/bloc/forgot_password_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/forgot_password/domain/forgot_password_response.dart';
@@ -44,7 +45,7 @@ void main() {
               const ForgotPasswordState(
                 response: BaseResponse(),
                 email: '',
-                emailErrorText: '',
+                emailValidation: ValidationCode.empty,
               ));
         },
       );
@@ -57,7 +58,7 @@ void main() {
           const ForgotPasswordState(
             response: BaseResponse(),
             email: 'sadfasdf',
-            emailErrorText: 'Enter valid email',
+            emailValidation: ValidationCode.enterValidEmail,
           ),
         },
       );
@@ -72,7 +73,7 @@ void main() {
           const ForgotPasswordState(
             response: BaseResponse(),
             email: 'abc@abc.com',
-            emailErrorText: '',
+            emailValidation: ValidationCode.empty,
           )
         },
       );
@@ -97,11 +98,11 @@ void main() {
                 const ForgotPasswordState(
                     response: BaseResponse(),
                     email: 'abc@abc.com',
-                    emailErrorText: ''),
+                    emailValidation: ValidationCode.empty),
                 ForgotPasswordState(
                   response: BaseResponse.loading(),
                   email: 'abc@abc.com',
-                  emailErrorText: '',
+                  emailValidation: ValidationCode.empty,
                 ),
                 const ForgotPasswordState(
                   response: BaseResponse<ForgotPasswordResponse>(
@@ -109,7 +110,7 @@ void main() {
                           'Successfully sent new password!'),
                       state: ResponseState.success),
                   email: 'abc@abc.com',
-                  emailErrorText: '',
+                  emailValidation: ValidationCode.empty,
                 )
               });
 

@@ -110,8 +110,8 @@ class AuthRepository {
           ChangePasswordRequest(password, newPassword, confirmNewPassword));
       return BaseResponse.complete(
           ChangePasswordResponse.fromJson(response.data));
-    } on UnauthorizedException {
-      return BaseResponse.error(message: 'Invalid Password');
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
     } catch (_) {
       return BaseResponse.error();
     }

@@ -5,6 +5,7 @@ import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_status_widget.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../core/utils/feature_flags.dart';
+import '../../../../generated/l10n.dart';
 import '../../../balance/deposit/presentation/deposit_screen.dart';
 import '../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
@@ -18,12 +19,11 @@ class KycResultScreen extends StatelessWidget {
     return CustomScaffold(
       enableBackNavigation: false,
       body: CustomStretchedLayout(
-        content: const CustomStatusWidget(
-          key: Key('custom_status_widget'),
-          title: 'Your investment account application is under review!',
+        content: CustomStatusWidget(
+          key: const Key('custom_status_widget'),
+          title: S.of(context).kycResultScreenTitle,
           statusType: StatusType.success,
-          subTitle:
-              'You will be informed when your application is approved.\n\nPlease remember to collect your gift.',
+          subTitle: S.of(context).kycResultScreenDesc,
         ),
         bottomButton: _bottomButton(context),
       ),
@@ -37,8 +37,8 @@ class KycResultScreen extends StatelessWidget {
             : GiftBotStockWelcomeScreen.open(context),
         secondaryButtonOnClick: () => TabScreen.openAndRemoveAllRoute(context),
         primaryButtonLabel: FeatureFlags.byPassFreeBots
-            ? 'Deposit Funds'
+            ? S.of(context).depositFund
             : 'Get Free HKD500 Gift Botstock',
-        secondaryButtonLabel: 'Maybe Later',
+        secondaryButtonLabel: S.of(context).buttonMaybeLater,
       );
 }

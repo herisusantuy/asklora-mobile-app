@@ -220,6 +220,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonDone": MessageLookupByLibrary.simpleMessage("Done"),
         "buttonForgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget Password?"),
+        "buttonGoBack": MessageLookupByLibrary.simpleMessage("Go Back"),
         "buttonHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Have An Account?"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("Let\'s Begin"),
@@ -300,6 +301,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Define Investment Style"),
         "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "depositAmount": MessageLookupByLibrary.simpleMessage("Deposit Amount"),
+        "depositFund": MessageLookupByLibrary.simpleMessage("Deposit Funds"),
         "depositFundToStartInvesting": MessageLookupByLibrary.simpleMessage(
             "Deposit funds to start investing"),
         "depositHistory":
@@ -332,7 +334,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
         "employment": MessageLookupByLibrary.simpleMessage("Employment"),
         "employmentStatus":
-            MessageLookupByLibrary.simpleMessage("Employment Status*"),
+            MessageLookupByLibrary.simpleMessage("Employment Status"),
         "endBotStockAcknowledgement": m9,
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
@@ -480,6 +482,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "It’s time to define your investment style.Show me what you’re made of!"),
         "isqNextButton": MessageLookupByLibrary.simpleMessage(
             "Press to move onto the next section"),
+        "kycRejectedExplanationOfAffiliate": MessageLookupByLibrary.simpleMessage(
+            "We do not accept any members who are affiliated with the organisations mentioned above"),
+        "kycRejectedScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "Sorry ! You are not eligible for Asklora"),
+        "kycResultScreenDesc": MessageLookupByLibrary.simpleMessage(
+            "You will be informed when your application is approved.\n\nPlease remember to collect your gift."),
+        "kycResultScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "Your investment account application is under review!"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lawEnforcementGovernmentProtectiveService":
             MessageLookupByLibrary.simpleMessage(

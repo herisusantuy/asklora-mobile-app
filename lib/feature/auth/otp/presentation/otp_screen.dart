@@ -24,6 +24,7 @@ import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../../../tabs/presentation/tab_screen.dart';
 import '../../repository/auth_repository.dart';
 import '../../sign_in/bloc/sign_in_bloc.dart';
+import '../../utils/auth_utils.dart';
 import '../bloc/otp_bloc.dart';
 import '../repository/otp_repository.dart';
 
@@ -71,7 +72,9 @@ class OtpScreen extends StatelessWidget {
                   switch (state.response.state) {
                     case ResponseState.error:
                       CustomInAppNotification.show(
-                          context, state.response.message);
+                          context,
+                          state.response.validationCode
+                              .getErrorMessage(context));
                       break;
                     case ResponseState.success:
                       context
@@ -112,12 +115,13 @@ class OtpScreen extends StatelessWidget {
     return Stack(
       children: [
         BlocBuilder<OtpBloc, OtpState>(
-          buildWhen: (previous, current) => previous.otp != current.otp,
+          buildWhen: (previous, current) => previous != current,
           builder: (context, state) {
             return MasterTextField(
               key: const Key('otp_box'),
               initialValue: state.otp,
               labelText: 'OTP',
+              errorText: state.otpError ? 'The OTP is incorrect' : '',
               textInputType: TextInputType.number,
               hintText: S.of(context).otpDigit,
               floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -169,7 +173,7 @@ class OtpScreen extends StatelessWidget {
             builder: (context, state) {
               return PrimaryButton(
                 key: const Key('sign_up_again_button'),
-                disabled: state.otp.isEmpty,
+                disabled: state.otp.isEmpty && state.otp.length < 6,
                 label: S.of(context).buttonVerify,
                 onTap: () => context
                     .read<SignInBloc>()
