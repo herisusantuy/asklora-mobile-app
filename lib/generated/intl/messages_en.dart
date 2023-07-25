@@ -92,8 +92,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "AskloraAgreementFile": MessageLookupByLibrary.simpleMessage(
+            "Asklora Customer Agreement.pdf"),
         "about": MessageLookupByLibrary.simpleMessage("About"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("About Asklora"),
+        "acceptedSignature":
+            MessageLookupByLibrary.simpleMessage("Accepted signature(s):"),
         "accountInformation":
             MessageLookupByLibrary.simpleMessage("Account Information"),
         "accountIsNotActive": MessageLookupByLibrary.simpleMessage(
@@ -110,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "afterPayDepositHeaderTitle": MessageLookupByLibrary.simpleMessage(
             "Your investment account will be ready soon!"),
         "agree": MessageLookupByLibrary.simpleMessage("Agree"),
+        "agreed": MessageLookupByLibrary.simpleMessage("Agreed"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
         "aiIsqWelcomeSubTitle": MessageLookupByLibrary.simpleMessage(
             "Let\'s see what kind of stocks you prefer"),
@@ -118,12 +123,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "almostFinished":
             MessageLookupByLibrary.simpleMessage("Almost finished!"),
+        "architectureEngineering":
+            MessageLookupByLibrary.simpleMessage("Architecture / Engineering"),
+        "artDesign": MessageLookupByLibrary.simpleMessage("Arts / Design"),
         "askMeAnythingRelatedToFinance": MessageLookupByLibrary.simpleMessage(
             "Ask me anything related to finance"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "I\'m Lora, your personal AI assistant.\n\nGet ready to crush your investment goals!\nWhat\'s your name? "),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("Your Name"),
+        "askloraCustomerAgreement":
+            MessageLookupByLibrary.simpleMessage("Asklora Customer Agreement"),
         "askloraWireDetails":
             MessageLookupByLibrary.simpleMessage("Asklora\'s Wire Details"),
         "askloraYouUltimateFinancialAdvisor":
@@ -187,6 +197,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "botTradeBottomSheetRolloverDisclosureTitle":
             MessageLookupByLibrary.simpleMessage(
                 "If you extend the Botstock period, you will incur additional fees"),
+        "businessNonFinance":
+            MessageLookupByLibrary.simpleMessage("Business, Non-Finance"),
+        "businessOwner": MessageLookupByLibrary.simpleMessage("Business Owner"),
         "buttonAlreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Already Have An Account?"),
         "buttonBack": MessageLookupByLibrary.simpleMessage("Back"),
@@ -253,15 +266,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Check back later to see if\nthere are any new\ntransactions!"),
         "checkBotStockDetails":
             MessageLookupByLibrary.simpleMessage("Check Botstock Details"),
+        "communitySocialService":
+            MessageLookupByLibrary.simpleMessage("Community / Social Service"),
         "companyAddress":
             MessageLookupByLibrary.simpleMessage("Company Address"),
         "completed": MessageLookupByLibrary.simpleMessage("Completed"),
+        "computerInformationTechnology": MessageLookupByLibrary.simpleMessage(
+            "Computer / Information Technology"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmAndContinue":
             MessageLookupByLibrary.simpleMessage("Confirm And Continue"),
         "confirmNewPassword":
             MessageLookupByLibrary.simpleMessage("Confirm New Password"),
         "confirmTrade": MessageLookupByLibrary.simpleMessage("Confirm Trade"),
+        "construction": MessageLookupByLibrary.simpleMessage("Construction"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "continueAccountOpening":
             MessageLookupByLibrary.simpleMessage("Continue Account Opening"),
@@ -299,6 +317,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Deposit via FPS or Wire Transfer"),
         "doAnyOfTheFollowingApply": MessageLookupByLibrary.simpleMessage(
             "Do any of the following apply to you or a member of your immediate family ?"),
+        "educationTrainingLibrary": MessageLookupByLibrary.simpleMessage(
+            "Education / Training / Library"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailActivationFailedTitle": MessageLookupByLibrary.simpleMessage(
             "Sorry! You were a bit late, your request has timed out. \n\nLet\'s try and activate your account again!"),
@@ -308,6 +328,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "User does not exist with the given email"),
         "emailNotVerified":
             MessageLookupByLibrary.simpleMessage("User email is not verified"),
+        "employed": MessageLookupByLibrary.simpleMessage("Employed"),
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
         "employment": MessageLookupByLibrary.simpleMessage("Employment"),
         "employmentStatus":
@@ -370,14 +391,21 @@ class MessageLookup extends MessageLookupByLibrary {
             "You also seem to be a bit more reserved. But hey, introverts change the world!"),
         "extrovertMoreThan8": MessageLookupByLibrary.simpleMessage(
             "You also seem like a social butterfly - amplify that energy!"),
+        "farmingFishingForestry": MessageLookupByLibrary.simpleMessage(
+            "Farming, Fishing and Forestry"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("Filled Price"),
+        "financeBrokerDealerBank": MessageLookupByLibrary.simpleMessage(
+            "Finance/ Broker Dealer /Bank"),
         "financialProfile":
             MessageLookupByLibrary.simpleMessage("Financial Profile"),
         "firstTimeCopyAskloraBankDetails": m11,
+        "foodBeverage":
+            MessageLookupByLibrary.simpleMessage("Food and Beverage"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
         "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
             "Please enter your email. Instructions will be sent to reset your password."),
+        "formW8ben": MessageLookupByLibrary.simpleMessage("Form W-8BEN"),
         "founded": MessageLookupByLibrary.simpleMessage("Founded"),
         "free": MessageLookupByLibrary.simpleMessage("Free"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("Free Trial"),
@@ -398,11 +426,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ready to start your AI revolution?"),
         "halfWayThere": MessageLookupByLibrary.simpleMessage("Halfway there!"),
         "headquarters": MessageLookupByLibrary.simpleMessage("Headquarters"),
+        "healthcare": MessageLookupByLibrary.simpleMessage("Healthcare"),
         "hkId": MessageLookupByLibrary.simpleMessage("HKID"),
         "hkIdNumber": MessageLookupByLibrary.simpleMessage("HKID Number"),
         "hkPhoneNo": MessageLookupByLibrary.simpleMessage("HK Phone Number"),
         "hkResidentQuestion": MessageLookupByLibrary.simpleMessage(
             "Are you a Hong Kong resident? By clicking yes, you acknowledge that you are also a Hong Kong tax resident"),
+        "homeMaker": MessageLookupByLibrary.simpleMessage("Homemaker"),
+        "homeTrader": MessageLookupByLibrary.simpleMessage("At-Home Trader"),
         "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works"),
         "iAmADirector": MessageLookupByLibrary.simpleMessage(
             "I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission. (Excluding Lora Advisors Limited)"),
@@ -412,6 +443,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "I am a senior executive at or a 10% or greater shareholder of a publicly traded company."),
         "iAmASeniorPolitical": MessageLookupByLibrary.simpleMessage(
             "I am a senior political figure."),
+        "iHaveReadAndAgreed": MessageLookupByLibrary.simpleMessage(
+            "I have read, understood, and agree to be bound by LORA Advisors Limited’s account terms, and all other terms, disclosures and disclaimers applicable to me."),
+        "iUnderstandSigningAgreement": MessageLookupByLibrary.simpleMessage(
+            "I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Customer Agreement."),
         "inApp": MessageLookupByLibrary.simpleMessage("In-App"),
         "industry": MessageLookupByLibrary.simpleMessage("Industry"),
         "inputDepositAmount":
@@ -420,6 +455,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Input wrong email address"),
         "inputWrongEmailAddress":
             MessageLookupByLibrary.simpleMessage("Input wrong email address"),
+        "installationMaintenanceRepair": MessageLookupByLibrary.simpleMessage(
+            "Installation, Maintenance, and Repair"),
         "introduceBotPlank":
             MessageLookupByLibrary.simpleMessage("Introduce Bot - Plank"),
         "introduceBotPullup":
@@ -440,12 +477,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "investmentResultScreenTitle":
             MessageLookupByLibrary.simpleMessage("I like your style"),
         "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
-            "It’s time to define your investment style.  Show me what you’re made of!"),
+            "It’s time to define your investment style.Show me what you’re made of!"),
         "isqNextButton": MessageLookupByLibrary.simpleMessage(
             "Press to move onto the next section"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "lawEnforcementGovernmentProtectiveService":
+            MessageLookupByLibrary.simpleMessage(
+                "Law Enforcement, Government, Protective Service"),
         "learnBotstockManagement":
             MessageLookupByLibrary.simpleMessage("Learn Botstock Management"),
+        "legal": MessageLookupByLibrary.simpleMessage("Legal"),
         "legalFirstName":
             MessageLookupByLibrary.simpleMessage("Legal English First Name"),
         "legalLastName":
@@ -454,6 +495,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Licensee: Chang Yung Ching"),
         "licenseeNumber":
             MessageLookupByLibrary.simpleMessage("CE No.: AFF918"),
+        "lifePhysicalSocialService": MessageLookupByLibrary.simpleMessage(
+            "Life, Physical and Social Service"),
         "linkPasswordResetIsSent": MessageLookupByLibrary.simpleMessage(
             "Link for Password reset is sent to email."),
         "manageYourBotstock":
@@ -462,6 +505,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "marketPrice": MessageLookupByLibrary.simpleMessage("Market Price"),
         "masterAiTrading":
             MessageLookupByLibrary.simpleMessage("Master AI Trading"),
+        "mediaCommunications":
+            MessageLookupByLibrary.simpleMessage("Media and Communications"),
         "milestones": MessageLookupByLibrary.simpleMessage("Milestones"),
         "min": m12,
         "min8Character":
@@ -469,6 +514,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
         "natureOfBusiness":
             MessageLookupByLibrary.simpleMessage("Nature of Business"),
+        "natureOfBusinessDesc": MessageLookupByLibrary.simpleMessage(
+            "Nature of Business description"),
         "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
         "neuroticismLessThan8": MessageLookupByLibrary.simpleMessage(
             "we think you can take on more risk."),
@@ -517,13 +564,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "orderRejected": MessageLookupByLibrary.simpleMessage("Order Rejected"),
         "orderRollover": MessageLookupByLibrary.simpleMessage("Order Rollover"),
         "orderStarted": MessageLookupByLibrary.simpleMessage("Order Started"),
+        "other": MessageLookupByLibrary.simpleMessage("Other"),
         "otpDigit": MessageLookupByLibrary.simpleMessage("000000 (6 digit)"),
         "otpScreenDescription": m13,
         "otpScreenTitle": MessageLookupByLibrary.simpleMessage("Mobile OTP"),
         "otpSentToYourEmail":
             MessageLookupByLibrary.simpleMessage("OTP code sent to your email"),
         "otpSentToYourPhone": MessageLookupByLibrary.simpleMessage(
-            "Otp SMS is sent to your phone"),
+            "OTP SMS is sent to your phone"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordChangeSuccess":
             MessageLookupByLibrary.simpleMessage("Password Change Success"),
@@ -539,6 +587,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Payment Details"),
         "pending": MessageLookupByLibrary.simpleMessage("Pending"),
         "performance": MessageLookupByLibrary.simpleMessage("Performance"),
+        "personalCareService":
+            MessageLookupByLibrary.simpleMessage("Personal Care / Service"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "personalInfoFormDesc": MessageLookupByLibrary.simpleMessage(
             "Please make sure your name matches the information on your identification document."),
@@ -557,6 +607,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please make sure you press \'SUBMIT\' after you have transferred the funds from your bank."),
         "pleaseProvideYourResidentialAddress": MessageLookupByLibrary.simpleMessage(
             "Please provide your residential address. This will also be your mailing address."),
+        "pleaseReadTheAskloraCustomerAgreement":
+            MessageLookupByLibrary.simpleMessage(
+                "Please read the the Asklora Customer Agreement. You must click on the agreement and check all the boxes in order to proceed."),
         "pleaseSelect": MessageLookupByLibrary.simpleMessage("Please Select"),
         "porAddress": MessageLookupByLibrary.simpleMessage(
             "Proof of Residential Address"),
@@ -679,6 +732,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Age is just a number, but your personality is what sets you apart.\n\nAnswer a few personality questions, and I\'ll help you find investments that fit your style."),
         "privacySuccessScreenTitle":
             MessageLookupByLibrary.simpleMessage("I appreciate your honesty."),
+        "productionManufacturing": MessageLookupByLibrary.simpleMessage(
+            "Production and Manufacturing"),
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push-Notification"),
         "reSendOtp": m20,
@@ -695,8 +750,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "resultOfPersonalizationQuestion": m21,
         "retakeInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("Retake Investment Style"),
+        "retired": MessageLookupByLibrary.simpleMessage("Retired"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
+        "riskDisclosureStatement":
+            MessageLookupByLibrary.simpleMessage("Risk Disclosure Statement"),
         "riskDisclosureStatementAcknowledgement":
             MessageLookupByLibrary.simpleMessage(
                 "I have read, understood, and agree with the Risk Disclosure Statement."),
@@ -707,6 +765,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rolloverBotStockAcknowledgement": m22,
         "saveForLater": MessageLookupByLibrary.simpleMessage("Save For Later"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
+        "selfEmployed": MessageLookupByLibrary.simpleMessage("Self-Employed"),
         "sell": MessageLookupByLibrary.simpleMessage("Sell"),
         "sendOtp": MessageLookupByLibrary.simpleMessage("SEND OTP"),
         "setUpFinancialProfile":
@@ -717,10 +776,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "signAgreements":
             MessageLookupByLibrary.simpleMessage("Sign Agreements"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "signInElectronically": MessageLookupByLibrary.simpleMessage(
+            "Sign this electronically by typing your name exactly as shown below."),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to sign out ?"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage(
             "Start your AI revolution with\nAsklora. Go crush it."),
+        "sourceOfWealth":
+            MessageLookupByLibrary.simpleMessage("Source of Wealth"),
         "startABotstock":
             MessageLookupByLibrary.simpleMessage("Start A Botstock"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
@@ -730,6 +793,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Start investing"),
         "startsAt": MessageLookupByLibrary.simpleMessage("Starts at"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
+        "student": MessageLookupByLibrary.simpleMessage("Student"),
         "submitApplication":
             MessageLookupByLibrary.simpleMessage("Submit Application"),
         "subscription": MessageLookupByLibrary.simpleMessage("Subscription"),
@@ -746,6 +810,44 @@ class MessageLookup extends MessageLookupByLibrary {
         "takePhotoFront": MessageLookupByLibrary.simpleMessage(
             "Take a photo of the front of your HKID"),
         "takeSelfie": MessageLookupByLibrary.simpleMessage("Take a selfie"),
+        "taxAgreementCheckboxDesc": MessageLookupByLibrary.simpleMessage(
+            "By checking this box, you consent to the collection and distribution of tax forms in an electronic format in lieu of paper"),
+        "taxAgreementDesc1": MessageLookupByLibrary.simpleMessage(
+            "Under penalties of perjury, I declare that I have examined the information in lines 1-7 and to the best of my knowledge and belief it is true, correct, and complete. I further certify under penalties of perjury that:"),
+        "taxAgreementDesc2": MessageLookupByLibrary.simpleMessage(
+            "Furthermore, I authorize this form to be provided to any withholding agent that has control, receipt, or custody of the income of which I am the beneficial owner or any withholding agent that can disburse or make payments of the income of which I am the beneficial owner. I agree I will submit a new form within 30 days if any certification made on this form becomes incorrect."),
+        "taxAgreementDesc3": MessageLookupByLibrary.simpleMessage(
+            "The US Internal Revenue Service does not require your consent to any provisions of this document other than the certifications required to establish your status as a non-U.S. person, and if applicable, obtain a reduced rate of witholding."),
+        "taxAgreementDescPoint1": MessageLookupByLibrary.simpleMessage(
+            "I am the individual that is the beneficial owner (or am authorized to sign for the individual that is the beneficial owner) of all the income or proceeds to which this form relates or am using this form to document myself for chapter 4 purposes;"),
+        "taxAgreementDescPoint2": MessageLookupByLibrary.simpleMessage(
+            "The person named on line 1 of this form is not a U.S. person;"),
+        "taxAgreementDescPoint3":
+            MessageLookupByLibrary.simpleMessage("This form relates to:"),
+        "taxAgreementDescPoint3SubPoint1": MessageLookupByLibrary.simpleMessage(
+            "income not effectively connected with the conduct of a trade or business in the United States;"),
+        "taxAgreementDescPoint3SubPoint2": MessageLookupByLibrary.simpleMessage(
+            "income effectively connected with the conduct of a trade or business in the United States but is not subject to tax under an applicable income tax treaty;"),
+        "taxAgreementDescPoint3SubPoint3": MessageLookupByLibrary.simpleMessage(
+            "the partner\'s share of a partnership\'s effectively connected taxable income;"),
+        "taxAgreementDescPoint3SubPoint4": MessageLookupByLibrary.simpleMessage(
+            "or the partner\'s amount realized from the transfer of a partnership interest subject to withholding under section 1446(f);"),
+        "taxAgreementDescPoint4": MessageLookupByLibrary.simpleMessage(
+            "The person named on line 1 of this form is a resident of the treaty country listed on line 9 of the form (if any) within the meaning of the income tax treaty between the United States and that country;"),
+        "taxAgreementDescPoint5": MessageLookupByLibrary.simpleMessage(
+            "and For broker transactions or barter exchanges, the beneficial owner is an exempt foreign person as defined in the instructions to IRS Form W-8BEN."),
+        "taxAgreementSignatureDesc": MessageLookupByLibrary.simpleMessage(
+            "By typing my signature and clicking ‘Agree’ below, I confirm that:"),
+        "taxAgreementSignatureDescPoint1": MessageLookupByLibrary.simpleMessage(
+            "(1) All information and/or documentation provided by me during the account application process is accurate, complete and up-to-date; "),
+        "taxAgreementSignatureDescPoint2": MessageLookupByLibrary.simpleMessage(
+            "(2) I have read and understood all of the information provided to me by LORA Advisors;"),
+        "taxAgreementSignatureDescPoint3": MessageLookupByLibrary.simpleMessage(
+            "(3) I consent and agree to the terms of all the above agreements and disclosures provided to me during the account application process: and"),
+        "taxAgreementSignatureDescPoint4": MessageLookupByLibrary.simpleMessage(
+            "(4) I understand and agree that my electronic signature is the legal equivalent of a manual written signature."),
+        "taxAgreementSignatureTitle":
+            MessageLookupByLibrary.simpleMessage("Signature"),
         "terminateAccount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
@@ -816,6 +918,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferInitialFundToAsklora": MessageLookupByLibrary.simpleMessage(
             "Transfer initial funds to Asklora"),
         "transferTo": MessageLookupByLibrary.simpleMessage("Transfer to"),
+        "transportationMaterialMoving": MessageLookupByLibrary.simpleMessage(
+            "Transportation and Material Moving"),
+        "unEmployed": MessageLookupByLibrary.simpleMessage("Unemployed"),
         "unableToProcessDepositSubTitle": MessageLookupByLibrary.simpleMessage(
             "We\'re having some trouble processing your deposit request. Please try again"),
         "unableToProcessDepositTitle":
@@ -824,6 +929,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "We\'re having some trouble processing your withdrawal request. Please try again"),
         "unableToProcessWithdrawalTitle": MessageLookupByLibrary.simpleMessage(
             "Unable to Process Withdrawal"),
+        "unknown": MessageLookupByLibrary.simpleMessage("Unknown"),
         "updatedAt": m24,
         "uploadAddressProof":
             MessageLookupByLibrary.simpleMessage("Upload Address Proof"),
@@ -840,6 +946,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "version": MessageLookupByLibrary.simpleMessage("Version"),
         "viewDepositGuide":
             MessageLookupByLibrary.simpleMessage("View Deposit Guide"),
+        "w8benForm": MessageLookupByLibrary.simpleMessage("W-8BEN Form"),
         "weAcceptHKDOnly":
             MessageLookupByLibrary.simpleMessage("We accept HKD only."),
         "weAcceptUtilityBill": MessageLookupByLibrary.simpleMessage(
