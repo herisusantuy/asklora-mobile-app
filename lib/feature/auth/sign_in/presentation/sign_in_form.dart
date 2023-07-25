@@ -34,9 +34,7 @@ class SignInForm extends StatelessWidget {
       if (responseState == ResponseState.error) {
         context.read<SignInBloc>().add(SignInEmailChanged(state.emailAddress));
         CustomInAppNotification.show(
-            context,
-            AuthErrorMessage.findByString(state.response.message)
-                .getErrorMessage(context));
+            context, state.response.validationCode.getErrorMessage(context));
       } else if (responseState == ResponseState.success) {
         context.read<AppBloc>().add(const GetUserJourneyFromLocal());
         var arguments = Pair(state.emailAddress, state.password);
@@ -98,8 +96,7 @@ class SignInForm extends StatelessWidget {
           maxLine: 1,
           labelText: S.of(context).emailAddress,
           hintText: S.of(context).emailAddress,
-          errorText: AuthErrorMessage.findByString(state.emailAddressErrorText)
-              .getErrorMessage(context),
+          errorText: state.emailAddressValidation.getErrorMessage(context),
           onChanged: (email) =>
               context.read<SignInBloc>().add(SignInEmailChanged(email))));
 

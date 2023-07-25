@@ -69,10 +69,9 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
       emit(state.copyWith(
           response: BaseResponse.complete(data,
               message: 'Password changed successfully.')));
-    } on BadRequestException {
+    } on AskloraApiClientException catch (e) {
       emit(state.copyWith(
-          response:
-              BaseResponse.error(message: 'Token is invalid or expired.')));
+          response: BaseResponse.error(validationCode: e.askloraError.type)));
     } catch (e) {
       emit(state.copyWith(
           response: BaseResponse.error(message: 'Something went wrong!')));

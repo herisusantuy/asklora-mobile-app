@@ -11,8 +11,8 @@ import '../../chart/domain/bot_portfolio_chart_models.dart';
 import '../../chart/domain/bot_recommendation_chart_model.dart';
 import '../../chart/domain/chart_models.dart';
 import '../../chart/domain/chart_studio_animation_model.dart';
-import '../domain/bot_recommendation_detail_model.dart';
 import '../domain/bot_detail_request.dart';
+import '../domain/bot_recommendation_detail_model.dart';
 import '../domain/bot_recommendation_model.dart';
 import '../domain/bot_recommendation_response.dart';
 import '../domain/bot_stock_api_client.dart';
@@ -128,9 +128,13 @@ class BotStockRepository {
           .activeOrder(BotActiveOrderRequest(status: status.join(',')));
       return BaseResponse.complete(List.from(response.data
           .map((element) => BotActiveOrderModel.fromJson(element))));
-    } on ForbiddenException {
-      return BaseResponse.error(errorCode: 403);
-    } catch (e) {
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
+    }
+    /*on ForbiddenException {
+      return BaseResponse.error(validationCode: ValidationCodes.tradeAuthorization);
+    }*/
+    catch (e) {
       return BaseResponse.error();
     }
   }
@@ -176,12 +180,16 @@ class BotStockRepository {
       await removeInvestmentStyleState();
       return BaseResponse.complete(
           BotCreateOrderResponse.fromJson(response.data));
-    } on ForbiddenException {
-      return BaseResponse.error(errorCode: 403);
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
+    }
+    /* on ForbiddenException {
+      return BaseResponse.error(validationCode: ValidationCodes.tradeAuthorization);
     } on LegalReasonException {
       return BaseResponse.suspended();
-    } catch (e) {
-      ///todo handle error code later on insufficient balance
+    }*/
+    catch (e) {
+      ///TODO: handle error code later on insufficient balance
       return BaseResponse.error();
     }
   }
@@ -191,9 +199,13 @@ class BotStockRepository {
       var response =
           await _botStockApiClient.cancelOrder(BotOrderRequest(botOrderId));
       return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
-    } on LegalReasonException {
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
+    }
+    /*on LegalReasonException {
       return BaseResponse.suspended();
-    } catch (e) {
+    }*/
+    catch (e) {
       return BaseResponse.error();
     }
   }
@@ -205,9 +217,13 @@ class BotStockRepository {
           await _botStockApiClient.rolloverOrder(BotOrderRequest(botOrderId));
       return BaseResponse.complete(
           RolloverOrderResponse.fromJson(response.data));
-    } on LegalReasonException {
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
+    }
+    /*on LegalReasonException {
       return BaseResponse.suspended();
-    } catch (e) {
+    }*/
+    catch (e) {
       return BaseResponse.error();
     }
   }
@@ -219,9 +235,13 @@ class BotStockRepository {
           await _botStockApiClient.terminateOrder(BotOrderRequest(botOrderId));
       return BaseResponse.complete(
           TerminateOrderResponse.fromJson(response.data));
-    } on LegalReasonException {
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
+    }
+    /*on LegalReasonException {
       return BaseResponse.suspended();
-    } catch (e) {
+    }*/
+    catch (e) {
       return BaseResponse.error();
     }
   }

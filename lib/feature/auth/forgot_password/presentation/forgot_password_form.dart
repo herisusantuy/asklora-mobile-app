@@ -24,15 +24,11 @@ class ForgotPasswordForm extends StatelessWidget {
         CustomLoadingOverlay.of(context).show(responseState);
         if (responseState == ResponseState.success) {
           CustomInAppNotification.show(
-              context,
-              AuthErrorMessage.findByString(state.response.data.detail)
-                  .getErrorMessage(context));
+              context, state.response.validationCode.getErrorMessage(context));
           ForgotPasswordSuccessScreen.open(context);
         } else if (responseState == ResponseState.error) {
           CustomInAppNotification.show(
-              context,
-              AuthErrorMessage.findByString(state.response.message)
-                  .getErrorMessage(context));
+              context, state.response.validationCode.getErrorMessage(context));
           context
               .read<ForgotPasswordBloc>()
               .add(ForgotPasswordEmailChanged(state.email));
@@ -70,8 +66,7 @@ class ForgotPasswordForm extends StatelessWidget {
                 maxLine: 1,
                 labelText: S.of(context).email,
                 hintText: S.of(context).emailAddress,
-                errorText: AuthErrorMessage.findByString(state.emailErrorText)
-                    .getErrorMessage(context),
+                errorText: state.emailValidation.getErrorMessage(context),
                 onChanged: (email) => context
                     .read<ForgotPasswordBloc>()
                     .add(ForgotPasswordEmailChanged(email)));

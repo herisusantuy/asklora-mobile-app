@@ -1,68 +1,53 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/domain/validation_enum.dart';
 import '../../../generated/l10n.dart';
 
-enum AuthErrorMessage {
-  invalidPassword('Invalid Password'),
-  emailNotExist('User does not exist with the given email'),
-  emailNotVerified('User email is not verified'),
-  enterValidEmail('Enter valid email'),
-  passwordDoesNotMatch('Your password does not match.'),
-  enterValidPassword('Enter valid password'),
-  passwordChangeSuccessfully('Password changed successfully.'),
-  tokenInvalid('Token is invalid or expired.'),
-  invalidOtp('Invalid OTP'),
-  linkPasswordResetIsSent('Link for Password reset is sent to email.'),
-  accountIsNotActive('Your account is not active yet.'),
-  inputWrongEmailAddress('Input wrong email address'),
-  otpSentToYourPhone('Otp SMS is sent to your phone'),
-  otpSentToYourEmail('Otp SMS is sent to your Email'),
-  verifyOtpSuccess('Verify OTP Success'),
-  empty('');
-
-  final String value;
-
-  const AuthErrorMessage(this.value);
-
-  static AuthErrorMessage findByString(String message) =>
-      AuthErrorMessage.values.firstWhere((element) => element.value == message);
-}
-
-extension AuthErrorMessageExtension on AuthErrorMessage {
+extension ErrorMessageExtension on ValidationCode {
   String getErrorMessage(BuildContext context) {
     switch (this) {
-      case AuthErrorMessage.invalidPassword:
+      case ValidationCode.invalidPassword:
         return S.of(context).invalidPassword;
-      case AuthErrorMessage.emailNotExist:
+      case ValidationCode.invalidUser:
         return S.of(context).emailNotExist;
-      case AuthErrorMessage.emailNotVerified:
+      case ValidationCode.unverifiedEmail:
         return S.of(context).emailNotVerified;
-      case AuthErrorMessage.enterValidEmail:
+      case ValidationCode.enterValidEmail:
         return S.of(context).enterValidEmail;
-      case AuthErrorMessage.passwordDoesNotMatch:
+      case ValidationCode.passwordDoesNotMatch:
         return S.of(context).passwordDoesNotMatch;
-      case AuthErrorMessage.enterValidPassword:
+      case ValidationCode.enterValidPassword:
         return S.of(context).enterValidPassword;
-      case AuthErrorMessage.passwordChangeSuccessfully:
+      case ValidationCode.passwordChangeSuccessfully:
         return S.of(context).passwordChangeSuccessfully;
-      case AuthErrorMessage.tokenInvalid:
+      case ValidationCode.invalidToken:
         return S.of(context).tokenInvalid;
-      case AuthErrorMessage.invalidOtp:
+      case ValidationCode.invalidOtpType:
         return S.of(context).invalidOtp;
-      case AuthErrorMessage.linkPasswordResetIsSent:
+      case ValidationCode.linkPasswordResetIsSent:
         return S.of(context).linkPasswordResetIsSent;
-      case AuthErrorMessage.accountIsNotActive:
+      case ValidationCode.unverifiedUser:
         return S.of(context).accountIsNotActive;
-      case AuthErrorMessage.inputWrongEmailAddress:
+      case ValidationCode.inputWrongEmailAddress:
         return S.of(context).inputWrongEmailAddress;
-      case AuthErrorMessage.otpSentToYourPhone:
+      case ValidationCode.otpSentToYourPhone:
         return S.of(context).otpSentToYourPhone;
-      case AuthErrorMessage.otpSentToYourEmail:
+      case ValidationCode.otpSentToYourEmail:
         return S.of(context).otpSentToYourEmail;
-      case AuthErrorMessage.verifyOtpSuccess:
+      case ValidationCode.verifyOtpSuccess:
         return S.of(context).verifyOtpSuccess;
-      default:
+      case ValidationCode.accountExists:
+        return 'Account with this email already exists.';
+      case ValidationCode.usernameExists:
+        return 'Username has been taken, please use another';
+      case ValidationCode.invalidPasswordValidation:
+        return 'The password is too common.';
+      case ValidationCode.otpInvalid:
+        return 'The OTP is incorrect';
+      case ValidationCode.empty:
         return '';
+      default:
+        return name;
     }
   }
 }
