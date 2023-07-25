@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import '../../../generated/l10n.dart';
+import 'column_text.dart';
 import 'column_text_with_bottom_sheet.dart';
 
 class PairColumnTextWithBottomSheet extends StatelessWidget {
   final String leftTitle;
   final String leftSubTitle;
   final Color? leftSubTitleColor;
-  final String? leftTooltipText;
   final String rightTitle;
   final String rightSubTitle;
   final Color? rightSubTitleColor;
-  final String? rightTooltipText;
+  final String? leftBottomSheetText;
+  final String? rightBottomSheetText;
   final double? spaceWidth;
-  final CrossAxisAlignment? columnTextCrossAxisAlignment;
+  final CrossAxisAlignment columnTextCrossAxisAlignment;
   final String? buttonLabel;
 
   const PairColumnTextWithBottomSheet(
@@ -22,10 +23,10 @@ class PairColumnTextWithBottomSheet extends StatelessWidget {
       required this.rightSubTitle,
       this.leftSubTitleColor,
       this.rightSubTitleColor,
-      this.leftTooltipText,
-      this.rightTooltipText,
+      this.leftBottomSheetText,
+      this.rightBottomSheetText,
       this.spaceWidth,
-      this.columnTextCrossAxisAlignment,
+      this.columnTextCrossAxisAlignment = CrossAxisAlignment.start,
       this.buttonLabel,
       Key? key})
       : super(key: key);
@@ -36,26 +37,39 @@ class PairColumnTextWithBottomSheet extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
-          child: ColumnTextWithBottomSheet(
-            subTitleColor: leftSubTitleColor,
-            crossAxisAlignment: columnTextCrossAxisAlignment,
-            title: leftTitle,
-            subTitle: leftSubTitle,
-            tooltipText: leftTooltipText,
-            buttonLabel: buttonLabel ?? S.of(context).buttonBack,
-          ),
+          child: leftBottomSheetText != null
+              ? ColumnTextWithBottomSheet(
+                  subTitleColor: leftSubTitleColor,
+                  crossAxisAlignment: columnTextCrossAxisAlignment,
+                  title: leftTitle,
+                  subTitle: leftSubTitle,
+                  bottomSheetText: leftBottomSheetText,
+                  bottomSheetButtonLabel:
+                      buttonLabel ?? S.of(context).buttonBack,
+                )
+              : ColumnText(
+                  subTitleColor: leftSubTitleColor,
+                  crossAxisAlignment: columnTextCrossAxisAlignment,
+                  title: leftTitle,
+                  subTitle: leftSubTitle),
         ),
         if (spaceWidth != null)
           SizedBox(
             width: spaceWidth,
           ),
         Expanded(
-          child: ColumnTextWithBottomSheet(
-              subTitleColor: rightSubTitleColor,
-              crossAxisAlignment: columnTextCrossAxisAlignment,
-              title: rightTitle,
-              subTitle: rightSubTitle,
-              tooltipText: rightTooltipText),
+          child: rightBottomSheetText != null
+              ? ColumnTextWithBottomSheet(
+                  subTitleColor: rightSubTitleColor,
+                  crossAxisAlignment: columnTextCrossAxisAlignment,
+                  title: rightTitle,
+                  subTitle: rightSubTitle,
+                  bottomSheetText: rightBottomSheetText)
+              : ColumnText(
+                  subTitleColor: rightSubTitleColor,
+                  crossAxisAlignment: columnTextCrossAxisAlignment,
+                  title: rightTitle,
+                  subTitle: rightSubTitle),
         ),
       ],
     );

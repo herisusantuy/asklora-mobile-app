@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../core/presentation/column_text/pair_column_text.dart';
 import '../../../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
@@ -14,7 +15,6 @@ import '../../../../utils/bot_stock_utils.dart';
 import '../../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
 import '../../../widgets/iex_data_provider_link.dart';
-import '../../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import 'bot_price_level_indicator.dart';
 
 class BotRecommendationDetailContent extends StatelessWidget {
@@ -133,7 +133,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
             ],
           ),
           children: [
-            PairColumnTextWithTooltip(
+            PairColumnText(
               leftTitle: S.of(context).prevClose,
               leftSubTitle: botDetailModel?.prevClosePrice != null
                   ? (botDetailModel?.prevClosePrice ?? 0).toString()
@@ -155,21 +155,21 @@ class BotRecommendationDetailContent extends StatelessWidget {
             const SizedBox(
               height: 21,
             ),
-            PairColumnTextWithTooltip(
+            PairColumnText(
               leftTitle: S.of(context).sectors,
               leftSubTitle: botDetailModel?.stockInfo.sector ?? 'NA',
               rightTitle: S.of(context).industry,
               rightSubTitle: botDetailModel?.stockInfo.industry ?? 'NA',
             ),
             _spaceBetweenInfo,
-            PairColumnTextWithTooltip(
+            PairColumnText(
               leftTitle: S.of(context).ceo,
               leftSubTitle: botDetailModel?.stockInfo.ceo ?? 'NA',
               rightTitle: S.of(context).employees,
               rightSubTitle: '${botDetailModel?.stockInfo.employees}',
             ),
             _spaceBetweenInfo,
-            PairColumnTextWithTooltip(
+            PairColumnText(
               leftTitle: S.of(context).headquarters,
               leftSubTitle: botDetailModel?.stockInfo.headquarter ?? 'NA',
               rightTitle: S.of(context).founded,
@@ -198,8 +198,8 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   leftSubTitle: '${botDetailModel?.formattedStartDate}',
                   rightTitle: S.of(context).investmentPeriod,
                   rightSubTitle: '${botDetailModel?.botDuration}',
-                  leftTooltipText: S.of(context).tooltipBotDetailsStartDate,
-                  rightTooltipText:
+                  leftBottomSheetText: S.of(context).tooltipBotDetailsStartDate,
+                  rightBottomSheetText:
                       S.of(context).tooltipBotDetailsInvestmentPeriod),
               _spaceBetweenInfo,
               ColumnTextWithTooltip(
@@ -272,10 +272,10 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   ? S.of(context).estTakeProfitPercent
                   : S.of(context).estMaxProfitPercent,
               rightSubTitle: botDetailModel.estTakeProfitPctFormatted,
-              leftTooltipText: botType == BotType.plank
+              leftBottomSheetText: botType == BotType.plank
                   ? S.of(context).tooltipBotDetailsEstStopLoss
                   : S.of(context).tooltipBotDetailsEstMaxLoss,
-              rightTooltipText: botType == BotType.plank
+              rightBottomSheetText: botType == BotType.plank
                   ? S.of(context).tooltipBotDetailsEstTakeProfit
                   : S.of(context).tooltipBotDetailsEstMaxProfit),
           _spaceBetweenInfo,

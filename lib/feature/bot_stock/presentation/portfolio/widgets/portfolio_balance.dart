@@ -101,7 +101,7 @@ class PortfolioBalance extends StatelessWidget {
               leftSubTitle: currencyType == CurrencyType.hkd
                   ? data.buyingPowerHkdStr
                   : data.buyingPowerUsdStr,
-              leftTooltipText: S.of(context).portfolioBuyingPowerToolTip,
+              leftBottomSheetText: S.of(context).portfolioBuyingPowerToolTip,
               rightTitle: S.of(context).portfolioTotalPL,
               rightSubTitle: data.totalPnLStr,
               rightSubTitleColor: data.totalPnLColor,
@@ -111,8 +111,8 @@ class PortfolioBalance extends StatelessWidget {
             const SizedBox(
               height: 23,
             ),
-            PairColumnTextWithTooltip(
-              columnTextCrossAxisAlignment: CrossAxisAlignment.center,
+            PairColumnText(
+              crossAxisAlignment: CrossAxisAlignment.center,
               leftTitle:
                   S.of(context).portfolioWithdrawableAmount(currencyType.name),
               leftSubTitle: currencyType == CurrencyType.hkd

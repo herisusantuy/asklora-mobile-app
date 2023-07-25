@@ -100,16 +100,13 @@ class LoraBottomSheetContent extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        GestureDetector(
-                          onTap: () => Navigator.pop(context),
-                          child: Container(
-                            width: 150,
-                            height: 10,
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              color: AskLoraColors.gray,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
+                        Container(
+                          width: 150,
+                          height: 10,
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: AskLoraColors.gray,
+                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                         const SizedBox(

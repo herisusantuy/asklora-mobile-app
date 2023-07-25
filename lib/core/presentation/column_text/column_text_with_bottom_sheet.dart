@@ -11,24 +11,24 @@ class ColumnTextWithBottomSheet extends StatelessWidget {
   final String title;
   final String subTitle;
   final Color? subTitleColor;
-  final String? tooltipText;
-  final CrossAxisAlignment? crossAxisAlignment;
-  final String? buttonLabel;
+  final String? bottomSheetText;
+  final CrossAxisAlignment crossAxisAlignment;
+  final String? bottomSheetButtonLabel;
 
   const ColumnTextWithBottomSheet(
       {required this.title,
       required this.subTitle,
-      this.tooltipText,
-      this.crossAxisAlignment,
+      required this.bottomSheetText,
+      this.crossAxisAlignment = CrossAxisAlignment.start,
       this.subTitleColor,
-      this.buttonLabel,
+      this.bottomSheetButtonLabel,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
+      crossAxisAlignment: crossAxisAlignment,
       children: [
         Row(
           mainAxisSize: MainAxisSize.min,
@@ -40,20 +40,20 @@ class ColumnTextWithBottomSheet extends StatelessWidget {
                     .copyWith(color: AskLoraColors.charcoal),
               ),
             ),
-            if (tooltipText != null)
-              GestureDetector(
-                onTap: () => LoraBottomSheet.show(
-                  context: context,
-                  title: title,
-                  subTitle: tooltipText,
-                  primaryButtonLabel: buttonLabel ?? S.of(context).buttonBack,
-                  onPrimaryButtonTap: () => Navigator.pop(context),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 6.0),
-                  child: getSvgIcon('icon_info'),
-                ),
-              )
+            GestureDetector(
+              onTap: () => LoraBottomSheet.show(
+                context: context,
+                title: title,
+                subTitle: bottomSheetText,
+                primaryButtonLabel:
+                    bottomSheetButtonLabel ?? S.of(context).buttonBack,
+                onPrimaryButtonTap: () => Navigator.pop(context),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 6.0),
+                child: getSvgIcon('icon_info'),
+              ),
+            )
           ],
         ),
         CustomTextNew(subTitle,

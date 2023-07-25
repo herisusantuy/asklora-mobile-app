@@ -7,8 +7,8 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/presentation/column_text/pair_column_text.dart';
 import '../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
-import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
@@ -133,19 +133,20 @@ class BotTradeSummaryScreen extends StatelessWidget {
                         leftSubTitle: botTradeSummaryModel.amount
                             .convertToCurrencyDecimal(),
                         rightSubTitle: S.of(context).free,
-                        rightTooltipText: S.of(context).botManagementFeeTooltip,
+                        rightBottomSheetText:
+                            S.of(context).botManagementFeeTooltip,
                       ),
                       _spaceBetweenInfo,
                       ..._detailedInformation(context),
                       _spaceBetweenInfo,
-                      PairColumnTextWithTooltip(
+                      PairColumnText(
                           leftTitle: '${S.of(context).marketPrice} (USD)',
                           leftSubTitle:
                               '${botTradeSummaryModel.botDetailModel.price}',
                           rightTitle: S.of(context).investmentPeriod,
                           rightSubTitle: botDetailModel.botDuration),
                       _spaceBetweenInfo,
-                      PairColumnTextWithTooltip(
+                      PairColumnText(
                           leftTitle: S.of(context).startDate,
                           rightTitle: S.of(context).endDate,
                           leftSubTitle: botTradeSummaryModel
@@ -207,7 +208,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
   }
 
   List<Widget> _detailedInformation(BuildContext context) => [
-        PairColumnTextWithTooltip(
+        PairColumnText(
+          crossAxisAlignment: CrossAxisAlignment.start,
           leftTitle: botTradeSummaryModel.botType == BotType.plank
               ? S.of(context).estStopLossPercent
               : S.of(context).estMaxLossPercent,
