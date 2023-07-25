@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/upgrade_account/affiliated_person.dart';
@@ -11,6 +12,7 @@ class DisclosureAffiliationBloc
     extends Bloc<DisclosuresAffiliationEvent, DisclosureAffiliationState> {
   DisclosureAffiliationBloc() : super(const DisclosureAffiliationState()) {
     on<AffiliatedPersonChanged>(_onAffiliatedPersonChanged);
+    on<ResetAffiliatedAnswer>(_onResetAffiliatedPersonAnswer);
     on<AffiliatedAssociatesChanged>(_onAffiliateAssociatesChanged);
     on<AffiliatedCommissionChanged>(_onAffiliateCommissionChanged);
     on<AffiliatePersonFirstNameChanged>(_onAffiliatePersonFirstNameChanged);
@@ -26,7 +28,7 @@ class DisclosureAffiliationBloc
   _onInitiateDisclosureAffiliation(InitiateDisclosureAffiliation event,
       Emitter<DisclosureAffiliationState> emit) {
     emit(state.copyWith(
-        isAffiliatedPerson: event.immediateFamilyAffiliation,
+        isAffiliatedPerson: () => event.immediateFamilyAffiliation,
         isAffiliatedAssociates: event.associatesAffiliation,
         affiliatedPersonFirstName: event.affiliatedPerson?.firstName,
         affiliatedPersonLastName: event.affiliatedPerson?.lastName));
@@ -34,11 +36,12 @@ class DisclosureAffiliationBloc
 
   _onAffiliatedPersonChanged(
       AffiliatedPersonChanged event, Emitter<DisclosureAffiliationState> emit) {
-    if (event.isAffiliatedPerson) {
-      emit(state.copyWith(isAffiliatedPerson: event.isAffiliatedPerson));
-    } else {
-      emit(state.copyWith(isAffiliatedPerson: event.isAffiliatedPerson));
-    }
+    emit(state.copyWith(isAffiliatedPerson: () => event.isAffiliatedPerson));
+  }
+
+  _onResetAffiliatedPersonAnswer(
+      ResetAffiliatedAnswer event, Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(isAffiliatedPerson: () => null));
   }
 
   _onAffiliateAssociatesChanged(AffiliatedAssociatesChanged event,
