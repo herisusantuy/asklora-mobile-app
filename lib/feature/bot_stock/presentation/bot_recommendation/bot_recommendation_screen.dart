@@ -30,9 +30,13 @@ import '../widgets/custom_expansion_panel.dart';
 import 'detail/bot_recommendation_detail_screen.dart';
 
 part 'widgets/bot_learn_more_bottom_sheet.dart';
+
 part 'widgets/bot_recommendation_card.dart';
+
 part 'widgets/bot_recommendation_card_shimmer.dart';
+
 part 'widgets/bot_recommendation_faq.dart';
+
 part 'widgets/bot_recommendation_list.dart';
 
 class BotRecommendationScreen extends StatelessWidget {
@@ -107,9 +111,7 @@ class BotRecommendationScreen extends StatelessWidget {
             S.of(context).botRecommendationScreenTitle,
             style: AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
           ),
-          const SizedBox(
-            height: 36,
-          ),
+          const SizedBox(height: 16),
           CustomTextWithTooltip(
             title: S.of(context).updatedAt(updated),
             tooltipText: S.of(context).ourPersonalisedRecommendationsAreUnique,
@@ -129,9 +131,7 @@ class BotRecommendationScreen extends StatelessWidget {
                       .copyWith(color: AskLoraColors.primaryMagenta),
                 ),
               ),
-              const SizedBox(
-                width: 5,
-              ),
+              const SizedBox(width: 5),
               ExtraInfoButton(
                 label: S.of(context).defineAgain,
                 buttonExtraInfoSize: ButtonExtraInfoSize.small,

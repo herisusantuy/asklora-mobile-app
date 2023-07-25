@@ -571,7 +571,7 @@
   "noTransactions": "暫時沒有交易",
   "noTransactionsYet": "你似乎未進行過任何交易！",
   "checkBackLater": "稍後再來查看!",
-  "defineAgain": "Define again",
+  "defineAgain": "重新界定",
   "updatedAt": "Updated at {updated}",
   "@updatedAt": {
     "placeholders": {

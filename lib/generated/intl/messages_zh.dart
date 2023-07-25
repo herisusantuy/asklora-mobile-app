@@ -253,7 +253,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("出生日期"),
-        "defineAgain": MessageLookupByLibrary.simpleMessage("Define again"),
+        "defineAgain": MessageLookupByLibrary.simpleMessage("重新界定"),
         "defineInvestmentStyle": MessageLookupByLibrary.simpleMessage("界定投資風格"),
         "deposit": MessageLookupByLibrary.simpleMessage("存入資金"),
         "depositAmount": MessageLookupByLibrary.simpleMessage("存入金額"),
