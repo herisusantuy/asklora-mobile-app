@@ -753,5 +753,6 @@
   "verifyNow": "Verify Now",
   "kycResultScreenTitle": "Your investment account application is under review!",
   "kycResultScreenDesc": "You will be informed when your application is approved.\n\nPlease remember to collect your gift.",
-  "depositFund": "Deposit Funds"
+  "depositFund": "Deposit Funds",
+  "generalSettings": "General Settings"
 }

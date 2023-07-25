@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../core/domain/base_response.dart';
 import '../../../core/domain/token/repository/token_repository.dart';
+import '../../../core/presentation/buttons/primary_button.dart';
 import '../../../core/presentation/custom_header.dart';
 import '../../../core/presentation/custom_in_app_notification.dart';
 import '../../../core/presentation/custom_scaffold.dart';
@@ -17,14 +17,12 @@ import '../../../core/utils/storage/profile_data.dart';
 import '../../../core/utils/storage/secure_storage.dart';
 import '../../../core/utils/storage/shared_preference.dart';
 import '../../../generated/l10n.dart';
-import '../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../auth/repository/auth_repository.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
 import '../../onboarding/welcome/welcome_screen.dart';
 import '../../transaction_history/presentation/transaction_history_screen.dart';
 import 'account_setting_screen.dart';
 import 'about_asklora_screen.dart';
-import 'get_help_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const String route = '/settings_screen';
@@ -43,7 +41,7 @@ class SettingsScreen extends StatelessWidget {
             sharedPreference: SharedPreference()),
         child: CustomStretchedLayout(
           header: CustomHeader(
-            title: S.of(context).allSettings,
+            title: S.of(context).generalSettings,
           ),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,83 +91,31 @@ class SettingsScreen extends StatelessWidget {
               const SizedBox(
                 height: 40,
               ),
-              _settingsMenu(
-                  title: S.of(context).subscription,
-                  subTitle:
-                      '${S.of(context).corePlan} - ${S.of(context).freeTrial}',
-                  onTap: () {}),
+
+              ///ADD THIS BACK FOR THE REAL MONEY LUNCH
+              // _settingsMenu(
+              //     title: S.of(context).subscription,
+              //     subTitle:
+              //         '${S.of(context).corePlan} - ${S.of(context).freeTrial}',
+              //     onTap: () {}),
               _settingsMenu(
                   title: S.of(context).accountSettings,
                   onTap: () => AccountSettingScreen.open(context)),
               _settingsMenu(
-                  title: S.of(context).investmentPreferences,
-                  onTap: () =>
-                      AiInvestmentStyleQuestionWelcomeScreen.open(context)),
-              _settingsMenu(
                   title: S.of(context).transactionHistory,
                   onTap: () => TransactionHistoryScreen.open(context)),
               _settingsMenu(
-                  title: S.of(context).getHelp,
-                  onTap: () => GetHelpScreen.open(context)),
-              _settingsMenu(
                   title: S.of(context).aboutAsklora,
                   onTap: () => AboutAskloraScreen.open(context)),
-              _signOutButton(context),
-              _getAppVersion()
+              // _signOutButton(context),
+              // _getAppVersion()
             ],
           ),
+          bottomButton: _signOutButton,
         ),
       ),
     );
   }
-
-  Widget _signOutButton(BuildContext context) => Builder(
-        builder: (context) => BlocListener<SignOutBloc, SignOutState>(
-          listener: (context, state) async {
-            CustomLoadingOverlay.of(context).show(state.response.state);
-            if (state.response.state == ResponseState.error) {
-              CustomInAppNotification.show(context, state.response.message);
-            } else if (state.response.state == ResponseState.success) {
-              WelcomeScreen.openAndRemoveAllRoute(context);
-            }
-          },
-          child: GestureDetector(
-            onTap: () => LoraBottomSheet.show(
-              context: context,
-              title: S.of(context).signOutConfirmation,
-              primaryButtonLabel: S.of(context).buttonSignOut,
-              secondaryButtonLabel: S.of(context).buttonCancel,
-              onPrimaryButtonTap: () {
-                Navigator.pop(context);
-                context.read<SignOutBloc>().add(const SignOutSubmitted());
-              },
-              onSecondaryButtonTap: () => Navigator.pop(context),
-            ),
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.only(top: 39),
-              decoration: const BoxDecoration(
-                  border: Border(
-                      top: BorderSide(color: AskLoraColors.gray, width: 0.5))),
-              child: UnconstrainedBox(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  padding: const EdgeInsets.only(bottom: 3),
-                  decoration: const BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(
-                              color: AskLoraColors.charcoal, width: 0.5))),
-                  child: CustomTextNew(
-                    S.of(context).buttonSignOut,
-                    style: AskLoraTextStyles.subtitle2
-                        .copyWith(color: AskLoraColors.charcoal),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
 
   Widget _settingsMenu(
           {required String title,
@@ -213,26 +159,32 @@ class SettingsScreen extends StatelessWidget {
         ),
       );
 
-  Widget _getAppVersion() => FutureBuilder<PackageInfo>(
-        future: PackageInfo.fromPlatform(),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
-              return Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 23.5),
-                  child: CustomTextNew(
-                    '${S.of(context).version}: ${snapshot.data!.version} ${snapshot.data!.buildNumber}',
-                    style: AskLoraTextStyles.body1,
-                  ),
-                ),
-              );
-            default:
-              return const SizedBox();
-          }
-        },
-      );
+  Widget get _signOutButton => Builder(builder: (context) {
+        return BlocListener<SignOutBloc, SignOutState>(
+          listener: (context, state) {
+            CustomLoadingOverlay.of(context).show(state.response.state);
+            if (state.response.state == ResponseState.error) {
+              CustomInAppNotification.show(context, state.response.message);
+            } else if (state.response.state == ResponseState.success) {
+              WelcomeScreen.openAndRemoveAllRoute(context);
+            }
+          },
+          child: PrimaryButton(
+              buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
+              label: S.of(context).buttonSignOut,
+              onTap: () => LoraBottomSheet.show(
+                    context: context,
+                    title: S.of(context).signOutConfirmation,
+                    primaryButtonLabel: S.of(context).buttonSignOut,
+                    secondaryButtonLabel: S.of(context).buttonCancel,
+                    onPrimaryButtonTap: () {
+                      Navigator.pop(context);
+                      context.read<SignOutBloc>().add(const SignOutSubmitted());
+                    },
+                    onSecondaryButtonTap: () => Navigator.pop(context),
+                  )),
+        );
+      });
 
   static void open(BuildContext context) =>
       Navigator.of(context, rootNavigator: true).pushNamed(route);

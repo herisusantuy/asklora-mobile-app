@@ -725,5 +725,6 @@
   "verifyNow": "立即核實",
   "kycResultScreenTitle": "幫緊你,幫緊你!",
   "kycResultScreenDesc": "你嘅投資賬戶正在審核中\n一有進度Asklora會馬上同你聯絡",
-  "depositFund": "存入資金"
+  "depositFund": "存入資金",
+  "generalSettings": "設定"
 }

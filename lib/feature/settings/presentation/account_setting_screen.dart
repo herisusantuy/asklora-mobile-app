@@ -7,11 +7,8 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
-import 'account_information_screen.dart';
 import 'change_password_screen.dart';
 import 'language_selection_screen.dart';
-import 'notification_setting_screen.dart';
-import 'payment_detail_screen.dart';
 
 class AccountSettingScreen extends StatelessWidget {
   static const route = '/account_setting_screen';
@@ -28,31 +25,14 @@ class AccountSettingScreen extends StatelessWidget {
         content: Column(
           children: [
             MenuButtonWidget(
-              onTap: () => AccountInformationScreen.open(context),
-              title: S.of(context).accountInformation,
-            ),
-            MenuButtonWidget(
                 onTap: () => ChangePasswordScreen.open(context),
                 title: S.of(context).changePassword,
-                showBottomBorder: false),
-            MenuButtonWidget(
-              onTap: () => PaymentDetailScreen.open(context),
-              title: S.of(context).paymentDetails,
-            ),
+                showBottomBorder: true),
             MenuButtonWidget(
                 onTap: () => LanguageSelectionScreen.open(context),
                 title: S.of(context).language,
                 subtitle: context.read<AppBloc>().state.locale.labelName,
                 showBottomBorder: false),
-            MenuButtonWidget(
-              onTap: () => NotificationSettingScreen.open(context),
-              title: S.of(context).notificationSettings,
-            ),
-            MenuButtonWidget(
-              title: S.of(context).terminateAccount,
-              showBottomBorder: false,
-              onTap: () {},
-            ),
           ],
         ),
       ),
