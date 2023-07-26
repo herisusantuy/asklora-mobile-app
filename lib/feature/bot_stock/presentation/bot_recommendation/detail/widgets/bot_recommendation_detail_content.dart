@@ -24,11 +24,14 @@ class BotRecommendationDetailContent extends StatelessWidget {
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
+  final bool isGraphHidden;
 
   const BotRecommendationDetailContent(
       {required this.botRecommendationModel,
       required this.botType,
       this.botDetailModel,
+      // Set this as true only for mock app
+      this.isGraphHidden = true,
       Key? key})
       : super(key: key);
 
@@ -205,11 +208,13 @@ class BotRecommendationDetailContent extends StatelessWidget {
               ColumnTextWithTooltip(
                   title: S.of(context).estimatedEndDate,
                   subTitle: '${botDetailModel?.estEndDateFormatted}'),
-              _chartWidget(context),
-              const SizedBox(
-                height: 6,
-              ),
-              _getChartCaption(context),
+              if (!isGraphHidden) ...[
+                _chartWidget(context),
+                const SizedBox(
+                  height: 6,
+                ),
+                _getChartCaption(context),
+              ]
             ],
           ),
         ),
