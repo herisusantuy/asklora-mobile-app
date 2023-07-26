@@ -4,10 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../../app/repository/user_journey_repository.dart';
 import '../../../../core/data/remote/base_api_client.dart';
-import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/utils/extensions.dart';
-import '../../../../core/utils/log.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
 import '../../../onboarding/kyc/domain/get_account/get_account_response.dart';
@@ -132,8 +131,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     } on AskloraApiClientException catch (e) {
       emit(state.copyWith(
           response: BaseResponse.error(validationCode: e.askloraError.type)));
-      Logger.log(
-          'Krishna AskloraApiClientException ${e.askloraError.code} ${e.askloraError.detail}');
     } catch (e) {
       _authRepository.removeStorageOnSignInFailed();
       emit(state.copyWith(response: BaseResponse.error()));

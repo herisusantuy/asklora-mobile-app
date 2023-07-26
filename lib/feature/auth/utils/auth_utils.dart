@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../core/domain/validation_enum.dart';
 import '../../../generated/l10n.dart';
 
-extension ErrorMessageExtension on ValidationCode {
-  String getErrorMessage(BuildContext context) {
+extension MessageExtension on ValidationCode {
+  String getText(BuildContext context) {
     switch (this) {
       case ValidationCode.invalidPassword:
         return S.of(context).invalidPassword;
@@ -44,8 +44,18 @@ extension ErrorMessageExtension on ValidationCode {
         return 'The password is too common.';
       case ValidationCode.otpInvalid:
         return 'The OTP is incorrect';
+      case ValidationCode.emailVerificationLinkSentSuccess:
+        return 'Email verification link has been sent successfully!';
+      case ValidationCode.couldNotGetUserDetails:
+        return 'Could not get user details!';
+      case ValidationCode.couldNotFetchOnfidoToken:
+        return 'Could not fetch the token!';
+      case ValidationCode.couldNotUpdateOnfidoResult:
+        return 'Could not update the Onfido result!';
       case ValidationCode.empty:
         return '';
+      case ValidationCode.unknown:
+        return 'Something went wrong!';
       default:
         return name;
     }

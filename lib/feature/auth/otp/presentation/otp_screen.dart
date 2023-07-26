@@ -71,10 +71,8 @@ class OtpScreen extends StatelessWidget {
 
                   switch (state.response.state) {
                     case ResponseState.error:
-                      CustomInAppNotification.show(
-                          context,
-                          state.response.validationCode
-                              .getErrorMessage(context));
+                      CustomInAppNotification.show(context,
+                          state.response.validationCode.getText(context));
                       break;
                     case ResponseState.success:
                       context
