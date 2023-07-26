@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-
-import '../../../core/presentation/ai/buttons/ai_send_text_button.dart';
 import '../../../core/presentation/ai/lora_animation_green.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
+import '../../../core/utils/app_icons.dart';
 import '../../../core/values/app_values.dart';
 import '../../../core/presentation/ai/buttons/glowing_button.dart';
 import '../../../core/presentation/ai/utils/ai_utils.dart';
@@ -59,18 +58,32 @@ class AiWelcomeScreen extends StatelessWidget {
               if (child != null) child!,
             ]),
           ),
-          bottomButton: GlowingButton(
-            height: 75.0,
-            width: 75.0,
-            onTap: onBottomButtonTap,
-            buttonBackgroundColor: aiThemeType.startButtonFillColor,
-            glowColor: Colors.white.withAlpha(100),
-            child: AiSendTextButton(
-              borderColor: AskLoraColors.lightGray,
-              enabledButtonColor: AskLoraColors.whiteSmoke.withOpacity(0.5),
-              onTap: onBottomButtonTap,
-            ),
-          ),
+          bottomButton: _bottomButton,
         ),
+      );
+
+  Widget get _bottomButton => GlowingButton(
+        height: 75.0,
+        width: 75.0,
+        onTap: onBottomButtonTap,
+        buttonBackgroundColor: aiThemeType.startButtonFillColor,
+        glowColor: Colors.grey[350]!.withAlpha(100),
+        child: Container(
+            margin: const EdgeInsets.all(2),
+            padding: const EdgeInsets.only(left: 4),
+            decoration: BoxDecoration(
+                gradient: RadialGradient(colors: <Color>[
+                  AskLoraColors.white.withOpacity(1),
+                  AskLoraColors.white.withOpacity(0.6),
+                  AskLoraColors.gray,
+                ], stops: const <double>[
+                  0.6,
+                  0.8,
+                  1
+                ]),
+                shape: BoxShape.circle,
+                border: Border.all(color: AskLoraColors.darkGray, width: 1)),
+            child: getSvgIcon('icon_play',
+                color: AskLoraColors.darkGray, fit: BoxFit.none)),
       );
 }
