@@ -27,7 +27,6 @@ class LoraGptRepository {
       var response = await _loraGptClient.portfolioDetails(params.params);
       return BaseResponse.complete(QueryResponse.fromJson(response.data));
     } catch (e) {
-      print('error $e');
       return BaseResponse.error(
           message: 'Something went wrong. Please try again!');
     }
