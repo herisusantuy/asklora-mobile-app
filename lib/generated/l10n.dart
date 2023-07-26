@@ -5405,6 +5405,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Not the stock you were looking for? Try something different`
+  String get notTheStockYouWereLooking {
+    return Intl.message(
+      'Not the stock you were looking for? Try something different',
+      name: 'notTheStockYouWereLooking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Press to Start Over`
+  String get pressToStartOver {
+    return Intl.message(
+      'Press to Start Over',
+      name: 'pressToStartOver',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
