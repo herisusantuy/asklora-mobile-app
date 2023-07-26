@@ -49,11 +49,7 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 28,
-              ),
-              _chartWidget(context, botOrderId),
-              const SizedBox(
-                height: 33,
+                height: 42,
               ),
               CustomTextNew(
                 S.of(context).portfolioDetailKeyInfoTitle,
