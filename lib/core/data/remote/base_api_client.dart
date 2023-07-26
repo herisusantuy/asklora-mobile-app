@@ -163,8 +163,7 @@ class AppInterceptors extends Interceptor {
 
             final message = err.response?.data['message'];
             if (message == 'Token invalid' ||
-                message == 'Token invalid / expired' ||
-                askloraError.type == ValidationCode.invalidToken) {
+                message == 'Token invalid / expired') {
               _handleExpiredToken(err, handler);
               return;
             } else {

@@ -9,6 +9,7 @@ import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../generated/l10n.dart';
 import '../../forgot_password/presentation/forgot_password_screen.dart';
 import '../../sign_in/presentation/sign_in_screen.dart';
+import '../../utils/auth_utils.dart';
 import '../bloc/reset_password_bloc.dart';
 
 class ResetPasswordForm extends StatelessWidget {
@@ -22,7 +23,8 @@ class ResetPasswordForm extends StatelessWidget {
       listener: (context, state) {
         CustomLoadingOverlay.of(context).show(state.response.state);
         if (state.response.message.isNotEmpty) {
-          CustomInAppNotification.show(context, state.response.message);
+          CustomInAppNotification.show(
+              context, state.response.validationCode.getText(context));
         }
 
         if (state.response.state == ResponseState.success) {

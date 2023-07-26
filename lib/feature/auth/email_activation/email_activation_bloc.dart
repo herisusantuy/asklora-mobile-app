@@ -4,9 +4,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uni_links/uni_links.dart';
 
+import '../../../core/data/remote/base_api_client.dart';
 import '../../../core/domain/base_response.dart';
 import '../../../core/domain/otp/get_otp_request.dart';
 import '../../../core/domain/token/repository/token_repository.dart';
+import '../../../core/domain/validation_enum.dart';
 import '../../../core/utils/storage/shared_preference.dart';
 import '../../../core/utils/storage/storage_keys.dart';
 import '../../onboarding/ppi/repository/ppi_response_repository.dart';
@@ -47,8 +49,11 @@ class EmailActivationBloc
               GetOtpRequest(event.email, OtpType.register.value));
       emit(state.copyWith(
           response: BaseResponse.complete(
-              message: 'Email verification link has been sent successfully!',
+              validationCode: ValidationCode.emailVerificationLinkSentSuccess,
               null)));
+    } on AskloraApiClientException catch (e) {
+      emit(state.copyWith(
+          response: BaseResponse.error(validationCode: e.askloraError.type)));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }

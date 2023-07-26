@@ -10,4 +10,6 @@ class FeatureFlags {
   /// Currently only being used for Deposits.
   /// This flag is being used for setting the 100HKD is minimum deposits in the UAT.
   static const bool isProdTestEnabled = true;
+
+  static const bool isMockApp = true;
 }
