@@ -3,6 +3,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/domain/endpoints.dart';
+import '../../../core/presentation/buttons/primary_button.dart';
 import '../../../core/presentation/custom_expanded_row.dart';
 import '../../../core/presentation/custom_header.dart';
 import '../../../core/presentation/custom_scaffold.dart';
@@ -11,9 +12,11 @@ import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/app_icons.dart';
+import '../../../core/utils/feature_flags.dart';
 import '../../../core/utils/utils.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
+import 'customer_service_screen.dart';
 import 'privacy_policy_screen.dart';
 import 'terms_condition_screen.dart';
 
@@ -60,15 +63,20 @@ class AboutAskloraScreen extends StatelessWidget {
                     rightTextStyle: AskLoraTextStyles.body1.copyWith(
                       color: AskLoraColors.primaryMagenta,
                     ))),
-            _spaceHeight(),
-            CustomExpandedRow(S.of(context).officeHoursLabel,
-                leftTextStyle: AskLoraTextStyles.subtitle2,
-                flex2: 2,
-                text: S.of(context).officeHours,
-                textValueAlign: TextAlign.left,
-                rightTextStyle: AskLoraTextStyles.body1.copyWith(
-                  color: AskLoraColors.black,
-                )),
+            if (FeatureFlags.isMockApp)
+              Column(
+                children: [
+                  _spaceHeight(),
+                  CustomExpandedRow(S.of(context).officeHoursLabel,
+                      leftTextStyle: AskLoraTextStyles.subtitle2,
+                      flex2: 2,
+                      text: S.of(context).officeHours,
+                      textValueAlign: TextAlign.left,
+                      rightTextStyle: AskLoraTextStyles.body1.copyWith(
+                        color: AskLoraColors.black,
+                      )),
+                ],
+              ),
             const SizedBox(height: 12),
             const Divider(thickness: 1, height: 0),
             MenuButtonWidget(
@@ -105,13 +113,15 @@ class AboutAskloraScreen extends StatelessWidget {
         },
       );
 
-  Widget _spaceHeight() => const Column(
-        children: [
-          SizedBox(height: 12),
-          Divider(thickness: 1, height: 0),
-          SizedBox(height: 12),
-        ],
-      );
+  Widget get _contactUsButton => Builder(builder: (context) {
+        return PrimaryButton(
+            label: S.of(context).contactUs.toUpperCase(),
+            onTap: () => CustomerServiceScreen.open(context));
+      });
+
+  Widget _spaceHeight() => const Padding(
+      padding: EdgeInsets.symmetric(vertical: 12),
+      child: Divider(thickness: 1, height: 0));
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }
