@@ -4146,13 +4146,13 @@ class S {
     );
   }
 
-  /// `Updated at {time} HKT, {date}`
-  String updatedAt(String time, String date) {
+  /// `Updated at {updated}`
+  String updatedAt(String updated) {
     return Intl.message(
-      'Updated at $time HKT, $date',
+      'Updated at $updated',
       name: 'updatedAt',
       desc: '',
-      args: [time, date],
+      args: [updated],
     );
   }
 
@@ -5381,6 +5381,26 @@ class S {
     return Intl.message(
       'The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!',
       name: 'botManagementFeeTooltip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Our personalised recommendations are unique. The recommended Botstocks are based on your risk tolerance, personality, and investment style.`
+  String get ourPersonalisedRecommendationsAreUnique {
+    return Intl.message(
+      'Our personalised recommendations are unique. The recommended Botstocks are based on your risk tolerance, personality, and investment style.',
+      name: 'ourPersonalisedRecommendationsAreUnique',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `General Settings`
+  String get generalSettings {
+    return Intl.message(
+      'General Settings',
+      name: 'generalSettings',
       desc: '',
       args: [],
     );

@@ -82,7 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m23(minDeposit) =>
       "Transfer at least HK\$${minDeposit} to Asklora\'s bank account. Any initial deposit less than HK\$${minDeposit} will be rejected and fees will be charged.";
 
-  static String m24(time, date) => "Updated at ${time} HKT, ${date}";
+  static String m24(updated) => "Updated at ${updated}";
 
   static String m25(minDeposit) =>
       "We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK\$ ${minDeposit} bank transfer is completed.";
@@ -414,6 +414,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "free": MessageLookupByLibrary.simpleMessage("Free"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("Free Trial"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
+        "generalSettings":
+            MessageLookupByLibrary.simpleMessage("General Settings"),
         "getHelp": MessageLookupByLibrary.simpleMessage("Get Help"),
         "getReadyForTheVerification": MessageLookupByLibrary.simpleMessage(
             "Get ready for the verification process. You will.."),
@@ -584,6 +586,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("OTP code sent to your email"),
         "otpSentToYourPhone": MessageLookupByLibrary.simpleMessage(
             "OTP SMS is sent to your phone"),
+        "ourPersonalisedRecommendationsAreUnique":
+            MessageLookupByLibrary.simpleMessage(
+                "Our personalised recommendations are unique. The recommended Botstocks are based on your risk tolerance, personality, and investment style."),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordChangeSuccess":
             MessageLookupByLibrary.simpleMessage("Password Change Success"),

@@ -77,6 +77,8 @@ const String endpointIexCloud = 'https://iexcloud.io';
 const String askloraFaq = 'https://www.asklora.ai/faq';
 const String askloraSite = 'https://www.asklora.ai/';
 const String mailToLoraCare = 'mailto:loracares@asklora.ai';
+const String mailToHelpAsklora = 'mailto:help@asklora.ai';
+const String helpAskloraEmail = 'help@asklora.ai';
 
 ///
 /// LoraGPT

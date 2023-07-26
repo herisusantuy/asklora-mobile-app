@@ -14,10 +14,12 @@ BotRecommendationResponse _$BotRecommendationResponseFromJson(
                   BotRecommendationModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      updated: json['updated'] as String? ?? '',
     );
 
 Map<String, dynamic> _$BotRecommendationResponseToJson(
         BotRecommendationResponse instance) =>
     <String, dynamic>{
       'data': instance.data,
+      'updated': instance.updated,
     };

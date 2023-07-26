@@ -16,14 +16,14 @@ class BotRecommendationList extends StatelessWidget {
   Widget build(BuildContext context) {
     if (botStockState.botRecommendationResponse.state ==
             ResponseState.success &&
-        botStockState.botRecommendationResponse.data!.isNotEmpty) {
+        botStockState.botRecommendationResponse.data!.data.isNotEmpty) {
       return Container(
         margin: EdgeInsets.symmetric(vertical: verticalMargin),
         padding: AppValues.screenHorizontalPadding,
         child: Wrap(
           spacing: _spacing,
           runSpacing: _spacing,
-          children: botStockState.botRecommendationResponse.data!.map((e) {
+          children: botStockState.botRecommendationResponse.data!.data.map((e) {
             return BotRecommendationCard(
               onTap: () => BotRecommendationDetailScreen.open(
                   context: context, botRecommendationModel: e),
@@ -36,7 +36,7 @@ class BotRecommendationList extends StatelessWidget {
       );
     } else if (botStockState.botRecommendationResponse.state ==
             ResponseState.success &&
-        botStockState.botRecommendationResponse.data!.isEmpty) {
+        botStockState.botRecommendationResponse.data!.data.isEmpty) {
       return SizedBox(
         height: _getListHeight,
         width: double.infinity,
