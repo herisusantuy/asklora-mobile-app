@@ -17,6 +17,7 @@ class InteractionWidget extends StatelessWidget {
               previous.isTextFieldSendButtonDisabled !=
               current.isTextFieldSendButtonDisabled,
           builder: (context, state) => AiTextField(
+            hintText: 'Tell me your interests...',
             aiThemeType: aiThemeType,
             isSendButtonDisabled: state.isTextFieldSendButtonDisabled,
             onFieldSubmitted: (_) {},

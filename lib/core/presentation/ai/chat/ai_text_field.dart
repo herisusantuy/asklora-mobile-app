@@ -10,6 +10,7 @@ class AiTextField extends StatefulWidget {
   final VoidCallback onTap;
   final bool isSendButtonDisabled;
   final AiThemeType aiThemeType;
+  final String hintText;
 
   const AiTextField(
       {required this.onFieldSubmitted,
@@ -17,6 +18,7 @@ class AiTextField extends StatefulWidget {
       required this.onTap,
       required this.aiThemeType,
       this.isSendButtonDisabled = false,
+      this.hintText = 'Ask me anything...',
       super.key});
 
   @override
@@ -73,7 +75,7 @@ class _AiTextFieldState extends State<AiTextField> {
                     focusedBorder: TextFieldStyle.focusedBorder.copyWith(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(15.0))),
-                    hintText: 'Ask me anything...',
+                    hintText: widget.hintText,
                     hintStyle: TextFieldStyle.valueTextStyle
                         .copyWith(color: widget.aiThemeType.primaryFontColor),
                     fillColor: widget.aiThemeType.textFieldFillColor,

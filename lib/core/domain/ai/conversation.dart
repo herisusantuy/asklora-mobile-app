@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'conversation.g.dart';
 
-enum ConversationType { me, lora, loading, reset, next }
+enum ConversationType { me, lora, loading, reset, next, component }
 
 abstract class Conversation extends Equatable {
   ConversationType type();
@@ -14,36 +14,20 @@ abstract class Conversation extends Equatable {
   List<Object?> get props => [type()];
 }
 
-@JsonSerializable()
 class Lora extends Conversation {
-  final String response;
+  final String text;
 
-  @JsonKey(name: 'request_id')
-  final String? requestId;
-  @JsonKey(name: 'type')
-  final String? respType;
-
-  @JsonKey(name: 'new_session')
-  final bool newSession;
-
-  Lora(this.response, this.requestId, this.respType, this.newSession);
+  Lora(this.text);
 
   @override
   ConversationType type() => ConversationType.lora;
 
-  factory Lora.fromJson(Map<String, dynamic> json) => _$LoraFromJson(json);
-
-  Map<String, dynamic> toJson() => _$LoraToJson(this);
-
   @override
-  List<Object?> get props =>
-      [type(), response, requestId, respType, newSession];
+  List<Object?> get props => [type(), text];
 
   static Lora get defaultMessage => Lora(
-      "👋Hi! I'm Lora. Let me know if you have any questions or requests on stocks investments.",
-      '',
-      '',
-      false);
+        "👋Hi! I'm Lora. Let me know if you have any questions or requests on stocks investments.",
+      );
 }
 
 @JsonSerializable()
@@ -70,15 +54,16 @@ class Usage extends Equatable {
 }
 
 class Me extends Conversation {
-  final String query;
+  final String text;
+  final String userName;
 
-  Me(this.query) : super();
+  Me(this.text, this.userName) : super();
 
   @override
   ConversationType type() => ConversationType.me;
 
   @override
-  List<Object?> get props => [query, type()];
+  List<Object?> get props => [text, type()];
 }
 
 class NextButton extends Conversation {

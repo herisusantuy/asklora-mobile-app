@@ -21,6 +21,7 @@ import '../../../core/utils/storage/shared_preference.dart';
 import '../../../generated/l10n.dart';
 import '../../auth/repository/auth_repository.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
+import '../../backdoor/domain/backdoor_repository.dart';
 import '../../onboarding/welcome/welcome_screen.dart';
 import '../../transaction_history/presentation/transaction_history_screen.dart';
 import 'account_setting_screen.dart';
@@ -38,7 +39,10 @@ class SettingsScreen extends StatelessWidget {
       body: BlocProvider(
         create: (_) => SignOutBloc(
             tokenRepository: TokenRepository(),
-            authRepository: AuthRepository(TokenRepository()),
+            authRepository: AuthRepository(
+              TokenRepository(),
+              BackdoorRepository(),
+            ),
             secureStorage: SecureStorage(),
             sharedPreference: SharedPreference()),
         child: CustomStretchedLayout(

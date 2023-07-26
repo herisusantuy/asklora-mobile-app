@@ -20,6 +20,14 @@ class OnSearchQuery extends LoraGptEvent {
   List<Object?> get props => [];
 }
 
+class OnPromptTap extends LoraGptEvent {
+  final String query;
+  const OnPromptTap(this.query);
+
+  @override
+  List<Object?> get props => [query];
+}
+
 class OnScreenLaunch extends LoraGptEvent {
   const OnScreenLaunch();
 
