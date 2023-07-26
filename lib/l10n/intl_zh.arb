@@ -572,13 +572,10 @@
   "noTransactionsYet": "你似乎未進行過任何交易！",
   "checkBackLater": "稍後再來查看!",
   "defineAgain": "重新界定",
-  "updatedAt": "於 {time} HKT, {date} 更新",
+  "updatedAt": "Updated at {updated}",
   "@updatedAt": {
     "placeholders": {
-      "time": {
-        "type": "String"
-      },
-      "date": {
+      "updated": {
         "type": "String"
       }
     }
@@ -726,6 +723,7 @@
   "kycResultScreenTitle": "幫緊你,幫緊你!",
   "kycResultScreenDesc": "你嘅投資賬戶正在審核中\n一有進度Asklora會馬上同你聯絡",
   "depositFund": "存入資金",
-  "generalSettings": "設定",
-  "botManagementFeeTooltip": "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!"
+  "botManagementFeeTooltip": "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!",
+  "ourPersonalisedRecommendationsAreUnique": "每個個人化建議均獨一無二。所建議的 Botstock 都是根據你能承受的風險、個性測試及投資風格所提供。",
+  "generalSettings": "設定"
 }
