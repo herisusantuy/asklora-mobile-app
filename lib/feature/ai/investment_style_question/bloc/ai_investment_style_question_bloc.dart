@@ -82,7 +82,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
       NextQuestion event, Emitter<AiInvestmentStyleQuestionState> emit) {
     final tempList = List<Conversation>.of(state.conversations)
       ..removeLast()
-      ..add(Me('Moving onto next section'));
+      ..add(Me('Moving onto next section', state.userName));
     emit(state.copyWith(
         query: '',
         conversations: tempList,
@@ -165,7 +165,8 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
     emit(state.copyWith(
         query: '',
         interaction: const EmptyInteraction(),
-        conversations: state.conversations..add(Me(event.answerText))));
+        conversations: state.conversations
+          ..add(Me(event.answerText, state.userName))));
     add(SubmitQuery(answerId: event.answerId));
   }
 
@@ -179,7 +180,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
       tempList.removeLast();
     }
     if (!event.isNewSession && state.query.isNotEmpty) {
-      tempList.add(Me(state.query));
+      tempList.add(Me(state.query, state.userName));
     }
 
     tempList.add(Loading());
@@ -202,7 +203,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
 
     tempList.removeLast();
     if (response.state == ResponseState.success) {
-      tempList.add(Lora(response.data!.response, '', '', false));
+      tempList.add(Lora(response.data!.response));
 
       ///show next button on question 1
       if (_isNeedToAddNextButton(response)) {
@@ -229,10 +230,8 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
   }
 
   Conversation get _errorChat => Lora(
-      'Sorry I cannot connect to the server right now, please try again',
-      '',
-      '',
-      false);
+        'Sorry I cannot connect to the server right now, please try again',
+      );
 
   bool _isNeedToAddNextButton(
           BaseResponse<InvestmentStyleQuestionQueryResponse> response) =>
