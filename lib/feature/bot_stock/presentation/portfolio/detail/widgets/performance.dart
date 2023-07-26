@@ -74,8 +74,7 @@ class Performance extends StatelessWidget {
         const SizedBox(
           height: 32,
         ),
-        if (!FeatureFlags.isMockApp)
-          _chartWidget(context)
+        if (!FeatureFlags.isMockApp) _chartWidget(context)
       ]);
 
   Widget _chartWidget(BuildContext context) => Align(
