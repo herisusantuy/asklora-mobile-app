@@ -1,6 +1,8 @@
+import '../../../core/utils/date_utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'stock_info.g.dart';
+
 
 @JsonSerializable()
 class StockInfo extends Equatable {
@@ -18,6 +20,9 @@ class StockInfo extends Equatable {
   final int employees;
   final String headquarter;
   final String founded;
+
+  String get foundedFormatted =>
+      formatDateTimeAsString(founded, dateFormat: 'dd/MM/yyyy');
 
   const StockInfo(
       this.symbol,
