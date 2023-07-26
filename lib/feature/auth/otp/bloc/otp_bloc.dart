@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/data/remote/base_api_client.dart';
+import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/otp/get_otp_request.dart';
 import '../../../../core/domain/otp/get_sms_otp_request.dart';
@@ -26,6 +27,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     on<OtpSubmitted>(_onOtpSubmitted);
     on<OtpRequested>(_onOtpRequested);
     on<OtpTimeResetUpdate>(_onOtpTimeResetUpdate);
+    on<OtpTyped>(_onOtpTyped);
     on<SmsOtpRequested>(_onSmsOtpRequested);
   }
 
@@ -35,17 +37,16 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       var data = await _otpRepository.getOtp(
           getOtpRequest: GetOtpRequest(event.email, OtpType.register.value));
 
-      data.copyWith(message: 'OTP code sent to your email');
+      data.copyWith(message: ValidationCode.otpSentToYourEmail.code);
       emit(state.copyWith(
           response: data, disableRequest: true, resetTime: _resetTime));
 
       resetTimeStreamSubscription = ticker().listen((_) {
         add(const OtpTimeResetUpdate());
       });
-    } on NotFoundException {
+    } on AskloraApiClientException catch (e) {
       emit(state.copyWith(
-          response: BaseResponse.error(
-              message: 'User does not exist with the given email')));
+          response: BaseResponse.error(validationCode: e.askloraError.type)));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
     }
@@ -57,20 +58,20 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       var data = await _otpRepository.getSmsOtp(
           getSmsOtpRequest: GetSmsOtpRequest(event.email));
 
-      data.copyWith(message: 'Otp SMS is sent to your phone');
+      data.copyWith(message: ValidationCode.otpSentToYourPhone.code);
       emit(state.copyWith(
         response: data,
         disableRequest: true,
         resetTime: _resetTime,
+        phoneNumber: data.data?.phoneNumber,
       ));
 
       resetTimeStreamSubscription = ticker().listen((_) {
         add(const OtpTimeResetUpdate());
       });
-    } on NotFoundException {
+    } on AskloraApiClientException catch (e) {
       emit(state.copyWith(
-          response: BaseResponse.error(
-              message: 'User does not exist with the given email')));
+          response: BaseResponse.error(validationCode: e.askloraError.type)));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
     }
@@ -83,6 +84,10 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         response: BaseResponse.unknown()));
   }
 
+  void _onOtpTyped(OtpTyped event, Emitter<OtpState> emit) {
+    emit(state.copyWith(otp: event.otp, otpError: false));
+  }
+
   void _onOtpSubmitted(
     OtpSubmitted event,
     Emitter<OtpState> emit,
@@ -92,11 +97,14 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       var data = await _otpRepository.verifyOtp(
           verifyOtpRequest: event.verifyOtpRequest);
       cancelStreamSubscription();
-      data.copyWith(message: 'Verify OTP Success');
+      data.copyWith(message: ValidationCode.verifyOtpSuccess.code);
       emit(state.copyWith(response: data));
-    } on UnauthorizedException {
-      emit(
-          state.copyWith(response: BaseResponse.error(message: 'Invalid OTP')));
+    } on AskloraApiClientException catch (e) {
+      emit(state.copyWith(
+          response: BaseResponse.error(
+            validationCode: e.askloraError.type,
+          ),
+          otpError: e.askloraError.type == ValidationCode.otpInvalid));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
     }

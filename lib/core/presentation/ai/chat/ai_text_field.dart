@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../utils/ai_utils.dart';
 import '../../../styles/asklora_colors.dart';
 import '../../text_fields/style/text_field_style.dart';
 import '../buttons/ai_send_text_button.dart';
@@ -9,11 +9,13 @@ class AiTextField extends StatefulWidget {
   final Function(String) onChanged;
   final VoidCallback onTap;
   final bool isSendButtonDisabled;
+  final AiThemeType aiThemeType;
 
   const AiTextField(
       {required this.onFieldSubmitted,
       required this.onChanged,
       required this.onTap,
+      required this.aiThemeType,
       this.isSendButtonDisabled = false,
       super.key});
 
@@ -51,14 +53,14 @@ class _AiTextFieldState extends State<AiTextField> {
               });
             },
             child: TextFormField(
-                cursorColor: AskLoraColors.white,
+                cursorColor: widget.aiThemeType.primaryFontColor,
                 onFieldSubmitted: widget.onFieldSubmitted,
                 controller: controller,
                 onChanged: widget.onChanged,
                 maxLines: 5,
                 minLines: 1,
                 style: TextFieldStyle.valueTextStyle
-                    .copyWith(color: AskLoraColors.white),
+                    .copyWith(color: widget.aiThemeType.primaryFontColor),
                 decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                         horizontal: 17, vertical: 18),
@@ -73,15 +75,17 @@ class _AiTextFieldState extends State<AiTextField> {
                             const BorderRadius.all(Radius.circular(15.0))),
                     hintText: 'Ask me anything...',
                     hintStyle: TextFieldStyle.valueTextStyle
-                        .copyWith(color: AskLoraColors.white),
-                    fillColor: AskLoraColors.white.withOpacity(0.05),
-                    filled: !focused && controller.text.isEmpty)),
+                        .copyWith(color: widget.aiThemeType.primaryFontColor),
+                    fillColor: widget.aiThemeType.textFieldFillColor,
+                    filled: _filled)),
           ),
         ),
         const SizedBox(width: 14),
         AiSendTextButton(
           isDisabled: widget.isSendButtonDisabled,
           size: const Size(55, 55),
+          enabledIconColor: widget.aiThemeType.sendChatButtonIconEnableColor,
+          disabledIconColor: widget.aiThemeType.sendChatButtonIconDisableColor,
           onTap: () {
             widget.onTap();
             controller.text = '';
@@ -90,4 +94,8 @@ class _AiTextFieldState extends State<AiTextField> {
       ],
     );
   }
+
+  bool get _filled => widget.aiThemeType == AiThemeType.light
+      ? true
+      : !focused && controller.text.isEmpty;
 }

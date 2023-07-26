@@ -27,12 +27,12 @@ class PersonalInfoSummaryScreen extends StatelessWidget {
     return KycBaseForm(
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-      title: 'Set Up Personal Info',
+      title: S.of(context).personalInfo,
       content: PersonalInfoSummaryContent(
         key: const Key('personal_info_summary_content'),
         personalInfoState: personalInfoState,
         addressProofState: addressProofState,
-        title: 'Summary',
+        title: S.of(context).summary,
       ),
       bottomButton: _bottomButton(context),
       progress: progress,

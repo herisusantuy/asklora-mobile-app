@@ -7,6 +7,7 @@ import '../../../../../../../core/data/remote/base_api_client.dart';
 import '../../../../../../../core/domain/base_response.dart';
 import '../../../../../../../core/domain/otp/get_sms_otp_request.dart';
 import '../../../../../../../core/domain/otp/validate_phone_request.dart';
+import '../../../../../../../core/domain/validation_enum.dart';
 import '../../../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../../../../core/utils/storage/storage_keys.dart';
 import '../../../../../../auth/otp/repository/otp_repository.dart';
@@ -40,22 +41,19 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       final email = await _sharedPreference.readData(sfKeyEmail);
       var data = await _otpRepository.getSmsOtp(
           getSmsOtpRequest: GetSmsOtpRequest(email ?? ''));
-      data.copyWith(message: 'OTP code sent to your email');
       emit(state.copyWith(
-          response: data, disableRequest: true, resetTime: _resetTime));
+          response: data.copyWith(
+              validationCode: ValidationCode.otpSentToYourPhone,
+              state: ResponseState.success),
+          disableRequest: true,
+          resetTime: _resetTime));
 
       resetTimeStreamSubscription = ticker().listen((_) {
         add(const OtpTimeResetUpdate());
       });
-    } on NotFoundException {
+    } on AskloraApiClientException catch (e) {
       emit(state.copyWith(
-          response: BaseResponse.error(
-              message: 'User does not exist with the given email')));
-    } on BadRequestException {
-      emit(state.copyWith(
-          response: BaseResponse.error(
-              message:
-                  ' Your phone number is invalid, please update it first')));
+          response: BaseResponse.error(validationCode: e.askloraError.type)));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }
@@ -71,9 +69,10 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
   void _onOtpReset(Reset event, Emitter<OtpState> emit) =>
       emit(state.copyWith(response: BaseResponse.unknown(), otpError: ''));
 
-  void _onInvalidOtpEvent(InValidOtpEvent event, Emitter<OtpState> emit) =>
-      emit(state.copyWith(
-          response: BaseResponse.unknown(), otpError: 'The OTP is incorrect'));
+  void _onInvalidOtpEvent(InValidOtpEvent event, Emitter<OtpState> emit) {
+    emit(state.copyWith(
+        response: BaseResponse.unknown(), otpError: 'The OTP is incorrect'));
+  }
 
   void _onOtpSubmitted(
     OtpSubmitted event,
@@ -86,9 +85,10 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       cancelStreamSubscription();
       data.copyWith(message: 'Verify OTP Success');
       emit(OtpValidationSuccess());
-    } on BadRequestException {
+    } on AskloraApiClientException catch (e) {
       emit(state.copyWith(
-          response: BaseResponse.unknown(), otpError: 'The OTP is incorrect'));
+          response: BaseResponse.error(validationCode: e.askloraError.type),
+          otp: 'The OTP is incorrect'));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }

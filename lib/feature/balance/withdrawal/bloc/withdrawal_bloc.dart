@@ -42,9 +42,14 @@ class WithdrawalBloc extends Bloc<WithdrawalEvent, WithdrawalState> {
       var data = await _transactionRepository.submitWithdrawal(
           withdrawalRequest: WithdrawalRequest(amount: event.withdrawalAmount));
       emit(state.copyWith(response: data));
-    } on LegalReasonException {
+    } on AskloraApiClientException catch (e) {
+      emit(state.copyWith(
+          response: BaseResponse.error(validationCode: e.askloraError.type)));
+    }
+    /*on LegalReasonException {
       emit(state.copyWith(response: BaseResponse.suspended()));
-    } catch (e) {
+    }*/
+    catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }
   }

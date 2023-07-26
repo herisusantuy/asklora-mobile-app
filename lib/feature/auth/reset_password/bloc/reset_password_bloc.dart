@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/data/remote/base_api_client.dart';
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../repository/auth_repository.dart';
 
@@ -68,11 +69,10 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
 
       emit(state.copyWith(
           response: BaseResponse.complete(data,
-              message: 'Password changed successfully.')));
-    } on BadRequestException {
+              validationCode: ValidationCode.passwordChangeSuccessfully)));
+    } on AskloraApiClientException catch (e) {
       emit(state.copyWith(
-          response:
-              BaseResponse.error(message: 'Token is invalid or expired.')));
+          response: BaseResponse.error(validationCode: e.askloraError.type)));
     } catch (e) {
       emit(state.copyWith(
           response: BaseResponse.error(message: 'Something went wrong!')));

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 
 import '../../../core/styles/asklora_colors.dart';
@@ -18,6 +16,30 @@ enum TransferType {
     TransferType transferType = TransferType.values
         .firstWhere((element) => element.value == transferTypeString);
     return transferType;
+  }
+
+  static TransferType findByTitle(String transferTypeString) {
+    TransferType transferType = TransferType.values
+        .firstWhere((element) => element.title == transferTypeString);
+    return transferType;
+  }
+
+  String text(BuildContext context) {
+    switch (this) {
+      case TransferType.deposit:
+        return S.of(context).deposit;
+      case TransferType.withdraw:
+        return S.of(context).withdraw;
+    }
+  }
+
+  String titleText(BuildContext context) {
+    switch (this) {
+      case TransferType.deposit:
+        return S.of(context).depositHistory;
+      case TransferType.withdraw:
+        return S.of(context).withdrawalHistory;
+    }
   }
 
   const TransferType(this.value, this.title, this.color, this.punctuation);
@@ -79,6 +101,24 @@ enum TransferStatus {
     } else {
       return TransferStatus.values
           .firstWhere((element) => element.value == transferStatusString);
+    }
+  }
+
+  static TransferStatus findByString(String transferStatusString) {
+    return TransferStatus.values
+        .firstWhere((element) => element.name == transferStatusString);
+  }
+
+  String text(BuildContext context) {
+    switch (this) {
+      case TransferStatus.pending:
+        return S.of(context).pending;
+      case TransferStatus.active:
+        return S.of(context).completed;
+      case TransferStatus.rejected:
+        return S.of(context).rejected;
+      default:
+        return '';
     }
   }
 

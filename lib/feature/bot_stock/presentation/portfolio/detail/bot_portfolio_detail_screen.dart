@@ -6,6 +6,8 @@ import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/column_text/column_text.dart';
 import '../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
+import '../../../../../core/presentation/column_text/pair_column_text.dart';
+import '../../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
 import '../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';

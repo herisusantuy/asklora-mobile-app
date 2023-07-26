@@ -79,14 +79,13 @@ class TransactionBalanceResponse extends Equatable {
       ? totalBotStockUsd.convertToCurrencyDecimal()
       : '0.00';
 
-  String get totalPnLStr =>
-      '${totalPnLPct != 0 ? totalPnLPct.convertToCurrencyDecimal() : '0.00'}%';
+  String get totalPnLStr => (totalPnLPct < 0)
+      ? '${totalPnLPct.convertToCurrencyDecimal()}%'
+      : '+${totalPnLPct.convertToCurrencyDecimal()}%';
 
-  Color get totalPnLColor => totalPnLPct == 0
-      ? AskLoraColors.charcoal
-      : totalPnLPct > 0
-          ? AskLoraColors.primaryGreen
-          : AskLoraColors.primaryMagenta;
+  Color get totalPnLColor => (totalPnLPct < 0)
+      ? AskLoraColors.primaryMagenta
+      : AskLoraColors.primaryGreen;
 
   @override
   List<Object> get props => [

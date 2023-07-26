@@ -10,10 +10,12 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/domain/transaction/transaction_balance_response.dart';
 import '../../../../core/presentation/auto_sized_text_widget.dart';
+import '../../../../core/presentation/column_text/pair_column_text.dart';
 import '../../../../core/presentation/column_text/pair_column_text_with_auto_sized_text.dart';
-import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
+import '../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
 import '../../../../core/presentation/custom_checkbox_list_tile.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
@@ -88,7 +90,8 @@ class PortfolioScreen extends StatelessWidget {
               ),
               showPopUp: (state.botActiveOrderResponse.state ==
                           ResponseState.error &&
-                      state.botActiveOrderResponse.errorCode != 403) ||
+                      state.botActiveOrderResponse.validationCode !=
+                          ValidationCode.tradeAuthorization) ||
                   state.transactionBalanceResponse.state == ResponseState.error,
               content: ListView(
                 padding: AppValues.screenHorizontalPadding

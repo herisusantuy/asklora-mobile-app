@@ -76,6 +76,16 @@ class MockPpiQuestionRepository extends _i1.Mock
         )),
       ) as _i4.Future<_i2.Fixture>);
   @override
+  _i4.Future<_i2.Fixture?> fetchInvestmentStyleQuestionsWithTryCatch(
+          String? accountId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchInvestmentStyleQuestionsWithTryCatch,
+          [accountId],
+        ),
+        returnValue: _i4.Future<_i2.Fixture?>.value(),
+      ) as _i4.Future<_i2.Fixture?>);
+  @override
   _i4.Future<_i2.Fixture> getQuestions() => (super.noSuchMethod(
         Invocation.method(
           #getQuestions,

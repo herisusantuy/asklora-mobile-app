@@ -39,7 +39,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
     on<SubmitAnswer>(_onSubmitAnswer);
     on<NextQuestion>(_onNextQuestion);
     on<ResetSession>(_onResetSession);
-    on<OnFinishTyping>(_onFinishTyping);
+    on<FinishChatAnimation>(_onFinishChatAnimation);
     on<SendResultToPpi>(_onSendResultToPpi);
   }
 
@@ -83,7 +83,10 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
     final tempList = List<Conversation>.of(state.conversations)
       ..removeLast()
       ..add(Me('Moving onto next section'));
-    emit(state.copyWith(query: '', conversations: tempList));
+    emit(state.copyWith(
+        query: '',
+        conversations: tempList,
+        interaction: const EmptyInteraction()));
     add(const SubmitQuery(answerId: '1'));
   }
 
@@ -161,6 +164,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
       SubmitAnswer event, Emitter<AiInvestmentStyleQuestionState> emit) {
     emit(state.copyWith(
         query: '',
+        interaction: const EmptyInteraction(),
         conversations: state.conversations..add(Me(event.answerText))));
     add(SubmitQuery(answerId: event.answerId));
   }
@@ -212,6 +216,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
                 .investmentStyleQuestionResult));
       }
       emit(state.copyWith(
+        isChatAnimationRunning: true,
         isTyping: false,
         conversations: tempList,
         interaction: _getInteraction(response.data!.choices,
@@ -252,13 +257,17 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
   void _onResetSession(ResetSession onResetSession,
       Emitter<AiInvestmentStyleQuestionState> emit) {
     emit(state.copyWith(
-        conversations: [], isTyping: false, sessionId: '', query: ''));
+        conversations: [],
+        isTyping: false,
+        sessionId: '',
+        query: '',
+        interaction: const TextFieldInteraction()));
     add(const SubmitQuery(isNewSession: true));
   }
 
-  void _onFinishTyping(OnFinishTyping onFinishTyping,
+  void _onFinishChatAnimation(FinishChatAnimation onFinishTyping,
           Emitter<AiInvestmentStyleQuestionState> emit) =>
-      emit(state.copyWith(isTyping: false));
+      emit(state.copyWith(isChatAnimationRunning: false));
 
   final Map<String, String> _investmentHorizon = {
     '12 months': '1 year',

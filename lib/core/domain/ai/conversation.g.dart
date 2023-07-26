@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../core/domain/ai/conversation.dart';
+part of 'conversation.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

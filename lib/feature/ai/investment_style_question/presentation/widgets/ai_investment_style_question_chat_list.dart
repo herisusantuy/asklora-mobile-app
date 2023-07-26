@@ -1,6 +1,7 @@
 part of '../ai_investment_style_question_form.dart';
 
 class AiInvestmentStyleQuestionChatList extends StatelessWidget {
+  final AiThemeType aiThemeType;
   final List<Conversation> conversations;
   final String userName;
   final bool isTyping;
@@ -9,6 +10,7 @@ class AiInvestmentStyleQuestionChatList extends StatelessWidget {
       {required this.conversations,
       required this.userName,
       required this.isTyping,
+      required this.aiThemeType,
       super.key});
 
   @override
@@ -66,26 +68,21 @@ class AiInvestmentStyleQuestionChatList extends StatelessWidget {
       return OutChatBubbleWidget(
         e.response,
         animateText: animateText,
+        onFinishedAnimation: () => context
+            .read<AiInvestmentStyleQuestionBloc>()
+            .add(const FinishChatAnimation()),
+        aiThemeType: aiThemeType,
       );
     } else if (e is Me) {
-      return InChatBubbleWidget(message: e.query, name: userName);
-    } else if (e is Loading) {
-      return const LoraThinkingWidget();
-    } else if (e is NextButton) {
-      return Align(
-        alignment: Alignment.bottomLeft,
-        child: CustomChoiceChips(
-          verticalPadding: 14,
-          textColor: AskLoraColors.white,
-          textStyle: AskLoraTextStyles.body2,
-          pressedFillColor: AskLoraColors.primaryGreen.withOpacity(0.4),
-          fillColor: Colors.transparent,
-          label: 'Press to move onto the next section',
-          onTap: () => context
-              .read<AiInvestmentStyleQuestionBloc>()
-              .add(const NextQuestion()),
-        ),
+      return InChatBubbleWidget(
+        message: e.query,
+        name: userName,
+        aiThemeType: aiThemeType,
       );
+    } else if (e is Loading) {
+      return LoraThinkingWidget(aiThemeType: aiThemeType);
+    } else if (e is NextButton) {
+      return AiInvestmentStyleQuestionNextButton(aiThemeType: aiThemeType);
     } else {
       return const SizedBox.shrink();
     }

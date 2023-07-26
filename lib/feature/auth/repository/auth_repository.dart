@@ -85,19 +85,33 @@ class AuthRepository {
       {required String token,
       required String password,
       required String confirmPassword}) async {
-    var response = await _authApiClient.resetPassword(
-      ResetPasswordRequest(token, password, confirmPassword),
-    );
-    return BaseResponse.complete(ResetPasswordResponse.fromJson(response.data));
+    try {
+      var response = await _authApiClient.resetPassword(
+        ResetPasswordRequest(token, password, confirmPassword),
+      );
+      return BaseResponse.complete(
+          ResetPasswordResponse.fromJson(response.data));
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
+    } catch (_) {
+      return BaseResponse.error();
+    }
   }
 
   Future<BaseResponse<ForgotPasswordResponse>> forgotPassword(
       {required String email}) async {
-    var response = await _authApiClient.forgotPassword(
-      ForgotPasswordRequest(email),
-    );
-    return BaseResponse.complete(
-        ForgotPasswordResponse.fromJson(response.data));
+    try {
+      var response = await _authApiClient.forgotPassword(
+        ForgotPasswordRequest(email),
+      );
+
+      return BaseResponse.complete(
+          ForgotPasswordResponse.fromJson(response.data));
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
+    } catch (_) {
+      return BaseResponse.error();
+    }
   }
 
   Future<BaseResponse<ChangePasswordResponse>> changePassword({
@@ -110,8 +124,8 @@ class AuthRepository {
           ChangePasswordRequest(password, newPassword, confirmNewPassword));
       return BaseResponse.complete(
           ChangePasswordResponse.fromJson(response.data));
-    } on UnauthorizedException {
-      return BaseResponse.error(message: 'Invalid Password');
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
     } catch (_) {
       return BaseResponse.error();
     }

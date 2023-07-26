@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import 'validation_enum.dart';
+
 enum ResponseState { success, error, unknown, loading, suspended }
 
 class BaseResponse<T> extends Equatable {
@@ -7,14 +9,14 @@ class BaseResponse<T> extends Equatable {
 
   final ResponseState state;
   final T? data;
-  final int? errorCode;
+  final ValidationCode validationCode;
   final String message;
 
   const BaseResponse(
       {this.state = ResponseState.unknown,
       this.data,
       this.message = '',
-      this.errorCode});
+      this.validationCode = ValidationCode.empty});
 
   static BaseResponse<T> unknown<T>() {
     return const BaseResponse(state: ResponseState.unknown);
@@ -24,15 +26,23 @@ class BaseResponse<T> extends Equatable {
     return BaseResponse(state: ResponseState.loading, data: previousData);
   }
 
-  static BaseResponse<T> complete<T>(T data, {String message = ''}) {
+  static BaseResponse<T> complete<T>(T data,
+      {String message = '',
+      ValidationCode validationCode = ValidationCode.empty}) {
     return BaseResponse(
-        state: ResponseState.success, data: data, message: message);
+        state: ResponseState.success,
+        data: data,
+        message: message,
+        validationCode: validationCode);
   }
 
   static BaseResponse<T> error<T>(
-      {String message = BaseResponse.errorMessage, int? errorCode}) {
+      {String message = BaseResponse.errorMessage,
+      ValidationCode? validationCode}) {
     return BaseResponse(
-        state: ResponseState.error, message: message, errorCode: errorCode);
+        state: ResponseState.error,
+        message: message,
+        validationCode: validationCode ?? ValidationCode.unknown);
   }
 
   static BaseResponse<T> suspended<T>(
@@ -41,16 +51,19 @@ class BaseResponse<T> extends Equatable {
   }
 
   BaseResponse<T> copyWith(
-      {ResponseState? state, T? data, String? message, int? errorCode}) {
+      {ResponseState? state,
+      T? data,
+      String? message,
+      ValidationCode? validationCode}) {
     return BaseResponse<T>(
         state: state ?? this.state,
         data: data ?? this.data,
         message: message ?? this.message,
-        errorCode: errorCode ?? this.errorCode);
+        validationCode: validationCode ?? this.validationCode);
   }
 
   @override
   List<Object?> get props {
-    return [state, data, message, errorCode];
+    return [state, data, message, validationCode];
   }
 }
