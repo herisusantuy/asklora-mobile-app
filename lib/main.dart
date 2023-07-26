@@ -31,10 +31,11 @@ main() async {
   // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
   if (FeatureFlags.enableSentry) {
-    await SentryFlutter.init(
-        (options) => options.dsn =
-            'https://7d102597b0f949038c91ccd163d0506e@sentry.api.asklora.ai/3',
-        appRunner: () => runApp(AppConfigWidget(child: const App())));
+    await SentryFlutter.init((options) {
+      options.dsn =
+          'https://7d102597b0f949038c91ccd163d0506e@sentry.api.asklora.ai/3';
+      options.tracesSampleRate = 1.0;
+    }, appRunner: () => runApp(AppConfigWidget(child: const App())));
   } else {
     runApp(AppConfigWidget(child: const App()));
   }
