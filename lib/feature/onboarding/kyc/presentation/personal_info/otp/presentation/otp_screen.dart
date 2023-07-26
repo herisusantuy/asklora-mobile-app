@@ -11,6 +11,7 @@ import '../../../../../../../core/presentation/text_fields/master_text_field.dar
 import '../../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../../generated/l10n.dart';
+import '../../../../../../auth/utils/auth_utils.dart';
 import '../../../../../../tabs/presentation/tab_screen.dart';
 import '../../../../bloc/kyc_bloc.dart';
 import '../../../../bloc/personal_info/personal_info_bloc.dart';
@@ -25,6 +26,7 @@ class OtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<OtpBloc, OtpState>(
+      listenWhen: (previous, current) => previous != current,
       listener: (context, state) {
         CustomLoadingOverlay.of(context).show(state.response.state);
         if (state is OtpValidationSuccess) {
@@ -34,7 +36,8 @@ class OtpScreen extends StatelessWidget {
         } else {
           if (state.response.state == ResponseState.error ||
               state.response.state == ResponseState.success) {
-            CustomInAppNotification.show(context, state.response.message);
+            CustomInAppNotification.show(
+                context, state.response.validationCode.getText(context));
           }
         }
       },

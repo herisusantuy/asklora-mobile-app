@@ -22,7 +22,7 @@ class SignUpResponse extends Equatable {
 class GetOtpResponse extends Equatable {
   final String detail;
   @JsonKey(name: 'phone_number')
-  final String phoneNumber;
+  final String? phoneNumber;
 
   const GetOtpResponse(this.detail, this.phoneNumber);
 

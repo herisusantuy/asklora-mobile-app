@@ -6,6 +6,7 @@ import '../../../core/repository/transaction_repository.dart';
 import '../../../core/utils/extensions.dart';
 import '../domain/bot_recommendation_detail_model.dart';
 import '../domain/bot_recommendation_model.dart';
+import '../domain/bot_recommendation_response.dart';
 import '../domain/orders/bot_create_order_response.dart';
 import '../repository/bot_stock_repository.dart';
 
@@ -42,6 +43,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
       FetchFreeBotRecommendation event, Emitter<BotStockState> emit) async {
     emit(state.copyWith(botRecommendationResponse: BaseResponse.loading()));
     var data = await _botStockRepository.fetchFreeBotRecommendation();
+
     emit(state.copyWith(botRecommendationResponse: data));
   }
 

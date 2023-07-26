@@ -77,7 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m23(minDeposit) =>
       "請轉賬最少 HK\$${minDeposit} 至 Asklora 銀行戶口。任何少於 HK\$${minDeposit} 的首次入金均會被拒收，並會被徵收手續費。";
 
-  static String m24(time, date) => "於 ${time} HKT, ${date} 更新";
+  static String m24(updated) => "Updated at ${updated}";
 
   static String m25(minDeposit) =>
       "我們會提取由你銀行透過 API 或匯款通知書收集的資訊， 確定你指定的銀行戶口。我們只會接受透過此指定戶口進行所有將來的入金與提取。你可轉換指定銀行戶口，但你需要完成最少匯款 HK\$${minDeposit} 以通過相同的認證。";
@@ -333,6 +333,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "free": MessageLookupByLibrary.simpleMessage("免費"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("免費試用期"),
         "fullName": MessageLookupByLibrary.simpleMessage("姓名"),
+        "generalSettings": MessageLookupByLibrary.simpleMessage("設定"),
         "getHelp": MessageLookupByLibrary.simpleMessage("獲得幫助"),
         "getReadyForTheVerification":
             MessageLookupByLibrary.simpleMessage("核實程序即將開始，你將要......"),
@@ -477,6 +478,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("OTP code sent to your email"),
         "otpSentToYourPhone": MessageLookupByLibrary.simpleMessage(
             "Otp SMS is sent to your phone"),
+        "ourPersonalisedRecommendationsAreUnique":
+            MessageLookupByLibrary.simpleMessage(
+                "每個個人化建議均獨一無二。所建議的 Botstock 都是根據你能承受的風險、個性測試及投資風格所提供。"),
         "password": MessageLookupByLibrary.simpleMessage("密碼"),
         "passwordChangeSuccess":
             MessageLookupByLibrary.simpleMessage("Password Change Success"),
