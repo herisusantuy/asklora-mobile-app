@@ -10,6 +10,7 @@ import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
+import '../../../backdoor/domain/backdoor_repository.dart';
 import '../../repository/auth_repository.dart';
 import '../bloc/forgot_password_bloc.dart';
 import 'forgot_password_form.dart';
@@ -22,7 +23,10 @@ class ForgotPasswordScreen extends StatelessWidget {
     return CustomScaffold(
       body: BlocProvider(
         create: (context) => ForgotPasswordBloc(
-            authRepository: AuthRepository(TokenRepository())),
+            authRepository: AuthRepository(
+          TokenRepository(),
+          BackdoorRepository(),
+        )),
         child: CustomStretchedLayout(
           header: CustomHeader(
             title: S.of(context).forgotPassword,

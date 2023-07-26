@@ -25,9 +25,9 @@ import '../sign_up/domain/sign_up_request.dart';
 class AuthRepository {
   final AuthApiClient _authApiClient = AuthApiClient();
   final Repository _storage;
-  final BackdoorRepository _backdoorRepository = BackdoorRepository();
+  final BackdoorRepository _backdoorRepository;
 
-  AuthRepository(this._storage);
+  AuthRepository(this._storage, this._backdoorRepository);
 
   Future<BaseResponse<SignUpResponse>> signUp({
     required String email,

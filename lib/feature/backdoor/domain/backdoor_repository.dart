@@ -1,8 +1,8 @@
 import '../../../core/utils/storage/shared_preference.dart';
-import '../../../core/utils/storage/storage_keys.dart';
 
 class BackdoorRepository {
   final SharedPreference _sharedPreference = SharedPreference();
+  static const String _sfKeyLoginVersion = 'login_version';
 
   static const String _baseUrlKey = 'baseUrlKey';
 
@@ -15,13 +15,13 @@ class BackdoorRepository {
   }
 
   Future<bool> isOtpLoginDisabled() async {
-    bool? response = await _sharedPreference.readBoolData(sfKeyLoginVersion);
+    bool? response = await _sharedPreference.readBoolData(_sfKeyLoginVersion);
     return response ?? true;
   }
 
   Future<bool> otpLoginVersion(bool value) async {
     bool response =
-        await _sharedPreference.writeBoolData(sfKeyLoginVersion, value);
+        await _sharedPreference.writeBoolData(_sfKeyLoginVersion, value);
     return response;
   }
 }

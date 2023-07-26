@@ -38,14 +38,8 @@ class BackdoorScreenBloc
 
   void _onLoginVersionChanged(
       OnLoginVersionChanged event, Emitter<BackdoorScreenState> emit) async {
-    if (!event.isOtpLoginDisabled) {
-      await _backdoorRepository.otpLoginVersion(false);
-      emit(state.copyWith(
-          isOtpLoginDisabled: await _backdoorRepository.isOtpLoginDisabled()));
-    } else {
-      await _backdoorRepository.otpLoginVersion(true);
-      emit(state.copyWith(
-          isOtpLoginDisabled: await _backdoorRepository.isOtpLoginDisabled()));
-    }
+    await _backdoorRepository.otpLoginVersion(event.isOtpLoginDisabled);
+    emit(state.copyWith(
+        isOtpLoginDisabled: await _backdoorRepository.isOtpLoginDisabled()));
   }
 }

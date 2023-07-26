@@ -21,28 +21,26 @@ class BackdoorScreen extends StatelessWidget {
           create: (context) => BackdoorScreenBloc(BackdoorRepository())
             ..add(InitOtpLoginDisabled()),
           child: SingleChildScrollView(
-            child: LayoutBuilder(
-              builder: (context, constraint) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-                  child: Column(children: [
-                    TextFormField(
-                      onChanged: (str) {
-                        context
-                            .read<BackdoorScreenBloc>()
-                            .add(OnBaseUrlChanged(str));
-                      },
-                      onFieldSubmitted: (str) {
-                        context
-                            .read<BackdoorScreenBloc>()
-                            .add(OnBaseUrlChanged(str));
-                      },
-                    ),
-                    const SizedBox(height: 30),
-                    _disabledOtpLoginToggle,
-                  ]),
-                );
-              },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
+              child: Column(
+                children: [
+                  TextFormField(
+                    onChanged: (str) {
+                      context
+                          .read<BackdoorScreenBloc>()
+                          .add(OnBaseUrlChanged(str));
+                    },
+                    onFieldSubmitted: (str) {
+                      context
+                          .read<BackdoorScreenBloc>()
+                          .add(OnBaseUrlChanged(str));
+                    },
+                  ),
+                  const SizedBox(height: 30),
+                  _disabledOtpLoginToggle,
+                ],
+              ),
             ),
           ),
         ),
