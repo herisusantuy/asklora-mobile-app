@@ -16,3 +16,4 @@ const String sfKeyPushNotification = 'push_notification';
 const String sfKeyEmailNotification = 'email_notification';
 const String sfKeyAccountData = 'account_data';
 const String sfKeyLocalisationData = 'localisation_data';
+const String sfKeyLoginVersion = 'login_version';
