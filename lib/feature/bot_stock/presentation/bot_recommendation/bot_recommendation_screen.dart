@@ -22,7 +22,6 @@ import '../../../../generated/l10n.dart';
 import '../../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../tabs/for_you/for_you_screen_form.dart';
-import '../../../tabs/home/home_screen_form.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../domain/bot_recommendation_model.dart';
 import '../../utils/bot_stock_utils.dart';
@@ -84,16 +83,9 @@ class BotRecommendationScreen extends StatelessWidget {
                   ),
                   if (UserJourney.compareUserJourney(
                       context: context, target: UserJourney.freeBotStock))
-                    _buttonChangeInvestmentStyle(context),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  const BotRecommendationFaq(),
-                  const SizedBox(
-                    height: 28,
-                  ),
-                  const UnconstrainedBox(
-                      child: HomeScreenNeedHelpButtonWidget())
+                    const SizedBox(
+                      height: 50,
+                    ),
                 ],
               ),
             ),
@@ -178,24 +170,6 @@ class BotRecommendationScreen extends StatelessWidget {
                   ),
                 ],
               ),
-          ],
-        ),
-      );
-
-  Widget _buttonChangeInvestmentStyle(BuildContext context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 48),
-        child: Column(
-          children: [
-            const SizedBox(height: 30),
-            CustomTextNew(S.of(context).notFeelingIt,
-                style: AskLoraTextStyles.h4, textAlign: TextAlign.center),
-            const SizedBox(height: 20),
-            PrimaryButton(
-              label: S.of(context).buttonChangeInvestmentStyle,
-              onTap: () => context
-                  .read<NavigationBloc<ForYouPage>>()
-                  .add(const PageChanged(ForYouPage.investmentStyle)),
-            ),
           ],
         ),
       );
