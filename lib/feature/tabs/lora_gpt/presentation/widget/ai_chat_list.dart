@@ -70,10 +70,7 @@ class _AiChatListState extends State<AiChatList> {
                             conversation,
                             index,
                             state.isTyping &&
-                                (index == state.conversations.length - 1 ||
-                                    (index == state.conversations.length - 2 &&
-                                        state.conversations.last
-                                            is PromptButtons)),
+                                index == state.conversations.length - 1,
                           ),
                         );
                       }).toList(),
@@ -169,43 +166,24 @@ class _AiChatListState extends State<AiChatList> {
       return InChatBubbleWidget(message: e.text, name: e.userName);
     } else if (e is Reset) {
       return _sessionResetWidget();
-    } else if (e is PromptButtons) {
-      return _promptButtons(e.components);
+    } else if (e is Component) {
+      return _componentWidget(e);
     } else {
       return const LoraThinkingWidget();
     }
   }
 
-  Widget _promptButtons(List<Component> components) {
-    return BlocBuilder<LoraGptBloc, LoraGptState>(
-        buildWhen: (previous, current) => previous.isTyping != current.isTyping,
-        builder: (context, state) {
-          return Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: components
-                  .map((e) => state.isTyping
-                      ? ShimmerWidget(
-                          width:
-                              e.label.textWidth(AskLoraTextStyles.body2) + 30.2,
-                          height: 39.2)
-                      : CustomChoiceChips(
-                          textStyle: AskLoraTextStyles.body2.copyWith(
-                              color: widget.aiThemeType.primaryFontColor),
-                          textColor: widget.aiThemeType.secondaryFontColor,
-                          borderColor:
-                              widget.aiThemeType.choicesInteractionBorderColor,
-                          pressedFillColor:
-                              AskLoraColors.primaryGreen.withOpacity(0.4),
-                          fillColor: AskLoraColors.white.withOpacity(0.2),
-                          label: e.label,
-                          onTap: () => context
-                              .read<LoraGptBloc>()
-                              .add(OnPromptTap(e.label)),
-                        ))
-                  .toList());
-        });
-  }
+  Widget _componentWidget(Component component) => CustomChoiceChips(
+        textStyle: AskLoraTextStyles.body2
+            .copyWith(color: widget.aiThemeType.primaryFontColor),
+        textColor: widget.aiThemeType.secondaryFontColor,
+        borderColor: widget.aiThemeType.choicesInteractionBorderColor,
+        pressedFillColor: AskLoraColors.primaryGreen.withOpacity(0.4),
+        fillColor: AskLoraColors.white.withOpacity(0.2),
+        label: component.label,
+        onTap: () =>
+            context.read<LoraGptBloc>().add(OnPromptTap(component.label)),
+      );
 
   ///todo: some backup code in case something fishy happening
   // Widget _getBubbleChat(LoraGptState state, Conversation e, int index) {

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/ai/component.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/endpoints.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
@@ -65,9 +66,10 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
   void _onSearchQuery(
       OnSearchQuery onSearchQuery, Emitter<LoraGptState> emit) async {
     final tempList = List<Conversation>.of(state.conversations);
-    if (tempList.last is PromptButtons) {
-      tempList.removeLast();
-    }
+
+    ///Remove components from conversations
+    tempList.removeWhere((element) => element is Component);
+
     tempList.add(Me(state.query, state.userName));
     tempList.add(Loading());
 
@@ -123,9 +125,10 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     if (response.state == ResponseState.success) {
       tempList.add(Lora(response.data!.response));
 
-      ///ADD PROMPT WHEN AVAILABLE
+      ///Add components on temporary conversation
+      ///it will be added to state later when chat animation is completed
       if (response.data!.components.isNotEmpty) {
-        _tempConversation.add(PromptButtons(response.data!.components));
+        _tempConversation.addAll(response.data!.components);
       }
     } else {
       tempList.add(Lora(

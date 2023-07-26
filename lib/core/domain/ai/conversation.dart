@@ -1,11 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'component.dart';
-
 part 'conversation.g.dart';
 
-enum ConversationType { me, lora, loading, reset, next, prompt }
+enum ConversationType { me, lora, loading, reset, next, component }
 
 abstract class Conversation extends Equatable {
   ConversationType type();
@@ -90,16 +88,4 @@ class Reset extends Conversation {
 
   @override
   List<Object?> get props => [type()];
-}
-
-class PromptButtons extends Conversation {
-  final List<Component> components;
-
-  @override
-  ConversationType type() => ConversationType.prompt;
-
-  PromptButtons(this.components);
-
-  @override
-  List<Object?> get props => [type(), components];
 }

@@ -1,7 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:json_annotation/json_annotation.dart';
-
-part 'component.g.dart';
+import 'conversation.dart';
 
 enum ComponentType {
   promptButton('prompt_btn'),
@@ -16,20 +13,39 @@ enum ComponentType {
           .firstWhere((element) => element.value == aiComponentTypeString);
 }
 
-@JsonSerializable()
-class Component extends Equatable {
+abstract class Component extends Conversation {
   final String id;
   final String label;
 
-  const Component(this.id, this.label);
+  Component(this.id, this.label);
 
-  get type => ComponentType.findByString(id);
+  ComponentType componentType();
 
-  factory Component.fromJson(Map<String, dynamic> json) =>
-      _$ComponentFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ComponentToJson(this);
+  static empty() => const [];
 
   @override
-  List<Object?> get props => [type];
+  ConversationType type() => ConversationType.component;
+
+  @override
+  List<Object?> get props => [type()];
+}
+
+class PromptButton extends Component {
+  PromptButton(String id, String label) : super(id, label);
+
+  @override
+  ComponentType componentType() => ComponentType.promptButton;
+
+  @override
+  List<Object?> get props => [componentType()];
+}
+
+class NavigationButton extends Component {
+  NavigationButton(String id, String label) : super(id, label);
+
+  @override
+  ComponentType componentType() => ComponentType.navigationButton;
+
+  @override
+  List<Object?> get props => [componentType()];
 }
