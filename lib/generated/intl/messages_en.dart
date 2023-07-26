@@ -414,6 +414,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "free": MessageLookupByLibrary.simpleMessage("Free"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("Free Trial"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
+        "generalSettings":
+            MessageLookupByLibrary.simpleMessage("General Settings"),
         "getHelp": MessageLookupByLibrary.simpleMessage("Get Help"),
         "getReadyForTheVerification": MessageLookupByLibrary.simpleMessage(
             "Get ready for the verification process. You will.."),
