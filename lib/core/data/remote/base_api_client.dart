@@ -109,17 +109,18 @@ class AppInterceptors extends Interceptor {
       DioError error, ErrorInterceptorHandler handler) async {
     final accessToken = await _refreshToken();
 
-    if (accessToken.isEmpty) {
-      handler.next(error);
+    if (accessToken.isNotEmpty) {
+      /// Check if the last API call was `auth/verify/`. If, then replace the old token
+      /// with the new (refreshed) one.
+      final requestOptions = error.requestOptions;
+
+      if (requestOptions.path == endpointTokenVerify) {
+        requestOptions.data = TokenVerifyRequest(accessToken).toJson();
+      }
+
+      return handler.resolve(await _retry(error.requestOptions));
     }
-
-    final requestOptions = error.requestOptions;
-
-    if (requestOptions.path == endpointTokenVerify) {
-      requestOptions.data = TokenVerifyRequest(accessToken).toJson();
-    }
-
-    return handler.resolve(await _retry(error.requestOptions));
+    handler.next(error);
   }
 
   Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {
