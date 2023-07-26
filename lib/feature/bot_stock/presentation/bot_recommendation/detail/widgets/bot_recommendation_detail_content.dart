@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
-import '../../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
+import '../../../../../../core/presentation/column_text/pair_column_text.dart';
+import '../../../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
@@ -138,7 +139,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
             ],
           ),
           children: [
-            PairColumnTextWithTooltip(
+            PairColumnText(
               leftTitle: S.of(context).prevClose,
               leftSubTitle: botDetailModel?.prevClosePrice != null
                   ? (botDetailModel?.prevClosePrice ?? 0).toString()
@@ -160,21 +161,21 @@ class BotRecommendationDetailContent extends StatelessWidget {
             const SizedBox(
               height: 21,
             ),
-            PairColumnTextWithTooltip(
+            PairColumnText(
               leftTitle: S.of(context).sectors,
               leftSubTitle: botDetailModel?.stockInfo.sector ?? 'NA',
               rightTitle: S.of(context).industry,
               rightSubTitle: botDetailModel?.stockInfo.industry ?? 'NA',
             ),
             _spaceBetweenInfo,
-            PairColumnTextWithTooltip(
+            PairColumnText(
               leftTitle: S.of(context).ceo,
               leftSubTitle: botDetailModel?.stockInfo.ceo ?? 'NA',
               rightTitle: S.of(context).employees,
               rightSubTitle: '${botDetailModel?.stockInfo.employees}',
             ),
             _spaceBetweenInfo,
-            PairColumnTextWithTooltip(
+            PairColumnText(
               leftTitle: S.of(context).headquarters,
               leftSubTitle: botDetailModel?.stockInfo.headquarter ?? 'NA',
               rightTitle: S.of(context).founded,
@@ -198,13 +199,13 @@ class BotRecommendationDetailContent extends StatelessWidget {
             children: [
               if (botDetailModel != null)
                 _detailedInformation(context, botDetailModel!),
-              PairColumnTextWithTooltip(
+              PairColumnTextWithBottomSheet(
                   leftTitle: S.of(context).startDate,
                   leftSubTitle: '${botDetailModel?.formattedStartDate}',
                   rightTitle: S.of(context).investmentPeriod,
                   rightSubTitle: '${botDetailModel?.botDuration}',
-                  leftTooltipText: S.of(context).tooltipBotDetailsStartDate,
-                  rightTooltipText:
+                  leftBottomSheetText: S.of(context).tooltipBotDetailsStartDate,
+                  rightBottomSheetText:
                       S.of(context).tooltipBotDetailsInvestmentPeriod),
               _spaceBetweenInfo,
               ColumnTextWithTooltip(
@@ -268,7 +269,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
             botType: botType,
           ),
           const SizedBox(height: 28),
-          PairColumnTextWithTooltip(
+          PairColumnTextWithBottomSheet(
               leftTitle: botType == BotType.plank
                   ? S.of(context).estStopLossPercent
                   : S.of(context).estMaxLossPercent,
@@ -277,10 +278,10 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   ? S.of(context).estTakeProfitPercent
                   : S.of(context).estMaxProfitPercent,
               rightSubTitle: botDetailModel.estTakeProfitPctFormatted,
-              leftTooltipText: botType == BotType.plank
+              leftBottomSheetText: botType == BotType.plank
                   ? S.of(context).tooltipBotDetailsEstStopLoss
                   : S.of(context).tooltipBotDetailsEstMaxLoss,
-              rightTooltipText: botType == BotType.plank
+              rightBottomSheetText: botType == BotType.plank
                   ? S.of(context).tooltipBotDetailsEstTakeProfit
                   : S.of(context).tooltipBotDetailsEstMaxProfit),
           _spaceBetweenInfo,

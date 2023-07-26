@@ -95,23 +95,24 @@ class PortfolioBalance extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
         content: Column(
           children: [
-            PairColumnTextWithTooltip(
+            PairColumnTextWithBottomSheet(
               columnTextCrossAxisAlignment: CrossAxisAlignment.center,
               leftTitle: S.of(context).portfolioBuyingPower(currencyType.name),
               leftSubTitle: currencyType == CurrencyType.hkd
                   ? data.buyingPowerHkdStr
                   : data.buyingPowerUsdStr,
-              leftTooltipText: S.of(context).portfolioBuyingPowerToolTip,
+              leftBottomSheetText: S.of(context).portfolioBuyingPowerToolTip,
               rightTitle: S.of(context).portfolioTotalPL,
               rightSubTitle: data.totalPnLStr,
               rightSubTitleColor: data.totalPnLColor,
+              buttonLabel: S.of(context).buttonBackToPortfolio,
               spaceWidth: 6,
             ),
             const SizedBox(
               height: 23,
             ),
-            PairColumnTextWithTooltip(
-              columnTextCrossAxisAlignment: CrossAxisAlignment.center,
+            PairColumnText(
+              crossAxisAlignment: CrossAxisAlignment.center,
               leftTitle:
                   S.of(context).portfolioWithdrawableAmount(currencyType.name),
               leftSubTitle: currencyType == CurrencyType.hkd

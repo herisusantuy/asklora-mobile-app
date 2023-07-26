@@ -10,6 +10,7 @@ class PairColumnText extends StatelessWidget {
   final double? spaceWidth;
   final int? maxLines;
   final bool ellipsis;
+  final CrossAxisAlignment crossAxisAlignment;
 
   const PairColumnText(
       {required this.leftTitle,
@@ -19,16 +20,18 @@ class PairColumnText extends StatelessWidget {
       this.spaceWidth = 10,
       this.maxLines,
       this.ellipsis = false,
+      this.crossAxisAlignment = CrossAxisAlignment.start,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: crossAxisAlignment,
       children: [
         Expanded(
           child: ColumnText(
+            crossAxisAlignment: crossAxisAlignment,
             title: leftTitle,
             subTitle: leftSubTitle,
             ellipsis: ellipsis,
@@ -41,6 +44,7 @@ class PairColumnText extends StatelessWidget {
           ),
         Expanded(
           child: ColumnText(
+            crossAxisAlignment: crossAxisAlignment,
             title: rightTitle,
             subTitle: rightSubTitle,
             ellipsis: ellipsis,
