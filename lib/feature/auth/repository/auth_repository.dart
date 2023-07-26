@@ -55,8 +55,8 @@ class AuthRepository {
     var response = await _authApiClient.signIn(SignInRequest(email, password));
     var signInResponse = SignInResponse.fromJson(response.data);
     if (response.statusCode == 200) {
-      _storage.saveAccessToken(signInResponse.access!);
-      _storage.saveRefreshToken(signInResponse.refresh!);
+      await _storage.saveAccessToken(signInResponse.access!);
+      await _storage.saveRefreshToken(signInResponse.refresh!);
     }
     return signInResponse.copyWith(statusCode: response.statusCode);
   }
@@ -71,14 +71,14 @@ class AuthRepository {
     var signInResponse = SignInResponse.fromJson(response.data);
 
     if (response.statusCode == 200) {
-      _storage.saveAccessToken(signInResponse.access!);
-      _storage.saveRefreshToken(signInResponse.refresh!);
+      await _storage.saveAccessToken(signInResponse.access!);
+      await _storage.saveRefreshToken(signInResponse.refresh!);
     }
     return signInResponse.copyWith(statusCode: response.statusCode);
   }
 
-  void removeStorageOnSignInFailed() {
-    _storage.deleteAll();
+  void removeStorageOnSignInFailed() async {
+    await _storage.deleteAll();
   }
 
   Future<BaseResponse<ResetPasswordResponse>> resetPassword(
