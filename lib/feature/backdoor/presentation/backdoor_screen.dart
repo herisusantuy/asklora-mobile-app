@@ -40,7 +40,6 @@ class BackdoorScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 30),
                     _disabledOtpLoginToggle,
-                    const SizedBox(height: 1000),
                   ]),
                 );
               },
