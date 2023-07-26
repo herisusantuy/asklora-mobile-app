@@ -44,6 +44,14 @@ class BotActiveOrderModel extends Equatable {
     }
   }
 
+  String startOrExpireShowDateOnly(BuildContext context) {
+    if (botStatus == BotStatus.pending) {
+      return '${S.of(context).startsAt} ${convertDateToHktString(optimalTime, dateFormat: 'dd/MM/yy')}';
+    } else {
+      return '${S.of(context).expiresAt} ${formatDateTimeAsString(expireDate, dateFormat: 'dd/MM/yy')}';
+    }
+  }
+
   String get botName =>
       '${BotType.findByString(botAppsName).upperCaseName} $symbol';
 
