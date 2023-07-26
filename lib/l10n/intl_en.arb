@@ -754,5 +754,6 @@
   "kycResultScreenTitle": "Your investment account application is under review!",
   "kycResultScreenDesc": "You will be informed when your application is approved.\n\nPlease remember to collect your gift.",
   "depositFund": "Deposit Funds",
+  "generalSettings": "General Settings",
   "botManagementFeeTooltip": "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!"
 }

@@ -333,6 +333,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "free": MessageLookupByLibrary.simpleMessage("免費"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("免費試用期"),
         "fullName": MessageLookupByLibrary.simpleMessage("姓名"),
+        "generalSettings": MessageLookupByLibrary.simpleMessage("設定"),
         "getHelp": MessageLookupByLibrary.simpleMessage("獲得幫助"),
         "getReadyForTheVerification":
             MessageLookupByLibrary.simpleMessage("核實程序即將開始，你將要......"),
