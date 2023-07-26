@@ -6,6 +6,8 @@ const transactions = 'transactions/';
 const orders = 'orders/';
 const activities = 'activities/';
 const user = 'user/';
+
+const String endpointSignInV1 = '${v1}auth/';
 const String endpointSignIn = '${v2}auth/';
 const String endpointSignOut = '${v1}auth/revoke/';
 const String endpointSignUp = '$v1$accounts';

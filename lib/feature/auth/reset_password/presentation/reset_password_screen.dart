@@ -7,6 +7,7 @@ import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../generated/l10n.dart';
+import '../../../backdoor/domain/backdoor_repository.dart';
 import '../../repository/auth_repository.dart';
 import '../bloc/reset_password_bloc.dart';
 import 'reset_password_form.dart';
@@ -22,8 +23,11 @@ class ResetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          ResetPasswordBloc(authRepository: AuthRepository(TokenRepository())),
+      create: (context) => ResetPasswordBloc(
+          authRepository: AuthRepository(
+        TokenRepository(),
+        BackdoorRepository(),
+      )),
       child: CustomScaffold(
         body: CustomStretchedLayout(
           header: CustomHeader(

@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/otp/get_otp_request.dart';
 import '../../../core/data/remote/base_api_client.dart';
 import '../../../core/domain/token/repository/repository.dart';
+import '../../backdoor/domain/backdoor_repository.dart';
 import '../../settings/domain/change_password/change_password_request.dart';
 import '../../settings/domain/change_password/change_password_response.dart';
 import '../domain/auth_api_client.dart';
@@ -22,8 +25,9 @@ import '../sign_up/domain/sign_up_request.dart';
 class AuthRepository {
   final AuthApiClient _authApiClient = AuthApiClient();
   final Repository _storage;
+  final BackdoorRepository _backdoorRepository;
 
-  AuthRepository(this._storage);
+  AuthRepository(this._storage, this._backdoorRepository);
 
   Future<BaseResponse<SignUpResponse>> signUp({
     required String email,
@@ -52,7 +56,15 @@ class AuthRepository {
     required String email,
     required String password,
   }) async {
-    var response = await _authApiClient.signIn(SignInRequest(email, password));
+    final isOtpLoginDisabled = await _backdoorRepository.isOtpLoginDisabled();
+
+    Response response;
+    if (isOtpLoginDisabled) {
+      response = await _authApiClient.signInV1(SignInRequest(email, password));
+    } else {
+      response = await _authApiClient.signIn(SignInRequest(email, password));
+    }
+
     var signInResponse = SignInResponse.fromJson(response.data);
     if (response.statusCode == 200) {
       _storage.saveAccessToken(signInResponse.access!);

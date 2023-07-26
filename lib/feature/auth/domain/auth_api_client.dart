@@ -29,9 +29,14 @@ class AuthApiClient {
       await AskloraApiClient().post(
           endpoint: endpointSignOut, payload: jsonEncode(request.toJson()));
 
-  Future<Response> signIn(SignInRequest request) async =>
+  Future<Response> signInV1(SignInRequest request) async =>
       await AskloraApiClient().post(
-          endpoint: endpointSignIn, payload: jsonEncode(request.toJson()));
+          endpoint: endpointSignInV1, payload: jsonEncode(request.toJson()));
+
+  Future<Response> signIn(SignInRequest request) async {
+    return await AskloraApiClient()
+        .post(endpoint: endpointSignIn, payload: jsonEncode(request.toJson()));
+  }
 
   Future<Response> signInWithOtp(SignInWithOtpRequest request) async =>
       await AskloraApiClient().post(
