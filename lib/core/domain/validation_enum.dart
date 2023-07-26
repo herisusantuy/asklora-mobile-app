@@ -10,6 +10,10 @@ enum ValidationCode {
   otpSentToYourEmail('otpSentToYourEmail'),
   verifyOtpSuccess('verifyOtpSuccess'),
   noInternetConnection('noInternetConnection'),
+  emailVerificationLinkSentSuccess('emailVerificationLinkSentSuccess'),
+  couldNotGetUserDetails('couldNotGetUserDetails'),
+  couldNotFetchOnfidoToken('couldNotGetUserDetails'),
+  couldNotUpdateOnfidoResult('couldNotGetUserDetails'),
   empty(''),
 
   ///
