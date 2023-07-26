@@ -10,6 +10,7 @@ import '../../../../core/domain/ai/conversation.dart';
 import '../domain/portfolio_details_request.dart';
 import '../domain/portfolio_query_request.dart';
 import '../domain/query_request.dart';
+import '../domain/query_response.dart';
 import '../repository/lora_gpt_repository.dart';
 
 part 'lora_gpt_event.dart';
@@ -24,6 +25,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         _sharedPreference = sharedPreference,
         super(const LoraGptState()) {
     on<OnEditQuery>(_onEditQuery);
+    on<OnPromptTap>(_onPromptTap);
     on<OnSearchQuery>(_onSearchQuery);
     on<OnScreenLaunch>(_onScreenLaunch);
     on<OnResetSession>(_onResetSession);
@@ -36,6 +38,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
   final LoraGptRepository _loraGptRepository;
   final SharedPreference _sharedPreference;
+  List<Conversation> _tempConversation = [];
 
   void _onScreenLaunch(
       OnScreenLaunch onEditQuery, Emitter<LoraGptState> emit) async {
@@ -54,10 +57,18 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       emit(state.copyWith(
           query: onEditQuery.query, status: ResponseState.unknown));
 
+  void _onPromptTap(OnPromptTap onPromptTap, Emitter<LoraGptState> emit) {
+    emit(state.copyWith(query: onPromptTap.query));
+    add(const OnSearchQuery());
+  }
+
   void _onSearchQuery(
       OnSearchQuery onSearchQuery, Emitter<LoraGptState> emit) async {
     final tempList = List<Conversation>.of(state.conversations);
-    tempList.add(Me(state.query));
+    if (tempList.last is PromptButtons) {
+      tempList.removeLast();
+    }
+    tempList.add(Me(state.query, state.userName));
     tempList.add(Loading());
 
     final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
@@ -72,7 +83,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         query: '',
         isTyping: true));
 
-    var response = BaseResponse.error();
+    BaseResponse<QueryResponse> response = BaseResponse.error();
 
     final subPage = state.tabPage.getArguments;
 
@@ -110,13 +121,15 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     tempList.removeLast();
     if (response.state == ResponseState.success) {
-      tempList.add(response.data!);
+      tempList.add(Lora(response.data!.response));
+
+      ///ADD PROMPT WHEN AVAILABLE
+      if (response.data!.components.isNotEmpty) {
+        _tempConversation.add(PromptButtons(response.data!.components));
+      }
     } else {
       tempList.add(Lora(
-          'Sorry I cannot connect to the server right now, please try again',
-          '',
-          '',
-          false));
+          'Sorry I cannot connect to the server right now, please try again'));
     }
     emit(state.copyWith(
         status: ResponseState.success,
@@ -136,8 +149,14 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
           query: ''));
 
   void _onFinishTyping(
-          OnFinishTyping onFinishTyping, Emitter<LoraGptState> emit) =>
-      emit(state.copyWith(status: ResponseState.unknown, isTyping: false));
+      OnFinishTyping onFinishTyping, Emitter<LoraGptState> emit) {
+    emit(state.copyWith(
+        conversations: List<Conversation>.of(state.conversations)
+          ..addAll(_tempConversation),
+        status: ResponseState.unknown,
+        isTyping: false));
+    _tempConversation = [];
+  }
 
   void _onShowOverlayWidget(
           ShowOverLayScreen onShowOverLayScreen, Emitter<LoraGptState> emit) =>

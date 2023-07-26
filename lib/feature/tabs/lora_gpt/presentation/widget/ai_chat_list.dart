@@ -1,7 +1,9 @@
 part of '../lora_ai_screen.dart';
 
 class AiChatList extends StatefulWidget {
-  const AiChatList({super.key});
+  final AiThemeType aiThemeType;
+
+  const AiChatList({this.aiThemeType = AiThemeType.dark, super.key});
 
   @override
   State<AiChatList> createState() => _AiChatListState();
@@ -15,14 +17,7 @@ class _AiChatListState extends State<AiChatList> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 20, 15),
-      child: BlocConsumer<LoraGptBloc, LoraGptState>(
-        listener: (context, state) => {
-          if (state.status == ResponseState.error)
-            {
-              CustomInAppNotification.show(context,
-                  'I am sorry! Currently I am having issue to connect with my server.')
-            }
-        },
+      child: BlocBuilder<LoraGptBloc, LoraGptState>(
         buildWhen: (previous, current) =>
             previous.status != current.status &&
                 current.status != ResponseState.unknown ||
@@ -74,11 +69,16 @@ class _AiChatListState extends State<AiChatList> {
                               padding:
                                   const EdgeInsets.only(bottom: 17, left: 20),
                               child: _getBubbleChat(
-                                  conversation,
-                                  index,
-                                  state.isTyping &&
-                                      index == state.conversations.length - 1,
-                                  state.userName),
+                                conversation,
+                                index,
+                                state.isTyping &&
+                                    (index == state.conversations.length - 1 ||
+                                        (index ==
+                                                state.conversations.length -
+                                                    2 &&
+                                            state.conversations.last
+                                                is PromptButtons)),
+                              ),
                             );
                           }).toList(),
                         ),
@@ -163,22 +163,54 @@ class _AiChatListState extends State<AiChatList> {
     );
   }
 
-  Widget _getBubbleChat(
-      Conversation e, int index, bool isTyping, String userName) {
+  Widget _getBubbleChat(Conversation e, int index, bool isTyping) {
     if (e is Lora) {
       return OutChatBubbleWidget(
-        e.response,
+        e.text,
         animateText: isTyping,
         onFinishedAnimation: () =>
             context.read<LoraGptBloc>().add(const OnFinishTyping()),
       );
     } else if (e is Me) {
-      return InChatBubbleWidget(message: e.query, name: userName);
+      return InChatBubbleWidget(message: e.text, name: e.userName);
     } else if (e is Reset) {
       return _sessionResetWidget();
+    } else if (e is PromptButtons) {
+      return _promptButtons(e.components);
     } else {
       return const LoraThinkingWidget();
     }
+  }
+
+  Widget _promptButtons(List<Component> components) {
+    return BlocBuilder<LoraGptBloc, LoraGptState>(
+        buildWhen: (previous, current) => previous.isTyping != current.isTyping,
+        builder: (context, state) {
+          return Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              children: components
+                  .map((e) => state.isTyping
+                      ? ShimmerWidget(
+                          width:
+                              e.label.textWidth(AskLoraTextStyles.body2) + 30.2,
+                          height: 39.2)
+                      : CustomChoiceChips(
+                          textStyle: AskLoraTextStyles.body2.copyWith(
+                              color: widget.aiThemeType.primaryFontColor),
+                          textColor: widget.aiThemeType.secondaryFontColor,
+                          borderColor:
+                              widget.aiThemeType.choicesInteractionBorderColor,
+                          pressedFillColor:
+                              AskLoraColors.primaryGreen.withOpacity(0.4),
+                          fillColor: AskLoraColors.white.withOpacity(0.2),
+                          label: e.label,
+                          onTap: () => context
+                              .read<LoraGptBloc>()
+                              .add(OnPromptTap(e.label)),
+                        ))
+                  .toList());
+        });
   }
 
   ///todo: some backup code in case something fishy happening
