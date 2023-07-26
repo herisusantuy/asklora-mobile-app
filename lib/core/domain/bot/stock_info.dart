@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'stock_info.g.dart';
 
-
 @JsonSerializable()
 class StockInfo extends Equatable {
   final String symbol;
