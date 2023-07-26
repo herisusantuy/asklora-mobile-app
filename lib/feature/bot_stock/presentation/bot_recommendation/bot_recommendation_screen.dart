@@ -14,7 +14,7 @@ import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/presentation/auto_sized_text_widget.dart';
 import '../../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
-import '../../../../core/presentation/custom_text_with_tooltip.dart';
+import '../../../../core/presentation/custom_text_with_bottom_sheet.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -112,9 +112,10 @@ class BotRecommendationScreen extends StatelessWidget {
             style: AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
           ),
           const SizedBox(height: 16),
-          CustomTextWithTooltip(
+          CustomTextWithBottomSheet(
             title: S.of(context).updatedAt(updated),
-            tooltipText: S.of(context).ourPersonalisedRecommendationsAreUnique,
+            bottomSheetText:
+                S.of(context).ourPersonalisedRecommendationsAreUnique,
             titleStyle: AskLoraTextStyles.subtitle3
                 .copyWith(color: AskLoraColors.darkGray),
           ),
