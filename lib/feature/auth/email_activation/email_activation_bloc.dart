@@ -55,9 +55,7 @@ class EmailActivationBloc
       emit(state.copyWith(
           response: BaseResponse.error(validationCode: e.askloraError.type)));
     } catch (e) {
-      emit(state.copyWith(
-          response:
-              BaseResponse.error(validationCode: ValidationCode.unknown)));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 
