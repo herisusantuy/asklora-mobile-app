@@ -174,7 +174,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               leftTitle: S.of(context).headquarters,
               leftSubTitle: botDetailModel?.stockInfo.headquarter ?? 'NA',
               rightTitle: S.of(context).founded,
-              rightSubTitle: botDetailModel?.stockInfo.founded ?? 'NA',
+              rightSubTitle: botDetailModel?.stockInfo.foundedFormatted ?? 'NA',
             ),
             const SizedBox(
               height: 23,
