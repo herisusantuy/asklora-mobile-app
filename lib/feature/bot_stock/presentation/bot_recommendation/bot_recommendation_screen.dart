@@ -77,8 +77,7 @@ class BotRecommendationScreen extends StatelessWidget {
                 ),
                 showPopUp: state.botRecommendationResponse.state ==
                     ResponseState.error,
-                content: ListView(
-                  padding: const EdgeInsets.only(bottom: 35),
+                content: Column(
                   children: [
                     _header(
                         context: context,
@@ -86,9 +85,16 @@ class BotRecommendationScreen extends StatelessWidget {
                         updated: state.botRecommendationResponse.data
                                 ?.updatedFormatted ??
                             '-'),
-                    BotRecommendationList(
-                      verticalMargin: 14,
-                      botStockState: state,
+                    Expanded(
+                      child: ListView(
+                        padding: const EdgeInsets.only(bottom: 35),
+                        children: [
+                          BotRecommendationList(
+                            verticalMargin: 14,
+                            botStockState: state,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -127,14 +133,14 @@ class BotRecommendationScreen extends StatelessWidget {
               Flexible(
                 flex: 3,
                 child: AutoSizedTextWidget(
-                  S.of(context).notFeelingIt,
+                  S.of(context).notTheStockYouWereLooking,
                   style: AskLoraTextStyles.subtitle3
                       .copyWith(color: AskLoraColors.primaryMagenta),
                 ),
               ),
               const SizedBox(width: 5),
               ExtraInfoButton(
-                label: S.of(context).defineAgain,
+                label: S.of(context).pressToStartOver,
                 buttonExtraInfoSize: ButtonExtraInfoSize.small,
                 onTap: () => context
                     .read<NavigationBloc<ForYouPage>>()

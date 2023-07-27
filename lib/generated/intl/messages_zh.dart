@@ -445,6 +445,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTransactionsYet":
             MessageLookupByLibrary.simpleMessage("你似乎未進行過任何交易！"),
         "notFeelingIt": MessageLookupByLibrary.simpleMessage("唔啱心水？當然仲有得揀！"),
+        "notTheStockYouWereLooking": MessageLookupByLibrary.simpleMessage(
+            "Not the stock you were looking for? Try something different"),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
             "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。"),
         "notes": MessageLookupByLibrary.simpleMessage("說明"),
@@ -604,6 +606,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
+        "pressToStartOver":
+            MessageLookupByLibrary.simpleMessage("Press to Start Over"),
         "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
         "privacyEvaluation": MessageLookupByLibrary.simpleMessage("私隱評估"),
         "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
