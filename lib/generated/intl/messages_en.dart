@@ -740,7 +740,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pressBackAgain": MessageLookupByLibrary.simpleMessage(
             "Press back again to exit Asklora"),
         "pressToStartOver":
-            MessageLookupByLibrary.simpleMessage("Press to Start Over"),
+            MessageLookupByLibrary.simpleMessage("Press to\nStart Over"),
         "prevClose": MessageLookupByLibrary.simpleMessage("Prev Close"),
         "privacyEvaluation":
             MessageLookupByLibrary.simpleMessage("Privacy Evaluation"),

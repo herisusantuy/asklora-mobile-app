@@ -5416,10 +5416,10 @@ class S {
     );
   }
 
-  /// `Press to Start Over`
+  /// `Press to\nStart Over`
   String get pressToStartOver {
     return Intl.message(
-      'Press to Start Over',
+      'Press to\nStart Over',
       name: 'pressToStartOver',
       desc: '',
       args: [],

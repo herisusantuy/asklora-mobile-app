@@ -607,7 +607,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
         "pressToStartOver":
-            MessageLookupByLibrary.simpleMessage("Press to Start Over"),
+            MessageLookupByLibrary.simpleMessage("Press to\nStart Over"),
         "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
         "privacyEvaluation": MessageLookupByLibrary.simpleMessage("私隱評估"),
         "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
