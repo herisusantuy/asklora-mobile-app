@@ -49,8 +49,7 @@ class FinancialProfileSummaryContent extends StatelessWidget {
         /// TODO: Confirm with James if we want to show the source of wealth and employment or not.
         /// Disabling the source of wealth and employment as there are few demo with potential investors.
         if (!FeatureFlags.isDemoEnable)
-          ..._getEmploymentDetailsAndSourceOfWealthSummary(context),
-        ..._getAffiliatedPerson(context),
+          ..._getEmploymentDetailsAndSourceOfWealthSummary(context)
       ],
     );
   }

@@ -67,8 +67,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
                 final validation = state.validate();
                 if (validation.result) {
                   context.read<NavigationBloc<KycPageStep>>().add(
-                      const PageChanged(
-                          KycPageStep.disclosureAffiliationAssociates));
+                      const PageChanged(KycPageStep.financialProfileSummary));
                 } else {
                   CustomInAppNotification.show(
                       context, validation.errorMessage);
