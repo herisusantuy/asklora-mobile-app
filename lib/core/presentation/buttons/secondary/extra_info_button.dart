@@ -11,12 +11,16 @@ class ExtraInfoButton extends StatefulWidget {
   final VoidCallback onTap;
   final Widget? suffixIcon;
   final ButtonExtraInfoSize buttonExtraInfoSize;
+  final TextStyle? labelStyle;
+  final double? borderWidth;
 
   const ExtraInfoButton(
       {this.label = '',
       required this.onTap,
       this.suffixIcon,
       this.buttonExtraInfoSize = ButtonExtraInfoSize.big,
+      this.labelStyle,
+      this.borderWidth,
       Key? key})
       : super(key: key);
 
@@ -53,7 +57,9 @@ class _ExtraInfoButtonState extends State<ExtraInfoButton> {
             vertical: 5),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(width: 1.4, color: AskLoraColors.primaryMagenta),
+            border: Border.all(
+                width: widget.borderWidth ?? 1.4,
+                color: AskLoraColors.primaryMagenta),
             color: _isPressed
                 ? AskLoraColors.primaryMagenta.withOpacity(0.2)
                 : Colors.transparent),
@@ -63,10 +69,12 @@ class _ExtraInfoButtonState extends State<ExtraInfoButton> {
           children: [
             CustomTextNew(widget.label,
                 style: widget.buttonExtraInfoSize == ButtonExtraInfoSize.big
-                    ? AskLoraTextStyles.subtitle2
-                        .copyWith(color: AskLoraColors.primaryMagenta)
-                    : AskLoraTextStyles.subtitle3
-                        .copyWith(color: AskLoraColors.primaryMagenta)),
+                    ? widget.labelStyle ??
+                        AskLoraTextStyles.subtitle2
+                            .copyWith(color: AskLoraColors.primaryMagenta)
+                    : widget.labelStyle ??
+                        AskLoraTextStyles.subtitle3
+                            .copyWith(color: AskLoraColors.primaryMagenta)),
             if (widget.suffixIcon != null)
               Padding(
                   padding: const EdgeInsets.only(left: 5),
