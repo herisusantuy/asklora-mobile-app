@@ -5425,6 +5425,96 @@ class S {
       args: [],
     );
   }
+
+  /// `A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that I will manage for you!`
+  String get botStockExplanationScreenTitle {
+    return Intl.message(
+      'A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that I will manage for you!',
+      name: 'botStockExplanationScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Got it! But What Does a Bot Do?`
+  String get botStockExplanationScreenBottomButton {
+    return Intl.message(
+      'Got it! But What Does a Bot Do?',
+      name: 'botStockExplanationScreenBottomButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward.`
+  String get botStockDoScreenTitle {
+    return Intl.message(
+      'A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward.',
+      name: 'botStockDoScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go for occasional big wins`
+  String get botStockDoScreenPoint1 {
+    return Intl.message(
+      'Go for occasional big wins',
+      name: 'botStockDoScreenPoint1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Avoid excessive losses`
+  String get botStockDoScreenPoint2 {
+    return Intl.message(
+      'Avoid excessive losses',
+      name: 'botStockDoScreenPoint2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go for small but frequent wins`
+  String get botStockDoScreenPoint3 {
+    return Intl.message(
+      'Go for small but frequent wins',
+      name: 'botStockDoScreenPoint3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Understood!`
+  String get understood {
+    return Intl.message(
+      'Understood!',
+      name: 'understood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You're all set!\nLet's begin a real AI trade!`
+  String get giftBotStockWelcomeScreenTitle {
+    return Intl.message(
+      'You\'re all set!\nLet\'s begin a real AI trade!',
+      name: 'giftBotStockWelcomeScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sure! What is a Botstock? `
+  String get giftBotStockWelcomeScreenBottomButton {
+    return Intl.message(
+      'Sure! What is a Botstock? ',
+      name: 'giftBotStockWelcomeScreenBottomButton',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

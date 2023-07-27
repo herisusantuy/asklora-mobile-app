@@ -4,7 +4,6 @@ import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
-import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../styles/asklora_colors.dart';
 import 'buttons/primary_button.dart';
 
@@ -17,7 +16,6 @@ class LoraBottomSheet {
   final String? secondaryButtonLabel;
   final VoidCallback onPrimaryButtonTap;
   final VoidCallback? onSecondaryButtonTap;
-  final LoraMemojiType loraMemojiType;
 
   LoraBottomSheet.show({
     required this.context,
@@ -28,14 +26,12 @@ class LoraBottomSheet {
     this.secondaryButtonLabel,
     required this.onPrimaryButtonTap,
     this.onSecondaryButtonTap,
-    this.loraMemojiType = LoraMemojiType.lora1,
   }) {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
         context: (context),
         builder: (_) => LoraBottomSheetContent(
-              loraMemojiType: loraMemojiType,
               title: title,
               primaryButtonLabel: primaryButtonLabel,
               secondaryButtonLabel: secondaryButtonLabel,
@@ -56,7 +52,6 @@ class LoraBottomSheetContent extends StatelessWidget {
   final String? secondaryButtonLabel;
   final VoidCallback onPrimaryButtonTap;
   final VoidCallback? onSecondaryButtonTap;
-  final LoraMemojiType loraMemojiType;
   final double buttonPaddingTop;
 
   const LoraBottomSheetContent(
@@ -68,7 +63,6 @@ class LoraBottomSheetContent extends StatelessWidget {
       this.secondaryButtonLabel,
       required this.onPrimaryButtonTap,
       this.onSecondaryButtonTap,
-      this.loraMemojiType = LoraMemojiType.lora1,
       this.buttonPaddingTop = 32,
       Key? key})
       : super(key: key);

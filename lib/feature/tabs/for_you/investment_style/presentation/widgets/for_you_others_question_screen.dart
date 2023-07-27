@@ -31,10 +31,12 @@ class ForYouOthersQuestionScreen extends StatelessWidget {
                   question: 'Get in your investment zone',
                   paddingBottom: 24,
                 ),
-                const LoraRoundedCornerBanner(
-                  text:
+                RoundColoredBox(
+                    backgroundColor: AskLoraColors.lightGreen,
+                    content: CustomTextNew(
                       'Find Botstocks that fit you the best by letting me know your Investment Style.',
-                ),
+                      style: AskLoraTextStyles.body1,
+                    )),
                 const SizedBox(
                   height: 52,
                 ),

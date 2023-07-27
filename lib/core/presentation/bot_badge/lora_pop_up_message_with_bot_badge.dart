@@ -6,7 +6,6 @@ import '../../styles/asklora_text_styles.dart';
 import '../../values/app_values.dart';
 import '../buttons/primary_button.dart';
 import '../custom_text_new.dart';
-import '../lora_memoji_widget.dart';
 import 'bot_badge.dart';
 
 enum BadgePosition { top, belowSubtitle }
@@ -16,7 +15,6 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
   final String subTitle;
   final List<BotType> botTypes;
   final BadgePosition badgePosition;
-  final bool withLoraImage;
   final Color backgroundColor;
   final List<Color> badgeBackgroundColors;
   final List<Color> badgeTextColors;
@@ -29,7 +27,6 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
       {required this.title,
       required this.subTitle,
       required this.botTypes,
-      this.withLoraImage = true,
       this.badgePosition = BadgePosition.belowSubtitle,
       this.backgroundColor = AskLoraColors.whiteSmoke,
       this.titleColor = AskLoraColors.charcoal,
@@ -46,7 +43,7 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          margin: EdgeInsets.only(top: withLoraImage ? 70 : 0),
+          margin: const EdgeInsets.only(top: 0),
           child: IntrinsicHeight(
             child: Stack(
               children: [
@@ -59,8 +56,7 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
                   width: double.infinity,
                 ),
                 Container(
-                  padding:
-                      EdgeInsets.only(top: withLoraImage ? 64 : 32, bottom: 32),
+                  padding: const EdgeInsets.only(top: 32, bottom: 32),
                   width: double.infinity,
                   child: Column(
                     children: [
@@ -134,10 +130,6 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
             ),
           ),
         ),
-        if (withLoraImage)
-          const Align(
-              alignment: Alignment.topCenter,
-              child: LoraMemojiWidget(loraMemojiType: LoraMemojiType.lora1)),
       ],
     );
   }

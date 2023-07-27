@@ -8,7 +8,7 @@ class HomeScreenPopUpMessageWidget extends StatelessWidget {
   final String? secondaryButtonLabel;
   final VoidCallback onPrimaryButtonTap;
   final VoidCallback? onSecondaryButtonTap;
-  final String pngImage;
+  final String? pngImage;
   final double boxTopMargin;
 
   const HomeScreenPopUpMessageWidget(
@@ -19,7 +19,7 @@ class HomeScreenPopUpMessageWidget extends StatelessWidget {
       this.secondaryButtonLabel,
       required this.onPrimaryButtonTap,
       this.onSecondaryButtonTap,
-      this.pngImage = 'lora_memoji_1',
+      this.pngImage,
       this.boxTopMargin = 70,
       Key? key})
       : super(key: key);

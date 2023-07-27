@@ -7,7 +7,6 @@ class HomeScreenPopUpWidgetWithBotBadgeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return LoraPopUpMessageWithBotBadge(
       backgroundColor: AskLoraColors.whiteSmoke,
-      withLoraImage: true,
       badgePosition: BadgePosition.belowSubtitle,
       title: 'No traded BotStocks.',
       subTitle:

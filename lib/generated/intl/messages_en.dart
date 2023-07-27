@@ -163,6 +163,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!"),
         "botRecommendationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Investments tailored  for you"),
+        "botStockDoScreenPoint1":
+            MessageLookupByLibrary.simpleMessage("Go for occasional big wins"),
+        "botStockDoScreenPoint2":
+            MessageLookupByLibrary.simpleMessage("Avoid excessive losses"),
+        "botStockDoScreenPoint3": MessageLookupByLibrary.simpleMessage(
+            "Go for small but frequent wins"),
+        "botStockDoScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward."),
+        "botStockExplanationScreenBottomButton":
+            MessageLookupByLibrary.simpleMessage(
+                "Got it! But What Does a Bot Do?"),
+        "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that I will manage for you!"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
             MessageLookupByLibrary.simpleMessage(
@@ -423,6 +436,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Get ready for AI trading."),
         "getTheFirstBotstockForFree": MessageLookupByLibrary.simpleMessage(
             "Get the First Botstock for Free"),
+        "giftBotStockWelcomeScreenBottomButton":
+            MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock? "),
+        "giftBotStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "You\'re all set!\nLet\'s begin a real AI trade!"),
         "go": MessageLookupByLibrary.simpleMessage("Go"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got It"),
         "greatStart": MessageLookupByLibrary.simpleMessage("Great start!"),
@@ -950,6 +967,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "We\'re having some trouble processing your withdrawal request. Please try again"),
         "unableToProcessWithdrawalTitle": MessageLookupByLibrary.simpleMessage(
             "Unable to Process Withdrawal"),
+        "understood": MessageLookupByLibrary.simpleMessage("Understood!"),
         "unknown": MessageLookupByLibrary.simpleMessage("Unknown"),
         "updatedAt": m24,
         "uploadAddressProof":
