@@ -16,7 +16,7 @@ import '../../../../utils/bot_stock_utils.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
 import '../../../widgets/iex_data_provider_link.dart';
 import 'bot_price_level_indicator.dart';
-import 'toggable_price_text.dart';
+import 'toggleable_price_text.dart';
 import '../../../../../../core/utils/feature_flags.dart';
 
 class BotRecommendationDetailContent extends StatelessWidget {
