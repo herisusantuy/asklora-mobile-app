@@ -27,7 +27,6 @@ class ToggleablePriceText extends StatelessWidget {
           ToggleablePriceTextBloc(sharedPreference: SharedPreference()),
       child: Builder(
         builder: (context) {
-          // Calculate the width of the price and the percentage text
           String priceText = priceDifference < 0
               ? priceDifference.convertToCurrencyDecimal()
               : '+${priceDifference.convertToCurrencyDecimal()}';
@@ -35,28 +34,12 @@ class ToggleablePriceText extends StatelessWidget {
               ? '${percentDifference.convertToCurrencyDecimal()}%'
               : '+${percentDifference.convertToCurrencyDecimal()}%';
 
-          TextPainter pricePainter = TextPainter(
-            text: TextSpan(
-                text: priceText,
-                style: AskLoraTextStyles.subtitle3
-                    .copyWith(color: AskLoraColors.white)),
-            textDirection: TextDirection.ltr,
+          final TextStyle toggleableTextStyle =
+              AskLoraTextStyles.subtitle3.copyWith(color: AskLoraColors.white);
+          final maxTextWidth = max(
+            priceText.textWidth(toggleableTextStyle),
+            percentageText.textWidth(toggleableTextStyle),
           );
-
-          TextPainter percentagePainter = TextPainter(
-            text: TextSpan(
-                text: percentageText,
-                style: AskLoraTextStyles.subtitle3
-                    .copyWith(color: AskLoraColors.white)),
-            textDirection: TextDirection.ltr,
-          );
-
-          pricePainter.layout();
-          percentagePainter.layout();
-
-          // Calculate the container width based on the longer text
-          double containerWidth =
-              max(pricePainter.width, percentagePainter.width) + 10;
 
           return GestureDetector(
             onTap: () {
@@ -69,7 +52,7 @@ class ToggleablePriceText extends StatelessWidget {
                   previous.showPriceDifference != current.showPriceDifference,
               builder: (context, state) {
                 return Container(
-                  width: containerWidth,
+                  width: maxTextWidth + 10,
                   padding: const EdgeInsets.symmetric(vertical: 2),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
@@ -79,8 +62,7 @@ class ToggleablePriceText extends StatelessWidget {
                   ),
                   child: CustomTextNew(
                     state.showPriceDifference ? priceText : percentageText,
-                    style: AskLoraTextStyles.subtitle3
-                        .copyWith(color: AskLoraColors.white),
+                    style: toggleableTextStyle,
                     textAlign: TextAlign.center,
                   ),
                 );
