@@ -27,6 +27,9 @@ void main() async {
         PpiSelectionRequest(questionId: 'quid0', answer: 'AAAA', userId: 101);
     PpiUserResponse ppiUserResponse =
         const PpiUserResponse(email: 'xx@gmail.com');
+
+    BaseResponse<PpiUserResponse> response =
+        BaseResponse.complete(ppiUserResponse);
     List<Triplet<String, Question, String>> a = [Triplet('', Question(), '')];
 
     setUpAll(() async {
@@ -52,7 +55,7 @@ void main() async {
         'send answer',
         build: () {
           when(ppiResponseRepository.addAnswer(ppiUserResponseRequest))
-              .thenAnswer((_) => Future.value(ppiUserResponse));
+              .thenAnswer((_) => Future.value(response));
           return userResponseBloc;
         },
         act: (bloc) => bloc.add(SendResponse(ppiUserResponseRequest)),
