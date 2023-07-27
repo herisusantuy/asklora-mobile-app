@@ -63,13 +63,14 @@ enum FundingSource {
 }
 
 enum EmploymentStatus {
-  unemployed('Unemployed', 'UNEMPLOYED'),
   employed('Employed', 'EMPLOYED'),
   selfEmployed('Self Employed', 'SELFEMPLOYED'),
   retired('Retired', 'RETIRED'),
   student('Student', 'STUDENT'),
-  atHomeTrader('At-Home Trader', 'ATHOMETRADER'),
+  businessOwner('Business Owner', 'BUSINESSOWNER'),
   homemaker('Homemaker', 'HOMEMAKER'),
+  unemployed('Unemployed', 'UNEMPLOYED'),
+  other('Other', 'OTHER'),
   unknown('Unknown', 'UNKNOWN');
 
   final String name;
@@ -84,11 +85,8 @@ enum EmploymentStatus {
   static EmploymentStatus findByStringName(String employmentStatus) =>
       EmploymentStatus.values
           .firstWhere((element) => element.name == employmentStatus);
-
   String text(BuildContext context) {
     switch (this) {
-      case EmploymentStatus.unemployed:
-        return S.of(context).unEmployed;
       case EmploymentStatus.employed:
         return S.of(context).employed;
       case EmploymentStatus.selfEmployed:
@@ -97,10 +95,14 @@ enum EmploymentStatus {
         return S.of(context).retired;
       case EmploymentStatus.student:
         return S.of(context).student;
-      case EmploymentStatus.atHomeTrader:
-        return S.of(context).homeTrader;
+      case EmploymentStatus.businessOwner:
+        return S.of(context).businessOwner;
       case EmploymentStatus.homemaker:
         return S.of(context).homeMaker;
+      case EmploymentStatus.unemployed:
+        return S.of(context).unEmployed;
+      case EmploymentStatus.other:
+        return S.of(context).other;
       case EmploymentStatus.unknown:
         return S.of(context).unknown;
     }
