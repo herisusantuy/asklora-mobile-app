@@ -2,8 +2,11 @@ import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/storage/shared_preference.dart';
 import '../../bloc/tab_screen_bloc.dart';
+import '../../lora_gpt/bloc/lora_gpt_bloc.dart';
 import '../../lora_gpt/presentation/lora_ai_screen.dart';
+import '../../lora_gpt/repository/lora_gpt_repository.dart';
 
 class AiOverlay extends StatefulWidget {
   final double maxHeight;
@@ -51,12 +54,18 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      BlocListener<TabScreenBloc, TabScreenState>(
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => LoraGptBloc(
+          loraGptRepository: LoraGptRepository(),
+          sharedPreference: SharedPreference())
+        ..add(const ShowOverLayScreen())
+        ..add(const OnScreenLaunch()),
+      child: BlocListener<TabScreenBloc, TabScreenState>(
         listenWhen: (previous, current) =>
             previous.aiPageSelected != current.aiPageSelected,
         listener: (context, state) =>
-            state.aiPageSelected ? _openAiOverlay() : _closeAiOverlay(),
+            state.aiPageSelected ? _openAiOverlay(context) : _closeAiOverlay(),
         child: Positioned(
           width: widget.maxWidth,
           height: widget.maxHeight,
@@ -70,10 +79,14 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
                 )
               : const LoraAiScreen(),
         ),
-      );
+      ),
+    );
+  }
 
-  void _openAiOverlay() {
+  void _openAiOverlay(BuildContext context) {
     BackButtonInterceptor.add(_backButtonInterceptor);
+
+    context.read<LoraGptBloc>().add(const OnAiOverlayOpen());
     _controller = AnimationController(
         duration: openAndCloseAnimationDuration, vsync: this);
     _animation = Tween<double>(begin: 0, end: 1).animate(_controller!)

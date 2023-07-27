@@ -2,12 +2,14 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/ai/component.dart';
+import '../../../../core/domain/ai/conversation.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/endpoints.dart';
+import '../../../../core/utils/log.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
+import '../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../bloc/tab_screen_bloc.dart';
-import '../../../../core/domain/ai/conversation.dart';
 import '../domain/portfolio_details_request.dart';
 import '../domain/portfolio_query_request.dart';
 import '../domain/query_request.dart';
@@ -34,7 +36,9 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     on<ShowOverLayScreen>(_onShowOverlayWidget);
     on<StorePortfolioBotStocks>(_onActiveBotResponse);
     on<StorePortfolioDetails>(_onStoreTotalPnl);
-    on<StoreTabPageState>(_onStoreTabPage);
+    on<StoreTabPageEvent>(_onStoreTabPage);
+    on<OnAiOverlayOpen>(_onAiOverlayOpen);
+    on<OnAiOverlayClose>(_onAiOverlayClose);
   }
 
   final LoraGptRepository _loraGptRepository;
@@ -176,7 +180,87 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       emit(state.copyWith(
           totalPnl: event.totalPortfolioPnl, status: ResponseState.unknown));
 
-  void _onStoreTabPage(StoreTabPageState event, Emitter<LoraGptState> emit) =>
+  void _onStoreTabPage(StoreTabPageEvent event, Emitter<LoraGptState> emit) {
+    Logger.log('Krishna _onStoreTabPage ${event.tabPage}');
+    emit(state.copyWith(tabPage: event.tabPage, status: ResponseState.unknown));
+  }
+
+  void _onAiOverlayOpen(
+      OnAiOverlayOpen event, Emitter<LoraGptState> emit) async {
+    Logger.log(
+        'Krishna _onAiOverlayOpen ${event} state.tabPage ${state.tabPage} ${state.tabPage.getArguments}');
+
+    final subPage = state.tabPage.getArguments;
+
+    if (subPage.path.isNotEmpty &&
+        subPage.path == SubTabPage.portfolioBotStockDetails.value) {
+      BaseResponse<QueryResponse> response = BaseResponse.error();
+
+      final tempList = List<Conversation>.of(state.conversations);
+      tempList.add(Loading());
+
       emit(state.copyWith(
-          tabPage: event.tabPage, status: ResponseState.unknown));
+          status: ResponseState.loading,
+          conversations: tempList,
+          isTyping: true));
+
+      Logger.log(
+          'Krishna _onAiOverlayOpen ${event} state.tabPage ${state.tabPage} ${BotType.findByValue(subPage.arguments['botType']).internalName}');
+
+      var a = await _loraGptRepository.botIntro(
+          params: BotstockIntro(
+              botType: BotType.findByValue(subPage.arguments['botType']).name,
+              tickerSymbol: subPage.arguments['symbol'],
+              investmentHorizon: subPage.arguments['duration'],
+              userId: 'asdf',
+              platform: 'asdf',
+              username: 'asdf'));
+
+      tempList.removeLast();
+
+      if (a.state == ResponseState.success) {
+        tempList.add(Lora(a.data!.getResult()));
+      } else {
+        tempList.add(Lora(
+            'Sorry I cannot connect to the server right now, please try again'));
+      }
+
+      tempList.add(Loading());
+
+      var b = await _loraGptRepository.botEarnings(
+          params: BotstockIntro(
+              botType: BotType.findByValue(subPage.arguments['botType']).name,
+              tickerSymbol: subPage.arguments['symbol'],
+              investmentHorizon: subPage.arguments['duration'],
+              userId: 'asdf',
+              platform: 'asdf',
+              username: 'asdf'));
+
+      tempList.removeLast();
+
+      if (b.state == ResponseState.success) {
+        tempList.add(Lora(b.data!.response));
+      } else {
+        tempList.add(Lora(
+            'Sorry I cannot connect to the server right now, please try again'));
+      }
+
+      emit(state.copyWith(
+          status: ResponseState.success,
+          conversations: tempList,
+          query: '',
+          sessionId: response.data?.requestId,
+          isTyping: true));
+    }
+
+    // emit(state.copyWith(
+    //     tabPage: event.tabPage, status: ResponseState.unknown));
+  }
+
+  void _onAiOverlayClose(OnAiOverlayClose event, Emitter<LoraGptState> emit) {
+    Logger.log(
+        'Krishna _onAiOverlayClose ${event} state.tabPage ${state.tabPage}');
+    // emit(state.copyWith(
+    //     tabPage: event.tabPage, status: ResponseState.unknown));
+  }
 }
