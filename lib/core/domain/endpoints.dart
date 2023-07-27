@@ -90,3 +90,6 @@ const String endpointPortfolio = 'chat/portfolio_page';
 const String endpointPortfolioDetailPage =
     'chat/experimental/with_botstock_data';
 const String endpointInvestmentStyle = 'chat/isq_main';
+
+const String endpointBotIntro = '/miscellaneous/bot_starter_omit_earnings';
+const String endpointBotEarning = '/miscellaneous/earnings_analysis';
