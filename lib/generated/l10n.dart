@@ -5425,6 +5425,26 @@ class S {
       args: [],
     );
   }
+
+  /// `See My Recommendations`
+  String get seeMyRecommendations {
+    return Intl.message(
+      'See My Recommendations',
+      name: 'seeMyRecommendations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Again`
+  String get startAgain {
+    return Intl.message(
+      'Start Again',
+      name: 'startAgain',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

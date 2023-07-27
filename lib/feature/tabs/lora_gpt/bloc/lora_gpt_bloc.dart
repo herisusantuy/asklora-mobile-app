@@ -2,12 +2,12 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/ai/component.dart';
+import '../../../../core/domain/ai/conversation.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/endpoints.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
 import '../../bloc/tab_screen_bloc.dart';
-import '../../../../core/domain/ai/conversation.dart';
 import '../domain/portfolio_details_request.dart';
 import '../domain/portfolio_query_request.dart';
 import '../domain/query_request.dart';
@@ -131,8 +131,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         _tempConversation.addAll(response.data!.components);
       }
     } else {
-      tempList.add(Lora(
-          'Sorry I cannot connect to the server right now, please try again'));
+      tempList.add(
+          Lora('Lora is working on some optimizations to serve you better.'));
     }
     emit(state.copyWith(
         status: ResponseState.success,
