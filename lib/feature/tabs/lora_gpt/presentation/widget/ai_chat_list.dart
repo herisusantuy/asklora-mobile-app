@@ -17,9 +17,9 @@ class _AiChatListState extends State<AiChatList> {
   Widget build(BuildContext context) {
     return BlocBuilder<LoraGptBloc, LoraGptState>(
       buildWhen: (previous, current) =>
-          previous.status != current.status &&
-              current.status != ResponseState.unknown ||
-          previous.conversations.length != current.conversations.length,
+          previous.status != current.status ||
+          previous.conversations.length != current.conversations.length ||
+          previous.isTyping != current.isTyping,
       builder: (context, state) {
         return Stack(children: [
           ShaderMask(
@@ -157,10 +157,11 @@ class _AiChatListState extends State<AiChatList> {
   Widget _getBubbleChat(Conversation e, int index, bool isTyping) {
     if (e is Lora) {
       return OutChatBubbleWidget(
-        e.text,
+        e.text.toString(),
         animateText: isTyping,
-        onFinishedAnimation: () =>
-            context.read<LoraGptBloc>().add(const OnFinishTyping()),
+        onFinishedAnimation: () => context
+            .read<LoraGptBloc>()
+            .add(OnFinishTyping(isTyping: e.isTyping)),
       );
     } else if (e is Me) {
       return InChatBubbleWidget(message: e.text, name: e.userName);

@@ -16,8 +16,9 @@ abstract class Conversation extends Equatable {
 
 class Lora extends Conversation {
   final String text;
+  final bool isTyping;
 
-  Lora(this.text);
+  Lora(this.text, {this.isTyping = false});
 
   @override
   ConversationType type() => ConversationType.lora;
@@ -28,6 +29,15 @@ class Lora extends Conversation {
   static Lora get defaultMessage => Lora(
         "👋Hi! I'm Lora. Let me know if you have any questions or requests on stocks investments.",
       );
+}
+
+class LoraError extends Lora {
+  LoraError()
+      : super(
+            'Sorry I cannot connect to the server right now, please try again');
+
+  @override
+  List<Object?> get props => [type(), text];
 }
 
 @JsonSerializable()

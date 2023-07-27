@@ -22,6 +22,7 @@ class OnSearchQuery extends LoraGptEvent {
 
 class OnPromptTap extends LoraGptEvent {
   final String query;
+
   const OnPromptTap(this.query);
 
   @override
@@ -43,10 +44,11 @@ class OnResetSession extends LoraGptEvent {
 }
 
 class OnFinishTyping extends LoraGptEvent {
-  const OnFinishTyping();
+  final bool isTyping;
+  const OnFinishTyping({this.isTyping = false});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [isTyping];
 }
 
 class ShowOverLayScreen extends LoraGptEvent {
@@ -97,4 +99,22 @@ class OnAiOverlayClose extends LoraGptEvent {
 
   @override
   List<Object?> get props => [];
+}
+
+class FetchBotIntro extends LoraGptEvent {
+  final Map<String, dynamic> arguments;
+
+  const FetchBotIntro(this.arguments);
+
+  @override
+  List<Object?> get props => [arguments];
+}
+
+class FetchBotEarnings extends LoraGptEvent {
+  final Map<String, dynamic> arguments;
+
+  const FetchBotEarnings(this.arguments);
+
+  @override
+  List<Object?> get props => [arguments];
 }

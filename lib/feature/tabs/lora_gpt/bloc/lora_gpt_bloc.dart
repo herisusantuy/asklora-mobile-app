@@ -27,6 +27,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       : _loraGptRepository = loraGptRepository,
         _sharedPreference = sharedPreference,
         super(const LoraGptState()) {
+    on<FetchBotIntro>(_onFetchBotIntro);
+    on<FetchBotEarnings>(_onFetchBotEarnings);
     on<OnEditQuery>(_onEditQuery);
     on<OnPromptTap>(_onPromptTap);
     on<OnSearchQuery>(_onSearchQuery);
@@ -44,6 +46,117 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
   final LoraGptRepository _loraGptRepository;
   final SharedPreference _sharedPreference;
   List<Conversation> _tempConversation = [];
+  BaseResponse? _tempIntroResponse;
+
+  void _onFetchBotIntro(
+      FetchBotIntro fetchBotIntro, Emitter<LoraGptState> emit) async {
+    final tempList = List<Conversation>.of(state.conversations);
+
+    ResponseState status = ResponseState.loading;
+    bool isTyping = false;
+
+    tempList.add(Loading());
+    emit(state.copyWith(status: status, conversations: tempList));
+
+    var botIntroResponse = await _loraGptRepository.botIntro(
+        params: BotstockIntro(
+            botType:
+                BotType.findByValue(fetchBotIntro.arguments['botType']).name,
+            tickerSymbol: fetchBotIntro.arguments['symbol'],
+            investmentHorizon: fetchBotIntro.arguments['duration'],
+            userId: state.userId,
+            platform: 'asdf',
+            username: state.userName));
+
+    emit(state.copyWith(status: status));
+
+    ///remove loading
+    if (_tempIntroResponse != null) {
+      tempList.removeLast();
+    }
+
+    if (_tempIntroResponse?.state != ResponseState.error) {
+      if (botIntroResponse.state == ResponseState.success) {
+        status = ResponseState.success;
+        if (_tempIntroResponse != null) {
+          isTyping = true;
+          _tempConversation.add(Lora(_tempIntroResponse!.data!.getResult()));
+          tempList
+              .add(Lora(botIntroResponse.data!.getResult(), isTyping: true));
+        } else {
+          _tempIntroResponse = botIntroResponse;
+        }
+      } else {
+        status = ResponseState.error;
+        if (_tempIntroResponse != null) {
+          isTyping = true;
+          _tempIntroResponse = botIntroResponse;
+          tempList.add(LoraError());
+        } else {
+          _tempIntroResponse = botIntroResponse;
+        }
+      }
+    } else {
+      status = ResponseState.error;
+      isTyping = true;
+      tempList.add(LoraError());
+    }
+    emit(state.copyWith(
+        status: status, conversations: tempList, isTyping: isTyping));
+  }
+
+  void _onFetchBotEarnings(
+      FetchBotEarnings fetchBotEarnings, Emitter<LoraGptState> emit) async {
+    final tempList = List<Conversation>.of(state.conversations);
+
+    ResponseState status = ResponseState.loading;
+    bool isTyping = false;
+    emit(state.copyWith(status: status));
+
+    var botEarningsResponse = await _loraGptRepository.botEarnings(
+        params: BotstockIntro(
+            botType:
+                BotType.findByValue(fetchBotEarnings.arguments['botType']).name,
+            tickerSymbol: fetchBotEarnings.arguments['symbol'],
+            investmentHorizon: fetchBotEarnings.arguments['duration'],
+            userId: state.userId,
+            platform: 'asdf',
+            username: state.userName));
+    emit(state.copyWith(status: status));
+
+    ///remove loading
+    if (_tempIntroResponse != null) {
+      tempList.removeLast();
+    }
+
+    if (_tempIntroResponse?.state != ResponseState.error) {
+      if (botEarningsResponse.state == ResponseState.success) {
+        status = ResponseState.success;
+        if (_tempIntroResponse != null) {
+          isTyping = true;
+          _tempConversation.add(Lora(botEarningsResponse.data!.getResult()));
+          tempList
+              .add(Lora(_tempIntroResponse!.data!.getResult(), isTyping: true));
+        } else {
+          _tempIntroResponse = botEarningsResponse;
+        }
+      } else {
+        status = ResponseState.error;
+        if (_tempIntroResponse != null) {
+          isTyping = true;
+          tempList.add(LoraError());
+        } else {
+          _tempIntroResponse = botEarningsResponse;
+        }
+      }
+    } else {
+      status = ResponseState.error;
+      isTyping = true;
+      tempList.add(LoraError());
+    }
+    emit(state.copyWith(
+        status: status, conversations: tempList, isTyping: isTyping));
+  }
 
   void _onScreenLaunch(
       OnScreenLaunch onEditQuery, Emitter<LoraGptState> emit) async {
@@ -161,7 +274,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         conversations: List<Conversation>.of(state.conversations)
           ..addAll(_tempConversation),
         status: ResponseState.unknown,
-        isTyping: false));
+        isTyping: onFinishTyping.isTyping));
     _tempConversation = [];
   }
 
@@ -194,63 +307,66 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     if (subPage.path.isNotEmpty &&
         subPage.path == SubTabPage.portfolioBotStockDetails.value) {
-      BaseResponse<QueryResponse> response = BaseResponse.error();
+      _tempIntroResponse = null;
+      add(FetchBotIntro(subPage.arguments));
+      add(FetchBotEarnings(subPage.arguments));
+      // BaseResponse<QueryResponse> response = BaseResponse.error();
 
-      final tempList = List<Conversation>.of(state.conversations);
-      tempList.add(Loading());
+      // final tempList = List<Conversation>.of(state.conversations);
+      // tempList.add(Loading());
+      //
+      // emit(state.copyWith(
+      //     status: ResponseState.loading,
+      //     conversations: tempList,
+      //     isTyping: true));
+      //
+      // Logger.log(
+      //     'Krishna _onAiOverlayOpen ${event} state.tabPage ${state.tabPage} ${BotType.findByValue(subPage.arguments['botType']).internalName}');
+      //
+      // var botIntroResponse = await _loraGptRepository.botIntro(
+      //     params: BotstockIntro(
+      //         botType: BotType.findByValue(subPage.arguments['botType']).name,
+      //         tickerSymbol: subPage.arguments['symbol'],
+      //         investmentHorizon: subPage.arguments['duration'],
+      //         userId: state.userId,
+      //         platform: 'asdf',
+      //         username: state.userName));
+      //
+      // tempList.removeLast();
+      //
+      // if (botIntroResponse.state == ResponseState.success) {
+      //   tempList.add(Lora(botIntroResponse.data!.getResult()));
+      // } else {
+      //   tempList.add(Lora(
+      //       'Sorry I cannot connect to the server right now, please try again'));
+      // }
+      //
+      // tempList.add(Loading());
+      //
+      // var botEarningsResponse = await _loraGptRepository.botEarnings(
+      //     params: BotstockIntro(
+      //         botType: BotType.findByValue(subPage.arguments['botType']).name,
+      //         tickerSymbol: subPage.arguments['symbol'],
+      //         investmentHorizon: subPage.arguments['duration'],
+      //         userId: state.userId,
+      //         platform: 'asdf',
+      //         username: state.userName));
+      //
+      // tempList.removeLast();
+      //
+      // if (botEarningsResponse.state == ResponseState.success) {
+      //   tempList.add(Lora(botEarningsResponse.data!.getResult()));
+      // } else {
+      //   tempList.add(Lora(
+      //       'Sorry I cannot connect to the server right now, please try again'));
+      // }
 
-      emit(state.copyWith(
-          status: ResponseState.loading,
-          conversations: tempList,
-          isTyping: true));
-
-      Logger.log(
-          'Krishna _onAiOverlayOpen ${event} state.tabPage ${state.tabPage} ${BotType.findByValue(subPage.arguments['botType']).internalName}');
-
-      var a = await _loraGptRepository.botIntro(
-          params: BotstockIntro(
-              botType: BotType.findByValue(subPage.arguments['botType']).name,
-              tickerSymbol: subPage.arguments['symbol'],
-              investmentHorizon: subPage.arguments['duration'],
-              userId: 'asdf',
-              platform: 'asdf',
-              username: 'asdf'));
-
-      tempList.removeLast();
-
-      if (a.state == ResponseState.success) {
-        tempList.add(Lora(a.data!.getResult()));
-      } else {
-        tempList.add(Lora(
-            'Sorry I cannot connect to the server right now, please try again'));
-      }
-
-      tempList.add(Loading());
-
-      var b = await _loraGptRepository.botEarnings(
-          params: BotstockIntro(
-              botType: BotType.findByValue(subPage.arguments['botType']).name,
-              tickerSymbol: subPage.arguments['symbol'],
-              investmentHorizon: subPage.arguments['duration'],
-              userId: 'asdf',
-              platform: 'asdf',
-              username: 'asdf'));
-
-      tempList.removeLast();
-
-      if (b.state == ResponseState.success) {
-        tempList.add(Lora(b.data!.response));
-      } else {
-        tempList.add(Lora(
-            'Sorry I cannot connect to the server right now, please try again'));
-      }
-
-      emit(state.copyWith(
-          status: ResponseState.success,
-          conversations: tempList,
-          query: '',
-          sessionId: response.data?.requestId,
-          isTyping: true));
+      // emit(state.copyWith(
+      //     status: ResponseState.success,
+      //     conversations: tempList,
+      //     query: '',
+      //     sessionId: response.data?.requestId,
+      //     isTyping: true));
     }
 
     // emit(state.copyWith(

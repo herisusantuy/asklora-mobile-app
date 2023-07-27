@@ -8,7 +8,7 @@ part of 'intro_response.dart';
 
 IntroResponse _$IntroResponseFromJson(Map<String, dynamic> json) =>
     IntroResponse(
-      (json['result'] as List<dynamic>).map((e) => e as String).toList(),
+      json['result'],
       json['type'] as String,
     );
 

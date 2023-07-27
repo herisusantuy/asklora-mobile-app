@@ -5,7 +5,7 @@ part 'intro_response.g.dart';
 
 @JsonSerializable()
 class IntroResponse extends Equatable {
-  final List<String> result;
+  final dynamic result;
   final String type;
 
   const IntroResponse(this.result, this.type);
@@ -16,7 +16,17 @@ class IntroResponse extends Equatable {
   Map<String, dynamic> toJson() => _$IntroResponseToJson(this);
 
   String getResult() {
-    return result.join('\n');
+    if (result != null) {
+      if (result is List<String>) {
+        return (result as List<String>).join('\n');
+      } else if (result is List<dynamic>) {
+        return List<String>.from(result).join('\n');
+      } else {
+        return result;
+      }
+    } else {
+      return '';
+    }
   }
 
   @override

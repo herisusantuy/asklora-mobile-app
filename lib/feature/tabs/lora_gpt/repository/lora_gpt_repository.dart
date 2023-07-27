@@ -1,5 +1,4 @@
 import '../../../../core/domain/base_response.dart';
-import '../../../../core/utils/log.dart';
 import '../../../ai/investment_style_question/domain/investment_style_question_query_request.dart';
 import '../../../ai/investment_style_question/domain/investment_style_question_query_response.dart';
 import '../domain/intro_response.dart';
@@ -61,26 +60,21 @@ class LoraGptRepository {
 
   Future<BaseResponse<IntroResponse>> botIntro(
       {required BotstockIntro params}) async {
-    Logger.log('Krishna _onAiOverlayOpen ${params.params}');
-
     try {
       final response = await _loraGptClient.botIntro(params.params);
-      return BaseResponse.complete<IntroResponse>(
-          IntroResponse.fromJson(response.data));
+
+      return BaseResponse.complete(IntroResponse.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error(
           message: 'Something went wrong. Please try again!');
     }
   }
 
-  Future<BaseResponse<QueryResponse>> botEarnings(
+  Future<BaseResponse<IntroResponse>> botEarnings(
       {required BotstockIntro params}) async {
-    Logger.log('Krishna _onAiOverlayOpen ${params.params}');
-
     try {
       var response = await _loraGptClient.botIntroEarnings(params.params);
-      return BaseResponse.complete<QueryResponse>(
-          QueryResponse.fromJson(response.data));
+      return BaseResponse.complete(IntroResponse.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error(
           message: 'Something went wrong. Please try again!');

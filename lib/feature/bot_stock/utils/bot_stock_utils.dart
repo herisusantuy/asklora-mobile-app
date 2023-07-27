@@ -82,8 +82,8 @@ enum BotType {
   static BotType findByString(String botAppType) =>
       BotType.values.firstWhere((element) => element.value == botAppType);
 
-  static BotType findByValue(String botAppType) =>
-      BotType.values.firstWhere((element) => element.internalName == botAppType);
+  static BotType findByValue(String botAppType) => BotType.values
+      .firstWhere((element) => element.internalName == botAppType);
 }
 
 enum BotStockFilter {
