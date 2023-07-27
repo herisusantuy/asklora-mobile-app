@@ -113,28 +113,25 @@ class BotRecommendationDetailContent extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CustomTextNew(
-                          (botDetailModel?.price ?? 0)
-                              .convertToCurrencyDecimal(),
-                          style: AskLoraTextStyles.h5
-                              .copyWith(color: AskLoraColors.charcoal),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        ToggleablePriceText(
-                          percentDifference: getPercentDifference(),
-                          priceDifference: getPriceDifference(),
-                        ),
-                      ],
-                    ),
-                  ],
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomTextNew(
+                        (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
+                        style: AskLoraTextStyles.h5
+                            .copyWith(color: AskLoraColors.charcoal),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      ToggleablePriceText(
+                        percentDifference: getPercentDifference(),
+                        priceDifference: getPriceDifference(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
