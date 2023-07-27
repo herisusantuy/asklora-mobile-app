@@ -8,3 +8,10 @@ class OnBaseUrlChanged extends BackdoorScreenEvent {
 
   OnBaseUrlChanged(this.baseUrl);
 }
+
+class InitOtpLoginDisabled extends BackdoorScreenEvent {}
+
+class OnLoginVersionChanged extends BackdoorScreenEvent {
+  final bool isOtpLoginDisabled;
+  OnLoginVersionChanged(this.isOtpLoginDisabled);
+}

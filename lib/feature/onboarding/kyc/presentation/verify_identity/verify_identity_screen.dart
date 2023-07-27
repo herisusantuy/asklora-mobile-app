@@ -13,6 +13,7 @@ import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../auth/utils/auth_utils.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../domain/onfido/onfido_result_request.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
@@ -38,7 +39,8 @@ class VerifyIdentityScreen extends StatelessWidget {
           CustomLoadingOverlay.of(context).show(state.onfidoResponse.state);
 
           if (state.onfidoResponse.state == ResponseState.error) {
-            CustomInAppNotification.show(context, state.onfidoResponse.message);
+            CustomInAppNotification.show(
+                context, state.onfidoResponse.validationCode.getText(context));
           }
 
           if (state is OnfidoSdkToken) {

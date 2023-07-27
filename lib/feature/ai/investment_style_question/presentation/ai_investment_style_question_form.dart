@@ -99,7 +99,6 @@ class AiInvestmentStyleQuestionForm extends StatelessWidget {
           builder: (context, state) => AiInvestmentStyleQuestionChatList(
             aiThemeType: aiThemeType,
             conversations: state.conversations,
-            userName: state.userName,
             isTyping: state.isTyping,
           ),
         ),

@@ -17,6 +17,8 @@ import '../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../generated/l10n.dart';
 import '../../auth/repository/auth_repository.dart';
+import '../../auth/utils/auth_utils.dart';
+import '../../backdoor/domain/backdoor_repository.dart';
 import '../bloc/change_password/change_password_bloc.dart';
 import 'account_setting_screen.dart';
 import 'settings_screen.dart';
@@ -29,8 +31,11 @@ class ChangePasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          ChangePasswordBloc(authRepository: AuthRepository(TokenRepository())),
+      create: (context) => ChangePasswordBloc(
+          authRepository: AuthRepository(
+        TokenRepository(),
+        BackdoorRepository(),
+      )),
       child: BlocListener<ChangePasswordBloc, ChangePasswordState>(
         listenWhen: (previous, current) =>
             previous.response.state != current.response.state,
@@ -50,7 +55,8 @@ class ChangePasswordScreen extends StatelessWidget {
                       statusType: StatusType.success));
               break;
             case ResponseState.error:
-              CustomInAppNotification.show(context, state.response.message);
+              CustomInAppNotification.show(
+                  context, state.response.validationCode.getText(context));
               break;
             default:
               break;

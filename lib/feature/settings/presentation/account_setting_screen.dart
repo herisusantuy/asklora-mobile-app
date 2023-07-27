@@ -5,6 +5,7 @@ import '../../../app/bloc/app_bloc.dart';
 import '../../../core/presentation/custom_header.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
+import '../../../core/utils/feature_flags.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
 import 'account_information_screen.dart';
@@ -27,32 +28,39 @@ class AccountSettingScreen extends StatelessWidget {
             title: S.of(context).accountSettings, isShowBottomBorder: true),
         content: Column(
           children: [
-            MenuButtonWidget(
-              onTap: () => AccountInformationScreen.open(context),
-              title: S.of(context).accountInformation,
-            ),
+            if (!FeatureFlags.isMockApp)
+              MenuButtonWidget(
+                onTap: () => AccountInformationScreen.open(context),
+                title: S.of(context).accountInformation,
+              ),
             MenuButtonWidget(
                 onTap: () => ChangePasswordScreen.open(context),
                 title: S.of(context).changePassword,
-                showBottomBorder: false),
-            MenuButtonWidget(
-              onTap: () => PaymentDetailScreen.open(context),
-              title: S.of(context).paymentDetails,
-            ),
+                showBottomBorder: true),
+            if (!FeatureFlags.isMockApp)
+              MenuButtonWidget(
+                onTap: () => PaymentDetailScreen.open(context),
+                title: S.of(context).paymentDetails,
+              ),
             MenuButtonWidget(
                 onTap: () => LanguageSelectionScreen.open(context),
                 title: S.of(context).language,
                 subtitle: context.read<AppBloc>().state.locale.labelName,
                 showBottomBorder: false),
-            MenuButtonWidget(
-              onTap: () => NotificationSettingScreen.open(context),
-              title: S.of(context).notificationSettings,
-            ),
-            MenuButtonWidget(
-              title: S.of(context).terminateAccount,
-              showBottomBorder: false,
-              onTap: () {},
-            ),
+            if (!FeatureFlags.isMockApp)
+              Column(
+                children: [
+                  MenuButtonWidget(
+                    onTap: () => NotificationSettingScreen.open(context),
+                    title: S.of(context).notificationSettings,
+                  ),
+                  MenuButtonWidget(
+                    title: S.of(context).terminateAccount,
+                    showBottomBorder: false,
+                    onTap: () {},
+                  ),
+                ],
+              ),
           ],
         ),
       ),
