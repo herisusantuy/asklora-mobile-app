@@ -118,7 +118,14 @@ class SettingsScreen extends StatelessWidget {
                 ),
             ],
           ),
-          bottomButton: _signOutButtonGhostCharcoal,
+          bottomButton: Column(
+            children: [
+              _signOutButtonGhostCharcoal,
+              const SizedBox(
+                height: 30,
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -135,7 +142,7 @@ class SettingsScreen extends StatelessWidget {
           width: double.infinity,
           decoration: const BoxDecoration(
               border: Border(
-                  top: BorderSide(color: AskLoraColors.gray, width: 0.5))),
+                  bottom: BorderSide(color: AskLoraColors.gray, width: 0.5))),
           child: Row(
             children: [
               Expanded(
@@ -158,7 +165,7 @@ class SettingsScreen extends StatelessWidget {
               ),
               const Icon(
                 Icons.arrow_forward_ios_rounded,
-                color: AskLoraColors.gray,
+                color: AskLoraColors.black,
                 size: 14,
               )
             ],
