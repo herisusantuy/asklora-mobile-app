@@ -5416,16 +5416,6 @@ class S {
     );
   }
 
-  /// `Press to Start Over`
-  String get pressToStartOver {
-    return Intl.message(
-      'Press to Start Over',
-      name: 'pressToStartOver',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that I will manage for you!`
   String get botStockExplanationScreenTitle {
     return Intl.message(
@@ -5506,11 +5496,41 @@ class S {
     );
   }
 
-  /// `Sure! What is a Botstock? `
+  /// `Sure! What is a Botstock?`
   String get giftBotStockWelcomeScreenBottomButton {
     return Intl.message(
-      'Sure! What is a Botstock? ',
+      'Sure! What is a Botstock?',
       name: 'giftBotStockWelcomeScreenBottomButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Press to\nStart Over`
+  String get pressToStartOver {
+    return Intl.message(
+      'Press to\nStart Over',
+      name: 'pressToStartOver',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See My Recommendations`
+  String get seeMyRecommendations {
+    return Intl.message(
+      'See My Recommendations',
+      name: 'seeMyRecommendations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Again`
+  String get startAgain {
+    return Intl.message(
+      'Start Again',
+      name: 'startAgain',
       desc: '',
       args: [],
     );

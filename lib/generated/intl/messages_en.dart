@@ -437,7 +437,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getTheFirstBotstockForFree": MessageLookupByLibrary.simpleMessage(
             "Get the First Botstock for Free"),
         "giftBotStockWelcomeScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock? "),
+            MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
         "giftBotStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
             "You\'re all set!\nLet\'s begin a real AI trade!"),
         "go": MessageLookupByLibrary.simpleMessage("Go"),
@@ -757,7 +757,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pressBackAgain": MessageLookupByLibrary.simpleMessage(
             "Press back again to exit Asklora"),
         "pressToStartOver":
-            MessageLookupByLibrary.simpleMessage("Press to Start Over"),
+            MessageLookupByLibrary.simpleMessage("Press to\nStart Over"),
         "prevClose": MessageLookupByLibrary.simpleMessage("Prev Close"),
         "privacyEvaluation":
             MessageLookupByLibrary.simpleMessage("Privacy Evaluation"),
@@ -803,6 +803,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "rolloverBotStockAcknowledgement": m22,
         "saveForLater": MessageLookupByLibrary.simpleMessage("Save For Later"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
+        "seeMyRecommendations":
+            MessageLookupByLibrary.simpleMessage("See My Recommendations"),
         "selfEmployed": MessageLookupByLibrary.simpleMessage("Self-Employed"),
         "sell": MessageLookupByLibrary.simpleMessage("Sell"),
         "sendOtp": MessageLookupByLibrary.simpleMessage("SEND OTP"),
@@ -824,6 +826,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Source of Wealth"),
         "startABotstock":
             MessageLookupByLibrary.simpleMessage("Start A Botstock"),
+        "startAgain": MessageLookupByLibrary.simpleMessage("Start Again"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
         "startInvesting":
             MessageLookupByLibrary.simpleMessage("Start Investing"),

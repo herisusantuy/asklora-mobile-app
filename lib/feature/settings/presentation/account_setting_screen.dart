@@ -24,8 +24,7 @@ class AccountSettingScreen extends StatelessWidget {
     return CustomScaffold(
       body: CustomStretchedLayout(
         contentPadding: const EdgeInsets.only(top: 0),
-        header: CustomHeader(
-            title: S.of(context).accountSettings, isShowBottomBorder: true),
+        header: CustomHeader(title: S.of(context).accountSettings),
         content: Column(
           children: [
             if (!FeatureFlags.isMockApp)
