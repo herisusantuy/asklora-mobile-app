@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../domain/validation_enum.dart';
@@ -5,11 +6,11 @@ import '../../domain/validation_enum.dart';
 part 'asklora_error.g.dart';
 
 @JsonSerializable()
-class AskloraError {
+class AskloraError extends Equatable {
   final String detail;
   final String code;
 
-  AskloraError({this.detail = '', this.code = 'UNKNOWN'});
+  const AskloraError({this.detail = '', this.code = 'UNKNOWN'});
 
   AskloraError copyWith({
     String? detail,
@@ -27,9 +28,13 @@ class AskloraError {
     try {
       return _$AskloraErrorFromJson(json);
     } catch (e) {
-      return AskloraError(detail: 'Something went wrong!', code: 'UNKNOWN');
+      return const AskloraError(
+          detail: 'Something went wrong!', code: 'UNKNOWN');
     }
   }
 
   Map<String, dynamic> toJson() => _$AskloraErrorToJson(this);
+
+  @override
+  List<Object?> get props => [detail, code];
 }
