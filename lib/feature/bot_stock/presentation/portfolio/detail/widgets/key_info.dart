@@ -43,29 +43,31 @@ class KeyInfo extends StatelessWidget {
           ColumnText(
               title: S.of(context).portfolioDetailKeyInfoBotStockStatus,
               subTitle: botStatus.name),
-          const SizedBox(
-            height: 40,
-          ),
-          RoundColoredBox(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            content: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _columnTextBigTitle(
-                    title: botActiveOrderDetailModel.avgReturnString,
-                    subTitle: S.of(context).portfolioDetailKeyInfoAvgReturn),
-                _columnTextBigTitle(
-                    title: botActiveOrderDetailModel.avgLossString,
-                    subTitle: S.of(context).portfolioDetailKeyInfoAvgLoss),
-                _columnTextBigTitle(
-                    title: botActiveOrderDetailModel.avgPeriodString,
-                    subTitle: S.of(context).portfolioDetailKeyInfoAvgPeriod),
-              ],
+          if (!FeatureFlags.isMockApp) ...[
+            const SizedBox(
+              height: 40,
             ),
-          ),
-          const SizedBox(
-            height: 8,
-          )
+            RoundColoredBox(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              content: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _columnTextBigTitle(
+                      title: botActiveOrderDetailModel.avgReturnString,
+                      subTitle: S.of(context).portfolioDetailKeyInfoAvgReturn),
+                  _columnTextBigTitle(
+                      title: botActiveOrderDetailModel.avgLossString,
+                      subTitle: S.of(context).portfolioDetailKeyInfoAvgLoss),
+                  _columnTextBigTitle(
+                      title: botActiveOrderDetailModel.avgPeriodString,
+                      subTitle: S.of(context).portfolioDetailKeyInfoAvgPeriod),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            )
+          ]
         ],
       );
 
