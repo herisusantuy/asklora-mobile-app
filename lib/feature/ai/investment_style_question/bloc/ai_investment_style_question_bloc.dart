@@ -134,13 +134,10 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
             ppiUserId);
       }
     }
-
-    final response =
-        await _ppiResponseRepository.addBulkAnswer(ppiSelectionRequest);
-
-    if (response.state == ResponseState.success) {
+    try {
+      await _ppiResponseRepository.addBulkAnswer(ppiSelectionRequest);
       emit(state.copyWith(ppiResponseState: ResponseState.success));
-    } else {
+    } catch (e) {
       emit(state.copyWith(
           conversations: [...state.conversations, _errorChat],
           ppiResponseState: ResponseState.error));

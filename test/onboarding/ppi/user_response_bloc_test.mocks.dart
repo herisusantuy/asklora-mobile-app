@@ -5,22 +5,22 @@
 // @dart=2.19
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
+import 'dart:async' as _i7;
 
-import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i3;
+import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i4;
 import 'package:asklora_mobile_app/core/utils/storage/cache/json_cache_shared_preferences.dart'
     as _i10;
 import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart'
     as _i9;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart'
-    as _i7;
+    as _i3;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response_request.dart'
     as _i8;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/bot_recommendation_repository.dart'
     as _i2;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/ppi_response_repository.dart'
-    as _i5;
-import 'package:dio/dio.dart' as _i4;
+    as _i6;
+import 'package:dio/dio.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -45,9 +45,9 @@ class _FakeBotRecommendationRepository_0 extends _i1.SmartFake
         );
 }
 
-class _FakeBaseResponse_1<T> extends _i1.SmartFake
-    implements _i3.BaseResponse<T> {
-  _FakeBaseResponse_1(
+class _FakePpiUserResponse_1 extends _i1.SmartFake
+    implements _i3.PpiUserResponse {
+  _FakePpiUserResponse_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -56,8 +56,19 @@ class _FakeBaseResponse_1<T> extends _i1.SmartFake
         );
 }
 
-class _FakeResponse_2<T> extends _i1.SmartFake implements _i4.Response<T> {
-  _FakeResponse_2(
+class _FakeBaseResponse_2<T> extends _i1.SmartFake
+    implements _i4.BaseResponse<T> {
+  _FakeBaseResponse_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeResponse_3<T> extends _i1.SmartFake implements _i5.Response<T> {
+  _FakeResponse_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -70,7 +81,7 @@ class _FakeResponse_2<T> extends _i1.SmartFake implements _i4.Response<T> {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPpiResponseRepository extends _i1.Mock
-    implements _i5.PpiResponseRepository {
+    implements _i6.PpiResponseRepository {
   MockPpiResponseRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -85,68 +96,68 @@ class MockPpiResponseRepository extends _i1.Mock
         ),
       ) as _i2.BotRecommendationRepository);
   @override
-  _i6.Future<_i3.BaseResponse<_i7.PpiUserResponse>> addAnswer(
+  _i7.Future<_i3.PpiUserResponse> addAnswer(
           _i8.PpiSelectionRequest? ppiUserResponseRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #addAnswer,
           [ppiUserResponseRequest],
         ),
-        returnValue: _i6.Future<_i3.BaseResponse<_i7.PpiUserResponse>>.value(
-            _FakeBaseResponse_1<_i7.PpiUserResponse>(
+        returnValue:
+            _i7.Future<_i3.PpiUserResponse>.value(_FakePpiUserResponse_1(
           this,
           Invocation.method(
             #addAnswer,
             [ppiUserResponseRequest],
           ),
         )),
-      ) as _i6.Future<_i3.BaseResponse<_i7.PpiUserResponse>>);
+      ) as _i7.Future<_i3.PpiUserResponse>);
   @override
-  _i6.Future<_i3.BaseResponse<_i7.PpiUserResponse>> addBulkAnswer(
+  _i7.Future<_i3.PpiUserResponse> addBulkAnswer(
           List<_i8.PpiSelectionRequest>? ppiUserResponseRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #addBulkAnswer,
           [ppiUserResponseRequest],
         ),
-        returnValue: _i6.Future<_i3.BaseResponse<_i7.PpiUserResponse>>.value(
-            _FakeBaseResponse_1<_i7.PpiUserResponse>(
+        returnValue:
+            _i7.Future<_i3.PpiUserResponse>.value(_FakePpiUserResponse_1(
           this,
           Invocation.method(
             #addBulkAnswer,
             [ppiUserResponseRequest],
           ),
         )),
-      ) as _i6.Future<_i3.BaseResponse<_i7.PpiUserResponse>>);
+      ) as _i7.Future<_i3.PpiUserResponse>);
   @override
-  _i6.Future<_i3.BaseResponse<_i7.SnapShot>> getUserSnapShotUserId(
+  _i7.Future<_i4.BaseResponse<_i3.SnapShot>> getUserSnapShotUserId(
           dynamic userId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserSnapShotUserId,
           [userId],
         ),
-        returnValue: _i6.Future<_i3.BaseResponse<_i7.SnapShot>>.value(
-            _FakeBaseResponse_1<_i7.SnapShot>(
+        returnValue: _i7.Future<_i4.BaseResponse<_i3.SnapShot>>.value(
+            _FakeBaseResponse_2<_i3.SnapShot>(
           this,
           Invocation.method(
             #getUserSnapShotUserId,
             [userId],
           ),
         )),
-      ) as _i6.Future<_i3.BaseResponse<_i7.SnapShot>>);
+      ) as _i7.Future<_i4.BaseResponse<_i3.SnapShot>>);
   @override
-  _i6.Future<void> saveUserSnapShotToLocal(_i7.SnapShot? snapshot) =>
+  _i7.Future<void> saveUserSnapShotToLocal(_i3.SnapShot? snapshot) =>
       (super.noSuchMethod(
         Invocation.method(
           #saveUserSnapShotToLocal,
           [snapshot],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<_i7.SnapShot?> getUserSnapShotFromLocal(
+  _i7.Future<_i3.SnapShot?> getUserSnapShotFromLocal(
           {bool? forceToFetch = false}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -154,41 +165,41 @@ class MockPpiResponseRepository extends _i1.Mock
           [],
           {#forceToFetch: forceToFetch},
         ),
-        returnValue: _i6.Future<_i7.SnapShot?>.value(),
-      ) as _i6.Future<_i7.SnapShot?>);
+        returnValue: _i7.Future<_i3.SnapShot?>.value(),
+      ) as _i7.Future<_i3.SnapShot?>);
   @override
-  _i6.Future<_i3.BaseResponse<_i7.SnapShot>> getUserSnapshotByAskloraId(
+  _i7.Future<_i4.BaseResponse<_i3.SnapShot>> getUserSnapshotByAskloraId(
           int? askloraId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserSnapshotByAskloraId,
           [askloraId],
         ),
-        returnValue: _i6.Future<_i3.BaseResponse<_i7.SnapShot>>.value(
-            _FakeBaseResponse_1<_i7.SnapShot>(
+        returnValue: _i7.Future<_i4.BaseResponse<_i3.SnapShot>>.value(
+            _FakeBaseResponse_2<_i3.SnapShot>(
           this,
           Invocation.method(
             #getUserSnapshotByAskloraId,
             [askloraId],
           ),
         )),
-      ) as _i6.Future<_i3.BaseResponse<_i7.SnapShot>>);
+      ) as _i7.Future<_i4.BaseResponse<_i3.SnapShot>>);
   @override
-  _i6.Future<_i4.Response<dynamic>> linkUser(int? userId) =>
+  _i7.Future<_i5.Response<dynamic>> linkUser(int? userId) =>
       (super.noSuchMethod(
         Invocation.method(
           #linkUser,
           [userId],
         ),
         returnValue:
-            _i6.Future<_i4.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
+            _i7.Future<_i5.Response<dynamic>>.value(_FakeResponse_3<dynamic>(
           this,
           Invocation.method(
             #linkUser,
             [userId],
           ),
         )),
-      ) as _i6.Future<_i4.Response<dynamic>>);
+      ) as _i7.Future<_i5.Response<dynamic>>);
 }
 
 /// A class which mocks [SharedPreference].
@@ -200,41 +211,41 @@ class MockSharedPreference extends _i1.Mock implements _i9.SharedPreference {
   }
 
   @override
-  _i6.Future<void> deleteAllData() => (super.noSuchMethod(
+  _i7.Future<void> deleteAllData() => (super.noSuchMethod(
         Invocation.method(
           #deleteAllData,
           [],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<void> deleteData(String? key) => (super.noSuchMethod(
+  _i7.Future<void> deleteData(String? key) => (super.noSuchMethod(
         Invocation.method(
           #deleteData,
           [key],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<String?> readData(String? key) => (super.noSuchMethod(
+  _i7.Future<String?> readData(String? key) => (super.noSuchMethod(
         Invocation.method(
           #readData,
           [key],
         ),
-        returnValue: _i6.Future<String?>.value(),
-      ) as _i6.Future<String?>);
+        returnValue: _i7.Future<String?>.value(),
+      ) as _i7.Future<String?>);
   @override
-  _i6.Future<bool?> readBoolData(String? key) => (super.noSuchMethod(
+  _i7.Future<bool?> readBoolData(String? key) => (super.noSuchMethod(
         Invocation.method(
           #readBoolData,
           [key],
         ),
-        returnValue: _i6.Future<bool?>.value(),
-      ) as _i6.Future<bool?>);
+        returnValue: _i7.Future<bool?>.value(),
+      ) as _i7.Future<bool?>);
   @override
-  _i6.Future<bool> writeData(
+  _i7.Future<bool> writeData(
     String? key,
     String? value,
   ) =>
@@ -246,10 +257,10 @@ class MockSharedPreference extends _i1.Mock implements _i9.SharedPreference {
             value,
           ],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
   @override
-  _i6.Future<bool> writeBoolData(
+  _i7.Future<bool> writeBoolData(
     String? key,
     bool? value,
   ) =>
@@ -261,10 +272,10 @@ class MockSharedPreference extends _i1.Mock implements _i9.SharedPreference {
             value,
           ],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
   @override
-  _i6.Future<bool> writeIntData(
+  _i7.Future<bool> writeIntData(
     String? key,
     int? value,
   ) =>
@@ -276,34 +287,34 @@ class MockSharedPreference extends _i1.Mock implements _i9.SharedPreference {
             value,
           ],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
   @override
-  _i6.Future<int?> readIntData(String? key) => (super.noSuchMethod(
+  _i7.Future<int?> readIntData(String? key) => (super.noSuchMethod(
         Invocation.method(
           #readIntData,
           [key],
         ),
-        returnValue: _i6.Future<int?>.value(),
-      ) as _i6.Future<int?>);
+        returnValue: _i7.Future<int?>.value(),
+      ) as _i7.Future<int?>);
   @override
-  _i6.Future<bool> containsKey(String? key) => (super.noSuchMethod(
+  _i7.Future<bool> containsKey(String? key) => (super.noSuchMethod(
         Invocation.method(
           #containsKey,
           [key],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
   @override
-  _i6.Future<void> deleteAllDataExcept(List<String>? keys) =>
+  _i7.Future<void> deleteAllDataExcept(List<String>? keys) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteAllDataExcept,
           [keys],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }
 
 /// A class which mocks [JsonCacheSharedPreferences].
@@ -316,25 +327,25 @@ class MockJsonCacheSharedPreferences extends _i1.Mock
   }
 
   @override
-  _i6.Future<void> clear() => (super.noSuchMethod(
+  _i7.Future<void> clear() => (super.noSuchMethod(
         Invocation.method(
           #clear,
           [],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<void> remove(String? key) => (super.noSuchMethod(
+  _i7.Future<void> remove(String? key) => (super.noSuchMethod(
         Invocation.method(
           #remove,
           [key],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<void> refresh(
+  _i7.Future<void> refresh(
     String? key,
     dynamic value,
   ) =>
@@ -346,20 +357,20 @@ class MockJsonCacheSharedPreferences extends _i1.Mock
             value,
           ],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
   dynamic value(String? key) => super.noSuchMethod(Invocation.method(
         #value,
         [key],
       ));
   @override
-  _i6.Future<bool> contains(String? key) => (super.noSuchMethod(
+  _i7.Future<bool> contains(String? key) => (super.noSuchMethod(
         Invocation.method(
           #contains,
           [key],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
 }

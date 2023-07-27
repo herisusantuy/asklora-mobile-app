@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import '../../../../core/data/remote/base_api_client.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
@@ -25,30 +24,22 @@ class PpiResponseRepository {
 
   final PpiApiRepository _ppiApiRepository = PpiApiRepository();
 
-  Future<BaseResponse<PpiUserResponse>> addAnswer(
+  Future<PpiUserResponse> addAnswer(
       PpiSelectionRequest ppiUserResponseRequest) async {
-    try {
-      var response =
-          await _ppiApiRepository.postQuestionAnswer(ppiUserResponseRequest);
+    var response =
+        await _ppiApiRepository.postQuestionAnswer(ppiUserResponseRequest);
 
-      var ppiUserResponse = PpiUserResponse.fromJson(response.data);
-      return BaseResponse.complete(ppiUserResponse);
-    } on AskloraApiClientException catch (_) {
-      return BaseResponse.error();
-    }
+    var ppiUserResponse = PpiUserResponse.fromJson(response.data);
+
+    return ppiUserResponse;
   }
 
-  Future<BaseResponse<PpiUserResponse>> addBulkAnswer(
+  Future<PpiUserResponse> addBulkAnswer(
       List<PpiSelectionRequest> ppiUserResponseRequest) async {
-    try {
-      var response =
-          await _ppiApiRepository.postBulkAnswer(ppiUserResponseRequest);
-      return BaseResponse.complete(PpiUserResponse.fromJson(response.data));
-    } on BadRequestException catch (_) {
-      return BaseResponse.error();
-    } catch (e) {
-      return BaseResponse.error();
-    }
+    var response =
+        await _ppiApiRepository.postBulkAnswer(ppiUserResponseRequest);
+
+    return PpiUserResponse.fromJson(response.data);
   }
 
   Future<BaseResponse<SnapShot>> getUserSnapShotUserId(dynamic userId) async {
