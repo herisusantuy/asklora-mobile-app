@@ -109,7 +109,7 @@ class BotRecommendationScreen extends StatelessWidget {
       required UserJourney userJourney,
       required String updated}) {
     return Padding(
-      padding: AppValues.screenHorizontalPadding,
+      padding: AppValues.screenHorizontalPadding.copyWith(bottom: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -122,11 +122,11 @@ class BotRecommendationScreen extends StatelessWidget {
             title: S.of(context).updatedAt(updated),
             bottomSheetText:
                 S.of(context).ourPersonalisedRecommendationsAreUnique,
-            titleStyle: AskLoraTextStyles.subtitle3
-                .copyWith(color: AskLoraColors.darkGray),
+            titleStyle:
+                AskLoraTextStyles.body2.copyWith(color: AskLoraColors.darkGray),
           ),
           const SizedBox(
-            height: 8,
+            height: 14,
           ),
           Row(
             children: [
@@ -138,9 +138,12 @@ class BotRecommendationScreen extends StatelessWidget {
                       .copyWith(color: AskLoraColors.primaryMagenta),
                 ),
               ),
-              const SizedBox(width: 5),
+              const SizedBox(width: 8),
               ExtraInfoButton(
+                borderWidth: 1,
                 label: S.of(context).pressToStartOver,
+                labelStyle: AskLoraTextStyles.subtitleAllCap1
+                    .copyWith(color: AskLoraColors.primaryMagenta),
                 buttonExtraInfoSize: ButtonExtraInfoSize.small,
                 onTap: () => context
                     .read<NavigationBloc<ForYouPage>>()
