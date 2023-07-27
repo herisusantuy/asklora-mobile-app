@@ -33,6 +33,7 @@ import '../../bot_performance/bot_performance_chart.dart';
 import '../../bot_stock_result_screen.dart';
 import '../../widgets/bot_stock_form.dart';
 import '../bloc/portfolio_bloc.dart';
+import '../../../../../../core/utils/feature_flags.dart';
 import 'widgets/bot_portfolio_detail_content.dart';
 
 part 'widgets/bot_portfolio_detail_header.dart';

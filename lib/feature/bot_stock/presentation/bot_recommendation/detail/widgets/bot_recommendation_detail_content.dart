@@ -16,6 +16,7 @@ import '../../../../../../core/presentation/column_text/column_text_with_tooltip
 import '../../../widgets/custom_detail_expansion_tile.dart';
 import '../../../widgets/iex_data_provider_link.dart';
 import 'bot_price_level_indicator.dart';
+import '../../../../../../core/utils/feature_flags.dart';
 
 class BotRecommendationDetailContent extends StatelessWidget {
   final BotRecommendationModel botRecommendationModel;
@@ -205,11 +206,13 @@ class BotRecommendationDetailContent extends StatelessWidget {
               ColumnTextWithTooltip(
                   title: S.of(context).estimatedEndDate,
                   subTitle: '${botDetailModel?.estEndDateFormatted}'),
-              _chartWidget(context),
-              const SizedBox(
-                height: 6,
-              ),
-              _getChartCaption(context),
+              if (!FeatureFlags.isMockApp) ...[
+                _chartWidget(context),
+                const SizedBox(
+                  height: 6,
+                ),
+                _getChartCaption(context),
+              ]
             ],
           ),
         ),
