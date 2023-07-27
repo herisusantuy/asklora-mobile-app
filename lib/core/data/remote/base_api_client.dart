@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 
 import '../../domain/endpoints.dart';
 import '../../domain/token/model/token_refresh_response.dart';
+import '../../domain/token/model/token_verify_request.dart';
 import '../../domain/token/repository/repository.dart';
 import '../../domain/token/repository/token_repository.dart';
 import '../../domain/validation_enum.dart';
@@ -106,7 +107,17 @@ class AppInterceptors extends Interceptor {
 
   Future<void> _handleExpiredToken(
       DioError error, ErrorInterceptorHandler handler) async {
-    if (await _refreshToken()) {
+    final accessToken = await _refreshToken();
+
+    if (accessToken.isNotEmpty) {
+      /// Check if the last API call was `auth/verify/`. If, then replace the old token
+      /// with the new (refreshed) one.
+      final requestOptions = error.requestOptions;
+
+      if (requestOptions.path == endpointTokenVerify) {
+        requestOptions.data = TokenVerifyRequest(accessToken).toJson();
+      }
+
       return handler.resolve(await _retry(error.requestOptions));
     }
     handler.next(error);
@@ -123,7 +134,8 @@ class AppInterceptors extends Interceptor {
         options: options);
   }
 
-  Future<bool> _refreshToken() async {
+  Future<String> _refreshToken() async {
+    var accessToken = '';
     try {
       final refreshToken = await _storage.getRefreshToken();
       final response = await _dio
@@ -131,20 +143,20 @@ class AppInterceptors extends Interceptor {
 
       if (response.statusCode == 200) {
         var refreshResponse = TokenRefreshResponse.fromJson(response.data);
-        var accessToken = refreshResponse.access!;
-        _storage.saveAccessToken(accessToken);
-        return true;
+        accessToken = refreshResponse.access!;
+        await _storage.saveAccessToken(accessToken);
+        return accessToken;
       } else {
-        _storage.deleteAll();
-        return false;
+        await _storage.deleteAll();
+        return accessToken;
       }
     } catch (e) {
-      return false;
+      return accessToken;
     }
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioError err, ErrorInterceptorHandler handler) async {
     switch (err.type) {
       case DioErrorType.connectionTimeout:
       case DioErrorType.sendTimeout:
@@ -163,8 +175,9 @@ class AppInterceptors extends Interceptor {
 
             final message = err.response?.data['message'];
             if (message == 'Token invalid' ||
-                message == 'Token invalid / expired') {
-              _handleExpiredToken(err, handler);
+                message == 'Token invalid / expired' ||
+                askloraError.type == ValidationCode.invalidToken) {
+              await _handleExpiredToken(err, handler);
               return;
             } else {
               throw UnauthorizedException(err.requestOptions, askloraError);

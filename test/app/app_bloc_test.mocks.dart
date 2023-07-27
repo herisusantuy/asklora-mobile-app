@@ -65,21 +65,23 @@ class MockTokenRepository extends _i1.Mock implements _i4.TokenRepository {
   }
 
   @override
-  void saveAccessToken(String? token) => super.noSuchMethod(
+  _i5.Future<void> saveAccessToken(String? token) => (super.noSuchMethod(
         Invocation.method(
           #saveAccessToken,
           [token],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
   @override
-  void saveRefreshToken(String? token) => super.noSuchMethod(
+  _i5.Future<void> saveRefreshToken(String? token) => (super.noSuchMethod(
         Invocation.method(
           #saveRefreshToken,
           [token],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
   @override
   _i5.Future<String?> getAccessToken() => (super.noSuchMethod(
         Invocation.method(
