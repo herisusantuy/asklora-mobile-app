@@ -61,14 +61,16 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
   void _onSendAnswer(
       SendResponse event, Emitter<UserResponseState> emit) async {
-    try {
-      emit(state.copyWith(responseState: ResponseState.loading));
+    emit(state.copyWith(responseState: ResponseState.loading));
 
-      await _ppiResponseRepository.addAnswer(event.ppiUserResponseRequest);
+    final response =
+        await _ppiResponseRepository.addAnswer(event.ppiUserResponseRequest);
+
+    if (response.state == ResponseState.success) {
       emit(state.copyWith(
         responseState: ResponseState.success,
       ));
-    } catch (e) {
+    } else {
       emit(state.copyWith(responseState: ResponseState.error));
     }
   }
@@ -187,14 +189,23 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
         await _jsonCacheSharedPreferences.refresh(sfKeyPpiAnswers, requests);
       }
 
-      await _ppiResponseRepository.addBulkAnswer(requests);
-      var userSnapShot =
-          await _ppiResponseRepository.getUserSnapShotUserId(tempId);
-      emit(state.copyWith(
-        responseState: ResponseState.success,
-        ppiResponseState: PpiResponseState.dispatchResponse,
-        snapShot: userSnapShot,
-      ));
+      final response = await _ppiResponseRepository.addBulkAnswer(requests);
+
+      if (response.state == ResponseState.success) {
+        var userSnapShot =
+            await _ppiResponseRepository.getUserSnapShotUserId(tempId);
+        emit(state.copyWith(
+          responseState: ResponseState.success,
+          ppiResponseState: PpiResponseState.dispatchResponse,
+          snapShot: userSnapShot,
+        ));
+      } else {
+        emit(state.copyWith(
+            responseState: ResponseState.error,
+            ppiResponseState: PpiResponseState.dispatchResponse,
+            message: 'Something went wrong! Please try again.',
+            errorType: ErrorType.error400));
+      }
     } on BadRequestException {
       emit(state.copyWith(
           responseState: ResponseState.error,
