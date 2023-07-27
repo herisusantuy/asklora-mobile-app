@@ -77,8 +77,7 @@ class BotRecommendationScreen extends StatelessWidget {
                 ),
                 showPopUp: state.botRecommendationResponse.state ==
                     ResponseState.error,
-                content: ListView(
-                  padding: const EdgeInsets.only(bottom: 35),
+                content: Column(
                   children: [
                     _header(
                         context: context,
@@ -86,9 +85,16 @@ class BotRecommendationScreen extends StatelessWidget {
                         updated: state.botRecommendationResponse.data
                                 ?.updatedFormatted ??
                             '-'),
-                    BotRecommendationList(
-                      verticalMargin: 14,
-                      botStockState: state,
+                    Expanded(
+                      child: ListView(
+                        padding: const EdgeInsets.only(bottom: 35),
+                        children: [
+                          BotRecommendationList(
+                            verticalMargin: 14,
+                            botStockState: state,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -103,7 +109,7 @@ class BotRecommendationScreen extends StatelessWidget {
       required UserJourney userJourney,
       required String updated}) {
     return Padding(
-      padding: AppValues.screenHorizontalPadding,
+      padding: AppValues.screenHorizontalPadding.copyWith(bottom: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -116,25 +122,28 @@ class BotRecommendationScreen extends StatelessWidget {
             title: S.of(context).updatedAt(updated),
             bottomSheetText:
                 S.of(context).ourPersonalisedRecommendationsAreUnique,
-            titleStyle: AskLoraTextStyles.subtitle3
-                .copyWith(color: AskLoraColors.darkGray),
+            titleStyle:
+                AskLoraTextStyles.body2.copyWith(color: AskLoraColors.darkGray),
           ),
           const SizedBox(
-            height: 8,
+            height: 14,
           ),
           Row(
             children: [
               Flexible(
                 flex: 3,
                 child: AutoSizedTextWidget(
-                  S.of(context).notFeelingIt,
+                  S.of(context).notTheStockYouWereLooking,
                   style: AskLoraTextStyles.subtitle3
                       .copyWith(color: AskLoraColors.primaryMagenta),
                 ),
               ),
-              const SizedBox(width: 5),
+              const SizedBox(width: 8),
               ExtraInfoButton(
-                label: S.of(context).defineAgain,
+                borderWidth: 1,
+                label: S.of(context).pressToStartOver,
+                labelStyle: AskLoraTextStyles.subtitleAllCap1
+                    .copyWith(color: AskLoraColors.primaryMagenta),
                 buttonExtraInfoSize: ButtonExtraInfoSize.small,
                 onTap: () => context
                     .read<NavigationBloc<ForYouPage>>()

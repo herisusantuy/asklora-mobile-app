@@ -25,12 +25,11 @@ class DioAdapterMock extends Mock implements HttpClientAdapter {}
 class MockSignInBloc extends MockBloc<SignInEvent, SignInState>
     implements SignInBloc {}
 
-class MockRepository extends Mock implements Repository {}
-
 @GenerateMocks([AuthRepository])
 @GenerateMocks([UserJourneyRepository])
 @GenerateMocks([SharedPreference])
 @GenerateMocks([AccountRepository])
+@GenerateMocks([Repository])
 @GenerateMocks([PpiResponseRepository])
 void main() async {
   group('Sign In Screen Bloc Test', () {
@@ -59,9 +58,8 @@ void main() async {
         accountRepository = MockAccountRepository();
         ppiResponseRepository = MockPpiResponseRepository();
 
-        when(mockRepository.saveRefreshToken('token')).thenAnswer((_) async {
-          null;
-        });
+        when(mockRepository.saveRefreshToken('token'))
+            .thenAnswer((_) async => Future<void>);
         when(mockRepository.saveAccessToken('token')).thenAnswer((_) async {});
 
         when(sharedPreference.writeData(sfKeyEmail, 'kk@kk.com'))

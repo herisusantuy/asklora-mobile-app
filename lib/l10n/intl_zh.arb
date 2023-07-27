@@ -725,5 +725,7 @@
   "depositFund": "存入資金",
   "botManagementFeeTooltip": "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!",
   "ourPersonalisedRecommendationsAreUnique": "每個個人化建議均獨一無二。所建議的 Botstock 都是根據你能承受的風險、個性測試及投資風格所提供。",
-  "generalSettings": "設定"
+  "generalSettings": "設定",
+  "notTheStockYouWereLooking": "Not the stock you were looking for? Try something different",
+  "pressToStartOver": "Press to Start Over"
 }

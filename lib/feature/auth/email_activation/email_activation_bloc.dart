@@ -99,8 +99,10 @@ class EmailActivationBloc
 
     await Future.delayed(const Duration(milliseconds: 1500));
 
-    _tokenRepository.saveAccessToken(event.uri.queryParameters['access']!);
-    _tokenRepository.saveRefreshToken(event.uri.queryParameters['refresh']!);
+    await _tokenRepository
+        .saveAccessToken(event.uri.queryParameters['access']!);
+    await _tokenRepository
+        .saveRefreshToken(event.uri.queryParameters['refresh']!);
 
     emit(state.copyWith(
         response: const BaseResponse(),

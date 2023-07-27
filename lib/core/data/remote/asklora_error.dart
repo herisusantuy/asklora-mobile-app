@@ -9,7 +9,7 @@ class AskloraError {
   final String detail;
   final String code;
 
-  AskloraError({this.detail = '', this.code = 'unknown'});
+  AskloraError({this.detail = '', this.code = 'UNKNOWN'});
 
   AskloraError copyWith({
     String? detail,
@@ -27,7 +27,7 @@ class AskloraError {
     try {
       return _$AskloraErrorFromJson(json);
     } catch (e) {
-      return AskloraError(detail: 'Something went wrong!', code: 'unknown');
+      return AskloraError(detail: 'Something went wrong!', code: 'UNKNOWN');
     }
   }
 

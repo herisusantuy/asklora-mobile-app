@@ -37,7 +37,11 @@ class CustomTextWithBottomSheet extends StatelessWidget {
           onTap: () => LoraBottomSheet.show(
             context: context,
             title: title,
+            titleStyle:
+                AskLoraTextStyles.h5.copyWith(color: AskLoraColors.charcoal),
             subTitle: bottomSheetText,
+            subTitleStyle:
+                AskLoraTextStyles.body3.copyWith(color: AskLoraColors.charcoal),
             primaryButtonLabel:
                 bottomSheetButtonLabel ?? S.of(context).buttonBack,
             onPrimaryButtonTap: () => Navigator.pop(context),

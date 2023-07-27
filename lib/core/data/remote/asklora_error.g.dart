@@ -8,7 +8,7 @@ part of 'asklora_error.dart';
 
 AskloraError _$AskloraErrorFromJson(Map<String, dynamic> json) => AskloraError(
       detail: json['detail'] as String? ?? '',
-      code: json['code'] as String? ?? 'unknown',
+      code: json['code'] as String? ?? 'UNKNOWN',
     );
 
 Map<String, dynamic> _$AskloraErrorToJson(AskloraError instance) =>

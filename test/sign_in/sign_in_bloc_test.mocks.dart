@@ -15,6 +15,8 @@ import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart'
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
 import 'package:asklora_mobile_app/core/domain/otp/get_otp_request.dart'
     as _i10;
+import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart'
+    as _i27;
 import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart'
     as _i17;
 import 'package:asklora_mobile_app/feature/auth/forgot_password/domain/forgot_password_response.dart'
@@ -48,11 +50,11 @@ import 'package:asklora_mobile_app/feature/onboarding/kyc/repository/account_rep
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart'
     as _i5;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response_request.dart'
-    as _i28;
+    as _i29;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/bot_recommendation_repository.dart'
     as _i4;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/ppi_response_repository.dart'
-    as _i27;
+    as _i28;
 import 'package:asklora_mobile_app/feature/settings/domain/change_password/change_password_response.dart'
     as _i13;
 import 'package:dio/dio.dart' as _i6;
@@ -656,11 +658,80 @@ class MockAccountRepository extends _i1.Mock implements _i18.AccountRepository {
       ) as _i8.Future<_i2.BaseResponse<_i25.OnfidoResultResponse>>);
 }
 
+/// A class which mocks [Repository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRepository extends _i1.Mock implements _i27.Repository {
+  MockRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i8.Future<void> saveAccessToken(String? token) => (super.noSuchMethod(
+        Invocation.method(
+          #saveAccessToken,
+          [token],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+  @override
+  _i8.Future<void> saveRefreshToken(String? token) => (super.noSuchMethod(
+        Invocation.method(
+          #saveRefreshToken,
+          [token],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+  @override
+  _i8.Future<String?> getAccessToken() => (super.noSuchMethod(
+        Invocation.method(
+          #getAccessToken,
+          [],
+        ),
+        returnValue: _i8.Future<String?>.value(),
+      ) as _i8.Future<String?>);
+  @override
+  _i8.Future<String?> getRefreshToken() => (super.noSuchMethod(
+        Invocation.method(
+          #getRefreshToken,
+          [],
+        ),
+        returnValue: _i8.Future<String?>.value(),
+      ) as _i8.Future<String?>);
+  @override
+  _i8.Future<bool> isTokenValid() => (super.noSuchMethod(
+        Invocation.method(
+          #isTokenValid,
+          [],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+  @override
+  _i8.Future<bool> refreshToken() => (super.noSuchMethod(
+        Invocation.method(
+          #refreshToken,
+          [],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+  @override
+  _i8.Future<void> deleteAll() => (super.noSuchMethod(
+        Invocation.method(
+          #deleteAll,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+}
+
 /// A class which mocks [PpiResponseRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPpiResponseRepository extends _i1.Mock
-    implements _i27.PpiResponseRepository {
+    implements _i28.PpiResponseRepository {
   MockPpiResponseRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -676,7 +747,7 @@ class MockPpiResponseRepository extends _i1.Mock
       ) as _i4.BotRecommendationRepository);
   @override
   _i8.Future<_i5.PpiUserResponse> addAnswer(
-          _i28.PpiSelectionRequest? ppiUserResponseRequest) =>
+          _i29.PpiSelectionRequest? ppiUserResponseRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #addAnswer,
@@ -693,7 +764,7 @@ class MockPpiResponseRepository extends _i1.Mock
       ) as _i8.Future<_i5.PpiUserResponse>);
   @override
   _i8.Future<_i5.PpiUserResponse> addBulkAnswer(
-          List<_i28.PpiSelectionRequest>? ppiUserResponseRequest) =>
+          List<_i29.PpiSelectionRequest>? ppiUserResponseRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #addBulkAnswer,

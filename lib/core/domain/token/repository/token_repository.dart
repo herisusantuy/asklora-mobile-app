@@ -21,13 +21,14 @@ class TokenRepository implements Repository {
   TokenRepository._internal();
 
   @override
-  void saveAccessToken(String token) async {
-    await _secureStorage.writeData(Repository.keyAuthTokenAccess, token);
+  Future<void> saveAccessToken(String token) async {
+    return await _secureStorage.writeData(Repository.keyAuthTokenAccess, token);
   }
 
   @override
-  void saveRefreshToken(String token) async {
-    await _secureStorage.writeData(Repository.keyAuthTokenRefresh, token);
+  Future<void> saveRefreshToken(String token) async {
+    return await _secureStorage.writeData(
+        Repository.keyAuthTokenRefresh, token);
   }
 
   @override
