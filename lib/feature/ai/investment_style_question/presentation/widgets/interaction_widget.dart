@@ -83,7 +83,7 @@ class InteractionWidget extends StatelessWidget {
                   state.isChatAnimationRunning
                       ? const ShimmerWidget(width: double.infinity, height: 55)
                       : PrimaryButton(
-                          label: 'Continue',
+                          label: 'See My Recommendations',
                           onTap: () => context
                               .read<AiInvestmentStyleQuestionBloc>()
                               .add(const SendResultToPpi()),
@@ -94,7 +94,7 @@ class InteractionWidget extends StatelessWidget {
                   state.isChatAnimationRunning
                       ? const ShimmerWidget(width: double.infinity, height: 55)
                       : PrimaryButton(
-                          label: 'Change My Preferences',
+                          label: 'Start Again',
                           onTap: () => context
                               .read<AiInvestmentStyleQuestionBloc>()
                               .add(const ResetSession()),
