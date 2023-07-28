@@ -79,6 +79,9 @@ const String askloraSite = 'https://www.asklora.ai/';
 const String mailToLoraCare = 'mailto:loracares@asklora.ai';
 const String mailToHelpAsklora = 'mailto:help@asklora.ai';
 const String helpAskloraEmail = 'help@asklora.ai';
+const String askloraPrivacyPolicy = 'https://www.asklora.ai/privacy-policy';
+const String askloraTermAndConditions =
+    'https://www.asklora.ai/terms-and-condtions';
 
 ///
 /// LoraGPT

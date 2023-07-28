@@ -80,11 +80,13 @@ class AboutAskloraScreen extends StatelessWidget {
             const SizedBox(height: 12),
             const Divider(thickness: 1, height: 0),
             MenuButtonWidget(
-                onTap: () => PrivacyPolicyScreen.open(context),
+                onTap: () => openUrl(askloraPrivacyPolicy,
+                    mode: LaunchMode.externalApplication),
                 title: S.of(context).privacyPolicy,
                 showBottomBorder: true),
             MenuButtonWidget(
-                onTap: () => TermsAndConditionScreen.open(context),
+                onTap: () => openUrl(askloraTermAndConditions,
+                    mode: LaunchMode.externalApplication),
                 title: S.of(context).termsAndConditions,
                 showBottomBorder: true),
           ],
