@@ -155,6 +155,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!"),
         "botRecommendationScreenTitle":
             MessageLookupByLibrary.simpleMessage("最夾你嘅投資風格"),
+        "botRecommendationTutorialDesc1":
+            MessageLookupByLibrary.simpleMessage("This is the "),
+        "botRecommendationTutorialDesc2": MessageLookupByLibrary.simpleMessage(
+            "Botstock recommendations screen. "),
+        "botRecommendationTutorialDesc3":
+            MessageLookupByLibrary.simpleMessage("press "),
+        "botRecommendationTutorialDesc4":
+            MessageLookupByLibrary.simpleMessage("\'Trade\' "),
+        "botRecommendationTutorialDesc5": MessageLookupByLibrary.simpleMessage(
+            "on a Botstock that catches your eye!"),
         "botStockDoScreenPoint1":
             MessageLookupByLibrary.simpleMessage("嘗試獲取較大收益"),
         "botStockDoScreenPoint2":

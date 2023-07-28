@@ -3938,7 +3938,7 @@ class S {
   /// `we investing can be simple with AI`
   String get opennessLessThan8 {
     return Intl.message(
-      'investing can be simple with AI',
+      'we investing can be simple with AI',
       name: 'opennessLessThan8',
       desc: '',
       args: [],
@@ -5711,6 +5711,56 @@ class S {
     return Intl.message(
       'Got It',
       name: 'ppiGotIt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This is the `
+  String get botRecommendationTutorialDesc1 {
+    return Intl.message(
+      'This is the ',
+      name: 'botRecommendationTutorialDesc1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Botstock recommendations screen. `
+  String get botRecommendationTutorialDesc2 {
+    return Intl.message(
+      'Botstock recommendations screen. ',
+      name: 'botRecommendationTutorialDesc2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `press `
+  String get botRecommendationTutorialDesc3 {
+    return Intl.message(
+      'press ',
+      name: 'botRecommendationTutorialDesc3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `'Trade' `
+  String get botRecommendationTutorialDesc4 {
+    return Intl.message(
+      '\'Trade\' ',
+      name: 'botRecommendationTutorialDesc4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `on a Botstock that catches your eye!`
+  String get botRecommendationTutorialDesc5 {
+    return Intl.message(
+      'on a Botstock that catches your eye!',
+      name: 'botRecommendationTutorialDesc5',
       desc: '',
       args: [],
     );

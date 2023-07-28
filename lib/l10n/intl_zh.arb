@@ -770,5 +770,10 @@
       }
     }
   },
-  "ppiGotIt": "了解!"
+  "ppiGotIt": "了解!",
+  "botRecommendationTutorialDesc1": "This is the ",
+  "botRecommendationTutorialDesc2": "Botstock recommendations screen. ",
+  "botRecommendationTutorialDesc3": "press ",
+  "botRecommendationTutorialDesc4": "'Trade' ",
+  "botRecommendationTutorialDesc5": "on a Botstock that catches your eye!"
 }

@@ -117,11 +117,30 @@ class BotRecommendationScreen extends StatelessWidget {
                             TextSpan(
                               children: [
                                 TextSpan(
-                                    text: S.of(context).hereYouCanFind,
+                                    text: S
+                                        .of(context)
+                                        .botRecommendationTutorialDesc1,
                                     style: AskLoraTextStyles.body1),
                                 TextSpan(
-                                    text: S.of(context).botStocksDetails,
+                                    text: S
+                                        .of(context)
+                                        .botRecommendationTutorialDesc2,
                                     style: AskLoraTextStyles.subtitle2),
+                                TextSpan(
+                                    text: S
+                                        .of(context)
+                                        .botRecommendationTutorialDesc3,
+                                    style: AskLoraTextStyles.body1),
+                                TextSpan(
+                                    text: S
+                                        .of(context)
+                                        .botRecommendationTutorialDesc4,
+                                    style: AskLoraTextStyles.subtitle2),
+                                TextSpan(
+                                    text: S
+                                        .of(context)
+                                        .botRecommendationTutorialDesc5,
+                                    style: AskLoraTextStyles.body1),
                               ],
                             ),
                           ),
