@@ -147,22 +147,6 @@
       }
     }
   },
-  "botTradeBottomSheetAmountMinimumFirst": "You have {availableAmount},",
-  "@botTradeBottomSheetAmountMinimumFirst": {
-    "placeholders": {
-      "availableAmount": {
-        "type": "String"
-      }
-    }
-  },
-  "botTradeBottomSheetAmountMinimumSecond": " the minimum investment amount is {minimumAmount}.",
-  "@botTradeBottomSheetAmountMinimumSecond": {
-    "placeholders": {
-      "minimumAmount": {
-        "type": "String"
-      }
-    }
-  },
   "botTradeBottomSheetAmountTitle": "How much are you investing?",
   "botTradeBottomSheetInsufficientBalanceTitle": "You are running out of money! Fund your account now.",
   "botTradeBottomSheetInsufficientBalanceSubTitle": "The minimum investment amount is {minimumAmount} per trade.",
@@ -773,5 +757,21 @@
   "notTheStockYouWereLooking": "Not the stock you were looking for? Try something different",
   "pressToStartOver": "Press to\nStart Over",
   "seeMyRecommendations": "See My Recommendations",
-  "startAgain": "Start Again"
+  "startAgain": "Start Again",
+  "botTradeBottomSheetAmountMinimumFirst": "You have {availableAmount},",
+  "@botTradeBottomSheetAmountMinimumFirst": {
+    "placeholders": {
+      "availableAmount": {
+        "type": "String"
+      }
+    }
+  },
+  "botTradeBottomSheetAmountMinimumSecond": " the minimum investment amount is {minimumAmount}.",
+  "@botTradeBottomSheetAmountMinimumSecond": {
+    "placeholders": {
+      "minimumAmount": {
+        "type": "String"
+      }
+    }
+  }
 }
