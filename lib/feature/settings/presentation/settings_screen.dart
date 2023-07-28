@@ -135,7 +135,7 @@ class SettingsScreen extends StatelessWidget {
           width: double.infinity,
           decoration: const BoxDecoration(
               border: Border(
-                  top: BorderSide(color: AskLoraColors.gray, width: 0.5))),
+                  bottom: BorderSide(color: AskLoraColors.gray, width: 0.5))),
           child: Row(
             children: [
               Expanded(
@@ -158,7 +158,7 @@ class SettingsScreen extends StatelessWidget {
               ),
               const Icon(
                 Icons.arrow_forward_ios_rounded,
-                color: AskLoraColors.gray,
+                color: AskLoraColors.black,
                 size: 14,
               )
             ],
@@ -176,20 +176,25 @@ class SettingsScreen extends StatelessWidget {
               WelcomeScreen.openAndRemoveAllRoute(context);
             }
           },
-          child: PrimaryButton(
-              buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
-              label: S.of(context).buttonSignOut,
-              onTap: () => LoraBottomSheet.show(
-                    context: context,
-                    title: S.of(context).signOutConfirmation,
-                    primaryButtonLabel: S.of(context).buttonSignOut,
-                    secondaryButtonLabel: S.of(context).buttonCancel,
-                    onPrimaryButtonTap: () {
-                      Navigator.pop(context);
-                      context.read<SignOutBloc>().add(const SignOutSubmitted());
-                    },
-                    onSecondaryButtonTap: () => Navigator.pop(context),
-                  )),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 30),
+            child: PrimaryButton(
+                buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
+                label: S.of(context).buttonSignOut,
+                onTap: () => LoraBottomSheet.show(
+                      context: context,
+                      title: S.of(context).signOutConfirmation,
+                      primaryButtonLabel: S.of(context).buttonSignOut,
+                      secondaryButtonLabel: S.of(context).buttonCancel,
+                      onPrimaryButtonTap: () {
+                        Navigator.pop(context);
+                        context
+                            .read<SignOutBloc>()
+                            .add(const SignOutSubmitted());
+                      },
+                      onSecondaryButtonTap: () => Navigator.pop(context),
+                    )),
+          ),
         );
       });
 

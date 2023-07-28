@@ -17,8 +17,6 @@ import '../../../core/utils/utils.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
 import 'customer_service_screen.dart';
-import 'privacy_policy_screen.dart';
-import 'terms_condition_screen.dart';
 
 class AboutAskloraScreen extends StatelessWidget {
   static const route = '/about_asklora_screen';
@@ -30,8 +28,7 @@ class AboutAskloraScreen extends StatelessWidget {
     return CustomScaffold(
       body: CustomStretchedLayout(
         contentPadding: const EdgeInsets.only(top: 0, bottom: 43),
-        header: CustomHeader(
-            title: S.of(context).aboutAsklora, isShowBottomBorder: true),
+        header: CustomHeader(title: S.of(context).aboutAsklora),
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -80,11 +77,13 @@ class AboutAskloraScreen extends StatelessWidget {
             const SizedBox(height: 12),
             const Divider(thickness: 1, height: 0),
             MenuButtonWidget(
-                onTap: () => PrivacyPolicyScreen.open(context),
+                onTap: () => openUrl(askloraPrivacyPolicy,
+                    mode: LaunchMode.externalApplication),
                 title: S.of(context).privacyPolicy,
                 showBottomBorder: true),
             MenuButtonWidget(
-                onTap: () => TermsAndConditionScreen.open(context),
+                onTap: () => openUrl(askloraTermAndConditions,
+                    mode: LaunchMode.externalApplication),
                 title: S.of(context).termsAndConditions,
                 showBottomBorder: true),
           ],

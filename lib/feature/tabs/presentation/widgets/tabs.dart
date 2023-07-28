@@ -28,17 +28,17 @@ class Tabs extends StatelessWidget {
                         onTap: () => context
                             .read<TabScreenBloc>()
                             .add(const TabChanged(TabPage.forYou)),
-                        iconAsset: 'bottom_nav_for_you',
-                        activeIconAsset: 'bottom_nav_for_you_selected',
+                        iconAsset: 'bottom_nav_isq',
+                        activeIconAsset: 'bottom_nav_isq_selected',
                         active: state.currentTabPage == TabPage.forYou &&
                             !state.aiPageSelected),
                     if (canTrade)
-                      _tabPng(
+                      _tabSvg(
                           onTap: () => context
                               .read<TabScreenBloc>()
                               .add(const OnAiOverlayClick()),
-                          iconAsset: 'bottom_nav_ai',
-                          activeIconAsset: 'bottom_nav_ai_selected',
+                          iconAsset: 'bottom_nav_asklora_ai',
+                          activeIconAsset: 'bottom_nav_asklora_ai_selected',
                           active: state.aiPageSelected),
                     _tabSvg(
                         onTap: () => context
@@ -61,8 +61,7 @@ class Tabs extends StatelessWidget {
           required String iconAsset,
           required String activeIconAsset,
           bool active = false,
-          double size = 28,
-          double clickAreaSize = 40}) =>
+          double clickAreaSize = 36}) =>
       GestureDetector(
         onTap: onTap,
         child: Container(
@@ -70,25 +69,7 @@ class Tabs extends StatelessWidget {
           width: clickAreaSize,
           height: clickAreaSize,
           child: getSvgIcon(active ? activeIconAsset : iconAsset,
-              height: size, fit: BoxFit.none),
-        ),
-      );
-
-  Widget _tabPng(
-          {required VoidCallback onTap,
-          required String iconAsset,
-          required String activeIconAsset,
-          bool active = false,
-          double size = 28,
-          double clickAreaSize = 40}) =>
-      GestureDetector(
-        onTap: onTap,
-        child: Container(
-          color: Colors.transparent,
-          width: clickAreaSize,
-          height: clickAreaSize,
-          child: getPngIcon(active ? activeIconAsset : iconAsset,
-              height: size, width: size),
+              fit: BoxFit.none),
         ),
       );
 }

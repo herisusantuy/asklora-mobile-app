@@ -248,8 +248,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         _tempConversation.addAll(response.data!.components);
       }
     } else {
-      tempList.add(Lora(
-          'Sorry I cannot connect to the server right now, please try again'));
+      tempList.add(
+          Lora('Lora is working on some optimizations to serve you better.'));
     }
     emit(state.copyWith(
         status: ResponseState.success,

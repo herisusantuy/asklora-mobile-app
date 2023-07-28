@@ -79,12 +79,13 @@ const String askloraSite = 'https://www.asklora.ai/';
 const String mailToLoraCare = 'mailto:loracares@asklora.ai';
 const String mailToHelpAsklora = 'mailto:help@asklora.ai';
 const String helpAskloraEmail = 'help@asklora.ai';
+const String askloraPrivacyPolicy = 'https://www.asklora.ai/privacy-policy';
+const String askloraTermAndConditions =
+    'https://www.asklora.ai/terms-and-condtions';
 
 ///
 /// LoraGPT
 ///
-const String loraGptBaseUrl = 'http://stock-gpt-dev.intra.asklora.ai/';
-// const String loraGptBaseUrl = 'https://stock-gpt-stag.api.asklora.ai/';
 const String endpointChat = 'chat/general';
 const String endpointPortfolio = 'chat/portfolio_page';
 const String endpointPortfolioDetailPage =

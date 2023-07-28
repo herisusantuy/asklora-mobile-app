@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/bot_badge/lora_pop_up_message_with_bot_badge.dart';
-import '../../../core/presentation/lora_memoji_header.dart';
 import '../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../core/presentation/lora_animation_header.dart';
 import '../../core/values/app_values.dart';
 import '../bot_stock/utils/bot_stock_utils.dart';
 import 'learning_bot_stock_screen.dart';
@@ -23,14 +24,13 @@ class LearningBotStockWelcomeScreen extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 30),
           children: [
             Padding(
-              padding: AppValues.screenHorizontalPadding,
-              child: LoraMemojiHeader(
+              padding: AppValues.screenHorizontalPadding.copyWith(bottom: 20),
+              child: LoraAnimationHeader(
                   text:
                       'Let’s go through a few reps, and see if ${botType.upperCaseName} bot fits your investment style.'),
             ),
             LoraPopUpMessageWithBotBadge(
               buttonLabel: "LET'S PRACTICE",
-              withLoraImage: false,
               backgroundColor: botType.primaryBgColor,
               title: _getTitle,
               subTitle: _getSubTitle,

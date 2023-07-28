@@ -73,10 +73,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
               BackButtonInterceptorState>(
             listener: (context, state) {
               if (state is OnPressedBack) {
-                context
-                    .read<BackButtonInterceptorBloc>()
-                    .add(RemoveInterceptor());
-                Navigator.pop(context);
+                Navigator.of(context).maybePop();
               }
             },
             child: BlocConsumer<PortfolioBloc, PortfolioState>(

@@ -58,11 +58,7 @@ class MenuSelectionButtonWidget extends StatelessWidget {
                     color: AskLoraColors.charcoal,
                     size: 24,
                   )
-                : const Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: AskLoraColors.gray,
-                    size: 14,
-                  )
+                : const SizedBox.shrink()
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
 import '../../../../../../core/presentation/column_text/pair_column_text.dart';
 import '../../../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
@@ -12,10 +13,10 @@ import '../../../../../chart/presentation/chart_animation.dart';
 import '../../../../domain/bot_recommendation_detail_model.dart';
 import '../../../../domain/bot_recommendation_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
-import '../../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
 import '../../../widgets/iex_data_provider_link.dart';
 import 'bot_price_level_indicator.dart';
+import 'toggleable_price_text.dart';
 import '../../../../../../core/utils/feature_flags.dart';
 
 class BotRecommendationDetailContent extends StatelessWidget {
@@ -112,23 +113,25 @@ class BotRecommendationDetailContent extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    CustomTextNew(
-                      (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
-                      style: AskLoraTextStyles.h5
-                          .copyWith(color: AskLoraColors.charcoal),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    CustomTextNew(
-                      '${getPriceDifference().convertToCurrencyDecimal()} ${getPercentDifference().convertToCurrencyDecimal()}%',
-                      style: AskLoraTextStyles.body2
-                          .copyWith(color: AskLoraColors.charcoal),
-                    )
-                  ],
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomTextNew(
+                        (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
+                        style: AskLoraTextStyles.h5
+                            .copyWith(color: AskLoraColors.charcoal),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      ToggleablePriceText(
+                        percentDifference: getPercentDifference(),
+                        priceDifference: getPriceDifference(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

@@ -156,7 +156,7 @@ class AppInterceptors extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) async {
+  void onError(DioError err, ErrorInterceptorHandler handler) {
     switch (err.type) {
       case DioErrorType.connectionTimeout:
       case DioErrorType.sendTimeout:
@@ -177,7 +177,7 @@ class AppInterceptors extends Interceptor {
             if (message == 'Token invalid' ||
                 message == 'Token invalid / expired' ||
                 askloraError.type == ValidationCode.invalidToken) {
-              await _handleExpiredToken(err, handler);
+              _handleExpiredToken(err, handler);
               return;
             } else {
               throw UnauthorizedException(err.requestOptions, askloraError);
@@ -198,16 +198,20 @@ class AppInterceptors extends Interceptor {
         }
         break;
       case DioErrorType.cancel:
-        break;
+        throw AskloraApiClientException(err.requestOptions,
+            askloraError: const AskloraError());
       case DioErrorType.unknown:
         throw NoInternetConnectionException(err.requestOptions,
             AskloraError(code: ValidationCode.noInternetConnection.code));
       case DioErrorType.badCertificate:
-        // TODO: Handle this case.
-        break;
+        throw AskloraApiClientException(err.requestOptions,
+            askloraError: const AskloraError());
       case DioErrorType.connectionError:
-        // TODO: Handle this case.
-        break;
+        throw AskloraApiClientException(err.requestOptions,
+            askloraError: const AskloraError());
+      default:
+        throw AskloraApiClientException(err.requestOptions,
+            askloraError: const AskloraError());
     }
 
     return handler.next(err);

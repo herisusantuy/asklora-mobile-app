@@ -7,14 +7,15 @@ import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
+import '../../../../../core/presentation/custom_linear_progress_indicator/custom_linear_progress_indicator.dart';
 import '../../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
-import '../../../../../core/presentation/lora_rounded_corner_banner.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/presentation/text_fields/custom_dropdown.dart';
-import '../../../../../core/presentation/custom_linear_progress_indicator/custom_linear_progress_indicator.dart';
+import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
@@ -29,7 +30,6 @@ import '../../for_you_screen_form.dart';
 import '../bloc/for_you_question_bloc.dart';
 
 part 'widgets/for_you_omni_search_question_screen.dart';
-
 part 'widgets/for_you_others_question_screen.dart';
 
 class ForYouInvestmentStyleScreen extends StatelessWidget {

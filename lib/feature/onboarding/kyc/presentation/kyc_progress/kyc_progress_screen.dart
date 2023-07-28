@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/presentation/ai/lora_animation_green.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/utils/app_icons.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../tabs/presentation/tab_screen.dart';
@@ -26,7 +26,7 @@ class KycProgressScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(width: 180, child: loraGreenAnimation),
+            const SizedBox(width: 180, child: LoraAnimationGreen()),
             CustomTextNew(
               S.of(context).accountOpeningAndDeposit,
               style:

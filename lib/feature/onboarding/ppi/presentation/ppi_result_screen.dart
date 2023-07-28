@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/presentation/ai/lora_animation_green.dart';
+import '../../../../core/presentation/ai/lora_animation_magenta.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
-import '../../../../core/utils/app_icons.dart';
 import '../../../../core/values/app_values.dart';
 
 enum PpiResult { success, failed }
@@ -47,8 +48,8 @@ class PpiResultScreen extends StatelessWidget {
                     Padding(
                         padding: const EdgeInsets.all(20),
                         child: ppiResult == PpiResult.success
-                            ? loraGreenAnimation
-                            : loraMagentaAnimation),
+                            ? const LoraAnimationGreen()
+                            : const LoraAnimationMagenta()),
                     CustomTextNew(title,
                         style: AskLoraTextStyles.h4.copyWith(
                             color: isDarkBgColor

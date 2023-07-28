@@ -4,7 +4,6 @@ import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
-import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../styles/asklora_colors.dart';
 import 'buttons/primary_button.dart';
 
@@ -12,36 +11,39 @@ class LoraBottomSheet {
   final BuildContext context;
   final bool disablePrimaryButton;
   final String title;
+  final TextStyle? titleStyle;
   final String? subTitle;
+  final TextStyle? subTitleStyle;
   final String primaryButtonLabel;
   final String? secondaryButtonLabel;
   final VoidCallback onPrimaryButtonTap;
   final VoidCallback? onSecondaryButtonTap;
-  final LoraMemojiType loraMemojiType;
 
   LoraBottomSheet.show({
     required this.context,
     required this.title,
+    this.titleStyle,
     this.disablePrimaryButton = false,
     this.subTitle,
+    this.subTitleStyle,
     required this.primaryButtonLabel,
     this.secondaryButtonLabel,
     required this.onPrimaryButtonTap,
     this.onSecondaryButtonTap,
-    this.loraMemojiType = LoraMemojiType.lora1,
   }) {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
         context: (context),
         builder: (_) => LoraBottomSheetContent(
-              loraMemojiType: loraMemojiType,
               title: title,
+              titleStyle: titleStyle,
               primaryButtonLabel: primaryButtonLabel,
               secondaryButtonLabel: secondaryButtonLabel,
               onPrimaryButtonTap: onPrimaryButtonTap,
               onSecondaryButtonTap: onSecondaryButtonTap,
               subTitle: subTitle,
+              subTitleStyle: subTitleStyle,
               disablePrimaryButton: disablePrimaryButton,
             ));
   }
@@ -50,25 +52,27 @@ class LoraBottomSheet {
 class LoraBottomSheetContent extends StatelessWidget {
   final bool disablePrimaryButton;
   final String title;
+  final TextStyle? titleStyle;
   final String? subTitle;
+  final TextStyle? subTitleStyle;
   final Widget? child;
   final String primaryButtonLabel;
   final String? secondaryButtonLabel;
   final VoidCallback onPrimaryButtonTap;
   final VoidCallback? onSecondaryButtonTap;
-  final LoraMemojiType loraMemojiType;
   final double buttonPaddingTop;
 
   const LoraBottomSheetContent(
       {required this.title,
+      this.titleStyle,
       this.disablePrimaryButton = false,
       this.subTitle,
+      this.subTitleStyle,
       this.child,
       required this.primaryButtonLabel,
       this.secondaryButtonLabel,
       required this.onPrimaryButtonTap,
       this.onSecondaryButtonTap,
-      this.loraMemojiType = LoraMemojiType.lora1,
       this.buttonPaddingTop = 32,
       Key? key})
       : super(key: key);
@@ -101,9 +105,8 @@ class LoraBottomSheetContent extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          width: 150,
-                          height: 10,
-                          padding: const EdgeInsets.all(5),
+                          width: 123,
+                          height: 11,
                           decoration: BoxDecoration(
                             color: AskLoraColors.gray,
                             borderRadius: BorderRadius.circular(20),
@@ -116,17 +119,17 @@ class LoraBottomSheetContent extends StatelessWidget {
                           padding: AppValues.screenHorizontalPadding,
                           child: CustomTextNew(
                             title,
-                            style: AskLoraTextStyles.h4,
+                            style: titleStyle ?? AskLoraTextStyles.h4,
                             textAlign: TextAlign.center,
                           ),
                         ),
                         if (subTitle != null)
                           Padding(
                             padding: AppValues.screenHorizontalPadding
-                                .copyWith(top: 14),
+                                .copyWith(top: 23),
                             child: CustomTextNew(
                               subTitle!,
-                              style: AskLoraTextStyles.body1,
+                              style: subTitleStyle ?? AskLoraTextStyles.body1,
                               textAlign: TextAlign.center,
                             ),
                           ),

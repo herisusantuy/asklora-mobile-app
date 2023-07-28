@@ -9,8 +9,7 @@ import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../../../core/presentation/lora_memoji_header.dart';
-import '../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../../core/presentation/lora_animation_header.dart';
 import '../../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../generated/l10n.dart';
@@ -90,12 +89,14 @@ class EmailActivationScreen extends StatelessWidget {
         child: BlocBuilder<EmailActivationBloc, EmailActivationState>(
           builder: (context, state) {
             final headerWidget = state.deeplinkStatus == DeeplinkStatus.failed
-                ? LoraMemojiHeader(
+                ? LoraAnimationHeader(
                     text: S.of(context).emailActivationFailedTitle,
-                    loraMemojiType: LoraMemojiType.lora6)
-                : LoraMemojiHeader(
-                    loraMemojiType: LoraMemojiType.lora7,
-                    text: S.of(context).emailActivationSuccessTitle(userName));
+                    loraAnimationType: LoraAnimationType.magenta,
+                  )
+                : LoraAnimationHeader(
+                    text: S.of(context).emailActivationSuccessTitle(userName),
+                  );
+
             return WillPopScope(
                 onWillPop: () {
                   return Future.value(false);

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/lora_bottom_sheet.dart';
-import '../../../core/presentation/lora_memoji_widget.dart';
 import '../../../core/presentation/text_fields/auto_resized_text_field.dart';
 import '../../../core/repository/transaction_repository.dart';
 import '../../../core/styles/asklora_colors.dart';
@@ -55,7 +54,6 @@ class BotStockBottomSheet {
               primaryButtonLabel: S
                   .of(context)
                   .botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle,
-              loraMemojiType: LoraMemojiType.lora4,
               secondaryButtonLabel: S.of(context).buttonNotNow,
               onPrimaryButtonTap: () =>
                   DepositWelcomeScreen.open(context: context),
@@ -213,12 +211,21 @@ class BotStockBottomSheet {
                     const SizedBox(
                       height: 11,
                     ),
-                    CustomTextNew(
-                      S.of(context).botTradeBottomSheetAmountMinimum(
-                          'HKD${buyingPower.convertToCurrencyDecimal()}',
-                          'HKD1,500'),
-                      style: AskLoraTextStyles.body4,
-                    )
+                    Text.rich(
+                        TextSpan(style: AskLoraTextStyles.body4, children: [
+                      TextSpan(
+                        text: S
+                            .of(context)
+                            .botTradeBottomSheetAmountMinimumFirst(
+                                'HKD${buyingPower.convertToCurrencyDecimal()}'),
+                      ),
+                      TextSpan(
+                        text: S
+                            .of(context)
+                            .botTradeBottomSheetAmountMinimumSecond('HKD1,500'),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ])),
                   ],
                 ),
               );
@@ -229,7 +236,6 @@ class BotStockBottomSheet {
 
   static insufficientBalance(BuildContext context) {
     LoraBottomSheet.show(
-      loraMemojiType: LoraMemojiType.lora10,
       context: context,
       title: S.of(context).botTradeBottomSheetInsufficientBalanceTitle,
       subTitle: S
@@ -244,7 +250,6 @@ class BotStockBottomSheet {
 
   static notYetRegisteredToBroker(BuildContext context) {
     LoraBottomSheet.show(
-      loraMemojiType: LoraMemojiType.lora10,
       context: context,
       title: S.of(context).botTradeBottomSheetAccountNotYetApprovedTitle,
       subTitle: S.of(context).botTradeBottomSheetAccountNotYetApprovedSubTitle,
@@ -256,7 +261,6 @@ class BotStockBottomSheet {
   static generalError(BuildContext context) {
     ///TODO : IMPLEMENT THE RIGHT COPYWRITING LATER
     LoraBottomSheet.show(
-      loraMemojiType: LoraMemojiType.lora10,
       context: context,
       title: S.of(context).errorGettingInformationTitle,
       subTitle: S.of(context).errorGettingInformationPortfolioSubTitle,

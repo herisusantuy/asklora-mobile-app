@@ -11,10 +11,10 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/presentation/ai/utils/ai_utils.dart';
 import '../../../../core/presentation/auto_sized_text_widget.dart';
 import '../../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
-import '../../../../core/presentation/custom_text_with_bottom_sheet.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -23,6 +23,7 @@ import '../../../../generated/l10n.dart';
 import '../../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../tabs/for_you/for_you_screen_form.dart';
+import '../../../tabs/for_you/investment_style/presentation/ai_investment_style_question_for_you_screen.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../domain/bot_recommendation_model.dart';
 import '../../utils/bot_stock_utils.dart';
@@ -30,13 +31,9 @@ import '../widgets/custom_expansion_panel.dart';
 import 'detail/bot_recommendation_detail_screen.dart';
 
 part 'widgets/bot_learn_more_bottom_sheet.dart';
-
 part 'widgets/bot_recommendation_card.dart';
-
 part 'widgets/bot_recommendation_card_shimmer.dart';
-
 part 'widgets/bot_recommendation_faq.dart';
-
 part 'widgets/bot_recommendation_list.dart';
 
 class BotRecommendationScreen extends StatelessWidget {
@@ -109,7 +106,7 @@ class BotRecommendationScreen extends StatelessWidget {
       required UserJourney userJourney,
       required String updated}) {
     return Padding(
-      padding: AppValues.screenHorizontalPadding,
+      padding: AppValues.screenHorizontalPadding.copyWith(bottom: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -118,39 +115,35 @@ class BotRecommendationScreen extends StatelessWidget {
             style: AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
           ),
           const SizedBox(height: 16),
-          CustomTextWithBottomSheet(
-            title: S.of(context).updatedAt(updated),
-            bottomSheetText:
-                S.of(context).ourPersonalisedRecommendationsAreUnique,
-            titleStyle: AskLoraTextStyles.subtitle3
-                .copyWith(color: AskLoraColors.darkGray),
+          CustomTextNew(
+            S.of(context).updatedAt(updated),
+            style:
+                AskLoraTextStyles.body2.copyWith(color: AskLoraColors.darkGray),
           ),
-          const SizedBox(
-            height: 8,
-          ),
+          const SizedBox(height: 14),
           Row(
             children: [
               Flexible(
                 flex: 3,
                 child: AutoSizedTextWidget(
                   S.of(context).notTheStockYouWereLooking,
-                  style: AskLoraTextStyles.subtitle3
+                  style: AskLoraTextStyles.subtitle2
                       .copyWith(color: AskLoraColors.primaryMagenta),
                 ),
               ),
-              const SizedBox(width: 5),
+              const SizedBox(width: 8),
               ExtraInfoButton(
+                borderWidth: 1,
                 label: S.of(context).pressToStartOver,
-                buttonExtraInfoSize: ButtonExtraInfoSize.small,
-                onTap: () => context
-                    .read<NavigationBloc<ForYouPage>>()
-                    .add(const PageChanged(ForYouPage.investmentStyle)),
+                labelAlign: TextAlign.center,
+                labelStyle: AskLoraTextStyles.button1
+                    .copyWith(color: AskLoraColors.primaryMagenta),
+                onTap: () => AiInvestmentStyleQuestionForYouScreen.open(context,
+                    aiThemeType: AiThemeType.light),
               ),
             ],
           ),
-          const SizedBox(
-            height: 8,
-          ),
+          const SizedBox(height: 8),
           if (userJourney == UserJourney.freeBotStock)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,9 +161,7 @@ class BotRecommendationScreen extends StatelessWidget {
                   style: AskLoraTextStyles.subtitle2
                       .copyWith(color: AskLoraColors.charcoal),
                 ),
-                const SizedBox(
-                  height: 8,
-                ),
+                const SizedBox(height: 8),
                 GestureDetector(
                   onTap: () => showModalBottomSheet(
                     context: context,
