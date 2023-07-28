@@ -213,12 +213,25 @@ class BotStockBottomSheet {
                     const SizedBox(
                       height: 11,
                     ),
-                    CustomTextNew(
-                      S.of(context).botTradeBottomSheetAmountMinimum(
-                          'HKD${buyingPower.convertToCurrencyDecimal()}',
-                          'HKD1,500'),
-                      style: AskLoraTextStyles.body4,
-                    )
+                    Text.rich(
+                      TextSpan(
+                        style: AskLoraTextStyles.body4, 
+                        children: [
+                          TextSpan(
+                            text: S
+                                .of(context)
+                                .botTradeBottomSheetAmountMinimumFirst(
+                                    'HKD${buyingPower.convertToCurrencyDecimal()}'),
+                          ),
+                          TextSpan(
+                            text: S
+                                .of(context)
+                                .botTradeBottomSheetAmountMinimumSecond('HKD1,500'),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ]
+                      )
+                    ),
                   ],
                 ),
               );

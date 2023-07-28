@@ -130,6 +130,22 @@
       }
     }
   },
+  "botTradeBottomSheetAmountMinimumFirst": "你有  {availableAmount} 可供使用，",
+  "@botTradeBottomSheetAmountMinimumFirst": {
+    "placeholders": {
+      "availableAmount": {
+        "type": "String"
+      }
+    }
+  },
+  "botTradeBottomSheetAmountMinimumSecond": "每單交易最小金額為 {minimumAmount} 。",
+  "@botTradeBottomSheetAmountMinimumSecond": {
+    "placeholders": {
+      "minimumAmount": {
+        "type": "String"
+      }
+    }
+  },
   "botTradeBottomSheetInsufficientBalanceTitle": "唔夠資金，幫你唔到，係時候入錢入戶口！",
   "botTradeBottomSheetInsufficientBalanceSubTitle": "每單交易最小金額為 {minimumAmount} 。",
   "@botTradeBottomSheetInsufficientBalanceSubTitle": {

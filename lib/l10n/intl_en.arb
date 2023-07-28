@@ -147,6 +147,22 @@
       }
     }
   },
+  "botTradeBottomSheetAmountMinimumFirst": "You have {availableAmount},",
+  "@botTradeBottomSheetAmountMinimumFirst": {
+    "placeholders": {
+      "availableAmount": {
+        "type": "String"
+      }
+    }
+  },
+  "botTradeBottomSheetAmountMinimumSecond": " the minimum investment amount is {minimumAmount}.",
+  "@botTradeBottomSheetAmountMinimumSecond": {
+    "placeholders": {
+      "minimumAmount": {
+        "type": "String"
+      }
+    }
+  },
   "botTradeBottomSheetAmountTitle": "How much are you investing?",
   "botTradeBottomSheetInsufficientBalanceTitle": "You are running out of money! Fund your account now.",
   "botTradeBottomSheetInsufficientBalanceSubTitle": "The minimum investment amount is {minimumAmount} per trade.",
