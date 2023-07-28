@@ -522,7 +522,7 @@ class MockTutorialRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<bool> saveTutorialState(bool? tutorialState) =>
+  _i4.Future<bool> saveBotDetailTutorialState(bool? tutorialState) =>
       (super.noSuchMethod(
         Invocation.method(
           #saveTutorialState,
@@ -531,7 +531,7 @@ class MockTutorialRepository extends _i1.Mock
         returnValue: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
   @override
-  _i4.Future<bool> fetchTutorialState() => (super.noSuchMethod(
+  _i4.Future<bool> fetchBotDetailTutorialState() => (super.noSuchMethod(
         Invocation.method(
           #fetchTutorialState,
           [],

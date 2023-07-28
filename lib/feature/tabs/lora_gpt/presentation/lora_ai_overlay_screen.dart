@@ -34,7 +34,7 @@ class LoraAiOverlayScreen extends StatelessWidget {
                 targetBorderRadius: BorderRadius.circular(50),
                 onToolTipClick: () {
                   ShowCaseWidget.of(context).dismiss();
-                  context.read<TutorialBloc>().add(TutorialFinished());
+                  context.read<TutorialBloc>().add(BotDetailTutorialFinished());
                 },
                 overlayOpacity: 0,
                 tooltipWidget: Text.rich(

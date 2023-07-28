@@ -10,23 +10,40 @@ class TutorialBloc extends Bloc<TutorialEvent, TutorialState> {
   TutorialBloc({required TutorialRepository tutorialRepository})
       : _tutorialRepository = tutorialRepository,
         super(const TutorialState()) {
-    on<InitiateTutorial>(_onInitiateTutorial);
-    on<TutorialFinished>(_onTutorialFinished);
+    on<InitiateBotDetailTutorial>(_onInitiateBotDetailTutorial);
+    on<InitiateBotRecommendationTutorial>(_onInitiateBotRecommendationTutorial);
+    on<BotDetailTutorialFinished>(_onBotDetailTutorialFinished);
+    on<BotRecommendationTutorialFinished>(_onBotRecommendationTutorialFinished);
   }
 
   final TutorialRepository _tutorialRepository;
 
-  _onInitiateTutorial(
-      InitiateTutorial event, Emitter<TutorialState> emit) async {
+  _onInitiateBotDetailTutorial(
+      InitiateBotDetailTutorial event, Emitter<TutorialState> emit) async {
     final bool isBotDetailsTutorial =
-        await _tutorialRepository.fetchTutorialState();
+        await _tutorialRepository.fetchBotDetailTutorialState();
     emit(state.copyWith(isBotDetailsTutorial: isBotDetailsTutorial));
   }
 
-  _onTutorialFinished(
-      TutorialFinished event, Emitter<TutorialState> emit) async {
+  _onInitiateBotRecommendationTutorial(InitiateBotRecommendationTutorial event,
+      Emitter<TutorialState> emit) async {
+    final bool isBotRecommendationTutorial =
+        await _tutorialRepository.fetchBotRecommendationTutorialState();
+    emit(state.copyWith(
+        isBotRecommendationTutorial: isBotRecommendationTutorial));
+  }
+
+  _onBotDetailTutorialFinished(
+      BotDetailTutorialFinished event, Emitter<TutorialState> emit) async {
     final bool tutorialState =
-        await _tutorialRepository.saveTutorialState(false);
+        await _tutorialRepository.saveBotDetailTutorialState(false);
     emit(state.copyWith(isBotDetailsTutorial: tutorialState));
+  }
+
+  _onBotRecommendationTutorialFinished(BotRecommendationTutorialFinished event,
+      Emitter<TutorialState> emit) async {
+    final bool tutorialState =
+        await _tutorialRepository.saveBotRecommendationTutorialState(false);
+    emit(state.copyWith(isBotRecommendationTutorial: tutorialState));
   }
 }
