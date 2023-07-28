@@ -491,7 +491,7 @@
   "resetPassword": "重設密碼",
   "passwordLinkHasBeenSent": "已發送重設密碼電郵，\n請檢查你的電郵。",
   "inputWrongEmailAddress": "電郵地址錯誤",
-  "cannotRememberEmailAddress": "忘記登入電郵地址\n請發送電郵至 cs@asklora.ai",
+  "cannotRememberEmailAddress": "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai",
   "forgotPassword": "忘記密碼",
   "forgotPasswordMessage": "請輸入你的電郵地址，我們會發送重設密碼的指示給你。",
   "resetPasswordSuccessful": "密碼重設成功",
