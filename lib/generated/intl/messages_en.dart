@@ -594,7 +594,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openInvestmentAccount":
             MessageLookupByLibrary.simpleMessage("Open Investment Account"),
         "opennessLessThan8": MessageLookupByLibrary.simpleMessage(
-            "we investing can be simple with AI"),
+            "investing can be simple with AI"),
         "opennessMoreThan8": MessageLookupByLibrary.simpleMessage(
             "our technology is perfect for you."),
         "orderCancelled":

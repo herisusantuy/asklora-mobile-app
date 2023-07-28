@@ -33,8 +33,7 @@ class Lora extends Conversation {
 
 class LoraError extends Lora {
   LoraError()
-      : super(
-            'Sorry I cannot connect to the server right now, please try again');
+      : super('Lora is working on some optimizations to serve you better.');
 
   @override
   List<Object?> get props => [type(), text];

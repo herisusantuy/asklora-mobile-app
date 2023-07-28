@@ -45,7 +45,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
   final LoraGptRepository _loraGptRepository;
   final SharedPreference _sharedPreference;
-  List<Conversation> _tempConversation = [];
+  final List<Conversation> _tempConversation = [];
   BaseResponse? _tempIntroResponse;
 
   void _onFetchBotIntro(
@@ -59,14 +59,11 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     emit(state.copyWith(status: status, conversations: tempList));
 
     var botIntroResponse = await _loraGptRepository.botIntro(
-        params: BotstockIntro(
+        params: state.getIntroRequest(
             botType:
                 BotType.findByValue(fetchBotIntro.arguments['botType']).name,
             tickerSymbol: fetchBotIntro.arguments['symbol'],
-            investmentHorizon: fetchBotIntro.arguments['duration'],
-            userId: state.userId,
-            platform: 'asdf',
-            username: state.userName));
+            investmentHorizon: fetchBotIntro.arguments['duration']));
 
     emit(state.copyWith(status: status));
 
@@ -75,8 +72,12 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       tempList.removeLast();
     }
 
+    Logger.log('Krishna is _onFetchBotIntro ${_tempIntroResponse}');
+
     if (_tempIntroResponse?.state != ResponseState.error) {
+      Logger.log('Krishna is _onFetchBotIntro ${_tempIntroResponse} one');
       if (botIntroResponse.state == ResponseState.success) {
+        Logger.log('Krishna is _onFetchBotIntro ${_tempIntroResponse} two');
         status = ResponseState.success;
         if (_tempIntroResponse != null) {
           isTyping = true;
@@ -88,18 +89,11 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         }
       } else {
         status = ResponseState.error;
-        if (_tempIntroResponse != null) {
-          isTyping = true;
-          _tempIntroResponse = botIntroResponse;
-          tempList.add(LoraError());
-        } else {
-          _tempIntroResponse = botIntroResponse;
-        }
+        _tempIntroResponse ??= botIntroResponse;
       }
     } else {
       status = ResponseState.error;
-      isTyping = true;
-      tempList.add(LoraError());
+      isTyping = false;
     }
     emit(state.copyWith(
         status: status, conversations: tempList, isTyping: isTyping));
@@ -114,14 +108,11 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     emit(state.copyWith(status: status));
 
     var botEarningsResponse = await _loraGptRepository.botEarnings(
-        params: BotstockIntro(
+        params: state.getIntroRequest(
             botType:
                 BotType.findByValue(fetchBotEarnings.arguments['botType']).name,
             tickerSymbol: fetchBotEarnings.arguments['symbol'],
-            investmentHorizon: fetchBotEarnings.arguments['duration'],
-            userId: state.userId,
-            platform: 'asdf',
-            username: state.userName));
+            investmentHorizon: fetchBotEarnings.arguments['duration']));
     emit(state.copyWith(status: status));
 
     ///remove loading
@@ -142,17 +133,11 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         }
       } else {
         status = ResponseState.error;
-        if (_tempIntroResponse != null) {
-          isTyping = true;
-          tempList.add(LoraError());
-        } else {
-          _tempIntroResponse = botEarningsResponse;
-        }
+        _tempIntroResponse ??= botEarningsResponse;
       }
     } else {
       status = ResponseState.error;
-      isTyping = true;
-      tempList.add(LoraError());
+      isTyping = false;
     }
     emit(state.copyWith(
         status: status, conversations: tempList, isTyping: isTyping));
@@ -207,7 +192,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     final subPage = state.tabPage.getArguments;
 
     if (subPage.path.isNotEmpty &&
-        subPage.path == SubTabPage.portfolioBotStockDetails.value) {
+            subPage.path == SubTabPage.portfolioBotStockDetails.value ||
+        subPage.path == SubTabPage.recommendationsBotStockDetails.value) {
       PortfolioDetailsRequest request = state.getPortfolioDetailsRequest(
           query: query,
           botType: subPage.arguments['botType'],
@@ -248,8 +234,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         _tempConversation.addAll(response.data!.components);
       }
     } else {
-      tempList.add(
-          Lora('Lora is working on some optimizations to serve you better.'));
+      tempList.add(LoraError());
     }
     emit(state.copyWith(
         status: ResponseState.success,
@@ -275,7 +260,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
           ..addAll(_tempConversation),
         status: ResponseState.unknown,
         isTyping: onFinishTyping.isTyping));
-    _tempConversation = [];
+    _tempConversation.clear();
   }
 
   void _onShowOverlayWidget(
@@ -293,90 +278,21 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       emit(state.copyWith(
           totalPnl: event.totalPortfolioPnl, status: ResponseState.unknown));
 
-  void _onStoreTabPage(StoreTabPageEvent event, Emitter<LoraGptState> emit) {
-    Logger.log('Krishna _onStoreTabPage ${event.tabPage}');
-    emit(state.copyWith(tabPage: event.tabPage, status: ResponseState.unknown));
-  }
+  void _onStoreTabPage(StoreTabPageEvent event, Emitter<LoraGptState> emit) =>
+      emit(state.copyWith(
+          tabPage: event.tabPage, status: ResponseState.unknown));
 
   void _onAiOverlayOpen(
       OnAiOverlayOpen event, Emitter<LoraGptState> emit) async {
-    Logger.log(
-        'Krishna _onAiOverlayOpen ${event} state.tabPage ${state.tabPage} ${state.tabPage.getArguments}');
-
     final subPage = state.tabPage.getArguments;
 
     if (subPage.path.isNotEmpty &&
-        subPage.path == SubTabPage.portfolioBotStockDetails.value) {
+        subPage.path == SubTabPage.recommendationsBotStockDetails.value) {
       _tempIntroResponse = null;
       add(FetchBotIntro(subPage.arguments));
       add(FetchBotEarnings(subPage.arguments));
-      // BaseResponse<QueryResponse> response = BaseResponse.error();
-
-      // final tempList = List<Conversation>.of(state.conversations);
-      // tempList.add(Loading());
-      //
-      // emit(state.copyWith(
-      //     status: ResponseState.loading,
-      //     conversations: tempList,
-      //     isTyping: true));
-      //
-      // Logger.log(
-      //     'Krishna _onAiOverlayOpen ${event} state.tabPage ${state.tabPage} ${BotType.findByValue(subPage.arguments['botType']).internalName}');
-      //
-      // var botIntroResponse = await _loraGptRepository.botIntro(
-      //     params: BotstockIntro(
-      //         botType: BotType.findByValue(subPage.arguments['botType']).name,
-      //         tickerSymbol: subPage.arguments['symbol'],
-      //         investmentHorizon: subPage.arguments['duration'],
-      //         userId: state.userId,
-      //         platform: 'asdf',
-      //         username: state.userName));
-      //
-      // tempList.removeLast();
-      //
-      // if (botIntroResponse.state == ResponseState.success) {
-      //   tempList.add(Lora(botIntroResponse.data!.getResult()));
-      // } else {
-      //   tempList.add(Lora(
-      //       'Sorry I cannot connect to the server right now, please try again'));
-      // }
-      //
-      // tempList.add(Loading());
-      //
-      // var botEarningsResponse = await _loraGptRepository.botEarnings(
-      //     params: BotstockIntro(
-      //         botType: BotType.findByValue(subPage.arguments['botType']).name,
-      //         tickerSymbol: subPage.arguments['symbol'],
-      //         investmentHorizon: subPage.arguments['duration'],
-      //         userId: state.userId,
-      //         platform: 'asdf',
-      //         username: state.userName));
-      //
-      // tempList.removeLast();
-      //
-      // if (botEarningsResponse.state == ResponseState.success) {
-      //   tempList.add(Lora(botEarningsResponse.data!.getResult()));
-      // } else {
-      //   tempList.add(Lora(
-      //       'Sorry I cannot connect to the server right now, please try again'));
-      // }
-
-      // emit(state.copyWith(
-      //     status: ResponseState.success,
-      //     conversations: tempList,
-      //     query: '',
-      //     sessionId: response.data?.requestId,
-      //     isTyping: true));
     }
-
-    // emit(state.copyWith(
-    //     tabPage: event.tabPage, status: ResponseState.unknown));
   }
 
-  void _onAiOverlayClose(OnAiOverlayClose event, Emitter<LoraGptState> emit) {
-    Logger.log(
-        'Krishna _onAiOverlayClose ${event} state.tabPage ${state.tabPage}');
-    // emit(state.copyWith(
-    //     tabPage: event.tabPage, status: ResponseState.unknown));
-  }
+  void _onAiOverlayClose(OnAiOverlayClose event, Emitter<LoraGptState> emit) {}
 }
