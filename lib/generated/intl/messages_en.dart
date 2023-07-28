@@ -605,7 +605,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "opennessLessThan8": MessageLookupByLibrary.simpleMessage(
             "we investing can be simple with AI"),
         "opennessMoreThan8": MessageLookupByLibrary.simpleMessage(
-            "our technology is perfect for you."),
+            "our technology is perfect for you"),
         "orderCancelled":
             MessageLookupByLibrary.simpleMessage("Order Cancelled"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("Order Expired"),
@@ -772,6 +772,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioWithdrawableAmount": m21,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
+        "ppiGotIt": MessageLookupByLibrary.simpleMessage("Got It"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage(
             "Press back again to exit Asklora"),
         "pressToStartOver":

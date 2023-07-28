@@ -74,7 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m22(seconds) => "在${seconds}秒後重發 ";
 
   static String m23(opennessScore, neuroticismScore, extrovertScore) =>
-      "${opennessScore}, ${neuroticismScore}\n\n${extrovertScore}";
+      "${opennessScore} ${neuroticismScore}\n\n${extrovertScore}";
 
   static String m24(botName, botSymbol, dateTime) =>
       "${botName} ${botSymbol} 將於 ${dateTime} 開始";
@@ -637,6 +637,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioWithdrawableAmount": m21,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
+        "ppiGotIt": MessageLookupByLibrary.simpleMessage("了解!"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
         "pressToStartOver":
             MessageLookupByLibrary.simpleMessage("Press to\nStart Over"),
