@@ -105,7 +105,7 @@ class AiInvestmentStyleQuestionForm extends StatelessWidget {
       );
 
   Widget get _bottomContent => Align(
-        alignment: Alignment.bottomCenter,
+        alignment: Alignment.bottomLeft,
         child: Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: BlocBuilder<AiInvestmentStyleQuestionBloc,

@@ -37,6 +37,8 @@ class InteractionWidget extends StatelessWidget {
                 current.isChatAnimationRunning,
             builder: (context, state) {
               return Wrap(
+                alignment: WrapAlignment.start,
+                crossAxisAlignment: WrapCrossAlignment.start,
                 spacing: 12,
                 runSpacing: 12,
                 children: (interaction as ChoicesInteraction)
@@ -45,11 +47,11 @@ class InteractionWidget extends StatelessWidget {
                     .map((value) => state.isChatAnimationRunning
                         ? ShimmerWidget(
                             width:
-                                value.value.textWidth(AskLoraTextStyles.body2) +
+                                value.value.textWidth(AskLoraTextStyles.body1) +
                                     30.2,
                             height: 39.2)
                         : CustomChoiceChips(
-                            textStyle: AskLoraTextStyles.body2
+                            textStyle: AskLoraTextStyles.body1
                                 .copyWith(color: aiThemeType.primaryFontColor),
                             textColor: aiThemeType.secondaryFontColor,
                             borderColor:

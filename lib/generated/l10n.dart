@@ -3798,7 +3798,7 @@ class S {
   /// `investing can be simple with AI`
   String get opennessLessThan8 {
     return Intl.message(
-      'investing can be simple with AI',
+      'we investing can be simple with AI',
       name: 'opennessLessThan8',
       desc: '',
       args: [],

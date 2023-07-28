@@ -29,7 +29,7 @@ class InChatBubbleWidget extends StatelessWidget {
               ),
             ),
             child: SelectableText(message,
-                style: AskLoraTextStyles.body2
+                style: AskLoraTextStyles.body1
                     .copyWith(color: aiThemeType.primaryFontColor))));
   }
 }
