@@ -43,6 +43,9 @@ class BotRecommendationDetailModel extends Equatable {
   @JsonKey(name: 'market_cap')
   final String marketCap;
 
+  String get prevCloseDateFormatted =>
+      formatDateTimeAsString(prevCloseDate, dateFormat: 'dd/MM/yyyy');
+
   String get estEndDateFormatted =>
       formatDateTimeAsString(estEndDate, dateFormat: 'dd/MM/yyyy');
 
