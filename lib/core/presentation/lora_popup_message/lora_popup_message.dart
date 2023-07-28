@@ -122,9 +122,10 @@ class LoraPopUpMessage extends StatelessWidget {
                 ),
               ),
             ),
-            Align(
-                alignment: Alignment.topCenter,
-                child: getPngImage(pngImage ?? 'lora_memoji_1')),
+            if (pngImage != null)
+              Align(
+                  alignment: Alignment.topCenter,
+                  child: getPngImage(pngImage!)),
           ],
         ),
       ),

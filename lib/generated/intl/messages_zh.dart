@@ -147,6 +147,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!"),
         "botRecommendationScreenTitle":
             MessageLookupByLibrary.simpleMessage("最夾你嘅投資風格"),
+        "botStockDoScreenPoint1":
+            MessageLookupByLibrary.simpleMessage("嘗試獲取較大收益"),
+        "botStockDoScreenPoint2":
+            MessageLookupByLibrary.simpleMessage("避免過度損失"),
+        "botStockDoScreenPoint3":
+            MessageLookupByLibrary.simpleMessage("獲取頻繁而小額的收益"),
+        "botStockDoScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "作為 AI 投資策略, Bot 將會於指定時間內，自動幫你進行交易，捕捉收益機會同時管理風險。"),
+        "botStockExplanationScreenBottomButton":
+            MessageLookupByLibrary.simpleMessage("明白! BOT 會做甚麼？"),
+        "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "Botstock 由一隻股票及一個 Bot 組成。 每一個 Bot 各代表一個獨一無二的 AI 投資策略。而Lora會幫你管理策略。"),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
             MessageLookupByLibrary.simpleMessage("預計批核時間為 2 個工作天。"),
         "botTradeBottomSheetAccountNotYetApprovedTitle":
@@ -340,6 +352,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "getReadyForTrading": MessageLookupByLibrary.simpleMessage("準備好AI 交易"),
         "getTheFirstBotstockForFree":
             MessageLookupByLibrary.simpleMessage("獲取首個免費 Botstock "),
+        "giftBotStockWelcomeScreenBottomButton":
+            MessageLookupByLibrary.simpleMessage("好! 甚麼是Botstock ?"),
+        "giftBotStockWelcomeScreenTitle":
+            MessageLookupByLibrary.simpleMessage("萬事具備, 即刻開始交易你嘅第一隻Botstock!"),
         "go": MessageLookupByLibrary.simpleMessage("繼續"),
         "gotIt": MessageLookupByLibrary.simpleMessage("知道了"),
         "greatStart": MessageLookupByLibrary.simpleMessage("開始投資"),
@@ -782,6 +798,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transportationMaterialMoving": MessageLookupByLibrary.simpleMessage(
             "Transportation and Material Moving"),
         "unEmployed": MessageLookupByLibrary.simpleMessage("失業"),
+        "understood": MessageLookupByLibrary.simpleMessage("明白！"),
         "unknown": MessageLookupByLibrary.simpleMessage("Unknown"),
         "updatedAt": m24,
         "uploadAddressProof": MessageLookupByLibrary.simpleMessage("上傳住址證明"),

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/styles/asklora_colors.dart';
-import '../../../../core/presentation/lora_memoji_header.dart';
-import '../widgets/circular_bot_card.dart';
+import '../../../../core/presentation/buttons/secondary/extra_info_button.dart';
+import '../../../../core/presentation/custom_text_new.dart';
+import '../../../../core/styles/asklora_text_styles.dart';
+import '../../../../generated/l10n.dart';
 import '../widgets/bot_stock_form.dart';
+import '../widgets/circular_bot_card.dart';
 import 'bot_stock_do_screen.dart';
 
 class BotStockExplanationScreen extends StatelessWidget {
@@ -15,24 +18,28 @@ class BotStockExplanationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BotStockForm(
-      content: const Column(
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          LoraMemojiHeader(
-              text:
-                  'A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that Lora will manage for you!'),
-          SizedBox(
-            height: 32,
+          const SizedBox(height: 50),
+          ExtraInfoButton(
+            onTap: () => '',
+            label: 'Lora\'s tips',
+            buttonExtraInfoSize: ButtonExtraInfoSize.small,
           ),
-          WhatIsBotTutorial(),
-          SizedBox(
-            height: 50,
+          const SizedBox(height: 20),
+          CustomTextNew(
+            S.of(context).botStockExplanationScreenTitle,
+            style: AskLoraTextStyles.h4,
           ),
+          const SizedBox(height: 100),
+          const WhatIsBotTutorial(),
         ],
       ),
       bottomButton: Padding(
         padding: const EdgeInsets.only(bottom: 30.0),
         child: PrimaryButton(
-          label: 'Got It! What Does a Bot Do?',
+          label: S.of(context).botStockExplanationScreenBottomButton,
           onTap: () => BotStockDoScreen.open(context),
         ),
       ),

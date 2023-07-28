@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/domain/pair.dart';
+import '../../../../core/presentation/ai/lora_animation_green.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
-import '../../../../core/utils/app_icons.dart';
 import '../../../../generated/l10n.dart';
 import '../../ppi/bloc/question/question_bloc.dart';
 import '../../ppi/presentation/ppi_screen.dart';
@@ -26,8 +26,7 @@ class GreetingScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 70),
-          getAPngImage('lora_animation_green',
-              width: 208, fit: BoxFit.fitWidth),
+          const LoraAnimationGreen(),
           const SizedBox(height: 10),
           CustomTextNew(
             S.of(context).greetingScreenTitle,
