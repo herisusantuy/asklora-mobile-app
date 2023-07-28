@@ -80,10 +80,12 @@ class BotDetailModel extends Equatable {
         : 'NA';
   }
 
-  String get spotDateFormatted => formatDateTimeAsString(spotDate);
+  String get spotDateFormatted =>
+      formatDateTimeAsString(spotDate, dateFormat: 'dd/MM/yyyy');
 
-  String get expireDateFormatted =>
-      expireDate != null ? formatDateTimeAsString(expireDate) : 'NA';
+  String get expireDateFormatted => expireDate != null
+      ? formatDateTimeAsString(expireDate, dateFormat: 'dd/MM/yyyy')
+      : 'NA';
 
   String get totalPnLPctString {
     final double totalPnlPctDouble = checkDouble(totalPnLPct);
