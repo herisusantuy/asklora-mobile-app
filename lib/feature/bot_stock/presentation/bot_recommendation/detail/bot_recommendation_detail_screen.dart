@@ -77,7 +77,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                     .add(RemoveInterceptor());
               } else if (state.botDetailResponse.state ==
                   ResponseState.success) {
-                context.read<TutorialBloc>().add(InitiateTutorial());
+                context.read<TutorialBloc>().add(InitiateBotDetailTutorial());
               } else {
                 context
                     .read<BackButtonInterceptorBloc>()
