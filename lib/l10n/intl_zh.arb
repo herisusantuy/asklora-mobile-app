@@ -491,7 +491,7 @@
   "resetPassword": "重設密碼",
   "passwordLinkHasBeenSent": "已發送重設密碼電郵，\n請檢查你的電郵。",
   "inputWrongEmailAddress": "電郵地址錯誤",
-  "cannotRememberEmailAddress": "忘記登入電郵地址\n請發送電郵至 cs@asklora.ai",
+  "cannotRememberEmailAddress": "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai",
   "forgotPassword": "忘記密碼",
   "forgotPasswordMessage": "請輸入你的電郵地址，我們會發送重設密碼的指示給你。",
   "resetPasswordSuccessful": "密碼重設成功",
@@ -554,7 +554,7 @@
   "cantRememberYourEmail": "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai",
   "inputWrongEmail": "電郵地址錯誤",
   "buttonBackToPortfolio": "返回投資組合頁",
-  "resultOfPersonalizationQuestion": "{opennessScore}, {neuroticismScore}\n\n{extrovertScore}",
+  "resultOfPersonalizationQuestion": "{opennessScore} {neuroticismScore}\n\n{extrovertScore}",
   "@resultOfPersonalizationQuestion": {
     "placeholders": {
       "opennessScore": {
@@ -736,6 +736,7 @@
   "understood": "明白！",
   "giftBotStockWelcomeScreenTitle": "萬事具備, 即刻開始交易你嘅第一隻Botstock!",
   "giftBotStockWelcomeScreenBottomButton": "好! 甚麼是Botstock ?",
+  "giftBotStockMessage": "每一次你投資新嘅Botstock, 我都會問你投資風格問題，咁我就可以提供新嘅個人化投資建議畀你！",
   "pressToStartOver": "Press to\nStart Over",
   "seeMyRecommendations": "See My Recommendations",
   "startAgain": "Start Again",
@@ -754,5 +755,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "ppiGotIt": "了解!"
 }

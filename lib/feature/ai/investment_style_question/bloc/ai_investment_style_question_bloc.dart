@@ -103,7 +103,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
     ///quid17 is risk preference
     ///quid18 is preferred method
     for (var element in fixture!.getInvestmentStyleQuestion) {
-      if (element.questionId == 'quid15') {
+      if (element.questionId == 'quid15' && state.result!.keywords.isNotEmpty) {
         ppiSelectionRequest.add(PpiSelectionRequest(
           userId: ppiUserId,
           questionId: element.questionId!,

@@ -74,7 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m22(seconds) => "在${seconds}秒後重發 ";
 
   static String m23(opennessScore, neuroticismScore, extrovertScore) =>
-      "${opennessScore}, ${neuroticismScore}\n\n${extrovertScore}";
+      "${opennessScore} ${neuroticismScore}\n\n${extrovertScore}";
 
   static String m24(botName, botSymbol, dateTime) =>
       "${botName} ${botSymbol} 將於 ${dateTime} 開始";
@@ -237,7 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buy": MessageLookupByLibrary.simpleMessage("買入"),
         "cancelled": MessageLookupByLibrary.simpleMessage("已取消"),
         "cannotRememberEmailAddress": MessageLookupByLibrary.simpleMessage(
-            "忘記登入電郵地址\n請發送電郵至 cs@asklora.ai"),
+            "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai"),
         "cantRememberYourEmail": MessageLookupByLibrary.simpleMessage(
             "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage("投資一樣\n要夠Fit"),
@@ -359,6 +359,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "getReadyForTrading": MessageLookupByLibrary.simpleMessage("準備好AI 交易"),
         "getTheFirstBotstockForFree":
             MessageLookupByLibrary.simpleMessage("獲取首個免費 Botstock "),
+        "giftBotStockMessage": MessageLookupByLibrary.simpleMessage(
+            "每一次你投資新嘅Botstock, 我都會問你投資風格問題，咁我就可以提供新嘅個人化投資建議畀你！"),
         "giftBotStockWelcomeScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("好! 甚麼是Botstock ?"),
         "giftBotStockWelcomeScreenTitle":
@@ -628,6 +630,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioWithdrawableAmount": m21,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
+        "ppiGotIt": MessageLookupByLibrary.simpleMessage("了解!"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
         "pressToStartOver":
             MessageLookupByLibrary.simpleMessage("Press to\nStart Over"),

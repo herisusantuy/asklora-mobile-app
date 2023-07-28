@@ -443,6 +443,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Get ready for AI trading."),
         "getTheFirstBotstockForFree": MessageLookupByLibrary.simpleMessage(
             "Get the First Botstock for Free"),
+        "giftBotStockMessage": MessageLookupByLibrary.simpleMessage(
+            "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! "),
         "giftBotStockWelcomeScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
         "giftBotStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
@@ -596,7 +598,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "opennessLessThan8": MessageLookupByLibrary.simpleMessage(
             "investing can be simple with AI"),
         "opennessMoreThan8": MessageLookupByLibrary.simpleMessage(
-            "our technology is perfect for you."),
+            "our technology is perfect for you"),
         "orderCancelled":
             MessageLookupByLibrary.simpleMessage("Order Cancelled"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("Order Expired"),
@@ -761,6 +763,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioWithdrawableAmount": m21,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
+        "ppiGotIt": MessageLookupByLibrary.simpleMessage("Got It"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage(
             "Press back again to exit Asklora"),
         "pressToStartOver":

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../feature/bot_stock/presentation/gift/gift_bot_stock_message.dart';
 import '../presentation/ai/utils/ai_utils.dart';
 import '../../feature/onboarding/ppi/presentation/investment_style_question/ai_investment_style_question_onboarding_screen.dart';
 import '../../feature/ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
@@ -144,6 +145,10 @@ class RouterGenerator {
       case BotStockDoScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const BotStockDoScreen());
+      case GiftBotStockMessageScreen.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const GiftBotStockMessageScreen());
       case FreeBotRecommendationScreen.route:
         return MaterialPageRoute(
             settings: settings,

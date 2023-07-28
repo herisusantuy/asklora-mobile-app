@@ -3805,10 +3805,10 @@ class S {
     );
   }
 
-  /// `our technology is perfect for you.`
+  /// `our technology is perfect for you`
   String get opennessMoreThan8 {
     return Intl.message(
-      'our technology is perfect for you.',
+      'our technology is perfect for you',
       name: 'opennessMoreThan8',
       desc: '',
       args: [],
@@ -5506,6 +5506,16 @@ class S {
     );
   }
 
+  /// `Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! `
+  String get giftBotStockMessage {
+    return Intl.message(
+      'Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ',
+      name: 'giftBotStockMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Press to\nStart Over`
   String get pressToStartOver {
     return Intl.message(
@@ -5553,6 +5563,16 @@ class S {
       name: 'botTradeBottomSheetAmountMinimumSecond',
       desc: '',
       args: [minimumAmount],
+    );
+  }
+
+  /// `Got It`
+  String get ppiGotIt {
+    return Intl.message(
+      'Got It',
+      name: 'ppiGotIt',
+      desc: '',
+      args: [],
     );
   }
 }
