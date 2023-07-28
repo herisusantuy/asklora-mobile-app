@@ -82,7 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m25(minDeposit) =>
       "請轉賬最少 HK\$${minDeposit} 至 Asklora 銀行戶口。任何少於 HK\$${minDeposit} 的首次入金均會被拒收，並會被徵收手續費。";
 
-  static String m26(updated) => "Updated at ${updated}";
+  static String m26(updated) => "於 ${updated} 更新";
 
   static String m27(minDeposit) =>
       "我們會提取由你銀行透過 API 或匯款通知書收集的資訊， 確定你指定的銀行戶口。我們只會接受透過此指定戶口進行所有將來的入金與提取。你可轉換指定銀行戶口，但你需要完成最少匯款 HK\$${minDeposit} 以通過相同的認證。";
@@ -470,8 +470,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTransactionsYet":
             MessageLookupByLibrary.simpleMessage("你似乎未進行過任何交易！"),
         "notFeelingIt": MessageLookupByLibrary.simpleMessage("唔啱心水？當然仲有得揀！"),
-        "notTheStockYouWereLooking": MessageLookupByLibrary.simpleMessage(
-            "Not the stock you were looking for? Try something different"),
+        "notTheStockYouWereLooking":
+            MessageLookupByLibrary.simpleMessage("唔係你想要嘅股票？仲有其他可以揀！"),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
             "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。"),
         "notes": MessageLookupByLibrary.simpleMessage("說明"),
@@ -632,8 +632,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "ppiGotIt": MessageLookupByLibrary.simpleMessage("了解!"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
-        "pressToStartOver":
-            MessageLookupByLibrary.simpleMessage("Press to\nStart Over"),
+        "pressToStartOver": MessageLookupByLibrary.simpleMessage("重新界定"),
         "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
         "privacyEvaluation": MessageLookupByLibrary.simpleMessage("私隱評估"),
         "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
