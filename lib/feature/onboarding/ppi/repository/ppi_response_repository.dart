@@ -28,7 +28,7 @@ class PpiResponseRepository {
   Future<BaseResponse<PpiUserResponse>> addAnswer(
       PpiSelectionRequest ppiUserResponseRequest) async {
     try {
-      var response =
+      final response =
           await _ppiApiRepository.postQuestionAnswer(ppiUserResponseRequest);
 
       var ppiUserResponse = PpiUserResponse.fromJson(response.data);
@@ -41,7 +41,7 @@ class PpiResponseRepository {
   Future<BaseResponse<PpiUserResponse>> addBulkAnswer(
       List<PpiSelectionRequest> ppiUserResponseRequest) async {
     try {
-      var response =
+      final response =
           await _ppiApiRepository.postBulkAnswer(ppiUserResponseRequest);
       return BaseResponse.complete(PpiUserResponse.fromJson(response.data));
     } on BadRequestException catch (_) {

@@ -4,6 +4,7 @@ import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/utils.dart';
 
 class CustomToggleButton extends StatelessWidget {
   final String? title;
@@ -64,7 +65,7 @@ class CustomToggleButton extends StatelessWidget {
       child: GestureDetector(
         key: Key('$title-$choice'),
         onTap: () {
-          FocusManager.instance.primaryFocus?.unfocus();
+          closeKeyboard();
           onSelected(choice);
         },
         child: Container(

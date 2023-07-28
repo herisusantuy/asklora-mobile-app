@@ -607,7 +607,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
         "pressToStartOver":
-            MessageLookupByLibrary.simpleMessage("Press to Start Over"),
+            MessageLookupByLibrary.simpleMessage("Press to\nStart Over"),
         "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
         "privacyEvaluation": MessageLookupByLibrary.simpleMessage("私隱評估"),
         "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
@@ -646,6 +646,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "rolloverBotStockAcknowledgement": m22,
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
+        "seeMyRecommendations":
+            MessageLookupByLibrary.simpleMessage("See My Recommendations"),
         "selfEmployed": MessageLookupByLibrary.simpleMessage("自僱"),
         "sell": MessageLookupByLibrary.simpleMessage("賣出"),
         "sendOtp": MessageLookupByLibrary.simpleMessage("發送 OTP"),
@@ -661,6 +663,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(" 踏入AI新世代，\n展開AI投資之旅"),
         "sourceOfWealth": MessageLookupByLibrary.simpleMessage("財富來源"),
         "startABotstock": MessageLookupByLibrary.simpleMessage("開始交易"),
+        "startAgain": MessageLookupByLibrary.simpleMessage("Start Again"),
         "startDate": MessageLookupByLibrary.simpleMessage("最佳開始日期"),
         "startInvesting": MessageLookupByLibrary.simpleMessage("開始投資 "),
         "startInvestingOnMilestone":

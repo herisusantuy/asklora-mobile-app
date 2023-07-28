@@ -2,6 +2,7 @@ import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/utils.dart';
 import '../../bloc/tab_screen_bloc.dart';
 import '../../lora_gpt/presentation/lora_ai_screen.dart';
 
@@ -88,6 +89,7 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
 
   void _closeAiOverlay() {
     BackButtonInterceptor.remove(_backButtonInterceptor);
+    closeKeyboard();
     final double startingPoint = _drawerBottom;
     _controller = AnimationController(
         duration: openAndCloseAnimationDuration, vsync: this);
@@ -149,7 +151,7 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
 
   void _onPanDown(DragDownDetails dragEndDetails) {
     ///dismiss keyboard on user tap down background
-    FocusManager.instance.primaryFocus?.unfocus();
+    closeKeyboard();
   }
 
   void _onPanEnd(DragEndDetails dragEndDetails) {
