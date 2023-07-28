@@ -3938,7 +3938,7 @@ class S {
   /// `we investing can be simple with AI`
   String get opennessLessThan8 {
     return Intl.message(
-      'we investing can be simple with AI',
+      'investing can be simple with AI',
       name: 'opennessLessThan8',
       desc: '',
       args: [],
@@ -5641,6 +5641,16 @@ class S {
     return Intl.message(
       'Sure! What is a Botstock?',
       name: 'giftBotStockWelcomeScreenBottomButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! `
+  String get giftBotStockMessage {
+    return Intl.message(
+      'Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ',
+      name: 'giftBotStockMessage',
       desc: '',
       args: [],
     );

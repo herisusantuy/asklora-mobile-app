@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class LoraAnimationMagenta extends StatelessWidget {
-  const LoraAnimationMagenta({super.key});
+  final double height;
+  final double width;
+  const LoraAnimationMagenta({this.height = 170, this.width = 170, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Image.asset('assets/apng/lora_animation_magenta.png',
-        height: 170, width: 170, filterQuality: FilterQuality.high);
+        height: height, width: width, filterQuality: FilterQuality.high);
   }
 }
