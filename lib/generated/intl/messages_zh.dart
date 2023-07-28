@@ -770,13 +770,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "timeCompleted": MessageLookupByLibrary.simpleMessage("完成時間"),
         "timeRequested": MessageLookupByLibrary.simpleMessage("請求時間"),
         "to": MessageLookupByLibrary.simpleMessage("至"),
-        "toDismissAsklora":
-            MessageLookupByLibrary.simpleMessage("to dismiss Asklora. "),
         "toExecuteIt": MessageLookupByLibrary.simpleMessage(" 就可以立即執行指示！"),
         "toGiveYou":
             MessageLookupByLibrary.simpleMessage("嘅表現，希望幫到你理解Botstock係點樣交易！"),
         "toStartAConversation": MessageLookupByLibrary.simpleMessage(
-            "to start a conversation. Swipe down "),
+            "to start a conversation. Tap the icon again to dismiss Asklora"),
         "tokenInvalid": MessageLookupByLibrary.simpleMessage(
             "Token is invalid or expired."),
         "tooltipBotDetailsEstMaxLoss":
@@ -792,7 +790,6 @@ class MessageLookup extends MessageLookupByLibrary {
                 "你定下的投資時間，Botstock將會於此期間內自動買賣股票。"),
         "tooltipBotDetailsStartDate":
             MessageLookupByLibrary.simpleMessage("Lora開始Botstocks交易"),
-        "topBar": MessageLookupByLibrary.simpleMessage("top bar "),
         "totalAmount": MessageLookupByLibrary.simpleMessage("總金額"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "trade": MessageLookupByLibrary.simpleMessage("交易"),

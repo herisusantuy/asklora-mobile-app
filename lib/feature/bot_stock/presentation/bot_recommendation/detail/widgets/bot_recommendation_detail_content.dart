@@ -43,7 +43,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
       children: [
         _botDetailsExpansionTile(context),
         _detailedInformation(context),
-        _performanceWidget(context),
+        if (!FeatureFlags.isMockApp) _performanceWidget(context),
       ],
     );
   }
@@ -226,6 +226,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
             ),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (botDetailModel != null)
                 Column(
@@ -297,13 +298,11 @@ class BotRecommendationDetailContent extends StatelessWidget {
           onToolTipClick: () => ShowCaseWidget.of(context).next(),
           child: Column(
             children: [
-              if (!FeatureFlags.isMockApp) ...[
-                _chartWidget(context),
-                const SizedBox(
-                  height: 6,
-                ),
-                _getChartCaption(context),
-              ]
+              _chartWidget(context),
+              const SizedBox(
+                height: 6,
+              ),
+              _getChartCaption(context),
             ],
           ),
         ),

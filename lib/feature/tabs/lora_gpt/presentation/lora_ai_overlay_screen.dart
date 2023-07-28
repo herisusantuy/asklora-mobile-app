@@ -29,7 +29,8 @@ class LoraAiOverlayScreen extends StatelessWidget {
               child: CustomShowcaseView(
                 targetPadding: EdgeInsets.zero,
                 tutorialKey: TutorialJourney.chatLoraButton,
-                tooltipPosition: TooltipPosition.top,
+                tooltipPosition: TooltipPosition.bottom,
+                pointerPosition: PointerPosition.top,
                 targetBorderRadius: BorderRadius.circular(50),
                 onToolTipClick: () {
                   ShowCaseWidget.of(context).dismiss();
@@ -47,12 +48,6 @@ class LoraAiOverlayScreen extends StatelessWidget {
                           style: AskLoraTextStyles.subtitle2),
                       TextSpan(
                           text: S.of(context).toStartAConversation,
-                          style: AskLoraTextStyles.body1),
-                      TextSpan(
-                          text: S.of(context).topBar,
-                          style: AskLoraTextStyles.subtitle2),
-                      TextSpan(
-                          text: S.of(context).toDismissAsklora,
                           style: AskLoraTextStyles.body1),
                     ],
                   ),

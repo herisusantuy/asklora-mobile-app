@@ -13,6 +13,7 @@ import '../../../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../../../core/repository/transaction_repository.dart';
 import '../../../../../core/repository/tutorial_repository.dart';
 import '../../../../../core/utils/back_button_interceptor/back_button_interceptor_bloc.dart';
+import '../../../../../core/utils/feature_flags.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../chart/presentation/chart_animation.dart';
@@ -94,7 +95,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                 if (tutorialState.isBotDetailsTutorial) {
                   ShowCaseWidget.of(context).startShowCase([
                     TutorialJourney.botDetails,
-                    TutorialJourney.botChart,
+                    if (!FeatureFlags.isMockApp) TutorialJourney.botChart,
                     TutorialJourney.chatLoraTab,
                     TutorialJourney.chatLoraButton,
                   ]);

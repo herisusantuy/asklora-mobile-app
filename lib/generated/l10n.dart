@@ -3083,31 +3083,11 @@ class S {
     );
   }
 
-  /// `to start a conversation. Swipe down `
+  /// `to start a conversation. Tap the icon again to dismiss Asklora`
   String get toStartAConversation {
     return Intl.message(
-      'to start a conversation. Swipe down ',
+      'to start a conversation. Tap the icon again to dismiss Asklora',
       name: 'toStartAConversation',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `top bar `
-  String get topBar {
-    return Intl.message(
-      'top bar ',
-      name: 'topBar',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `to dismiss Asklora. `
-  String get toDismissAsklora {
-    return Intl.message(
-      'to dismiss Asklora. ',
-      name: 'toDismissAsklora',
       desc: '',
       args: [],
     );
