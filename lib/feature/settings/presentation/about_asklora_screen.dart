@@ -30,8 +30,7 @@ class AboutAskloraScreen extends StatelessWidget {
     return CustomScaffold(
       body: CustomStretchedLayout(
         contentPadding: const EdgeInsets.only(top: 0, bottom: 43),
-        header: CustomHeader(
-            title: S.of(context).aboutAsklora, isShowBottomBorder: true),
+        header: CustomHeader(title: S.of(context).aboutAsklora),
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -85,8 +84,7 @@ class AboutAskloraScreen extends StatelessWidget {
                 showBottomBorder: true),
             MenuButtonWidget(
                 onTap: () => TermsAndConditionScreen.open(context),
-                title: S.of(context).termsAndConditions,
-                showBottomBorder: true),
+                title: S.of(context).termsAndConditions),
           ],
         ),
       ),

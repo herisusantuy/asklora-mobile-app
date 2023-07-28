@@ -5416,11 +5416,31 @@ class S {
     );
   }
 
-  /// `Press to Start Over`
+  /// `Press to\nStart Over`
   String get pressToStartOver {
     return Intl.message(
-      'Press to Start Over',
+      'Press to\nStart Over',
       name: 'pressToStartOver',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See My Recommendations`
+  String get seeMyRecommendations {
+    return Intl.message(
+      'See My Recommendations',
+      name: 'seeMyRecommendations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Again`
+  String get startAgain {
+    return Intl.message(
+      'Start Again',
+      name: 'startAgain',
       desc: '',
       args: [],
     );

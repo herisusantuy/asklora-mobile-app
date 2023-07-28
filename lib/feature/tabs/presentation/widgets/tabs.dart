@@ -28,17 +28,17 @@ class Tabs extends StatelessWidget {
                         onTap: () => context
                             .read<TabScreenBloc>()
                             .add(const TabChanged(TabPage.forYou)),
-                        iconAsset: 'bottom_nav_for_you',
-                        activeIconAsset: 'bottom_nav_for_you_selected',
+                        iconAsset: 'bottom_nav_isq',
+                        activeIconAsset: 'bottom_nav_isq_selected',
                         active: state.currentTabPage == TabPage.forYou &&
                             !state.aiPageSelected),
                     if (canTrade)
-                      _tabPng(
+                      _tabSvg(
                           onTap: () => context
                               .read<TabScreenBloc>()
                               .add(const OnAiOverlayClick()),
-                          iconAsset: 'bottom_nav_ai',
-                          activeIconAsset: 'bottom_nav_ai_selected',
+                          iconAsset: 'bottom_nav_asklora_ai',
+                          activeIconAsset: 'bottom_nav_asklora_ai_selected',
                           active: state.aiPageSelected),
                     _tabSvg(
                         onTap: () => context

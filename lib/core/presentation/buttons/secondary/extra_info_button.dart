@@ -13,6 +13,7 @@ class ExtraInfoButton extends StatefulWidget {
   final ButtonExtraInfoSize buttonExtraInfoSize;
   final TextStyle? labelStyle;
   final double? borderWidth;
+  final TextAlign labelAlign;
 
   const ExtraInfoButton(
       {this.label = '',
@@ -21,6 +22,7 @@ class ExtraInfoButton extends StatefulWidget {
       this.buttonExtraInfoSize = ButtonExtraInfoSize.big,
       this.labelStyle,
       this.borderWidth,
+      this.labelAlign = TextAlign.start,
       Key? key})
       : super(key: key);
 
@@ -67,14 +69,17 @@ class _ExtraInfoButtonState extends State<ExtraInfoButton> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomTextNew(widget.label,
-                style: widget.buttonExtraInfoSize == ButtonExtraInfoSize.big
-                    ? widget.labelStyle ??
-                        AskLoraTextStyles.subtitle2
-                            .copyWith(color: AskLoraColors.primaryMagenta)
-                    : widget.labelStyle ??
-                        AskLoraTextStyles.subtitle3
-                            .copyWith(color: AskLoraColors.primaryMagenta)),
+            CustomTextNew(
+              widget.label,
+              style: widget.buttonExtraInfoSize == ButtonExtraInfoSize.big
+                  ? widget.labelStyle ??
+                      AskLoraTextStyles.subtitle2
+                          .copyWith(color: AskLoraColors.primaryMagenta)
+                  : widget.labelStyle ??
+                      AskLoraTextStyles.subtitle3
+                          .copyWith(color: AskLoraColors.primaryMagenta),
+              textAlign: widget.labelAlign,
+            ),
             if (widget.suffixIcon != null)
               Padding(
                   padding: const EdgeInsets.only(left: 5),
