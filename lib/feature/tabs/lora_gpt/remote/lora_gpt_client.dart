@@ -1,5 +1,5 @@
 import '../../../../core/data/remote/base_api_client.dart';
-import '../../../../core/domain/endpoints.dart';
+import '../../../../core/utils/build_configs/build_config.dart';
 
 class LoraGptApiClient extends BaseApiClient {
   LoraGptApiClient._internal() : super();
@@ -9,7 +9,7 @@ class LoraGptApiClient extends BaseApiClient {
   factory LoraGptApiClient() => _singleton;
 
   @override
-  String get baseUrl => loraGptBaseUrl;
+  String get baseUrl => Environment().config.askloraAiBaseUrl;
 
   @override
   String get token => 'Bearer 90u1-6+pn2=as91jk';
