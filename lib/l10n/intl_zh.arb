@@ -738,5 +738,21 @@
   "giftBotStockWelcomeScreenBottomButton": "好! 甚麼是Botstock ?",
   "pressToStartOver": "Press to\nStart Over",
   "seeMyRecommendations": "See My Recommendations",
-  "startAgain": "Start Again"
+  "startAgain": "Start Again",
+  "botTradeBottomSheetAmountMinimumFirst": "你有  {availableAmount} 可供使用，",
+  "@botTradeBottomSheetAmountMinimumFirst": {
+    "placeholders": {
+      "availableAmount": {
+        "type": "String"
+      }
+    }
+  },
+  "botTradeBottomSheetAmountMinimumSecond": "每單交易最小金額為 {minimumAmount} 。",
+  "@botTradeBottomSheetAmountMinimumSecond": {
+    "placeholders": {
+      "minimumAmount": {
+        "type": "String"
+      }
+    }
+  }
 }

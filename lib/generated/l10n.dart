@@ -5535,6 +5535,26 @@ class S {
       args: [],
     );
   }
+
+  /// `You have {availableAmount},`
+  String botTradeBottomSheetAmountMinimumFirst(String availableAmount) {
+    return Intl.message(
+      'You have $availableAmount,',
+      name: 'botTradeBottomSheetAmountMinimumFirst',
+      desc: '',
+      args: [availableAmount],
+    );
+  }
+
+  /// ` the minimum investment amount is {minimumAmount}.`
+  String botTradeBottomSheetAmountMinimumSecond(String minimumAmount) {
+    return Intl.message(
+      ' the minimum investment amount is $minimumAmount.',
+      name: 'botTradeBottomSheetAmountMinimumSecond',
+      desc: '',
+      args: [minimumAmount],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

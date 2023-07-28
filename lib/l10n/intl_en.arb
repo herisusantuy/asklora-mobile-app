@@ -766,5 +766,21 @@
   "giftBotStockWelcomeScreenBottomButton": "Sure! What is a Botstock?",
   "pressToStartOver": "Press to\nStart Over",
   "seeMyRecommendations": "See My Recommendations",
-  "startAgain": "Start Again"
+  "startAgain": "Start Again",
+  "botTradeBottomSheetAmountMinimumFirst": "You have {availableAmount},",
+  "@botTradeBottomSheetAmountMinimumFirst": {
+    "placeholders": {
+      "availableAmount": {
+        "type": "String"
+      }
+    }
+  },
+  "botTradeBottomSheetAmountMinimumSecond": " the minimum investment amount is {minimumAmount}.",
+  "@botTradeBottomSheetAmountMinimumSecond": {
+    "placeholders": {
+      "minimumAmount": {
+        "type": "String"
+      }
+    }
+  }
 }
