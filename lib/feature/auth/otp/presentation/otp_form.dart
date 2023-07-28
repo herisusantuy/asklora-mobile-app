@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../core/presentation/buttons/primary_button.dart';
-import '../../../../core/presentation/lora_memoji_header.dart';
+import '../../../../core/presentation/lora_animation_header.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../bloc/otp_bloc.dart';
@@ -30,7 +30,7 @@ class OtpForm extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const LoraMemojiHeader(
+                    const LoraAnimationHeader(
                         text:
                             'Please enter the OTP sent on your registered Phone Number.'),
                     _otpBox(context),

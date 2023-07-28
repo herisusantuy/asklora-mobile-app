@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_text_new.dart';
-import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../domain/chart_models.dart';
 
@@ -91,13 +90,6 @@ class _PopUpChoicesWidgetState extends State<PopUpChoicesWidget> {
                   ),
                 ),
               ),
-              const Align(
-                  alignment: Alignment.topCenter,
-                  child: LoraMemojiWidget(
-                    height: 100,
-                    width: 100,
-                    loraMemojiType: LoraMemojiType.lora1,
-                  )),
             ],
           ),
         ),

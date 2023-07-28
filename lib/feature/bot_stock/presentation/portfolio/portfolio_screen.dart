@@ -23,6 +23,7 @@ import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/currency_enum.dart';
+import '../../../../core/utils/feature_flags.dart';
 import '../../../../generated/l10n.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../balance/deposit/utils/deposit_utils.dart';
@@ -122,8 +123,13 @@ class PortfolioScreen extends StatelessWidget {
   Widget _header(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          getSvgIcon('icon_notification', color: AskLoraColors.black),
-          const SizedBox(width: 15),
+          if (!FeatureFlags.isMockApp)
+            Column(
+              children: [
+                getSvgIcon('icon_notification', color: AskLoraColors.black),
+                const SizedBox(width: 15),
+              ],
+            ),
           InkWell(
               onTap: () => SettingsScreen.open(context),
               child: getSvgIcon('icon_settings', color: AskLoraColors.black)),

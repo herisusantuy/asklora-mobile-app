@@ -11,7 +11,6 @@ import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/presentation/column_text/pair_column_text.dart';
 import '../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/suspended_account_screen.dart';
 import '../../../../core/repository/transaction_repository.dart';
@@ -169,24 +168,10 @@ class BotTradeSummaryScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         vertical: 12, horizontal: 13),
                     backgroundColor: AskLoraColors.lightGreen,
-                    content: Row(
-                      children: [
-                        const LoraMemojiWidget(
-                          loraMemojiType: LoraMemojiType.lora1,
-                          height: 70,
-                          width: 70,
-                        ),
-                        const SizedBox(
-                          width: 12,
-                        ),
-                        Expanded(
-                          child: CustomTextNew(
-                            'You will have more flexibility in the next real trade. Come on, this is FREE!',
-                            style: AskLoraTextStyles.body1
-                                .copyWith(color: AskLoraColors.charcoal),
-                          ),
-                        )
-                      ],
+                    content: CustomTextNew(
+                      'You will have more flexibility in the next real trade. Come on, this is FREE!',
+                      style: AskLoraTextStyles.body1
+                          .copyWith(color: AskLoraColors.charcoal),
                     ),
                   ),
               ],

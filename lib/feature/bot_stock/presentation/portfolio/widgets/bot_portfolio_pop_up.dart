@@ -35,7 +35,6 @@ class BotPortfolioPopUp extends StatelessWidget {
         primaryButtonLabel: loraPopUpMessageModel.primaryButtonLabel,
         onPrimaryButtonTap: loraPopUpMessageModel.onPrimaryButtonTap,
         buttonPrimaryType: ButtonPrimaryType.solidGreen,
-        pngImage: loraPopUpMessageModel.loraMemojiType,
       ),
     );
   }

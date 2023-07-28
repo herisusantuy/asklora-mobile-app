@@ -199,19 +199,19 @@ class AppInterceptors extends Interceptor {
         break;
       case DioErrorType.cancel:
         throw AskloraApiClientException(err.requestOptions,
-            askloraError: AskloraError());
+            askloraError: const AskloraError());
       case DioErrorType.unknown:
         throw NoInternetConnectionException(err.requestOptions,
             AskloraError(code: ValidationCode.noInternetConnection.code));
       case DioErrorType.badCertificate:
         throw AskloraApiClientException(err.requestOptions,
-            askloraError: AskloraError());
+            askloraError: const AskloraError());
       case DioErrorType.connectionError:
         throw AskloraApiClientException(err.requestOptions,
-            askloraError: AskloraError());
+            askloraError: const AskloraError());
       default:
         throw AskloraApiClientException(err.requestOptions,
-            askloraError: AskloraError());
+            askloraError: const AskloraError());
     }
 
     return handler.next(err);

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../../core/presentation/circular_container.dart';
 import '../../../../core/presentation/custom_text_new.dart';
-import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
+import '../../../../generated/l10n.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../bot_recommendation/free_bot_recommendation_screen.dart';
 import '../widgets/bot_stock_form.dart';
@@ -20,24 +21,35 @@ class BotStockDoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BotStockForm(
       content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const LoraMemojiHeader(
-              text:
-                  'Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward.'),
+          const SizedBox(height: 50),
+          ExtraInfoButton(
+            onTap: () => '',
+            label: 'Lora\'s tips',
+            buttonExtraInfoSize: ButtonExtraInfoSize.small,
+          ),
+          const SizedBox(height: 20),
+          CustomTextNew(
+            S.of(context).botStockDoScreenTitle,
+            style: AskLoraTextStyles.h4,
+          ),
+          const SizedBox(height: 50),
           _botCard(
               botType: BotType.pullUp,
-              description: 'Go for occasional big wins'),
+              description: S.of(context).botStockDoScreenPoint1),
           _botCard(
-              botType: BotType.plank, description: 'Avoid excessive losses'),
+              botType: BotType.plank,
+              description: S.of(context).botStockDoScreenPoint2),
           _botCard(
               botType: BotType.squat,
-              description: 'Go for small but frequent wins'),
+              description: S.of(context).botStockDoScreenPoint3),
         ],
       ),
       bottomButton: Padding(
         padding: const EdgeInsets.only(top: 30, bottom: 30.0),
         child: PrimaryButton(
-          label: 'See My Recommendations',
+          label: S.of(context).understood,
           onTap: () => FreeBotRecommendationScreen.open(context),
         ),
       ),

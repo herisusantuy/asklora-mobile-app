@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_text_new.dart';
-import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../domain/chart_models.dart';
 
@@ -98,13 +98,6 @@ class _PopUpValueWidgetState extends State<PopUpValueWidget> {
                   ),
                 ),
               ),
-              const Align(
-                  alignment: Alignment.topCenter,
-                  child: LoraMemojiWidget(
-                    loraMemojiType: LoraMemojiType.lora1,
-                    width: 100,
-                    height: 100,
-                  )),
             ],
           ),
         ),

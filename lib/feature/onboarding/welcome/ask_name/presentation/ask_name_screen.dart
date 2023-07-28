@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/presentation/ai/lora_animation_green.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
@@ -10,7 +11,6 @@ import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/we_create/custom_centered_text_input.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/utils/app_icons.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../../core/values/app_values.dart';
@@ -55,7 +55,7 @@ class AskNameScreen extends StatelessWidget {
               content: Column(
                 children: [
                   const SizedBox(height: 50),
-                  loraGreenAnimation,
+                  const LoraAnimationGreen(),
                   const SizedBox(height: 10),
                   CustomTextNew(
                     S.of(context).askNameScreenPlaceholder,

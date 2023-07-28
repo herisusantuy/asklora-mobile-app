@@ -3,5 +3,5 @@ abstract class BaseConfig {
 
   String get ppiBaseUrl;
 
-  String get streamServiceBaseUrl;
+  String get askloraAiBaseUrl;
 }

@@ -12,6 +12,7 @@ import '../../../../core/presentation/ai/chat/chat_lora_header.dart';
 import '../../../../core/presentation/ai/chat/in_chat_bubble_widget.dart';
 import '../../../../core/presentation/ai/chat/lora_thinking_widget.dart';
 import '../../../../core/presentation/ai/chat/out_chat_bubble_widget.dart';
+import '../../../../core/presentation/ai/lora_animation_green.dart';
 import '../../../../core/presentation/ai/utils/ai_utils.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_text_new.dart';
