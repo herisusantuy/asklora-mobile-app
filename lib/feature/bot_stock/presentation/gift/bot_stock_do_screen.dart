@@ -9,8 +9,8 @@ import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../generated/l10n.dart';
 import '../../utils/bot_stock_utils.dart';
-import '../bot_recommendation/free_bot_recommendation_screen.dart';
 import '../widgets/bot_stock_form.dart';
+import 'gift_bot_stock_message.dart';
 
 class BotStockDoScreen extends StatelessWidget {
   static const String route = '/gift_bot_stock_do_screen';
@@ -50,7 +50,7 @@ class BotStockDoScreen extends StatelessWidget {
         padding: const EdgeInsets.only(top: 30, bottom: 30.0),
         child: PrimaryButton(
           label: S.of(context).understood,
-          onTap: () => FreeBotRecommendationScreen.open(context),
+          onTap: () => GiftBotStockMessageScreen.open(context),
         ),
       ),
     );
@@ -62,9 +62,22 @@ class BotStockDoScreen extends StatelessWidget {
         child: Row(
           children: [
             CircularContainer(
+                padding: const EdgeInsets.all(22),
                 backgroundColor: botType.primaryBgColor,
-                child: getSvgIcon(botType.botAssetName,
-                    color: AskLoraColors.black)),
+                child: Column(
+                  children: [
+                    getSvgIcon(botType.botAssetName,
+                        color: AskLoraColors.black),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    CustomTextNew(
+                      botType.value,
+                      style: AskLoraTextStyles.subtitle3
+                          .copyWith(color: AskLoraColors.charcoal),
+                    ),
+                  ],
+                )),
             const SizedBox(
               width: 15,
             ),
@@ -73,16 +86,8 @@ class BotStockDoScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomTextNew(
-                    '${botType.upperCaseName} BOT',
-                    style: AskLoraTextStyles.h5
-                        .copyWith(color: AskLoraColors.charcoal),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  CustomTextNew(
                     description,
-                    style: AskLoraTextStyles.body1
+                    style: AskLoraTextStyles.subtitle2
                         .copyWith(color: AskLoraColors.charcoal),
                   ),
                 ],
