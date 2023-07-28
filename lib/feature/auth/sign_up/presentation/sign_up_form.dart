@@ -138,7 +138,7 @@ class SignUpForm extends StatelessWidget {
       key: const Key('sign_up_may_be_later_button'),
       margin: const EdgeInsets.only(top: 20),
       label: S.of(context).buttonMaybeLater,
-      onTap: () => WelcomeScreen.open(context),
+      onTap: () => WelcomeScreen.openAndRemoveAllRoute(context),
     );
   }
 
