@@ -5506,6 +5506,16 @@ class S {
     );
   }
 
+  /// `Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! `
+  String get giftBotStockMessage {
+    return Intl.message(
+      'Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ',
+      name: 'giftBotStockMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Press to\nStart Over`
   String get pressToStartOver {
     return Intl.message(

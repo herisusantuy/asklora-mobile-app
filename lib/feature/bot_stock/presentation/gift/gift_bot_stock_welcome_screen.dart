@@ -15,24 +15,31 @@ class GiftBotStockWelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BotStockForm(
-      content: Column(
-        children: [
-          const LoraAnimationHeader(text: ''),
-          const SizedBox(height: 100),
-          CustomTextNew(
-            S.of(context).giftBotStockWelcomeScreenTitle,
-            style: AskLoraTextStyles.h4,
-            textAlign: TextAlign.center,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: BotStockForm(
+        enableBackNavigation: false,
+        content: Column(
+          children: [
+            const LoraAnimationHeader(
+              loraAnimationHeight: 208,
+              loraAnimationWidth: 208,
+            ),
+            const SizedBox(height: 100),
+            CustomTextNew(
+              S.of(context).giftBotStockWelcomeScreenTitle,
+              style: AskLoraTextStyles.h4,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+        bottomButton: Padding(
+          padding: const EdgeInsets.only(bottom: 30.0),
+          child: PrimaryButton(
+            buttonPrimaryType: ButtonPrimaryType.solidCharcoal,
+            label: S.of(context).giftBotStockWelcomeScreenBottomButton,
+            onTap: () => BotStockExplanationScreen.open(context),
           ),
-        ],
-      ),
-      bottomButton: Padding(
-        padding: const EdgeInsets.only(bottom: 30.0),
-        child: PrimaryButton(
-          buttonPrimaryType: ButtonPrimaryType.solidCharcoal,
-          label: S.of(context).giftBotStockWelcomeScreenBottomButton,
-          onTap: () => BotStockExplanationScreen.open(context),
         ),
       ),
     );

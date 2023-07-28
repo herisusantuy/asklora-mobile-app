@@ -13,12 +13,16 @@ enum LoraAnimationType { green, magenta }
 class LoraAnimationHeader extends StatelessWidget {
   final String text;
   final Color textColor;
+  final double loraAnimationHeight;
+  final double loraAnimationWidth;
   final LoraAnimationType loraAnimationType;
 
   const LoraAnimationHeader({
-    required this.text,
+    this.text = '',
     this.loraAnimationType = LoraAnimationType.green,
     this.textColor = AskLoraColors.charcoal,
+    this.loraAnimationHeight = 170,
+    this.loraAnimationWidth = 170,
     Key? key,
   }) : super(key: key);
 
@@ -29,20 +33,29 @@ class LoraAnimationHeader extends StatelessWidget {
         getSvgImage(_getHeaderProps().left),
         _getHeaderProps().right,
       ]),
-      CustomTextNew(
-        text,
-        style: AskLoraTextStyles.h4.copyWith(color: textColor),
-        textAlign: TextAlign.center,
-      ),
+      if (text.isNotEmpty)
+        CustomTextNew(
+          text,
+          style: AskLoraTextStyles.h4.copyWith(color: textColor),
+          textAlign: TextAlign.center,
+        ),
     ]);
   }
 
   Pair<String, Widget> _getHeaderProps() {
     switch (loraAnimationType) {
       case LoraAnimationType.green:
-        return const Pair('memoji_background_green', LoraAnimationGreen());
+        return Pair(
+            'memoji_background_green',
+            LoraAnimationGreen(
+              width: loraAnimationWidth,
+              height: loraAnimationHeight,
+            ));
       default:
-        return const Pair('memoji_background_magenta', LoraAnimationMagenta());
+        return Pair(
+            'memoji_background_magenta',
+            LoraAnimationMagenta(
+                width: loraAnimationWidth, height: loraAnimationHeight));
     }
   }
 }
