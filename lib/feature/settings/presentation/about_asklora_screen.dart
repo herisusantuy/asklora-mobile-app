@@ -17,8 +17,6 @@ import '../../../core/utils/utils.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
 import 'customer_service_screen.dart';
-import 'privacy_policy_screen.dart';
-import 'terms_condition_screen.dart';
 
 class AboutAskloraScreen extends StatelessWidget {
   static const route = '/about_asklora_screen';
