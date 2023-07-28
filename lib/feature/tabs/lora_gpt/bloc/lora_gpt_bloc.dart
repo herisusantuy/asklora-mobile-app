@@ -5,7 +5,6 @@ import '../../../../core/domain/ai/component.dart';
 import '../../../../core/domain/ai/conversation.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/endpoints.dart';
-import '../../../../core/utils/log.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
@@ -52,11 +51,10 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       FetchBotIntro fetchBotIntro, Emitter<LoraGptState> emit) async {
     final tempList = List<Conversation>.of(state.conversations);
 
-    ResponseState status = ResponseState.loading;
     bool isTyping = false;
 
     tempList.add(Loading());
-    emit(state.copyWith(status: status, conversations: tempList));
+    emit(state.copyWith(conversations: tempList));
 
     var botIntroResponse = await _loraGptRepository.botIntro(
         params: state.getIntroRequest(
@@ -65,47 +63,39 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
             tickerSymbol: fetchBotIntro.arguments['symbol'],
             investmentHorizon: fetchBotIntro.arguments['duration']));
 
-    emit(state.copyWith(status: status));
-
     ///remove loading
     if (_tempIntroResponse != null) {
       tempList.removeLast();
     }
 
-    Logger.log('Krishna is _onFetchBotIntro ${_tempIntroResponse}');
-
-    if (_tempIntroResponse?.state != ResponseState.error) {
-      Logger.log('Krishna is _onFetchBotIntro ${_tempIntroResponse} one');
-      if (botIntroResponse.state == ResponseState.success) {
-        Logger.log('Krishna is _onFetchBotIntro ${_tempIntroResponse} two');
-        status = ResponseState.success;
-        if (_tempIntroResponse != null) {
-          isTyping = true;
-          _tempConversation.add(Lora(_tempIntroResponse!.data!.getResult()));
-          tempList
-              .add(Lora(botIntroResponse.data!.getResult(), isTyping: true));
-        } else {
-          _tempIntroResponse = botIntroResponse;
-        }
+    if (botIntroResponse.state == ResponseState.success) {
+      isTyping = true;
+      if (_tempIntroResponse?.state == ResponseState.success) {
+        tempList.add(Lora(botIntroResponse.data!.getResult(), isTyping: true));
+        _tempConversation.add(Lora(_tempIntroResponse!.data!.getResult()));
+      } else if (_tempIntroResponse?.state == ResponseState.error) {
+        tempList.add(Lora(botIntroResponse.data!.getResult()));
       } else {
-        status = ResponseState.error;
-        _tempIntroResponse ??= botIntroResponse;
+        isTyping = false;
+        _tempIntroResponse = botIntroResponse;
       }
     } else {
-      status = ResponseState.error;
-      isTyping = false;
+      if (_tempIntroResponse?.state == ResponseState.success) {
+        isTyping = true;
+        tempList.add(Lora(_tempIntroResponse!.data.getResult()));
+      } else {
+        _tempIntroResponse ??= botIntroResponse;
+      }
     }
-    emit(state.copyWith(
-        status: status, conversations: tempList, isTyping: isTyping));
+
+    emit(state.copyWith(conversations: tempList, isTyping: isTyping));
   }
 
   void _onFetchBotEarnings(
       FetchBotEarnings fetchBotEarnings, Emitter<LoraGptState> emit) async {
     final tempList = List<Conversation>.of(state.conversations);
 
-    ResponseState status = ResponseState.loading;
     bool isTyping = false;
-    emit(state.copyWith(status: status));
 
     var botEarningsResponse = await _loraGptRepository.botEarnings(
         params: state.getIntroRequest(
@@ -113,34 +103,34 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
                 BotType.findByValue(fetchBotEarnings.arguments['botType']).name,
             tickerSymbol: fetchBotEarnings.arguments['symbol'],
             investmentHorizon: fetchBotEarnings.arguments['duration']));
-    emit(state.copyWith(status: status));
 
     ///remove loading
     if (_tempIntroResponse != null) {
       tempList.removeLast();
     }
 
-    if (_tempIntroResponse?.state != ResponseState.error) {
-      if (botEarningsResponse.state == ResponseState.success) {
-        status = ResponseState.success;
-        if (_tempIntroResponse != null) {
-          isTyping = true;
-          _tempConversation.add(Lora(botEarningsResponse.data!.getResult()));
-          tempList
-              .add(Lora(_tempIntroResponse!.data!.getResult(), isTyping: true));
-        } else {
-          _tempIntroResponse = botEarningsResponse;
-        }
+    if (botEarningsResponse.state == ResponseState.success) {
+      isTyping = true;
+      if (_tempIntroResponse?.state == ResponseState.success) {
+        tempList
+            .add(Lora(_tempIntroResponse!.data!.getResult(), isTyping: true));
+        _tempConversation.add(Lora(botEarningsResponse.data!.getResult()));
+      } else if (_tempIntroResponse?.state == ResponseState.error) {
+        tempList.add(Lora(botEarningsResponse.data!.getResult()));
       } else {
-        status = ResponseState.error;
-        _tempIntroResponse ??= botEarningsResponse;
+        isTyping = false;
+        _tempIntroResponse = botEarningsResponse;
       }
     } else {
-      status = ResponseState.error;
-      isTyping = false;
+      if (_tempIntroResponse?.state == ResponseState.success) {
+        isTyping = true;
+        tempList.add(Lora(_tempIntroResponse!.data!.getResult()));
+      } else {
+        _tempIntroResponse ??= botEarningsResponse;
+      }
     }
-    emit(state.copyWith(
-        status: status, conversations: tempList, isTyping: isTyping));
+
+    emit(state.copyWith(conversations: tempList, isTyping: isTyping));
   }
 
   void _onScreenLaunch(

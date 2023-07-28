@@ -49,6 +49,7 @@ class LoraGptRepository {
       {required InvestmentStyleQuestionQueryRequest params}) async {
     try {
       var response = await _loraGptClient.investmentStyle(params);
+
       return BaseResponse.complete(
           InvestmentStyleQuestionQueryResponse.fromJson(response.data));
     } catch (e) {
@@ -61,7 +62,6 @@ class LoraGptRepository {
       {required BotstockIntro params}) async {
     try {
       final response = await _loraGptClient.botIntro(params.params);
-
       return BaseResponse.complete(QueryResponse.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error(
