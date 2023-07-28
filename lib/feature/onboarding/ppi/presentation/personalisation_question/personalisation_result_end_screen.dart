@@ -52,7 +52,7 @@ class PersonalisationResultEndScreen extends StatelessWidget {
             bottomButton: PrimaryButton(
                 buttonPrimaryType: ButtonPrimaryType.solidGreen,
                 key: const Key('next_button'),
-                label: 'Got It',
+                label: S.of(context).gotIt,
                 onTap: () => SignUpScreen.open(context)),
           );
         }
