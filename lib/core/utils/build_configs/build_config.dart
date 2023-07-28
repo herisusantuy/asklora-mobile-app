@@ -39,7 +39,7 @@ class DevConfig implements BaseConfig {
       backDoorBaseUrl ?? 'https://dev-apca.intra.asklora.ai/';
 
   @override
-  String get streamServiceBaseUrl => 'wss://apca.services.asklora.ai/';
+  String get askloraAiBaseUrl => 'http://stock-gpt-dev.intra.asklora.ai/';
 }
 
 class StagingConfig implements BaseConfig {
@@ -50,7 +50,7 @@ class StagingConfig implements BaseConfig {
   String get askLoraApiBaseUrl => 'https://stag-apca.api.asklora.ai/';
 
   @override
-  String get streamServiceBaseUrl => 'wss://stag-apca.api.asklora.ai/';
+  String get askloraAiBaseUrl => 'https://stock-gpt-stag.api.asklora.ai/';
 }
 
 class ProdConfig implements BaseConfig {
@@ -61,6 +61,5 @@ class ProdConfig implements BaseConfig {
   String get askLoraApiBaseUrl => 'https://apca.api.asklora.ai/';
 
   @override
-  String get streamServiceBaseUrl =>
-      'wss://apca.services.asklora.ai/prodConfig';
+  String get askloraAiBaseUrl => 'wss://apca.services.asklora.ai/prodConfig';
 }
