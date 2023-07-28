@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/otp/get_otp_request.dart';
 import '../../../core/data/remote/base_api_client.dart';
 import '../../../core/domain/token/repository/repository.dart';
+import '../../backdoor/domain/backdoor_repository.dart';
 import '../../settings/domain/change_password/change_password_request.dart';
 import '../../settings/domain/change_password/change_password_response.dart';
 import '../domain/auth_api_client.dart';
@@ -22,8 +25,9 @@ import '../sign_up/domain/sign_up_request.dart';
 class AuthRepository {
   final AuthApiClient _authApiClient = AuthApiClient();
   final Repository _storage;
+  final BackdoorRepository _backdoorRepository;
 
-  AuthRepository(this._storage);
+  AuthRepository(this._storage, this._backdoorRepository);
 
   Future<BaseResponse<SignUpResponse>> signUp({
     required String email,
@@ -52,11 +56,19 @@ class AuthRepository {
     required String email,
     required String password,
   }) async {
-    var response = await _authApiClient.signIn(SignInRequest(email, password));
+    final isOtpLoginDisabled = await _backdoorRepository.isOtpLoginDisabled();
+
+    Response response;
+    if (isOtpLoginDisabled) {
+      response = await _authApiClient.signInV1(SignInRequest(email, password));
+    } else {
+      response = await _authApiClient.signIn(SignInRequest(email, password));
+    }
+
     var signInResponse = SignInResponse.fromJson(response.data);
     if (response.statusCode == 200) {
-      _storage.saveAccessToken(signInResponse.access!);
-      _storage.saveRefreshToken(signInResponse.refresh!);
+      await _storage.saveAccessToken(signInResponse.access!);
+      await _storage.saveRefreshToken(signInResponse.refresh!);
     }
     return signInResponse.copyWith(statusCode: response.statusCode);
   }
@@ -71,33 +83,47 @@ class AuthRepository {
     var signInResponse = SignInResponse.fromJson(response.data);
 
     if (response.statusCode == 200) {
-      _storage.saveAccessToken(signInResponse.access!);
-      _storage.saveRefreshToken(signInResponse.refresh!);
+      await _storage.saveAccessToken(signInResponse.access!);
+      await _storage.saveRefreshToken(signInResponse.refresh!);
     }
     return signInResponse.copyWith(statusCode: response.statusCode);
   }
 
-  void removeStorageOnSignInFailed() {
-    _storage.deleteAll();
+  void removeStorageOnSignInFailed() async {
+    await _storage.deleteAll();
   }
 
   Future<BaseResponse<ResetPasswordResponse>> resetPassword(
       {required String token,
       required String password,
       required String confirmPassword}) async {
-    var response = await _authApiClient.resetPassword(
-      ResetPasswordRequest(token, password, confirmPassword),
-    );
-    return BaseResponse.complete(ResetPasswordResponse.fromJson(response.data));
+    try {
+      var response = await _authApiClient.resetPassword(
+        ResetPasswordRequest(token, password, confirmPassword),
+      );
+      return BaseResponse.complete(
+          ResetPasswordResponse.fromJson(response.data));
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
+    } catch (_) {
+      return BaseResponse.error();
+    }
   }
 
   Future<BaseResponse<ForgotPasswordResponse>> forgotPassword(
       {required String email}) async {
-    var response = await _authApiClient.forgotPassword(
-      ForgotPasswordRequest(email),
-    );
-    return BaseResponse.complete(
-        ForgotPasswordResponse.fromJson(response.data));
+    try {
+      var response = await _authApiClient.forgotPassword(
+        ForgotPasswordRequest(email),
+      );
+
+      return BaseResponse.complete(
+          ForgotPasswordResponse.fromJson(response.data));
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
+    } catch (_) {
+      return BaseResponse.error();
+    }
   }
 
   Future<BaseResponse<ChangePasswordResponse>> changePassword({
@@ -110,8 +136,8 @@ class AuthRepository {
           ChangePasswordRequest(password, newPassword, confirmNewPassword));
       return BaseResponse.complete(
           ChangePasswordResponse.fromJson(response.data));
-    } on UnauthorizedException {
-      return BaseResponse.error(message: 'Invalid Password');
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
     } catch (_) {
       return BaseResponse.error();
     }

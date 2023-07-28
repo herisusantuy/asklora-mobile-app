@@ -28,8 +28,8 @@ class Tabs extends StatelessWidget {
                         onTap: () => context
                             .read<TabScreenBloc>()
                             .add(const TabChanged(TabPage.forYou)),
-                        iconAsset: 'bottom_nav_for_you',
-                        activeIconAsset: 'bottom_nav_for_you_selected',
+                        iconAsset: 'bottom_nav_isq',
+                        activeIconAsset: 'bottom_nav_isq_selected',
                         active: state.currentTabPage == TabPage.forYou &&
                             !state.aiPageSelected),
                     if (canTrade)
@@ -64,12 +64,12 @@ class Tabs extends StatelessWidget {
                             ],
                           ),
                         ),
-                        child: _tabPng(
+                        child: _tabSvg(
                             onTap: () => context
                                 .read<TabScreenBloc>()
                                 .add(const OnAiOverlayClick()),
-                            iconAsset: 'bottom_nav_ai',
-                            activeIconAsset: 'bottom_nav_ai_selected',
+                            iconAsset: 'bottom_nav_asklora_ai',
+                            activeIconAsset: 'bottom_nav_asklora_ai_selected',
                             active: state.aiPageSelected),
                       ),
                     _tabSvg(
@@ -98,7 +98,7 @@ class Tabs extends StatelessWidget {
       GestureDetector(
         onTap: onTap,
         child: Container(
-          color: AskLoraColors.white,
+          color: Colors.transparent,
           width: clickAreaSize,
           height: clickAreaSize,
           child: getSvgIcon(active ? activeIconAsset : iconAsset,
@@ -116,7 +116,7 @@ class Tabs extends StatelessWidget {
       GestureDetector(
         onTap: onTap,
         child: Container(
-          color: AskLoraColors.white,
+          color: Colors.transparent,
           width: clickAreaSize,
           height: clickAreaSize,
           child: getPngIcon(active ? activeIconAsset : iconAsset,

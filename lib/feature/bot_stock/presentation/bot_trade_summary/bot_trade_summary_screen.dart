@@ -8,9 +8,10 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../app/bloc/app_bloc.dart';
-import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
+import '../../../../core/domain/validation_enum.dart';
+import '../../../../core/presentation/column_text/pair_column_text.dart';
+import '../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/suspended_account_screen.dart';
 import '../../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
@@ -72,9 +73,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
       )..add(InitBotTradeSummaryTutorial()),
       child: BlocBuilder<BotStockBloc, BotStockState>(
         buildWhen: (previous, current) =>
-            previous.createBotOrderResponse != current.createBotOrderResponse ||
             previous.isBotTradeSummaryTutorial !=
-                current.isBotTradeSummaryTutorial,
+            current.isBotTradeSummaryTutorial,
         builder: (context, state) {
           return ShowCaseWidget(
             disableBarrierInteraction: true,
@@ -84,10 +84,10 @@ class BotTradeSummaryScreen extends StatelessWidget {
             builder: Builder(builder: (context) {
               return BlocListener<BotStockBloc, BotStockState>(
                 listenWhen: (previous, current) =>
-                    previous.isBotTradeSummaryTutorial !=
-                        current.isBotTradeSummaryTutorial ||
                     previous.createBotOrderResponse !=
-                        current.createBotOrderResponse,
+                        current.createBotOrderResponse ||
+                    previous.isBotTradeSummaryTutorial !=
+                        current.isBotTradeSummaryTutorial,
                 listener: (context, state) {
                   if (state.isBotTradeSummaryTutorial) {
                     Future.delayed(
@@ -138,7 +138,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
                     SuspendedAccountScreen.open(context);
                   } else if (state.createBotOrderResponse.state ==
                       ResponseState.error) {
-                    if (state.createBotOrderResponse.errorCode == 403) {
+                    if (state.createBotOrderResponse.validationCode ==
+                        ValidationCode.tradeAuthorization) {
                       BotStockBottomSheet.notYetRegisteredToBroker(context);
 
                       ///TODO : INSUFFICIENT BALANCE ERROR IS SAME 403 THEREFORE WILL BE IMPLEMENTED LATER WHEN GOT NEW ENUM STATUS_CODE
@@ -176,7 +177,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                           child: RoundColoredBox(
                             content: Column(
                               children: [
-                                PairColumnTextWithTooltip(
+                                PairColumnTextWithBottomSheet(
                                   leftTitle:
                                       '${S.of(context).investmentAmount} (HKD)',
                                   rightTitle:
@@ -184,13 +185,13 @@ class BotTradeSummaryScreen extends StatelessWidget {
                                   leftSubTitle: botTradeSummaryModel.amount
                                       .convertToCurrencyDecimal(),
                                   rightSubTitle: S.of(context).free,
-                                  rightTooltipText:
-                                      'The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!',
+                                  rightBottomSheetText:
+                                      S.of(context).botManagementFeeTooltip,
                                 ),
                                 _spaceBetweenInfo,
                                 ..._detailedInformation(context),
                                 _spaceBetweenInfo,
-                                PairColumnTextWithTooltip(
+                                PairColumnText(
                                     leftTitle:
                                         '${S.of(context).marketPrice} (USD)',
                                     leftSubTitle:
@@ -198,7 +199,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                                     rightTitle: S.of(context).investmentPeriod,
                                     rightSubTitle: botDetailModel.botDuration),
                                 _spaceBetweenInfo,
-                                PairColumnTextWithTooltip(
+                                PairColumnText(
                                     leftTitle: S.of(context).startDate,
                                     rightTitle: S.of(context).endDate,
                                     leftSubTitle: botTradeSummaryModel
@@ -220,24 +221,10 @@ class BotTradeSummaryScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 13),
                             backgroundColor: AskLoraColors.lightGreen,
-                            content: Row(
-                              children: [
-                                const LoraMemojiWidget(
-                                  loraMemojiType: LoraMemojiType.lora1,
-                                  height: 70,
-                                  width: 70,
-                                ),
-                                const SizedBox(
-                                  width: 12,
-                                ),
-                                Expanded(
-                                  child: CustomTextNew(
-                                    'You will have more flexibility in the next real trade. Come on, this is FREE!',
-                                    style: AskLoraTextStyles.body1.copyWith(
-                                        color: AskLoraColors.charcoal),
-                                  ),
-                                )
-                              ],
+                            content: CustomTextNew(
+                              'You will have more flexibility in the next real trade. Come on, this is FREE!',
+                              style: AskLoraTextStyles.body1
+                                  .copyWith(color: AskLoraColors.charcoal),
                             ),
                           ),
                       ],
@@ -268,7 +255,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
   }
 
   List<Widget> _detailedInformation(BuildContext context) => [
-        PairColumnTextWithTooltip(
+        PairColumnText(
+          crossAxisAlignment: CrossAxisAlignment.start,
           leftTitle: botTradeSummaryModel.botType == BotType.plank
               ? S.of(context).estStopLossPercent
               : S.of(context).estMaxLossPercent,
@@ -287,19 +275,18 @@ class BotTradeSummaryScreen extends StatelessWidget {
       S.of(context).rolloverBotStockAcknowledgement(
           createOrderResponse.botAppsName,
           createOrderResponse.symbol,
-          createOrderResponse.optimalTimeFormatted);
+          createOrderResponse.optimalTimeHKTString);
+
+  void _onTradeSummaryTutorialFinished(BuildContext context) {
+    ShowCaseWidget.of(context).dismiss();
+    context.read<BotStockBloc>().add(BotTradeSummaryTutorialFinished());
+  }
 
   static void open(
           {required BuildContext context,
           required BotTradeSummaryModel botTradeSummaryModel}) =>
       Navigator.of(context, rootNavigator: true)
           .pushNamed(route, arguments: botTradeSummaryModel);
-
-  void _onTradeSummaryTutorialFinished(BuildContext context) {
-    ShowCaseWidget.of(context).dismiss();
-    // context.read<TutorialBloc>().add(TradeSummaryTutorialFinished());
-    context.read<BotStockBloc>().add(BotTradeSummaryTutorialFinished());
-  }
 
   static void openWithBackCallBack(
           {required BuildContext context,

@@ -14,7 +14,7 @@ class LoraAiOverlayScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             const SizedBox(height: 40),
-            loraGreenAnimation,
+            const LoraAnimationGreen(),
             CustomTextNew(
               S.of(context).askloraYouUltimateFinancialAdvisor,
               style: AskLoraTextStyles.h3.copyWith(color: AskLoraColors.white),

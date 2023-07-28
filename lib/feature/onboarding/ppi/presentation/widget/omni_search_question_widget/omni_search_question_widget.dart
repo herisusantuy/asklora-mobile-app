@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../../core/presentation/custom_in_app_notification.dart';
-import '../../../../../../core/presentation/lora_rounded_corner_banner.dart';
+import '../../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../../core/presentation/text_fields/auto_resized_text_field.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
+import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/question.dart';
@@ -81,10 +83,12 @@ class OmniSearchQuestionWidget extends StatelessWidget {
                               question: question.question!,
                               paddingBottom: 24,
                             ),
-                            const LoraRoundedCornerBanner(
-                              text:
+                            RoundColoredBox(
+                                backgroundColor: AskLoraColors.lightGreen,
+                                content: CustomTextNew(
                                   'Go search for stocks with keywords or phrases, Lora will get you the relevant stocks!',
-                            ),
+                                  style: AskLoraTextStyles.body1,
+                                )),
                             const SizedBox(
                               height: 52,
                             ),

@@ -38,12 +38,12 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
       progress: progress,
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-      title: 'Set Up Financial Profile',
+      title: S.of(context).setUpFinancialProfile,
       headerContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomTextNew(
-            'Source Of Wealth',
+            S.of(context).sourceOfWealth,
             style: AskLoraTextStyles.h4,
           ),
           const SizedBox(height: 23),
@@ -67,8 +67,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
                 final validation = state.validate();
                 if (validation.result) {
                   context.read<NavigationBloc<KycPageStep>>().add(
-                      const PageChanged(
-                          KycPageStep.disclosureAffiliationAssociates));
+                      const PageChanged(KycPageStep.financialProfileSummary));
                 } else {
                   CustomInAppNotification.show(
                       context, validation.errorMessage);
@@ -77,7 +76,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
               secondaryButtonOnClick: () => context
                   .read<KycBloc>()
                   .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
-              primaryButtonLabel: S.of(context).buttonNext,
+              primaryButtonLabel: S.of(context).buttonDone,
               secondaryButtonLabel: S.of(context).saveForLater);
         },
       ),

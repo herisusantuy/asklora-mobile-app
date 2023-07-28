@@ -8,6 +8,7 @@ import '../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../generated/l10n.dart';
+import '../../../backdoor/domain/backdoor_repository.dart';
 import '../../repository/auth_repository.dart';
 import '../../reset_password/presentation/reset_password_screen.dart';
 import '../bloc/forgot_password_bloc.dart';
@@ -19,7 +20,10 @@ class ForgotPasswordSuccessScreen extends StatelessWidget {
   Widget build(BuildContext context) => BlocProvider(
         create: (context) {
           return ForgotPasswordBloc(
-              authRepository: AuthRepository(TokenRepository()))
+              authRepository: AuthRepository(
+            TokenRepository(),
+            BackdoorRepository(),
+          ))
             ..add(const StartListenOnDeeplink());
         },
         child: BlocListener<ForgotPasswordBloc, ForgotPasswordState>(

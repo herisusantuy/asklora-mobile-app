@@ -1,15 +1,17 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/ai/component.dart';
+import '../../../../core/domain/ai/conversation.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/endpoints.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
 import '../../bloc/tab_screen_bloc.dart';
-import '../../../../core/domain/ai/conversation.dart';
 import '../domain/portfolio_details_request.dart';
 import '../domain/portfolio_query_request.dart';
 import '../domain/query_request.dart';
+import '../domain/query_response.dart';
 import '../repository/lora_gpt_repository.dart';
 
 part 'lora_gpt_event.dart';
@@ -24,6 +26,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         _sharedPreference = sharedPreference,
         super(const LoraGptState()) {
     on<OnEditQuery>(_onEditQuery);
+    on<OnPromptTap>(_onPromptTap);
     on<OnSearchQuery>(_onSearchQuery);
     on<OnScreenLaunch>(_onScreenLaunch);
     on<OnResetSession>(_onResetSession);
@@ -36,6 +39,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
   final LoraGptRepository _loraGptRepository;
   final SharedPreference _sharedPreference;
+  List<Conversation> _tempConversation = [];
 
   void _onScreenLaunch(
       OnScreenLaunch onEditQuery, Emitter<LoraGptState> emit) async {
@@ -54,10 +58,19 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       emit(state.copyWith(
           query: onEditQuery.query, status: ResponseState.unknown));
 
+  void _onPromptTap(OnPromptTap onPromptTap, Emitter<LoraGptState> emit) {
+    emit(state.copyWith(query: onPromptTap.query));
+    add(const OnSearchQuery());
+  }
+
   void _onSearchQuery(
       OnSearchQuery onSearchQuery, Emitter<LoraGptState> emit) async {
     final tempList = List<Conversation>.of(state.conversations);
-    tempList.add(Me(state.query));
+
+    ///Remove components from conversations
+    tempList.removeWhere((element) => element is Component);
+
+    tempList.add(Me(state.query, state.userName));
     tempList.add(Loading());
 
     final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
@@ -72,7 +85,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         query: '',
         isTyping: true));
 
-    var response = BaseResponse.error();
+    BaseResponse<QueryResponse> response = BaseResponse.error();
 
     final subPage = state.tabPage.getArguments;
 
@@ -110,13 +123,16 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     tempList.removeLast();
     if (response.state == ResponseState.success) {
-      tempList.add(response.data!);
+      tempList.add(Lora(response.data!.response));
+
+      ///Add components on temporary conversation
+      ///it will be added to state later when chat animation is completed
+      if (response.data!.components.isNotEmpty) {
+        _tempConversation.addAll(response.data!.components);
+      }
     } else {
-      tempList.add(Lora(
-          'Sorry I cannot connect to the server right now, please try again',
-          '',
-          '',
-          false));
+      tempList.add(
+          Lora('Lora is working on some optimizations to serve you better.'));
     }
     emit(state.copyWith(
         status: ResponseState.success,
@@ -136,8 +152,14 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
           query: ''));
 
   void _onFinishTyping(
-          OnFinishTyping onFinishTyping, Emitter<LoraGptState> emit) =>
-      emit(state.copyWith(status: ResponseState.unknown, isTyping: false));
+      OnFinishTyping onFinishTyping, Emitter<LoraGptState> emit) {
+    emit(state.copyWith(
+        conversations: List<Conversation>.of(state.conversations)
+          ..addAll(_tempConversation),
+        status: ResponseState.unknown,
+        isTyping: false));
+    _tempConversation = [];
+  }
 
   void _onShowOverlayWidget(
           ShowOverLayScreen onShowOverLayScreen, Emitter<LoraGptState> emit) =>

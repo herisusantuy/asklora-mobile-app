@@ -9,19 +9,23 @@ class ColumnText extends StatelessWidget {
   final String subTitle;
   final int? maxLines;
   final bool ellipsis;
+  final Color? subTitleColor;
+  final CrossAxisAlignment crossAxisAlignment;
 
   const ColumnText(
       {required this.title,
       required this.subTitle,
       this.maxLines,
       this.ellipsis = false,
+      this.subTitleColor,
+      this.crossAxisAlignment = CrossAxisAlignment.start,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: crossAxisAlignment,
       children: [
         CustomTextNew(
           title,
@@ -33,7 +37,7 @@ class ColumnText extends StatelessWidget {
         CustomTextNew(
           subTitle,
           style: AskLoraTextStyles.subtitle2
-              .copyWith(color: AskLoraColors.charcoal),
+              .copyWith(color: subTitleColor ?? AskLoraColors.charcoal),
           maxLines: maxLines,
           ellipsis: ellipsis,
         ),

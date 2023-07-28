@@ -28,7 +28,6 @@ class _MyAppState extends State<MyApp> {
           children: [
             LoraPopUpMessageWithBotBadge(
               backgroundColor: AskLoraColors.primaryGreen,
-              withLoraImage: true,
               badgePosition: BadgePosition.belowSubtitle,
               title: 'No traded BotStocks.',
               subTitle:

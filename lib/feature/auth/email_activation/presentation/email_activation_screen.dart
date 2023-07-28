@@ -9,8 +9,7 @@ import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../../../core/presentation/lora_memoji_header.dart';
-import '../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../../core/presentation/lora_animation_header.dart';
 import '../../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../generated/l10n.dart';
@@ -20,6 +19,7 @@ import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../../../onboarding/welcome/ask_name/bloc/lora_ask_name_bloc.dart';
 import '../../../onboarding/welcome/ask_name/repository/add_user_name_repository.dart';
 import '../../sign_up/repository/sign_up_repository.dart';
+import '../../utils/auth_utils.dart';
 import '../email_activation_bloc.dart';
 
 class EmailActivationScreen extends StatelessWidget {
@@ -61,7 +61,8 @@ class EmailActivationScreen extends StatelessWidget {
               switch (state.response.state) {
                 case ResponseState.error:
                 case ResponseState.success:
-                  CustomInAppNotification.show(context, state.response.message);
+                  CustomInAppNotification.show(
+                      context, state.response.validationCode.getText(context));
                   break;
                 default:
                   break;
@@ -88,12 +89,14 @@ class EmailActivationScreen extends StatelessWidget {
         child: BlocBuilder<EmailActivationBloc, EmailActivationState>(
           builder: (context, state) {
             final headerWidget = state.deeplinkStatus == DeeplinkStatus.failed
-                ? LoraMemojiHeader(
+                ? LoraAnimationHeader(
                     text: S.of(context).emailActivationFailedTitle,
-                    loraMemojiType: LoraMemojiType.lora6)
-                : LoraMemojiHeader(
-                    loraMemojiType: LoraMemojiType.lora7,
-                    text: S.of(context).emailActivationSuccessTitle(userName));
+                    loraAnimationType: LoraAnimationType.magenta,
+                  )
+                : LoraAnimationHeader(
+                    text: S.of(context).emailActivationSuccessTitle(userName),
+                  );
+
             return WillPopScope(
                 onWillPop: () {
                   return Future.value(false);

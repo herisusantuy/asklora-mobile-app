@@ -28,7 +28,7 @@ class BotTerminateButton extends StatelessWidget {
                   desc: S.of(context).endBotStockAcknowledgement(
                       botType.name,
                       botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol,
-                      state.endBotStockResponse.data?.optimalTimeFormatted ??
+                      state.endBotStockResponse.data?.optimalTimeHKTString ??
                           '-'),
                   labelBottomButton: S.of(context).buttonBackToPortfolio,
                   onButtonTap: (_) => TabScreen.openAndRemoveAllRoute(context,

@@ -2,8 +2,10 @@ part of '../ai_investment_style_question_form.dart';
 
 class InteractionWidget extends StatelessWidget {
   final ISQInteraction interaction;
+  final AiThemeType aiThemeType;
 
-  const InteractionWidget({required this.interaction, super.key});
+  const InteractionWidget(
+      {required this.interaction, required this.aiThemeType, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +17,8 @@ class InteractionWidget extends StatelessWidget {
               previous.isTextFieldSendButtonDisabled !=
               current.isTextFieldSendButtonDisabled,
           builder: (context, state) => AiTextField(
+            hintText: 'Tell me your interests...',
+            aiThemeType: aiThemeType,
             isSendButtonDisabled: state.isTextFieldSendButtonDisabled,
             onFieldSubmitted: (_) {},
             onChanged: (value) => context
@@ -45,8 +49,11 @@ class InteractionWidget extends StatelessWidget {
                                     30.2,
                             height: 39.2)
                         : CustomChoiceChips(
-                            textStyle: AskLoraTextStyles.body2,
-                            textColor: AskLoraColors.white,
+                            textStyle: AskLoraTextStyles.body2
+                                .copyWith(color: aiThemeType.primaryFontColor),
+                            textColor: aiThemeType.secondaryFontColor,
+                            borderColor:
+                                aiThemeType.choicesInteractionBorderColor,
                             pressedFillColor:
                                 AskLoraColors.primaryGreen.withOpacity(0.4),
                             fillColor: AskLoraColors.white.withOpacity(0.2),
@@ -61,6 +68,10 @@ class InteractionWidget extends StatelessWidget {
               );
             });
       case ISQInteractionType.summary:
+        final ButtonPrimaryType buttonPrimaryType =
+            aiThemeType == AiThemeType.dark
+                ? ButtonPrimaryType.whiteTransparency
+                : ButtonPrimaryType.ghostCharcoal;
         return BlocBuilder<AiInvestmentStyleQuestionBloc,
                 AiInvestmentStyleQuestionState>(
             buildWhen: (previous, current) =>
@@ -72,25 +83,22 @@ class InteractionWidget extends StatelessWidget {
                   state.isChatAnimationRunning
                       ? const ShimmerWidget(width: double.infinity, height: 55)
                       : PrimaryButton(
-                          label: 'Continue',
+                          label: S.of(context).seeMyRecommendations,
                           onTap: () => context
                               .read<AiInvestmentStyleQuestionBloc>()
                               .add(const SendResultToPpi()),
-                          buttonPrimaryType:
-                              ButtonPrimaryType.whiteTransparency,
-                        ),
+                          buttonPrimaryType: buttonPrimaryType),
                   const SizedBox(
                     height: 10,
                   ),
                   state.isChatAnimationRunning
                       ? const ShimmerWidget(width: double.infinity, height: 55)
                       : PrimaryButton(
-                          label: 'Change My Preferences',
+                          label: S.of(context).startAgain,
                           onTap: () => context
                               .read<AiInvestmentStyleQuestionBloc>()
                               .add(const ResetSession()),
-                          buttonPrimaryType:
-                              ButtonPrimaryType.whiteTransparency,
+                          buttonPrimaryType: buttonPrimaryType,
                         ),
                 ],
               );

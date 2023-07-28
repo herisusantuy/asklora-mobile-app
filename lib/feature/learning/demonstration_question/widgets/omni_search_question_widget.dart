@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
-import '../../../../../core/presentation/lora_rounded_corner_banner.dart';
+
+import '../../../../../core/presentation/custom_snack_bar.dart';
+import '../../../../core/presentation/custom_text_new.dart';
+import '../../../../core/presentation/round_colored_box.dart';
+import '../../../../core/styles/asklora_colors.dart';
+import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../onboarding/ppi/domain/question.dart';
 import '../../../onboarding/ppi/presentation/widget/omni_search_question_widget/bloc/omni_search_question_widget_bloc.dart';
 import '../../../onboarding/ppi/presentation/widget/omni_search_question_widget/widgets/custom_choice_chips.dart';
 import '../../../onboarding/ppi/presentation/widget/question_title.dart';
 import '../../widgets/demonstration_tooltip_guide.dart';
-import '../../../../../core/presentation/custom_snack_bar.dart';
 
 class OmniSearchQuestionWidget extends StatelessWidget {
   final String defaultAnswer;
@@ -50,9 +54,12 @@ class OmniSearchQuestionWidget extends StatelessWidget {
               question: question.question!,
               paddingBottom: 24,
             ),
-            const LoraRoundedCornerBanner(
-                text:
-                    'Search for stocks with keywords or phrases, let us surprise you with the relevant stocks!'),
+            RoundColoredBox(
+                backgroundColor: AskLoraColors.lightGreen,
+                content: CustomTextNew(
+                  'Search for stocks with keywords or phrases, let us surprise you with the relevant stocks!',
+                  style: AskLoraTextStyles.body1,
+                )),
             const SizedBox(
               height: 52,
             ),

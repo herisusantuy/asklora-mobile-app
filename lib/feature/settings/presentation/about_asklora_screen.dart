@@ -12,6 +12,7 @@ import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/app_icons.dart';
+import '../../../core/utils/feature_flags.dart';
 import '../../../core/utils/utils.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
@@ -29,8 +30,7 @@ class AboutAskloraScreen extends StatelessWidget {
     return CustomScaffold(
       body: CustomStretchedLayout(
         contentPadding: const EdgeInsets.only(top: 0, bottom: 43),
-        header: CustomHeader(
-            title: S.of(context).aboutAsklora, isShowBottomBorder: true),
+        header: CustomHeader(title: S.of(context).aboutAsklora),
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,9 +46,36 @@ class AboutAskloraScreen extends StatelessWidget {
                     leftTextStyle: AskLoraTextStyles.subtitle2,
                     flex2: 2,
                     text: askloraSite,
+                    textValueAlign: TextAlign.left,
                     rightTextStyle: AskLoraTextStyles.body1.copyWith(
                       color: AskLoraColors.primaryMagenta,
                     ))),
+            _spaceHeight(),
+            GestureDetector(
+                onTap: () => openUrl(mailToHelpAsklora,
+                    mode: LaunchMode.externalApplication),
+                child: CustomExpandedRow(S.of(context).email,
+                    leftTextStyle: AskLoraTextStyles.subtitle2,
+                    flex2: 2,
+                    text: helpAskloraEmail,
+                    textValueAlign: TextAlign.left,
+                    rightTextStyle: AskLoraTextStyles.body1.copyWith(
+                      color: AskLoraColors.primaryMagenta,
+                    ))),
+            if (FeatureFlags.isMockApp)
+              Column(
+                children: [
+                  _spaceHeight(),
+                  CustomExpandedRow(S.of(context).officeHoursLabel,
+                      leftTextStyle: AskLoraTextStyles.subtitle2,
+                      flex2: 2,
+                      text: S.of(context).officeHours,
+                      textValueAlign: TextAlign.left,
+                      rightTextStyle: AskLoraTextStyles.body1.copyWith(
+                        color: AskLoraColors.black,
+                      )),
+                ],
+              ),
             const SizedBox(height: 12),
             const Divider(thickness: 1, height: 0),
             MenuButtonWidget(
@@ -57,11 +84,9 @@ class AboutAskloraScreen extends StatelessWidget {
                 showBottomBorder: true),
             MenuButtonWidget(
                 onTap: () => TermsAndConditionScreen.open(context),
-                title: S.of(context).termsAndConditions,
-                showBottomBorder: true),
+                title: S.of(context).termsAndConditions),
           ],
         ),
-        bottomButton: _contactUsButton,
       ),
     );
   }
@@ -91,6 +116,10 @@ class AboutAskloraScreen extends StatelessWidget {
             label: S.of(context).contactUs.toUpperCase(),
             onTap: () => CustomerServiceScreen.open(context));
       });
+
+  Widget _spaceHeight() => const Padding(
+      padding: EdgeInsets.symmetric(vertical: 12),
+      child: Divider(thickness: 1, height: 0));
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }

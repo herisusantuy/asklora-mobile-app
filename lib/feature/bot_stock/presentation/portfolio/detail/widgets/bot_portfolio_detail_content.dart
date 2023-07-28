@@ -158,8 +158,8 @@ class BotPortfolioDetailContent extends StatelessWidget {
                 leftSubTitle: botActiveOrderDetailModel!
                     .stockInfoWithPlaceholder.headquarter,
                 rightTitle: 'Founded',
-                rightSubTitle:
-                    botActiveOrderDetailModel!.stockInfoWithPlaceholder.founded,
+                rightSubTitle: botActiveOrderDetailModel!
+                    .stockInfoWithPlaceholder.foundedFormatted,
               ),
               const SizedBox(
                 height: 23,

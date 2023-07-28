@@ -1,4 +1,7 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../generated/l10n.dart';
 
 enum Occupations {
   accountant('Accountant'),
@@ -60,13 +63,14 @@ enum FundingSource {
 }
 
 enum EmploymentStatus {
-  unemployed('Unemployed', 'UNEMPLOYED'),
   employed('Employed', 'EMPLOYED'),
   selfEmployed('Self Employed', 'SELFEMPLOYED'),
   retired('Retired', 'RETIRED'),
   student('Student', 'STUDENT'),
-  atHomeTrader('At-Home Trader', 'ATHOMETRADER'),
+  businessOwner('Business Owner', 'BUSINESSOWNER'),
   homemaker('Homemaker', 'HOMEMAKER'),
+  unemployed('Unemployed', 'UNEMPLOYED'),
+  other('Other', 'OTHER'),
   unknown('Unknown', 'UNKNOWN');
 
   final String name;
@@ -77,6 +81,32 @@ enum EmploymentStatus {
   static EmploymentStatus? findByStringValue(String employmentStatus) =>
       EmploymentStatus.values
           .firstWhereOrNull((element) => element.value == employmentStatus);
+
+  static EmploymentStatus findByStringName(String employmentStatus) =>
+      EmploymentStatus.values
+          .firstWhere((element) => element.name == employmentStatus);
+  String text(BuildContext context) {
+    switch (this) {
+      case EmploymentStatus.employed:
+        return S.of(context).employed;
+      case EmploymentStatus.selfEmployed:
+        return S.of(context).selfEmployed;
+      case EmploymentStatus.retired:
+        return S.of(context).retired;
+      case EmploymentStatus.student:
+        return S.of(context).student;
+      case EmploymentStatus.businessOwner:
+        return S.of(context).businessOwner;
+      case EmploymentStatus.homemaker:
+        return S.of(context).homeMaker;
+      case EmploymentStatus.unemployed:
+        return S.of(context).unEmployed;
+      case EmploymentStatus.other:
+        return S.of(context).other;
+      case EmploymentStatus.unknown:
+        return S.of(context).unknown;
+    }
+  }
 }
 
 enum NatureOfBusiness {
@@ -109,6 +139,55 @@ enum NatureOfBusiness {
   static NatureOfBusiness? findByString(String natureOfBusiness) =>
       NatureOfBusiness.values
           .firstWhereOrNull((element) => element.value == natureOfBusiness);
+
+  static NatureOfBusiness findByStringValue(String natureOfBusiness) =>
+      NatureOfBusiness.values
+          .firstWhere((element) => element.value == natureOfBusiness);
+
+  String text(BuildContext context) {
+    switch (this) {
+      case NatureOfBusiness.architectureEngineering:
+        return S.of(context).architectureEngineering;
+      case NatureOfBusiness.artDesign:
+        return S.of(context).artDesign;
+      case NatureOfBusiness.businessNonFinance:
+        return S.of(context).businessNonFinance;
+      case NatureOfBusiness.communitySocialService:
+        return S.of(context).communitySocialService;
+      case NatureOfBusiness.computerInformationTechnology:
+        return S.of(context).computerInformationTechnology;
+      case NatureOfBusiness.construction:
+        return S.of(context).construction;
+      case NatureOfBusiness.educationTrainingLibrary:
+        return S.of(context).educationTrainingLibrary;
+      case NatureOfBusiness.farmingFishingForestry:
+        return S.of(context).farmingFishingForestry;
+      case NatureOfBusiness.financeBrokerDealerBank:
+        return S.of(context).financeBrokerDealerBank;
+      case NatureOfBusiness.foodBeverage:
+        return S.of(context).foodBeverage;
+      case NatureOfBusiness.healthcare:
+        return S.of(context).healthcare;
+      case NatureOfBusiness.installationMaintenanceRepair:
+        return S.of(context).installationMaintenanceRepair;
+      case NatureOfBusiness.legal:
+        return S.of(context).legal;
+      case NatureOfBusiness.lifePhysicalSocialService:
+        return S.of(context).lifePhysicalSocialService;
+      case NatureOfBusiness.mediaCommunications:
+        return S.of(context).mediaCommunications;
+      case NatureOfBusiness.lawEnforcementGovernmentProtectiveService:
+        return S.of(context).lawEnforcementGovernmentProtectiveService;
+      case NatureOfBusiness.personalCareService:
+        return S.of(context).personalCareService;
+      case NatureOfBusiness.productionManufacturing:
+        return S.of(context).productionManufacturing;
+      case NatureOfBusiness.transportationMaterialMoving:
+        return S.of(context).transportationMaterialMoving;
+      case NatureOfBusiness.other:
+        return S.of(context).other;
+    }
+  }
 }
 
 enum Region {

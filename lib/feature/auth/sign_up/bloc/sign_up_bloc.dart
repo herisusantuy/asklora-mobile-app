@@ -2,11 +2,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/data/remote/base_api_client.dart';
+import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
-import '../../utils/auth_utils.dart';
 import '../repository/sign_up_repository.dart';
 
 part 'sign_up_event.dart';
@@ -37,10 +37,10 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           response: BaseResponse.unknown(),
           username: event.username,
           isEmailValid: event.username.isValidEmail(),
-          usernameErrorText:
+          userNameValidation:
               (event.username.isValidEmail() || event.username.isEmpty)
-                  ? AuthErrorMessage.empty.value
-                  : AuthErrorMessage.enterValidEmail.value),
+                  ? ValidationCode.empty
+                  : ValidationCode.enterValidEmail),
     );
   }
 
@@ -51,10 +51,10 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(state.copyWith(
         response: BaseResponse.unknown(),
         password: event.password,
-        passwordErrorText:
+        passwordValidation:
             (event.password.isValidPassword() || event.password.isEmpty)
-                ? ''
-                : 'Enter valid password',
+                ? ValidationCode.empty
+                : ValidationCode.enterValidPassword,
         isPasswordValid: event.password.isValidPassword()));
   }
 
@@ -73,14 +73,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       await _sharedPreference.writeData(sfKeyEmail, state.username);
 
       emit(state.copyWith(response: data));
-    } on ConflictException {
+    } on AskloraApiClientException catch (e) {
       emit(state.copyWith(
-          response: BaseResponse.error(
-              message: 'Account with this email already exists')));
-    } on BadRequestException {
-      emit(state.copyWith(
-          response:
-              BaseResponse.error(message: 'This password is too common.')));
+          response: BaseResponse.error(validationCode: e.askloraError.type)));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }

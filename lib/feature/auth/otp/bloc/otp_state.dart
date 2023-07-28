@@ -5,7 +5,7 @@ class OtpState extends Equatable {
   final String otp;
   final int resetTime;
   final bool disableRequest;
-  final String otpError;
+  final bool otpError;
   final String phoneNumber;
 
   const OtpState({
@@ -13,7 +13,7 @@ class OtpState extends Equatable {
     this.response = const BaseResponse(),
     this.otp = '',
     this.resetTime = 0,
-    this.otpError = '',
+    this.otpError = false,
     this.phoneNumber = '',
   }) : super();
 
@@ -32,7 +32,7 @@ class OtpState extends Equatable {
     String? otp,
     bool? disableRequest,
     int? resetTime,
-    String? otpError,
+    bool? otpError,
     String? phoneNumber,
   }) {
     return OtpState(

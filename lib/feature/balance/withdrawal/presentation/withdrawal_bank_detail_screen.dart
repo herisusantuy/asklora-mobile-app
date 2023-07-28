@@ -72,7 +72,7 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
                         bankAccount != null
                     ? _bottomButton(context, bankAccount)
                     : const SizedBox.shrink(),
-                title: S.of(context).buttonWithdraw,
+                title: S.of(context).withdraw,
               ),
             ),
           );

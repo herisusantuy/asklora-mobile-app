@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import '../../../../core/data/remote/base_api_client.dart';
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
 import '../domain/account_api_client.dart';
@@ -26,8 +28,11 @@ class AccountRepository {
       await _jsonCacheSharedPreference.refresh(
           sfKeyAccountData, getAccountResponse);
       return BaseResponse.complete<GetAccountResponse>(getAccountResponse);
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
     } catch (e) {
-      return BaseResponse.error(message: 'Could not get user details!');
+      return BaseResponse.error(
+          validationCode: ValidationCode.couldNotGetUserDetails);
     }
   }
 
@@ -47,6 +52,8 @@ class AccountRepository {
       var response = await _accountApiClient.submitIBKR(upgradeAccountRequest);
       return BaseResponse.complete(
           UpgradeAccountResponse.fromJson(response.data));
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
     } catch (_) {
       return BaseResponse.error();
     }
@@ -59,6 +66,8 @@ class AccountRepository {
           await _accountApiClient.submitPersonalInfo(personalInfoRequest);
       return BaseResponse.complete(
           PersonalInfoResponse.fromJson(response.data));
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
     } catch (_) {
       return BaseResponse.error();
     }
@@ -68,8 +77,11 @@ class AccountRepository {
     try {
       var response = await _accountApiClient.getOnfidoToken();
       return BaseResponse.complete(OnfidoTokenResponse.fromJson(response.data));
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
     } catch (e) {
-      return BaseResponse.error(message: 'Could not fetch the token!');
+      return BaseResponse.error(
+          validationCode: ValidationCode.couldNotFetchOnfidoToken);
     }
   }
 
@@ -79,8 +91,11 @@ class AccountRepository {
       var response = await _accountApiClient.submitOnfidoOutcome(request);
       return BaseResponse.complete(
           OnfidoResultResponse.fromJson(response.data));
+    } on AskloraApiClientException catch (e) {
+      return BaseResponse.error(validationCode: e.askloraError.type);
     } catch (e) {
-      return BaseResponse.error(message: 'Could not update the Onfido result!');
+      return BaseResponse.error(
+          validationCode: ValidationCode.couldNotUpdateOnfidoResult);
     }
   }
 }

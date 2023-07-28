@@ -5,7 +5,7 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../../../core/presentation/lora_memoji_header.dart';
+import '../../../../core/presentation/lora_animation_header.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
@@ -28,7 +28,8 @@ class SignUpForm extends StatelessWidget {
       switch (state.response.state) {
         case ResponseState.error:
           context.read<SignUpBloc>().add(SignUpUsernameChanged(state.username));
-          CustomInAppNotification.show(context, state.response.message);
+          CustomInAppNotification.show(
+              context, state.response.validationCode.getText(context));
           break;
         case ResponseState.success:
           EmailActivationScreen.open(context, state.username);
@@ -49,7 +50,7 @@ class SignUpForm extends StatelessWidget {
               children: <Widget>[
                 Column(
                   children: [
-                    LoraMemojiHeader(text: S.of(context).signUpTitle),
+                    LoraAnimationHeader(text: S.of(context).signUpTitle),
                     _userNameInput(),
                     _padding(),
                     _passwordInput(),
@@ -87,9 +88,7 @@ class SignUpForm extends StatelessWidget {
                 maxLine: 1,
                 labelText: S.of(context).email,
                 hintText: S.of(context).emailAddress,
-                errorText:
-                    AuthErrorMessage.findByString(state.usernameErrorText)
-                        .getErrorMessage(context),
+                errorText: state.userNameValidation.getText(context),
                 onChanged: (email) => context
                     .read<SignUpBloc>()
                     .add(SignUpUsernameChanged(email)));

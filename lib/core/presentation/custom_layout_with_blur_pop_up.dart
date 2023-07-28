@@ -39,7 +39,6 @@ class CustomLayoutWithBlurPopUp extends StatelessWidget {
             child: Padding(
               padding: AppValues.screenHorizontalPadding,
               child: LoraPopUpMessage(
-                pngImage: 'lora_memoji_10',
                 backgroundColor: AskLoraColors.charcoal,
                 title: loraPopUpMessageModel.title,
                 titleColor: AskLoraColors.white,

@@ -10,6 +10,7 @@ import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../generated/l10n.dart';
+import '../../auth/utils/auth_utils.dart';
 import '../../balance/widgets/bank_account_card.dart';
 import '../../balance/widgets/change_bank_account_button.dart';
 import '../../onboarding/kyc/repository/account_repository.dart';
@@ -34,7 +35,8 @@ class PaymentDetailScreen extends StatelessWidget {
           CustomLoadingOverlay.of(context).show(state.response.state);
           switch (state.response.state) {
             case ResponseState.error:
-              CustomInAppNotification.show(context, state.response.message);
+              CustomInAppNotification.show(
+                  context, state.response.validationCode.getText(context));
               break;
             case ResponseState.success:
               break;

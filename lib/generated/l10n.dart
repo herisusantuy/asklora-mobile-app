@@ -700,16 +700,6 @@ class S {
     );
   }
 
-  /// `Subscription`
-  String get subscription {
-    return Intl.message(
-      'Subscription',
-      name: 'subscription',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Core Plan`
   String get corePlan {
     return Intl.message(
@@ -890,10 +880,10 @@ class S {
     );
   }
 
-  /// `It’s time to define your investment style.  Show me what you’re made of!`
+  /// `It’s time to define your investment style.Show me what you’re made of!`
   String get investmentStyleWelcomeTitle {
     return Intl.message(
-      'It’s time to define your investment style.  Show me what you’re made of!',
+      'It’s time to define your investment style.Show me what you’re made of!',
       name: 'investmentStyleWelcomeTitle',
       desc: '',
       args: [],
@@ -1522,13 +1512,13 @@ class S {
     );
   }
 
-  /// `Current Price ({currency})`
-  String portfolioCurrentPrice(String currency) {
+  /// `Current Price`
+  String get portfolioCurrentPrice {
     return Intl.message(
-      'Current Price ($currency)',
+      'Current Price',
       name: 'portfolioCurrentPrice',
       desc: '',
-      args: [currency],
+      args: [],
     );
   }
 
@@ -2413,10 +2403,10 @@ class S {
     );
   }
 
-  /// `Confirm & Continue`
+  /// `Confirm And Continue`
   String get confirmAndContinue {
     return Intl.message(
-      'Confirm & Continue',
+      'Confirm And Continue',
       name: 'confirmAndContinue',
       desc: '',
       args: [],
@@ -4316,13 +4306,13 @@ class S {
     );
   }
 
-  /// `Updated at {time} HKT, {date}`
-  String updatedAt(String time, String date) {
+  /// `Updated at {updated}`
+  String updatedAt(String updated) {
     return Intl.message(
-      'Updated at $time HKT, $date',
+      'Updated at $updated',
       name: 'updatedAt',
       desc: '',
-      args: [time, date],
+      args: [updated],
     );
   }
 
@@ -4356,10 +4346,10 @@ class S {
     );
   }
 
-  /// `Otp SMS is sent to your phone`
+  /// `OTP SMS is sent to your phone`
   String get otpSentToYourPhone {
     return Intl.message(
-      'Otp SMS is sent to your phone',
+      'OTP SMS is sent to your phone',
       name: 'otpSentToYourPhone',
       desc: '',
       args: [],
@@ -4523,6 +4513,1206 @@ class S {
       name: 'withdrawalHistory',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Sorry ! You are not eligible for Asklora`
+  String get kycRejectedScreenTitle {
+    return Intl.message(
+      'Sorry ! You are not eligible for Asklora',
+      name: 'kycRejectedScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We do not accept any members who are affiliated with the organisations mentioned above`
+  String get kycRejectedExplanationOfAffiliate {
+    return Intl.message(
+      'We do not accept any members who are affiliated with the organisations mentioned above',
+      name: 'kycRejectedExplanationOfAffiliate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go Back`
+  String get buttonGoBack {
+    return Intl.message(
+      'Go Back',
+      name: 'buttonGoBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Employment`
+  String get employment {
+    return Intl.message(
+      'Employment',
+      name: 'employment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Employment Status`
+  String get employmentStatus {
+    return Intl.message(
+      'Employment Status',
+      name: 'employmentStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Employed`
+  String get employed {
+    return Intl.message(
+      'Employed',
+      name: 'employed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Self-Employed`
+  String get selfEmployed {
+    return Intl.message(
+      'Self-Employed',
+      name: 'selfEmployed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retired`
+  String get retired {
+    return Intl.message(
+      'Retired',
+      name: 'retired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Student`
+  String get student {
+    return Intl.message(
+      'Student',
+      name: 'student',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Business Owner`
+  String get businessOwner {
+    return Intl.message(
+      'Business Owner',
+      name: 'businessOwner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Homemaker`
+  String get homeMaker {
+    return Intl.message(
+      'Homemaker',
+      name: 'homeMaker',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unemployed`
+  String get unEmployed {
+    return Intl.message(
+      'Unemployed',
+      name: 'unEmployed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `At-Home Trader`
+  String get homeTrader {
+    return Intl.message(
+      'At-Home Trader',
+      name: 'homeTrader',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown`
+  String get unknown {
+    return Intl.message(
+      'Unknown',
+      name: 'unknown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nature of Business`
+  String get natureOfBusiness {
+    return Intl.message(
+      'Nature of Business',
+      name: 'natureOfBusiness',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nature of Business description`
+  String get natureOfBusinessDesc {
+    return Intl.message(
+      'Nature of Business description',
+      name: 'natureOfBusinessDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Architecture / Engineering`
+  String get architectureEngineering {
+    return Intl.message(
+      'Architecture / Engineering',
+      name: 'architectureEngineering',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Arts / Design`
+  String get artDesign {
+    return Intl.message(
+      'Arts / Design',
+      name: 'artDesign',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Business, Non-Finance`
+  String get businessNonFinance {
+    return Intl.message(
+      'Business, Non-Finance',
+      name: 'businessNonFinance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Community / Social Service`
+  String get communitySocialService {
+    return Intl.message(
+      'Community / Social Service',
+      name: 'communitySocialService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Computer / Information Technology`
+  String get computerInformationTechnology {
+    return Intl.message(
+      'Computer / Information Technology',
+      name: 'computerInformationTechnology',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction`
+  String get construction {
+    return Intl.message(
+      'Construction',
+      name: 'construction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Education / Training / Library`
+  String get educationTrainingLibrary {
+    return Intl.message(
+      'Education / Training / Library',
+      name: 'educationTrainingLibrary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Farming, Fishing and Forestry`
+  String get farmingFishingForestry {
+    return Intl.message(
+      'Farming, Fishing and Forestry',
+      name: 'farmingFishingForestry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Finance/ Broker Dealer /Bank`
+  String get financeBrokerDealerBank {
+    return Intl.message(
+      'Finance/ Broker Dealer /Bank',
+      name: 'financeBrokerDealerBank',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Food and Beverage`
+  String get foodBeverage {
+    return Intl.message(
+      'Food and Beverage',
+      name: 'foodBeverage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Healthcare`
+  String get healthcare {
+    return Intl.message(
+      'Healthcare',
+      name: 'healthcare',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Installation, Maintenance, and Repair`
+  String get installationMaintenanceRepair {
+    return Intl.message(
+      'Installation, Maintenance, and Repair',
+      name: 'installationMaintenanceRepair',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Legal`
+  String get legal {
+    return Intl.message(
+      'Legal',
+      name: 'legal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Life, Physical and Social Service`
+  String get lifePhysicalSocialService {
+    return Intl.message(
+      'Life, Physical and Social Service',
+      name: 'lifePhysicalSocialService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Media and Communications`
+  String get mediaCommunications {
+    return Intl.message(
+      'Media and Communications',
+      name: 'mediaCommunications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Law Enforcement, Government, Protective Service`
+  String get lawEnforcementGovernmentProtectiveService {
+    return Intl.message(
+      'Law Enforcement, Government, Protective Service',
+      name: 'lawEnforcementGovernmentProtectiveService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Personal Care / Service`
+  String get personalCareService {
+    return Intl.message(
+      'Personal Care / Service',
+      name: 'personalCareService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Production and Manufacturing`
+  String get productionManufacturing {
+    return Intl.message(
+      'Production and Manufacturing',
+      name: 'productionManufacturing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation and Material Moving`
+  String get transportationMaterialMoving {
+    return Intl.message(
+      'Transportation and Material Moving',
+      name: 'transportationMaterialMoving',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other`
+  String get other {
+    return Intl.message(
+      'Other',
+      name: 'other',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Source of Wealth`
+  String get sourceOfWealth {
+    return Intl.message(
+      'Source of Wealth',
+      name: 'sourceOfWealth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account opening and deposit are the last few steps before investing.`
+  String get accountOpeningAndDeposit {
+    return Intl.message(
+      'Account opening and deposit are the last few steps before investing.',
+      name: 'accountOpeningAndDeposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get ready for AI trading.`
+  String get getReadyForTrading {
+    return Intl.message(
+      'Get ready for AI trading.',
+      name: 'getReadyForTrading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set up Personal Info`
+  String get setupPersonalInfo {
+    return Intl.message(
+      'Set up Personal Info',
+      name: 'setupPersonalInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify identity`
+  String get verifyIdentity {
+    return Intl.message(
+      'Verify identity',
+      name: 'verifyIdentity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The items you will need…`
+  String get theItemYouWillNeed {
+    return Intl.message(
+      'The items you will need…',
+      name: 'theItemYouWillNeed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HKID`
+  String get hkId {
+    return Intl.message(
+      'HKID',
+      name: 'hkId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Proof of Residential Address`
+  String get porAddress {
+    return Intl.message(
+      'Proof of Residential Address',
+      name: 'porAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(We accept utility bill, bank statement, or government correspondence within the last 3 months)`
+  String get weAcceptUtilityBill {
+    return Intl.message(
+      '(We accept utility bill, bank statement, or government correspondence within the last 3 months)',
+      name: 'weAcceptUtilityBill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Once you've started, you can resume the process whenever you want.`
+  String get onceYouHaveStarted {
+    return Intl.message(
+      'Once you\'ve started, you can resume the process whenever you want.',
+      name: 'onceYouHaveStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open Account Now`
+  String get openAccountNow {
+    return Intl.message(
+      'Open Account Now',
+      name: 'openAccountNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you a United States tax resident, green card holder, or citizen?`
+  String get usResidentQuestion {
+    return Intl.message(
+      'Are you a United States tax resident, green card holder, or citizen?',
+      name: 'usResidentQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you a Hong Kong resident? By clicking yes, you acknowledge that you are also a Hong Kong tax resident`
+  String get hkResidentQuestion {
+    return Intl.message(
+      'Are you a Hong Kong resident? By clicking yes, you acknowledge that you are also a Hong Kong tax resident',
+      name: 'hkResidentQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please make sure your name matches the information on your identification document.`
+  String get personalInfoFormDesc {
+    return Intl.message(
+      'Please make sure your name matches the information on your identification document.',
+      name: 'personalInfoFormDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Legal English First Name`
+  String get legalFirstName {
+    return Intl.message(
+      'Legal English First Name',
+      name: 'legalFirstName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Legal English Last Name`
+  String get legalLastName {
+    return Intl.message(
+      'Legal English Last Name',
+      name: 'legalLastName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HKID Number`
+  String get hkIdNumber {
+    return Intl.message(
+      'HKID Number',
+      name: 'hkIdNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nationality`
+  String get nationality {
+    return Intl.message(
+      'Nationality',
+      name: 'nationality',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date of Birth`
+  String get dateOfBirth {
+    return Intl.message(
+      'Date of Birth',
+      name: 'dateOfBirth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Country of Birth`
+  String get countryOfBirth {
+    return Intl.message(
+      'Country of Birth',
+      name: 'countryOfBirth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HK Phone Number`
+  String get hkPhoneNo {
+    return Intl.message(
+      'HK Phone Number',
+      name: 'hkPhoneNo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please provide your residential address. This will also be your mailing address.`
+  String get pleaseProvideYourResidentialAddress {
+    return Intl.message(
+      'Please provide your residential address. This will also be your mailing address.',
+      name: 'pleaseProvideYourResidentialAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload Address Proof`
+  String get uploadAddressProof {
+    return Intl.message(
+      'Upload Address Proof',
+      name: 'uploadAddressProof',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your address proof must contain your full name, full residential address and the issuing agency.\n\nWe accept water/electricity/gas bills, bank statement, or government correspondence within the last 3 months.`
+  String get yourAddressProofMustContainFullName {
+    return Intl.message(
+      'Your address proof must contain your full name, full residential address and the issuing agency.\n\nWe accept water/electricity/gas bills, bank statement, or government correspondence within the last 3 months.',
+      name: 'yourAddressProofMustContainFullName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address Proof`
+  String get addressProof {
+    return Intl.message(
+      'Address Proof',
+      name: 'addressProof',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Select`
+  String get pleaseSelect {
+    return Intl.message(
+      'Please Select',
+      name: 'pleaseSelect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription`
+  String get subscription {
+    return Intl.message(
+      'Subscription',
+      name: 'subscription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please read the the Asklora Customer Agreement. You must click on the agreement and check all the boxes in order to proceed.`
+  String get pleaseReadTheAskloraCustomerAgreement {
+    return Intl.message(
+      'Please read the the Asklora Customer Agreement. You must click on the agreement and check all the boxes in order to proceed.',
+      name: 'pleaseReadTheAskloraCustomerAgreement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I have read, understood, and agree to be bound by LORA Advisors Limited’s account terms, and all other terms, disclosures and disclaimers applicable to me.`
+  String get iHaveReadAndAgreed {
+    return Intl.message(
+      'I have read, understood, and agree to be bound by LORA Advisors Limited’s account terms, and all other terms, disclosures and disclaimers applicable to me.',
+      name: 'iHaveReadAndAgreed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Customer Agreement.`
+  String get iUnderstandSigningAgreement {
+    return Intl.message(
+      'I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Customer Agreement.',
+      name: 'iUnderstandSigningAgreement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asklora Customer Agreement.pdf`
+  String get AskloraAgreementFile {
+    return Intl.message(
+      'Asklora Customer Agreement.pdf',
+      name: 'AskloraAgreementFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Under penalties of perjury, I declare that I have examined the information in lines 1-7 and to the best of my knowledge and belief it is true, correct, and complete. I further certify under penalties of perjury that:`
+  String get taxAgreementDesc1 {
+    return Intl.message(
+      'Under penalties of perjury, I declare that I have examined the information in lines 1-7 and to the best of my knowledge and belief it is true, correct, and complete. I further certify under penalties of perjury that:',
+      name: 'taxAgreementDesc1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am the individual that is the beneficial owner (or am authorized to sign for the individual that is the beneficial owner) of all the income or proceeds to which this form relates or am using this form to document myself for chapter 4 purposes;`
+  String get taxAgreementDescPoint1 {
+    return Intl.message(
+      'I am the individual that is the beneficial owner (or am authorized to sign for the individual that is the beneficial owner) of all the income or proceeds to which this form relates or am using this form to document myself for chapter 4 purposes;',
+      name: 'taxAgreementDescPoint1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The person named on line 1 of this form is not a U.S. person;`
+  String get taxAgreementDescPoint2 {
+    return Intl.message(
+      'The person named on line 1 of this form is not a U.S. person;',
+      name: 'taxAgreementDescPoint2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This form relates to:`
+  String get taxAgreementDescPoint3 {
+    return Intl.message(
+      'This form relates to:',
+      name: 'taxAgreementDescPoint3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `income not effectively connected with the conduct of a trade or business in the United States;`
+  String get taxAgreementDescPoint3SubPoint1 {
+    return Intl.message(
+      'income not effectively connected with the conduct of a trade or business in the United States;',
+      name: 'taxAgreementDescPoint3SubPoint1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `income effectively connected with the conduct of a trade or business in the United States but is not subject to tax under an applicable income tax treaty;`
+  String get taxAgreementDescPoint3SubPoint2 {
+    return Intl.message(
+      'income effectively connected with the conduct of a trade or business in the United States but is not subject to tax under an applicable income tax treaty;',
+      name: 'taxAgreementDescPoint3SubPoint2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `the partner's share of a partnership's effectively connected taxable income;`
+  String get taxAgreementDescPoint3SubPoint3 {
+    return Intl.message(
+      'the partner\'s share of a partnership\'s effectively connected taxable income;',
+      name: 'taxAgreementDescPoint3SubPoint3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `or the partner's amount realized from the transfer of a partnership interest subject to withholding under section 1446(f);`
+  String get taxAgreementDescPoint3SubPoint4 {
+    return Intl.message(
+      'or the partner\'s amount realized from the transfer of a partnership interest subject to withholding under section 1446(f);',
+      name: 'taxAgreementDescPoint3SubPoint4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The person named on line 1 of this form is a resident of the treaty country listed on line 9 of the form (if any) within the meaning of the income tax treaty between the United States and that country;`
+  String get taxAgreementDescPoint4 {
+    return Intl.message(
+      'The person named on line 1 of this form is a resident of the treaty country listed on line 9 of the form (if any) within the meaning of the income tax treaty between the United States and that country;',
+      name: 'taxAgreementDescPoint4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `and For broker transactions or barter exchanges, the beneficial owner is an exempt foreign person as defined in the instructions to IRS Form W-8BEN.`
+  String get taxAgreementDescPoint5 {
+    return Intl.message(
+      'and For broker transactions or barter exchanges, the beneficial owner is an exempt foreign person as defined in the instructions to IRS Form W-8BEN.',
+      name: 'taxAgreementDescPoint5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Furthermore, I authorize this form to be provided to any withholding agent that has control, receipt, or custody of the income of which I am the beneficial owner or any withholding agent that can disburse or make payments of the income of which I am the beneficial owner. I agree I will submit a new form within 30 days if any certification made on this form becomes incorrect.`
+  String get taxAgreementDesc2 {
+    return Intl.message(
+      'Furthermore, I authorize this form to be provided to any withholding agent that has control, receipt, or custody of the income of which I am the beneficial owner or any withholding agent that can disburse or make payments of the income of which I am the beneficial owner. I agree I will submit a new form within 30 days if any certification made on this form becomes incorrect.',
+      name: 'taxAgreementDesc2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The US Internal Revenue Service does not require your consent to any provisions of this document other than the certifications required to establish your status as a non-U.S. person, and if applicable, obtain a reduced rate of witholding.`
+  String get taxAgreementDesc3 {
+    return Intl.message(
+      'The US Internal Revenue Service does not require your consent to any provisions of this document other than the certifications required to establish your status as a non-U.S. person, and if applicable, obtain a reduced rate of witholding.',
+      name: 'taxAgreementDesc3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By checking this box, you consent to the collection and distribution of tax forms in an electronic format in lieu of paper`
+  String get taxAgreementCheckboxDesc {
+    return Intl.message(
+      'By checking this box, you consent to the collection and distribution of tax forms in an electronic format in lieu of paper',
+      name: 'taxAgreementCheckboxDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signature`
+  String get taxAgreementSignatureTitle {
+    return Intl.message(
+      'Signature',
+      name: 'taxAgreementSignatureTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By typing my signature and clicking ‘Agree’ below, I confirm that:`
+  String get taxAgreementSignatureDesc {
+    return Intl.message(
+      'By typing my signature and clicking ‘Agree’ below, I confirm that:',
+      name: 'taxAgreementSignatureDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(1) All information and/or documentation provided by me during the account application process is accurate, complete and up-to-date; `
+  String get taxAgreementSignatureDescPoint1 {
+    return Intl.message(
+      '(1) All information and/or documentation provided by me during the account application process is accurate, complete and up-to-date; ',
+      name: 'taxAgreementSignatureDescPoint1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(2) I have read and understood all of the information provided to me by LORA Advisors;`
+  String get taxAgreementSignatureDescPoint2 {
+    return Intl.message(
+      '(2) I have read and understood all of the information provided to me by LORA Advisors;',
+      name: 'taxAgreementSignatureDescPoint2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(3) I consent and agree to the terms of all the above agreements and disclosures provided to me during the account application process: and`
+  String get taxAgreementSignatureDescPoint3 {
+    return Intl.message(
+      '(3) I consent and agree to the terms of all the above agreements and disclosures provided to me during the account application process: and',
+      name: 'taxAgreementSignatureDescPoint3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(4) I understand and agree that my electronic signature is the legal equivalent of a manual written signature.`
+  String get taxAgreementSignatureDescPoint4 {
+    return Intl.message(
+      '(4) I understand and agree that my electronic signature is the legal equivalent of a manual written signature.',
+      name: 'taxAgreementSignatureDescPoint4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign this electronically by typing your name exactly as shown below.`
+  String get signInElectronically {
+    return Intl.message(
+      'Sign this electronically by typing your name exactly as shown below.',
+      name: 'signInElectronically',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accepted signature(s):`
+  String get acceptedSignature {
+    return Intl.message(
+      'Accepted signature(s):',
+      name: 'acceptedSignature',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asklora Customer Agreement`
+  String get askloraCustomerAgreement {
+    return Intl.message(
+      'Asklora Customer Agreement',
+      name: 'askloraCustomerAgreement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Risk Disclosure Statement`
+  String get riskDisclosureStatement {
+    return Intl.message(
+      'Risk Disclosure Statement',
+      name: 'riskDisclosureStatement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `W-8BEN Form`
+  String get w8benForm {
+    return Intl.message(
+      'W-8BEN Form',
+      name: 'w8benForm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Form W-8BEN`
+  String get formW8ben {
+    return Intl.message(
+      'Form W-8BEN',
+      name: 'formW8ben',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Agreed`
+  String get agreed {
+    return Intl.message(
+      'Agreed',
+      name: 'agreed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We'll need to verify your identity via your HKID.`
+  String get weNeedToVerifyYourId {
+    return Intl.message(
+      'We\'ll need to verify your identity via your HKID.',
+      name: 'weNeedToVerifyYourId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get ready for the verification process. You will..`
+  String get getReadyForTheVerification {
+    return Intl.message(
+      'Get ready for the verification process. You will..',
+      name: 'getReadyForTheVerification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a photo of the front of your HKID`
+  String get takePhotoFront {
+    return Intl.message(
+      'Take a photo of the front of your HKID',
+      name: 'takePhotoFront',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a photo of the front of your HKID`
+  String get takePhotoBack {
+    return Intl.message(
+      'Take a photo of the front of your HKID',
+      name: 'takePhotoBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a selfie`
+  String get takeSelfie {
+    return Intl.message(
+      'Take a selfie',
+      name: 'takeSelfie',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify Now`
+  String get verifyNow {
+    return Intl.message(
+      'Verify Now',
+      name: 'verifyNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your investment account application is under review!`
+  String get kycResultScreenTitle {
+    return Intl.message(
+      'Your investment account application is under review!',
+      name: 'kycResultScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You will be informed when your application is approved.\n\nPlease remember to collect your gift.`
+  String get kycResultScreenDesc {
+    return Intl.message(
+      'You will be informed when your application is approved.\n\nPlease remember to collect your gift.',
+      name: 'kycResultScreenDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit Funds`
+  String get depositFund {
+    return Intl.message(
+      'Deposit Funds',
+      name: 'depositFund',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!`
+  String get botManagementFeeTooltip {
+    return Intl.message(
+      'The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!',
+      name: 'botManagementFeeTooltip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Our personalised recommendations are unique. The recommended Botstocks are based on your risk tolerance, personality, and investment style.`
+  String get ourPersonalisedRecommendationsAreUnique {
+    return Intl.message(
+      'Our personalised recommendations are unique. The recommended Botstocks are based on your risk tolerance, personality, and investment style.',
+      name: 'ourPersonalisedRecommendationsAreUnique',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `General Settings`
+  String get generalSettings {
+    return Intl.message(
+      'General Settings',
+      name: 'generalSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not the stock you were looking for? Try something different`
+  String get notTheStockYouWereLooking {
+    return Intl.message(
+      'Not the stock you were looking for? Try something different',
+      name: 'notTheStockYouWereLooking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that I will manage for you!`
+  String get botStockExplanationScreenTitle {
+    return Intl.message(
+      'A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that I will manage for you!',
+      name: 'botStockExplanationScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Got it! But What Does a Bot Do?`
+  String get botStockExplanationScreenBottomButton {
+    return Intl.message(
+      'Got it! But What Does a Bot Do?',
+      name: 'botStockExplanationScreenBottomButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward.`
+  String get botStockDoScreenTitle {
+    return Intl.message(
+      'A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward.',
+      name: 'botStockDoScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go for occasional big wins`
+  String get botStockDoScreenPoint1 {
+    return Intl.message(
+      'Go for occasional big wins',
+      name: 'botStockDoScreenPoint1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Avoid excessive losses`
+  String get botStockDoScreenPoint2 {
+    return Intl.message(
+      'Avoid excessive losses',
+      name: 'botStockDoScreenPoint2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go for small but frequent wins`
+  String get botStockDoScreenPoint3 {
+    return Intl.message(
+      'Go for small but frequent wins',
+      name: 'botStockDoScreenPoint3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Understood!`
+  String get understood {
+    return Intl.message(
+      'Understood!',
+      name: 'understood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You're all set!\nLet's begin a real AI trade!`
+  String get giftBotStockWelcomeScreenTitle {
+    return Intl.message(
+      'You\'re all set!\nLet\'s begin a real AI trade!',
+      name: 'giftBotStockWelcomeScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sure! What is a Botstock?`
+  String get giftBotStockWelcomeScreenBottomButton {
+    return Intl.message(
+      'Sure! What is a Botstock?',
+      name: 'giftBotStockWelcomeScreenBottomButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Press to\nStart Over`
+  String get pressToStartOver {
+    return Intl.message(
+      'Press to\nStart Over',
+      name: 'pressToStartOver',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See My Recommendations`
+  String get seeMyRecommendations {
+    return Intl.message(
+      'See My Recommendations',
+      name: 'seeMyRecommendations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Again`
+  String get startAgain {
+    return Intl.message(
+      'Start Again',
+      name: 'startAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have {availableAmount},`
+  String botTradeBottomSheetAmountMinimumFirst(String availableAmount) {
+    return Intl.message(
+      'You have $availableAmount,',
+      name: 'botTradeBottomSheetAmountMinimumFirst',
+      desc: '',
+      args: [availableAmount],
+    );
+  }
+
+  /// ` the minimum investment amount is {minimumAmount}.`
+  String botTradeBottomSheetAmountMinimumSecond(String minimumAmount) {
+    return Intl.message(
+      ' the minimum investment amount is $minimumAmount.',
+      name: 'botTradeBottomSheetAmountMinimumSecond',
+      desc: '',
+      args: [minimumAmount],
     );
   }
 }

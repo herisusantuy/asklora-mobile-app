@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/presentation/ai/lora_animation_green.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../tabs/presentation/tab_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../widgets/custom_stepper/custom_stepper.dart';
@@ -22,30 +23,33 @@ class KycProgressScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: AppValues.screenHorizontalPadding,
-      child: ListView(
-        children: [
-          const LoraMemojiHeader(
-              text:
-                  'Account opening and deposit are the last few steps before investing.'),
-          _kycSteps,
-          const SizedBox(
-            height: 20,
-          ),
-          _neededItems,
-          const SizedBox(
-            height: 57,
-          ),
-          CustomTextNew(
-            'Once you\'ve started, you can always take a break and resume the process whenever you want.',
-            style: AskLoraTextStyles.subtitle3
-                .copyWith(color: AskLoraColors.charcoal),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          _bottomButton(context),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(width: 180, child: LoraAnimationGreen()),
+            CustomTextNew(
+              S.of(context).accountOpeningAndDeposit,
+              style:
+                  AskLoraTextStyles.h4.copyWith(color: AskLoraColors.charcoal),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 50),
+            _kycSteps(context),
+            const SizedBox(height: 20),
+            _neededItems(context),
+            const SizedBox(height: 57),
+            CustomTextNew(
+              S.of(context).onceYouHaveStarted,
+              style: AskLoraTextStyles.subtitle3
+                  .copyWith(color: AskLoraColors.charcoal),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            _bottomButton(context),
+          ],
+        ),
       ),
     );
   }
@@ -55,34 +59,31 @@ class KycProgressScreen extends StatelessWidget {
             .read<NavigationBloc<KycPageStep>>()
             .add(const PageChanged(KycPageStep.residentCheck)),
         secondaryButtonOnClick: () => TabScreen.openAndRemoveAllRoute(context),
-        primaryButtonLabel: 'Open Account Now',
-        secondaryButtonLabel: 'Maybe Later',
+        primaryButtonLabel: S.of(context).openAccountNow,
+        secondaryButtonLabel: S.of(context).buttonMaybeLater,
       );
 
-  Widget get _kycSteps => RoundColoredBox(
+  Widget _kycSteps(BuildContext context) => RoundColoredBox(
       key: const Key('kyc_steps'),
-      title: 'Get ready for AI trading.',
+      title: S.of(context).getReadyForTrading,
       content: CustomStepper(
         currentStep: currentStep,
-        steps: const [
-          'Set up Personal Info',
-          'Set up Financial Profile',
-          'Verify Identity',
-          'Sign Agreements'
+        steps: [
+          S.of(context).setupPersonalInfo,
+          S.of(context).setUpFinancialProfile,
+          S.of(context).verifyIdentity,
+          S.of(context).signAgreements,
         ],
       ));
 
-  Widget get _neededItems => RoundColoredBox(
+  Widget _neededItems(BuildContext context) => RoundColoredBox(
       key: const Key('kyc_items_needed'),
-      title: 'The items you will need..',
+      title: S.of(context).theItemYouWillNeed,
       content: Column(children: [
-        _neededItem('HKID'),
-        const SizedBox(
-          height: 10,
-        ),
-        _neededItem('Proof of residential address',
-            additionalText:
-                '(We accept utility bill, bank statement, or government correspondence within the last 3 months)')
+        _neededItem(S.of(context).hkId),
+        const SizedBox(height: 10),
+        _neededItem(S.of(context).porAddress,
+            additionalText: S.of(context).weAcceptUtilityBill)
       ]));
 
   Widget _neededItem(String text, {String additionalText = ''}) => Row(

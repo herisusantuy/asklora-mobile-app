@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/presentation/custom_image_picker.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../bloc/address_proof/address_proof_bloc.dart';
 import '../../../bloc/personal_info/personal_info_bloc.dart';
 import '../../widgets/kyc_sub_title.dart';
@@ -31,55 +32,55 @@ class PersonalInfoSummaryContent extends StatelessWidget {
           ),
           _spaceHeight,
           SummaryTextInfo(
-              title:
-                  'Are you a United States tax resident, green card holder or citizens ?',
+              title: S.of(context).usResidentQuestion,
               subTitle: personalInfoState.isUnitedStateResident != null
                   ? personalInfoState.isUnitedStateResident!
-                      ? 'Yes'
-                      : 'No'
+                      ? S.of(context).yes
+                      : S.of(context).no
                   : 'Unknown'),
           _spaceHeight,
           SummaryTextInfo(
-              title:
-                  'Are you a Hong Kong citizen or resident? By clicking yes, you acknowledge that you are also a Hong Kong tax resident',
+              title: S.of(context).hkResidentQuestion,
               subTitle: personalInfoState.isHongKongPermanentResident != null
                   ? personalInfoState.isHongKongPermanentResident!
-                      ? 'Yes'
-                      : 'No'
+                      ? S.of(context).yes
+                      : S.of(context).no
                   : 'Unknown'),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'Legal English First Name',
+              title: S.of(context).legalFirstName,
               subTitle: personalInfoState.firstName),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'Legal English Last Name',
+              title: S.of(context).legalLastName,
               subTitle: personalInfoState.lastName),
           _spaceHeight,
           SummaryTextInfo(title: 'Gender', subTitle: personalInfoState.gender),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'HKID Number', subTitle: personalInfoState.hkIdNumber),
+              title: S.of(context).hkIdNumber,
+              subTitle: personalInfoState.hkIdNumber),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'Nationality',
+              title: S.of(context).nationality,
               subTitle: personalInfoState.nationalityName),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'Date of Birth',
+              title: S.of(context).dateOfBirth,
               subTitle: personalInfoState.dateOfBirth.replaceAll('-', '/')),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'Country of Birth',
+              title: S.of(context).countryOfBirth,
               subTitle: personalInfoState.countryNameOfBirth),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'Phone',
+              title: S.of(context).hkPhoneNo,
               subTitle:
                   '+${personalInfoState.phoneCountryCode} ${personalInfoState.phoneNumber}'),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'Address', subTitle: addressProofState.addressLine1),
+              title: S.of(context).addressProof,
+              subTitle: addressProofState.addressLine1),
           if (addressProofState.addressLine2.isNotEmpty)
             SummaryTextInfo(
                 title: null, subTitle: addressProofState.addressLine2),
@@ -92,7 +93,7 @@ class PersonalInfoSummaryContent extends StatelessWidget {
           _spaceHeight,
           CustomImagePicker(
             initialValue: addressProofState.addressProofImages,
-            title: 'Address Proof',
+            title: S.of(context).addressProof,
             titleColor: AskLoraColors.gray,
             disabled: true,
           ),

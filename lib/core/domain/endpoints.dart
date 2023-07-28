@@ -6,6 +6,8 @@ const transactions = 'transactions/';
 const orders = 'orders/';
 const activities = 'activities/';
 const user = 'user/';
+
+const String endpointSignInV1 = '${v1}auth/';
 const String endpointSignIn = '${v2}auth/';
 const String endpointSignOut = '${v1}auth/revoke/';
 const String endpointSignUp = '$v1$accounts';
@@ -75,6 +77,8 @@ const String endpointIexCloud = 'https://iexcloud.io';
 const String askloraFaq = 'https://www.asklora.ai/faq';
 const String askloraSite = 'https://www.asklora.ai/';
 const String mailToLoraCare = 'mailto:loracares@asklora.ai';
+const String mailToHelpAsklora = 'mailto:help@asklora.ai';
+const String helpAskloraEmail = 'help@asklora.ai';
 
 ///
 /// LoraGPT
@@ -82,7 +86,7 @@ const String mailToLoraCare = 'mailto:loracares@asklora.ai';
 const String loraGptBaseUrl = 'http://stock-gpt-dev.intra.asklora.ai/';
 // const String loraGptBaseUrl = 'https://stock-gpt-stag.api.asklora.ai/';
 const String endpointChat = 'chat/general';
-const String endpointPortfolio = 'chat/porfolio_page';
+const String endpointPortfolio = 'chat/portfolio_page';
 const String endpointPortfolioDetailPage =
     'chat/experimental/with_botstock_data';
 const String endpointInvestmentStyle = 'chat/isq_main';

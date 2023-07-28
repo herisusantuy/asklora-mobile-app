@@ -5,10 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uni_links/uni_links.dart';
 
 import '../../../../core/data/remote/base_api_client.dart';
+import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../repository/auth_repository.dart';
-import '../../utils/auth_utils.dart';
 
 part 'forgot_password_event.dart';
 
@@ -38,13 +38,11 @@ class ForgotPasswordBloc
     ForgotPasswordEmailChanged event,
     Emitter<ForgotPasswordState> emit,
   ) {
-    emit(
-      state.copyWith(
-          email: event.email,
-          emailErrorText: (event.email.isValidEmail() || event.email.isEmpty)
-              ? AuthErrorMessage.empty.value
-              : AuthErrorMessage.enterValidEmail.value),
-    );
+    emit(state.copyWith(
+        email: event.email,
+        emailValidation: (event.email.isValidEmail() || event.email.isEmpty)
+            ? ValidationCode.empty
+            : ValidationCode.enterValidEmail));
   }
 
   void _onForgotPasswordSubmitted(
@@ -53,17 +51,12 @@ class ForgotPasswordBloc
       emit(state.copyWith(response: BaseResponse.loading()));
       var data = await _authRepository.forgotPassword(email: state.email);
 
-      data.copyWith(message: AuthErrorMessage.linkPasswordResetIsSent.value);
+      data.copyWith(message: ValidationCode.linkPasswordResetIsSent.code);
 
       emit(state.copyWith(response: data));
-    } on BadRequestException {
+    } on AskloraApiClientException catch (e) {
       emit(state.copyWith(
-          response: BaseResponse.error(
-              message: AuthErrorMessage.accountIsNotActive.value)));
-    } on NotFoundException {
-      emit(state.copyWith(
-          response: BaseResponse.error(
-              message: AuthErrorMessage.emailNotExist.value)));
+          response: BaseResponse.error(validationCode: e.askloraError.type)));
     } catch (e) {
       state.copyWith(response: BaseResponse.error());
     }

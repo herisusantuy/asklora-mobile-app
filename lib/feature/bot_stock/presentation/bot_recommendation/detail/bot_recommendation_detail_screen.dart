@@ -60,10 +60,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
             BlocListener<BackButtonInterceptorBloc, BackButtonInterceptorState>(
           listener: (context, state) {
             if (state is OnPressedBack) {
-              context
-                  .read<BackButtonInterceptorBloc>()
-                  .add(RemoveInterceptor());
-              Navigator.pop(context);
+              Navigator.of(context).maybePop();
             }
           },
           child: BlocConsumer<BotStockBloc, BotStockState>(

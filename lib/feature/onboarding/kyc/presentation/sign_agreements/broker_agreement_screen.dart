@@ -28,12 +28,12 @@ class BrokerAgreementScreen extends StatelessWidget {
     return KycBaseForm(
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-      title: 'Sign Agreements',
+      title: S.of(context).signAgreements,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomTextNew(
-            'Please read the the Asklora Customer Agreement. You must click on the agreement and check all the boxes in order to proceed.',
+            S.of(context).pleaseReadTheAskloraCustomerAgreement,
             style:
                 AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
           ),
@@ -42,7 +42,7 @@ class BrokerAgreementScreen extends StatelessWidget {
           ),
           ViewFileButton(
               key: const Key('asklora_agreement'),
-              label: 'Asklora Customer Agreement.pdf',
+              label: S.of(context).AskloraAgreementFile,
               onTap: () => context
                   .read<SigningAgreementBloc>()
                   .add(const AskLoraClientAgreementOpened())),
@@ -73,8 +73,7 @@ class BrokerAgreementScreen extends StatelessWidget {
                 checkboxKey:
                     const Key('bound_alpaca_lora_agreement_checkbox_value'),
                 key: const Key('bound_alpaca_lora_agreement_checkbox'),
-                text:
-                    'I have read, understood, and agree to be bound by LORA Advisors Limited’s account terms, and all other terms, disclosures and disclaimers applicable to me.',
+                text: S.of(context).iHaveReadAndAgreed,
                 disabled: !state.isAskLoraClientAgreementOpened,
                 isChecked: state.isBoundByAskloraAgreementChecked,
                 fontType: FontType.smallText,
@@ -94,8 +93,7 @@ class BrokerAgreementScreen extends StatelessWidget {
           builder: (context, state) => CustomCheckbox(
                 checkboxKey: const Key('understand_agreement_checkbox_value'),
                 key: const Key('understand_agreement_checkbox'),
-                text:
-                    'I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Customer Agreement.',
+                text: S.of(context).iUnderstandSigningAgreement,
                 fontHeight: 1.4,
                 disabled: !state.isBoundByAskloraAgreementChecked,
                 isChecked: state.isUnderstandOnTheAgreementChecked,

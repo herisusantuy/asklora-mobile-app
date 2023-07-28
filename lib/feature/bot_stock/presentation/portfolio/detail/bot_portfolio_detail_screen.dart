@@ -6,6 +6,8 @@ import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/column_text/column_text.dart';
 import '../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
+import '../../../../../core/presentation/column_text/pair_column_text.dart';
+import '../../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
 import '../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
@@ -31,6 +33,7 @@ import '../../bot_performance/bot_performance_chart.dart';
 import '../../bot_stock_result_screen.dart';
 import '../../widgets/bot_stock_form.dart';
 import '../bloc/portfolio_bloc.dart';
+import '../../../../../../core/utils/feature_flags.dart';
 import 'widgets/bot_portfolio_detail_content.dart';
 
 part 'widgets/bot_portfolio_detail_header.dart';
@@ -70,10 +73,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
               BackButtonInterceptorState>(
             listener: (context, state) {
               if (state is OnPressedBack) {
-                context
-                    .read<BackButtonInterceptorBloc>()
-                    .add(RemoveInterceptor());
-                Navigator.pop(context);
+                Navigator.of(context).maybePop();
               }
             },
             child: BlocConsumer<PortfolioBloc, PortfolioState>(
