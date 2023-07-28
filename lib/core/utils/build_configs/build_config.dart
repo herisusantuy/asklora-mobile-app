@@ -61,6 +61,5 @@ class ProdConfig implements BaseConfig {
   String get askLoraApiBaseUrl => 'https://apca.api.asklora.ai/';
 
   @override
-  String get askloraAiBaseUrl =>
-      'wss://apca.services.asklora.ai/prodConfig';
+  String get askloraAiBaseUrl => 'wss://apca.services.asklora.ai/prodConfig';
 }
