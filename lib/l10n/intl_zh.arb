@@ -554,7 +554,7 @@
   "cantRememberYourEmail": "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai",
   "inputWrongEmail": "電郵地址錯誤",
   "buttonBackToPortfolio": "返回投資組合頁",
-  "resultOfPersonalizationQuestion": "{opennessScore}, {neuroticismScore}\n\n{extrovertScore}",
+  "resultOfPersonalizationQuestion": "{opennessScore} {neuroticismScore}\n\n{extrovertScore}",
   "@resultOfPersonalizationQuestion": {
     "placeholders": {
       "opennessScore": {
@@ -754,5 +754,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "ppiGotIt": "了解!"
 }

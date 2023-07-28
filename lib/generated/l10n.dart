@@ -5555,6 +5555,16 @@ class S {
       args: [minimumAmount],
     );
   }
+
+  /// `Got It`
+  String get ppiGotIt {
+    return Intl.message(
+      'Got It',
+      name: 'ppiGotIt',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

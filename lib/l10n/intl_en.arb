@@ -782,5 +782,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "ppiGotIt": "Got It"
 }
