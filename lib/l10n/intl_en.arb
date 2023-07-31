@@ -764,7 +764,6 @@
   "understood": "Understood!",
   "giftBotStockWelcomeScreenTitle": "You're all set!\nLet's begin a real AI trade!",
   "giftBotStockWelcomeScreenBottomButton": "Sure! What is a Botstock?",
-  "giftBotStockMessage": "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ",
   "trySomethingNew": "Try Something New",
   "seeMyRecommendations": "See My Recommendations",
   "startAgain": "Start Again",
@@ -784,5 +783,7 @@
       }
     }
   },
-  "ppiGotIt": "Got It"
+  "ppiGotIt": "Got It",
+  "giftBotStockMessageScreenTitle": "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ",
+  "giftBotStockMessageScreenBottomButton": "See my recommendations"
 }

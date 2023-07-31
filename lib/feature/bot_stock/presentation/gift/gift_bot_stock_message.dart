@@ -24,7 +24,7 @@ class GiftBotStockMessageScreen extends StatelessWidget {
           ),
           const SizedBox(height: 100),
           CustomTextNew(
-            S.of(context).giftBotStockMessage,
+            S.of(context).giftBotStockMessageScreenTitle,
             style: AskLoraTextStyles.h4,
             textAlign: TextAlign.center,
           ),
@@ -34,7 +34,7 @@ class GiftBotStockMessageScreen extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 30.0),
         child: PrimaryButton(
           buttonPrimaryType: ButtonPrimaryType.solidCharcoal,
-          label: S.of(context).giftBotStockWelcomeScreenBottomButton,
+          label: S.of(context).giftBotStockMessageScreenBottomButton,
           onTap: () => TabScreen.openAndRemoveAllRoute(context),
         ),
       ),
