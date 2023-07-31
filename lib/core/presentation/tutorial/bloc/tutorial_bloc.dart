@@ -39,6 +39,7 @@ class TutorialBloc extends Bloc<TutorialEvent, TutorialState> {
       InitiateTradeSummaryTutorial event, Emitter<TutorialState> emit) async {
     final bool isTradeSummaryTutorial =
         await _tutorialRepository.fetchTradeSummaryTutorialState();
+    print('initiate trade summary tutorial $isTradeSummaryTutorial');
     emit(state.copyWith(isTradeSummaryTutorial: isTradeSummaryTutorial));
   }
 

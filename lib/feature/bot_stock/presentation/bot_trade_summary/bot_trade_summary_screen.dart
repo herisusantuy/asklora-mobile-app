@@ -67,33 +67,30 @@ class BotTradeSummaryScreen extends StatelessWidget {
         botTradeSummaryModel.botDetailModel;
     final isFreeBotTrade = botTradeSummaryModel.botRecommendationModel.freeBot;
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-            create: (_) => BotStockBloc(
-                  botStockRepository: BotStockRepository(),
-                  transactionRepository: TransactionRepository(),
-                )),
-        BlocProvider(
-            create: (_) =>
-                TutorialBloc(tutorialRepository: TutorialRepository())
-                  ..add(InitiateTradeSummaryTutorial())),
-      ],
-      child: BlocConsumer<TutorialBloc, TutorialState>(
-        listenWhen: (_, current) => current.isTradeSummaryTutorial,
-        listener: (context, state) => Future.delayed(
-            const Duration(milliseconds: 300),
-            () => ShowCaseWidget.of(context)
-                .startShowCase([TutorialJourney.summaryTrade])),
-        buildWhen: (previous, current) =>
-            previous.isTradeSummaryTutorial != current.isTradeSummaryTutorial,
-        builder: (context, state) {
-          return ShowCaseWidget(
-            disableBarrierInteraction: true,
-            disableMovingAnimation: true,
-            showCaseViewScrollPosition: ShowCaseViewScrollPosition.scrollToTop,
-            blurValue: 2.5,
-            builder: Builder(builder: (context) {
-              return BlocListener<BotStockBloc, BotStockState>(
+        providers: [
+          BlocProvider(
+              create: (_) => BotStockBloc(
+                    botStockRepository: BotStockRepository(),
+                    transactionRepository: TransactionRepository(),
+                  )),
+          BlocProvider(
+              create: (_) =>
+                  TutorialBloc(tutorialRepository: TutorialRepository())
+                    ..add(InitiateTradeSummaryTutorial())),
+        ],
+        child: ShowCaseWidget(
+          disableBarrierInteraction: true,
+          disableMovingAnimation: true,
+          showCaseViewScrollPosition: ShowCaseViewScrollPosition.scrollToTop,
+          blurValue: 2.5,
+          builder: Builder(builder: (context) {
+            return BlocListener<TutorialBloc, TutorialState>(
+              listenWhen: (_, current) => current.isTradeSummaryTutorial,
+              listener: (context, state) => Future.delayed(
+                  const Duration(milliseconds: 300),
+                  () => ShowCaseWidget.of(context)
+                      .startShowCase([TutorialJourney.summaryTrade])),
+              child: BlocListener<BotStockBloc, BotStockState>(
                 listenWhen: (previous, current) =>
                     previous.createBotOrderResponse !=
                     current.createBotOrderResponse,
@@ -249,12 +246,10 @@ class BotTradeSummaryScreen extends StatelessWidget {
                                 },
                               ),
                             ))),
-              );
-            }),
-          );
-        },
-      ),
-    );
+              ),
+            );
+          }),
+        ));
   }
 
   List<Widget> _detailedInformation(BuildContext context) => [
