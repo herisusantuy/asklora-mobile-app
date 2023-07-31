@@ -161,7 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "botStockDoScreenTitle": MessageLookupByLibrary.simpleMessage(
             "作為 AI 投資策略, Bot 將會於指定時間內，自動幫你進行交易，捕捉收益機會同時管理風險。"),
         "botStockExplanationScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage("明白! BOT 會做甚麼？"),
+            MessageLookupByLibrary.simpleMessage("明白！咁Bot可以做啲咩？"),
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Botstock 由一隻股票及一個 Bot 組成。 每一個 Bot 各代表一個獨一無二的 AI 投資策略。而Lora會幫你管理策略。"),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
@@ -362,7 +362,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftBotStockMessage": MessageLookupByLibrary.simpleMessage(
             "每一次你投資新嘅Botstock, 我都會問你投資風格問題，咁我就可以提供新嘅個人化投資建議畀你！"),
         "giftBotStockWelcomeScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage("好! 甚麼是Botstock ?"),
+            MessageLookupByLibrary.simpleMessage("好！咩咩Botstock話？"),
         "giftBotStockWelcomeScreenTitle":
             MessageLookupByLibrary.simpleMessage("萬事具備, 即刻開始交易你嘅第一隻Botstock!"),
         "go": MessageLookupByLibrary.simpleMessage("繼續"),
