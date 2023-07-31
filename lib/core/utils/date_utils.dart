@@ -20,6 +20,12 @@ DateTime formatDateTimeToLocal(dynamic dateTime,
       .toLocal();
 }
 
+String formatLocalDateTimeToString(String dateTime, {String? dateFormat}) {
+  DateTime dt = formatDateTimeToLocal(dateTime);
+  return DateFormat(dateFormat ?? 'hh:mm ${dt.timeZoneName} dd/MM/yy')
+      .format(dt);
+}
+
 DateTime formatDateOnly(dynamic dateTime) {
   DateTime date = DateTime.parse(formatDateTimeAsString(dateTime));
   return DateTime(date.year, date.month, date.day);
