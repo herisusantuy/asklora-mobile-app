@@ -443,7 +443,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Get ready for AI trading."),
         "getTheFirstBotstockForFree": MessageLookupByLibrary.simpleMessage(
             "Get the First Botstock for Free"),
-        "giftBotStockMessage": MessageLookupByLibrary.simpleMessage(
+        "giftBotStockMessageScreenBottomButton":
+            MessageLookupByLibrary.simpleMessage("See my recommendations"),
+        "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! "),
         "giftBotStockWelcomeScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
