@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/presentation/ai/lora_animation_magenta.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/shimmer_widget.dart';
 import '../../../../core/presentation/ai/chat/ai_text_field.dart';
@@ -87,6 +88,7 @@ class AiInvestmentStyleQuestionForm extends StatelessWidget {
         alignment: Alignment.topCenter,
         child: ChatLoraHeader(
           aiThemeType: aiThemeType,
+          loraAnimationType: const LoraAnimationMagenta(height: 32, width: 32),
         ),
       );
 
@@ -105,7 +107,7 @@ class AiInvestmentStyleQuestionForm extends StatelessWidget {
       );
 
   Widget get _bottomContent => Align(
-        alignment: Alignment.bottomCenter,
+        alignment: Alignment.bottomLeft,
         child: Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: BlocBuilder<AiInvestmentStyleQuestionBloc,

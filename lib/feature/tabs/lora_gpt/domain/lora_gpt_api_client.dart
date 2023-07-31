@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import '../../../../core/domain/endpoints.dart';
+import '../../../../core/utils/log.dart';
 import '../../../ai/investment_style_question/domain/investment_style_question_query_request.dart';
 import '../remote/lora_gpt_client.dart';
 import 'portfolio_query_request.dart';
@@ -34,4 +35,14 @@ class LoraGptClient {
           InvestmentStyleQuestionQueryRequest request) async =>
       await LoraGptApiClient().get(
           endpoint: endpointInvestmentStyle, queryParameters: request.toJson());
+
+  Future<Response> botIntro(Map<String, String> params) async {
+    Logger.log('Krishna _onAiOverlayClose ${params}');
+    return await LoraGptApiClient()
+        .get(endpoint: endpointBotIntro, queryParameters: params);
+  }
+
+  Future<Response> botIntroEarnings(Map<String, String> params) async =>
+      await LoraGptApiClient()
+          .get(endpoint: endpointBotEarning, queryParameters: params);
 }

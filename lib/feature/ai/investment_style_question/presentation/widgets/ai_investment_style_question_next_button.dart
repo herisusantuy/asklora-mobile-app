@@ -19,14 +19,14 @@ class AiInvestmentStyleQuestionNextButton extends StatelessWidget {
                     width: S
                             .of(context)
                             .isqNextButton
-                            .textWidth(AskLoraTextStyles.body2) +
+                            .textWidth(AskLoraTextStyles.body1) +
                         30.2,
                     height: 52)
                 : CustomChoiceChips(
                     borderColor: aiThemeType.chatNextButtonBorderColor,
                     verticalPadding: 14,
                     textColor: aiThemeType.secondaryFontColor,
-                    textStyle: AskLoraTextStyles.body2,
+                    textStyle: AskLoraTextStyles.body1,
                     pressedFillColor:
                         AskLoraColors.primaryGreen.withOpacity(0.4),
                     fillColor: Colors.transparent,

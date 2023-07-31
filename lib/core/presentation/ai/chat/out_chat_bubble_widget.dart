@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../utils/ai_utils.dart';
 import '../../../../feature/tabs/lora_gpt/presentation/widget/scrambled_text.dart';
+import '../utils/ai_utils.dart';
 
 class OutChatBubbleWidget extends StatelessWidget {
   const OutChatBubbleWidget(this.message,
@@ -31,10 +32,10 @@ class OutChatBubbleWidget extends StatelessWidget {
             ),
             child: animateText
                 ? ScrambledText(
-                    scrambledStyle: AskLoraTextStyles.body2
+                    scrambledStyle: AskLoraTextStyles.body1
                         .copyWith(color: aiThemeType.scrambledTextColor),
                     text: message,
-                    style: AskLoraTextStyles.body2
+                    style: AskLoraTextStyles.body1
                         .copyWith(color: aiThemeType.primaryFontColor),
                     duration: const Duration(milliseconds: 17),
                     // ? AnimatedTextKit(
@@ -52,7 +53,7 @@ class OutChatBubbleWidget extends StatelessWidget {
                       }
                     })
                 : SelectableText(message,
-                    style: AskLoraTextStyles.body2
+                    style: AskLoraTextStyles.body1
                         .copyWith(color: aiThemeType.primaryFontColor))),
       );
 }

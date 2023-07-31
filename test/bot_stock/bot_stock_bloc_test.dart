@@ -49,7 +49,8 @@ void main() async {
         BaseResponse.error();
 
     const BotRecommendationModel botRecommendationModel =
-        BotRecommendationModel(1, '', '', '', 'Pullup', '', '', '', '');
+        BotRecommendationModel(
+            1, '', '', '', 'Pullup', '', '', '', '', '', '', '');
 
     final BaseResponse<TransactionLedgerBalanceResponse> ledgerBalanceResponse =
         BaseResponse.complete(

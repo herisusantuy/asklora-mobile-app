@@ -14,7 +14,6 @@ import '../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/presentation/ai/utils/ai_utils.dart';
 import '../../../../core/presentation/auto_sized_text_widget.dart';
-import '../../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
@@ -186,23 +185,22 @@ class BotRecommendationScreen extends StatelessWidget {
           const SizedBox(height: 14),
           Row(
             children: [
-              Flexible(
-                flex: 3,
+              Expanded(
                 child: AutoSizedTextWidget(
                   S.of(context).notTheStockYouWereLooking,
+                  textAlign: TextAlign.center,
                   style: AskLoraTextStyles.subtitle2
                       .copyWith(color: AskLoraColors.primaryMagenta),
                 ),
               ),
-              const SizedBox(width: 8),
-              ExtraInfoButton(
-                borderWidth: 1,
-                label: S.of(context).pressToStartOver,
-                labelAlign: TextAlign.center,
-                labelStyle: AskLoraTextStyles.button1
-                    .copyWith(color: AskLoraColors.primaryMagenta),
-                onTap: () => AiInvestmentStyleQuestionForYouScreen.open(context,
-                    aiThemeType: AiThemeType.light),
+              const SizedBox(width: 20),
+              Expanded(
+                child: PrimaryButton(
+                  label: S.of(context).trySomethingNew,
+                  onTap: () => AiInvestmentStyleQuestionForYouScreen.open(
+                      context,
+                      aiThemeType: AiThemeType.light),
+                ),
               ),
             ],
           ),

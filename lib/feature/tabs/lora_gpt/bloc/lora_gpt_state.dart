@@ -92,6 +92,18 @@ class LoraGptState extends Equatable {
         sessionId: '',
       );
 
+  BotstockIntro getIntroRequest(
+          {required String botType,
+          required String tickerSymbol,
+          required String investmentHorizon}) =>
+      BotstockIntro(
+          botType: botType,
+          tickerSymbol: tickerSymbol,
+          investmentHorizon: investmentHorizon,
+          userId: userId,
+          platform: platform,
+          username: userName);
+
   @override
   List<Object> get props => [
         debugText,
