@@ -89,9 +89,9 @@ class TabScreen extends StatelessWidget {
           BlocProvider(
             create: (_) {
               BotStockBloc botStockBloc = BotStockBloc(
-                  botStockRepository: BotStockRepository(),
-                  transactionRepository: TransactionRepository(),
-                  tutorialRepository: TutorialRepository());
+                botStockRepository: BotStockRepository(),
+                transactionRepository: TransactionRepository(),
+              );
               botStockBloc.add(FetchBotRecommendation());
               return botStockBloc;
             },

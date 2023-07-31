@@ -16,6 +16,12 @@ class TutorialRepository {
     return tutorialState;
   }
 
+  Future<bool> saveTradeSummaryTutorialState(bool tutorialState) async {
+    await _sharedPreference.writeBoolData(
+        sfKeyTradeSummaryTutorial, tutorialState);
+    return tutorialState;
+  }
+
   Future<bool> fetchBotDetailTutorialState() async {
     bool? response =
         await _sharedPreference.readBoolData(sfKeyBotDetailsTutorial);
@@ -28,7 +34,7 @@ class TutorialRepository {
     return response ?? true;
   }
 
-  Future<bool> isTradeSummaryTutorial() async {
+  Future<bool> fetchTradeSummaryTutorialState() async {
     bool? response =
         await _sharedPreference.readBoolData(sfKeyTradeSummaryTutorial);
     return response ?? true;

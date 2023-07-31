@@ -15,6 +15,7 @@ import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/suspended_account_screen.dart';
 import '../../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
+import '../../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../../core/repository/transaction_repository.dart';
 import '../../../../core/repository/tutorial_repository.dart';
@@ -65,16 +66,26 @@ class BotTradeSummaryScreen extends StatelessWidget {
     BotRecommendationDetailModel botDetailModel =
         botTradeSummaryModel.botDetailModel;
     final isFreeBotTrade = botTradeSummaryModel.botRecommendationModel.freeBot;
-    return BlocProvider(
-      create: (_) => BotStockBloc(
-        botStockRepository: BotStockRepository(),
-        transactionRepository: TransactionRepository(),
-        tutorialRepository: TutorialRepository(),
-      )..add(InitBotTradeSummaryTutorial()),
-      child: BlocBuilder<BotStockBloc, BotStockState>(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (_) => BotStockBloc(
+                  botStockRepository: BotStockRepository(),
+                  transactionRepository: TransactionRepository(),
+                )),
+        BlocProvider(
+            create: (_) =>
+                TutorialBloc(tutorialRepository: TutorialRepository())
+                  ..add(InitiateTradeSummaryTutorial())),
+      ],
+      child: BlocConsumer<TutorialBloc, TutorialState>(
+        listenWhen: (_, current) => current.isTradeSummaryTutorial,
+        listener: (context, state) => Future.delayed(
+            const Duration(milliseconds: 300),
+            () => ShowCaseWidget.of(context)
+                .startShowCase([TutorialJourney.summaryTrade])),
         buildWhen: (previous, current) =>
-            previous.isBotTradeSummaryTutorial !=
-            current.isBotTradeSummaryTutorial,
+            previous.isTradeSummaryTutorial != current.isTradeSummaryTutorial,
         builder: (context, state) {
           return ShowCaseWidget(
             disableBarrierInteraction: true,
@@ -85,16 +96,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
               return BlocListener<BotStockBloc, BotStockState>(
                 listenWhen: (previous, current) =>
                     previous.createBotOrderResponse !=
-                        current.createBotOrderResponse ||
-                    previous.isBotTradeSummaryTutorial !=
-                        current.isBotTradeSummaryTutorial,
+                    current.createBotOrderResponse,
                 listener: (context, state) {
-                  if (state.isBotTradeSummaryTutorial) {
-                    Future.delayed(
-                        const Duration(milliseconds: 300),
-                        () => ShowCaseWidget.of(context)
-                            .startShowCase([TutorialJourney.summaryTrade]));
-                  }
                   CustomLoadingOverlay.of(context)
                       .show(state.createBotOrderResponse.state);
 
@@ -279,7 +282,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
 
   void _onTradeSummaryTutorialFinished(BuildContext context) {
     ShowCaseWidget.of(context).dismiss();
-    context.read<BotStockBloc>().add(BotTradeSummaryTutorialFinished());
+    context.read<TutorialBloc>().add(TradeSummaryTutorialFinished());
   }
 
   static void open(

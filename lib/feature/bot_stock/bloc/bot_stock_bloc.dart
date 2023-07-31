@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
 import '../../../core/repository/transaction_repository.dart';
-import '../../../core/repository/tutorial_repository.dart';
 import '../../../core/utils/extensions.dart';
 import '../domain/bot_recommendation_detail_model.dart';
 import '../domain/bot_recommendation_model.dart';
@@ -16,13 +15,11 @@ part 'bot_stock_event.dart';
 part 'bot_stock_state.dart';
 
 class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
-  BotStockBloc(
-      {required BotStockRepository botStockRepository,
-      required TransactionRepository transactionRepository,
-      required TutorialRepository tutorialRepository})
-      : _botStockRepository = botStockRepository,
+  BotStockBloc({
+    required BotStockRepository botStockRepository,
+    required TransactionRepository transactionRepository,
+  })  : _botStockRepository = botStockRepository,
         _transactionRepository = transactionRepository,
-        _tutorialRepository = tutorialRepository,
         super(const BotStockState()) {
     on<FetchBotRecommendation>(_onFetchBotRecommendation);
     on<FetchFreeBotRecommendation>(_onFetchFreeBotRecommendation);
@@ -30,13 +27,10 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     on<CreateBotOrder>(_onCreateBotOrder);
     on<FetchBotDetail>(_onFetchBotDetail);
     on<TradeBotStockAmountChanged>(_onTradeBotStockAmountChanged);
-    on<InitBotTradeSummaryTutorial>(_onInitBotTradeSummaryTutorial);
-    on<BotTradeSummaryTutorialFinished>(_onBotTradeSummaryTutorialFinished);
   }
 
   final BotStockRepository _botStockRepository;
   final TransactionRepository _transactionRepository;
-  final TutorialRepository _tutorialRepository;
 
   _onFetchBotRecommendation(
       FetchBotRecommendation event, Emitter<BotStockState> emit) async {
@@ -93,22 +87,8 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     }
   }
 
-  _onInitBotTradeSummaryTutorial(
-      InitBotTradeSummaryTutorial event, Emitter<BotStockState> emit) async {
-    final isBotTradeSummaryTutorial =
-        await _tutorialRepository.isTradeSummaryTutorial();
-    emit(state.copyWith(isBotTradeSummaryTutorial: isBotTradeSummaryTutorial));
-  }
-
   _onTradeBotStockAmountChanged(
       TradeBotStockAmountChanged event, Emitter<BotStockState> emit) async {
     emit(state.copyWith(botStockTradeAmount: event.amount));
-  }
-
-  _onBotTradeSummaryTutorialFinished(BotTradeSummaryTutorialFinished event,
-      Emitter<BotStockState> emit) async {
-    final bool isBotTradeSummaryTutorial =
-        await _tutorialRepository.setTradeSummaryTutorialFinished();
-    emit(state.copyWith(isBotTradeSummaryTutorial: isBotTradeSummaryTutorial));
   }
 }
