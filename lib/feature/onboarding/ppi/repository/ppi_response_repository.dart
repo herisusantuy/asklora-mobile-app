@@ -44,11 +44,9 @@ class PpiResponseRepository {
       final response =
           await _ppiApiRepository.postBulkAnswer(ppiUserResponseRequest);
       return BaseResponse.complete(PpiUserResponse.fromJson(response.data));
-    } on BadRequestException catch (e) {
-      print('error bad request ppi $e');
+    } on BadRequestException catch (_) {
       return BaseResponse.error();
     } catch (e) {
-      print('error catch ppi $e');
       return BaseResponse.error();
     }
   }
