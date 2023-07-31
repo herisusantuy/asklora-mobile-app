@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/repository/transaction_repository.dart';
-import '../../../../core/repository/tutorial_repository.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../repository/bot_stock_repository.dart';
 import 'bot_recommendation_screen.dart';
@@ -18,8 +17,7 @@ class FreeBotRecommendationScreen extends StatelessWidget {
   Widget build(BuildContext context) => BlocProvider(
         create: (_) => BotStockBloc(
             botStockRepository: BotStockRepository(),
-            transactionRepository: TransactionRepository(),
-            tutorialRepository: TutorialRepository())
+            transactionRepository: TransactionRepository())
           ..add(FetchFreeBotRecommendation()),
         child: const BotRecommendationScreen(),
       );

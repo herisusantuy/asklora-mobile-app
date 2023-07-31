@@ -44,7 +44,9 @@ class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
         await _sharedPreference.deleteAllDataExcept([
           sfKeyLocalisationData,
           sfKeyBotDetailsTutorial,
-          sfKeyTradeSummaryTutorial
+          sfKeyBotRecommendationTutorial,
+          sfKeyTradeSummaryTutorial,
+          sfKeyTradeSummaryTutorial,
         ]);
         await _secureStorage.deleteAllData();
         emit(state.copyWith(

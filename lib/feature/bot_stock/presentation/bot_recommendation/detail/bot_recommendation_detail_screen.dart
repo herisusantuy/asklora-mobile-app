@@ -11,7 +11,6 @@ import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_me
 import '../../../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
 import '../../../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../../../core/repository/transaction_repository.dart';
-import '../../../../../core/repository/tutorial_repository.dart';
 import '../../../../../core/utils/back_button_interceptor/back_button_interceptor_bloc.dart';
 import '../../../../../core/utils/feature_flags.dart';
 import '../../../../../core/values/app_values.dart';
@@ -50,8 +49,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
           BlocProvider(create: (_) {
             BotStockBloc botStockBloc = BotStockBloc(
                 botStockRepository: BotStockRepository(),
-                transactionRepository: TransactionRepository(),
-                tutorialRepository: TutorialRepository());
+                transactionRepository: TransactionRepository());
             _fetchBotDetail(botStockBloc);
             return botStockBloc;
           }),
