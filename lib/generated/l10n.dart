@@ -3805,10 +3805,10 @@ class S {
     );
   }
 
-  /// `our technology is perfect for you.`
+  /// `our technology is perfect for you`
   String get opennessMoreThan8 {
     return Intl.message(
-      'our technology is perfect for you.',
+      'our technology is perfect for you',
       name: 'opennessMoreThan8',
       desc: '',
       args: [],
