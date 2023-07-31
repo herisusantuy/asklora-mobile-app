@@ -93,7 +93,7 @@ class Tabs extends StatelessWidget {
           required String iconAsset,
           required String activeIconAsset,
           bool active = false,
-          double clickAreaSize = 36}) =>
+          double clickAreaSize = 40}) =>
       GestureDetector(
         onTap: onTap,
         child: Container(
