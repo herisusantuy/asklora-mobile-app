@@ -45,6 +45,15 @@ class QueryResponse extends Equatable {
     }
   }
 
+  ///this code is to test response with components as of now
+  ///endpoint still responding zero list of components
+  QueryResponse copyWith({
+    List<Component>? components,
+  }) {
+    return QueryResponse(response, requestId, respType, newSession,
+        components: components ?? this.components, results: results);
+  }
+
   @override
   List<Object?> get props =>
       [response, requestId, respType, newSession, components, results];

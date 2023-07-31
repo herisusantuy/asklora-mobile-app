@@ -44,7 +44,7 @@ Map<String, dynamic> _$BotstockToJson(Botstock instance) => <String, dynamic>{
 
 BotstockIntro _$BotstockIntroFromJson(Map<String, dynamic> json) =>
     BotstockIntro(
-      tickerSymbol: json['ticker_symbol'] as String,
+      ticker: json['ticker'] as String,
       botType: json['bot_type'] as String,
       investmentHorizon: json['investment_horizon'] as String,
       platform: json['platform'] as String,
@@ -54,7 +54,7 @@ BotstockIntro _$BotstockIntroFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$BotstockIntroToJson(BotstockIntro instance) =>
     <String, dynamic>{
-      'ticker_symbol': instance.tickerSymbol,
+      'ticker': instance.ticker,
       'bot_type': instance.botType,
       'investment_horizon': instance.investmentHorizon,
       'userId': instance.userId,

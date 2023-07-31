@@ -62,7 +62,14 @@ class LoraGptRepository {
       {required BotstockIntro params}) async {
     try {
       final response = await _loraGptClient.botIntro(params.params);
+
       return BaseResponse.complete(QueryResponse.fromJson(response.data));
+      //QueryResponse queryResponse = QueryResponse.fromJson(response.data);
+      // return BaseResponse.complete(QueryResponse('a', 'b', 'c', false, components: [
+      //   PromptButton('prompt_btn', 'choice 1'),
+      //   PromptButton('prompt_btn', 'choice 2'),
+      //   PromptButton('prompt_btn', 'choice 3'),
+      // ],results: const ['hello', 'what are you doing?']));
     } catch (e) {
       return BaseResponse.error(
           message: 'Something went wrong. Please try again!');
@@ -74,6 +81,15 @@ class LoraGptRepository {
     try {
       var response = await _loraGptClient.botIntroEarnings(params.params);
       return BaseResponse.complete(QueryResponse.fromJson(response.data));
+      // return BaseResponse.complete(
+      //     QueryResponse('d', 'e', 'f', false, components: [
+      //   PromptButton('prompt_btn', 'choice a'),
+      //   PromptButton('prompt_btn', 'choice b'),
+      //   PromptButton('prompt_btn', 'choice c'),
+      // ], results: const [
+      //   'hello 2',
+      //   'what are you doing 2?'
+      // ]));
     } catch (e) {
       return BaseResponse.error(
           message: 'Something went wrong. Please try again!');
