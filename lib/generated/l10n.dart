@@ -3795,7 +3795,7 @@ class S {
     );
   }
 
-  /// `we investing can be simple with AI`
+  /// `investing can be simple with AI`
   String get opennessLessThan8 {
     return Intl.message(
       'we investing can be simple with AI',

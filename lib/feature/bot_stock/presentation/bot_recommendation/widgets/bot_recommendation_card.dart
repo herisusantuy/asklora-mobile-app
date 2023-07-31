@@ -25,10 +25,11 @@ class BotRecommendationCard extends StatelessWidget {
         context
             .read<TabScreenBloc>()
             .add(TabChanged(TabPage.forYou.setData(arguments: (
-              path: SubTabPage.portfolioBotStockDetails.value,
+              path: SubTabPage.recommendationsBotStockDetails.value,
               arguments: {
                 'botType': botType.internalName,
-                'symbol': botRecommendationModel.ticker
+                'symbol': botRecommendationModel.ticker,
+                'duration': botRecommendationModel.botDuration
               }
             ))));
         isDisabled ? () {} : onTap();

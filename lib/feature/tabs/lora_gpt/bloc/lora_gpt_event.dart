@@ -22,6 +22,7 @@ class OnSearchQuery extends LoraGptEvent {
 
 class OnPromptTap extends LoraGptEvent {
   final String query;
+
   const OnPromptTap(this.query);
 
   @override
@@ -43,10 +44,11 @@ class OnResetSession extends LoraGptEvent {
 }
 
 class OnFinishTyping extends LoraGptEvent {
-  const OnFinishTyping();
+  final bool isTyping;
+  const OnFinishTyping({this.isTyping = false});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [isTyping];
 }
 
 class ShowOverLayScreen extends LoraGptEvent {
@@ -76,11 +78,43 @@ class StorePortfolioDetails extends LoraGptEvent {
   List<Object?> get props => [totalPortfolioPnl];
 }
 
-class StoreTabPageState extends LoraGptEvent {
+class StoreTabPageEvent extends LoraGptEvent {
   final TabPage tabPage;
 
-  const StoreTabPageState({required this.tabPage});
+  const StoreTabPageEvent({required this.tabPage});
 
   @override
   List<Object?> get props => [tabPage];
+}
+
+class OnAiOverlayOpen extends LoraGptEvent {
+  const OnAiOverlayOpen();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class OnAiOverlayClose extends LoraGptEvent {
+  const OnAiOverlayClose();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class FetchBotIntro extends LoraGptEvent {
+  final Map<String, dynamic> arguments;
+
+  const FetchBotIntro(this.arguments);
+
+  @override
+  List<Object?> get props => [arguments];
+}
+
+class FetchBotEarnings extends LoraGptEvent {
+  final Map<String, dynamic> arguments;
+
+  const FetchBotEarnings(this.arguments);
+
+  @override
+  List<Object?> get props => [arguments];
 }

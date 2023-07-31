@@ -3,7 +3,8 @@ part of 'tab_screen_bloc.dart';
 enum TabPage { home, forYou, portfolio }
 
 enum SubTabPage {
-  portfolioBotStockDetails('portfolioBotStockDetails');
+  portfolioBotStockDetails('portfolioBotStockDetails'),
+  recommendationsBotStockDetails('recommendationsBotStockDetails');
 
   const SubTabPage(this.value);
 
