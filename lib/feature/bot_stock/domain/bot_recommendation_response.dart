@@ -14,7 +14,7 @@ class BotRecommendationResponse {
 
   String get updatedFormatted {
     DateTime localTime = formatDateTimeToLocal(updated);
-    return '${formatLocalDateTimeToString(updated, dateFormat: 'hh:mm')} ${localTime.timeZoneName} ${formatLocalDateTimeToString(updated, dateFormat: 'dd/Mm/yy')}';
+    return '${formatLocalDateTimeToString(updated, dateFormat: 'hh:mm')} ${localTime.timeZoneName} ${formatLocalDateTimeToString(updated, dateFormat: 'dd/MM/yy')}';
   }
 
   factory BotRecommendationResponse.fromJson(Map<String, dynamic> json) =>
