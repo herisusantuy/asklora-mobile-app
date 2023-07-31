@@ -44,11 +44,10 @@ class OnResetSession extends LoraGptEvent {
 }
 
 class OnFinishTyping extends LoraGptEvent {
-  final bool isTyping;
-  const OnFinishTyping({this.isTyping = false});
+  const OnFinishTyping();
 
   @override
-  List<Object?> get props => [isTyping];
+  List<Object?> get props => [];
 }
 
 class ShowOverLayScreen extends LoraGptEvent {

@@ -159,15 +159,18 @@ class _AiChatListState extends State<AiChatList> {
       return OutChatBubbleWidget(
         e.text.toString(),
         animateText: isTyping,
-        onFinishedAnimation: () => context
-            .read<LoraGptBloc>()
-            .add(OnFinishTyping(isTyping: e.isTyping)),
+        onFinishedAnimation: () =>
+            context.read<LoraGptBloc>().add(const OnFinishTyping()),
       );
     } else if (e is Me) {
       return InChatBubbleWidget(message: e.text, name: e.userName);
     } else if (e is Reset) {
       return _sessionResetWidget();
     } else if (e is Component) {
+      if (isTyping) {
+        context.read<LoraGptBloc>().add(const OnFinishTyping());
+      }
+
       return _componentWidget(e);
     } else {
       return const LoraThinkingWidget();

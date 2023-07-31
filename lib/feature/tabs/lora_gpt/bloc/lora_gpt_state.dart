@@ -98,7 +98,7 @@ class LoraGptState extends Equatable {
           required String investmentHorizon}) =>
       BotstockIntro(
           botType: botType,
-          tickerSymbol: tickerSymbol,
+          ticker: tickerSymbol,
           investmentHorizon: investmentHorizon,
           userId: userId,
           platform: platform,

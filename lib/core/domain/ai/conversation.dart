@@ -16,9 +16,8 @@ abstract class Conversation extends Equatable {
 
 class Lora extends Conversation {
   final String text;
-  final bool isTyping;
 
-  Lora(this.text, {this.isTyping = false});
+  Lora(this.text);
 
   @override
   ConversationType type() => ConversationType.lora;
