@@ -673,7 +673,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
         "seeMyRecommendations":
-            MessageLookupByLibrary.simpleMessage("OK! 睇下畀我嘅推薦"),
+            MessageLookupByLibrary.simpleMessage("See My Recommendations"),
         "selfEmployed": MessageLookupByLibrary.simpleMessage("自僱"),
         "sell": MessageLookupByLibrary.simpleMessage("賣出"),
         "sendOtp": MessageLookupByLibrary.simpleMessage("發送 OTP"),
