@@ -22,8 +22,7 @@ DateTime formatDateTimeToLocal(dynamic dateTime,
 
 String formatLocalDateTimeToString(String dateTime, {String? dateFormat}) {
   DateTime dt = formatDateTimeToLocal(dateTime);
-  return DateFormat(dateFormat ?? 'hh:mm ${dt.timeZoneName} dd/MM/yy')
-      .format(dt);
+  return DateFormat(dateFormat ?? 'hh:mm dd/MM/yy').format(dt);
 }
 
 DateTime formatDateOnly(dynamic dateTime) {

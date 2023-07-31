@@ -13,7 +13,8 @@ class BotRecommendationResponse {
   BotRecommendationResponse({this.data = const [], this.updated = ''});
 
   String get updatedFormatted {
-    return formatLocalDateTimeToString(updated);
+    DateTime localTime = formatDateTimeToLocal(updated);
+    return '${formatLocalDateTimeToString(updated, dateFormat: 'hh:mm')} ${localTime.timeZoneName} ${formatLocalDateTimeToString(updated, dateFormat: 'dd/Mm/yy')}';
   }
 
   factory BotRecommendationResponse.fromJson(Map<String, dynamic> json) =>
