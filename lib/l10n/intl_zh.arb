@@ -508,7 +508,7 @@
   "buttonTryAgain": "再試一次",
   "buttonSure": "好",
   "personalizationResultScreenTitle": "Alright!\n\n你嘅答案顯示我嘅科技同你都幾夾，我哋都可以進取少少！",
-  "opennessLessThan8": "用AI投資其實可以好簡單",
+  "opennessLessThan8": "用AI投資其實可以好簡單。",
   "opennessMoreThan8": "我哋一定好夾!",
   "neuroticismLessThan8": "我哋可以進取少少, 承受一定嘅風險",
   "neuroticismMoreThan8": "我哋一步一步嚟, 控制住風險",
@@ -738,7 +738,7 @@
   "giftBotStockWelcomeScreenBottomButton": "好！咩咩Botstock話？",
   "giftBotStockMessage": "每一次你投資新嘅Botstock, 我都會問你投資風格問題，咁我就可以提供新嘅個人化投資建議畀你！",
   "pressToStartOver": "重新界定",
-  "seeMyRecommendations": "See My Recommendations",
+  "seeMyRecommendations": "OK! 睇下畀我嘅推薦",
   "startAgain": "Start Again",
   "botTradeBottomSheetAmountMinimumFirst": "你有  {availableAmount} 可供使用，",
   "@botTradeBottomSheetAmountMinimumFirst": {

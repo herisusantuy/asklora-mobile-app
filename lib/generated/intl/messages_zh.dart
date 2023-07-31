@@ -490,7 +490,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openInvestmentAccount":
             MessageLookupByLibrary.simpleMessage("開立新投資賬戶"),
         "opennessLessThan8":
-            MessageLookupByLibrary.simpleMessage("用AI投資其實可以好簡單"),
+            MessageLookupByLibrary.simpleMessage("用AI投資其實可以好簡單。"),
         "opennessMoreThan8": MessageLookupByLibrary.simpleMessage("我哋一定好夾!"),
         "orderCancelled": MessageLookupByLibrary.simpleMessage("訂單己取消"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("訂單已過期"),
@@ -672,7 +672,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
         "seeMyRecommendations":
-            MessageLookupByLibrary.simpleMessage("See My Recommendations"),
+            MessageLookupByLibrary.simpleMessage("OK! 睇下畀我嘅推薦"),
         "selfEmployed": MessageLookupByLibrary.simpleMessage("自僱"),
         "sell": MessageLookupByLibrary.simpleMessage("賣出"),
         "sendOtp": MessageLookupByLibrary.simpleMessage("發送 OTP"),

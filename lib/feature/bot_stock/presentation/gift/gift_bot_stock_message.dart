@@ -34,7 +34,7 @@ class GiftBotStockMessageScreen extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 30.0),
         child: PrimaryButton(
           buttonPrimaryType: ButtonPrimaryType.solidCharcoal,
-          label: S.of(context).giftBotStockWelcomeScreenBottomButton,
+          label: S.of(context).seeMyRecommendations,
           onTap: () => TabScreen.openAndRemoveAllRoute(context),
         ),
       ),
