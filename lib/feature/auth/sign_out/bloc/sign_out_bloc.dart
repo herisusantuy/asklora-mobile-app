@@ -46,8 +46,7 @@ class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
           sfKeyInvestmentStyleState,
           sfKeyBotDetailsTutorial,
           sfKeyBotRecommendationTutorial,
-          sfKeyTradeSummaryTutorial,
-          sfKeyTradeSummaryTutorial,
+          sfKeyTradeSummaryTutorial
         ]);
 
         await _secureStorage.deleteAllData();
