@@ -39,6 +39,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('test');
     return Column(
       children: [
         _botDetailsExpansionTile(context),
