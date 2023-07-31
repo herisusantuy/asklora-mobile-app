@@ -768,6 +768,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ppiGotIt": MessageLookupByLibrary.simpleMessage("Got It"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage(
             "Press back again to exit Asklora"),
+        "pressToRedoISQ":
+            MessageLookupByLibrary.simpleMessage("Press to redo ISQ"),
         "prevClose": MessageLookupByLibrary.simpleMessage("Prev Close"),
         "privacyEvaluation":
             MessageLookupByLibrary.simpleMessage("Privacy Evaluation"),
@@ -971,8 +973,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferTo": MessageLookupByLibrary.simpleMessage("Transfer to"),
         "transportationMaterialMoving": MessageLookupByLibrary.simpleMessage(
             "Transportation and Material Moving"),
-        "trySomethingNew":
-            MessageLookupByLibrary.simpleMessage("Try Something New"),
         "unEmployed": MessageLookupByLibrary.simpleMessage("Unemployed"),
         "unableToProcessDepositSubTitle": MessageLookupByLibrary.simpleMessage(
             "We\'re having some trouble processing your deposit request. Please try again"),

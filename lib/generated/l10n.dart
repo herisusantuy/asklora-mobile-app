@@ -5506,11 +5506,11 @@ class S {
     );
   }
 
-  /// `Try Something New`
-  String get trySomethingNew {
+  /// `Press to redo ISQ`
+  String get pressToRedoISQ {
     return Intl.message(
-      'Try Something New',
-      name: 'trySomethingNew',
+      'Press to redo ISQ',
+      name: 'pressToRedoISQ',
       desc: '',
       args: [],
     );

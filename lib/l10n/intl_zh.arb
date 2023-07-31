@@ -737,7 +737,7 @@
   "giftBotStockWelcomeScreenTitle": "萬事具備, 即刻開始交易你嘅第一隻Botstock!",
   "giftBotStockWelcomeScreenBottomButton": "好！咩咩Botstock話？",
   "pressToStartOver": "重新界定",
-  "trySomethingNew": "仲有其他可以揀",
+  "pressToRedoISQ": "重新界定投資風格",
   "seeMyRecommendations": "See My Recommendations",
   "startAgain": "Start Again",
   "botTradeBottomSheetAmountMinimumFirst": "你有  {availableAmount} 可供使用，",

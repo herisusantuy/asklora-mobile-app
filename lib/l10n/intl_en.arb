@@ -764,7 +764,7 @@
   "understood": "Understood!",
   "giftBotStockWelcomeScreenTitle": "You're all set!\nLet's begin a real AI trade!",
   "giftBotStockWelcomeScreenBottomButton": "Sure! What is a Botstock?",
-  "trySomethingNew": "Try Something New",
+  "pressToRedoISQ": "Press to redo ISQ",
   "seeMyRecommendations": "See My Recommendations",
   "startAgain": "Start Again",
   "botTradeBottomSheetAmountMinimumFirst": "You have {availableAmount},",

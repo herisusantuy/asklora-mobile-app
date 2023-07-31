@@ -634,6 +634,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "ppiGotIt": MessageLookupByLibrary.simpleMessage("了解!"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
+        "pressToRedoISQ": MessageLookupByLibrary.simpleMessage("重新界定投資風格"),
         "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
         "privacyEvaluation": MessageLookupByLibrary.simpleMessage("私隱評估"),
         "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
@@ -807,7 +808,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferTo": MessageLookupByLibrary.simpleMessage("轉賬至"),
         "transportationMaterialMoving": MessageLookupByLibrary.simpleMessage(
             "Transportation and Material Moving"),
-        "trySomethingNew": MessageLookupByLibrary.simpleMessage("仲有其他可以揀"),
         "unEmployed": MessageLookupByLibrary.simpleMessage("失業"),
         "understood": MessageLookupByLibrary.simpleMessage("明白！"),
         "unknown": MessageLookupByLibrary.simpleMessage("Unknown"),
