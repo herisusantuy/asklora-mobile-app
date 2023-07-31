@@ -97,8 +97,13 @@ platform :ios do
     cert_stag()
     build_app(workspace: "Runner.xcworkspace", scheme: "staging",  export_method: "app-store")
     upload_to_testflight(username: "asklora@loratechai.com", app_identifier: "ai.asklora.app.stag", ipa: "Runner.ipa", skip_waiting_for_build_processing: true)
-    upload_symbols()
 
+#    dev_release = firebase_app_distribution(
+#        app: ENV["FIREBASE_IOS_STAG_APP_ID"],
+#        ipa_path: "Runner.ipa", debug: true,
+#        groups: "AskLora, Internal",
+#    )
+#
 #    slack(
 #          slack_url: ENV["SLACK_HOOK_URL"],
 #          message: "🐕 , Asklora Dev iOS App successfully released!",
@@ -111,6 +116,7 @@ platform :ios do
 #          },
 #          default_payloads: [:git_branch, :git_author],
 #    )
+   upload_symbols()
   end
 
   desc "Creating a production build"
