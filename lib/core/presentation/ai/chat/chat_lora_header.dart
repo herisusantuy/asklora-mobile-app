@@ -6,20 +6,21 @@ import '../utils/ai_utils.dart';
 
 class ChatLoraHeader extends StatelessWidget {
   final AiThemeType aiThemeType;
+  final Widget loraAnimationType;
 
-  const ChatLoraHeader({this.aiThemeType = AiThemeType.dark, super.key});
+  const ChatLoraHeader(
+      {this.aiThemeType = AiThemeType.dark,
+      this.loraAnimationType = const LoraAnimationGreen(height: 32, width: 32),
+      super.key});
 
   @override
   Widget build(BuildContext context) => Row(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Padding(
-                padding: EdgeInsets.only(right: 6.0, top: 2),
-                child: LoraAnimationGreen(
-                  height: 32,
-                  width: 32,
-                )),
+            Padding(
+                padding: const EdgeInsets.only(right: 6.0, top: 2),
+                child: loraAnimationType),
             CustomTextNew(
               'Lora',
               style: AskLoraTextStyles.h4
