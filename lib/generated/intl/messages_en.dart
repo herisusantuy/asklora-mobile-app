@@ -573,7 +573,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notFeelingIt": MessageLookupByLibrary.simpleMessage(
             "Not feeling it? Try something different."),
         "notTheStockYouWereLooking": MessageLookupByLibrary.simpleMessage(
-            "Not the stock you were looking for? Try something different"),
+            "Not the stocks you were looking for?"),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
             "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
@@ -600,7 +600,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "opennessLessThan8": MessageLookupByLibrary.simpleMessage(
             "investing can be simple with AI"),
         "opennessMoreThan8": MessageLookupByLibrary.simpleMessage(
-            "our technology is perfect for you"),
+            "our technology is perfect for you."),
         "orderCancelled":
             MessageLookupByLibrary.simpleMessage("Order Cancelled"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("Order Expired"),
@@ -768,8 +768,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "ppiGotIt": MessageLookupByLibrary.simpleMessage("Got It"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage(
             "Press back again to exit Asklora"),
-        "pressToStartOver":
-            MessageLookupByLibrary.simpleMessage("Press to\nStart Over"),
         "prevClose": MessageLookupByLibrary.simpleMessage("Prev Close"),
         "privacyEvaluation":
             MessageLookupByLibrary.simpleMessage("Privacy Evaluation"),
@@ -973,6 +971,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferTo": MessageLookupByLibrary.simpleMessage("Transfer to"),
         "transportationMaterialMoving": MessageLookupByLibrary.simpleMessage(
             "Transportation and Material Moving"),
+        "trySomethingNew":
+            MessageLookupByLibrary.simpleMessage("Try Something New"),
         "unEmployed": MessageLookupByLibrary.simpleMessage("Unemployed"),
         "unableToProcessDepositSubTitle": MessageLookupByLibrary.simpleMessage(
             "We\'re having some trouble processing your deposit request. Please try again"),

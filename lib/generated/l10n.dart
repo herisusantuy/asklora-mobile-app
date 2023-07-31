@@ -3798,17 +3798,17 @@ class S {
   /// `investing can be simple with AI`
   String get opennessLessThan8 {
     return Intl.message(
-      'we investing can be simple with AI',
+      'investing can be simple with AI',
       name: 'opennessLessThan8',
       desc: '',
       args: [],
     );
   }
 
-  /// `our technology is perfect for you`
+  /// `our technology is perfect for you.`
   String get opennessMoreThan8 {
     return Intl.message(
-      'our technology is perfect for you',
+      'our technology is perfect for you.',
       name: 'opennessMoreThan8',
       desc: '',
       args: [],
@@ -5406,10 +5406,10 @@ class S {
     );
   }
 
-  /// `Not the stock you were looking for? Try something different`
+  /// `Not the stocks you were looking for?`
   String get notTheStockYouWereLooking {
     return Intl.message(
-      'Not the stock you were looking for? Try something different',
+      'Not the stocks you were looking for?',
       name: 'notTheStockYouWereLooking',
       desc: '',
       args: [],
@@ -5506,11 +5506,11 @@ class S {
     );
   }
 
-  /// `Press to\nStart Over`
-  String get pressToStartOver {
+  /// `Try Something New`
+  String get trySomethingNew {
     return Intl.message(
-      'Press to\nStart Over',
-      name: 'pressToStartOver',
+      'Try Something New',
+      name: 'trySomethingNew',
       desc: '',
       args: [],
     );

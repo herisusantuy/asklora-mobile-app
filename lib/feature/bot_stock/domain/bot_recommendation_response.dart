@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import '../../../core/utils/date_utils.dart';
 import 'bot_recommendation_model.dart';
 
@@ -13,7 +14,7 @@ class BotRecommendationResponse {
 
   String get updatedFormatted {
     DateTime localTime = formatDateTimeToLocal(updated);
-    return '${formatDateTimeAsString(updated, dateFormat: 'HH:mm')} ${localTime.timeZoneName}, ${formatDateTimeAsString(updated, dateFormat: 'dd/MM/yyyy')}';
+    return '${formatLocalDateTimeToString(updated, dateFormat: 'hh:mm')} ${localTime.timeZoneName} ${formatLocalDateTimeToString(updated, dateFormat: 'dd/MM/yy')}';
   }
 
   factory BotRecommendationResponse.fromJson(Map<String, dynamic> json) =>
