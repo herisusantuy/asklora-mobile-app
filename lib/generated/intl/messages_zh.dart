@@ -174,7 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "botStockDoScreenTitle": MessageLookupByLibrary.simpleMessage(
             "作為 AI 投資策略, Bot 將會於指定時間內，自動幫你進行交易，捕捉收益機會同時管理風險。"),
         "botStockExplanationScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage("明白! BOT 會做甚麼？"),
+            MessageLookupByLibrary.simpleMessage("明白！咁Bot可以做啲咩？"),
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Botstock 由一隻股票及一個 Bot 組成。 每一個 Bot 各代表一個獨一無二的 AI 投資策略。而Lora會幫你管理策略。"),
         "botStocksDetails":
@@ -374,10 +374,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "getReadyForTrading": MessageLookupByLibrary.simpleMessage("準備好AI 交易"),
         "getTheFirstBotstockForFree":
             MessageLookupByLibrary.simpleMessage("獲取首個免費 Botstock "),
-        "giftBotStockMessage": MessageLookupByLibrary.simpleMessage(
+        "giftBotStockMessageScreenBottomButton":
+            MessageLookupByLibrary.simpleMessage("OK! 睇下畀我嘅推薦 "),
+        "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
             "每一次你投資新嘅Botstock, 我都會問你投資風格問題，咁我就可以提供新嘅個人化投資建議畀你！"),
         "giftBotStockWelcomeScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage("好! 甚麼是Botstock ?"),
+            MessageLookupByLibrary.simpleMessage("好！咩咩Botstock話？"),
         "giftBotStockWelcomeScreenTitle":
             MessageLookupByLibrary.simpleMessage("萬事具備, 即刻開始交易你嘅第一隻Botstock!"),
         "go": MessageLookupByLibrary.simpleMessage("繼續"),
@@ -507,7 +509,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openInvestmentAccount":
             MessageLookupByLibrary.simpleMessage("開立新投資賬戶"),
         "opennessLessThan8":
-            MessageLookupByLibrary.simpleMessage("用AI投資其實可以好簡單"),
+            MessageLookupByLibrary.simpleMessage("用AI投資其實可以好簡單。"),
         "opennessMoreThan8": MessageLookupByLibrary.simpleMessage("我哋一定好夾!"),
         "orderCancelled": MessageLookupByLibrary.simpleMessage("訂單己取消"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("訂單已過期"),
@@ -651,6 +653,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "ppiGotIt": MessageLookupByLibrary.simpleMessage("了解!"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
+        "pressToRedoISQ": MessageLookupByLibrary.simpleMessage("重新界定投資風格"),
         "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
         "privacyEvaluation": MessageLookupByLibrary.simpleMessage("私隱評估"),
         "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
@@ -836,7 +839,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferTo": MessageLookupByLibrary.simpleMessage("轉賬至"),
         "transportationMaterialMoving": MessageLookupByLibrary.simpleMessage(
             "Transportation and Material Moving"),
-        "trySomethingNew": MessageLookupByLibrary.simpleMessage("仲有其他可以揀"),
         "twoWeekPerformance": MessageLookupByLibrary.simpleMessage("兩個星期"),
         "unEmployed": MessageLookupByLibrary.simpleMessage("失業"),
         "understood": MessageLookupByLibrary.simpleMessage("明白！"),

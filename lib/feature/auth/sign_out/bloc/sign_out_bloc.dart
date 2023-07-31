@@ -48,6 +48,7 @@ class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
           sfKeyTradeSummaryTutorial,
           sfKeyTradeSummaryTutorial,
         ]);
+
         await _secureStorage.deleteAllData();
         emit(state.copyWith(
             response: BaseResponse.complete('Sign Out Success')));

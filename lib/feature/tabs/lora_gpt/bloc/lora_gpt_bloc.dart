@@ -44,8 +44,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
   final LoraGptRepository _loraGptRepository;
   final SharedPreference _sharedPreference;
-  final List<Conversation> _tempConversation = [];
-  BaseResponse? _tempIntroResponse;
+  final List<Conversation> _conversationQueue = [];
+  BaseResponse<QueryResponse>? _tempIntroResponse;
 
   void _onFetchBotIntro(
       FetchBotIntro fetchBotIntro, Emitter<LoraGptState> emit) async {
@@ -71,10 +71,10 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     if (botIntroResponse.state == ResponseState.success) {
       isTyping = true;
       if (_tempIntroResponse?.state == ResponseState.success) {
-        tempList.add(Lora(botIntroResponse.data!.getResult(), isTyping: true));
-        _tempConversation.add(Lora(_tempIntroResponse!.data!.getResult()));
+        _addQueryResponseToConversation(tempList, botIntroResponse.data!);
+        _addQueryResponseToConversationQueues(_tempIntroResponse!.data!);
       } else if (_tempIntroResponse?.state == ResponseState.error) {
-        tempList.add(Lora(botIntroResponse.data!.getResult()));
+        _addQueryResponseToConversation(tempList, botIntroResponse.data!);
       } else {
         isTyping = false;
         _tempIntroResponse = botIntroResponse;
@@ -82,7 +82,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     } else {
       if (_tempIntroResponse?.state == ResponseState.success) {
         isTyping = true;
-        tempList.add(Lora(_tempIntroResponse!.data.getResult()));
+        _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
       } else {
         _tempIntroResponse ??= botIntroResponse;
       }
@@ -112,11 +112,10 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     if (botEarningsResponse.state == ResponseState.success) {
       isTyping = true;
       if (_tempIntroResponse?.state == ResponseState.success) {
-        tempList
-            .add(Lora(_tempIntroResponse!.data!.getResult(), isTyping: true));
-        _tempConversation.add(Lora(botEarningsResponse.data!.getResult()));
+        _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
+        _addQueryResponseToConversationQueues(botEarningsResponse.data!);
       } else if (_tempIntroResponse?.state == ResponseState.error) {
-        tempList.add(Lora(botEarningsResponse.data!.getResult()));
+        _addQueryResponseToConversation(tempList, botEarningsResponse.data!);
       } else {
         isTyping = false;
         _tempIntroResponse = botEarningsResponse;
@@ -124,13 +123,36 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     } else {
       if (_tempIntroResponse?.state == ResponseState.success) {
         isTyping = true;
-        tempList.add(Lora(_tempIntroResponse!.data!.getResult()));
+        _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
       } else {
         _tempIntroResponse ??= botEarningsResponse;
       }
     }
 
     emit(state.copyWith(conversations: tempList, isTyping: isTyping));
+  }
+
+  List<Conversation> _addQueryResponseToConversation(
+      List<Conversation> conversations, QueryResponse queryResponse) {
+    String result = queryResponse.getResult();
+    if (result.isNotEmpty) {
+      conversations.add(Lora(result));
+    }
+    if (queryResponse.components.isNotEmpty) {
+      _conversationQueue.addAll(queryResponse.components);
+    }
+
+    return conversations;
+  }
+
+  void _addQueryResponseToConversationQueues(QueryResponse queryResponse) {
+    String result = queryResponse.getResult();
+    if (result.isNotEmpty) {
+      _conversationQueue.add(Lora(result));
+    }
+    if (queryResponse.components.isNotEmpty) {
+      _conversationQueue.addAll(queryResponse.components);
+    }
   }
 
   void _onScreenLaunch(
@@ -216,13 +238,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     tempList.removeLast();
     if (response.state == ResponseState.success) {
-      tempList.add(Lora(response.data!.response));
-
-      ///Add components on temporary conversation
-      ///it will be added to state later when chat animation is completed
-      if (response.data!.components.isNotEmpty) {
-        _tempConversation.addAll(response.data!.components);
-      }
+      _addQueryResponseToConversation(tempList, response.data!);
     } else {
       tempList.add(LoraError());
     }
@@ -245,12 +261,16 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
   void _onFinishTyping(
       OnFinishTyping onFinishTyping, Emitter<LoraGptState> emit) {
-    emit(state.copyWith(
-        conversations: List<Conversation>.of(state.conversations)
-          ..addAll(_tempConversation),
-        status: ResponseState.unknown,
-        isTyping: onFinishTyping.isTyping));
-    _tempConversation.clear();
+    bool isTyping = false;
+    List<Conversation> tempConversation =
+        List<Conversation>.of(state.conversations);
+
+    if (_conversationQueue.isNotEmpty) {
+      isTyping = true;
+      tempConversation.add(_conversationQueue[0]);
+      _conversationQueue.removeAt(0);
+    }
+    emit(state.copyWith(conversations: tempConversation, isTyping: isTyping));
   }
 
   void _onShowOverlayWidget(

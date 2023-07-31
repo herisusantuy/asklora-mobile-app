@@ -3945,10 +3945,10 @@ class S {
     );
   }
 
-  /// `our technology is perfect for you.`
+  /// `our technology is perfect for you`
   String get opennessMoreThan8 {
     return Intl.message(
-      'our technology is perfect for you.',
+      'our technology is perfect for you',
       name: 'opennessMoreThan8',
       desc: '',
       args: [],
@@ -5646,21 +5646,11 @@ class S {
     );
   }
 
-  /// `Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! `
-  String get giftBotStockMessage {
+  /// `Press to redo ISQ`
+  String get pressToRedoISQ {
     return Intl.message(
-      'Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ',
-      name: 'giftBotStockMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Try Something New`
-  String get trySomethingNew {
-    return Intl.message(
-      'Try Something New',
-      name: 'trySomethingNew',
+      'Press to redo ISQ',
+      name: 'pressToRedoISQ',
       desc: '',
       args: [],
     );
@@ -5761,6 +5751,26 @@ class S {
     return Intl.message(
       'on a Botstock that catches your eye!',
       name: 'botRecommendationTutorialDesc5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! `
+  String get giftBotStockMessageScreenTitle {
+    return Intl.message(
+      'Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ',
+      name: 'giftBotStockMessageScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See my recommendations`
+  String get giftBotStockMessageScreenBottomButton {
+    return Intl.message(
+      'See my recommendations',
+      name: 'giftBotStockMessageScreenBottomButton',
       desc: '',
       args: [],
     );

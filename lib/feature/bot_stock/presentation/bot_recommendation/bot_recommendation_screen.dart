@@ -196,7 +196,7 @@ class BotRecommendationScreen extends StatelessWidget {
               const SizedBox(width: 20),
               Expanded(
                 child: PrimaryButton(
-                  label: S.of(context).trySomethingNew,
+                  label: S.of(context).pressToRedoISQ,
                   onTap: () => AiInvestmentStyleQuestionForYouScreen.open(
                       context,
                       aiThemeType: AiThemeType.light),

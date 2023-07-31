@@ -459,7 +459,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Get ready for AI trading."),
         "getTheFirstBotstockForFree": MessageLookupByLibrary.simpleMessage(
             "Get the First Botstock for Free"),
-        "giftBotStockMessage": MessageLookupByLibrary.simpleMessage(
+        "giftBotStockMessageScreenBottomButton":
+            MessageLookupByLibrary.simpleMessage("See my recommendations"),
+        "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! "),
         "giftBotStockWelcomeScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
@@ -617,7 +619,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "opennessLessThan8": MessageLookupByLibrary.simpleMessage(
             "investing can be simple with AI"),
         "opennessMoreThan8": MessageLookupByLibrary.simpleMessage(
-            "our technology is perfect for you."),
+            "our technology is perfect for you"),
         "orderCancelled":
             MessageLookupByLibrary.simpleMessage("Order Cancelled"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("Order Expired"),
@@ -787,6 +789,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ppiGotIt": MessageLookupByLibrary.simpleMessage("Got It"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage(
             "Press back again to exit Asklora"),
+        "pressToRedoISQ":
+            MessageLookupByLibrary.simpleMessage("Press to redo ISQ"),
         "prevClose": MessageLookupByLibrary.simpleMessage("Prev Close"),
         "privacyEvaluation":
             MessageLookupByLibrary.simpleMessage("Privacy Evaluation"),
@@ -1002,8 +1006,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferTo": MessageLookupByLibrary.simpleMessage("Transfer to"),
         "transportationMaterialMoving": MessageLookupByLibrary.simpleMessage(
             "Transportation and Material Moving"),
-        "trySomethingNew":
-            MessageLookupByLibrary.simpleMessage("Try Something New"),
         "twoWeekPerformance":
             MessageLookupByLibrary.simpleMessage("2 weeks performance "),
         "unEmployed": MessageLookupByLibrary.simpleMessage("Unemployed"),

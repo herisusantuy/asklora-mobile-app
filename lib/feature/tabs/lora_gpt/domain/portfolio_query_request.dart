@@ -99,8 +99,8 @@ class Botstock extends Equatable {
 
 @JsonSerializable()
 class BotstockIntro extends Equatable {
-  @JsonKey(name: 'ticker_symbol')
-  final String tickerSymbol;
+  @JsonKey(name: 'ticker')
+  final String ticker;
   @JsonKey(name: 'bot_type')
   final String botType;
   @JsonKey(name: 'investment_horizon')
@@ -111,7 +111,7 @@ class BotstockIntro extends Equatable {
   final String platform;
 
   const BotstockIntro.empty()
-      : tickerSymbol = '',
+      : ticker = '',
         botType = '',
         investmentHorizon = '',
         userId = '',
@@ -119,7 +119,7 @@ class BotstockIntro extends Equatable {
         platform = '';
 
   const BotstockIntro({
-    required this.tickerSymbol,
+    required this.ticker,
     required this.botType,
     required this.investmentHorizon,
     required this.platform,
@@ -128,7 +128,7 @@ class BotstockIntro extends Equatable {
   });
 
   Map<String, String> get params => {
-        'ticker_symbol': tickerSymbol,
+        'ticker_symbol': ticker,
         'user_id': userId,
         'username': username,
         'bot_type': botType,
@@ -142,5 +142,5 @@ class BotstockIntro extends Equatable {
   Map<String, dynamic> toJson() => _$BotstockIntroToJson(this);
 
   @override
-  List<Object> get props => [tickerSymbol, botType, investmentHorizon];
+  List<Object> get props => [ticker, botType, investmentHorizon];
 }
