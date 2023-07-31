@@ -600,7 +600,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "opennessLessThan8": MessageLookupByLibrary.simpleMessage(
             "investing can be simple with AI"),
         "opennessMoreThan8": MessageLookupByLibrary.simpleMessage(
-            "our technology is perfect for you."),
+            "our technology is perfect for you"),
         "orderCancelled":
             MessageLookupByLibrary.simpleMessage("Order Cancelled"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("Order Expired"),
