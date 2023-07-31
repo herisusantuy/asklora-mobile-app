@@ -161,7 +161,8 @@ class AppInterceptors extends Interceptor {
       case DioErrorType.connectionTimeout:
       case DioErrorType.sendTimeout:
       case DioErrorType.receiveTimeout:
-        throw DeadlineExceededException(err.requestOptions);
+        throw DeadlineExceededException(
+            err.requestOptions, const AskloraError());
       case DioErrorType.badResponse:
         final askloraError = err.response != null
             ? AskloraError.fromJson(err.response!.data)
@@ -308,8 +309,9 @@ class NoInternetConnectionException extends AskloraApiClientException {
   }
 }
 
-class DeadlineExceededException extends DioError {
-  DeadlineExceededException(RequestOptions r) : super(requestOptions: r);
+class DeadlineExceededException extends AskloraApiClientException {
+  DeadlineExceededException(RequestOptions r, askloraError)
+      : super(r, askloraError: askloraError);
 
   @override
   String toString() {
