@@ -39,31 +39,27 @@ class TutorialBloc extends Bloc<TutorialEvent, TutorialState> {
       InitiateTradeSummaryTutorial event, Emitter<TutorialState> emit) async {
     final bool isTradeSummaryTutorial =
         await _tutorialRepository.fetchTradeSummaryTutorialState();
-    print('initiate trade summary tutorial $isTradeSummaryTutorial');
     emit(state.copyWith(isTradeSummaryTutorial: isTradeSummaryTutorial));
   }
 
   _onBotDetailTutorialFinished(
       BotDetailTutorialFinished event, Emitter<TutorialState> emit) async {
-    ///todo : save bot to false later
     final bool tutorialState =
-        await _tutorialRepository.saveBotDetailTutorialState(true);
+        await _tutorialRepository.saveBotDetailTutorialState(false);
     emit(state.copyWith(isBotDetailsTutorial: tutorialState));
   }
 
   _onBotRecommendationTutorialFinished(BotRecommendationTutorialFinished event,
       Emitter<TutorialState> emit) async {
-    ///todo : save bot to false later
     final bool tutorialState =
-        await _tutorialRepository.saveBotRecommendationTutorialState(true);
+        await _tutorialRepository.saveBotRecommendationTutorialState(false);
     emit(state.copyWith(isBotRecommendationTutorial: tutorialState));
   }
 
   _onTradeSummaryTutorialFinished(
       TradeSummaryTutorialFinished event, Emitter<TutorialState> emit) async {
-    ///todo : save bot to false later
     final bool tutorialState =
-        await _tutorialRepository.saveTradeSummaryTutorialState(true);
+        await _tutorialRepository.saveTradeSummaryTutorialState(false);
     emit(state.copyWith(isTradeSummaryTutorial: tutorialState));
   }
 }
