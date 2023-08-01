@@ -18,6 +18,7 @@ class AskLoraColors {
   static const darkGray = Color(0XFF878787);
   static const white = Color(0XFFFFFFFF);
   static const whiteAlpha05 = Color(0X0DFFFFFF);
+  static const whiteAlpha50 = Color(0X80FFFFFF);
   static const whiteAlpha15 = Color(0X26FFFFFF);
   static const whiteAlpha20 = Color(0X33FFFFFF);
   static const whiteAlpha35 = Color(0X59FFFFFF);

@@ -42,6 +42,8 @@ dependencies:
   onfido_sdk: ^3.3.0
   just_the_tooltip: ^0.0.12
   sentry_flutter: ^7.4.2
+  showcaseview:
+    path: ../flutter_showcaseview
 
   country_picker:
     path: ../flutter_country_picker/

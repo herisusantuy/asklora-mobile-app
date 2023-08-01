@@ -181,7 +181,6 @@ class BotStockRepository {
         // ),
         /*isDummy: botRecommendationModel.freeBot)*/
       ));
-      await removeInvestmentStyleState();
       return BaseResponse.complete(
           BotCreateOrderResponse.fromJson(response.data));
     } on AskloraApiClientException catch (e) {

@@ -30,6 +30,14 @@ class Lora extends Conversation {
       );
 }
 
+class LoraError extends Lora {
+  LoraError()
+      : super('Lora is working on some optimizations to serve you better.');
+
+  @override
+  List<Object?> get props => [type(), text];
+}
+
 @JsonSerializable()
 class Usage extends Equatable {
   @JsonKey(name: 'prompt_tokens')

@@ -18,43 +18,43 @@ List<Pair<String, String>> botRecommendationFaqs = [
 
 List<BotRecommendationModel> defaultBotRecommendation = [
   const BotRecommendationModel(1, 'CLASSIC_classic_003846', '', '', 'Pull Up',
-      'MSFT.O', 'TESLA', '', '440'),
+      'MSFT.O', 'TESLA', '', '440', '', '', ''),
   const BotRecommendationModel(2, 'CLASSIC_classic_003846', '', '', 'Plank',
-      'MSFT.O', 'TESLA', '', '390'),
+      'MSFT.O', 'TESLA', '', '390', '', '', ''),
   const BotRecommendationModel(3, 'CLASSIC_classic_003846', '', '', 'Squat',
-      'MSFT.O', 'TESLA', '', '100'),
+      'MSFT.O', 'TESLA', '', '100', '', '', ''),
   const BotRecommendationModel(4, 'CLASSIC_classic_003846', '', '', 'Plank',
-      'MSFT.O', 'TESLA', '', '150'),
+      'MSFT.O', 'TESLA', '', '150', '', '', ''),
   const BotRecommendationModel(5, 'CLASSIC_classic_003846', '', '', 'Squat',
-      'MSFT.O', 'TESLA', '', '160'),
+      'MSFT.O', 'TESLA', '', '160', '', '', ''),
   const BotRecommendationModel(6, 'CLASSIC_classic_003846', '', '', 'Pull Up',
-      'MSFT.O', 'TESLA', '', '90'),
+      'MSFT.O', 'TESLA', '', '90', '', '', ''),
   const BotRecommendationModel(7, 'CLASSIC_classic_003846', '', '', 'Pull Up',
-      'MSFT.O', 'TESLA', '', '20'),
+      'MSFT.O', 'TESLA', '', '20', '', '', ''),
   const BotRecommendationModel(8, 'CLASSIC_classic_003846', '', '', 'Plank',
-      'MSFT.O', 'TESLA', '', '600'),
+      'MSFT.O', 'TESLA', '', '600', '', '', ''),
 ];
 
 List<BotRecommendationModel> demonstrationBots = [
   const BotRecommendationModel(1, 'CLASSIC_classic_003846', '', '', 'Pull Up',
-      'MSFT.O', 'TESLA', '', '440',
+      'MSFT.O', 'TESLA', '', '440', '', '', '',
       selectable: true),
   const BotRecommendationModel(2, 'CLASSIC_classic_003846', '', '', 'Plank',
-      'MSFT.O', 'TESLA', '', '390',
+      'MSFT.O', 'TESLA', '', '390', '', '', '',
       selectable: true),
   const BotRecommendationModel(3, 'CLASSIC_classic_003846', '', '', 'Squat',
-      'MSFT.O', 'TESLA', '', '100',
+      'MSFT.O', 'TESLA', '', '100', '', '', '',
       selectable: true),
   const BotRecommendationModel(4, 'CLASSIC_classic_003846', '', '', 'Plank',
-      'MSFT.O', 'TESLA', '', '150'),
+      'MSFT.O', 'TESLA', '', '150', '', '', ''),
   const BotRecommendationModel(5, 'CLASSIC_classic_003846', '', '', 'Squat',
-      'MSFT.O', 'TESLA', '', '160'),
+      'MSFT.O', 'TESLA', '', '160', '', '', ''),
   const BotRecommendationModel(6, 'CLASSIC_classic_003846', '', '', 'Pull Up',
-      'MSFT.O', 'TESLA', '', '90'),
+      'MSFT.O', 'TESLA', '', '90', '', '', ''),
   const BotRecommendationModel(7, 'CLASSIC_classic_003846', '', '', 'Pull Up',
-      'MSFT.O', 'TESLA', '', '20'),
+      'MSFT.O', 'TESLA', '', '20', '', '', ''),
   const BotRecommendationModel(8, 'CLASSIC_classic_003846', '', '', 'Plank',
-      'MSFT.O', 'TESLA', '', '600'),
+      'MSFT.O', 'TESLA', '', '600', '', '', ''),
 ];
 
 enum BotType {
@@ -81,6 +81,9 @@ enum BotType {
 
   static BotType findByString(String botAppType) =>
       BotType.values.firstWhere((element) => element.value == botAppType);
+
+  static BotType findByValue(String botAppType) => BotType.values
+      .firstWhere((element) => element.internalName == botAppType);
 }
 
 enum BotStockFilter {

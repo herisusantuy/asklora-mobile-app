@@ -12,6 +12,14 @@ class BotRecommendationModel extends Equatable {
   final String botId;
   @JsonKey(name: 'bot_word')
   final String? botWord;
+
+  final String? updated;
+
+  final String? created;
+
+  @JsonKey(name: 'bot_duration')
+  final String botDuration;
+
   @JsonKey(name: 'bot_type')
   final String botType;
   @JsonKey(name: 'bot_app_type')
@@ -36,6 +44,9 @@ class BotRecommendationModel extends Equatable {
       this.tickerName,
       this.tickerSymbol,
       this.latestPrice,
+      this.updated,
+      this.created,
+      this.botDuration,
       {this.freeBot = false,
       this.selectable = false});
 
@@ -54,6 +65,9 @@ class BotRecommendationModel extends Equatable {
       tickerName,
       tickerSymbol,
       latestPrice,
+      created,
+      updated,
+      botDuration,
       freeBot: freeBot ?? this.freeBot);
 
   factory BotRecommendationModel.fromJson(Map<String, dynamic> json) =>
@@ -71,6 +85,9 @@ class BotRecommendationModel extends Equatable {
         ticker,
         tickerName,
         tickerSymbol,
-        latestPrice
+        latestPrice,
+        created,
+        updated,
+        botDuration,
       ];
 }

@@ -1,14 +1,15 @@
 part of 'bot_stock_bloc.dart';
 
 class BotStockState extends Equatable {
-  const BotStockState(
-      {this.botRecommendationResponse =
-          const BaseResponse(state: ResponseState.loading),
-      this.createBotOrderResponse = const BaseResponse(),
-      this.botDetailResponse = const BaseResponse(),
-      this.faqActiveIndex,
-      this.botStockTradeAmount = 0,
-      this.buyingPower = 0});
+  const BotStockState({
+    this.botRecommendationResponse =
+        const BaseResponse(state: ResponseState.loading),
+    this.createBotOrderResponse = const BaseResponse(),
+    this.botDetailResponse = const BaseResponse(),
+    this.faqActiveIndex,
+    this.botStockTradeAmount = 0,
+    this.buyingPower = 0,
+  });
 
   final BaseResponse<BotRecommendationResponse> botRecommendationResponse;
   final BaseResponse<BotCreateOrderResponse> createBotOrderResponse;
@@ -25,7 +26,7 @@ class BotStockState extends Equatable {
       createBotOrderResponse,
       botDetailResponse,
       botStockTradeAmount,
-      buyingPower
+      buyingPower,
     ];
   }
 
@@ -43,7 +44,7 @@ class BotStockState extends Equatable {
       createBotOrderResponse:
           createBotOrderResponse ?? this.createBotOrderResponse,
       botDetailResponse: botDetailResponse ?? this.botDetailResponse,
-      faqActiveIndex: faqActiveIndex,
+      faqActiveIndex: faqActiveIndex ?? this.faqActiveIndex,
       botStockTradeAmount: botStockTradeAmount ?? this.botStockTradeAmount,
       buyingPower: buyingPower ?? this.buyingPower,
     );

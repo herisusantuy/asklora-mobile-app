@@ -41,3 +41,23 @@ Map<String, dynamic> _$BotstockToJson(Botstock instance) => <String, dynamic>{
       'total_pnl': instance.totalPnl,
       'expiry_date': instance.expiryDate,
     };
+
+BotstockIntro _$BotstockIntroFromJson(Map<String, dynamic> json) =>
+    BotstockIntro(
+      ticker: json['ticker'] as String,
+      botType: json['bot_type'] as String,
+      investmentHorizon: json['investment_horizon'] as String,
+      platform: json['platform'] as String,
+      username: json['username'] as String,
+      userId: json['userId'] as String,
+    );
+
+Map<String, dynamic> _$BotstockIntroToJson(BotstockIntro instance) =>
+    <String, dynamic>{
+      'ticker': instance.ticker,
+      'bot_type': instance.botType,
+      'investment_horizon': instance.investmentHorizon,
+      'userId': instance.userId,
+      'username': instance.username,
+      'platform': instance.platform,
+    };

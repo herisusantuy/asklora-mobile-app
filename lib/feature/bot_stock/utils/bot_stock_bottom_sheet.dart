@@ -126,8 +126,9 @@ class BotStockBottomSheet {
       context: (context),
       builder: (_) => BlocProvider(
         create: (_) => BotStockBloc(
-            botStockRepository: BotStockRepository(),
-            transactionRepository: TransactionRepository()),
+          botStockRepository: BotStockRepository(),
+          transactionRepository: TransactionRepository(),
+        ),
         child: BlocBuilder<BotStockBloc, BotStockState>(
             buildWhen: (previous, current) =>
                 previous.botStockTradeAmount != current.botStockTradeAmount,

@@ -49,8 +49,31 @@ class LoraGptRepository {
       {required InvestmentStyleQuestionQueryRequest params}) async {
     try {
       var response = await _loraGptClient.investmentStyle(params);
+
       return BaseResponse.complete(
           InvestmentStyleQuestionQueryResponse.fromJson(response.data));
+    } catch (e) {
+      return BaseResponse.error(
+          message: 'Something went wrong. Please try again!');
+    }
+  }
+
+  Future<BaseResponse<QueryResponse>> botIntro(
+      {required BotstockIntro params}) async {
+    try {
+      final response = await _loraGptClient.botIntro(params.params);
+      return BaseResponse.complete(QueryResponse.fromJson(response.data));
+    } catch (e) {
+      return BaseResponse.error(
+          message: 'Something went wrong. Please try again!');
+    }
+  }
+
+  Future<BaseResponse<QueryResponse>> botEarnings(
+      {required BotstockIntro params}) async {
+    try {
+      var response = await _loraGptClient.botIntroEarnings(params.params);
+      return BaseResponse.complete(QueryResponse.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error(
           message: 'Something went wrong. Please try again!');

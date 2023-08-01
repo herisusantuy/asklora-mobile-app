@@ -34,4 +34,13 @@ class LoraGptClient {
           InvestmentStyleQuestionQueryRequest request) async =>
       await LoraGptApiClient().get(
           endpoint: endpointInvestmentStyle, queryParameters: request.toJson());
+
+  Future<Response> botIntro(Map<String, String> params) async {
+    return await LoraGptApiClient()
+        .get(endpoint: endpointBotIntro, queryParameters: params);
+  }
+
+  Future<Response> botIntroEarnings(Map<String, String> params) async =>
+      await LoraGptApiClient()
+          .get(endpoint: endpointBotEarning, queryParameters: params);
 }

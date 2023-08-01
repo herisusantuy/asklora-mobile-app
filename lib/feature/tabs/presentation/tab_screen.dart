@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import '../../../app/bloc/app_bloc.dart';
 import '../../../core/domain/base_response.dart';
@@ -10,7 +11,12 @@ import '../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
+import '../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
+import '../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
+import '../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../core/repository/transaction_repository.dart';
+import '../../../core/repository/tutorial_repository.dart';
+import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/app_icons.dart';
 import '../../../core/utils/route_generator.dart';
 import '../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
@@ -52,6 +58,10 @@ class TabScreen extends StatelessWidget {
           ),
           BlocProvider(
             create: (_) =>
+                TutorialBloc(tutorialRepository: TutorialRepository()),
+          ),
+          BlocProvider(
+            create: (_) =>
                 AccountInformationBloc(accountRepository: AccountRepository())
                   ..add(GetAccountInformation()),
           ),
@@ -79,8 +89,9 @@ class TabScreen extends StatelessWidget {
           BlocProvider(
             create: (_) {
               BotStockBloc botStockBloc = BotStockBloc(
-                  botStockRepository: BotStockRepository(),
-                  transactionRepository: TransactionRepository());
+                botStockRepository: BotStockRepository(),
+                transactionRepository: TransactionRepository(),
+              );
               botStockBloc.add(FetchBotRecommendation());
               return botStockBloc;
             },
@@ -129,47 +140,58 @@ class TabScreen extends StatelessWidget {
                                   (state.response.data!.canTrade
                                       ? TabPage.forYou
                                       : TabPage.home)),
-                          child: BlocListener<TabScreenBloc, TabScreenState>(
-                            listenWhen: (previous, current) =>
-                                previous.tabScreenBackState !=
-                                    current.tabScreenBackState ||
-                                previous.currentTabPage !=
-                                    current.currentTabPage,
-                            listener: (context, state) {
-                              if (state.currentTabPage != TabPage.forYou) {
-                                context.read<TabThemeBloc>().add(
-                                    const BackgroundImageTypeChanged(
-                                        BackgroundImageType.none));
-                              }
-                              if (state.tabScreenBackState ==
-                                  TabScreenBackState.openConfirmation) {
-                                CustomInAppNotification.show(
-                                    context, S.of(context).pressBackAgain,
-                                    type: PopupType.grey);
-                              } else if (state.tabScreenBackState ==
-                                  TabScreenBackState.closeApp) {
-                                SystemNavigator.pop();
-                              }
-                            },
-                            child: Builder(
-                              builder: (context) => WillPopScope(
-                                onWillPop: () async {
-                                  context
-                                      .read<TabScreenBloc>()
-                                      .add(BackButtonClicked());
-                                  return false;
+                          child: ShowCaseWidget(
+                            disableBarrierInteraction: true,
+                            disableMovingAnimation: true,
+                            showCaseViewScrollPosition:
+                                ShowCaseViewScrollPosition.scrollToTop,
+                            blurValue: 2.5,
+                            builder: Builder(builder: (context) {
+                              return BlocListener<TabScreenBloc,
+                                  TabScreenState>(
+                                listenWhen: (previous, current) =>
+                                    previous.tabScreenBackState !=
+                                        current.tabScreenBackState ||
+                                    previous.currentTabPage !=
+                                        current.currentTabPage,
+                                listener: (context, state) {
+                                  if (state.currentTabPage != TabPage.forYou) {
+                                    context.read<TabThemeBloc>().add(
+                                        const BackgroundImageTypeChanged(
+                                            BackgroundImageType.none));
+                                  }
+                                  if (state.tabScreenBackState ==
+                                      TabScreenBackState.openConfirmation) {
+                                    CustomInAppNotification.show(
+                                        context, S.of(context).pressBackAgain,
+                                        type: PopupType.grey);
+                                  } else if (state.tabScreenBackState ==
+                                      TabScreenBackState.closeApp) {
+                                    SystemNavigator.pop();
+                                  }
                                 },
-                                child: Column(
-                                  children: [
-                                    TabPages(
-                                        canTrade:
-                                            state.response.data!.canTrade),
-                                    Tabs(
-                                        canTrade: state.response.data!.canTrade)
-                                  ],
+                                child: Builder(
+                                  builder: (context) => WillPopScope(
+                                    onWillPop: () async {
+                                      context
+                                          .read<TabScreenBloc>()
+                                          .add(BackButtonClicked());
+                                      return false;
+                                    },
+                                    child: Column(
+                                      children: [
+                                        TabPages(
+                                            canTrade:
+                                                state.response.data!.canTrade),
+                                        Tabs(
+                                            canTrade:
+                                                state.response.data!.canTrade)
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
+                              );
+                            }),
                           ),
                         )
                       : const SizedBox.shrink(),

@@ -42,7 +42,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
         height: 60,
         child: Stack(
           children: [
-            const Center(child: ChatLoraHeader()),
+            const Center(child: ChatLoraHeader(title: 'Lora')),
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
