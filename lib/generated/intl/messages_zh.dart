@@ -76,8 +76,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m23(opennessScore, neuroticismScore, extrovertScore) =>
       "${opennessScore} ${neuroticismScore}\n\n${extrovertScore}";
 
-  static String m24(botName, botSymbol, dateTime) =>
-      "${botName} ${botSymbol} 將於 ${dateTime} 開始";
+  static String m24(botName, botSymbol) =>
+      "${botName} ${botSymbol} will start when the US market opens";
 
   static String m25(minDeposit) =>
       "請轉賬最少 HK\$${minDeposit} 至 Asklora 銀行戶口。任何少於 HK\$${minDeposit} 的首次入金均會被拒收，並會被徵收手續費。";
@@ -360,7 +360,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getTheFirstBotstockForFree":
             MessageLookupByLibrary.simpleMessage("獲取首個免費 Botstock "),
         "giftBotStockMessageScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage("OK! 睇下畀我嘅推薦 "),
+            MessageLookupByLibrary.simpleMessage("OK! 睇下畀我嘅推薦"),
         "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
             "每一次你投資新嘅Botstock, 我都會問你投資風格問題，咁我就可以提供新嘅個人化投資建議畀你！"),
         "giftBotStockWelcomeScreenBottomButton":
@@ -368,6 +368,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftBotStockWelcomeScreenTitle":
             MessageLookupByLibrary.simpleMessage("萬事具備, 即刻開始交易你嘅第一隻Botstock!"),
         "go": MessageLookupByLibrary.simpleMessage("繼續"),
+        "goToPortfolio":
+            MessageLookupByLibrary.simpleMessage("Go To Portfolio"),
         "gotIt": MessageLookupByLibrary.simpleMessage("知道了"),
         "greatStart": MessageLookupByLibrary.simpleMessage("開始投資"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
@@ -670,7 +672,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("風險披露聲明"),
         "riskDisclosureStatementString": MessageLookupByLibrary.simpleMessage(
             "1. The prices of securities fluctuate, sometimes dramatically. The price of a security may move up or down, and may become valueless. It is as likely that losses will be incurred rather than profit made as a result of buying and selling securities. Investors should not only base on this marketing material to make any investment decision, you should carefully consider whether the investment products or services are suitable for you according to your investment experience, purpose, risk tolerance, financial or related conditions. If you have any questions, please contact us or obtain independent advice.\n\n2. Investment in foreign securities carries additional risks not generally associated with securities in the domestic market. The value or income of foreign securities may be more volatile and could be adversely affected by changes in currency rates of exchange, foreign taxation practices, foreign laws, government practices, regulations, and political events. You may find it more difficult to liquidate investments in foreign securities where they have limited liquidity in the relevant market. Foreign laws, government practices, and regulations may also affect the transferability of foreign securities. Timely and reliable information about the value or the extent of the risks of foreign securities may not be readily available at all times.\n\n3. You acknowledge that you have fully understood the implications of the risks associated with the Electronic Trading Service as set out in the Client Agreement"),
-        "rolloverBotStockAcknowledgement": m24,
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
         "seeMyRecommendations":
@@ -691,6 +692,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "sourceOfWealth": MessageLookupByLibrary.simpleMessage("財富來源"),
         "startABotstock": MessageLookupByLibrary.simpleMessage("開始交易"),
         "startAgain": MessageLookupByLibrary.simpleMessage("Start Again"),
+        "startAnotherInvestments":
+            MessageLookupByLibrary.simpleMessage("Start another investment"),
+        "startBotStockAcknowledgement": m24,
         "startDate": MessageLookupByLibrary.simpleMessage("最佳開始日期"),
         "startInvesting": MessageLookupByLibrary.simpleMessage("開始投資 "),
         "startInvestingOnMilestone":

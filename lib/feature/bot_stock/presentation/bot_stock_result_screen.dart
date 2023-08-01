@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/presentation/buttons/button_pair.dart';
 import '../../../core/presentation/buttons/primary_button.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_status_widget.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
+import '../../../generated/l10n.dart';
+import '../../tabs/bloc/tab_screen_bloc.dart';
+import '../../tabs/presentation/tab_screen.dart';
 
 class BotStockResultScreen extends StatelessWidget {
   static const String route = '/bot_stock_result_screen';
@@ -24,18 +28,28 @@ class BotStockResultScreen extends StatelessWidget {
               statusType: StatusType.success,
               subTitle: arguments.desc,
             ),
-            bottomButton: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30.0),
-              child: PrimaryButton(
-                label: arguments.labelBottomButton,
-                onTap: () {
-                  if (arguments.onButtonTap != null) {
-                    arguments.onButtonTap!(context);
-                  } else {
-                    Navigator.pop(context);
-                  }
-                },
-              ),
+            bottomButton: Column(
+              children: [
+                if (arguments.isCanceledBot)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 30),
+                    child: PrimaryButton(
+                        label: S.of(context).buttonBackToPortfolio,
+                        onTap: () => TabScreen.openAndRemoveAllRoute(context,
+                            initialTabPage: TabPage.portfolio)),
+                  )
+                else
+                  ButtonPair(
+                    primaryButtonOnClick: () => TabScreen.openAndRemoveAllRoute(
+                        context,
+                        initialTabPage: TabPage.portfolio),
+                    primaryButtonLabel: S.of(context).buttonBackToPortfolio,
+                    secondaryButtonLabel: S.of(context).startAnotherInvestments,
+                    secondaryButtonOnClick: () =>
+                        TabScreen.openAndRemoveAllRoute(context,
+                            initialTabPage: TabPage.forYou),
+                  ),
+              ],
             ),
           )),
     );
@@ -65,13 +79,11 @@ class BotStockResultScreen extends StatelessWidget {
 class BotStockResultArgument {
   final String title;
   final String desc;
-  final String labelBottomButton;
-  final Function(BuildContext)? onButtonTap;
+  final bool isCanceledBot;
 
   const BotStockResultArgument({
     required this.title,
     required this.desc,
-    required this.labelBottomButton,
-    this.onButtonTap,
+    this.isCanceledBot = false,
   });
 }
