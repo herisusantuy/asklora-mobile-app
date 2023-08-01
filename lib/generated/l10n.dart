@@ -5775,6 +5775,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.`
+  String get portfolioDetailPerformanceBotAssetsInStockTooltip {
+    return Intl.message(
+      'Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.',
+      name: 'portfolioDetailPerformanceBotAssetsInStockTooltip',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
