@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
+import '../../../../core/presentation/custom_status_widget.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
-import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../generated/l10n.dart';
 import '../../../backdoor/domain/backdoor_repository.dart';
@@ -40,10 +40,12 @@ class ForgotPasswordSuccessScreen extends StatelessWidget {
               header: CustomHeader(
                 title: S.of(context).forgotPassword,
               ),
-              content: CustomTextNew(
-                S.of(context).passwordLinkHasBeenSent,
-                textAlign: TextAlign.left,
-                style: const TextStyle(fontSize: 16),
+              content: Padding(
+                padding: const EdgeInsets.only(top: 48),
+                child: CustomStatusWidget(
+                  title: S.of(context).passwordLinkHasBeenSent,
+                  statusType: StatusType.success,
+                ),
               ),
             ),
           ),
