@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
@@ -7,9 +8,9 @@ import '../../../../../generated/l10n.dart';
 import '../../../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
+import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../../tabs/presentation/tab_screen.dart';
-import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../gift/gift_bot_stock_welcome_screen.dart';
 import '../utils/portfolio_utils.dart';
 
@@ -24,18 +25,16 @@ class BotPortfolioPopUp extends StatelessWidget {
     final LoraPopUpMessageModel loraPopUpMessageModel =
         _getBotPortfolioPopUpModel(context, botPortfolioPopUpType);
 
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: LoraPopUpMessage(
-        backgroundColor: AskLoraColors.charcoal,
-        title: loraPopUpMessageModel.title,
-        titleColor: AskLoraColors.white,
-        subTitle: loraPopUpMessageModel.subTitle,
-        subTitleColor: AskLoraColors.white,
-        primaryButtonLabel: loraPopUpMessageModel.primaryButtonLabel,
-        onPrimaryButtonTap: loraPopUpMessageModel.onPrimaryButtonTap,
-        buttonPrimaryType: ButtonPrimaryType.solidGreen,
-      ),
+    return LoraPopUpMessage(
+      backgroundColor: AskLoraColors.charcoal,
+      title: loraPopUpMessageModel.title,
+      boxTopMargin: 40,
+      titleColor: AskLoraColors.white,
+      subTitle: loraPopUpMessageModel.subTitle,
+      subTitleColor: AskLoraColors.white,
+      primaryButtonLabel: loraPopUpMessageModel.primaryButtonLabel,
+      onPrimaryButtonTap: loraPopUpMessageModel.onPrimaryButtonTap,
+      buttonPrimaryType: ButtonPrimaryType.solidGreen,
     );
   }
 
