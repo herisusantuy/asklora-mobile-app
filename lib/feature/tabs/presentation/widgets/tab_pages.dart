@@ -20,6 +20,8 @@ class TabPages extends StatelessWidget {
                     return _navigatorPage(HomeScreenForm.route);
                   case TabPage.forYou:
                     return _navigatorPage(ForYouScreenForm.route);
+                  case TabPage.aiLandingPage:
+                    return _navigatorPage(AiLandingPage.route);
                   case TabPage.portfolio:
                     return _navigatorPage(PortfolioScreen.route,
                         arguments: context);

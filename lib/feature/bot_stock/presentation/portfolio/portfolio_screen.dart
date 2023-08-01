@@ -31,6 +31,7 @@ import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.d
 import '../../../settings/bloc/account_information/account_information_bloc.dart';
 import '../../../settings/presentation/settings_screen.dart';
 import '../../../tabs/bloc/tab_screen_bloc.dart';
+import '../../../tabs/utils/tab_util.dart';
 import '../../domain/orders/bot_active_order_model.dart';
 import '../../utils/bot_stock_utils.dart';
 import 'bloc/portfolio_bloc.dart';

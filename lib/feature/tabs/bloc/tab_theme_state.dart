@@ -7,29 +7,41 @@ enum BackgroundImageType {
     baseBackgroundColor: AskLoraColors.white,
     appBarBackgroundColor: Colors.transparent,
     scaffoldBackgroundColor: Colors.transparent,
+    tabAiActiveAsset: 'bottom_nav_asklora_ai_selected_black',
   ),
   dark(
     imageAsset: 'assets/lora_gpt_background.png',
     baseBackgroundColor: AskLoraColors.black,
     appBarBackgroundColor: Colors.transparent,
     scaffoldBackgroundColor: Colors.transparent,
+    tabAiActiveAsset: 'bottom_nav_asklora_ai_selected_white',
+    tabForYouFilledColor: AskLoraColors.darkGray,
+    tabPortfolioFilledColor: AskLoraColors.darkGray,
   ),
+
   none(
-    baseBackgroundColor: AskLoraColors.white,
-    appBarBackgroundColor: AskLoraColors.white,
-    scaffoldBackgroundColor: AskLoraColors.white,
-  );
+      baseBackgroundColor: AskLoraColors.white,
+      appBarBackgroundColor: AskLoraColors.white,
+      scaffoldBackgroundColor: AskLoraColors.white,
+      tabAiActiveAsset: 'bottom_nav_asklora_ai_selected_black');
 
   final String? imageAsset;
+  final String tabAiActiveAsset;
+  final Color? tabForYouFilledColor;
+  final Color? tabPortfolioFilledColor;
   final Color baseBackgroundColor;
   final Color appBarBackgroundColor;
   final Color scaffoldBackgroundColor;
 
-  const BackgroundImageType(
-      {this.imageAsset,
-      required this.baseBackgroundColor,
-      required this.appBarBackgroundColor,
-      required this.scaffoldBackgroundColor});
+  const BackgroundImageType({
+    this.imageAsset,
+    required this.baseBackgroundColor,
+    required this.appBarBackgroundColor,
+    required this.scaffoldBackgroundColor,
+    required this.tabAiActiveAsset,
+    this.tabForYouFilledColor,
+    this.tabPortfolioFilledColor,
+  });
 }
 
 class TabThemeState extends Equatable {

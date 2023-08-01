@@ -37,7 +37,9 @@ import '../../tabs/for_you/for_you_screen_form.dart';
 import '../../tabs/for_you/investment_style/bloc/for_you_question_bloc.dart';
 import '../../tabs/for_you/repository/for_you_repository.dart';
 import '../../tabs/home/home_screen_form.dart';
+import '../ai_landing_page/presentation/ai_landing_page.dart';
 import '../bloc/tab_theme_bloc.dart';
+import '../utils/tab_util.dart';
 import 'widgets/ai_overlay.dart';
 
 part 'widgets/tab_pages.dart';
@@ -54,7 +56,8 @@ class TabScreen extends StatelessWidget {
   Widget build(BuildContext context) => MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => TabThemeBloc(),
+            create: (_) =>
+                TabThemeBloc(backgroundImageType: BackgroundImageType.none),
           ),
           BlocProvider(
             create: (_) =>
@@ -124,23 +127,36 @@ class TabScreen extends StatelessWidget {
               backgroundColor:
                   state.backgroundImageType.scaffoldBackgroundColor,
               enableBackNavigation: false,
-              body:
-                  BlocConsumer<AccountInformationBloc, AccountInformationState>(
-                listener: (context, state) =>
-                    CustomLoadingOverlay(context).show(state.response.state),
-                buildWhen: (previous, current) =>
-                    previous.response.data != current.response.data ||
-                    current.response.state == ResponseState.error,
-                builder: (context, state) => CustomLayoutWithBlurPopUp(
-                  showPopUp: state.response.state == ResponseState.error,
-                  content: state.response.data != null
-                      ? BlocProvider(
-                          create: (_) => TabScreenBloc(
-                              initialTabPage: initialTabPage ??
-                                  (state.response.data!.canTrade
-                                      ? TabPage.forYou
-                                      : TabPage.home)),
-                          child: ShowCaseWidget(
+              body: BlocProvider(
+                create: (_) => TabScreenBloc(
+                    initialTabPage: initialTabPage ?? TabPage.forYou),
+                child: BlocConsumer<AccountInformationBloc,
+                    AccountInformationState>(
+                  listener: (context, state) {
+                    CustomLoadingOverlay(context).show(state.response.state);
+                    if (state.response.state == ResponseState.success) {
+                      if (state.response.data!.canTrade &&
+                          initialTabPage == null) {
+                        context.read<TabThemeBloc>().add(
+                            const BackgroundImageTypeChanged(
+                                BackgroundImageType.dark));
+                        context
+                            .read<TabScreenBloc>()
+                            .add(const TabChanged(TabPage.aiLandingPage));
+                      } else {
+                        context.read<TabThemeBloc>().add(
+                            const BackgroundImageTypeChanged(
+                                BackgroundImageType.none));
+                      }
+                    }
+                  },
+                  buildWhen: (previous, current) =>
+                      previous.response.data != current.response.data ||
+                      current.response.state == ResponseState.error,
+                  builder: (context, state) => CustomLayoutWithBlurPopUp(
+                    showPopUp: state.response.state == ResponseState.error,
+                    content: state.response.data != null
+                        ? ShowCaseWidget(
                             disableBarrierInteraction: true,
                             disableMovingAnimation: true,
                             showCaseViewScrollPosition:
@@ -155,7 +171,12 @@ class TabScreen extends StatelessWidget {
                                     previous.currentTabPage !=
                                         current.currentTabPage,
                                 listener: (context, state) {
-                                  if (state.currentTabPage != TabPage.forYou) {
+                                  if (state.currentTabPage ==
+                                      TabPage.aiLandingPage) {
+                                    context.read<TabThemeBloc>().add(
+                                        const BackgroundImageTypeChanged(
+                                            BackgroundImageType.dark));
+                                  } else {
                                     context.read<TabThemeBloc>().add(
                                         const BackgroundImageTypeChanged(
                                             BackgroundImageType.none));
@@ -192,20 +213,20 @@ class TabScreen extends StatelessWidget {
                                 ),
                               );
                             }),
-                          ),
-                        )
-                      : const SizedBox.shrink(),
+                          )
+                        : const SizedBox.shrink(),
 
-                  ///TODO : IMPLEMENT THE RIGHT COPYWRITING LATER
-                  loraPopUpMessageModel: LoraPopUpMessageModel(
-                      title: S.of(context).errorGettingInformationTitle,
-                      subTitle: S
-                          .of(context)
-                          .errorGettingInformationPortfolioSubTitle,
-                      primaryButtonLabel: S.of(context).buttonReloadPage,
-                      onPrimaryButtonTap: () => context
-                          .read<AccountInformationBloc>()
-                          .add(GetAccountInformation())),
+                    ///TODO : IMPLEMENT THE RIGHT COPYWRITING LATER
+                    loraPopUpMessageModel: LoraPopUpMessageModel(
+                        title: S.of(context).errorGettingInformationTitle,
+                        subTitle: S
+                            .of(context)
+                            .errorGettingInformationPortfolioSubTitle,
+                        primaryButtonLabel: S.of(context).buttonReloadPage,
+                        onPrimaryButtonTap: () => context
+                            .read<AccountInformationBloc>()
+                            .add(GetAccountInformation())),
+                  ),
                 ),
               ),
             ),

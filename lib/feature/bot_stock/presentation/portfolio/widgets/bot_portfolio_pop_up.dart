@@ -7,9 +7,9 @@ import '../../../../../generated/l10n.dart';
 import '../../../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
-import '../../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../../tabs/presentation/tab_screen.dart';
 import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
+import '../../../../tabs/utils/tab_util.dart';
 import '../../gift/gift_bot_stock_welcome_screen.dart';
 import '../utils/portfolio_utils.dart';
 

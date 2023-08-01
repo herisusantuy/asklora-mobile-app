@@ -27,6 +27,7 @@ import '../../../ai/investment_style_question/presentation/ai_investment_style_q
 import '../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../tabs/for_you/for_you_screen_form.dart';
 import '../../../tabs/for_you/investment_style/presentation/ai_investment_style_question_for_you_screen.dart';
+import '../../../tabs/utils/tab_util.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../domain/bot_recommendation_model.dart';
 import '../../utils/bot_stock_utils.dart';

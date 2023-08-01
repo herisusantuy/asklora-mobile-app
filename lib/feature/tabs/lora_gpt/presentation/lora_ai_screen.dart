@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:asklora_mobile_app/feature/tabs/lora_gpt/presentation/widget/ai_debug_widget.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -25,17 +26,15 @@ import '../../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
-import '../../../../core/utils/build_configs/app_config_widget.dart';
-import '../../../../core/utils/build_configs/build_config.dart';
 import '../../../../core/utils/feature_flags.dart';
-import '../../../../core/values/app_values.dart';
 import '../../../../generated/l10n.dart';
 import '../../../bot_stock/presentation/portfolio/bloc/portfolio_bloc.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
-import '../../../onboarding/ppi/presentation/widget/omni_search_question_widget/widgets/custom_choice_chips.dart';
 import '../../bloc/tab_screen_bloc.dart';
 import '../bloc/lora_gpt_bloc.dart';
 import '../domain/portfolio_query_request.dart';
+import 'widget/component_widget.dart';
+import 'widget/session_reset_widget.dart';
 
 part 'lora_ai_overlay_screen.dart';
 

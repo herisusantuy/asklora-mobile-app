@@ -24,7 +24,7 @@ enum AiThemeType {
       primaryFontColor: AskLoraColors.white,
       secondaryFontColor: AskLoraColors.white,
       startButtonFillColor: Color(0xFF373A49),
-      textFieldFillColor: AskLoraColors.whiteAlpha05,
+      textFieldFillColor: AskLoraColors.whiteAlpha15,
       sendChatButtonIconEnableColor: AskLoraColors.gray,
       sendChatButtonIconDisableColor: AskLoraColors.gray,
       inChatBubbleWidgetColor: AskLoraColors.whiteAlpha35,

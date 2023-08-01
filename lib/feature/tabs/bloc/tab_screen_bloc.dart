@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../utils/tab_util.dart';
+
 part 'tab_screen_event.dart';
 part 'tab_screen_state.dart';
 

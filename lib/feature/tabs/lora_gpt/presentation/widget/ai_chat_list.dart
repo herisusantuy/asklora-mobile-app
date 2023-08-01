@@ -165,63 +165,38 @@ class _AiChatListState extends State<AiChatList> {
     } else if (e is Me) {
       return InChatBubbleWidget(message: e.text, name: e.userName);
     } else if (e is Reset) {
-      return _sessionResetWidget();
+      return const SessionResetWidget();
     } else if (e is Component) {
       if (isTyping) {
         context.read<LoraGptBloc>().add(const OnFinishTyping());
       }
 
-      return _componentWidget(e);
+      return ComponentWidget(
+        aiThemeType: widget.aiThemeType,
+        component: e,
+      );
     } else {
       return const LoraThinkingWidget();
     }
   }
 
-  Widget _componentWidget(Component component) => CustomChoiceChips(
-        textStyle: AskLoraTextStyles.body2
-            .copyWith(color: widget.aiThemeType.primaryFontColor),
-        textColor: widget.aiThemeType.secondaryFontColor,
-        borderColor: widget.aiThemeType.choicesInteractionBorderColor,
-        pressedFillColor: AskLoraColors.primaryGreen.withOpacity(0.4),
-        fillColor: AskLoraColors.white.withOpacity(0.2),
-        label: component.label,
-        onTap: () =>
-            context.read<LoraGptBloc>().add(OnPromptTap(component.label)),
-      );
-
   ///todo: some backup code in case something fishy happening
-  // Widget _getBubbleChat(LoraGptState state, Conversation e, int index) {
-  //   final List<Conversation> reversedConversations =
-  //   List.from(state.conversations.reversed);
-  //   final message = reversedConversations[
-  //   (reversedConversations.length - 1) - reversedConversations.indexOf(e)];
-  //   if (e is Lora) {
-  //     print('outchat');
-  //     return OutChatBubbleWidget((e).response,
-  //       animateText:
-  //       reversedConversations.indexOf(e) == 0 && state.isTyping,);
-  //   } else if (e is Me) {
-  //     return InChatBubbleWidget(message: (e).query, name: state.userName);
-  //   } else if (e is Reset) {
-  //     return _sessionResetWidget();
-  //   } else {
-  //     return const LoraThinkingWidget();
-  //   }
-  // }
-
-  Widget _sessionResetWidget() => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Expanded(
-            child:
-                Divider(thickness: 1, color: AskLoraColors.gray, endIndent: 5),
-          ),
-          CustomTextNew('Context is cleared for current session',
-              style: AskLoraTextStyles.body3),
-          const Expanded(
-            child: Divider(thickness: 1, color: AskLoraColors.gray, indent: 5),
-          ),
-        ],
-      );
+// Widget _getBubbleChat(LoraGptState state, Conversation e, int index) {
+//   final List<Conversation> reversedConversations =
+//   List.from(state.conversations.reversed);
+//   final message = reversedConversations[
+//   (reversedConversations.length - 1) - reversedConversations.indexOf(e)];
+//   if (e is Lora) {
+//     print('outchat');
+//     return OutChatBubbleWidget((e).response,
+//       animateText:
+//       reversedConversations.indexOf(e) == 0 && state.isTyping,);
+//   } else if (e is Me) {
+//     return InChatBubbleWidget(message: (e).query, name: state.userName);
+//   } else if (e is Reset) {
+//     return _sessionResetWidget();
+//   } else {
+//     return const LoraThinkingWidget();
+//   }
+// }
 }

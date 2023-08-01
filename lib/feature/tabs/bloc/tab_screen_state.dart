@@ -1,7 +1,5 @@
 part of 'tab_screen_bloc.dart';
 
-enum TabPage { home, forYou, portfolio }
-
 enum SubTabPage {
   portfolioBotStockDetails('portfolioBotStockDetails'),
   recommendationsBotStockDetails('recommendationsBotStockDetails');

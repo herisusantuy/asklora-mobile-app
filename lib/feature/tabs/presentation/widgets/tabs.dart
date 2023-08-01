@@ -7,6 +7,8 @@ class Tabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final BackgroundImageType backgroundImageType =
+        context.read<TabThemeBloc>().state.backgroundImageType;
     return KeyboardVisibilityBuilder(
       builder: (context, isKeyboardVisible) => !isKeyboardVisible
           ? Padding(
@@ -30,6 +32,7 @@ class Tabs extends StatelessWidget {
                             .add(const TabChanged(TabPage.forYou)),
                         iconAsset: 'bottom_nav_isq',
                         activeIconAsset: 'bottom_nav_isq_selected',
+                        filledColor: backgroundImageType.tabForYouFilledColor,
                         active: state.currentTabPage == TabPage.forYou &&
                             !state.aiPageSelected),
                     if (canTrade)
@@ -65,12 +68,19 @@ class Tabs extends StatelessWidget {
                           ),
                         ),
                         child: _tabSvg(
-                            onTap: () => context
-                                .read<TabScreenBloc>()
-                                .add(const OnAiOverlayClick()),
+                            onTap: () {
+                              if (state.currentTabPage !=
+                                  TabPage.aiLandingPage) {
+                                context
+                                    .read<TabScreenBloc>()
+                                    .add(const OnAiOverlayClick());
+                              }
+                            },
                             iconAsset: 'bottom_nav_asklora_ai',
-                            activeIconAsset: 'bottom_nav_asklora_ai_selected',
-                            active: state.aiPageSelected),
+                            activeIconAsset:
+                                backgroundImageType.tabAiActiveAsset,
+                            active: state.aiPageSelected ||
+                                state.currentTabPage == TabPage.aiLandingPage),
                       ),
                     _tabSvg(
                         onTap: () => context
@@ -78,6 +88,8 @@ class Tabs extends StatelessWidget {
                             .add(const TabChanged(TabPage.portfolio)),
                         iconAsset: 'bottom_nav_portfolio',
                         activeIconAsset: 'bottom_nav_portfolio_selected',
+                        filledColor:
+                            backgroundImageType.tabPortfolioFilledColor,
                         active: state.currentTabPage == TabPage.portfolio &&
                             !state.aiPageSelected)
                   ],
@@ -91,7 +103,9 @@ class Tabs extends StatelessWidget {
   Widget _tabSvg(
           {required VoidCallback onTap,
           required String iconAsset,
-          required String activeIconAsset,
+          String? activeIconAsset,
+          Color? activeFilledColor,
+          Color? filledColor,
           bool active = false,
           double clickAreaSize = 40}) =>
       GestureDetector(
@@ -100,7 +114,8 @@ class Tabs extends StatelessWidget {
           color: Colors.transparent,
           width: clickAreaSize,
           height: clickAreaSize,
-          child: getSvgIcon(active ? activeIconAsset : iconAsset,
+          child: getSvgIcon(active ? activeIconAsset ?? iconAsset : iconAsset,
+              color: active ? activeFilledColor : filledColor,
               fit: BoxFit.none),
         ),
       );

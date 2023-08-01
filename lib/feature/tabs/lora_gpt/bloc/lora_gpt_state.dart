@@ -120,4 +120,6 @@ class LoraGptState extends Equatable {
         tabPage,
         DateTime.now().millisecondsSinceEpoch
       ];
+
+  bool get isTextFieldSendButtonDisabled => isTyping || query.isEmpty;
 }
