@@ -70,6 +70,41 @@ platform :android do
     )
   end
 
+  desc "Create a mock build"
+    lane :create_mock do
+      clean()
+      set_up_env_vars(env:"mock")
+      gradle(task: "bundleMockRelease")
+      gradle(task: "assembleMockRelease")
+      validate_play_store_json_key(json_key: '../firebase_credentials_dev.json')
+
+      output_path = "../build/app/outputs/flutter-apk/app-mock-release.apk"
+
+           release = firebase_app_distribution(
+                app: ENV["FIREBASE_ANDROID_MOCK_APP_ID"],
+                android_artifact_path: output_path,
+                android_artifact_type: "APK",
+                release_notes: "Test App",
+                firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+                service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
+                groups: "AskLora, Internal",
+                debug: true
+           )
+
+          slack(
+                slack_url: ENV["SLACK_HOOK_URL"],
+                message: "💈 📱 Asklora Mock Android App successfully released!👯🤺",
+                success: true,
+                payload: {
+                  "Build Date" => release[:createTime],
+                  "🌎 Environment" => "Mock",
+                  "📥 Download" => release[:firebaseConsoleUri],
+                  "Build Version" => release[:displayVersion],
+                },
+                default_payloads: [:git_branch, :git_author],
+          )
+  end
+
   desc "Create a staging build"
   lane :create_staging do
     clean()

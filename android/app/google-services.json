@@ -31,10 +31,10 @@
               "client_type": 3
             },
             {
-              "client_id": "741527391541-l64arqb9qb1k50kvnhkr1p7n7ses1j2k.apps.googleusercontent.com",
+              "client_id": "741527391541-cg62jlg8epai4fbrsvka5luricgvdfcu.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "ai.asklora.app.dev"
+                "bundle_id": "ai.asklora.app.stag"
               }
             }
           ]
@@ -67,10 +67,46 @@
               "client_type": 3
             },
             {
-              "client_id": "741527391541-l64arqb9qb1k50kvnhkr1p7n7ses1j2k.apps.googleusercontent.com",
+              "client_id": "741527391541-cg62jlg8epai4fbrsvka5luricgvdfcu.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "ai.asklora.app.dev"
+                "bundle_id": "ai.asklora.app.stag"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741527391541:android:95117c95f9fe2f112c507c",
+        "android_client_info": {
+          "package_name": "ai.asklora.app.mock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "741527391541-b9ihd2bts8492aeqna5411eh159tcfml.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKaKrYNo0la3gVFNqmHlti0UMYdwBX-Ug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "741527391541-b9ihd2bts8492aeqna5411eh159tcfml.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "741527391541-cg62jlg8epai4fbrsvka5luricgvdfcu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ai.asklora.app.stag"
               }
             }
           ]
@@ -103,10 +139,10 @@
               "client_type": 3
             },
             {
-              "client_id": "741527391541-l64arqb9qb1k50kvnhkr1p7n7ses1j2k.apps.googleusercontent.com",
+              "client_id": "741527391541-cg62jlg8epai4fbrsvka5luricgvdfcu.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "ai.asklora.app.dev"
+                "bundle_id": "ai.asklora.app.stag"
               }
             }
           ]
