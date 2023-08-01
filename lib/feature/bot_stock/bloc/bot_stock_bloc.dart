@@ -15,10 +15,10 @@ part 'bot_stock_event.dart';
 part 'bot_stock_state.dart';
 
 class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
-  BotStockBloc(
-      {required BotStockRepository botStockRepository,
-      required TransactionRepository transactionRepository})
-      : _botStockRepository = botStockRepository,
+  BotStockBloc({
+    required BotStockRepository botStockRepository,
+    required TransactionRepository transactionRepository,
+  })  : _botStockRepository = botStockRepository,
         _transactionRepository = transactionRepository,
         super(const BotStockState()) {
     on<FetchBotRecommendation>(_onFetchBotRecommendation);
@@ -67,19 +67,23 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     emit(state.copyWith(botDetailResponse: BaseResponse.loading()));
     final data =
         await _botStockRepository.fetchBotDetail(event.ticker, event.botId);
+
     if (!event.isFreeBot) {
       final balanceResponse = await _transactionRepository.fetchLedgerBalance();
       if (balanceResponse.state == ResponseState.success) {
         emit(state.copyWith(
-            buyingPower: balanceResponse.data!.buyingPower,
-            botDetailResponse: data));
+          buyingPower: balanceResponse.data!.buyingPower,
+          botDetailResponse: data,
+        ));
       } else {
         emit(state.copyWith(
             botDetailResponse:
                 BaseResponse.error(message: 'Error when fetching balance')));
       }
     } else {
-      emit(state.copyWith(botDetailResponse: data));
+      emit(state.copyWith(
+        botDetailResponse: data,
+      ));
     }
   }
 

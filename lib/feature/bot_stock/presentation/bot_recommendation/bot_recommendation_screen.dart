@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
@@ -18,6 +19,9 @@ import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/shimmer.dart';
+import '../../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
+import '../../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
+import '../../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../../generated/l10n.dart';
 import '../../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../../tabs/bloc/tab_screen_bloc.dart';
@@ -52,51 +56,106 @@ class BotRecommendationScreen extends StatelessWidget {
         backgroundColor: AskLoraColors.white,
         body: Padding(
           padding: EdgeInsets.only(top: enableBackNavigation ? 70 : 20),
-          child: BlocBuilder<BotStockBloc, BotStockState>(
+          child: BlocConsumer<BotStockBloc, BotStockState>(
+            listenWhen: (_, current) =>
+                current.botRecommendationResponse.state ==
+                ResponseState.success,
+            listener: (context, state) => context
+                .read<TutorialBloc>()
+                .add(InitiateBotRecommendationTutorial()),
             buildWhen: (previous, current) =>
                 previous.botRecommendationResponse !=
                 current.botRecommendationResponse,
             builder: (context, state) {
-              return CustomLayoutWithBlurPopUp(
-                loraPopUpMessageModel: LoraPopUpMessageModel(
-                  title: S.of(context).errorGettingInformationTitle,
-                  subTitle: S
-                      .of(context)
-                      .errorGettingInformationInvestmentDetailSubTitle,
-                  primaryButtonLabel: S.of(context).buttonReloadPage,
-                  onSecondaryButtonTap: () => Navigator.pop(context),
-                  onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
-                      context: context,
-                      target: UserJourney.freeBotStock,
-                      onTrueCallback: () => context
-                          .read<BotStockBloc>()
-                          .add(FetchBotRecommendation()),
-                      onFalseCallback: () => context
-                          .read<BotStockBloc>()
-                          .add(FetchFreeBotRecommendation())),
-                ),
-                showPopUp: state.botRecommendationResponse.state ==
-                    ResponseState.error,
-                content: Column(
-                  children: [
-                    _header(
+              return BlocListener<TutorialBloc, TutorialState>(
+                listenWhen: (_, current) => current.isBotRecommendationTutorial,
+                listener: (context, tutorialState) =>
+                    ShowCaseWidget.of(context).startShowCase([
+                  TutorialJourney.botRecommendationList,
+                ]),
+                child: CustomLayoutWithBlurPopUp(
+                  loraPopUpMessageModel: LoraPopUpMessageModel(
+                    title: S.of(context).errorGettingInformationTitle,
+                    subTitle: S
+                        .of(context)
+                        .errorGettingInformationInvestmentDetailSubTitle,
+                    primaryButtonLabel: S.of(context).buttonReloadPage,
+                    onSecondaryButtonTap: () => Navigator.pop(context),
+                    onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
                         context: context,
-                        userJourney: context.read<AppBloc>().state.userJourney,
-                        updated: state.botRecommendationResponse.data
-                                ?.updatedFormatted ??
-                            '-'),
-                    Expanded(
-                      child: ListView(
-                        padding: const EdgeInsets.only(bottom: 35),
-                        children: [
-                          BotRecommendationList(
-                            verticalMargin: 14,
-                            botStockState: state,
+                        target: UserJourney.freeBotStock,
+                        onTrueCallback: () => context
+                            .read<BotStockBloc>()
+                            .add(FetchBotRecommendation()),
+                        onFalseCallback: () => context
+                            .read<BotStockBloc>()
+                            .add(FetchFreeBotRecommendation())),
+                  ),
+                  showPopUp: state.botRecommendationResponse.state ==
+                      ResponseState.error,
+                  content: Column(
+                    children: [
+                      _header(
+                          context: context,
+                          userJourney:
+                              context.read<AppBloc>().state.userJourney,
+                          updated: state.botRecommendationResponse.data
+                                  ?.updatedFormatted ??
+                              '-'),
+                      Expanded(
+                        child: CustomShowcaseView(
+                          tooltipPosition: TooltipPosition.top,
+                          tutorialKey: TutorialJourney.botRecommendationList,
+                          onToolTipClick: () {
+                            ShowCaseWidget.of(context).dismiss();
+                            context
+                                .read<TutorialBloc>()
+                                .add(BotRecommendationTutorialFinished());
+                          },
+                          tooltipWidget: Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                    text: S
+                                        .of(context)
+                                        .botRecommendationTutorialDesc1,
+                                    style: AskLoraTextStyles.body1),
+                                TextSpan(
+                                    text: S
+                                        .of(context)
+                                        .botRecommendationTutorialDesc2,
+                                    style: AskLoraTextStyles.subtitle2),
+                                TextSpan(
+                                    text: S
+                                        .of(context)
+                                        .botRecommendationTutorialDesc3,
+                                    style: AskLoraTextStyles.body1),
+                                TextSpan(
+                                    text: S
+                                        .of(context)
+                                        .botRecommendationTutorialDesc4,
+                                    style: AskLoraTextStyles.subtitle2),
+                                TextSpan(
+                                    text: S
+                                        .of(context)
+                                        .botRecommendationTutorialDesc5,
+                                    style: AskLoraTextStyles.body1),
+                              ],
+                            ),
                           ),
-                        ],
+                          child: ListView(
+                            padding: const EdgeInsets.only(bottom: 35),
+                            children: [
+                              BotRecommendationList(
+                                verticalMargin: 14,
+                                botStockState: state,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },

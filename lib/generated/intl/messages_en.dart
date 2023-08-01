@@ -101,6 +101,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Asklora Customer Agreement.pdf"),
         "about": MessageLookupByLibrary.simpleMessage("About"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("About Asklora"),
+        "aboutYourInvestment": MessageLookupByLibrary.simpleMessage(
+            "about your investment, tap this icon to summon your "),
         "acceptedSignature":
             MessageLookupByLibrary.simpleMessage("Accepted signature(s):"),
         "accountInformation":
@@ -128,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "almostFinished":
             MessageLookupByLibrary.simpleMessage("Almost finished!"),
+        "anyQuestion": MessageLookupByLibrary.simpleMessage("any questions "),
         "architectureEngineering":
             MessageLookupByLibrary.simpleMessage("Architecture / Engineering"),
         "artDesign": MessageLookupByLibrary.simpleMessage("Arts / Design"),
@@ -168,6 +171,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!"),
         "botRecommendationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Investments tailored  for you"),
+        "botRecommendationTutorialDesc1":
+            MessageLookupByLibrary.simpleMessage("This is the "),
+        "botRecommendationTutorialDesc2": MessageLookupByLibrary.simpleMessage(
+            "Botstock recommendations screen. "),
+        "botRecommendationTutorialDesc3":
+            MessageLookupByLibrary.simpleMessage("press "),
+        "botRecommendationTutorialDesc4":
+            MessageLookupByLibrary.simpleMessage("\'Trade\' "),
+        "botRecommendationTutorialDesc5": MessageLookupByLibrary.simpleMessage(
+            "on a Botstock that catches your eye!"),
         "botStockDoScreenPoint1":
             MessageLookupByLibrary.simpleMessage("Go for occasional big wins"),
         "botStockDoScreenPoint2":
@@ -182,6 +195,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that I will manage for you!"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
+        "botStocksDetails": MessageLookupByLibrary.simpleMessage(
+            "Botstock’s details and estimated returns."),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
             MessageLookupByLibrary.simpleMessage(
                 "Est. to be approved by 2 working days."),
@@ -301,7 +316,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm And Continue"),
         "confirmNewPassword":
             MessageLookupByLibrary.simpleMessage("Confirm New Password"),
-        "confirmTrade": MessageLookupByLibrary.simpleMessage("Confirm Trade"),
+        "confirmTrade":
+            MessageLookupByLibrary.simpleMessage(" \"Confirm Trade\""),
         "construction": MessageLookupByLibrary.simpleMessage("Construction"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "continueAccountOpening":
@@ -446,7 +462,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftBotStockMessageScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("See my recommendations"),
         "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "Every trade is unique, each time you invest with a new Botstock, I\'ll ask you some investment style questions to tailor new recommendations! "),
+            "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! "),
         "giftBotStockWelcomeScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
         "giftBotStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
@@ -463,6 +479,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "halfWayThere": MessageLookupByLibrary.simpleMessage("Halfway there!"),
         "headquarters": MessageLookupByLibrary.simpleMessage("Headquarters"),
         "healthcare": MessageLookupByLibrary.simpleMessage("Healthcare"),
+        "hereYouCanFind":
+            MessageLookupByLibrary.simpleMessage("Here, you can find the "),
         "hkId": MessageLookupByLibrary.simpleMessage("HKID"),
         "hkIdNumber": MessageLookupByLibrary.simpleMessage("HKID Number"),
         "hkPhoneNo": MessageLookupByLibrary.simpleMessage("HK Phone Number"),
@@ -483,6 +501,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "I have read, understood, and agree to be bound by LORA Advisors Limited’s account terms, and all other terms, disclosures and disclaimers applicable to me."),
         "iUnderstandSigningAgreement": MessageLookupByLibrary.simpleMessage(
             "I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Customer Agreement."),
+        "ifYouveGot": MessageLookupByLibrary.simpleMessage("If you’ve got "),
         "inApp": MessageLookupByLibrary.simpleMessage("In-App"),
         "industry": MessageLookupByLibrary.simpleMessage("Industry"),
         "inputDepositAmount":
@@ -636,6 +655,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Payment Details"),
         "pending": MessageLookupByLibrary.simpleMessage("Pending"),
         "performance": MessageLookupByLibrary.simpleMessage("Performance"),
+        "personalAIAssistant": MessageLookupByLibrary.simpleMessage(
+            "personal AI assistant Asklora! "),
         "personalCareService":
             MessageLookupByLibrary.simpleMessage("Personal Care / Service"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
@@ -805,6 +826,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "retired": MessageLookupByLibrary.simpleMessage("Retired"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
+        "reviewYourTradeSummary": MessageLookupByLibrary.simpleMessage(
+            "Review your trade summary and hit "),
         "riskDisclosureStatement":
             MessageLookupByLibrary.simpleMessage("Risk Disclosure Statement"),
         "riskDisclosureStatementAcknowledgement":
@@ -820,6 +843,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("See My Recommendations"),
         "selfEmployed": MessageLookupByLibrary.simpleMessage("Self-Employed"),
         "sell": MessageLookupByLibrary.simpleMessage("Sell"),
+        "sendIcon": MessageLookupByLibrary.simpleMessage("send icon "),
         "sendOtp": MessageLookupByLibrary.simpleMessage("SEND OTP"),
         "setUpFinancialProfile":
             MessageLookupByLibrary.simpleMessage("Set Up Financial Profile"),
@@ -835,6 +859,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Are you sure you want to sign out ?"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage(
             "Start your AI revolution with\nAsklora. Go crush it."),
+        "simplyTypeAQuestion": MessageLookupByLibrary.simpleMessage(
+            "Simply type a question and tap the "),
         "sourceOfWealth":
             MessageLookupByLibrary.simpleMessage("Source of Wealth"),
         "startABotstock":
@@ -920,9 +946,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "theProofOfRemittanceShouldShowYourBankAccount":
             MessageLookupByLibrary.simpleMessage(
                 "The proof of remittance should show your bank account number, full name, and amount."),
+        "thisInteractiveGraph": MessageLookupByLibrary.simpleMessage(
+            "This interactive graph shows the Botstock’s past "),
         "timeCompleted": MessageLookupByLibrary.simpleMessage("Time Completed"),
         "timeRequested": MessageLookupByLibrary.simpleMessage("Time Requested"),
         "to": MessageLookupByLibrary.simpleMessage("To"),
+        "toExecuteIt": MessageLookupByLibrary.simpleMessage(" to execute it!"),
+        "toGiveYou": MessageLookupByLibrary.simpleMessage(
+            "to give you a better idea of its trading potential!"),
+        "toStartAConversation": MessageLookupByLibrary.simpleMessage(
+            "to start a conversation. Tap the icon again to dismiss Asklora"),
         "tokenInvalid": MessageLookupByLibrary.simpleMessage(
             "Token is invalid or expired."),
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
@@ -977,6 +1010,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferTo": MessageLookupByLibrary.simpleMessage("Transfer to"),
         "transportationMaterialMoving": MessageLookupByLibrary.simpleMessage(
             "Transportation and Material Moving"),
+        "twoWeekPerformance":
+            MessageLookupByLibrary.simpleMessage("2 weeks performance "),
         "unEmployed": MessageLookupByLibrary.simpleMessage("Unemployed"),
         "unableToProcessDepositSubTitle": MessageLookupByLibrary.simpleMessage(
             "We\'re having some trouble processing your deposit request. Please try again"),
