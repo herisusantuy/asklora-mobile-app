@@ -95,6 +95,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Asklora 客戶協議.pdf"),
         "about": MessageLookupByLibrary.simpleMessage("關於"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("關於 Asklora"),
+        "aboutYourInvestment":
+            MessageLookupByLibrary.simpleMessage("關於投資嘅問題，可以點擊此處 "),
         "acceptedSignature":
             MessageLookupByLibrary.simpleMessage("Accepted signature(s):"),
         "accountInformation": MessageLookupByLibrary.simpleMessage("帳戶資訊"),
@@ -119,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("想知Asklora有咩投資秘技？"),
         "allSettings": MessageLookupByLibrary.simpleMessage("設定"),
         "almostFinished": MessageLookupByLibrary.simpleMessage("馬上就好"),
+        "anyQuestion": MessageLookupByLibrary.simpleMessage("任何"),
         "architectureEngineering":
             MessageLookupByLibrary.simpleMessage("Architecture / Engineering"),
         "artDesign": MessageLookupByLibrary.simpleMessage("Arts / Design"),
@@ -152,6 +155,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!"),
         "botRecommendationScreenTitle":
             MessageLookupByLibrary.simpleMessage("最夾你嘅投資風格"),
+        "botRecommendationTutorialDesc1":
+            MessageLookupByLibrary.simpleMessage("This is the "),
+        "botRecommendationTutorialDesc2": MessageLookupByLibrary.simpleMessage(
+            "Botstock recommendations screen. "),
+        "botRecommendationTutorialDesc3":
+            MessageLookupByLibrary.simpleMessage("press "),
+        "botRecommendationTutorialDesc4":
+            MessageLookupByLibrary.simpleMessage("\'Trade\' "),
+        "botRecommendationTutorialDesc5": MessageLookupByLibrary.simpleMessage(
+            "on a Botstock that catches your eye!"),
         "botStockDoScreenPoint1":
             MessageLookupByLibrary.simpleMessage("嘗試獲取較大收益"),
         "botStockDoScreenPoint2":
@@ -164,6 +177,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("明白！咁Bot可以做啲咩？"),
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Botstock 由一隻股票及一個 Bot 組成。 每一個 Bot 各代表一個獨一無二的 AI 投資策略。而Lora會幫你管理策略。"),
+        "botStocksDetails":
+            MessageLookupByLibrary.simpleMessage("Botstock 嘅詳情同預計回報。 "),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
             MessageLookupByLibrary.simpleMessage("預計批核時間為 2 個工作天。"),
         "botTradeBottomSheetAccountNotYetApprovedTitle":
@@ -258,7 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Computer / Information Technology"),
         "confirmAndContinue": MessageLookupByLibrary.simpleMessage("確認並繼續"),
         "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
-        "confirmTrade": MessageLookupByLibrary.simpleMessage("確認買入"),
+        "confirmTrade": MessageLookupByLibrary.simpleMessage(" \"確認買入\""),
         "construction": MessageLookupByLibrary.simpleMessage("Construction"),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
         "continueAccountOpening":
@@ -377,6 +392,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "halfWayThere": MessageLookupByLibrary.simpleMessage("進展順利"),
         "headquarters": MessageLookupByLibrary.simpleMessage("總部地點"),
         "healthcare": MessageLookupByLibrary.simpleMessage("Healthcare"),
+        "hereYouCanFind": MessageLookupByLibrary.simpleMessage("你可以係度搵到 "),
         "hkId": MessageLookupByLibrary.simpleMessage("香港身份證"),
         "hkIdNumber": MessageLookupByLibrary.simpleMessage("香港身份證號碼"),
         "hkPhoneNo": MessageLookupByLibrary.simpleMessage("香港電話號碼"),
@@ -396,6 +412,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "我已細閱、理解及同意受 LORA Advisors Limited 戶口條款約束，引用的所有其他條款， 披露及免責聲明對我同樣適用。"),
         "iUnderstandSigningAgreement": MessageLookupByLibrary.simpleMessage(
             "我理解我以電子方式簽署協議，我的電子簽署會與親筆簽署及提交申請協議同樣有效。"),
+        "ifYouveGot": MessageLookupByLibrary.simpleMessage("如果你有"),
         "inApp": MessageLookupByLibrary.simpleMessage("In-app通知"),
         "industry": MessageLookupByLibrary.simpleMessage("行業"),
         "inputDepositAmount": MessageLookupByLibrary.simpleMessage("輸入金額"),
@@ -523,6 +540,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
         "pending": MessageLookupByLibrary.simpleMessage("處理中"),
         "performance": MessageLookupByLibrary.simpleMessage("表現"),
+        "personalAIAssistant":
+            MessageLookupByLibrary.simpleMessage("問你嘅AI助手Asklora! "),
         "personalCareService":
             MessageLookupByLibrary.simpleMessage("Personal Care / Service"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("個人資料"),
@@ -662,6 +681,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "retired": MessageLookupByLibrary.simpleMessage("退休"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶號碼）。不過，我們亦可能會因核實交易，向你要求更多附加資料。"),
+        "reviewYourTradeSummary":
+            MessageLookupByLibrary.simpleMessage("查看你嘅交易摘要，點擊 "),
         "riskDisclosureStatement":
             MessageLookupByLibrary.simpleMessage("Risk Disclosure Statement"),
         "riskDisclosureStatementAcknowledgement":
@@ -677,6 +698,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("See My Recommendations"),
         "selfEmployed": MessageLookupByLibrary.simpleMessage("自僱"),
         "sell": MessageLookupByLibrary.simpleMessage("賣出"),
+        "sendIcon": MessageLookupByLibrary.simpleMessage("send icon "),
         "sendOtp": MessageLookupByLibrary.simpleMessage("發送 OTP"),
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
         "setupPersonalInfo": MessageLookupByLibrary.simpleMessage("設定個人資料"),
@@ -688,6 +710,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(" 真係要登出？"),
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage(" 踏入AI新世代，\n展開AI投資之旅"),
+        "simplyTypeAQuestion": MessageLookupByLibrary.simpleMessage(
+            "Simply type a question and tap the "),
         "sourceOfWealth": MessageLookupByLibrary.simpleMessage("財富來源"),
         "startABotstock": MessageLookupByLibrary.simpleMessage("開始交易"),
         "startAgain": MessageLookupByLibrary.simpleMessage("Start Again"),
@@ -755,9 +779,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
         "theProofOfRemittanceShouldShowYourBankAccount":
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
+        "thisInteractiveGraph":
+            MessageLookupByLibrary.simpleMessage("你可以係下面見到Botstock最近"),
         "timeCompleted": MessageLookupByLibrary.simpleMessage("完成時間"),
         "timeRequested": MessageLookupByLibrary.simpleMessage("請求時間"),
         "to": MessageLookupByLibrary.simpleMessage("至"),
+        "toExecuteIt": MessageLookupByLibrary.simpleMessage(" 就可以立即執行指示！"),
+        "toGiveYou":
+            MessageLookupByLibrary.simpleMessage("嘅表現，希望幫到你理解Botstock係點樣交易！"),
+        "toStartAConversation": MessageLookupByLibrary.simpleMessage(
+            "to start a conversation. Tap the icon again to dismiss Asklora"),
         "tokenInvalid": MessageLookupByLibrary.simpleMessage(
             "Token is invalid or expired."),
         "tooltipBotDetailsEstMaxLoss":
@@ -808,6 +839,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferTo": MessageLookupByLibrary.simpleMessage("轉賬至"),
         "transportationMaterialMoving": MessageLookupByLibrary.simpleMessage(
             "Transportation and Material Moving"),
+        "twoWeekPerformance": MessageLookupByLibrary.simpleMessage("兩個星期"),
         "unEmployed": MessageLookupByLibrary.simpleMessage("失業"),
         "understood": MessageLookupByLibrary.simpleMessage("明白！"),
         "unknown": MessageLookupByLibrary.simpleMessage("Unknown"),

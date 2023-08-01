@@ -41,13 +41,17 @@ class TabScreenState extends Equatable {
   });
 
   @override
-  List<Object> get props =>
-      [currentTabPage, aiPageSelected, tabScreenBackState];
+  List<Object?> get props => [
+        currentTabPage,
+        aiPageSelected,
+        tabScreenBackState,
+      ];
 
   TabScreenState copyWith({
     TabPage? currentTabPage,
     bool? aiPageSelected,
     TabScreenBackState? tabScreenBackState,
+    List<GlobalKey>? tutorialKeys,
   }) {
     return TabScreenState(
       currentTabPage: currentTabPage ?? this.currentTabPage,

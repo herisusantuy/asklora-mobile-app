@@ -33,13 +33,45 @@ class Tabs extends StatelessWidget {
                         active: state.currentTabPage == TabPage.forYou &&
                             !state.aiPageSelected),
                     if (canTrade)
-                      _tabSvg(
-                          onTap: () => context
+                      CustomShowcaseView(
+                        tutorialKey: TutorialJourney.chatLoraTab,
+                        onToolTipClick: () {
+                          context
                               .read<TabScreenBloc>()
-                              .add(const OnAiOverlayClick()),
-                          iconAsset: 'bottom_nav_asklora_ai',
-                          activeIconAsset: 'bottom_nav_asklora_ai_selected',
-                          active: state.aiPageSelected),
+                              .add(const OnAiOverlayClick());
+
+                          ///this delay is necessary to wait for AI page to be opened
+                          Future.delayed(const Duration(milliseconds: 350),
+                              () => ShowCaseWidget.of(context).next());
+                        },
+                        tooltipPosition: TooltipPosition.top,
+                        targetBorderRadius: BorderRadius.circular(35),
+                        tooltipWidget: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: S.of(context).ifYouveGot,
+                                  style: AskLoraTextStyles.body1),
+                              TextSpan(
+                                  text: S.of(context).anyQuestion,
+                                  style: AskLoraTextStyles.subtitle2),
+                              TextSpan(
+                                  text: S.of(context).aboutYourInvestment,
+                                  style: AskLoraTextStyles.body1),
+                              TextSpan(
+                                  text: S.of(context).personalAIAssistant,
+                                  style: AskLoraTextStyles.subtitle2),
+                            ],
+                          ),
+                        ),
+                        child: _tabSvg(
+                            onTap: () => context
+                                .read<TabScreenBloc>()
+                                .add(const OnAiOverlayClick()),
+                            iconAsset: 'bottom_nav_asklora_ai',
+                            activeIconAsset: 'bottom_nav_asklora_ai_selected',
+                            active: state.aiPageSelected),
+                      ),
                     _tabSvg(
                         onTap: () => context
                             .read<TabScreenBloc>()
@@ -61,7 +93,7 @@ class Tabs extends StatelessWidget {
           required String iconAsset,
           required String activeIconAsset,
           bool active = false,
-          double clickAreaSize = 36}) =>
+          double clickAreaSize = 40}) =>
       GestureDetector(
         onTap: onTap,
         child: Container(
