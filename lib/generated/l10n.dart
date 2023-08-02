@@ -3123,10 +3123,10 @@ class S {
     );
   }
 
-  /// ` "Confirm Trade"`
+  /// ` Confirm Trade`
   String get confirmTrade {
     return Intl.message(
-      ' "Confirm Trade"',
+      ' Confirm Trade',
       name: 'confirmTrade',
       desc: '',
       args: [],
