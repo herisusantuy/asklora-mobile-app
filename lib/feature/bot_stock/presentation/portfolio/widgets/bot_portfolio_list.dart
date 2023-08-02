@@ -14,13 +14,7 @@ class BotPortfolioList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        _header(context),
-        const SizedBox(
-          height: 10,
-        ),
-        _botList
-      ],
+      children: [_header(context), _botList],
     );
   }
 

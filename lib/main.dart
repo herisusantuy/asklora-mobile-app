@@ -33,7 +33,7 @@ main() async {
   if (FeatureFlags.enableSentry) {
     await SentryFlutter.init((options) {
       options.dsn =
-          'https://7d102597b0f949038c91ccd163d0506e@sentry.api.asklora.ai/3';
+          'https://da231b1c031b4ad4bdba03524933a47f@sentry.asklora.ai/3';
       options.tracesSampleRate = 0.3;
       options.sampleRate = 0.3;
     }, appRunner: () => runApp(AppConfigWidget(child: const App())));

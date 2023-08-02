@@ -17,12 +17,16 @@ class PortfolioDetailsRequest extends BaseQueryRequest {
   @JsonKey(name: 'bot_type')
   final String botType;
 
+  @JsonKey(name: 'ticker_symbol')
+  final String tickerSymbol;
+
   const PortfolioDetailsRequest.empty()
       : userId = '',
         ticker = '',
         username = '',
         platform = '',
-        botType = '';
+        botType = '',
+        tickerSymbol = '';
 
   const PortfolioDetailsRequest(
       {required String input,
@@ -30,7 +34,8 @@ class PortfolioDetailsRequest extends BaseQueryRequest {
       required this.ticker,
       required this.username,
       required this.platform,
-      required this.botType})
+      required this.botType,
+      required this.tickerSymbol})
       : super(input: input);
 
   Map<String, String> get params => {
@@ -40,6 +45,7 @@ class PortfolioDetailsRequest extends BaseQueryRequest {
         'username': username,
         'platform': platform,
         'bot_type': botType,
+        'ticker_symbol': tickerSymbol,
       };
 
   factory PortfolioDetailsRequest.fromJson(Map<String, dynamic> json) =>
@@ -48,5 +54,6 @@ class PortfolioDetailsRequest extends BaseQueryRequest {
   Map<String, dynamic> toJson() => _$PortfolioDetailsRequestToJson(this);
 
   @override
-  List<Object> get props => [input, userId, username, platform, botType];
+  List<Object> get props =>
+      [input, userId, username, platform, botType, tickerSymbol];
 }

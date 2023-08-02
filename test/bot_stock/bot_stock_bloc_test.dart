@@ -96,8 +96,9 @@ void main() async {
 
     setUp(() async {
       botStockBloc = BotStockBloc(
-          botStockRepository: botStockRepository,
-          transactionRepository: transactionRepository);
+        botStockRepository: botStockRepository,
+        transactionRepository: transactionRepository,
+      );
     });
 
     test('Bot Stock Bloc init state response should be default one', () {
@@ -208,10 +209,13 @@ void main() async {
         act: (bloc) => bloc.add(const FetchBotDetail(
             ticker: 'AAPL', botId: 'abc', isFreeBot: false)),
         expect: () => {
-              BotStockState(botDetailResponse: BaseResponse.loading()),
               BotStockState(
-                  botDetailResponse: BaseResponse.error(
-                      message: 'Error when fetching balance'))
+                botDetailResponse: BaseResponse.loading(),
+              ),
+              BotStockState(
+                botDetailResponse:
+                    BaseResponse.error(message: 'Error when fetching balance'),
+              )
             });
 
     blocTest<BotStockBloc, BotStockState>(

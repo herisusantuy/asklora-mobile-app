@@ -30,7 +30,7 @@ enum AiThemeType {
       inChatBubbleWidgetColor: AskLoraColors.whiteAlpha35,
       loraThingkingWidgetColor: AskLoraColors.whiteAlpha20,
       outChatBubbleWidgetColor: AskLoraColors.whiteAlpha15,
-      scrambledTextColor: AskLoraColors.whiteAlpha05);
+      scrambledTextColor: AskLoraColors.whiteAlpha50);
 
   final String backgroundImageAsset;
   final Color baseBackgroundColor;
