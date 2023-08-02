@@ -26,7 +26,7 @@ class TabPages extends StatelessWidget {
                     return _navigatorPage(PortfolioScreen.route,
                         arguments: context);
                   case TabPage.none:
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                 }
               },
             ),
