@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:showcaseview/showcaseview.dart';
 
+import '../../../../../../core/presentation/bot_badge/bot_badge.dart';
+import '../../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
 import '../../../../../../core/presentation/column_text/pair_column_text.dart';
 import '../../../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
@@ -10,9 +13,11 @@ import '../../../../../../core/presentation/tutorial/custom_show_case_view.dart'
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/utils/extensions.dart';
+import '../../../../../../core/utils/feature_flags.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../chart/presentation/chart_animation.dart';
+import '../../../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../../domain/bot_recommendation_detail_model.dart';
 import '../../../../domain/bot_recommendation_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
@@ -20,7 +25,6 @@ import '../../../widgets/custom_detail_expansion_tile.dart';
 import '../../../widgets/iex_data_provider_link.dart';
 import 'bot_price_level_indicator.dart';
 import 'toggleable_price_text.dart';
-import '../../../../../../core/utils/feature_flags.dart';
 
 class BotRecommendationDetailContent extends StatelessWidget {
   final BotRecommendationModel botRecommendationModel;
@@ -41,12 +45,89 @@ class BotRecommendationDetailContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _botDetailsExpansionTile(context),
+        BotBadge(botType: botType, margin: EdgeInsets.zero),
+        if (!FeatureFlags.isMockApp)
+          _botDetailsExpansionTile(context)
+        else
+          _botDetails(context),
         _detailedInformation(context),
         if (!FeatureFlags.isMockApp) _performanceWidget(context),
       ],
     );
   }
+
+  Widget _botDetails(BuildContext context) => Container(
+        padding: AppValues.screenHorizontalPadding.copyWith(top: 15),
+        margin: const EdgeInsets.only(bottom: 60),
+        decoration: const BoxDecoration(color: AskLoraColors.whiteSmoke),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            CustomTextNew('${botType.upperCaseName} Bot',
+                style: AskLoraTextStyles.h5
+                    .copyWith(color: AskLoraColors.charcoal)),
+            CustomTextNew(
+              botDetailModel?.botInfo.botDescription.detail ?? 'NA',
+              style: AskLoraTextStyles.body3
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomTextNew(
+                        '${botDetailModel?.stockInfo.tickerName}(${botDetailModel?.stockInfo.symbol})',
+                        style: AskLoraTextStyles.h5
+                            .copyWith(color: AskLoraColors.charcoal),
+                        maxLines: 2,
+                      ),
+                      CustomTextNew(
+                        '${S.of(context).prevClose} ${botDetailModel?.prevCloseDateFormatted ?? 'NA'}',
+                        style: AskLoraTextStyles.body2
+                            .copyWith(color: AskLoraColors.charcoal),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    CustomTextNew(
+                      (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
+                      style: AskLoraTextStyles.h5
+                          .copyWith(color: AskLoraColors.charcoal),
+                    ),
+                    ToggleablePriceText(
+                      percentDifference: getPercentDifference(),
+                      priceDifference: getPriceDifference(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const IexDataProviderLink(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 40),
+              child: Center(
+                child: SizedBox(
+                    width: 169,
+                    child: PrimaryButton(
+                        label: 'Tell Me More',
+                        onTap: () => context
+                            .read<TabScreenBloc>()
+                            .add(const OnAiOverlayClick()),
+                        buttonPrimaryType: ButtonPrimaryType.solidGreen)),
+              ),
+            )
+          ],
+        ),
+      );
 
   Widget _botDetailsExpansionTile(BuildContext context) => Column(
         children: [

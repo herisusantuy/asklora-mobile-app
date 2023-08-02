@@ -117,9 +117,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                   showPopUp:
                       state.botDetailResponse.state == ResponseState.error,
                   content: BotStockForm(
-                    useHeader: true,
-                    title:
-                        '${botType.upperCaseName} ${botRecommendationModel.tickerSymbol}',
+                    enableBackNavigation: false,
                     padding: EdgeInsets.zero,
                     content: BotRecommendationDetailContent(
                       botRecommendationModel: botRecommendationModel,
