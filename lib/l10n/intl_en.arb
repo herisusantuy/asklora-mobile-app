@@ -798,6 +798,7 @@
     }
   },
   "ppiGotIt": "Got It",
+  "botValues": "Bot Values",
   "botRecommendationTutorialDesc1": "This is the ",
   "botRecommendationTutorialDesc2": "Botstock recommendations screen. ",
   "botRecommendationTutorialDesc3": "press ",

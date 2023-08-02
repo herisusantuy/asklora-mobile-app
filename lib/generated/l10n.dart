@@ -5706,6 +5706,16 @@ class S {
     );
   }
 
+  /// `Bot Values`
+  String get botValues {
+    return Intl.message(
+      'Bot Values',
+      name: 'botValues',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `This is the `
   String get botRecommendationTutorialDesc1 {
     return Intl.message(
