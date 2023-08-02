@@ -1,14 +1,14 @@
 part of '../tab_screen.dart';
 
 class Tabs extends StatelessWidget {
+  final BackgroundImageType backgroundImageType;
   final bool canTrade;
 
-  const Tabs({required this.canTrade, super.key});
+  const Tabs(
+      {required this.canTrade, required this.backgroundImageType, super.key});
 
   @override
   Widget build(BuildContext context) {
-    final BackgroundImageType backgroundImageType =
-        context.read<TabThemeBloc>().state.backgroundImageType;
     return KeyboardVisibilityBuilder(
       builder: (context, isKeyboardVisible) => !isKeyboardVisible
           ? Padding(

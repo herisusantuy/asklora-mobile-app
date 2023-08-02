@@ -65,7 +65,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
             botType:
                 BotType.findByValue(fetchBotIntro.arguments['botType']).name,
             tickerSymbol: fetchBotIntro.arguments['symbol'],
-            investmentHorizon: fetchBotIntro.arguments['duration']));
+            investmentHorizon: fetchBotIntro.arguments['duration'],
+            ticker: fetchBotIntro.arguments['ticker']));
 
     ///remove loading
     if (_tempIntroResponse != null) {
@@ -106,7 +107,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
             botType:
                 BotType.findByValue(fetchBotEarnings.arguments['botType']).name,
             tickerSymbol: fetchBotEarnings.arguments['symbol'],
-            investmentHorizon: fetchBotEarnings.arguments['duration']));
+            investmentHorizon: fetchBotEarnings.arguments['duration'],
+            ticker: fetchBotEarnings.arguments['ticker']));
 
     ///remove loading
     if (_tempIntroResponse != null) {
@@ -146,7 +148,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     emit(state.copyWith(conversations: tempList));
 
     var welcomeStarterResponse = await _loraGptRepository.welcomeStarter(
-        params: state.getGeneralChatRequest(query: ''));
+        params: state.getLandingPageIntroRequest);
 
     ///remove loading
     if (_tempIntroResponse != null) {
@@ -183,7 +185,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     bool isTyping = false;
 
     var welcomeNewsResponse = await _loraGptRepository.welcomeNews(
-        params: state.getGeneralChatRequest(query: ''));
+        params: state.getLandingPageIntroRequest);
 
     ///remove loading
     if (_tempIntroResponse != null) {
@@ -309,7 +311,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       PortfolioDetailsRequest request = state.getPortfolioDetailsRequest(
           query: query,
           botType: subPage.arguments['botType'],
-          ticker: subPage.arguments['symbol']);
+          ticker: subPage.arguments['ticker'],
+          tickerSymbol: subPage.arguments['symbol']);
 
       emit(
         state.copyWith(
