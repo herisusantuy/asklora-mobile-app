@@ -124,6 +124,7 @@ class Tabs extends StatelessWidget {
           {required VoidCallback onTap,
           required String iconAsset,
           required String activeIconAsset,
+          Color? filledColor,
           bool active = false,
           double clickAreaSize = 40}) =>
       GestureDetector(
