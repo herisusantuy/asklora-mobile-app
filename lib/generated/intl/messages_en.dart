@@ -317,8 +317,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm And Continue"),
         "confirmNewPassword":
             MessageLookupByLibrary.simpleMessage("Confirm New Password"),
-        "confirmTrade":
-            MessageLookupByLibrary.simpleMessage(" \"Confirm Trade\""),
+        "confirmTrade": MessageLookupByLibrary.simpleMessage(" Confirm Trade"),
         "construction": MessageLookupByLibrary.simpleMessage("Construction"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "continueAccountOpening":
