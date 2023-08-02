@@ -109,6 +109,9 @@ class AskLoraTextStyles {
 
   static TextStyle button2 = _textStyle.copyWith(
       fontSize: 11, height: 1.5, fontWeight: AskLoraFontWeight.extraBold.value);
+
+  static TextStyle button3 = _textStyle.copyWith(
+      fontSize: 15, height: 1.5, fontWeight: AskLoraFontWeight.semiBold.value);
 }
 
 enum AskLoraFontWeight {
