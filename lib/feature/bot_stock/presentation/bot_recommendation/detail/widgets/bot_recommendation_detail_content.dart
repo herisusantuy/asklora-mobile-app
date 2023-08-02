@@ -67,6 +67,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
             CustomTextNew('${botType.upperCaseName} Bot',
                 style: AskLoraTextStyles.h5
                     .copyWith(color: AskLoraColors.charcoal)),
+            const SizedBox(height: 8),
             CustomTextNew(
               botDetailModel?.botInfo.botDescription.detail ?? 'NA',
               style: AskLoraTextStyles.body3
@@ -81,11 +82,12 @@ class BotRecommendationDetailContent extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomTextNew(
-                        '${botDetailModel?.stockInfo.tickerName}(${botDetailModel?.stockInfo.symbol})',
+                        '${botDetailModel?.stockInfo.tickerName} (${botDetailModel?.stockInfo.symbol})',
                         style: AskLoraTextStyles.h5
                             .copyWith(color: AskLoraColors.charcoal),
                         maxLines: 2,
                       ),
+                      const SizedBox(height: 8),
                       CustomTextNew(
                         '${S.of(context).prevClose} ${botDetailModel?.prevCloseDateFormatted ?? 'NA'}',
                         style: AskLoraTextStyles.body2
@@ -111,6 +113,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 5),
             const IexDataProviderLink(),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 40),
