@@ -58,9 +58,9 @@ android {
     signingConfigs {
         release {
             storeFile file("../androidKeystore")
-            storePassword ""
-            keyAlias ""
-            keyPassword ""
+            storePassword "AskLora2023@"
+            keyAlias "AskLora2023@"
+            keyPassword "AskLora2023@"
         }
     }
 
@@ -87,6 +87,12 @@ android {
         }
         production {
             dimension "flavor-type"
+            resValue "string", "app_name", "Asklora"
+        }
+        mock {
+            dimension "flavor-type"
+            applicationIdSuffix ".mock"
+            versionNameSuffix ".mock"
             resValue "string", "app_name", "Asklora"
         }
     }
