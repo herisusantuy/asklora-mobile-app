@@ -3,6 +3,7 @@ import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../tabs/presentation/tab_screen.dart';
+import '../../../../tabs/utils/tab_util.dart';
 import '../../../kyc/presentation/kyc_screen.dart';
 import '../ppi_result_screen.dart';
 
@@ -23,8 +24,9 @@ class InvestmentStyleResultScreen extends StatelessWidget {
             bottomPadding: 0,
             bottomButton: ButtonPair(
               primaryButtonOnClick: () => KycScreen.open(context),
-              secondaryButtonOnClick: () =>
-                  TabScreen.openAndRemoveAllRoute(context),
+              secondaryButtonOnClick: () => TabScreen.openAndRemoveAllRoute(
+                  context,
+                  initialTabPage: TabPage.forYou),
               primaryButtonLabel: S.of(context).openInvestmentAccount,
               secondaryButtonLabel: S.of(context).buttonMaybeLater,
             ),

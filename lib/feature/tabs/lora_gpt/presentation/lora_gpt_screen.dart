@@ -28,7 +28,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
       backgroundColor: Colors.transparent,
       body: Column(
         children: [
-          _debugWidget(context),
+          const AiDebugWidget(),
           _header,
           const Expanded(child: AiChatList()),
           _bottomContent
@@ -56,42 +56,6 @@ class _LoraGptScreenState extends State<LoraGptScreen>
           ],
         ),
       );
-
-  Widget _debugWidget(BuildContext context) {
-    final config = AppConfigWidget.of(context);
-    if (config != null &&
-        (config.baseConfig is DevConfig ||
-            config.baseConfig is StagingConfig)) {
-      return Container(
-        padding: AppValues.screenHorizontalPadding.copyWith(bottom: 4, top: 4),
-        width: MediaQuery.of(context).size.width,
-        color: Colors.white,
-        constraints: const BoxConstraints(maxHeight: 100),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomTextNew(
-                'DEBUG',
-                style: AskLoraTextStyles.body3,
-              ),
-              BlocBuilder<LoraGptBloc, LoraGptState>(
-                  buildWhen: (previous, current) =>
-                      previous.debugText != current.debugText,
-                  builder: (context, state) {
-                    return CustomTextNew(
-                      state.debugText,
-                      style: AskLoraTextStyles.body3,
-                    );
-                  }),
-            ],
-          ),
-        ),
-      );
-    } else {
-      return const SizedBox.shrink();
-    }
-  }
 
   Widget get _bottomContent {
     return BlocConsumer<LoraGptBloc, LoraGptState>(

@@ -18,6 +18,7 @@ import '../../../../../generated/l10n.dart';
 import '../../../../chart/presentation/chart_animation.dart';
 import '../../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../../tabs/for_you/bloc/for_you_bloc.dart';
+import '../../../../tabs/utils/tab_util.dart';
 import '../../../bloc/bot_stock_bloc.dart';
 import '../../../domain/bot_recommendation_model.dart';
 import '../../../repository/bot_stock_repository.dart';
@@ -73,13 +74,13 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                 context
                     .read<BackButtonInterceptorBloc>()
                     .add(RemoveInterceptor());
-              } else if (state.botDetailResponse.state ==
-                  ResponseState.success) {
-                context.read<TutorialBloc>().add(InitiateBotDetailTutorial());
               } else {
                 context
                     .read<BackButtonInterceptorBloc>()
                     .add(InitiateInterceptor());
+                if (state.botDetailResponse.state == ResponseState.success) {
+                  context.read<TutorialBloc>().add(InitiateBotDetailTutorial());
+                }
               }
             },
             buildWhen: (previous, current) =>

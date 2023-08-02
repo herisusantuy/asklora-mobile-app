@@ -1,7 +1,5 @@
 part of 'tab_screen_bloc.dart';
 
-enum TabPage { home, forYou, portfolio }
-
 enum SubTabPage {
   portfolioBotStockDetails('portfolioBotStockDetails'),
   recommendationsBotStockDetails('recommendationsBotStockDetails');
@@ -33,18 +31,20 @@ class TabScreenState extends Equatable {
   final TabPage currentTabPage;
   final bool aiPageSelected;
   final TabScreenBackState tabScreenBackState;
+  final BackgroundImageType backgroundImageType;
 
-  const TabScreenState({
-    required this.currentTabPage,
-    this.aiPageSelected = false,
-    this.tabScreenBackState = TabScreenBackState.none,
-  });
+  const TabScreenState(
+      {required this.currentTabPage,
+      this.aiPageSelected = false,
+      this.tabScreenBackState = TabScreenBackState.none,
+      this.backgroundImageType = BackgroundImageType.none});
 
   @override
   List<Object?> get props => [
         currentTabPage,
         aiPageSelected,
         tabScreenBackState,
+        backgroundImageType,
       ];
 
   TabScreenState copyWith({
@@ -52,11 +52,13 @@ class TabScreenState extends Equatable {
     bool? aiPageSelected,
     TabScreenBackState? tabScreenBackState,
     List<GlobalKey>? tutorialKeys,
+    BackgroundImageType? backgroundImageType,
   }) {
     return TabScreenState(
       currentTabPage: currentTabPage ?? this.currentTabPage,
       aiPageSelected: aiPageSelected ?? this.aiPageSelected,
       tabScreenBackState: tabScreenBackState ?? this.tabScreenBackState,
+      backgroundImageType: backgroundImageType ?? this.backgroundImageType,
     );
   }
 }
