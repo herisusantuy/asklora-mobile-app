@@ -6,8 +6,8 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_status_widget.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../generated/l10n.dart';
-import '../../tabs/bloc/tab_screen_bloc.dart';
 import '../../tabs/presentation/tab_screen.dart';
+import '../../tabs/utils/tab_util.dart';
 import '../bloc/bot_stock_bloc.dart';
 
 class BotStockResultScreen extends StatelessWidget {
