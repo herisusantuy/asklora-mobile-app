@@ -170,13 +170,14 @@ class _AiChatListState extends State<AiChatList> {
       if (isTyping) {
         context.read<LoraGptBloc>().add(const OnFinishTyping());
       }
-
       return ComponentWidget(
         aiThemeType: widget.aiThemeType,
         component: e,
       );
-    } else {
+    } else if (e is Loading) {
       return const LoraThinkingWidget();
+    } else {
+      return const SizedBox.shrink();
     }
   }
 

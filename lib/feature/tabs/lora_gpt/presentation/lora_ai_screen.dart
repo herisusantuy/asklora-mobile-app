@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:asklora_mobile_app/feature/tabs/lora_gpt/presentation/widget/ai_debug_widget.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -33,6 +32,7 @@ import '../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../bloc/tab_screen_bloc.dart';
 import '../bloc/lora_gpt_bloc.dart';
 import '../domain/portfolio_query_request.dart';
+import 'widget/ai_debug_widget.dart';
 import 'widget/component_widget.dart';
 import 'widget/session_reset_widget.dart';
 
