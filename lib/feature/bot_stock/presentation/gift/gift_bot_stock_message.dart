@@ -6,6 +6,7 @@ import '../../../../core/presentation/lora_animation_header.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../generated/l10n.dart';
 import '../../../tabs/presentation/tab_screen.dart';
+import '../../../tabs/utils/tab_util.dart';
 import '../widgets/bot_stock_form.dart';
 
 class GiftBotStockMessageScreen extends StatelessWidget {
@@ -35,7 +36,8 @@ class GiftBotStockMessageScreen extends StatelessWidget {
         child: PrimaryButton(
           buttonPrimaryType: ButtonPrimaryType.solidCharcoal,
           label: S.of(context).giftBotStockMessageScreenBottomButton,
-          onTap: () => TabScreen.openAndRemoveAllRoute(context),
+          onTap: () => TabScreen.openAndRemoveAllRoute(context,
+              initialTabPage: TabPage.forYou),
         ),
       ),
     );

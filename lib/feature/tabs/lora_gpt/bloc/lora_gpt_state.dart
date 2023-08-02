@@ -94,6 +94,14 @@ class LoraGptState extends Equatable {
         sessionId: '',
       );
 
+  GeneralQueryRequest get getLandingPageIntroRequest => GeneralQueryRequest(
+        input: '',
+        userId: userId,
+        username: userName,
+        platform: platform,
+        sessionId: '',
+      );
+
   BotstockIntro getIntroRequest(
           {required String botType,
           required String tickerSymbol,
@@ -124,4 +132,6 @@ class LoraGptState extends Equatable {
         tabPage,
         DateTime.now().millisecondsSinceEpoch
       ];
+
+  bool get isTextFieldSendButtonDisabled => isTyping || query.isEmpty;
 }

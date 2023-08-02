@@ -24,10 +24,6 @@ class Lora extends Conversation {
 
   @override
   List<Object?> get props => [type(), text];
-
-  static Lora get defaultMessage => Lora(
-        "👋Hi! I'm Lora. Let me know if you have any questions or requests on stocks investments.",
-      );
 }
 
 class LoraError extends Lora {

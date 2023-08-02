@@ -89,6 +89,48 @@ enum ValidationCode {
   botSuggestionsBotNotFound('BT0018'),
   botSuggestionsNoTickerName('BT0019'),
   botSuggestionsTickerNotFound('BT0020'),
+  botTypeNotFound('BT0021'),
+
+// # Transactions
+  depositError('TX0001'),
+  depositNoPersonalInfo('TX0002'),
+  depositRemittanceRequired('TX0003'),
+  depositRemittanceFileInvalid('TX0004'),
+  depositRemittanceFileError('TX0005'),
+  depositAmountInvalid('TX0006'),
+  depositCannotRequestToLedger('TX0007'),
+  withdrawalError('TX0008'),
+  withdrawalNoBankAccount('TX0009'),
+  withdrawalBalanceCheckError('TX0010'),
+  withdrawalBalanceInsufficient('TX0011'),
+  withdrawalAlreadyJournalled('TX0012'),
+  withdrawalCannotRequestToLedger('TX0013'),
+
+// # BANKS
+  bankCodeError('BK0001'),
+  relativeBankAccountExists('BK0002'),
+
+// # ORDERS
+  noActiveOrderExists('OD0001'),
+
+// # BROKER
+  brokerApiError('BRK0001'),
+
+// # SUBSCRIPTIONS
+  subscriptionNotFound('SB0001'),
+  subscriptionFailed('SB0002'),
+
+// # TICKER
+  tickerUnavailable('TK0001'),
+
+// # KYC
+  kycApplicantNotFound('KY0001'),
+
+// # UNKOWN
+  unknownError('XX0000'),
+  thirdPartyError('XX0001'),
+  unknownFirmAccountError('XX0002'),
+  unknownClearingAccountError('XX0003'),
   unknown('UNKNOWN');
 
   const ValidationCode(this.code);
