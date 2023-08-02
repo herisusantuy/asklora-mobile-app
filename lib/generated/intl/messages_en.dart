@@ -813,6 +813,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Redeem Your Botstock Now"),
         "rejected": MessageLookupByLibrary.simpleMessage("Rejected"),
         "relearn": MessageLookupByLibrary.simpleMessage("relearn"),
+        "requestedToEnd":
+            MessageLookupByLibrary.simpleMessage("Requested To End"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
         "resetPasswordSuccessful":
             MessageLookupByLibrary.simpleMessage("Password Reset Successful"),

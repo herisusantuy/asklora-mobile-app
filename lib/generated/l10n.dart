@@ -5775,6 +5775,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Requested To End`
+  String get requestedToEnd {
+    return Intl.message(
+      'Requested To End',
+      name: 'requestedToEnd',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

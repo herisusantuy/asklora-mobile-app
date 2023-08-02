@@ -804,5 +804,6 @@
   "botRecommendationTutorialDesc4": "'Trade' ",
   "botRecommendationTutorialDesc5": "on a Botstock that catches your eye!",
   "giftBotStockMessageScreenTitle": "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ",
-  "giftBotStockMessageScreenBottomButton": "See my recommendations"
+  "giftBotStockMessageScreenBottomButton": "See my recommendations",
+  "requestedToEnd": "Requested To End"
 }
