@@ -41,7 +41,9 @@ class PromptButton extends Component {
 }
 
 class NavigationButton extends Component {
-  NavigationButton(String id, String label) : super(id, label);
+  NavigationButton(String id, String label, this.route) : super(id, label);
+
+  final String route;
 
   @override
   ComponentType componentType() => ComponentType.navigationButton;

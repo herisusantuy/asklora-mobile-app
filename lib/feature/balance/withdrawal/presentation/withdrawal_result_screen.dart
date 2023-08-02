@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_status_widget.dart';
 import '../../../../generated/l10n.dart';
-import '../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../tabs/presentation/tab_screen.dart';
+import '../../../tabs/utils/tab_util.dart';
 import '../../../transaction_history/presentation/transaction_history_screen.dart';
 import '../../widgets/balance_base_form.dart';
 

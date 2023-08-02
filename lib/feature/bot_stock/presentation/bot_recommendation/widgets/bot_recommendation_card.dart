@@ -22,17 +22,7 @@ class BotRecommendationCard extends StatelessWidget {
         BotType.findByString(botRecommendationModel.botAppType);
     return GestureDetector(
       onTap: () {
-        context
-            .read<TabScreenBloc>()
-            .add(TabChanged(TabPage.forYou.setData(arguments: (
-              path: SubTabPage.recommendationsBotStockDetails.value,
-              arguments: {
-                'botType': botType.internalName,
-                'symbol': botRecommendationModel.tickerSymbol,
-                'ticker': botRecommendationModel.ticker,
-                'duration': botRecommendationModel.botDuration
-              }
-            ))));
+        _setTabData(context, botType);
         isDisabled ? () {} : onTap();
       },
       child: Container(
@@ -97,12 +87,29 @@ class BotRecommendationCard extends StatelessWidget {
                     label: botRecommendationModel.freeBot
                         ? 'FREE TRADE'
                         : S.of(context).trade,
-                    onTap: onTap),
+                    onTap: () {
+                      _setTabData(context, botType);
+                      onTap();
+                    }),
               ),
             )
           ],
         ),
       ),
     );
+  }
+
+  void _setTabData(BuildContext context, BotType botType) {
+    context
+        .read<TabScreenBloc>()
+        .add(TabChanged(TabPage.forYou.setData(arguments: (
+          path: SubTabPage.recommendationsBotStockDetails.value,
+          arguments: {
+            'botType': botType.internalName,
+            'symbol': botRecommendationModel.tickerSymbol,
+            'ticker': botRecommendationModel.ticker,
+            'duration': botRecommendationModel.botDuration
+          }
+        ))));
   }
 }

@@ -424,7 +424,7 @@
   "tradeSummary": "Trade Summary",
   "marketPrice": "Market Price",
   "endDate": "End Date",
-  "confirmTrade": " \"Confirm Trade\"",
+  "confirmTrade": " Confirm Trade",
   "checkBotStockDetails": "Check Botstock Details",
   "tradeRequestSubmitted": "Trade Request Submitted",
   "tradeCancelledTitle": "Trade Cancelled",
@@ -798,6 +798,7 @@
     }
   },
   "ppiGotIt": "Got It",
+  "botValues": "Bot Values",
   "botRecommendationTutorialDesc1": "This is the ",
   "botRecommendationTutorialDesc2": "Botstock recommendations screen. ",
   "botRecommendationTutorialDesc3": "press ",
@@ -805,5 +806,6 @@
   "botRecommendationTutorialDesc5": "on a Botstock that catches your eye!",
   "giftBotStockMessageScreenTitle": "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ",
   "giftBotStockMessageScreenBottomButton": "See my recommendations",
-  "userNotFound": "User Not Found"
+  "userNotFound": "User Not Found",
+  "portfolioDetailPerformanceBotAssetsInStockTooltip": "Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%."
 }

@@ -3123,10 +3123,10 @@ class S {
     );
   }
 
-  /// ` "Confirm Trade"`
+  /// ` Confirm Trade`
   String get confirmTrade {
     return Intl.message(
-      ' "Confirm Trade"',
+      ' Confirm Trade',
       name: 'confirmTrade',
       desc: '',
       args: [],
@@ -5706,6 +5706,16 @@ class S {
     );
   }
 
+  /// `Bot Values`
+  String get botValues {
+    return Intl.message(
+      'Bot Values',
+      name: 'botValues',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `This is the `
   String get botRecommendationTutorialDesc1 {
     return Intl.message(
@@ -5781,6 +5791,16 @@ class S {
     return Intl.message(
       'User Not Found',
       name: 'userNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.`
+  String get portfolioDetailPerformanceBotAssetsInStockTooltip {
+    return Intl.message(
+      'Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.',
+      name: 'portfolioDetailPerformanceBotAssetsInStockTooltip',
       desc: '',
       args: [],
     );

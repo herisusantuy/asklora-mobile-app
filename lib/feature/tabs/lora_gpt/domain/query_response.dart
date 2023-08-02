@@ -25,7 +25,7 @@ class QueryResponse extends Equatable {
               if (e['id'] == ComponentType.promptButton.value) {
                 return PromptButton(e['id'], e['label']);
               } else {
-                return NavigationButton(e['id'], e['label']);
+                return NavigationButton(e['id'], e['label'], e['route'] ?? '');
               }
             }).toList() ??
             const [],

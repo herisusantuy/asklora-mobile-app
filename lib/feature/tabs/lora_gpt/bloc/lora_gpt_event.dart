@@ -36,6 +36,13 @@ class OnScreenLaunch extends LoraGptEvent {
   List<Object?> get props => [];
 }
 
+class OnLandingPageOpened extends LoraGptEvent {
+  const OnLandingPageOpened();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class OnResetSession extends LoraGptEvent {
   const OnResetSession();
 
@@ -116,4 +123,18 @@ class FetchBotEarnings extends LoraGptEvent {
 
   @override
   List<Object?> get props => [arguments];
+}
+
+class FetchWelcomeStarter extends LoraGptEvent {
+  const FetchWelcomeStarter();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class FetchWelcomeNews extends LoraGptEvent {
+  const FetchWelcomeNews();
+
+  @override
+  List<Object?> get props => [];
 }

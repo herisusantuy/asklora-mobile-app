@@ -16,6 +16,7 @@ import '../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../core/repository/transaction_repository.dart';
 import '../../../core/repository/tutorial_repository.dart';
+import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/app_icons.dart';
 import '../../../core/utils/route_generator.dart';
@@ -37,7 +38,8 @@ import '../../tabs/for_you/for_you_screen_form.dart';
 import '../../tabs/for_you/investment_style/bloc/for_you_question_bloc.dart';
 import '../../tabs/for_you/repository/for_you_repository.dart';
 import '../../tabs/home/home_screen_form.dart';
-import '../bloc/tab_theme_bloc.dart';
+import '../ai_landing_page/presentation/ai_landing_page.dart';
+import '../utils/tab_util.dart';
 import 'widgets/ai_overlay.dart';
 
 part 'widgets/tab_pages.dart';
@@ -53,9 +55,6 @@ class TabScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (_) => TabThemeBloc(),
-          ),
           BlocProvider(
             create: (_) =>
                 TutorialBloc(tutorialRepository: TutorialRepository()),
@@ -108,110 +107,130 @@ class TabScreen extends StatelessWidget {
                   ppiResponseRepository: PpiResponseRepository(),
                   jsonCacheSharedPreferences: JsonCacheSharedPreferences())),
         ],
-        child: BlocBuilder<TabThemeBloc, TabThemeState>(
-          builder: (context, state) => Container(
-            decoration: BoxDecoration(
-              color: state.backgroundImageType.baseBackgroundColor,
-              image: state.backgroundImageType != BackgroundImageType.none
-                  ? DecorationImage(
-                      image: AssetImage(state.backgroundImageType.imageAsset!),
-                      fit: BoxFit.cover)
-                  : null,
-            ),
-            child: CustomScaffold(
-              appBarBackgroundColor:
-                  state.backgroundImageType.appBarBackgroundColor,
-              backgroundColor:
-                  state.backgroundImageType.scaffoldBackgroundColor,
-              enableBackNavigation: false,
-              body:
-                  BlocConsumer<AccountInformationBloc, AccountInformationState>(
-                listener: (context, state) =>
-                    CustomLoadingOverlay(context).show(state.response.state),
-                buildWhen: (previous, current) =>
-                    previous.response.data != current.response.data ||
-                    current.response.state == ResponseState.error,
-                builder: (context, state) => CustomLayoutWithBlurPopUp(
-                  showPopUp: state.response.state == ResponseState.error,
-                  content: state.response.data != null
-                      ? BlocProvider(
-                          create: (_) => TabScreenBloc(
-                              initialTabPage: initialTabPage ??
-                                  (state.response.data!.canTrade
-                                      ? TabPage.forYou
-                                      : TabPage.home)),
-                          child: ShowCaseWidget(
-                            disableBarrierInteraction: true,
-                            disableMovingAnimation: true,
-                            showCaseViewScrollPosition:
-                                ShowCaseViewScrollPosition.scrollToTop,
-                            blurValue: 2.5,
-                            builder: Builder(builder: (context) {
-                              return BlocListener<TabScreenBloc,
-                                  TabScreenState>(
-                                listenWhen: (previous, current) =>
-                                    previous.tabScreenBackState !=
-                                        current.tabScreenBackState ||
-                                    previous.currentTabPage !=
-                                        current.currentTabPage,
-                                listener: (context, state) {
-                                  if (state.currentTabPage != TabPage.forYou) {
-                                    context.read<TabThemeBloc>().add(
-                                        const BackgroundImageTypeChanged(
-                                            BackgroundImageType.none));
-                                  }
-                                  if (state.tabScreenBackState ==
-                                      TabScreenBackState.openConfirmation) {
-                                    CustomInAppNotification.show(
-                                        context, S.of(context).pressBackAgain,
-                                        type: PopupType.grey);
-                                  } else if (state.tabScreenBackState ==
-                                      TabScreenBackState.closeApp) {
-                                    SystemNavigator.pop();
-                                  }
-                                },
-                                child: Builder(
-                                  builder: (context) => WillPopScope(
-                                    onWillPop: () async {
-                                      context
-                                          .read<TabScreenBloc>()
-                                          .add(BackButtonClicked());
-                                      return false;
-                                    },
-                                    child: Column(
-                                      children: [
-                                        TabPages(
-                                            canTrade:
-                                                state.response.data!.canTrade),
-                                        Tabs(
-                                            canTrade:
-                                                state.response.data!.canTrade)
-                                      ],
+        child: BlocConsumer<AccountInformationBloc, AccountInformationState>(
+            listener: (context, state) =>
+                CustomLoadingOverlay(context).show(state.response.state),
+            buildWhen: (previous, current) =>
+                previous.response.data != current.response.data ||
+                current.response.state == ResponseState.error,
+            builder: (context, accountInformationState) {
+              if (accountInformationState.response.data != null ||
+                  accountInformationState.response.state ==
+                      ResponseState.error) {
+                return BlocProvider(
+                  create: (_) => TabScreenBloc(
+                      initialTabPage: _getTabPage(accountInformationState)),
+                  child: BlocConsumer<TabScreenBloc, TabScreenState>(
+                    listenWhen: tabScreenBlocListenWhen,
+                    listener: tabScreenBlocListener,
+                    buildWhen: (previous, current) =>
+                        previous.backgroundImageType !=
+                        current.backgroundImageType,
+                    builder: (context, tabScreenState) => Container(
+                      decoration: BoxDecoration(
+                        color: tabScreenState
+                            .backgroundImageType.baseBackgroundColor,
+                        image: tabScreenState.backgroundImageType !=
+                                BackgroundImageType.none
+                            ? DecorationImage(
+                                image: AssetImage(tabScreenState
+                                    .backgroundImageType.imageAsset!),
+                                fit: BoxFit.cover)
+                            : null,
+                      ),
+                      child: CustomScaffold(
+                        appBarBackgroundColor: tabScreenState
+                            .backgroundImageType.appBarBackgroundColor,
+                        backgroundColor: tabScreenState
+                            .backgroundImageType.scaffoldBackgroundColor,
+                        enableBackNavigation: false,
+                        body: CustomLayoutWithBlurPopUp(
+                          showPopUp: accountInformationState.response.state ==
+                              ResponseState.error,
+                          content: accountInformationState.response.data != null
+                              ? ShowCaseWidget(
+                                  disableBarrierInteraction: true,
+                                  disableMovingAnimation: true,
+                                  showCaseViewScrollPosition:
+                                      ShowCaseViewScrollPosition.scrollToTop,
+                                  blurValue: 2.5,
+                                  builder: Builder(
+                                    builder: (context) => WillPopScope(
+                                      onWillPop: () async {
+                                        context
+                                            .read<TabScreenBloc>()
+                                            .add(BackButtonClicked());
+                                        return false;
+                                      },
+                                      child: Column(
+                                        children: [
+                                          TabPages(
+                                              canTrade: accountInformationState
+                                                  .response.data!.canTrade),
+                                          Tabs(
+                                              backgroundImageType:
+                                                  tabScreenState
+                                                      .backgroundImageType,
+                                              canTrade: accountInformationState
+                                                  .response.data!.canTrade)
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
-                            }),
-                          ),
-                        )
-                      : const SizedBox.shrink(),
+                                )
+                              : const SizedBox.shrink(),
 
-                  ///TODO : IMPLEMENT THE RIGHT COPYWRITING LATER
-                  loraPopUpMessageModel: LoraPopUpMessageModel(
-                      title: S.of(context).errorGettingInformationTitle,
-                      subTitle: S
-                          .of(context)
-                          .errorGettingInformationPortfolioSubTitle,
-                      primaryButtonLabel: S.of(context).buttonReloadPage,
-                      onPrimaryButtonTap: () => context
-                          .read<AccountInformationBloc>()
-                          .add(GetAccountInformation())),
-                ),
-              ),
-            ),
-          ),
-        ),
+                          ///TODO : IMPLEMENT THE RIGHT COPYWRITING LATER
+                          loraPopUpMessageModel: LoraPopUpMessageModel(
+                              title: S.of(context).errorGettingInformationTitle,
+                              subTitle: S
+                                  .of(context)
+                                  .errorGettingInformationPortfolioSubTitle,
+                              primaryButtonLabel:
+                                  S.of(context).buttonReloadPage,
+                              onPrimaryButtonTap: () => context
+                                  .read<AccountInformationBloc>()
+                                  .add(GetAccountInformation())),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                return Container(color: AskLoraColors.white);
+              }
+            }),
       );
+
+  TabPage _getTabPage(AccountInformationState accountInformationState) {
+    if (accountInformationState.response.state == ResponseState.success) {
+      if (initialTabPage == null) {
+        if (accountInformationState.response.data!.canTrade) {
+          return TabPage.aiLandingPage;
+        } else {
+          return TabPage.home;
+        }
+      } else {
+        return initialTabPage!;
+      }
+    } else {
+      return TabPage.none;
+    }
+  }
+
+  void tabScreenBlocListener(BuildContext context, TabScreenState state) {
+    if (state.tabScreenBackState == TabScreenBackState.openConfirmation) {
+      CustomInAppNotification.show(context, S.of(context).pressBackAgain,
+          type: PopupType.grey);
+    } else if (state.tabScreenBackState == TabScreenBackState.closeApp) {
+      SystemNavigator.pop();
+    }
+  }
+
+  bool tabScreenBlocListenWhen(
+          TabScreenState previous, TabScreenState current) =>
+      previous.tabScreenBackState != current.tabScreenBackState ||
+      previous.currentTabPage != current.currentTabPage;
 
   static void openAndRemoveAllRoute(BuildContext context,
           {TabPage? initialTabPage}) =>

@@ -43,4 +43,12 @@ class LoraGptClient {
   Future<Response> botIntroEarnings(Map<String, String> params) async =>
       await LoraGptApiClient()
           .get(endpoint: endpointBotEarning, queryParameters: params);
+
+  Future<Response> welcomeStarter(Map<String, String> params) async =>
+      await LoraGptApiClient()
+          .get(endpoint: endpointWelcomeStarter, queryParameters: params);
+
+  Future<Response> welcomeNews(Map<String, String> params) async =>
+      await LoraGptApiClient()
+          .get(endpoint: endpointWelcomeNews, queryParameters: params);
 }

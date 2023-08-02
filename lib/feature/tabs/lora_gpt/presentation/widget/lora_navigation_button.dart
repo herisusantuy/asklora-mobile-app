@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../../../core/styles/asklora_colors.dart';
-import '../../../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/app_icons.dart';
 
-class CustomChoiceChips extends StatefulWidget {
+class LoraNavigationButton extends StatefulWidget {
   final String label;
   final VoidCallback onTap;
   final bool active;
-  final bool enableClosedButton;
   final VoidCallback? onClosed;
   final Color? activeFillColor;
   final Color? pressedFillColor;
@@ -21,11 +21,10 @@ class CustomChoiceChips extends StatefulWidget {
   final double horizontalPadding;
   final double verticalPadding;
 
-  const CustomChoiceChips(
+  const LoraNavigationButton(
       {this.label = '',
       required this.onTap,
       this.active = false,
-      this.enableClosedButton = false,
       this.activeFillColor,
       this.pressedFillColor,
       this.fillColor,
@@ -35,16 +34,16 @@ class CustomChoiceChips extends StatefulWidget {
       this.textStyle,
       this.textColor,
       this.activeTextColor,
-      this.horizontalPadding = 12.5,
-      this.verticalPadding = 7.5,
+      this.horizontalPadding = 16,
+      this.verticalPadding = 10,
       Key? key})
       : super(key: key);
 
   @override
-  State<CustomChoiceChips> createState() => _CustomChoiceChipsState();
+  State<LoraNavigationButton> createState() => _LoraNavigationButtonState();
 }
 
-class _CustomChoiceChipsState extends State<CustomChoiceChips> {
+class _LoraNavigationButtonState extends State<LoraNavigationButton> {
   bool _isPressed = false;
 
   @override
@@ -74,8 +73,9 @@ class _CustomChoiceChipsState extends State<CustomChoiceChips> {
             vertical: widget.active
                 ? widget.verticalPadding
                 : widget.verticalPadding + 1.5),
+        margin: const EdgeInsets.only(right: 40),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(25),
             border: Border.all(
                 width: widget.active ? 3 : 1.4,
                 color: _isPressed
@@ -91,34 +91,22 @@ class _CustomChoiceChipsState extends State<CustomChoiceChips> {
                         AskLoraColors.primaryGreen.withOpacity(0.2)
                     : widget.fillColor ?? Colors.transparent),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
               child: CustomTextNew(
                 widget.label,
-                style: (widget.textStyle ?? AskLoraTextStyles.subtitle4)
-                    .copyWith(
-                        color: widget.active
-                            ? widget.activeTextColor ?? AskLoraColors.charcoal
-                            : widget.textColor ?? AskLoraColors.gray),
+                style: (widget.textStyle ?? AskLoraTextStyles.button3).copyWith(
+                    color: widget.active
+                        ? widget.activeTextColor ?? AskLoraColors.charcoal
+                        : widget.textColor ?? AskLoraColors.gray),
                 maxLines: 3,
                 ellipsis: true,
               ),
             ),
-            if (widget.enableClosedButton)
-              Padding(
-                padding: const EdgeInsets.only(left: 8.4),
-                child: GestureDetector(
-                  onTap: widget.onClosed ?? () {},
-                  child: Icon(
-                    Icons.close,
-                    color: widget.active
-                        ? AskLoraColors.primaryGreen
-                        : AskLoraColors.gray,
-                    size: 12,
-                  ),
-                ),
-              ),
+            getSvgIcon('icon_sent_text',
+                color: AskLoraColors.white, height: 20, width: 20)
           ],
         ),
       ),

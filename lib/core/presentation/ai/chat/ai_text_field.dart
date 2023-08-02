@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../utils/ai_utils.dart';
-import '../../../styles/asklora_colors.dart';
 import '../../text_fields/style/text_field_style.dart';
 import '../buttons/ai_send_text_button.dart';
 
@@ -65,13 +64,11 @@ class _AiTextFieldState extends State<AiTextField> {
                     .copyWith(color: widget.aiThemeType.primaryFontColor),
                 decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 17, vertical: 18),
+                        horizontal: 17, vertical: 14),
                     enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                       Radius.circular(15.0),
-                    )).copyWith(
-                        borderSide:
-                            const BorderSide(color: AskLoraColors.whiteSmoke)),
+                    )).copyWith(borderSide: BorderSide.none),
                     focusedBorder: TextFieldStyle.focusedBorder.copyWith(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(15.0))),
@@ -85,7 +82,7 @@ class _AiTextFieldState extends State<AiTextField> {
         const SizedBox(width: 14),
         AiSendTextButton(
           isDisabled: widget.isSendButtonDisabled,
-          size: const Size(55, 55),
+          size: const Size(48, 48),
           enabledIconColor: widget.aiThemeType.sendChatButtonIconEnableColor,
           disabledIconColor: widget.aiThemeType.sendChatButtonIconDisableColor,
           onTap: () {

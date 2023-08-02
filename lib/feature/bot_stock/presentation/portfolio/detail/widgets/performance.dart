@@ -68,9 +68,12 @@ class Performance extends StatelessWidget {
           rightSubTitle: botActiveOrderDetailModel.botCashBalanceString,
         ),
         _spaceBetweenInfo,
-        ColumnTextWithTooltip(
-            title: S.of(context).portfolioDetailPerformanceBotAssetsInStock,
-            subTitle: botActiveOrderDetailModel.botAssetInStockPctString),
+        ColumnTextWithBottomSheet(
+          title: S.of(context).portfolioDetailPerformanceBotAssetsInStock,
+          subTitle: botActiveOrderDetailModel.botAssetInStockPctString,
+          bottomSheetText:
+              S.of(context).portfolioDetailPerformanceBotAssetsInStockTooltip,
+        ),
         const SizedBox(
           height: 32,
         ),

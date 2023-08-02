@@ -88,7 +88,8 @@ class AiInvestmentStyleQuestionForm extends StatelessWidget {
         alignment: Alignment.topCenter,
         child: ChatLoraHeader(
           aiThemeType: aiThemeType,
-          loraAnimationType: const LoraAnimationMagenta(height: 32, width: 32),
+          loraAnimationWidget:
+              const LoraAnimationMagenta(height: 32, width: 32),
         ),
       );
 
