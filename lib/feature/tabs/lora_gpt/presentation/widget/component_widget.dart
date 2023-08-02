@@ -8,10 +8,10 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../bot_stock/presentation/portfolio/portfolio_screen.dart';
 import '../../../../onboarding/ppi/presentation/widget/omni_search_question_widget/widgets/custom_choice_chips.dart';
 import '../../../bloc/tab_screen_bloc.dart';
-import '../../../bloc/tab_theme_bloc.dart';
 import '../../../for_you/investment_style/presentation/ai_investment_style_question_for_you_screen.dart';
 import '../../../utils/tab_util.dart';
 import '../../bloc/lora_gpt_bloc.dart';
+import 'lora_navigation_button.dart';
 
 class ComponentWidget extends StatelessWidget {
   final Component component;
@@ -24,8 +24,8 @@ class ComponentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (component is NavigationButton) {
       final navButton = component as NavigationButton;
-      return CustomChoiceChips(
-          textStyle: AskLoraTextStyles.body2
+      return LoraNavigationButton(
+          textStyle: AskLoraTextStyles.button3
               .copyWith(color: aiThemeType.primaryFontColor),
           textColor: aiThemeType.secondaryFontColor,
           borderColor: aiThemeType.choicesInteractionBorderColor,
@@ -35,7 +35,7 @@ class ComponentWidget extends StatelessWidget {
           onTap: () {
             if (navButton.route ==
                 AiInvestmentStyleQuestionForYouScreen.route) {
-              context.read<TabThemeBloc>().add(
+              context.read<TabScreenBloc>().add(
                   const BackgroundImageTypeChanged(BackgroundImageType.light));
               context
                   .read<TabScreenBloc>()
@@ -44,7 +44,7 @@ class ComponentWidget extends StatelessWidget {
               AiInvestmentStyleQuestionForYouScreen.open(context,
                   aiThemeType: AiThemeType.light);
             } else if (navButton.route == PortfolioScreen.route) {
-              context.read<TabThemeBloc>().add(
+              context.read<TabScreenBloc>().add(
                   const BackgroundImageTypeChanged(BackgroundImageType.light));
 
               context
