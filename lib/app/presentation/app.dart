@@ -95,7 +95,7 @@ class App extends StatelessWidget {
       case AppStatus.authenticated:
         if (FeatureFlags.isMockApp &&
             state.userJourney == UserJourney.investmentStyle) {
-          return const TabScreen();
+          return const AiInvestmentStyleQuestionOnboardingScreen();
         } else {
           return const TabScreen();
         }
