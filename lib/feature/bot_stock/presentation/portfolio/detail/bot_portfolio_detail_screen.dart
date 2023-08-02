@@ -5,6 +5,7 @@ import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/column_text/column_text.dart';
+import '../../../../../core/presentation/column_text/column_text_with_bottom_sheet.dart';
 import '../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
 import '../../../../../core/presentation/column_text/pair_column_text.dart';
 import '../../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
