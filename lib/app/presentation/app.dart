@@ -93,14 +93,14 @@ class App extends StatelessWidget {
   Widget _getBody(AppState state) {
     switch (state.status) {
       case AppStatus.authenticated:
-        if (FeatureFlags.isMockApp) {
-          if (state.userJourney == UserJourney.investmentStyle) {
-            return const AiInvestmentStyleQuestionOnboardingScreen();
-          }
+        if (FeatureFlags.isMockApp &&
+            state.userJourney == UserJourney.investmentStyle) {
           return const TabScreen();
         } else {
           return const TabScreen();
         }
+      case AppStatus.unauthenticated:
+        return const WelcomeScreen();
       case AppStatus.unauthenticated:
         return const WelcomeScreen();
       case AppStatus.unknown:
