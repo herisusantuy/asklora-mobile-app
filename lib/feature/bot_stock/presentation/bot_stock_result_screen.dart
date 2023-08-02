@@ -8,6 +8,7 @@ import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../generated/l10n.dart';
 import '../../tabs/bloc/tab_screen_bloc.dart';
 import '../../tabs/presentation/tab_screen.dart';
+import '../bloc/bot_stock_bloc.dart';
 
 class BotStockResultScreen extends StatelessWidget {
   static const String route = '/bot_stock_result_screen';
@@ -30,7 +31,7 @@ class BotStockResultScreen extends StatelessWidget {
             ),
             bottomButton: Column(
               children: [
-                if (arguments.isCanceledBot)
+                if (arguments.botOrderType == BotOrderType.cancel)
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 30),
                     child: PrimaryButton(
@@ -79,11 +80,11 @@ class BotStockResultScreen extends StatelessWidget {
 class BotStockResultArgument {
   final String title;
   final String desc;
-  final bool isCanceledBot;
+  final BotOrderType botOrderType;
 
   const BotStockResultArgument({
     required this.title,
     required this.desc,
-    this.isCanceledBot = false,
+    this.botOrderType = BotOrderType.buy,
   });
 }
