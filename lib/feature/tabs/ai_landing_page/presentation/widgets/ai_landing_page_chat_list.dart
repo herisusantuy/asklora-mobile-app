@@ -79,8 +79,10 @@ class AiLandingPageChatList extends StatelessWidget {
         aiThemeType: aiThemeType,
         component: e,
       );
-    } else {
+    } else if (e is Loading) {
       return const LoraThinkingWidget();
+    } else {
+      return const SizedBox.shrink();
     }
   }
 }

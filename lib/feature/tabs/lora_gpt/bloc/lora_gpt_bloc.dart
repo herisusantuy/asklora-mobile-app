@@ -245,7 +245,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     emit(state.copyWith(
         status: ResponseState.success,
-        conversations: [Lora.defaultMessage],
+        conversations: [],
         sessionId: '',
         userName: userName,
         userId: askloraId.toString()));
@@ -258,7 +258,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     emit(state.copyWith(
         status: ResponseState.success,
-        conversations: [Lora.defaultMessage],
+        conversations: [],
         sessionId: '',
         userName: userName,
         userId: askloraId.toString()));
