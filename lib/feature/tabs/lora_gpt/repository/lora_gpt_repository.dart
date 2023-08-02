@@ -16,9 +16,7 @@ class LoraGptRepository {
       var response = await _loraGptClient.general(params.params);
       return BaseResponse.complete(QueryResponse.fromJson(response.data));
     } catch (e) {
-      print('error general ep $e');
-      return BaseResponse.error(
-          message: 'Something went wrong. Please try again!');
+      return BaseResponse.error();
     }
   }
 
@@ -28,8 +26,7 @@ class LoraGptRepository {
       var response = await _loraGptClient.portfolioDetails(params.params);
       return BaseResponse.complete(QueryResponse.fromJson(response.data));
     } catch (e) {
-      return BaseResponse.error(
-          message: 'Something went wrong. Please try again!');
+      return BaseResponse.error();
     }
   }
 
@@ -41,8 +38,7 @@ class LoraGptRepository {
           await _loraGptClient.portfolio(params: params.params, payload: data);
       return BaseResponse.complete(QueryResponse.fromJson(response.data));
     } catch (e) {
-      return BaseResponse.error(
-          message: 'Something went wrong. Please try again!');
+      return BaseResponse.error();
     }
   }
 
@@ -54,8 +50,7 @@ class LoraGptRepository {
       return BaseResponse.complete(
           InvestmentStyleQuestionQueryResponse.fromJson(response.data));
     } catch (e) {
-      return BaseResponse.error(
-          message: 'Something went wrong. Please try again!');
+      return BaseResponse.error();
     }
   }
 
@@ -65,8 +60,7 @@ class LoraGptRepository {
       final response = await _loraGptClient.botIntro(params.params);
       return BaseResponse.complete(QueryResponse.fromJson(response.data));
     } catch (e) {
-      return BaseResponse.error(
-          message: 'Something went wrong. Please try again!');
+      return BaseResponse.error();
     }
   }
 
@@ -76,8 +70,7 @@ class LoraGptRepository {
       var response = await _loraGptClient.botIntroEarnings(params.params);
       return BaseResponse.complete(QueryResponse.fromJson(response.data));
     } catch (e) {
-      return BaseResponse.error(
-          message: 'Something went wrong. Please try again!');
+      return BaseResponse.error();
     }
   }
 
@@ -87,9 +80,7 @@ class LoraGptRepository {
       var response = await _loraGptClient.welcomeStarter(params.params);
       return BaseResponse.complete(QueryResponse.fromJson(response.data));
     } catch (e) {
-      print('error welcome starter $e');
-      return BaseResponse.error(
-          message: 'Something went wrong. Please try again!');
+      return BaseResponse.error();
     }
   }
 
@@ -99,9 +90,7 @@ class LoraGptRepository {
       var response = await _loraGptClient.welcomeNews(params.params);
       return BaseResponse.complete(QueryResponse.fromJson(response.data));
     } catch (e) {
-      print('error welcome news $e');
-      return BaseResponse.error(
-          message: 'Something went wrong. Please try again!');
+      return BaseResponse.error();
     }
   }
 }

@@ -40,7 +40,6 @@ class AiLandingPage extends StatelessWidget {
                 AppValues.screenHorizontalPadding.copyWith(top: 8, bottom: 12),
             child: Column(
               children: [
-                //const AiDebugWidget(),
                 _header,
                 _chatList,
                 _bottomContent,
