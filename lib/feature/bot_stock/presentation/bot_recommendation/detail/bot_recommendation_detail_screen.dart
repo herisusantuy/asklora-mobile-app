@@ -81,7 +81,6 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                 if (state.botDetailResponse.state == ResponseState.success) {
                   context.read<TutorialBloc>().add(InitiateBotDetailTutorial());
                 }
-
               }
             },
             buildWhen: (previous, current) =>
