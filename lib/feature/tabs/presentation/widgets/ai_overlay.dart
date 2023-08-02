@@ -177,8 +177,6 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
   }
 
   void _onClosed() {
-    ///update current tab highlight back to previous state
-    final TabScreenBloc tabScreenBloc = context.read<TabScreenBloc>();
-    tabScreenBloc.add(TabChanged(tabScreenBloc.state.currentTabPage));
+    ///do something on animation closed
   }
 }

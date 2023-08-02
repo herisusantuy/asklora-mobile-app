@@ -28,7 +28,9 @@ class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
     emit(state.copyWith(
         currentTabPage: event.tabPage,
         aiPageSelected: false,
-        backgroundImageType: event.tabPage.backgroundImageType));
+        backgroundImageType: event.tabPage == state.currentTabPage
+            ? state.backgroundImageType
+            : event.tabPage.backgroundImageType));
   }
 
   _onAiOverlayClick(OnAiOverlayClick event, Emitter<TabScreenState> emit) {

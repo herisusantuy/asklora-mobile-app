@@ -16,6 +16,7 @@ import '../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../core/repository/transaction_repository.dart';
 import '../../../core/repository/tutorial_repository.dart';
+import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/app_icons.dart';
 import '../../../core/utils/route_generator.dart';
@@ -196,7 +197,7 @@ class TabScreen extends StatelessWidget {
                   ),
                 );
               } else {
-                return const SizedBox.shrink();
+                return Container(color: AskLoraColors.white);
               }
             }),
       );
