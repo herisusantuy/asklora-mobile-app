@@ -13,7 +13,6 @@ import '../../../../../core/presentation/ai/utils/ai_utils.dart';
 import '../../../../core/domain/ai/component.dart';
 import '../../../../core/presentation/ai/chat/ai_text_field.dart';
 import '../../lora_gpt/bloc/lora_gpt_bloc.dart';
-import '../../lora_gpt/presentation/widget/ai_debug_widget.dart';
 import '../../lora_gpt/presentation/widget/component_widget.dart';
 import '../../lora_gpt/presentation/widget/session_reset_widget.dart';
 import '../../lora_gpt/repository/lora_gpt_repository.dart';
@@ -41,7 +40,7 @@ class AiLandingPage extends StatelessWidget {
                 AppValues.screenHorizontalPadding.copyWith(top: 8, bottom: 12),
             child: Column(
               children: [
-                const AiDebugWidget(),
+                //const AiDebugWidget(),
                 _header,
                 _chatList,
                 _bottomContent,

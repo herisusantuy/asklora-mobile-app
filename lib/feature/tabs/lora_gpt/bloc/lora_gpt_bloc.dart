@@ -146,7 +146,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     emit(state.copyWith(conversations: tempList));
 
     var welcomeStarterResponse = await _loraGptRepository.welcomeStarter(
-        params: state.getGeneralChatRequest(query: ''));
+        params: state.getLandingPageIntroRequest);
 
     ///remove loading
     if (_tempIntroResponse != null) {
@@ -183,7 +183,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     bool isTyping = false;
 
     var welcomeNewsResponse = await _loraGptRepository.welcomeNews(
-        params: state.getGeneralChatRequest(query: ''));
+        params: state.getLandingPageIntroRequest);
 
     ///remove loading
     if (_tempIntroResponse != null) {

@@ -16,7 +16,8 @@ import '../../../core/presentation/ai/utils/ai_utils.dart';
 import '../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../onboarding/kyc/presentation/kyc_screen.dart';
-import '../bloc/tab_theme_bloc.dart';
+import '../bloc/tab_screen_bloc.dart';
+import '../utils/tab_util.dart';
 import 'bloc/for_you_bloc.dart';
 
 enum ForYouPage { investmentStyle, botRecommendation }
@@ -71,7 +72,7 @@ class ForYouScreenForm extends StatelessWidget {
                   builder: (context, state) {
                     switch (state.page) {
                       case ForYouPage.investmentStyle:
-                        context.read<TabThemeBloc>().add(
+                        context.read<TabScreenBloc>().add(
                             const BackgroundImageTypeChanged(
                                 BackgroundImageType.light));
                         return const AiInvestmentStyleQuestionWelcomeScreen(
@@ -79,7 +80,7 @@ class ForYouScreenForm extends StatelessWidget {
                           aiThemeType: AiThemeType.light,
                         );
                       case ForYouPage.botRecommendation:
-                        context.read<TabThemeBloc>().add(
+                        context.read<TabScreenBloc>().add(
                             const BackgroundImageTypeChanged(
                                 BackgroundImageType.none));
                         return const BotRecommendationScreen(

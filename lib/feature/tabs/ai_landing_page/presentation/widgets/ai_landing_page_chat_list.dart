@@ -19,7 +19,7 @@ class AiLandingPageChatList extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.center,
             colors: [Colors.black, Colors.black.withOpacity(0)],
-            stops: const [0.1, 0.25]).createShader(rect);
+            stops: const [0.05, 0.25]).createShader(rect);
       },
       blendMode: BlendMode.dstOut,
       child: ShaderMask(

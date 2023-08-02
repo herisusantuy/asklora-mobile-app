@@ -5,15 +5,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils/tab_util.dart';
 
 part 'tab_screen_event.dart';
+
 part 'tab_screen_state.dart';
 
 class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
   TabScreenBloc({required TabPage initialTabPage})
-      : super(TabScreenState(currentTabPage: initialTabPage)) {
+      : super(TabScreenState(
+            currentTabPage: initialTabPage,
+            backgroundImageType: initialTabPage.backgroundImageType)) {
     on<TabChanged>(_onTabChanged);
     on<OnAiOverlayClick>(_onAiOverlayClick);
     on<CloseAiOverLay>(_onCloseAiOverlay);
     on<BackButtonClicked>(_onBackButtonClicked);
+    on<BackgroundImageTypeChanged>(_onBackgroundImageTypeChanged);
   }
 
   _onTabChanged(TabChanged event, Emitter<TabScreenState> emit) {
@@ -21,7 +25,10 @@ class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
       //Remove the data when tab change.
       state.currentTabPage.setData();
     }
-    emit(state.copyWith(currentTabPage: event.tabPage, aiPageSelected: false));
+    emit(state.copyWith(
+        currentTabPage: event.tabPage,
+        aiPageSelected: false,
+        backgroundImageType: event.tabPage.backgroundImageType));
   }
 
   _onAiOverlayClick(OnAiOverlayClick event, Emitter<TabScreenState> emit) {
@@ -45,4 +52,10 @@ class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
       emit(state.copyWith(tabScreenBackState: TabScreenBackState.closeApp));
     }
   }
+
+  _onBackgroundImageTypeChanged(
+          BackgroundImageTypeChanged event, Emitter<TabScreenState> emit) =>
+      emit(state.copyWith(
+        backgroundImageType: event.backgroundImageType,
+      ));
 }
