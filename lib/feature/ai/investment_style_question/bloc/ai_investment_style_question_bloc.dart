@@ -228,7 +228,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
       ));
     } else {
       tempList.add(_errorChat);
-      emit(state.copyWith(conversations: tempList));
+      emit(state.copyWith(conversations: tempList, isTyping: false));
     }
   }
 

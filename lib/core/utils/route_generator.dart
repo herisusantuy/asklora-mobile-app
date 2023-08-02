@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../feature/bot_stock/presentation/gift/gift_bot_stock_message.dart';
+import '../../feature/tabs/ai_landing_page/presentation/ai_landing_page.dart';
+import '../../feature/tabs/utils/tab_util.dart';
 import '../presentation/ai/utils/ai_utils.dart';
 import '../../feature/onboarding/ppi/presentation/investment_style_question/ai_investment_style_question_onboarding_screen.dart';
 import '../../feature/ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
@@ -53,7 +55,6 @@ import '../../feature/settings/presentation/payment_detail_screen.dart';
 import '../../feature/settings/presentation/privacy_policy_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/settings/presentation/terms_condition_screen.dart';
-import '../../feature/tabs/bloc/tab_screen_bloc.dart';
 import '../../feature/tabs/for_you/for_you_screen_form.dart';
 import '../../feature/tabs/for_you/investment_style/presentation/ai_investment_style_question_for_you_screen.dart';
 import '../../feature/tabs/home/home_screen_form.dart';
@@ -353,6 +354,9 @@ class RouterGenerator {
             builder: (_) => TabScreen(
                   initialTabPage: settings.arguments as TabPage?,
                 ));
+      case AiLandingPage.route:
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const AiLandingPage());
       case BackdoorScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const BackdoorScreen());
