@@ -28,8 +28,7 @@ class AskloraError extends Equatable {
     try {
       return _$AskloraErrorFromJson(json);
     } catch (e) {
-      return const AskloraError(
-          detail: 'Something went wrong!', code: 'UNKNOWN');
+      throw Exception(e.toString());
     }
   }
 

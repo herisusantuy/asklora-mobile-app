@@ -5706,6 +5706,16 @@ class S {
     );
   }
 
+  /// `Bot Values`
+  String get botValues {
+    return Intl.message(
+      'Bot Values',
+      name: 'botValues',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `This is the `
   String get botRecommendationTutorialDesc1 {
     return Intl.message(
@@ -5776,11 +5786,11 @@ class S {
     );
   }
 
-  /// `Requested To End`
-  String get requestedToEnd {
+  /// `Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.`
+  String get portfolioDetailPerformanceBotAssetsInStockTooltip {
     return Intl.message(
-      'Requested To End',
-      name: 'requestedToEnd',
+      'Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.',
+      name: 'portfolioDetailPerformanceBotAssetsInStockTooltip',
       desc: '',
       args: [],
     );

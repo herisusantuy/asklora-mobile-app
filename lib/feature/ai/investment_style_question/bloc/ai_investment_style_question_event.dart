@@ -20,15 +20,6 @@ class QueryChanged extends AiInvestmentStyleQuestionEvent {
   List<Object?> get props => [query];
 }
 
-class AnswerSelected extends AiInvestmentStyleQuestionEvent {
-  final String answerId;
-
-  const AnswerSelected(this.answerId);
-
-  @override
-  List<Object?> get props => [answerId];
-}
-
 class SubmitQuery extends AiInvestmentStyleQuestionEvent {
   final bool isNewSession;
   final String answerId;

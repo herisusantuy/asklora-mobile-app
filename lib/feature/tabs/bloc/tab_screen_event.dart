@@ -19,3 +19,9 @@ class CloseAiOverLay extends TabScreenEvent {
 }
 
 class BackButtonClicked extends TabScreenEvent {}
+
+class BackgroundImageTypeChanged extends TabScreenEvent {
+  final BackgroundImageType backgroundImageType;
+
+  const BackgroundImageTypeChanged(this.backgroundImageType);
+}
