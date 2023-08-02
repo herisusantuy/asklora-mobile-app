@@ -3945,10 +3945,10 @@ class S {
     );
   }
 
-  /// `our technology is perfect for you.`
+  /// `our technology is perfect for you`
   String get opennessMoreThan8 {
     return Intl.message(
-      'our technology is perfect for you.',
+      'our technology is perfect for you',
       name: 'opennessMoreThan8',
       desc: '',
       args: [],
@@ -5701,6 +5701,16 @@ class S {
     return Intl.message(
       'Got It',
       name: 'ppiGotIt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bot Values`
+  String get botValues {
+    return Intl.message(
+      'Bot Values',
+      name: 'botValues',
       desc: '',
       args: [],
     );
