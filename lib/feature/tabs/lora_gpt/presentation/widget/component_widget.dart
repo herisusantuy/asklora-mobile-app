@@ -30,7 +30,7 @@ class ComponentWidget extends StatelessWidget {
           textColor: aiThemeType.secondaryFontColor,
           borderColor: aiThemeType.choicesInteractionBorderColor,
           pressedFillColor: AskLoraColors.primaryGreen.withOpacity(0.4),
-          fillColor: AskLoraColors.white.withOpacity(0.2),
+          fillColor: Colors.transparent,
           label: navButton.label,
           onTap: () {
             if (navButton.route ==
