@@ -76,12 +76,12 @@ class BotPortfolioCard extends StatelessWidget {
                   height: 13,
                 ),
                 PairColumnTextWithAutoSizedText(
-                  leftTitle: botActiveOrderModel.botAppsName,
+                  leftTitle: S.of(context).botValues,
                   rightTitle: S.of(context).portfolioTotalPL,
-                  leftSubTitle:
-                      '\$${botActiveOrderModel.currentPrice.toString()}',
+                  leftSubTitle: botActiveOrderModel.botStockValueString,
                   rightSubTitle: botActiveOrderModel.totalPnLPctString,
                   maxLines: 1,
+                  spaceWidth: 15.0,
                 ),
                 const SizedBox(
                   height: 15,

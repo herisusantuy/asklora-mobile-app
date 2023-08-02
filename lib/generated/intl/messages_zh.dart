@@ -196,6 +196,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "botTradeBottomSheetRolloverDisclosureTitle":
             MessageLookupByLibrary.simpleMessage(
                 "你將延長 Botstock 投資期，\n 並需繳付額外延長費用。"),
+        "botValues": MessageLookupByLibrary.simpleMessage("當前價格"),
         "businessNonFinance":
             MessageLookupByLibrary.simpleMessage("Business, Non-Finance"),
         "businessOwner": MessageLookupByLibrary.simpleMessage("企業主"),

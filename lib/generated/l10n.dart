@@ -3798,17 +3798,17 @@ class S {
   /// `investing can be simple with AI`
   String get opennessLessThan8 {
     return Intl.message(
-      'we investing can be simple with AI',
+      'investing can be simple with AI',
       name: 'opennessLessThan8',
       desc: '',
       args: [],
     );
   }
 
-  /// `our technology is perfect for you`
+  /// `our technology is perfect for you.`
   String get opennessMoreThan8 {
     return Intl.message(
-      'our technology is perfect for you',
+      'our technology is perfect for you.',
       name: 'opennessMoreThan8',
       desc: '',
       args: [],
@@ -5571,6 +5571,16 @@ class S {
     return Intl.message(
       'Got It',
       name: 'ppiGotIt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bot Values`
+  String get botValues {
+    return Intl.message(
+      'Bot Values',
+      name: 'botValues',
       desc: '',
       args: [],
     );

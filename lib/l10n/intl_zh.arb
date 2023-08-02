@@ -756,5 +756,6 @@
       }
     }
   },
-  "ppiGotIt": "了解!"
+  "ppiGotIt": "了解!",
+  "botValues": "當前價格"
 }

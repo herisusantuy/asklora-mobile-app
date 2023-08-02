@@ -784,5 +784,6 @@
       }
     }
   },
-  "ppiGotIt": "Got It"
+  "ppiGotIt": "Got It",
+  "botValues": "Bot Values"
 }

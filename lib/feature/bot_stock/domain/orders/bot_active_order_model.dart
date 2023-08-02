@@ -35,6 +35,8 @@ class BotActiveOrderModel extends Equatable {
   @JsonKey(name: 'optimal_time')
   final String optimalTime;
   final String ticker;
+  @JsonKey(name: 'bot_stock_value')
+  final double botStockValue;
 
   String startOrExpireDateStr(BuildContext context) {
     if (botStatus == BotStatus.pending) {
@@ -46,9 +48,9 @@ class BotActiveOrderModel extends Equatable {
 
   String startOrExpireShowDateOnly(BuildContext context) {
     if (botStatus == BotStatus.pending) {
-      return '${S.of(context).startsAt} ${convertDateToHktString(optimalTime, dateFormat: 'dd/MM/yy')}';
+      return '${S.of(context).startsAt} ${convertDateToHktString(optimalTime, dateFormat: 'dd/MM/yy')} HKT';
     } else {
-      return '${S.of(context).expiresAt} ${formatDateTimeAsString(expireDate, dateFormat: 'dd/MM/yy')}';
+      return '${S.of(context).expiresAt} ${formatDateTimeAsString(expireDate, dateFormat: 'dd/MM/yy')} HKT';
     }
   }
 
@@ -71,7 +73,8 @@ class BotActiveOrderModel extends Equatable {
       this.botAppsName,
       this.botDuration,
       this.ticker,
-      this.optimalTime);
+      this.optimalTime,
+      this.botStockValue);
 
   String get totalPnLPctString {
     final double totalPnLPctDouble = checkDouble(totalPnLPct);
@@ -82,6 +85,13 @@ class BotActiveOrderModel extends Equatable {
         : (totalPnLPctDouble < 0)
             ? '$totalPnLPctString%'
             : '/';
+  }
+
+  String get botStockValueString {
+    final double botStockValueDouble = checkDouble(botStockValue);
+    return (botStockValueDouble > 0)
+        ? botStockValueDouble.convertToCurrencyDecimal()
+        : '/';
   }
 
   factory BotActiveOrderModel.fromJson(Map<String, dynamic> json) =>
