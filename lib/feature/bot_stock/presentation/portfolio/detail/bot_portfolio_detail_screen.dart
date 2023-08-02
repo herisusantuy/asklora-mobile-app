@@ -25,6 +25,7 @@ import '../../../../../core/utils/back_button_interceptor/back_button_intercepto
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../tabs/bloc/tab_screen_bloc.dart';
+import '../../../bloc/bot_stock_bloc.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_bottom_sheet.dart';
