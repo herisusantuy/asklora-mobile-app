@@ -6,9 +6,11 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/styles/asklora_colors.dart';
+import '../../core/utils/feature_flags.dart';
 import '../../core/utils/route_generator.dart';
 import '../../core/utils/storage/secure_storage.dart';
 import '../../core/utils/storage/shared_preference.dart';
+import '../../feature/onboarding/ppi/presentation/investment_style_question/ai_investment_style_question_onboarding_screen.dart';
 import '../../feature/onboarding/welcome/welcome_screen.dart';
 import '../../feature/tabs/presentation/tab_screen.dart';
 import '../../generated/l10n.dart';
@@ -91,7 +93,14 @@ class App extends StatelessWidget {
   Widget _getBody(AppState state) {
     switch (state.status) {
       case AppStatus.authenticated:
-        return const TabScreen();
+        if (FeatureFlags.isMockApp) {
+          if (state.userJourney == UserJourney.investmentStyle) {
+            return const AiInvestmentStyleQuestionOnboardingScreen();
+          }
+          return const TabScreen();
+        } else {
+          return const TabScreen();
+        }
       case AppStatus.unauthenticated:
         return const WelcomeScreen();
       case AppStatus.unknown:
