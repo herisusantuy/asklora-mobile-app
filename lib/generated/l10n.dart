@@ -5786,6 +5786,16 @@ class S {
     );
   }
 
+  /// `Requested To End`
+  String get requestedToEnd {
+    return Intl.message(
+      'Requested To End',
+      name: 'requestedToEnd',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.`
   String get portfolioDetailPerformanceBotAssetsInStockTooltip {
     return Intl.message(
