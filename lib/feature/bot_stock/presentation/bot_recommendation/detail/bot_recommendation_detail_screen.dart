@@ -74,13 +74,13 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                 context
                     .read<BackButtonInterceptorBloc>()
                     .add(RemoveInterceptor());
-              } else if (state.botDetailResponse.state ==
-                  ResponseState.success) {
-                context.read<TutorialBloc>().add(InitiateBotDetailTutorial());
               } else {
                 context
                     .read<BackButtonInterceptorBloc>()
                     .add(InitiateInterceptor());
+                if (state.botDetailResponse.state == ResponseState.success) {
+                  context.read<TutorialBloc>().add(InitiateBotDetailTutorial());
+                }
               }
             },
             buildWhen: (previous, current) =>

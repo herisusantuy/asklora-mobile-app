@@ -50,7 +50,7 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
   }
 
   bool _backButtonInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    _closeAiOverlay();
+    context.read<TabScreenBloc>().add(const OnAiOverlayClick());
     return true;
   }
 
