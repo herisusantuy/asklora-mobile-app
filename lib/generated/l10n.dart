@@ -5775,6 +5775,16 @@ class S {
       args: [],
     );
   }
+
+  /// `User Not Found`
+  String get userNotFound {
+    return Intl.message(
+      'User Not Found',
+      name: 'userNotFound',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
