@@ -1,6 +1,6 @@
 import 'base_config.dart';
 
-enum EnvironmentType { dev, staging, production }
+enum EnvironmentType { dev, staging, production, mock }
 
 class Environment {
   factory Environment() {
@@ -22,6 +22,8 @@ class Environment {
         return ProdConfig();
       case EnvironmentType.staging:
         return StagingConfig();
+      case EnvironmentType.mock:
+        return MockConfig();
       default:
         return DevConfig();
     }
@@ -62,4 +64,20 @@ class ProdConfig implements BaseConfig {
 
   @override
   String get askloraAiBaseUrl => 'wss://apca.services.asklora.ai/prodConfig';
+}
+
+class MockConfig implements BaseConfig {
+  /// Using staging configs just because want to submit the build for review.
+
+  @override
+  // String get ppiBaseUrl => 'http://ppi-beta.api.asklora.ai/';
+  String get ppiBaseUrl => 'http://ppi-stag.api.asklora.ai/';
+
+  @override
+  // String get askLoraApiBaseUrl => 'https://beta-apca.api.asklora.ai/';
+  String get askLoraApiBaseUrl => 'https://stag-apca.api.asklora.ai/';
+
+  @override
+  // String get askloraAiBaseUrl => 'http://stock-gpt-dev.intra.asklora.ai/';
+  String get askloraAiBaseUrl => 'http://stock-gpt-dev.intra.asklora.ai/';
 }

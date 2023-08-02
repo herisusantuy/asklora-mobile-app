@@ -29,6 +29,7 @@ class BotRecommendationCard extends StatelessWidget {
               arguments: {
                 'botType': botType.internalName,
                 'symbol': botRecommendationModel.tickerSymbol,
+                'ticker': botRecommendationModel.ticker,
                 'duration': botRecommendationModel.botDuration
               }
             ))));
