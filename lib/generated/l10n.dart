@@ -5814,6 +5814,56 @@ class S {
     );
   }
 
+  /// `Here's a brief description of the bot and stock you've chosen`
+  String get tooltipDescOfTickerDetailsTutorial {
+    return Intl.message(
+      'Here\'s a brief description of the bot and stock you\'ve chosen',
+      name: 'tooltipDescOfTickerDetailsTutorial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap anywhere to continue`
+  String get tapAnyWhere {
+    return Intl.message(
+      'Tap anywhere to continue',
+      name: 'tapAnyWhere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can click on `
+  String get youCanClickOn {
+    return Intl.message(
+      'You can click on ',
+      name: 'youCanClickOn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tell Me More`
+  String get tellMeMore {
+    return Intl.message(
+      'Tell Me More',
+      name: 'tellMeMore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` to open Lora and get more details about your investment!`
+  String get toOpenLora {
+    return Intl.message(
+      ' to open Lora and get more details about your investment!',
+      name: 'toOpenLora',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `LET'S TRADE`
   String get letsTrade {
     return Intl.message(

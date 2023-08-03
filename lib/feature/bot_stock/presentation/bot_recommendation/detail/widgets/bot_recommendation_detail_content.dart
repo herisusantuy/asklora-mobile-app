@@ -9,6 +9,7 @@ import '../../../../../../core/presentation/column_text/pair_column_text.dart';
 import '../../../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
+import '../../../../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
@@ -65,67 +66,98 @@ class BotRecommendationDetailContent extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 25),
         decoration: const BoxDecoration(color: AskLoraColors.whiteSmoke),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
           children: [
-            CustomTextNew('${botType.upperCaseName} Bot',
-                style: AskLoraTextStyles.h5
-                    .copyWith(color: AskLoraColors.charcoal)),
-            const SizedBox(height: 8),
-            CustomTextNew(
-              botDetailModel?.botInfo.botDescription.detail ?? 'NA',
-              style: AskLoraTextStyles.body3
-                  .copyWith(color: AskLoraColors.charcoal),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Column(
+            CustomShowcaseView(
+              tutorialKey: TutorialJourney.tickerDetails,
+              tooltipWidget: CustomTextNew(
+                S.of(context).tooltipDescOfTickerDetailsTutorial,
+                style: AskLoraTextStyles.body1,
+              ),
+              margin: const EdgeInsets.only(top: 117),
+              onToolTipClick: () => ShowCaseWidget.of(context).next(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomTextNew('${botType.upperCaseName} Bot',
+                      style: AskLoraTextStyles.h5
+                          .copyWith(color: AskLoraColors.charcoal)),
+                  const SizedBox(height: 8),
+                  CustomTextNew(
+                    botDetailModel?.botInfo.botDescription.detail ?? 'NA',
+                    style: AskLoraTextStyles.body3
+                        .copyWith(color: AskLoraColors.charcoal),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomTextNew(
-                        '${botDetailModel?.stockInfo.tickerName} (${botDetailModel?.stockInfo.symbol})',
-                        style: AskLoraTextStyles.h5
-                            .copyWith(color: AskLoraColors.charcoal),
-                        maxLines: 2,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomTextNew(
+                              '${botDetailModel?.stockInfo.tickerName} (${botDetailModel?.stockInfo.symbol})',
+                              style: AskLoraTextStyles.h5
+                                  .copyWith(color: AskLoraColors.charcoal),
+                              maxLines: 2,
+                            ),
+                            const SizedBox(height: 8),
+                            CustomTextNew(
+                              '${S.of(context).prevClose} ${botDetailModel?.prevCloseDateFormatted ?? 'NA'}',
+                              style: AskLoraTextStyles.body2
+                                  .copyWith(color: AskLoraColors.charcoal),
+                            ),
+                          ],
+                        ),
                       ),
-                      const SizedBox(height: 8),
-                      CustomTextNew(
-                        '${S.of(context).prevClose} ${botDetailModel?.prevCloseDateFormatted ?? 'NA'}',
-                        style: AskLoraTextStyles.body2
-                            .copyWith(color: AskLoraColors.charcoal),
+                      const SizedBox(width: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          CustomTextNew(
+                            (botDetailModel?.price ?? 0)
+                                .convertToCurrencyDecimal(),
+                            style: AskLoraTextStyles.h5
+                                .copyWith(color: AskLoraColors.charcoal),
+                          ),
+                          ToggleablePriceText(
+                            percentDifference: getPercentDifference(),
+                            priceDifference: getPriceDifference(),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    CustomTextNew(
-                      (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
-                      style: AskLoraTextStyles.h5
-                          .copyWith(color: AskLoraColors.charcoal),
-                    ),
-                    ToggleablePriceText(
-                      percentDifference: getPercentDifference(),
-                      priceDifference: getPriceDifference(),
-                    ),
-                  ],
-                ),
-              ],
+                  const SizedBox(height: 5),
+                  const IexDataProviderLink(),
+                ],
+              ),
             ),
-            const SizedBox(height: 5),
-            const IexDataProviderLink(),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Center(
+              padding: const EdgeInsets.symmetric(vertical: 40),
+              child: CustomShowcaseView(
+                tutorialKey: TutorialJourney.tellMeMoreButton,
+                tooltipWidget: Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                          text: S.of(context).youCanClickOn,
+                          style: AskLoraTextStyles.body1),
+                      TextSpan(
+                          text: "'${S.of(context).tellMeMore}'",
+                          style: AskLoraTextStyles.subtitle2),
+                      TextSpan(
+                          text: S.of(context).toOpenLora,
+                          style: AskLoraTextStyles.body1),
+                    ],
+                  ),
+                ),
+                margin: const EdgeInsets.only(top: 30),
+                onToolTipClick: () => ShowCaseWidget.of(context).next(),
                 child: SizedBox(
                     width: 169,
                     child: PrimaryButton(
-                        label: 'Tell Me More',
+                        label: S.of(context).tellMeMore,
                         onTap: () => context
                             .read<TabScreenBloc>()
                             .add(const OnAiOverlayClick()),
@@ -300,7 +332,10 @@ class BotRecommendationDetailContent extends StatelessWidget {
         child: CustomShowcaseView(
           tooltipPosition: TooltipPosition.bottom,
           tutorialKey: TutorialJourney.botDetails,
-          onToolTipClick: () => ShowCaseWidget.of(context).next(),
+          onToolTipClick: () {
+            ShowCaseWidget.of(context).dismiss();
+            context.read<TutorialBloc>().add(BotDetailTutorialFinished());
+          },
           tooltipWidget: Text.rich(
             TextSpan(
               children: [

@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../core/domain/ai/component.dart';
 import '../../../../core/domain/ai/conversation.dart';
@@ -17,9 +16,6 @@ import '../../../../core/presentation/ai/utils/ai_utils.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/text_fields/style/text_field_style.dart';
-import '../../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
-import '../../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
-import '../../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
@@ -35,9 +31,7 @@ import 'widget/component_widget.dart';
 import 'widget/session_reset_widget.dart';
 
 part 'lora_ai_overlay_screen.dart';
-
 part 'lora_gpt_screen.dart';
-
 part 'widget/ai_chat_list.dart';
 
 class LoraAiScreen extends StatelessWidget {

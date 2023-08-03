@@ -36,53 +36,19 @@ class Tabs extends StatelessWidget {
                         active: state.currentTabPage == TabPage.forYou &&
                             !state.aiPageSelected),
                     if (canTrade)
-                      CustomShowcaseView(
-                        tutorialKey: TutorialJourney.chatLoraTab,
-                        onToolTipClick: () {
-                          context
-                              .read<TabScreenBloc>()
-                              .add(const OnAiOverlayClick());
-
-                          ///this delay is necessary to wait for AI page to be opened
-                          Future.delayed(const Duration(milliseconds: 350),
-                              () => ShowCaseWidget.of(context).next());
-                        },
-                        tooltipPosition: TooltipPosition.top,
-                        targetBorderRadius: BorderRadius.circular(35),
-                        tooltipWidget: Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                  text: S.of(context).ifYouveGot,
-                                  style: AskLoraTextStyles.body1),
-                              TextSpan(
-                                  text: S.of(context).anyQuestion,
-                                  style: AskLoraTextStyles.subtitle2),
-                              TextSpan(
-                                  text: S.of(context).aboutYourInvestment,
-                                  style: AskLoraTextStyles.body1),
-                              TextSpan(
-                                  text: S.of(context).personalAIAssistant,
-                                  style: AskLoraTextStyles.subtitle2),
-                            ],
-                          ),
-                        ),
-                        child: _tabSvg(
-                            onTap: () {
-                              if (state.currentTabPage !=
-                                  TabPage.aiLandingPage) {
-                                context
-                                    .read<TabScreenBloc>()
-                                    .add(const OnAiOverlayClick());
-                              }
-                            },
-                            iconAsset: 'bottom_nav_asklora_ai',
-                            filledColor: backgroundImageType.tabAiFilledColor,
-                            activeIconAsset:
-                                backgroundImageType.tabAiActiveAsset,
-                            active: state.aiPageSelected ||
-                                state.currentTabPage == TabPage.aiLandingPage),
-                      ),
+                      _tabSvg(
+                          onTap: () {
+                            if (state.currentTabPage != TabPage.aiLandingPage) {
+                              context
+                                  .read<TabScreenBloc>()
+                                  .add(const OnAiOverlayClick());
+                            }
+                          },
+                          iconAsset: 'bottom_nav_asklora_ai',
+                          filledColor: backgroundImageType.tabAiFilledColor,
+                          activeIconAsset: backgroundImageType.tabAiActiveAsset,
+                          active: state.aiPageSelected ||
+                              state.currentTabPage == TabPage.aiLandingPage),
                     _tabSvg(
                         onTap: () => context
                             .read<TabScreenBloc>()
