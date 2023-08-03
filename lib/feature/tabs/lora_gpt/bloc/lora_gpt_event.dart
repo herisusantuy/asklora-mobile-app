@@ -57,15 +57,6 @@ class OnFinishTyping extends LoraGptEvent {
   List<Object?> get props => [];
 }
 
-class ShowOverLayScreen extends LoraGptEvent {
-  final bool shouldShowOverlayScreen;
-
-  const ShowOverLayScreen({this.shouldShowOverlayScreen = true});
-
-  @override
-  List<Object?> get props => [];
-}
-
 class StorePortfolioBotStocks extends LoraGptEvent {
   final List<Botstock> botstocks;
 

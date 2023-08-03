@@ -9,7 +9,6 @@ class LoraGptState extends Equatable {
   final String sessionId;
   final List<Conversation> conversations;
   final bool isTyping;
-  final bool shouldShowOverlay;
   final List<Botstock> botstocks;
   final double totalPnl;
   final TabPage tabPage;
@@ -25,7 +24,7 @@ class LoraGptState extends Equatable {
     this.userId = '',
     this.conversations = const [],
     this.isTyping = false,
-    this.shouldShowOverlay = true,
+    // this.shouldShowOverlay = true,
     this.botstocks = const [],
     this.totalPnl = 0,
     this.tabPage = TabPage.forYou,
@@ -40,7 +39,6 @@ class LoraGptState extends Equatable {
     List<Conversation>? conversations,
     ResponseState? status,
     bool? isTyping,
-    bool? shouldShowOverlay,
     List<Botstock>? botstocks,
     double? totalPnl,
     TabPage? tabPage,
@@ -54,7 +52,6 @@ class LoraGptState extends Equatable {
       isTyping: isTyping ?? this.isTyping,
       userName: userName ?? this.userName,
       userId: userId ?? this.userId,
-      shouldShowOverlay: shouldShowOverlay ?? this.shouldShowOverlay,
       botstocks: botstocks ?? this.botstocks,
       totalPnl: totalPnl ?? this.totalPnl,
       tabPage: tabPage ?? this.tabPage,
@@ -128,7 +125,6 @@ class LoraGptState extends Equatable {
         userId,
         botstocks,
         totalPnl,
-        shouldShowOverlay,
         tabPage,
         DateTime.now().millisecondsSinceEpoch
       ];

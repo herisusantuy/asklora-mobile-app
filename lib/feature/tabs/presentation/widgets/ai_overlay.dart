@@ -60,7 +60,6 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
       create: (_) => LoraGptBloc(
           loraGptRepository: LoraGptRepository(),
           sharedPreference: SharedPreference())
-        ..add(const ShowOverLayScreen())
         ..add(const OnScreenLaunch()),
       child: BlocListener<TabScreenBloc, TabScreenState>(
         listenWhen: (previous, current) =>
