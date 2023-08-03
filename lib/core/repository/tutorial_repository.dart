@@ -6,43 +6,43 @@ class TutorialRepository {
 
   Future<bool> saveBotDetailTutorialState(bool tutorialState) async {
     await _sharedPreference.writeBoolData(
-        sfKeyBotDetailsTutorial, tutorialState);
+        StorageKeys.sfKeyBotDetailsTutorial, tutorialState);
     return tutorialState;
   }
 
   Future<bool> saveBotRecommendationTutorialState(bool tutorialState) async {
     await _sharedPreference.writeBoolData(
-        sfKeyBotRecommendationTutorial, tutorialState);
+        StorageKeys.sfKeyBotRecommendationTutorial, tutorialState);
     return tutorialState;
   }
 
   Future<bool> saveTradeSummaryTutorialState(bool tutorialState) async {
     await _sharedPreference.writeBoolData(
-        sfKeyTradeSummaryTutorial, tutorialState);
+        StorageKeys.sfKeyTradeSummaryTutorial, tutorialState);
     return tutorialState;
   }
 
   Future<bool> fetchBotDetailTutorialState() async {
-    bool? response =
-        await _sharedPreference.readBoolData(sfKeyBotDetailsTutorial);
+    bool? response = await _sharedPreference
+        .readBoolData(StorageKeys.sfKeyBotDetailsTutorial);
     return response ?? true;
   }
 
   Future<bool> fetchBotRecommendationTutorialState() async {
-    bool? response =
-        await _sharedPreference.readBoolData(sfKeyBotRecommendationTutorial);
+    bool? response = await _sharedPreference
+        .readBoolData(StorageKeys.sfKeyBotRecommendationTutorial);
     return response ?? true;
   }
 
   Future<bool> fetchTradeSummaryTutorialState() async {
-    bool? response =
-        await _sharedPreference.readBoolData(sfKeyTradeSummaryTutorial);
+    bool? response = await _sharedPreference
+        .readBoolData(StorageKeys.sfKeyTradeSummaryTutorial);
     return response ?? true;
   }
 
   Future<bool> setTradeSummaryTutorialFinished() async {
-    bool response =
-        await _sharedPreference.writeBoolData(sfKeyTradeSummaryTutorial, false);
+    bool response = await _sharedPreference.writeBoolData(
+        StorageKeys.sfKeyTradeSummaryTutorial, false);
     return response;
   }
 }

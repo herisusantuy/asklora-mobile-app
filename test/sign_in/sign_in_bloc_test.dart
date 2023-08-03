@@ -62,13 +62,15 @@ void main() async {
             .thenAnswer((_) async => Future<void>);
         when(mockRepository.saveAccessToken('token')).thenAnswer((_) async {});
 
-        when(sharedPreference.writeData(sfKeyEmail, 'kk@kk.com'))
+        when(sharedPreference.writeData(StorageKeys.sfKeyEmail, 'kk@kk.com'))
             .thenAnswer((_) async => true);
-        when(sharedPreference.writeData(sfKeyPpiUsername, 'someusername'))
+        when(sharedPreference.writeData(
+                StorageKeys.sfKeyPpiUsername, 'someusername'))
             .thenAnswer((_) async => true);
-        when(sharedPreference.writeData(sfKeyPpiAccountId, 'some id'))
+        when(sharedPreference.writeData(
+                StorageKeys.sfKeyPpiAccountId, 'some id'))
             .thenAnswer((_) async => true);
-        when(sharedPreference.writeIntData(sfKeyPpiUserId, 0))
+        when(sharedPreference.writeIntData(StorageKeys.sfKeyPpiUserId, 0))
             .thenAnswer((_) async => true);
       },
     );

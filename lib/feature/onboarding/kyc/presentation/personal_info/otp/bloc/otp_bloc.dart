@@ -38,7 +38,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
   void _onOtpRequested(OtpRequested event, Emitter<OtpState> emit) async {
     try {
       emit(state.copyWith(response: BaseResponse.loading()));
-      final email = await _sharedPreference.readData(sfKeyEmail);
+      final email = await _sharedPreference.readData(StorageKeys.sfKeyEmail);
       var data = await _otpRepository.getSmsOtp(
           getSmsOtpRequest: GetSmsOtpRequest(email ?? ''));
       emit(state.copyWith(

@@ -189,8 +189,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   Future<GetAccountResponse?> _fetchUserProfile() async {
     final accountInfo = await _accountRepository.getAccount();
     if (accountInfo.state == ResponseState.success) {
-      _sharedPreference.writeData(sfKeyEmail, accountInfo.data!.email);
-      _sharedPreference.writeData(sfKeyPpiUsername, accountInfo.data!.username);
+      _sharedPreference.writeData(
+          StorageKeys.sfKeyEmail, accountInfo.data!.email);
+      _sharedPreference.writeData(
+          StorageKeys.sfKeyPpiUsername, accountInfo.data!.username);
       return accountInfo.data;
     }
     return null;

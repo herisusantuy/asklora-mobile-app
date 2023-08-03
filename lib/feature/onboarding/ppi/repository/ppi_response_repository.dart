@@ -63,18 +63,22 @@ class PpiResponseRepository {
   }
 
   Future<void> saveUserSnapShotToLocal(SnapShot snapshot) async {
-    await _sharedPreference.writeData(sfKeyPpiAccountId, snapshot.accountId);
-    await _sharedPreference.writeIntData(sfKeyPpiUserId, snapshot.id);
-    await _sharedPreference.writeData(sfKeyPpiName, snapshot.name);
-    await _sharedPreference.writeData(sfKeyPpiSnapshot, jsonEncode(snapshot));
+    await _sharedPreference.writeData(
+        StorageKeys.sfKeyPpiAccountId, snapshot.accountId);
+    await _sharedPreference.writeIntData(
+        StorageKeys.sfKeyPpiUserId, snapshot.id);
+    await _sharedPreference.writeData(StorageKeys.sfKeyPpiName, snapshot.name);
+    await _sharedPreference.writeData(
+        StorageKeys.sfKeyPpiSnapshot, jsonEncode(snapshot));
   }
 
   Future<SnapShot?> getUserSnapShotFromLocal(
       {bool forceToFetch = false}) async {
-    var data = await _sharedPreference.readData(sfKeyPpiSnapshot);
+    var data = await _sharedPreference.readData(StorageKeys.sfKeyPpiSnapshot);
     if (data == null || forceToFetch) {
       try {
-        var askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
+        var askloraId =
+            await _sharedPreference.readIntData(StorageKeys.sfKeyAskloraId);
         final response = await getUserSnapshotByAskloraId(askloraId ?? 0);
         return response.data;
       } catch (e) {

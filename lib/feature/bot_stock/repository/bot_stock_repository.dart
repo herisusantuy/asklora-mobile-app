@@ -90,7 +90,8 @@ class BotStockRepository {
       fetchBotRecommendation() async {
     try {
       var response = await _botStockApiClient.fetchBotRecommendation(
-          await _sharedPreference.readData(sfKeyPpiAccountId) ?? '');
+          await _sharedPreference.readData(StorageKeys.sfKeyPpiAccountId) ??
+              '');
       return BaseResponse.complete(
           BotRecommendationResponse.fromJson(response.data));
     } catch (e) {
@@ -102,7 +103,8 @@ class BotStockRepository {
       {bool isFreeBot = false}) async {
     try {
       var response = await _botStockApiClient.fetchBotRecommendation(
-          await _sharedPreference.readData(sfKeyPpiAccountId) ?? '');
+          await _sharedPreference.readData(StorageKeys.sfKeyPpiAccountId) ??
+              '');
       var botRecommendationResponse =
           BotRecommendationResponse.fromJson(response.data);
 
@@ -123,7 +125,7 @@ class BotStockRepository {
   }
 
   Future<void> removeInvestmentStyleState() async =>
-      await _sharedPreference.deleteData(sfKeyInvestmentStyleState);
+      await _sharedPreference.deleteData(StorageKeys.sfKeyInvestmentStyleState);
 
   Future<BaseResponse<List<BotActiveOrderModel>>> activeOrders(
       {required List<String> status}) async {

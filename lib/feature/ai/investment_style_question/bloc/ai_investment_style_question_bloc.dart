@@ -51,17 +51,19 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
 
   void _onInitiateAI(InitiateAI onEditQuery,
       Emitter<AiInvestmentStyleQuestionState> emit) async {
-    final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
-    final askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
+    final userName =
+        await _sharedPreference.readData(StorageKeys.sfKeyPpiName) ?? 'Me';
+    final askloraId =
+        await _sharedPreference.readIntData(StorageKeys.sfKeyAskloraId);
     final tempList = List<Conversation>.of(state.conversations);
     final ppiAccountId =
-        await _sharedPreference.readData(sfKeyPpiAccountId) ?? '';
+        await _sharedPreference.readData(StorageKeys.sfKeyPpiAccountId) ?? '';
     emit(state.copyWith(
         sessionId: '',
         userName: userName,
         userId: askloraId.toString(),
         isTyping: true,
-        conversations: tempList..add(Loading())));
+        conversations: tempList..add(const Loading())));
     fixture = await _ppiQuestionRepository
         .fetchInvestmentStyleQuestionsWithTryCatch(ppiAccountId);
     tempList.removeLast();
@@ -95,7 +97,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
     emit(state.copyWith(ppiResponseState: ResponseState.loading));
     final List<PpiSelectionRequest> ppiSelectionRequest = [];
     final int ppiUserId =
-        await _sharedPreference.readIntData(sfKeyPpiUserId) ?? 0;
+        await _sharedPreference.readIntData(StorageKeys.sfKeyPpiUserId) ?? 0;
 
     ///mapping question choices with AI ISQ result
     ///quid15 is omnisearch
@@ -186,7 +188,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
       tempList.add(Me(state.query, state.userName));
     }
 
-    tempList.add(Loading());
+    tempList.add(const Loading());
 
     final query = state.query;
 
@@ -210,7 +212,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
 
       ///show next button on question 1
       if (_isNeedToAddNextButton(response)) {
-        tempList.add(NextButton());
+        tempList.add(const NextButton());
       }
 
       ///save the result to the state on question 5
@@ -232,7 +234,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
     }
   }
 
-  Conversation get _errorChat => Lora(
+  Conversation get _errorChat => const Lora(
         'Sorry I cannot connect to the server right now, please try again',
       );
 
