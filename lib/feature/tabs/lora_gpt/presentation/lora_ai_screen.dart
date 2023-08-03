@@ -100,9 +100,7 @@ class LoraAiScreen extends StatelessWidget {
                     image: const DecorationImage(
                         image: AssetImage('assets/lora_gpt_background.png'),
                         fit: BoxFit.cover)),
-                child: state.shouldShowOverlay
-                    ? const LoraAiOverlayScreen()
-                    : const LoraGptScreen()),
+                child: const LoraGptScreen()),
           ),
         ),
       ),
