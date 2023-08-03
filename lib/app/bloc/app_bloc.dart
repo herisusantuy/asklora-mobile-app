@@ -51,7 +51,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         await _sharedPreference.readBoolData(StorageKeys.sfFreshInstall) ??
             true;
     if (isAppFreshInstall) {
-      _secureStorage.deleteAllData();
+      await _secureStorage.deleteAllData();
+      await _tokenRepository.deleteAll();
       await _sharedPreference.writeBoolData(StorageKeys.sfFreshInstall, false);
     }
 
