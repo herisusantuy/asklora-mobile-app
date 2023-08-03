@@ -38,7 +38,6 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     on<OnLandingPageOpened>(_onLandingPageOpened);
     on<OnResetSession>(_onResetSession);
     on<OnFinishTyping>(_onFinishTyping);
-    on<ShowOverLayScreen>(_onShowOverlayWidget);
     on<StorePortfolioBotStocks>(_onActiveBotResponse);
     on<StorePortfolioDetails>(_onStoreTotalPnl);
     on<StoreTabPageEvent>(_onStoreTabPage);
@@ -375,11 +374,6 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     }
     emit(state.copyWith(conversations: tempConversation, isTyping: isTyping));
   }
-
-  void _onShowOverlayWidget(
-          ShowOverLayScreen onShowOverLayScreen, Emitter<LoraGptState> emit) =>
-      emit(state.copyWith(
-          shouldShowOverlay: onShowOverLayScreen.shouldShowOverlayScreen));
 
   void _onActiveBotResponse(
           StorePortfolioBotStocks event, Emitter<LoraGptState> emit) =>
