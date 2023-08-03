@@ -14,13 +14,10 @@ class ResetPasswordSuccessScreen extends StatelessWidget {
   Widget build(BuildContext context) => CustomScaffold(
         enableBackNavigation: false,
         body: CustomStretchedLayout(
-          content: Padding(
-            padding: const EdgeInsets.only(top: 24),
-            child: CustomStatusWidget(
-              title: S.of(context).resetPasswordSuccessful,
-              subTitle: S.of(context).resetPasswordSuccessfulMessage,
-              statusType: StatusType.success,
-            ),
+          content: CustomStatusWidget(
+            title: S.of(context).resetPasswordSuccessful,
+            subTitle: S.of(context).resetPasswordSuccessfulMessage,
+            statusType: StatusType.success,
           ),
           bottomButton: _backToLoginButton(context),
         ),
