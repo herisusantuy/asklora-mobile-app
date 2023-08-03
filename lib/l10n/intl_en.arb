@@ -448,16 +448,13 @@
       }
     }
   },
-  "endBotStockAcknowledgement": "{botName} {botSymbol} will end at {dateTime}",
+  "endBotStockAcknowledgement": "{botName} {botSymbol} will end when the US market opens",
   "@endBotStockAcknowledgement": {
     "placeholders": {
       "botName": {
         "type": "String"
       },
       "botSymbol": {
-        "type": "String"
-      },
-      "dateTime": {
         "type": "String"
       }
     }
