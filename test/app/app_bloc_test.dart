@@ -21,6 +21,7 @@ class MockAppBloc extends MockBloc<AppEvent, AppState> implements AppBloc {}
 @GenerateMocks([TokenRepository])
 @GenerateMocks([UserJourneyRepository])
 @GenerateMocks([TokenApiClient])
+// @GenerateMocks([SecureStorage])
 void main() async {
   group('App Bloc Tests', () {
     late AppBloc appBloc;
@@ -55,6 +56,8 @@ void main() async {
       'emits `AppState.authenticated` and User Journey = kyc WHEN'
       'Token is valid and User Journey = kyc',
       build: () {
+        when(sharedPreference.readBoolData(StorageKeys.sfFreshInstall))
+            .thenAnswer((_) => Future.value(false));
         when(tokenRepository.isTokenValid())
             .thenAnswer((_) => Future.value(true));
         when(userJourneyRepository.getUserJourney())
@@ -75,6 +78,8 @@ void main() async {
       'emits `AppState.unauthenticated` WHEN '
       'Token is not valid or expired',
       build: () {
+        when(secureStorage.readBoolData(StorageKeys.sfFreshInstall))
+            .thenAnswer((_) => Future.value(true));
         when(tokenRepository.isTokenValid())
             .thenAnswer((_) => Future.value(false));
         when(userJourneyRepository.getUserJourney())
