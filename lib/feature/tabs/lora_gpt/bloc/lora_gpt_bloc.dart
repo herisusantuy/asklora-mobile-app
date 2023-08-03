@@ -254,7 +254,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     final askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
 
     emit(state.copyWith(
-        status: ResponseState.success,
+        status: ResponseState.loading,
         conversations: [],
         sessionId: '',
         userName: userName,
@@ -266,8 +266,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
   }
 
   void _onEditQuery(OnEditQuery onEditQuery, Emitter<LoraGptState> emit) =>
-      emit(state.copyWith(
-          query: onEditQuery.query, status: ResponseState.unknown));
+      emit(state.copyWith(query: onEditQuery.query));
 
   void _onPromptTap(OnPromptTap onPromptTap, Emitter<LoraGptState> emit) {
     emit(state.copyWith(query: onPromptTap.query));
