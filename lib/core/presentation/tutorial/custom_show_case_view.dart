@@ -62,14 +62,7 @@ class CustomShowcaseView extends StatelessWidget {
               if (pointerPosition == PointerPosition.top)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
-                  child: GestureDetector(
-                    onTap: onToolTipClick,
-                    child: CustomTextNew(
-                      S.of(context).tapAnyWhere,
-                      style: AskLoraTextStyles.subtitle2
-                          .copyWith(color: AskLoraColors.white),
-                    ),
-                  ),
+                  child: _tapAnyWhereButton(context),
                 ),
               GestureDetector(
                 onTap: onToolTipClick,
@@ -90,14 +83,7 @@ class CustomShowcaseView extends StatelessWidget {
               if (pointerPosition == PointerPosition.bottom)
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: GestureDetector(
-                    onTap: onToolTipClick,
-                    child: CustomTextNew(
-                      'Tap anywhere to continue',
-                      style: AskLoraTextStyles.subtitle2
-                          .copyWith(color: AskLoraColors.white),
-                    ),
-                  ),
+                  child: _tapAnyWhereButton(context),
                 )
             ],
           ),
@@ -106,4 +92,13 @@ class CustomShowcaseView extends StatelessWidget {
       child: child,
     );
   }
+
+  Widget _tapAnyWhereButton(BuildContext context) => GestureDetector(
+        onTap: onToolTipClick,
+        child: CustomTextNew(
+          S.of(context).tapAnyWhere,
+          style:
+              AskLoraTextStyles.subtitle2.copyWith(color: AskLoraColors.white),
+        ),
+      );
 }
