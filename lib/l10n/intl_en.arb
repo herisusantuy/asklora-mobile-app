@@ -429,16 +429,13 @@
   "tradeRequestSubmitted": "Trade Request Submitted",
   "tradeCancelledTitle": "Trade Cancelled",
   "tradeCancelledSubtitle": "The trade has been cancelled and your investment amount has been returned to your account",
-  "rolloverBotStockAcknowledgement": "{botName} {botSymbol} will start at {dateTime}",
-  "@rolloverBotStockAcknowledgement": {
+  "startBotStockAcknowledgement": "{botName} {botSymbol} will start when the US market opens",
+  "@startBotStockAcknowledgement": {
     "placeholders": {
       "botName": {
         "type": "String"
       },
       "botSymbol": {
-        "type": "String"
-      },
-      "dateTime": {
         "type": "String"
       }
     }
@@ -451,16 +448,13 @@
       }
     }
   },
-  "endBotStockAcknowledgement": "{botName} {botSymbol} will end at {dateTime}",
+  "endBotStockAcknowledgement": "{botName} {botSymbol} will end when the US market opens",
   "@endBotStockAcknowledgement": {
     "placeholders": {
       "botName": {
         "type": "String"
       },
       "botSymbol": {
-        "type": "String"
-      },
-      "dateTime": {
         "type": "String"
       }
     }
@@ -798,6 +792,10 @@
     }
   },
   "ppiGotIt": "Got It",
+  "giftBotStockMessageScreenTitle": "Every trade is unique, each time you invest with a new Botstock, I'll ask you some investment style questions to tailor new recommendations! ",
+  "giftBotStockMessageScreenBottomButton": "See my recommendations",
+  "goToPortfolio": "Go To Portfolio",
+  "startAnotherInvestments": "Start another investment",
   "botValues": "Bot Values",
   "botRecommendationTutorialDesc1": "This is the ",
   "botRecommendationTutorialDesc2": "Botstock recommendations screen. ",
@@ -806,5 +804,7 @@
   "botRecommendationTutorialDesc5": "on a Botstock that catches your eye!",
   "giftBotStockMessageScreenTitle": "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ",
   "giftBotStockMessageScreenBottomButton": "See my recommendations",
+  "requestedToEnd": "Requested To End",
+  "userNotFound": "User Not Found",
   "portfolioDetailPerformanceBotAssetsInStockTooltip": "Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%."
 }

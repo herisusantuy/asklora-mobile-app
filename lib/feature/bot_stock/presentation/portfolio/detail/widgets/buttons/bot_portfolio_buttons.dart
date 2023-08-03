@@ -28,10 +28,19 @@ class BotPortfolioButtons extends StatelessWidget {
             //   ),
 
             if (portfolioState.isShowTerminateButton)
-              BotTerminateButton(
-                botActiveOrderDetailModel: botActiveOrderDetailModel,
-                botType: botActiveOrderDetailModel.botType,
-              ),
+              if (botActiveOrderDetailModel.terminationRequested)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 30),
+                  child: CustomTextNew(
+                    S.of(context).requestedToEnd,
+                    style: AskLoraTextStyles.button1,
+                  ),
+                )
+              else
+                BotTerminateButton(
+                  botActiveOrderDetailModel: botActiveOrderDetailModel,
+                  botType: botActiveOrderDetailModel.botType,
+                ),
 
             if (portfolioState.isShowCancelButton)
               BotCancelButton(

@@ -24,8 +24,9 @@ Widget getSvgIcon(String iconName,
     );
 
 Image getPngIcon(String iconName,
-        {double? height, double? width, BoxFit? fit}) =>
+        {double? height, double? width, BoxFit? fit, Color? color}) =>
     Image.asset(
+      color: color,
       'assets/icons/$iconName.png',
       height: height,
       width: width,

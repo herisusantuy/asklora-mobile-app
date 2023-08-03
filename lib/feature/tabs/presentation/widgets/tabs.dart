@@ -26,7 +26,7 @@ class Tabs extends StatelessWidget {
                           iconAsset: 'bottom_nav_home',
                           activeIconAsset: 'bottom_nav_home_selected',
                           active: state.currentTabPage == TabPage.home),
-                    _tabSvg(
+                    _tabPng(
                         onTap: () => context
                             .read<TabScreenBloc>()
                             .add(const TabChanged(TabPage.forYou)),
@@ -77,6 +77,7 @@ class Tabs extends StatelessWidget {
                               }
                             },
                             iconAsset: 'bottom_nav_asklora_ai',
+                            filledColor: backgroundImageType.tabAiFilledColor,
                             activeIconAsset:
                                 backgroundImageType.tabAiActiveAsset,
                             active: state.aiPageSelected ||
@@ -117,6 +118,24 @@ class Tabs extends StatelessWidget {
           child: getSvgIcon(active ? activeIconAsset ?? iconAsset : iconAsset,
               color: active ? activeFilledColor : filledColor,
               fit: BoxFit.none),
+        ),
+      );
+
+  Widget _tabPng(
+          {required VoidCallback onTap,
+          required String iconAsset,
+          required String activeIconAsset,
+          Color? filledColor,
+          bool active = false,
+          double clickAreaSize = 40}) =>
+      GestureDetector(
+        onTap: onTap,
+        child: Container(
+          color: Colors.transparent,
+          width: clickAreaSize,
+          height: clickAreaSize,
+          child: getPngIcon(active ? activeIconAsset : iconAsset,
+              fit: BoxFit.none, color: filledColor),
         ),
       );
 }
