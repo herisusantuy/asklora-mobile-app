@@ -386,16 +386,13 @@
   "tradeCancelledTitle": "交易已取消",
   "buttonBackToHome": "返回主頁",
   "tradeCancelledSubtitle": "交易已取消，你的投資金額已轉至你嘅賬戶。",
-  "rolloverBotStockAcknowledgement": "{botName} {botSymbol} 將於 {dateTime} 開始",
-  "@rolloverBotStockAcknowledgement": {
+  "startBotStockAcknowledgement": "{botName} {botSymbol} will start when the US market opens",
+  "@startBotStockAcknowledgement": {
     "placeholders": {
       "botName": {
         "type": "String"
       },
       "botSymbol": {
-        "type": "String"
-      },
-      "dateTime": {
         "type": "String"
       }
     }
@@ -783,5 +780,10 @@
   "tapAnyWhere": "Tap anywhere to continue",
   "youCanClickOn": "You can click on ",
   "tellMeMore": "Tell Me More",
-  "toOpenLora": " to open Lora and get more details about your investment!"
+  "toOpenLora": " to open Lora and get more details about your investment!",
+  "requestedToEnd": "Requested To End",
+  "giftBotStockMessageScreenBottomButton": "OK! 睇下畀我嘅推薦 ",
+  "userNotFound": "User Not Found",
+  "goToPortfolio": "Go To Portfolio",
+  "startAnotherInvestments": "Start another investment"
 }

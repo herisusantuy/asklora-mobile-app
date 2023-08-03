@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/presentation/buttons/button_pair.dart';
 import '../../../core/presentation/buttons/primary_button.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_status_widget.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
+import '../../../generated/l10n.dart';
+import '../../tabs/presentation/tab_screen.dart';
+import '../../tabs/utils/tab_util.dart';
+import '../bloc/bot_stock_bloc.dart';
 
 class BotStockResultScreen extends StatelessWidget {
   static const String route = '/bot_stock_result_screen';
@@ -24,19 +29,24 @@ class BotStockResultScreen extends StatelessWidget {
               statusType: StatusType.success,
               subTitle: arguments.desc,
             ),
-            bottomButton: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30.0),
-              child: PrimaryButton(
-                label: arguments.labelBottomButton,
-                onTap: () {
-                  if (arguments.onButtonTap != null) {
-                    arguments.onButtonTap!(context);
-                  } else {
-                    Navigator.pop(context);
-                  }
-                },
-              ),
-            ),
+            bottomButton: arguments.botOrderType == BotOrderType.cancel
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 30),
+                    child: PrimaryButton(
+                        label: S.of(context).buttonBackToPortfolio,
+                        onTap: () => TabScreen.openAndRemoveAllRoute(context,
+                            initialTabPage: TabPage.portfolio)),
+                  )
+                : ButtonPair(
+                    primaryButtonOnClick: () => TabScreen.openAndRemoveAllRoute(
+                        context,
+                        initialTabPage: TabPage.portfolio),
+                    primaryButtonLabel: S.of(context).buttonBackToPortfolio,
+                    secondaryButtonLabel: S.of(context).startAnotherInvestments,
+                    secondaryButtonOnClick: () =>
+                        TabScreen.openAndRemoveAllRoute(context,
+                            initialTabPage: TabPage.forYou),
+                  ),
           )),
     );
   }
@@ -65,13 +75,11 @@ class BotStockResultScreen extends StatelessWidget {
 class BotStockResultArgument {
   final String title;
   final String desc;
-  final String labelBottomButton;
-  final Function(BuildContext)? onButtonTap;
+  final BotOrderType botOrderType;
 
   const BotStockResultArgument({
     required this.title,
     required this.desc,
-    required this.labelBottomButton,
-    this.onButtonTap,
+    this.botOrderType = BotOrderType.buy,
   });
 }

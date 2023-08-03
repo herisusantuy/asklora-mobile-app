@@ -37,6 +37,7 @@ BotActiveOrderDetailModel _$BotActiveOrderDetailModelFromJson(
       (json['max_loss_pct'] as num).toDouble(),
       (json['target_profit_pct'] as num).toDouble(),
       (json['stock_values'] as num).toDouble(),
+      json['termination_requested'] as bool,
     );
 
 Map<String, dynamic> _$BotActiveOrderDetailModelToJson(
@@ -68,4 +69,5 @@ Map<String, dynamic> _$BotActiveOrderDetailModelToJson(
       'max_loss_pct': instance.maxLossPct,
       'target_profit_pct': instance.targetProfitPct,
       'stock_values': instance.stockValues,
+      'termination_requested': instance.terminationRequested,
     };

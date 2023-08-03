@@ -3173,14 +3173,13 @@ class S {
     );
   }
 
-  /// `{botName} {botSymbol} will start at {dateTime}`
-  String rolloverBotStockAcknowledgement(
-      String botName, String botSymbol, String dateTime) {
+  /// `{botName} {botSymbol} will start when the US market opens`
+  String startBotStockAcknowledgement(String botName, String botSymbol) {
     return Intl.message(
-      '$botName $botSymbol will start at $dateTime',
-      name: 'rolloverBotStockAcknowledgement',
+      '$botName $botSymbol will start when the US market opens',
+      name: 'startBotStockAcknowledgement',
       desc: '',
-      args: [botName, botSymbol, dateTime],
+      args: [botName, botSymbol],
     );
   }
 
@@ -5706,6 +5705,46 @@ class S {
     );
   }
 
+  /// `Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! `
+  String get giftBotStockMessageScreenTitle {
+    return Intl.message(
+      'Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ',
+      name: 'giftBotStockMessageScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See my recommendations`
+  String get giftBotStockMessageScreenBottomButton {
+    return Intl.message(
+      'See my recommendations',
+      name: 'giftBotStockMessageScreenBottomButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go To Portfolio`
+  String get goToPortfolio {
+    return Intl.message(
+      'Go To Portfolio',
+      name: 'goToPortfolio',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start another investment`
+  String get startAnotherInvestments {
+    return Intl.message(
+      'Start another investment',
+      name: 'startAnotherInvestments',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Bot Values`
   String get botValues {
     return Intl.message(
@@ -5766,26 +5805,6 @@ class S {
     );
   }
 
-  /// `Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! `
-  String get giftBotStockMessageScreenTitle {
-    return Intl.message(
-      'Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ',
-      name: 'giftBotStockMessageScreenTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `See my recommendations`
-  String get giftBotStockMessageScreenBottomButton {
-    return Intl.message(
-      'See my recommendations',
-      name: 'giftBotStockMessageScreenBottomButton',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.`
   String get portfolioDetailPerformanceBotAssetsInStockTooltip {
     return Intl.message(
@@ -5841,6 +5860,26 @@ class S {
     return Intl.message(
       ' to open Lora and get more details about your investment!',
       name: 'toOpenLora',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Requested To End`
+  String get requestedToEnd {
+    return Intl.message(
+      'Requested To End',
+      name: 'requestedToEnd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User Not Found`
+  String get userNotFound {
+    return Intl.message(
+      'User Not Found',
+      name: 'userNotFound',
       desc: '',
       args: [],
     );

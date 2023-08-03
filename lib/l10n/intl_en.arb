@@ -429,16 +429,13 @@
   "tradeRequestSubmitted": "Trade Request Submitted",
   "tradeCancelledTitle": "Trade Cancelled",
   "tradeCancelledSubtitle": "The trade has been cancelled and your investment amount has been returned to your account",
-  "rolloverBotStockAcknowledgement": "{botName} {botSymbol} will start at {dateTime}",
-  "@rolloverBotStockAcknowledgement": {
+  "startBotStockAcknowledgement": "{botName} {botSymbol} will start when the US market opens",
+  "@startBotStockAcknowledgement": {
     "placeholders": {
       "botName": {
         "type": "String"
       },
       "botSymbol": {
-        "type": "String"
-      },
-      "dateTime": {
         "type": "String"
       }
     }
@@ -798,6 +795,10 @@
     }
   },
   "ppiGotIt": "Got It",
+  "giftBotStockMessageScreenTitle": "Every trade is unique, each time you invest with a new Botstock, I'll ask you some investment style questions to tailor new recommendations! ",
+  "giftBotStockMessageScreenBottomButton": "See my recommendations",
+  "goToPortfolio": "Go To Portfolio",
+  "startAnotherInvestments": "Start another investment",
   "botValues": "Bot Values",
   "botRecommendationTutorialDesc1": "This is the ",
   "botRecommendationTutorialDesc2": "Botstock recommendations screen. ",
@@ -811,5 +812,8 @@
   "tapAnyWhere": "Tap anywhere to continue",
   "youCanClickOn": "You can click on ",
   "tellMeMore": "Tell Me More",
-  "toOpenLora": " to open Lora and get more details about your investment!"
+  "toOpenLora": " to open Lora and get more details about your investment!",
+  "requestedToEnd": "Requested To End",
+  "userNotFound": "User Not Found",
+  "portfolioDetailPerformanceBotAssetsInStockTooltip": "Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%."
 }

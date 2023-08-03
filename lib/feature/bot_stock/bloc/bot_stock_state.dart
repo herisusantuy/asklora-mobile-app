@@ -1,5 +1,11 @@
 part of 'bot_stock_bloc.dart';
 
+enum BotOrderType {
+  buy,
+  terminate,
+  cancel;
+}
+
 class BotStockState extends Equatable {
   const BotStockState({
     this.botRecommendationResponse =

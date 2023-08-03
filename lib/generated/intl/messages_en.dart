@@ -81,8 +81,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m23(opennessScore, neuroticismScore, extrovertScore) =>
       "Based on your answer, ${opennessScore} and ${neuroticismScore}\n\n${extrovertScore}";
 
-  static String m24(botName, botSymbol, dateTime) =>
-      "${botName} ${botSymbol} will start at ${dateTime}";
+  static String m24(botName, botSymbol) =>
+      "${botName} ${botSymbol} will start when the US market opens";
 
   static String m25(minDeposit) =>
       "Transfer at least HK\$${minDeposit} to Asklora\'s bank account. Any initial deposit less than HK\$${minDeposit} will be rejected and fees will be charged.";
@@ -468,6 +468,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftBotStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
             "You\'re all set!\nLet\'s begin a real AI trade!"),
         "go": MessageLookupByLibrary.simpleMessage("Go"),
+        "goToPortfolio":
+            MessageLookupByLibrary.simpleMessage("Go To Portfolio"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got It"),
         "greatStart": MessageLookupByLibrary.simpleMessage("Great start!"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
@@ -816,6 +818,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Redeem Your Botstock Now"),
         "rejected": MessageLookupByLibrary.simpleMessage("Rejected"),
         "relearn": MessageLookupByLibrary.simpleMessage("relearn"),
+        "requestedToEnd":
+            MessageLookupByLibrary.simpleMessage("Requested To End"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
         "resetPasswordSuccessful":
             MessageLookupByLibrary.simpleMessage("Password Reset Successful"),
@@ -838,7 +842,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Risk Disclosure Statement"),
         "riskDisclosureStatementString": MessageLookupByLibrary.simpleMessage(
             "1. The prices of securities fluctuate, sometimes dramatically. The price of a security may move up or down, and may become valueless. It is as likely that losses will be incurred rather than profit made as a result of buying and selling securities. Investors should not only base on this marketing material to make any investment decision, you should carefully consider whether the investment products or services are suitable for you according to your investment experience, purpose, risk tolerance, financial or related conditions. If you have any questions, please contact us or obtain independent advice.\n\n2. Investment in foreign securities carries additional risks not generally associated with securities in the domestic market. The value or income of foreign securities may be more volatile and could be adversely affected by changes in currency rates of exchange, foreign taxation practices, foreign laws, government practices, regulations, and political events. You may find it more difficult to liquidate investments in foreign securities where they have limited liquidity in the relevant market. Foreign laws, government practices, and regulations may also affect the transferability of foreign securities. Timely and reliable information about the value or the extent of the risks of foreign securities may not be readily available at all times.\n\n3. You acknowledge that you have fully understood the implications of the risks associated with the Electronic Trading Service as set out in the Client Agreement"),
-        "rolloverBotStockAcknowledgement": m24,
         "saveForLater": MessageLookupByLibrary.simpleMessage("Save For Later"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
         "seeMyRecommendations":
@@ -868,6 +871,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "startABotstock":
             MessageLookupByLibrary.simpleMessage("Start A Botstock"),
         "startAgain": MessageLookupByLibrary.simpleMessage("Start Again"),
+        "startAnotherInvestments":
+            MessageLookupByLibrary.simpleMessage("Start another investment"),
+        "startBotStockAcknowledgement": m24,
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
         "startInvesting":
             MessageLookupByLibrary.simpleMessage("Start Investing"),
@@ -1037,6 +1043,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "usResidentQuestion": MessageLookupByLibrary.simpleMessage(
             "Are you a United States tax resident, green card holder, or citizen?"),
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
+        "userNotFound": MessageLookupByLibrary.simpleMessage("User Not Found"),
         "verifyIdentity":
             MessageLookupByLibrary.simpleMessage("Verify identity"),
         "verifyNow": MessageLookupByLibrary.simpleMessage("Verify Now"),
