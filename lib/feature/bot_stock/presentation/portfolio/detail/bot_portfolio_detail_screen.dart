@@ -123,9 +123,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                       content: BotPortfolioDetailContent(
                         botActiveOrderDetailModel: botActiveOrderDetailModel,
                       ),
-                      bottomButton: BotPortfolioButtons(
-                        portfolioState: state,
-                      ),
+                      bottomButton: BotPortfolioButtons(portfolioState: state),
                     ),
                   ),
                 );

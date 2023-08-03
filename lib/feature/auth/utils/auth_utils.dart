@@ -36,6 +36,8 @@ extension MessageExtension on ValidationCode {
         return S.of(context).otpSentToYourEmail;
       case ValidationCode.verifyOtpSuccess:
         return S.of(context).verifyOtpSuccess;
+      case ValidationCode.userNotFound:
+        return S.of(context).userNotFound;
       case ValidationCode.accountExists:
         return 'Account with this email already exists.';
       case ValidationCode.usernameExists:
