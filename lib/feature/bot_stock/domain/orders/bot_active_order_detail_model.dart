@@ -34,6 +34,8 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   final double targetProfitPct;
   @JsonKey(name: 'stock_values')
   final double stockValues;
+  @JsonKey(name: 'termination_requested')
+  final bool terminationRequested;
 
   const BotActiveOrderDetailModel(
       String uid,
@@ -61,7 +63,8 @@ class BotActiveOrderDetailModel extends BotDetailModel {
       this.botShare,
       this.maxLossPct,
       this.targetProfitPct,
-      this.stockValues)
+      this.stockValues,
+      this.terminationRequested)
       : super(
             uid,
             name,

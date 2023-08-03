@@ -675,6 +675,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "readyToGo": MessageLookupByLibrary.simpleMessage("準備好未？"),
         "rejected": MessageLookupByLibrary.simpleMessage("已拒絕"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
+        "requestedToEnd":
+            MessageLookupByLibrary.simpleMessage("Requested To End"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("重設密碼"),
         "resetPasswordSuccessful":
             MessageLookupByLibrary.simpleMessage("密碼重設成功"),
