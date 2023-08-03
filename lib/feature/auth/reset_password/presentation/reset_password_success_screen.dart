@@ -11,15 +11,18 @@ class ResetPasswordSuccessScreen extends StatelessWidget {
   const ResetPasswordSuccessScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => CustomScaffold(
-        enableBackNavigation: false,
-        body: CustomStretchedLayout(
-          content: CustomStatusWidget(
-            title: S.of(context).resetPasswordSuccessful,
-            subTitle: S.of(context).resetPasswordSuccessfulMessage,
-            statusType: StatusType.success,
+  Widget build(BuildContext context) => WillPopScope(
+        onWillPop: () async => false,
+        child: CustomScaffold(
+          enableBackNavigation: false,
+          body: CustomStretchedLayout(
+            content: CustomStatusWidget(
+              title: S.of(context).resetPasswordSuccessful,
+              subTitle: S.of(context).resetPasswordSuccessfulMessage,
+              statusType: StatusType.success,
+            ),
+            bottomButton: _backToLoginButton(context),
           ),
-          bottomButton: _backToLoginButton(context),
         ),
       );
 
@@ -33,11 +36,9 @@ class ResetPasswordSuccessScreen extends StatelessWidget {
       );
 
   static void open(BuildContext context) =>
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (BuildContext context) => const ResetPasswordSuccessScreen(
-            key: Key('reset_password_success_screen'),
-          ),
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (BuildContext context) => const ResetPasswordSuccessScreen(
+          key: Key('reset_password_success_screen'),
         ),
-      );
+      ));
 }
