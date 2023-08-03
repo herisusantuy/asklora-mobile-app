@@ -21,6 +21,6 @@ class ForYouRepository {
   Future<BaseResponse<bool>> getInvestmentStyleState() async {
     bool? investmentStyleState =
         await _sharedPreference.readBoolData(sfKeyInvestmentStyleState);
-    return BaseResponse.complete(investmentStyleState ?? false);
+    return BaseResponse.complete(investmentStyleState ?? true);
   }
 }

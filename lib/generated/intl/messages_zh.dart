@@ -676,6 +676,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "readyToGo": MessageLookupByLibrary.simpleMessage("準備好未？"),
         "rejected": MessageLookupByLibrary.simpleMessage("已拒絕"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
+        "requestedToEnd":
+            MessageLookupByLibrary.simpleMessage("Requested To End"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("重設密碼"),
         "resetPasswordSuccessful":
             MessageLookupByLibrary.simpleMessage("密碼重設成功"),
@@ -856,6 +858,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "usResidentQuestion":
             MessageLookupByLibrary.simpleMessage("你是否擁有美國稅務居民身份、持有綠卡，或公民身份？"),
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
+        "userNotFound": MessageLookupByLibrary.simpleMessage("User Not Found"),
         "verifyIdentity": MessageLookupByLibrary.simpleMessage("核實身份"),
         "verifyNow": MessageLookupByLibrary.simpleMessage("立即核實"),
         "verifyOtpSuccess":
