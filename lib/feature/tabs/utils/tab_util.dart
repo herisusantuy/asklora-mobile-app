@@ -21,6 +21,7 @@ enum BackgroundImageType {
     appBarBackgroundColor: Colors.transparent,
     scaffoldBackgroundColor: Colors.transparent,
     tabAiActiveAsset: 'bottom_nav_asklora_ai_selected_black',
+    tabAiFilledColor: Colors.transparent,
   ),
   dark(
     imageAsset: 'assets/lora_gpt_background.png',
@@ -30,16 +31,18 @@ enum BackgroundImageType {
     tabAiActiveAsset: 'bottom_nav_asklora_ai_selected_white',
     tabForYouFilledColor: AskLoraColors.darkGray,
     tabPortfolioFilledColor: AskLoraColors.darkGray,
+    tabAiFilledColor: AskLoraColors.gray,
   ),
-
   none(
       baseBackgroundColor: AskLoraColors.white,
       appBarBackgroundColor: AskLoraColors.white,
       scaffoldBackgroundColor: AskLoraColors.white,
+      tabAiFilledColor: AskLoraColors.gray,
       tabAiActiveAsset: 'bottom_nav_asklora_ai_selected_black');
 
   final String? imageAsset;
   final String tabAiActiveAsset;
+  final Color? tabAiFilledColor;
   final Color? tabForYouFilledColor;
   final Color? tabPortfolioFilledColor;
   final Color baseBackgroundColor;
@@ -52,6 +55,7 @@ enum BackgroundImageType {
     required this.appBarBackgroundColor,
     required this.scaffoldBackgroundColor,
     required this.tabAiActiveAsset,
+    this.tabAiFilledColor,
     this.tabForYouFilledColor,
     this.tabPortfolioFilledColor,
   });
