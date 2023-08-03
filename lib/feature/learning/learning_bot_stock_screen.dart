@@ -66,7 +66,7 @@ class LearningBotStockScreen extends StatelessWidget {
             case LearningBotStockPageStep.welcome:
               return LearningBotStockWelcomeScreen(
                 botType: botType,
-                botRecommendationModel: botRecommendationModel,
+                tickerSymbol: botRecommendationModel.tickerSymbol,
               );
             case LearningBotStockPageStep.question:
               return DemonstrationQuestionScreen(
