@@ -6,7 +6,11 @@ part 'conversation.g.dart';
 enum ConversationType { me, lora, loading, reset, next, component }
 
 abstract class Conversation extends Equatable {
+  final bool isNeedCallback;
+
   ConversationType type();
+
+  const Conversation({this.isNeedCallback = false});
 
   static empty() => const [];
 
@@ -17,21 +21,26 @@ abstract class Conversation extends Equatable {
 class Lora extends Conversation {
   final String text;
 
-  Lora(this.text);
+  const Lora(this.text, {bool isNeedCallback = true})
+      : super(isNeedCallback: isNeedCallback);
 
   @override
   ConversationType type() => ConversationType.lora;
 
   @override
-  List<Object?> get props => [type(), text];
+  List<Object?> get props => [type(), text, isNeedCallback];
+
+  Lora copyWith({bool? isNeedCallback}) =>
+      Lora(text, isNeedCallback: isNeedCallback ?? this.isNeedCallback);
 }
 
 class LoraError extends Lora {
-  LoraError()
-      : super('Lora is working on some optimizations to serve you better.');
+  const LoraError({bool isNeedCallback = true})
+      : super('Lora is working on some optimizations to serve you better.',
+            isNeedCallback: isNeedCallback);
 
   @override
-  List<Object?> get props => [type(), text];
+  List<Object?> get props => [type(), text, isNeedCallback];
 }
 
 @JsonSerializable()
@@ -61,35 +70,41 @@ class Me extends Conversation {
   final String text;
   final String userName;
 
-  Me(this.text, this.userName) : super();
+  const Me(this.text, this.userName) : super();
 
   @override
   ConversationType type() => ConversationType.me;
 
   @override
-  List<Object?> get props => [text, type()];
+  List<Object?> get props => [text, type(), isNeedCallback];
 }
 
 class NextButton extends Conversation {
   @override
   ConversationType type() => ConversationType.next;
 
+  const NextButton() : super(isNeedCallback: false);
+
   @override
-  List<Object?> get props => [type()];
+  List<Object?> get props => [type(), isNeedCallback];
 }
 
 class Loading extends Conversation {
   @override
   ConversationType type() => ConversationType.loading;
 
+  const Loading() : super(isNeedCallback: false);
+
   @override
-  List<Object?> get props => [type()];
+  List<Object?> get props => [type(), isNeedCallback];
 }
 
 class Reset extends Conversation {
   @override
   ConversationType type() => ConversationType.reset;
 
+  const Reset() : super(isNeedCallback: false);
+
   @override
-  List<Object?> get props => [type()];
+  List<Object?> get props => [type(), isNeedCallback];
 }
