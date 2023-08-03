@@ -79,5 +79,5 @@ class MockConfig implements BaseConfig {
 
   @override
   // String get askloraAiBaseUrl => 'http://stock-gpt-dev.intra.asklora.ai/';
-  String get askloraAiBaseUrl => 'http://stock-gpt-dev.intra.asklora.ai/';
+  String get askloraAiBaseUrl => 'https://stock-gpt-stag.api.asklora.ai/';
 }
