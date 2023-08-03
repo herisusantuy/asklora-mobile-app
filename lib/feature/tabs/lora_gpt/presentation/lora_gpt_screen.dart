@@ -61,7 +61,8 @@ class _LoraGptScreenState extends State<LoraGptScreen>
     return BlocConsumer<LoraGptBloc, LoraGptState>(
       listenWhen: (_, current) => current.query.isEmpty,
       listener: (context, state) => controller.clear(),
-      buildWhen: (previous, current) => previous != current,
+      buildWhen: (previous, current) =>
+          previous.status != current.status || previous.query != current.query,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.only(left: 20, right: 20, bottom: 12),
@@ -112,19 +113,15 @@ class _LoraGptScreenState extends State<LoraGptScreen>
               SizedBox.square(
                 dimension: 55,
                 child: AbsorbPointer(
-                  absorbing: state.query.isEmpty || state.isTyping,
+                  absorbing: state.isTextFieldSendButtonDisabled,
                   child: ElevatedButton(
                       onPressed: () {
                         FocusScope.of(context).unfocus();
-                        if (state.query.trim().isNotEmpty && !state.isTyping) {
-                          context
-                              .read<LoraGptBloc>()
-                              .add(const OnSearchQuery());
-                        }
+                        context.read<LoraGptBloc>().add(const OnSearchQuery());
                       },
                       style: ElevatedButton.styleFrom(
                         side: const BorderSide(color: AskLoraColors.white),
-                        backgroundColor: state.query.isEmpty || state.isTyping
+                        backgroundColor: state.isTextFieldSendButtonDisabled
                             ? AskLoraColors.gray.withOpacity(0.2)
                             : AskLoraColors.primaryGreen,
                         shape: const CircleBorder(),

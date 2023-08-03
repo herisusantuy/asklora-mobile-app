@@ -3,13 +3,9 @@ part of '../ai_landing_page.dart';
 class AiLandingPageChatList extends StatelessWidget {
   final AiThemeType aiThemeType;
   final List<Conversation> conversations;
-  final bool isTyping;
 
   const AiLandingPageChatList(
-      {required this.conversations,
-      required this.isTyping,
-      required this.aiThemeType,
-      super.key});
+      {required this.conversations, required this.aiThemeType, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +35,10 @@ class AiLandingPageChatList extends StatelessWidget {
             reverse: true,
             child: Column(
               children: conversations
-                  .mapIndexed(
-                    (index, conversation) => Padding(
+                  .map(
+                    (conversation) => Padding(
                       padding: const EdgeInsets.only(bottom: 17),
-                      child: _getBubbleChat(
-                          context, conversation, index, _isAnimateText(index)),
+                      child: _getBubbleChat(context, conversation),
                     ),
                   )
                   .toList(),
@@ -54,26 +49,26 @@ class AiLandingPageChatList extends StatelessWidget {
     );
   }
 
-  bool _isAnimateText(int index) =>
-      isTyping && index == conversations.length - 1;
+  void _updateConversation(BuildContext context, bool isNeedCallback) {
+    if (isNeedCallback) {
+      context.read<LoraGptBloc>().add(const OnFinishTyping());
+    }
+  }
 
-  Widget _getBubbleChat(
-      BuildContext context, Conversation e, int index, bool animateText) {
+  Widget _getBubbleChat(BuildContext context, Conversation e) {
     if (e is Lora) {
       return OutChatBubbleWidget(
         e.text.toString(),
-        animateText: animateText,
+        animateText: e.isNeedCallback,
         onFinishedAnimation: () =>
-            context.read<LoraGptBloc>().add(const OnFinishTyping()),
+            _updateConversation(context, e.isNeedCallback),
       );
     } else if (e is Me) {
       return InChatBubbleWidget(message: e.text, name: e.userName);
     } else if (e is Reset) {
       return const SessionResetWidget();
     } else if (e is Component) {
-      if (animateText) {
-        context.read<LoraGptBloc>().add(const OnFinishTyping());
-      }
+      _updateConversation(context, e.isNeedCallback);
 
       return ComponentWidget(
         aiThemeType: aiThemeType,
