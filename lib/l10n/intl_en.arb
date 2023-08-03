@@ -424,21 +424,18 @@
   "tradeSummary": "Trade Summary",
   "marketPrice": "Market Price",
   "endDate": "End Date",
-  "confirmTrade": " \"Confirm Trade\"",
+  "confirmTrade": " Confirm Trade",
   "checkBotStockDetails": "Check Botstock Details",
   "tradeRequestSubmitted": "Trade Request Submitted",
   "tradeCancelledTitle": "Trade Cancelled",
   "tradeCancelledSubtitle": "The trade has been cancelled and your investment amount has been returned to your account",
-  "rolloverBotStockAcknowledgement": "{botName} {botSymbol} will start at {dateTime}",
-  "@rolloverBotStockAcknowledgement": {
+  "startBotStockAcknowledgement": "{botName} {botSymbol} will start when the US market opens",
+  "@startBotStockAcknowledgement": {
     "placeholders": {
       "botName": {
         "type": "String"
       },
       "botSymbol": {
-        "type": "String"
-      },
-      "dateTime": {
         "type": "String"
       }
     }
@@ -798,6 +795,10 @@
     }
   },
   "ppiGotIt": "Got It",
+  "giftBotStockMessageScreenTitle": "Every trade is unique, each time you invest with a new Botstock, I'll ask you some investment style questions to tailor new recommendations! ",
+  "giftBotStockMessageScreenBottomButton": "See my recommendations",
+  "goToPortfolio": "Go To Portfolio",
+  "startAnotherInvestments": "Start another investment",
   "botValues": "Bot Values",
   "botRecommendationTutorialDesc1": "This is the ",
   "botRecommendationTutorialDesc2": "Botstock recommendations screen. ",
