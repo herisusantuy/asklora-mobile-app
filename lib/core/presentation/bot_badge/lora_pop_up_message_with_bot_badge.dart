@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../feature/bot_stock/domain/bot_recommendation_model.dart';
 import '../../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../../styles/asklora_colors.dart';
 import '../../styles/asklora_text_styles.dart';
@@ -22,11 +23,13 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
   final Color subTitleColor;
   final String buttonLabel;
   final VoidCallback onButtonTap;
+  final BotRecommendationModel botRecommendationModel;
 
   const LoraPopUpMessageWithBotBadge(
       {required this.title,
       required this.subTitle,
       required this.botTypes,
+      required this.botRecommendationModel,
       this.badgePosition = BadgePosition.belowSubtitle,
       this.backgroundColor = AskLoraColors.whiteSmoke,
       this.titleColor = AskLoraColors.charcoal,
@@ -64,6 +67,8 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
                         ...botTypes
                             .map((e) => BotBadge(
                                   botType: e,
+                                  botRecommendationModel:
+                                      botRecommendationModel,
                                   backgroundColor: _getBadgeBackgroundColor(
                                       botTypes.indexOf(e)),
                                   textColor:
@@ -108,6 +113,8 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
                                   textColor:
                                       _getBadgeTextColor(botTypes.indexOf(e)),
                                   botType: e,
+                                  botRecommendationModel:
+                                      botRecommendationModel,
                                 ))
                             .toList(),
                       const SizedBox(

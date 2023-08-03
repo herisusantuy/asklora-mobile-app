@@ -118,6 +118,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                   showPopUp:
                       state.botDetailResponse.state == ResponseState.error,
                   content: BotStockForm(
+                    contentPadding: EdgeInsets.zero,
                     enableBackNavigation: false,
                     padding: EdgeInsets.zero,
                     content: BotRecommendationDetailContent(

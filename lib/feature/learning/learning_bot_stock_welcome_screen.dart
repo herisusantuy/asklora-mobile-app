@@ -6,14 +6,17 @@ import '../../../core/presentation/bot_badge/lora_pop_up_message_with_bot_badge.
 import '../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../core/presentation/lora_animation_header.dart';
 import '../../core/values/app_values.dart';
+import '../bot_stock/domain/bot_recommendation_model.dart';
 import '../bot_stock/utils/bot_stock_utils.dart';
 import 'learning_bot_stock_screen.dart';
 
 class LearningBotStockWelcomeScreen extends StatelessWidget {
   final BotType botType;
+  final BotRecommendationModel botRecommendationModel;
   static const String route = '/learning_bot_stock_welcome_screen';
 
-  const LearningBotStockWelcomeScreen({required this.botType, Key? key})
+  const LearningBotStockWelcomeScreen(
+      {required this.botType, required this.botRecommendationModel, Key? key})
       : super(key: key);
 
   @override
@@ -30,6 +33,7 @@ class LearningBotStockWelcomeScreen extends StatelessWidget {
                       'Let’s go through a few reps, and see if ${botType.upperCaseName} bot fits your investment style.'),
             ),
             LoraPopUpMessageWithBotBadge(
+              botRecommendationModel: botRecommendationModel,
               buttonLabel: "LET'S PRACTICE",
               backgroundColor: botType.primaryBgColor,
               title: _getTitle,
