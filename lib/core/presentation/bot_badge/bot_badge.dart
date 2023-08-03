@@ -9,9 +9,14 @@ class BotBadge extends StatefulWidget {
   final BotType botType;
   final Color? backgroundColor;
   final Color? textColor;
+  final EdgeInsets margin;
 
   const BotBadge(
-      {required this.botType, this.backgroundColor, this.textColor, Key? key})
+      {required this.botType,
+      this.backgroundColor,
+      this.textColor,
+      this.margin = const EdgeInsets.only(bottom: 18),
+      Key? key})
       : super(key: key);
 
   @override
@@ -54,7 +59,7 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 18),
+      margin: widget.margin,
       width: double.infinity,
       padding: const EdgeInsets.only(top: 2),
       height: 50,
