@@ -29,18 +29,15 @@ class BotStockResultScreen extends StatelessWidget {
               statusType: StatusType.success,
               subTitle: arguments.desc,
             ),
-            bottomButton: Column(
-              children: [
-                if (arguments.botOrderType == BotOrderType.cancel)
-                  Padding(
+            bottomButton: arguments.botOrderType == BotOrderType.cancel
+                ? Padding(
                     padding: const EdgeInsets.symmetric(vertical: 30),
                     child: PrimaryButton(
                         label: S.of(context).buttonBackToPortfolio,
                         onTap: () => TabScreen.openAndRemoveAllRoute(context,
                             initialTabPage: TabPage.portfolio)),
                   )
-                else
-                  ButtonPair(
+                : ButtonPair(
                     primaryButtonOnClick: () => TabScreen.openAndRemoveAllRoute(
                         context,
                         initialTabPage: TabPage.portfolio),
@@ -50,8 +47,6 @@ class BotStockResultScreen extends StatelessWidget {
                         TabScreen.openAndRemoveAllRoute(context,
                             initialTabPage: TabPage.forYou),
                   ),
-              ],
-            ),
           )),
     );
   }
