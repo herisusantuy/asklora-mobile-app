@@ -376,7 +376,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getTheFirstBotstockForFree":
             MessageLookupByLibrary.simpleMessage("獲取首個免費 Botstock "),
         "giftBotStockMessageScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage("OK! 睇下畀我嘅推薦"),
+            MessageLookupByLibrary.simpleMessage("OK! 睇下畀我嘅推薦 "),
         "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
             "每一次你投資新嘅Botstock, 我都會問你投資風格問題，咁我就可以提供新嘅個人化投資建議畀你！"),
         "giftBotStockWelcomeScreenBottomButton":
@@ -855,6 +855,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "usResidentQuestion":
             MessageLookupByLibrary.simpleMessage("你是否擁有美國稅務居民身份、持有綠卡，或公民身份？"),
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
+        "userNotFound": MessageLookupByLibrary.simpleMessage("User Not Found"),
         "verifyIdentity": MessageLookupByLibrary.simpleMessage("核實身份"),
         "verifyNow": MessageLookupByLibrary.simpleMessage("立即核實"),
         "verifyOtpSuccess":
