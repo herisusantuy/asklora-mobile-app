@@ -77,6 +77,7 @@ class Tabs extends StatelessWidget {
                               }
                             },
                             iconAsset: 'bottom_nav_asklora_ai',
+                            filledColor: backgroundImageType.tabAiFilledColor,
                             activeIconAsset:
                                 backgroundImageType.tabAiActiveAsset,
                             active: state.aiPageSelected ||
@@ -134,7 +135,7 @@ class Tabs extends StatelessWidget {
           width: clickAreaSize,
           height: clickAreaSize,
           child: getPngIcon(active ? activeIconAsset : iconAsset,
-              fit: BoxFit.none),
+              fit: BoxFit.none, color: filledColor),
         ),
       );
 }
