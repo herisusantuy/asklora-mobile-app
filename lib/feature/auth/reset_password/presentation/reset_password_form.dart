@@ -8,9 +8,9 @@ import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../generated/l10n.dart';
 import '../../forgot_password/presentation/forgot_password_screen.dart';
-import '../../sign_in/presentation/sign_in_screen.dart';
 import '../../utils/auth_utils.dart';
 import '../bloc/reset_password_bloc.dart';
+import 'reset_password_success_screen.dart';
 
 class ResetPasswordForm extends StatelessWidget {
   const ResetPasswordForm({Key? key}) : super(key: key);
@@ -28,7 +28,7 @@ class ResetPasswordForm extends StatelessWidget {
         }
 
         if (state.response.state == ResponseState.success) {
-          SignInScreen.open(context);
+          ResetPasswordSuccessScreen.open(context);
         } else if (state.response.state == ResponseState.error) {
           context
               .read<ResetPasswordBloc>()

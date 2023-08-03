@@ -155,7 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "at least 1 upper case letter"),
         "backToAccountSettings":
             MessageLookupByLibrary.simpleMessage("Back to account settings"),
-        "backToLogin": MessageLookupByLibrary.simpleMessage("Back to login"),
+        "backToLogin": MessageLookupByLibrary.simpleMessage("Back To Login"),
         "bankAccountNumber":
             MessageLookupByLibrary.simpleMessage("Bank Account Number"),
         "bankName": MessageLookupByLibrary.simpleMessage("Bank Name"),

@@ -3813,10 +3813,10 @@ class S {
     );
   }
 
-  /// `Back to login`
+  /// `Back To Login`
   String get backToLogin {
     return Intl.message(
-      'Back to login',
+      'Back To Login',
       name: 'backToLogin',
       desc: '',
       args: [],
