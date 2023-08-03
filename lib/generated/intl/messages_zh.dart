@@ -45,8 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m10(emailAddress) =>
       "已發送電子郵件至\n ${emailAddress}\n\n請用手機點擊開通連結！";
 
-  static String m11(botName, botSymbol, dateTime) =>
-      "${botName} ${botSymbol} 將會在 ${dateTime} 開始";
+  static String m11(botName, botSymbol) =>
+      "${botName} ${botSymbol} will end when the US market opens";
 
   static String m12(time) => "現時匯率: HKD 1 = USD 0.137 (於 HKT ${time})";
 

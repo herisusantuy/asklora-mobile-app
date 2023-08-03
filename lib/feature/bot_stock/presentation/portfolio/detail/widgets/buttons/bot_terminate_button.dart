@@ -25,11 +25,8 @@ class BotTerminateButton extends StatelessWidget {
               context: context,
               arguments: BotStockResultArgument(
                 title: S.of(context).tradeRequestSubmitted,
-                desc: S.of(context).endBotStockAcknowledgement(
-                    botType.name,
-                    botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol,
-                    state.endBotStockResponse.data?.optimalTimeHKTString ??
-                        '-'),
+                desc: S.of(context).endBotStockAcknowledgement(botType.name,
+                    botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol),
               ),
               backCallBack: () => context
                   .read<BackButtonInterceptorBloc>()
