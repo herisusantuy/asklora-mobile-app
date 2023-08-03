@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../feature/bot_stock/domain/bot_recommendation_model.dart';
 import '../../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../../../generated/l10n.dart';
 import '../../styles/asklora_text_styles.dart';
@@ -9,14 +8,14 @@ import '../custom_text_new.dart';
 
 class BotBadge extends StatefulWidget {
   final BotType botType;
-  final BotRecommendationModel botRecommendationModel;
+  final String tickerSymbol;
   final Color? backgroundColor;
   final Color? textColor;
   final EdgeInsets margin;
 
   const BotBadge(
       {required this.botType,
-      required this.botRecommendationModel,
+      this.tickerSymbol = '',
       this.backgroundColor,
       this.textColor,
       this.margin = const EdgeInsets.only(bottom: 18),
@@ -80,7 +79,7 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
                 _getBotTypeIcon(),
                 const SizedBox(width: 5),
                 CustomTextNew(
-                  '${widget.botType.upperCaseName} ${widget.botRecommendationModel.tickerSymbol.toUpperCase()}',
+                  '${widget.botType.upperCaseName} ${widget.tickerSymbol.toUpperCase()}',
                   style: AskLoraTextStyles.h3.copyWith(
                       color:
                           widget.textColor ?? widget.botType.expiredTextColor),

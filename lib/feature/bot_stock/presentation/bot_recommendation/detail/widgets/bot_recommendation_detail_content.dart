@@ -47,7 +47,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
       children: [
         BotBadge(
             botType: botType,
-            botRecommendationModel: botRecommendationModel,
+            tickerSymbol: botRecommendationModel.tickerSymbol,
             textColor: AskLoraColors.charcoal,
             margin: EdgeInsets.zero),
         if (!FeatureFlags.isMockApp)

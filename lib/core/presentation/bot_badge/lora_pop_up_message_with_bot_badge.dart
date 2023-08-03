@@ -67,8 +67,8 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
                         ...botTypes
                             .map((e) => BotBadge(
                                   botType: e,
-                                  botRecommendationModel:
-                                      botRecommendationModel,
+                                  tickerSymbol:
+                                      botRecommendationModel.tickerSymbol,
                                   backgroundColor: _getBadgeBackgroundColor(
                                       botTypes.indexOf(e)),
                                   textColor:
@@ -113,8 +113,8 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
                                   textColor:
                                       _getBadgeTextColor(botTypes.indexOf(e)),
                                   botType: e,
-                                  botRecommendationModel:
-                                      botRecommendationModel,
+                                  tickerSymbol:
+                                      botRecommendationModel.tickerSymbol,
                                 ))
                             .toList(),
                       const SizedBox(

@@ -24,6 +24,8 @@ import '../../../../core/presentation/shimmer.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/currency_enum.dart';
 import '../../../../core/utils/feature_flags.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
+import '../../../../core/utils/storage/storage_keys.dart';
 import '../../../../generated/l10n.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../balance/deposit/utils/deposit_utils.dart';
@@ -78,6 +80,11 @@ class PortfolioScreen extends StatelessWidget {
               context
                   .read<AccountInformationBloc>()
                   .add(GetAccountInformation());
+
+              await SharedPreference()
+                  .deleteData(sfKeyBotRecommendationTutorial);
+              await SharedPreference().deleteData(sfKeyBotDetailsTutorial);
+              await SharedPreference().deleteData(sfKeyTradeSummaryTutorial);
             },
             child: CustomLayoutWithBlurPopUp(
               loraPopUpMessageModel: LoraPopUpMessageModel(
