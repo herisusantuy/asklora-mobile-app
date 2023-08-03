@@ -129,10 +129,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                       content: BotPortfolioDetailContent(
                         botActiveOrderDetailModel: botActiveOrderDetailModel,
                       ),
-                      bottomButton: _botPortfolioButtonsOrRequestedToEndText(
-                          context,
-                          botActiveOrderDetailModel?.terminationRequested,
-                          state),
+                      bottomButton: BotPortfolioButtons(portfolioState: state),
                     ),
                   ),
                 );
@@ -141,23 +138,6 @@ class BotPortfolioDetailScreen extends StatelessWidget {
           ),
         ),
       );
-
-  Widget _botPortfolioButtonsOrRequestedToEndText(BuildContext context,
-      bool? terminationRequested, PortfolioState portfolioState) {
-    if (terminationRequested != null) {
-      return terminationRequested
-          ? Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30),
-              child: CustomTextNew(
-                S.of(context).requestedToEnd,
-                style: AskLoraTextStyles.button1,
-              ),
-            )
-          : BotPortfolioButtons(portfolioState: portfolioState);
-    } else {
-      return const SizedBox.shrink();
-    }
-  }
 
   void _fetchActiveOrderDetail(BuildContext context) => context
       .read<PortfolioBloc>()
