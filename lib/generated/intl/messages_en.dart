@@ -462,7 +462,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftBotStockMessageScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("See my recommendations"),
         "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! "),
+            "Every trade is unique, each time you invest with a new Botstock, I\'ll ask you some investment style questions to tailor new recommendations! "),
         "giftBotStockWelcomeScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
         "giftBotStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(

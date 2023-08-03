@@ -5704,10 +5704,10 @@ class S {
     );
   }
 
-  /// `Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! `
+  /// `Every trade is unique, each time you invest with a new Botstock, I'll ask you some investment style questions to tailor new recommendations! `
   String get giftBotStockMessageScreenTitle {
     return Intl.message(
-      'Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ',
+      'Every trade is unique, each time you invest with a new Botstock, I\'ll ask you some investment style questions to tailor new recommendations! ',
       name: 'giftBotStockMessageScreenTitle',
       desc: '',
       args: [],

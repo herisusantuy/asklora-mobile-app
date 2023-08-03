@@ -8,7 +8,6 @@ class LoraGptState extends Equatable {
   final String userId;
   final String sessionId;
   final List<Conversation> conversations;
-  final bool isTyping;
   final List<Botstock> botstocks;
   final double totalPnl;
   final TabPage tabPage;
@@ -23,7 +22,6 @@ class LoraGptState extends Equatable {
     this.userName = '',
     this.userId = '',
     this.conversations = const [],
-    this.isTyping = false,
     // this.shouldShowOverlay = true,
     this.botstocks = const [],
     this.totalPnl = 0,
@@ -49,7 +47,6 @@ class LoraGptState extends Equatable {
       sessionId: sessionId ?? this.sessionId,
       conversations: conversations ?? this.conversations,
       status: status ?? this.status,
-      isTyping: isTyping ?? this.isTyping,
       userName: userName ?? this.userName,
       userId: userId ?? this.userId,
       botstocks: botstocks ?? this.botstocks,
@@ -120,7 +117,6 @@ class LoraGptState extends Equatable {
         sessionId,
         conversations,
         status,
-        isTyping,
         userName,
         userId,
         botstocks,
@@ -129,5 +125,6 @@ class LoraGptState extends Equatable {
         DateTime.now().millisecondsSinceEpoch
       ];
 
-  bool get isTextFieldSendButtonDisabled => isTyping || query.isEmpty;
+  bool get isTextFieldSendButtonDisabled =>
+      status == ResponseState.loading || query.isEmpty || query.trim().isEmpty;
 }

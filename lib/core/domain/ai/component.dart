@@ -17,7 +17,8 @@ abstract class Component extends Conversation {
   final String id;
   final String label;
 
-  Component(this.id, this.label);
+  const Component(this.id, this.label, {bool isNeedCallback = true})
+      : super(isNeedCallback: isNeedCallback);
 
   ComponentType componentType();
 
@@ -31,23 +32,33 @@ abstract class Component extends Conversation {
 }
 
 class PromptButton extends Component {
-  PromptButton(String id, String label) : super(id, label);
+  const PromptButton(String id, String label, {bool isNeedCallback = true})
+      : super(id, label, isNeedCallback: isNeedCallback);
 
   @override
   ComponentType componentType() => ComponentType.promptButton;
 
+  PromptButton copyWith({bool? isNeedCallback}) => PromptButton(id, label,
+      isNeedCallback: isNeedCallback ?? this.isNeedCallback);
+
   @override
-  List<Object?> get props => [componentType()];
+  List<Object?> get props => [componentType(), isNeedCallback];
 }
 
 class NavigationButton extends Component {
-  NavigationButton(String id, String label, this.route) : super(id, label);
+  const NavigationButton(String id, String label, this.route,
+      {bool isNeedCallback = true})
+      : super(id, label, isNeedCallback: isNeedCallback);
 
   final String route;
 
   @override
   ComponentType componentType() => ComponentType.navigationButton;
 
+  NavigationButton copyWith({bool? isNeedCallback}) =>
+      NavigationButton(id, label, route,
+          isNeedCallback: isNeedCallback ?? this.isNeedCallback);
+
   @override
-  List<Object?> get props => [componentType()];
+  List<Object?> get props => [componentType(), isNeedCallback];
 }

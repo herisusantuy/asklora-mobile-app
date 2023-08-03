@@ -802,8 +802,6 @@
   "botRecommendationTutorialDesc3": "press ",
   "botRecommendationTutorialDesc4": "'Trade' ",
   "botRecommendationTutorialDesc5": "on a Botstock that catches your eye!",
-  "giftBotStockMessageScreenTitle": "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ",
-  "giftBotStockMessageScreenBottomButton": "See my recommendations",
   "requestedToEnd": "Requested To End",
   "userNotFound": "User Not Found",
   "portfolioDetailPerformanceBotAssetsInStockTooltip": "Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%."

@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
@@ -60,12 +59,10 @@ class AiLandingPage extends StatelessWidget {
   Widget get _chatList => Expanded(
         child: BlocBuilder<LoraGptBloc, LoraGptState>(
           buildWhen: (previous, current) =>
-              previous.conversations != current.conversations ||
-              previous.isTyping != current.isTyping,
+              previous.conversations != current.conversations,
           builder: (context, state) => AiLandingPageChatList(
             aiThemeType: aiThemeType,
             conversations: state.conversations,
-            isTyping: state.isTyping,
           ),
         ),
       );
