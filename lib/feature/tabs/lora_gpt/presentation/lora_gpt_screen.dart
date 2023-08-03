@@ -28,7 +28,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
       backgroundColor: Colors.transparent,
       body: Column(
         children: [
-          const AiDebugWidget(),
+          if (FeatureFlags.showAiDebugWidget) const AiDebugWidget(),
           _header,
           const Expanded(child: AiChatList()),
           _bottomContent

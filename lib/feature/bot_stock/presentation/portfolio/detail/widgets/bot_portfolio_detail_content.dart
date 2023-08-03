@@ -7,6 +7,7 @@ import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../../core/utils/feature_flags.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../../../balance/deposit/utils/deposit_utils.dart';
@@ -55,6 +56,33 @@ class BotPortfolioDetailContent extends StatelessWidget {
               ],
             ),
           ),
+          if (!FeatureFlags.isMockApp) _botExpansionTile(botType),
+          if (!UserJourney.compareUserJourney(
+              context: context, target: UserJourney.deposit))
+            Padding(
+              padding: AppValues.screenHorizontalPadding.copyWith(top: 40.0),
+              child: LoraPopUpMessage(
+                backgroundColor: AskLoraColors.charcoal,
+                title: 'Take the next step towards gift redemption!',
+                titleColor: AskLoraColors.white,
+                subTitle: 'The secret of getting ahead is getting started.',
+                subTitleColor: AskLoraColors.white,
+                primaryButtonLabel: 'Complete Milestone',
+                onPrimaryButtonTap: () => DepositWelcomeScreen.open(
+                    context: context, depositType: DepositType.firstTime),
+                buttonPrimaryType: ButtonPrimaryType.solidGreen,
+                bottomText: 'Next Step: Pay deposit',
+              ),
+            )
+        ],
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
+
+  Widget _botExpansionTile(BotType botType) => Column(
+        children: [
           CustomDetailExpansionTile(
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,27 +199,6 @@ class BotPortfolioDetailContent extends StatelessWidget {
               )
             ],
           ),
-          if (!UserJourney.compareUserJourney(
-              context: context, target: UserJourney.deposit))
-            Padding(
-              padding: AppValues.screenHorizontalPadding.copyWith(top: 40.0),
-              child: LoraPopUpMessage(
-                backgroundColor: AskLoraColors.charcoal,
-                title: 'Take the next step towards gift redemption!',
-                titleColor: AskLoraColors.white,
-                subTitle: 'The secret of getting ahead is getting started.',
-                subTitleColor: AskLoraColors.white,
-                primaryButtonLabel: 'Complete Milestone',
-                onPrimaryButtonTap: () => DepositWelcomeScreen.open(
-                    context: context, depositType: DepositType.firstTime),
-                buttonPrimaryType: ButtonPrimaryType.solidGreen,
-                bottomText: 'Next Step: Pay deposit',
-              ),
-            )
         ],
       );
-    } else {
-      return const SizedBox.shrink();
-    }
-  }
 }

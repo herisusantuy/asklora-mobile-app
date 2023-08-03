@@ -1,6 +1,4 @@
 import 'dart:ui';
-
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -100,9 +98,7 @@ class LoraAiScreen extends StatelessWidget {
                     image: const DecorationImage(
                         image: AssetImage('assets/lora_gpt_background.png'),
                         fit: BoxFit.cover)),
-                child: state.shouldShowOverlay
-                    ? const LoraAiOverlayScreen()
-                    : const LoraGptScreen()),
+                child: const LoraGptScreen()),
           ),
         ),
       ),
