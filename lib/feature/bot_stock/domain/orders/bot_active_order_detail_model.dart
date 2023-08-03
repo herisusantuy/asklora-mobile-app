@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import '../../../../core/domain/bot/bot_detail_model.dart';
 import '../../../../core/domain/bot/bot_info.dart';
 import '../../../../core/domain/bot/stock_info.dart';
@@ -95,8 +96,13 @@ class BotActiveOrderDetailModel extends BotDetailModel {
         : 'NA';
   }
 
-  String get botAssetInStockPctString =>
-      (botAssetInStockPct > 0) ? '$botAssetInStockPct%' : '/';
+  String get botAssetInStockPctString {
+    if (botStatus == BotStatus.live) {
+      return '$botAssetInStockPct%';
+    } else {
+      return (botAssetInStockPct > 0) ? '$botAssetInStockPct%' : '/';
+    }
+  }
 
   String get botCashBalanceString {
     final double botCashBalanceDouble = checkDouble(botCashBalance);
@@ -107,7 +113,11 @@ class BotActiveOrderDetailModel extends BotDetailModel {
 
   String get botShareString {
     final double botShareDouble = checkDouble(botShare);
-    return (botShareDouble > 0) ? botShareDouble.toString() : '/';
+    if (botStatus == BotStatus.live) {
+      return botShareDouble.toString();
+    } else {
+      return (botShareDouble > 0) ? botShareDouble.toString() : '/';
+    }
   }
 
   String get avgReturnString {
@@ -155,9 +165,13 @@ class BotActiveOrderDetailModel extends BotDetailModel {
 
   String get stockValuesString {
     final double stockValuesDouble = checkDouble(stockValues);
-    return (stockValuesDouble > 0)
-        ? stockValuesDouble.convertToCurrencyDecimal()
-        : '/';
+    if (botStatus == BotStatus.live) {
+      return stockValuesDouble.convertToCurrencyDecimal();
+    } else {
+      return (stockValuesDouble > 0)
+          ? stockValuesDouble.convertToCurrencyDecimal()
+          : '/';
+    }
   }
 
   OmsStatus get omsStatus => OmsStatus.findByString(status);
