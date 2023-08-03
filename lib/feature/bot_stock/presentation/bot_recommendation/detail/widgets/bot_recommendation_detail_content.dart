@@ -46,7 +46,11 @@ class BotRecommendationDetailContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BotBadge(botType: botType, margin: EdgeInsets.zero),
+        BotBadge(
+            botType: botType,
+            tickerSymbol: botRecommendationModel.tickerSymbol,
+            textColor: AskLoraColors.charcoal,
+            margin: EdgeInsets.zero),
         if (!FeatureFlags.isMockApp)
           _botDetailsExpansionTile(context)
         else
@@ -59,7 +63,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
 
   Widget _botDetails(BuildContext context) => Container(
         padding: AppValues.screenHorizontalPadding.copyWith(top: 15),
-        margin: const EdgeInsets.only(bottom: 60),
+        margin: const EdgeInsets.only(bottom: 25),
         decoration: const BoxDecoration(color: AskLoraColors.whiteSmoke),
         child: Column(
           children: [

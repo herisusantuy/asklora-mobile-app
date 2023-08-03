@@ -548,7 +548,7 @@
   "forgotPasswordMessage": "Please enter your email. Instructions will be sent to reset your password.",
   "resetPasswordSuccessful": "Password Reset Successful",
   "resetPasswordSuccessfulMessage": "Your password has been reset. Please go back to the Login page and login again.",
-  "backToLogin": "Back to login",
+  "backToLogin": "Back To Login",
   "askloraYouUltimateFinancialAdvisor": "Asklora.\n Your ultimate\nfinancial advisor",
   "askMeAnythingRelatedToFinance": "Ask me anything related to finance",
   "investmentResultScreenTitle": "I like your style",
@@ -810,6 +810,7 @@
   "youCanClickOn": "You can click on ",
   "tellMeMore": "Tell Me More",
   "toOpenLora": " to open Lora and get more details about your investment!",
+  "letsTrade": "LET'S TRADE",
   "requestedToEnd": "Requested To End",
   "userNotFound": "User Not Found",
   "portfolioDetailPerformanceBotAssetsInStockTooltip": "Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%."

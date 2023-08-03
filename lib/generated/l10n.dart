@@ -3813,10 +3813,10 @@ class S {
     );
   }
 
-  /// `Back to login`
+  /// `Back To Login`
   String get backToLogin {
     return Intl.message(
-      'Back to login',
+      'Back To Login',
       name: 'backToLogin',
       desc: '',
       args: [],
@@ -5859,6 +5859,16 @@ class S {
     return Intl.message(
       ' to open Lora and get more details about your investment!',
       name: 'toOpenLora',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `LET'S TRADE`
+  String get letsTrade {
+    return Intl.message(
+      'LET\'S TRADE',
+      name: 'letsTrade',
       desc: '',
       args: [],
     );

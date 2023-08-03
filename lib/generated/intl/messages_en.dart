@@ -155,7 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "at least 1 upper case letter"),
         "backToAccountSettings":
             MessageLookupByLibrary.simpleMessage("Back to account settings"),
-        "backToLogin": MessageLookupByLibrary.simpleMessage("Back to login"),
+        "backToLogin": MessageLookupByLibrary.simpleMessage("Back To Login"),
         "bankAccountNumber":
             MessageLookupByLibrary.simpleMessage("Bank Account Number"),
         "bankName": MessageLookupByLibrary.simpleMessage("Bank Name"),
@@ -554,6 +554,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Legal English First Name"),
         "legalLastName":
             MessageLookupByLibrary.simpleMessage("Legal English Last Name"),
+        "letsTrade": MessageLookupByLibrary.simpleMessage("LET\'S TRADE"),
         "licenseeName":
             MessageLookupByLibrary.simpleMessage("Licensee: Chang Yung Ching"),
         "licenseeNumber":

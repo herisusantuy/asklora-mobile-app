@@ -779,8 +779,9 @@
   "tellMeMore": "Tell Me More",
   "toOpenLora": " to open Lora and get more details about your investment!",
   "requestedToEnd": "Requested To End",
-  "giftBotStockMessageScreenBottomButton": "OK! 睇下畀我嘅推薦 ",
+  "giftBotStockMessageScreenBottomButton": "OK! 睇下畀我嘅推薦",
   "userNotFound": "User Not Found",
   "goToPortfolio": "Go To Portfolio",
-  "startAnotherInvestments": "Start another investment"
+  "startAnotherInvestments": "Start another investment",
+  "letsTrade": "LET'S TRADE"
 }
