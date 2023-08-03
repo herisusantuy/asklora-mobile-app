@@ -31,7 +31,6 @@ import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_bottom_sheet.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../bot_stock_result_screen.dart';
-import '../portfolio/detail/bot_portfolio_detail_screen.dart';
 import '../widgets/bot_stock_form.dart';
 
 class BotTradeSummaryModel {
@@ -120,17 +119,6 @@ class BotTradeSummaryScreen extends StatelessWidget {
                             title: S.of(context).tradeRequestSubmitted,
                             desc: _tradeRequestSuccessMessage(
                                 context, state.createBotOrderResponse.data!),
-                            labelBottomButton:
-                                S.of(context).checkBotStockDetails,
-                            onButtonTap: (context) =>
-                                BotPortfolioDetailScreen.openReplace(
-                              context: context,
-                              arguments: BotPortfolioDetailArguments(
-                                botUid: state.createBotOrderResponse.data!.uid,
-                                botName:
-                                    state.createBotOrderResponse.data!.botName,
-                              ),
-                            ),
                           ));
                     }
                   } else if (state.createBotOrderResponse.state ==
@@ -270,10 +258,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
 
   String _tradeRequestSuccessMessage(
           BuildContext context, BotCreateOrderResponse createOrderResponse) =>
-      S.of(context).rolloverBotStockAcknowledgement(
-          createOrderResponse.botAppsName,
-          createOrderResponse.symbol,
-          createOrderResponse.optimalTimeHKTString);
+      S.of(context).startBotStockAcknowledgement(
+          createOrderResponse.botAppsName, createOrderResponse.symbol);
 
   void _onTradeSummaryTutorialFinished(BuildContext context) {
     ShowCaseWidget.of(context).dismiss();

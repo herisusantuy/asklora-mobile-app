@@ -55,10 +55,7 @@ class LoraAiOverlayScreen extends StatelessWidget {
                 child: GlowingButton(
                   height: 68.0,
                   width: 68.0,
-                  onTap: () {
-                    context.read<LoraGptBloc>().add(const ShowOverLayScreen(
-                        shouldShowOverlayScreen: false));
-                  },
+                  onTap: () {},
                   buttonBackgroundColor: const Color(0xFF373A49),
                   glowColor: Colors.white.withAlpha(100),
                   child: Container(
