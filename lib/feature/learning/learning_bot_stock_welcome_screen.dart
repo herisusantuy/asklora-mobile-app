@@ -11,9 +11,11 @@ import 'learning_bot_stock_screen.dart';
 
 class LearningBotStockWelcomeScreen extends StatelessWidget {
   final BotType botType;
+  final String tickerSymbol;
   static const String route = '/learning_bot_stock_welcome_screen';
 
-  const LearningBotStockWelcomeScreen({required this.botType, Key? key})
+  const LearningBotStockWelcomeScreen(
+      {required this.botType, required this.tickerSymbol, Key? key})
       : super(key: key);
 
   @override
@@ -30,6 +32,7 @@ class LearningBotStockWelcomeScreen extends StatelessWidget {
                       'Let’s go through a few reps, and see if ${botType.upperCaseName} bot fits your investment style.'),
             ),
             LoraPopUpMessageWithBotBadge(
+              tickerSymbol: tickerSymbol,
               buttonLabel: "LET'S PRACTICE",
               backgroundColor: botType.primaryBgColor,
               title: _getTitle,

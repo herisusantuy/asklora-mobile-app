@@ -5704,10 +5704,10 @@ class S {
     );
   }
 
-  /// `Every trade is unique, each time you invest with a new Botstock, I'll ask you some investment style questions to tailor new recommendations! `
+  /// `Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! `
   String get giftBotStockMessageScreenTitle {
     return Intl.message(
-      'Every trade is unique, each time you invest with a new Botstock, I\'ll ask you some investment style questions to tailor new recommendations! ',
+      'Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ',
       name: 'giftBotStockMessageScreenTitle',
       desc: '',
       args: [],
@@ -5804,6 +5804,26 @@ class S {
     );
   }
 
+  /// `Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.`
+  String get portfolioDetailPerformanceBotAssetsInStockTooltip {
+    return Intl.message(
+      'Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.',
+      name: 'portfolioDetailPerformanceBotAssetsInStockTooltip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `LET'S TRADE`
+  String get letsTrade {
+    return Intl.message(
+      'LET\'S TRADE',
+      name: 'letsTrade',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Requested To End`
   String get requestedToEnd {
     return Intl.message(
@@ -5819,16 +5839,6 @@ class S {
     return Intl.message(
       'User Not Found',
       name: 'userNotFound',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.`
-  String get portfolioDetailPerformanceBotAssetsInStockTooltip {
-    return Intl.message(
-      'Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.',
-      name: 'portfolioDetailPerformanceBotAssetsInStockTooltip',
       desc: '',
       args: [],
     );
