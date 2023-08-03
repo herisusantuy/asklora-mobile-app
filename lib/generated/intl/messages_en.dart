@@ -49,8 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m10(emailAddress) =>
       "We\'ve sent an email to\n ${emailAddress}\n\nPlease use your phone to click on the activation link!";
 
-  static String m11(botName, botSymbol, dateTime) =>
-      "${botName} ${botSymbol} will end at ${dateTime}";
+  static String m11(botName, botSymbol) =>
+      "${botName} ${botSymbol} will end when the US market opens";
 
   static String m12(time) =>
       "Current Exchange Rate: HKD 1 = USD 0.137 (at HKT ${time})";
