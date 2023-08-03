@@ -1036,6 +1036,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "usResidentQuestion": MessageLookupByLibrary.simpleMessage(
             "Are you a United States tax resident, green card holder, or citizen?"),
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
+        "userNotFound": MessageLookupByLibrary.simpleMessage("User Not Found"),
         "verifyIdentity":
             MessageLookupByLibrary.simpleMessage("Verify identity"),
         "verifyNow": MessageLookupByLibrary.simpleMessage("Verify Now"),
