@@ -3193,14 +3193,13 @@ class S {
     );
   }
 
-  /// `{botName} {botSymbol} will end at {dateTime}`
-  String endBotStockAcknowledgement(
-      String botName, String botSymbol, String dateTime) {
+  /// `{botName} {botSymbol} will end when the US market opens`
+  String endBotStockAcknowledgement(String botName, String botSymbol) {
     return Intl.message(
-      '$botName $botSymbol will end at $dateTime',
+      '$botName $botSymbol will end when the US market opens',
       name: 'endBotStockAcknowledgement',
       desc: '',
-      args: [botName, botSymbol, dateTime],
+      args: [botName, botSymbol],
     );
   }
 
