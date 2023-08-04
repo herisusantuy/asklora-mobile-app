@@ -105,6 +105,7 @@ class _LoraAiButtonState extends State<LoraAiButton> {
                 ellipsis: true,
               ),
             ),
+            const SizedBox(width: 5),
             getSvgIcon('icon_sent_text',
                 color: AskLoraColors.white, height: 20, width: 20)
           ],
