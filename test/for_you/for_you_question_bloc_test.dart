@@ -38,7 +38,7 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'get investment style answer but with empty data',
         build: () {
-          when(sharedPreference.readData(sfKeyPpiAccountId))
+          when(sharedPreference.readData(StorageKeys.sfKeyPpiAccountId))
               .thenAnswer((realInvocation) => Future.value('abc'));
           when(ppiQuestionRepository.fetchInvestmentStyleQuestions('abc'))
               .thenAnswer((_) => Future.value(

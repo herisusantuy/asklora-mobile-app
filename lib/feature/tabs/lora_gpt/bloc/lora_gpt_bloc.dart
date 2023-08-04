@@ -237,8 +237,10 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
   void _onScreenLaunch(
       OnScreenLaunch onEditQuery, Emitter<LoraGptState> emit) async {
-    final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
-    final askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
+    final userName =
+        await _sharedPreference.readData(StorageKeys.sfKeyPpiName) ?? 'Me';
+    final askloraId =
+        await _sharedPreference.readIntData(StorageKeys.sfKeyAskloraId);
 
     emit(state.copyWith(
         status: ResponseState.success,
@@ -250,8 +252,10 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
   void _onLandingPageOpened(
       OnLandingPageOpened onEditQuery, Emitter<LoraGptState> emit) async {
-    final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
-    final askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
+    final userName =
+        await _sharedPreference.readData(StorageKeys.sfKeyPpiName) ?? 'Me';
+    final askloraId =
+        await _sharedPreference.readIntData(StorageKeys.sfKeyAskloraId);
 
     emit(state.copyWith(
         status: ResponseState.loading,

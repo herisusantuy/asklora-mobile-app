@@ -42,11 +42,11 @@ class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
       if (isSignedOut) {
         await _tokenRepository.deleteAll();
         await _sharedPreference.deleteAllDataExcept([
-          sfKeyLocalisationData,
-          sfKeyInvestmentStyleState,
-          sfKeyBotDetailsTutorial,
-          sfKeyBotRecommendationTutorial,
-          sfKeyTradeSummaryTutorial
+          StorageKeys.sfKeyLocalisationData,
+          StorageKeys.sfKeyInvestmentStyleState,
+          StorageKeys.sfKeyBotDetailsTutorial,
+          StorageKeys.sfKeyBotRecommendationTutorial,
+          StorageKeys.sfKeyTradeSummaryTutorial
         ]);
 
         await _secureStorage.deleteAllData();
