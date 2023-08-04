@@ -44,6 +44,12 @@ String convertDateToHktString(String dateTime,
   return formatDateTimeAsString(date, dateFormat: dateFormat);
 }
 
+String addOneDayToDate(String dateTime, {String dateFormat = 'dd/MM/yyyy'}) {
+  DateTime date = DateFormat(dateFormat).parse(DateFormat(dateFormat)
+      .format(DateTime.parse(dateTime).add(const Duration(days: 1))));
+  return formatDateTimeAsString(date, dateFormat: dateFormat);
+}
+
 DateTime convertDateToHkt(String dateTime) {
   return DateTime.parse(dateTime).add(const Duration(hours: 8));
 }
