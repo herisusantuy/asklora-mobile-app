@@ -95,7 +95,7 @@ class BotStockRepository {
               '');
       return BaseResponse.complete(
           BotRecommendationResponse.fromJson(response.data));
-    } on BadRequestException catch (e) {
+    } on BadRequestException catch (_) {
       return BaseResponse.error(validationCode: ValidationCode.redoIsq);
     } catch (e) {
       return BaseResponse.error();
