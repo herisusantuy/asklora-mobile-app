@@ -49,6 +49,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
   final SharedPreference _sharedPreference;
   final List<Conversation> _conversationQueue = [];
   BaseResponse<QueryResponse>? _tempIntroResponse;
+  final Set<BotstockIntro> _botIntroQueryHistory = {};
 
   void _onFetchBotIntro(
       FetchBotIntro fetchBotIntro, Emitter<LoraGptState> emit) async {
@@ -57,13 +58,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     tempList.add(const Loading());
     emit(state.copyWith(conversations: [...tempList], status: status));
 
-    var botIntroResponse = await _loraGptRepository.botIntro(
-        params: state.getIntroRequest(
-            botType:
-                BotType.findByValue(fetchBotIntro.arguments['botType']).name,
-            tickerSymbol: fetchBotIntro.arguments['symbol'],
-            investmentHorizon: fetchBotIntro.arguments['duration'],
-            ticker: fetchBotIntro.arguments['ticker']));
+    var botIntroResponse =
+        await _loraGptRepository.botIntro(params: fetchBotIntro.params);
 
     ///remove loading
     if (_tempIntroResponse != null) {
@@ -101,13 +97,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     emit(state.copyWith(status: status));
 
-    var botEarningsResponse = await _loraGptRepository.botEarnings(
-        params: state.getIntroRequest(
-            botType:
-                BotType.findByValue(fetchBotEarnings.arguments['botType']).name,
-            tickerSymbol: fetchBotEarnings.arguments['symbol'],
-            investmentHorizon: fetchBotEarnings.arguments['duration'],
-            ticker: fetchBotEarnings.arguments['ticker']));
+    var botEarningsResponse =
+        await _loraGptRepository.botEarnings(params: fetchBotEarnings.params);
 
     ///remove loading
     if (_tempIntroResponse != null) {
@@ -407,8 +398,18 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
             subPage.path == SubTabPage.recommendationsBotStockDetails.value ||
         subPage.path == SubTabPage.recommendationsBotStockDetails.value) {
       _tempIntroResponse = null;
-      add(FetchBotIntro(subPage.arguments));
-      add(FetchBotEarnings(subPage.arguments));
+
+      BotstockIntro params = state.getIntroRequest(
+          botType: BotType.findByValue(subPage.arguments['botType']).name,
+          tickerSymbol: subPage.arguments['symbol'],
+          investmentHorizon: subPage.arguments['duration'],
+          ticker: subPage.arguments['ticker']);
+
+      if (!_botIntroQueryHistory.contains(params)) {
+        _botIntroQueryHistory.add(params);
+        add(FetchBotIntro(params));
+        add(FetchBotEarnings(params));
+      }
     }
   }
 
