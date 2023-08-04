@@ -12,6 +12,7 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/presentation/ai/utils/ai_utils.dart';
 import '../../../../core/presentation/auto_sized_text_widget.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
@@ -75,23 +76,10 @@ class BotRecommendationScreen extends StatelessWidget {
                   TutorialJourney.botRecommendationList,
                 ]),
                 child: CustomLayoutWithBlurPopUp(
-                  loraPopUpMessageModel: LoraPopUpMessageModel(
-                    title: S.of(context).errorGettingInformationTitle,
-                    subTitle: S
-                        .of(context)
-                        .errorGettingInformationInvestmentDetailSubTitle,
-                    primaryButtonLabel: S.of(context).buttonReloadPage,
-                    onSecondaryButtonTap: () => Navigator.pop(context),
-                    onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
-                        context: context,
-                        target: UserJourney.freeBotStock,
-                        onTrueCallback: () => context
-                            .read<BotStockBloc>()
-                            .add(FetchBotRecommendation()),
-                        onFalseCallback: () => context
-                            .read<BotStockBloc>()
-                            .add(FetchFreeBotRecommendation())),
-                  ),
+                  loraPopUpMessageModel: _getLoraPopUpMessageModel(
+                      context: context,
+                      validationCode:
+                          state.botRecommendationResponse.validationCode),
                   showPopUp: state.botRecommendationResponse.state ==
                       ResponseState.error,
                   content: Column(
@@ -244,5 +232,40 @@ class BotRecommendationScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  LoraPopUpMessageModel _getLoraPopUpMessageModel(
+      {required BuildContext context, required ValidationCode validationCode}) {
+    switch (validationCode) {
+      case ValidationCode.redoIsq:
+        return LoraPopUpMessageModel(
+          title: 'No Botstock recommendations',
+          subTitle:
+              'Oops! Looks like there aren’t enough recommendations that meet your current investment profile - Let’s go through your Investment Style again to find suitable recommendations.',
+          primaryButtonLabel: S.of(context).retakeInvestmentStyle,
+          onPrimaryButtonTap: () => _loraPopUpMessagePrimaryButtonTap(context),
+        );
+      default:
+        return LoraPopUpMessageModel(
+          title: S.of(context).errorGettingInformationTitle,
+          subTitle:
+              S.of(context).errorGettingInformationInvestmentDetailSubTitle,
+          primaryButtonLabel: S.of(context).buttonReloadPage,
+          onSecondaryButtonTap: () => Navigator.pop(context),
+          onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
+              context: context,
+              target: UserJourney.freeBotStock,
+              onTrueCallback: () =>
+                  context.read<BotStockBloc>().add(FetchBotRecommendation()),
+              onFalseCallback: () => context
+                  .read<BotStockBloc>()
+                  .add(FetchFreeBotRecommendation())),
+        );
+    }
+  }
+
+  void _loraPopUpMessagePrimaryButtonTap(BuildContext context) {
+    AiInvestmentStyleQuestionForYouScreen.open(context,
+        aiThemeType: AiThemeType.light);
   }
 }

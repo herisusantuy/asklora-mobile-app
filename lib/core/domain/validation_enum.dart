@@ -14,6 +14,7 @@ enum ValidationCode {
   couldNotGetUserDetails('couldNotGetUserDetails'),
   couldNotFetchOnfidoToken('couldNotGetUserDetails'),
   couldNotUpdateOnfidoResult('couldNotGetUserDetails'),
+  redoIsq('tickersAreUnder5redoIsqError'),
   empty(''),
 
   ///
