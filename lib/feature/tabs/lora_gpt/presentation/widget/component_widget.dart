@@ -6,7 +6,6 @@ import '../../../../../core/presentation/ai/utils/ai_utils.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../bot_stock/presentation/portfolio/portfolio_screen.dart';
-import '../../../../onboarding/ppi/presentation/widget/omni_search_question_widget/widgets/custom_choice_chips.dart';
 import '../../../bloc/tab_screen_bloc.dart';
 import '../../../for_you/investment_style/presentation/ai_investment_style_question_for_you_screen.dart';
 import '../../../utils/tab_util.dart';
@@ -53,17 +52,16 @@ class ComponentWidget extends StatelessWidget {
             }
           });
     } else {
-      return CustomChoiceChips(
-        textStyle: AskLoraTextStyles.body2
-            .copyWith(color: aiThemeType.primaryFontColor),
-        textColor: aiThemeType.secondaryFontColor,
-        borderColor: aiThemeType.choicesInteractionBorderColor,
-        pressedFillColor: AskLoraColors.primaryGreen.withOpacity(0.4),
-        fillColor: AskLoraColors.white.withOpacity(0.2),
-        label: component.label,
-        onTap: () =>
-            context.read<LoraGptBloc>().add(OnPromptTap(component.label)),
-      );
+      return LoraNavigationButton(
+          textStyle: AskLoraTextStyles.button3
+              .copyWith(color: aiThemeType.primaryFontColor),
+          textColor: aiThemeType.secondaryFontColor,
+          borderColor: aiThemeType.choicesInteractionBorderColor,
+          pressedFillColor: AskLoraColors.primaryGreen.withOpacity(0.4),
+          fillColor: Colors.transparent,
+          label: component.label,
+          onTap: () =>
+              context.read<LoraGptBloc>().add(OnPromptTap(component.label)));
     }
   }
 }
