@@ -99,21 +99,21 @@ class OnAiOverlayClose extends LoraGptEvent {
 }
 
 class FetchBotIntro extends LoraGptEvent {
-  final Map<String, dynamic> arguments;
+  final BotstockIntro params;
 
-  const FetchBotIntro(this.arguments);
+  const FetchBotIntro(this.params);
 
   @override
-  List<Object?> get props => [arguments];
+  List<Object?> get props => [params];
 }
 
 class FetchBotEarnings extends LoraGptEvent {
-  final Map<String, dynamic> arguments;
+  final BotstockIntro params;
 
-  const FetchBotEarnings(this.arguments);
+  const FetchBotEarnings(this.params);
 
   @override
-  List<Object?> get props => [arguments];
+  List<Object?> get props => [params];
 }
 
 class FetchWelcomeStarter extends LoraGptEvent {
