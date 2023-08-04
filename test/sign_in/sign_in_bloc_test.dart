@@ -72,6 +72,8 @@ void main() async {
             .thenAnswer((_) async => true);
         when(sharedPreference.writeIntData(StorageKeys.sfKeyPpiUserId, 0))
             .thenAnswer((_) async => true);
+        when(sharedPreference.writeBoolData(StorageKeys.sfFreshInstall, false))
+            .thenAnswer((_) async => true);
       },
     );
 

@@ -32,6 +32,9 @@ void main() async {
     setUpAll(() async {
       signUpRepository = MockSignUpRepository();
       sharedPreference = MockSharedPreference();
+
+      when(sharedPreference.writeBoolData(StorageKeys.sfFreshInstall, false))
+          .thenAnswer((_) async => true);
     });
 
     setUp(() async {

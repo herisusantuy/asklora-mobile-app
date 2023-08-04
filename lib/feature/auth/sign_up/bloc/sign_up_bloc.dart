@@ -72,6 +72,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           email: state.username, password: state.password, username: tempName!);
 
       await _sharedPreference.writeData(StorageKeys.sfKeyEmail, state.username);
+      await _sharedPreference.writeBoolData(StorageKeys.sfFreshInstall, false);
 
       emit(state.copyWith(response: data));
     } on AskloraApiClientException catch (e) {
