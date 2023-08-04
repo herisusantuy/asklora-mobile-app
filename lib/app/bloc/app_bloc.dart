@@ -67,8 +67,13 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           localeType: localeType));
     } else {
       await _tokenRepository.deleteAll();
-      await _sharedPreference
-          .deleteAllDataExcept([StorageKeys.sfKeyLocalisationData]);
+      await _sharedPreference.deleteAllDataExcept([
+        StorageKeys.sfKeyLocalisationData,
+        StorageKeys.sfKeyInvestmentStyleState,
+        StorageKeys.sfKeyBotDetailsTutorial,
+        StorageKeys.sfKeyBotRecommendationTutorial,
+        StorageKeys.sfKeyTradeSummaryTutorial,
+      ]);
       await _secureStorage.deleteAllData();
       emit(AppState.unauthenticated(localeType: localeType));
     }
