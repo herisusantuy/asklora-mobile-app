@@ -17,7 +17,6 @@ import '../domain/query_response.dart';
 import '../repository/lora_gpt_repository.dart';
 
 part 'lora_gpt_event.dart';
-
 part 'lora_gpt_state.dart';
 
 class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
@@ -58,7 +57,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     tempList.add(const Loading());
     emit(state.copyWith(conversations: [...tempList], status: status));
 
-    var botIntroResponse =
+    final botIntroResponse =
         await _loraGptRepository.botIntro(params: fetchBotIntro.params);
 
     ///remove loading
@@ -97,7 +96,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     emit(state.copyWith(status: status));
 
-    var botEarningsResponse =
+    final botEarningsResponse =
         await _loraGptRepository.botEarnings(params: fetchBotEarnings.params);
 
     ///remove loading
@@ -136,7 +135,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     tempList.add(const Loading());
     emit(state.copyWith(conversations: [...tempList], status: status));
 
-    var welcomeStarterResponse = await _loraGptRepository.welcomeStarter(
+    final welcomeStarterResponse = await _loraGptRepository.welcomeStarter(
         params: state.getLandingPageIntroRequest);
 
     ///remove loading
@@ -172,7 +171,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     final tempList = List<Conversation>.of(state.conversations);
     ResponseState status = ResponseState.loading;
 
-    var welcomeNewsResponse = await _loraGptRepository.welcomeNews(
+    final welcomeNewsResponse = await _loraGptRepository.welcomeNews(
         params: state.getLandingPageIntroRequest);
 
     ///remove loading
