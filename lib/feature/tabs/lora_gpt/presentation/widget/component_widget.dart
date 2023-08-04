@@ -21,6 +21,7 @@ class ComponentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('label : ${component.label}');
     return LoraAiButton(
       textStyle: AskLoraTextStyles.button3
           .copyWith(color: aiThemeType.primaryFontColor),
@@ -28,7 +29,7 @@ class ComponentWidget extends StatelessWidget {
       borderColor: aiThemeType.choicesInteractionBorderColor,
       pressedFillColor: AskLoraColors.primaryGreen.withOpacity(0.4),
       fillColor: Colors.transparent,
-      label: _label,
+      label: component.label,
       onTap: () => _handleTap(context),
     );
   }
@@ -48,15 +49,6 @@ class ComponentWidget extends StatelessWidget {
       }
     } else {
       context.read<LoraGptBloc>().add(OnPromptTap(component.label));
-    }
-  }
-
-  String get _label {
-    if (component is NavigationButton) {
-      final navButton = component as NavigationButton;
-      return navButton.label;
-    } else {
-      return component.label;
     }
   }
 }
