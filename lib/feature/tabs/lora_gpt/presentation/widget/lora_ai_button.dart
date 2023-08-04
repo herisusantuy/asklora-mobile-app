@@ -5,7 +5,7 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/app_icons.dart';
 
-class LoraNavigationButton extends StatefulWidget {
+class LoraAiButton extends StatefulWidget {
   final String label;
   final VoidCallback onTap;
   final bool active;
@@ -21,7 +21,7 @@ class LoraNavigationButton extends StatefulWidget {
   final double horizontalPadding;
   final double verticalPadding;
 
-  const LoraNavigationButton(
+  const LoraAiButton(
       {this.label = '',
       required this.onTap,
       this.active = false,
@@ -40,10 +40,10 @@ class LoraNavigationButton extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<LoraNavigationButton> createState() => _LoraNavigationButtonState();
+  State<LoraAiButton> createState() => _LoraAiButtonState();
 }
 
-class _LoraNavigationButtonState extends State<LoraNavigationButton> {
+class _LoraAiButtonState extends State<LoraAiButton> {
   bool _isPressed = false;
 
   @override
@@ -105,6 +105,7 @@ class _LoraNavigationButtonState extends State<LoraNavigationButton> {
                 ellipsis: true,
               ),
             ),
+            const SizedBox(width: 5),
             getSvgIcon('icon_sent_text',
                 color: AskLoraColors.white, height: 20, width: 20)
           ],
