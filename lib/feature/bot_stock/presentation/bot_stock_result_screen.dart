@@ -41,7 +41,7 @@ class BotStockResultScreen extends StatelessWidget {
                     primaryButtonOnClick: () => TabScreen.openAndRemoveAllRoute(
                         context,
                         initialTabPage: TabPage.portfolio),
-                    primaryButtonLabel: S.of(context).buttonBackToPortfolio,
+                    primaryButtonLabel: S.of(context).goToPortfolio,
                     secondaryButtonLabel: S.of(context).startAnotherInvestments,
                     secondaryButtonOnClick: () =>
                         TabScreen.openAndRemoveAllRoute(context,

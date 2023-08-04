@@ -49,8 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m10(emailAddress) =>
       "We\'ve sent an email to\n ${emailAddress}\n\nPlease use your phone to click on the activation link!";
 
-  static String m11(botName, botSymbol, dateTime) =>
-      "${botName} ${botSymbol} will end at ${dateTime}";
+  static String m11(botName, botSymbol) =>
+      "${botName} ${botSymbol} will end when the US market opens";
 
   static String m12(time) =>
       "Current Exchange Rate: HKD 1 = USD 0.137 (at HKT ${time})";
@@ -155,7 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "at least 1 upper case letter"),
         "backToAccountSettings":
             MessageLookupByLibrary.simpleMessage("Back to account settings"),
-        "backToLogin": MessageLookupByLibrary.simpleMessage("Back to login"),
+        "backToLogin": MessageLookupByLibrary.simpleMessage("Back To Login"),
         "bankAccountNumber":
             MessageLookupByLibrary.simpleMessage("Bank Account Number"),
         "bankName": MessageLookupByLibrary.simpleMessage("Bank Name"),
@@ -557,6 +557,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Legal English First Name"),
         "legalLastName":
             MessageLookupByLibrary.simpleMessage("Legal English Last Name"),
+        "letsTrade": MessageLookupByLibrary.simpleMessage("LET\'S TRADE"),
         "licenseeName":
             MessageLookupByLibrary.simpleMessage("Licensee: Chang Yung Ching"),
         "licenseeNumber":
@@ -901,6 +902,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "takePhotoFront": MessageLookupByLibrary.simpleMessage(
             "Take a photo of the front of your HKID"),
         "takeSelfie": MessageLookupByLibrary.simpleMessage("Take a selfie"),
+        "tapAnyWhere":
+            MessageLookupByLibrary.simpleMessage("Tap anywhere to continue"),
         "taxAgreementCheckboxDesc": MessageLookupByLibrary.simpleMessage(
             "By checking this box, you consent to the collection and distribution of tax forms in an electronic format in lieu of paper"),
         "taxAgreementDesc1": MessageLookupByLibrary.simpleMessage(
@@ -939,6 +942,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "(4) I understand and agree that my electronic signature is the legal equivalent of a manual written signature."),
         "taxAgreementSignatureTitle":
             MessageLookupByLibrary.simpleMessage("Signature"),
+        "tellMeMore": MessageLookupByLibrary.simpleMessage("Tell Me More"),
         "terminateAccount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
@@ -964,6 +968,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "toExecuteIt": MessageLookupByLibrary.simpleMessage(" to execute it!"),
         "toGiveYou": MessageLookupByLibrary.simpleMessage(
             "to give you a better idea of its trading potential!"),
+        "toOpenLora": MessageLookupByLibrary.simpleMessage(
+            " to open Lora and get more details about your investment!"),
         "toStartAConversation": MessageLookupByLibrary.simpleMessage(
             "to start a conversation. Tap the icon again to dismiss Asklora"),
         "tokenInvalid": MessageLookupByLibrary.simpleMessage(
@@ -980,6 +986,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "The duration you set for Botstock where the Bot will automatically buy and sell."),
         "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
             "Lora\'s date to start the Botstocks"),
+        "tooltipDescOfTickerDetailsTutorial": MessageLookupByLibrary.simpleMessage(
+            "Here\'s a brief description of the bot and stock you\'ve chosen"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("Total amount"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("Total P/L is"),
         "trade": MessageLookupByLibrary.simpleMessage("Trade"),
@@ -1087,6 +1095,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "withdrawalWorkingDays": MessageLookupByLibrary.simpleMessage(
             "Your withdrawal can take up to 2 working days."),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
+        "youCanClickOn":
+            MessageLookupByLibrary.simpleMessage("You can click on "),
         "yourAddressProofMustContainFullName": MessageLookupByLibrary.simpleMessage(
             "Your address proof must contain your full name, full residential address and the issuing agency.\n\nWe accept water/electricity/gas bills, bank statement, or government correspondence within the last 3 months."),
         "yourBankAccount":

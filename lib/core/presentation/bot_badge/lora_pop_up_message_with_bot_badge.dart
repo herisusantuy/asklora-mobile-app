@@ -22,11 +22,13 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
   final Color subTitleColor;
   final String buttonLabel;
   final VoidCallback onButtonTap;
+  final String tickerSymbol;
 
   const LoraPopUpMessageWithBotBadge(
       {required this.title,
       required this.subTitle,
       required this.botTypes,
+      this.tickerSymbol = '',
       this.badgePosition = BadgePosition.belowSubtitle,
       this.backgroundColor = AskLoraColors.whiteSmoke,
       this.titleColor = AskLoraColors.charcoal,
@@ -64,6 +66,7 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
                         ...botTypes
                             .map((e) => BotBadge(
                                   botType: e,
+                                  tickerSymbol: tickerSymbol,
                                   backgroundColor: _getBadgeBackgroundColor(
                                       botTypes.indexOf(e)),
                                   textColor:
@@ -108,6 +111,7 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
                                   textColor:
                                       _getBadgeTextColor(botTypes.indexOf(e)),
                                   botType: e,
+                                  tickerSymbol: tickerSymbol,
                                 ))
                             .toList(),
                       const SizedBox(

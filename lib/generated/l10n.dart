@@ -3193,14 +3193,13 @@ class S {
     );
   }
 
-  /// `{botName} {botSymbol} will end at {dateTime}`
-  String endBotStockAcknowledgement(
-      String botName, String botSymbol, String dateTime) {
+  /// `{botName} {botSymbol} will end when the US market opens`
+  String endBotStockAcknowledgement(String botName, String botSymbol) {
     return Intl.message(
-      '$botName $botSymbol will end at $dateTime',
+      '$botName $botSymbol will end when the US market opens',
       name: 'endBotStockAcknowledgement',
       desc: '',
-      args: [botName, botSymbol, dateTime],
+      args: [botName, botSymbol],
     );
   }
 
@@ -3814,10 +3813,10 @@ class S {
     );
   }
 
-  /// `Back to login`
+  /// `Back To Login`
   String get backToLogin {
     return Intl.message(
-      'Back to login',
+      'Back To Login',
       name: 'backToLogin',
       desc: '',
       args: [],
@@ -5805,6 +5804,76 @@ class S {
     );
   }
 
+  /// `Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.`
+  String get portfolioDetailPerformanceBotAssetsInStockTooltip {
+    return Intl.message(
+      'Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.',
+      name: 'portfolioDetailPerformanceBotAssetsInStockTooltip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Here's a brief description of the bot and stock you've chosen`
+  String get tooltipDescOfTickerDetailsTutorial {
+    return Intl.message(
+      'Here\'s a brief description of the bot and stock you\'ve chosen',
+      name: 'tooltipDescOfTickerDetailsTutorial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap anywhere to continue`
+  String get tapAnyWhere {
+    return Intl.message(
+      'Tap anywhere to continue',
+      name: 'tapAnyWhere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can click on `
+  String get youCanClickOn {
+    return Intl.message(
+      'You can click on ',
+      name: 'youCanClickOn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tell Me More`
+  String get tellMeMore {
+    return Intl.message(
+      'Tell Me More',
+      name: 'tellMeMore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` to open Lora and get more details about your investment!`
+  String get toOpenLora {
+    return Intl.message(
+      ' to open Lora and get more details about your investment!',
+      name: 'toOpenLora',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `LET'S TRADE`
+  String get letsTrade {
+    return Intl.message(
+      'LET\'S TRADE',
+      name: 'letsTrade',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Requested To End`
   String get requestedToEnd {
     return Intl.message(
@@ -5820,16 +5889,6 @@ class S {
     return Intl.message(
       'User Not Found',
       name: 'userNotFound',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.`
-  String get portfolioDetailPerformanceBotAssetsInStockTooltip {
-    return Intl.message(
-      'Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.',
-      name: 'portfolioDetailPerformanceBotAssetsInStockTooltip',
       desc: '',
       args: [],
     );

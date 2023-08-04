@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import '../../../core/data/remote/base_api_client.dart';
 import '../../../core/domain/base_response.dart';
+import '../../../core/domain/validation_enum.dart';
 import '../../../core/utils/storage/shared_preference.dart';
 import '../../../core/utils/storage/storage_keys.dart';
 import '../../chart/domain/bot_portfolio_chart_models.dart';
@@ -90,9 +91,12 @@ class BotStockRepository {
       fetchBotRecommendation() async {
     try {
       var response = await _botStockApiClient.fetchBotRecommendation(
-          await _sharedPreference.readData(sfKeyPpiAccountId) ?? '');
+          await _sharedPreference.readData(StorageKeys.sfKeyPpiAccountId) ??
+              '');
       return BaseResponse.complete(
           BotRecommendationResponse.fromJson(response.data));
+    } on BadRequestException catch (_) {
+      return BaseResponse.error(validationCode: ValidationCode.redoIsq);
     } catch (e) {
       return BaseResponse.error();
     }
@@ -102,7 +106,8 @@ class BotStockRepository {
       {bool isFreeBot = false}) async {
     try {
       var response = await _botStockApiClient.fetchBotRecommendation(
-          await _sharedPreference.readData(sfKeyPpiAccountId) ?? '');
+          await _sharedPreference.readData(StorageKeys.sfKeyPpiAccountId) ??
+              '');
       var botRecommendationResponse =
           BotRecommendationResponse.fromJson(response.data);
 
@@ -123,7 +128,7 @@ class BotStockRepository {
   }
 
   Future<void> removeInvestmentStyleState() async =>
-      await _sharedPreference.deleteData(sfKeyInvestmentStyleState);
+      await _sharedPreference.deleteData(StorageKeys.sfKeyInvestmentStyleState);
 
   Future<BaseResponse<List<BotActiveOrderModel>>> activeOrders(
       {required List<String> status}) async {

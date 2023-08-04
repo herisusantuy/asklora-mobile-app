@@ -22,9 +22,15 @@ class CarouselPage extends StatelessWidget {
                 const Expanded(child: SizedBox()),
                 ButtonPair(
                     key: const Key('button_pair'),
-                    primaryButtonOnClick: () => context
-                        .read<NavigationBloc<WelcomePages>>()
-                        .add(const PageChanged(WelcomePages.welcome)),
+                    primaryButtonOnClick: () {
+                      if (FeatureFlags.isMockApp) {
+                        AskNameScreen.open(context);
+                      } else {
+                        context
+                            .read<NavigationBloc<WelcomePages>>()
+                            .add(const PageChanged(WelcomePages.welcome));
+                      }
+                    },
                     secondaryButtonOnClick: () => SignInScreen.open(context),
                     primaryButtonLabel: S.of(context).buttonLetsBegin,
                     secondaryButtonLabel: S.of(context).buttonHaveAnAccount),

@@ -405,16 +405,13 @@
       }
     }
   },
-  "endBotStockAcknowledgement": "{botName} {botSymbol} 將會在 {dateTime} 開始",
+  "endBotStockAcknowledgement": "{botName} {botSymbol} will end when the US market opens",
   "@endBotStockAcknowledgement": {
     "placeholders": {
       "botName": {
         "type": "String"
       },
       "botSymbol": {
-        "type": "String"
-      },
-      "dateTime": {
         "type": "String"
       }
     }
@@ -775,11 +772,17 @@
   "botRecommendationTutorialDesc4": "'Trade' ",
   "botRecommendationTutorialDesc5": "on a Botstock that catches your eye!",
   "giftBotStockMessageScreenTitle": "每一次你投資新嘅Botstock, 我都會問你投資風格問題，咁我就可以提供新嘅個人化投資建議畀你！",
+  "giftBotStockMessageScreenBottomButton": "OK! 睇下畀我嘅推薦",
+  "tooltipDescOfTickerDetailsTutorial": "Here's a brief description of the bot and stock you've chosen",
+  "tapAnyWhere": "Tap anywhere to continue",
+  "youCanClickOn": "You can click on ",
+  "tellMeMore": "Tell Me More",
+  "toOpenLora": " to open Lora and get more details about your investment!",
   "requestedToEnd": "Requested To End",
-  "giftBotStockMessageScreenBottomButton": "OK! 睇下畀我嘅推薦 ",
   "userNotFound": "User Not Found",
   "goToPortfolio": "Go To Portfolio",
   "startAnotherInvestments": "Start another investment",
   "timeForInvestmentStyleQuestion": "想知Asklora有咩投資技？\n界定你嘅投資風格先！",
-  "isqWillHelpMeUnderstandWhatKindOfStocks": "ISQ會幫到我了解你對咩類型股票有興趣"
+  "isqWillHelpMeUnderstandWhatKindOfStocks": "ISQ會幫到我了解你對咩類型股票有興趣",
+  "letsTrade": "LET'S TRADE"
 }

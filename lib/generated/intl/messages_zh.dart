@@ -45,8 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m10(emailAddress) =>
       "已發送電子郵件至\n ${emailAddress}\n\n請用手機點擊開通連結！";
 
-  static String m11(botName, botSymbol, dateTime) =>
-      "${botName} ${botSymbol} 將會在 ${dateTime} 開始";
+  static String m11(botName, botSymbol) =>
+      "${botName} ${botSymbol} will end when the US market opens";
 
   static String m12(time) => "現時匯率: HKD 1 = USD 0.137 (於 HKT ${time})";
 
@@ -376,7 +376,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getTheFirstBotstockForFree":
             MessageLookupByLibrary.simpleMessage("獲取首個免費 Botstock "),
         "giftBotStockMessageScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage("OK! 睇下畀我嘅推薦 "),
+            MessageLookupByLibrary.simpleMessage("OK! 睇下畀我嘅推薦"),
         "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
             "每一次你投資新嘅Botstock, 我都會問你投資風格問題，咁我就可以提供新嘅個人化投資建議畀你！"),
         "giftBotStockWelcomeScreenBottomButton":
@@ -462,6 +462,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "legal": MessageLookupByLibrary.simpleMessage("Legal"),
         "legalFirstName": MessageLookupByLibrary.simpleMessage("法定英文名字"),
         "legalLastName": MessageLookupByLibrary.simpleMessage("法定英文姓氏"),
+        "letsTrade": MessageLookupByLibrary.simpleMessage("LET\'S TRADE"),
         "licenseeName": MessageLookupByLibrary.simpleMessage("持牌人：張永經"),
         "licenseeNumber": MessageLookupByLibrary.simpleMessage("CE 編號: AFF918"),
         "lifePhysicalSocialService": MessageLookupByLibrary.simpleMessage(
@@ -741,6 +742,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "takePhotoBack": MessageLookupByLibrary.simpleMessage("拍攝香港身份證背面"),
         "takePhotoFront": MessageLookupByLibrary.simpleMessage("拍攝香港身份證正面"),
         "takeSelfie": MessageLookupByLibrary.simpleMessage("自拍照一張"),
+        "tapAnyWhere":
+            MessageLookupByLibrary.simpleMessage("Tap anywhere to continue"),
         "taxAgreementCheckboxDesc": MessageLookupByLibrary.simpleMessage(
             "By checking this box, you consent to the collection and distribution of tax forms in an electronic format in lieu of paper"),
         "taxAgreementDesc2": MessageLookupByLibrary.simpleMessage(
@@ -777,6 +780,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "(4) I understand and agree that my electronic signature is the legal equivalent of a manual written signature."),
         "taxAgreementSignatureTitle":
             MessageLookupByLibrary.simpleMessage("Signature"),
+        "tellMeMore": MessageLookupByLibrary.simpleMessage("Tell Me More"),
         "terminateAccount": MessageLookupByLibrary.simpleMessage("終止賬戶"),
         "termsAndConditions": MessageLookupByLibrary.simpleMessage("條款與約束"),
         "theAmountMustMatch":
@@ -798,6 +802,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "toExecuteIt": MessageLookupByLibrary.simpleMessage(" 就可以立即執行指示！"),
         "toGiveYou":
             MessageLookupByLibrary.simpleMessage("嘅表現，希望幫到你理解Botstock係點樣交易！"),
+        "toOpenLora": MessageLookupByLibrary.simpleMessage(
+            " to open Lora and get more details about your investment!"),
         "toStartAConversation": MessageLookupByLibrary.simpleMessage(
             "to start a conversation. Tap the icon again to dismiss Asklora"),
         "tokenInvalid": MessageLookupByLibrary.simpleMessage(
@@ -815,6 +821,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "你定下的投資時間，Botstock將會於此期間內自動買賣股票。"),
         "tooltipBotDetailsStartDate":
             MessageLookupByLibrary.simpleMessage("Lora開始Botstocks交易"),
+        "tooltipDescOfTickerDetailsTutorial": MessageLookupByLibrary.simpleMessage(
+            "Here\'s a brief description of the bot and stock you\'ve chosen"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("總金額"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "trade": MessageLookupByLibrary.simpleMessage("交易"),
@@ -901,6 +909,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "withdrawalWorkingDays":
             MessageLookupByLibrary.simpleMessage("提取款項最多需時2個工作天。"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),
+        "youCanClickOn":
+            MessageLookupByLibrary.simpleMessage("You can click on "),
         "yourAddressProofMustContainFullName":
             MessageLookupByLibrary.simpleMessage(
                 " 你的住址證明必須包含你全名、詳細住址及發行機構。\n\n我們接受最近3個月的水/電/煤氣繳費單、銀行結單或政府函件。"),

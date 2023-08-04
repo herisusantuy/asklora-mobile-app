@@ -95,7 +95,7 @@ class VerifyIdentityScreen extends StatelessWidget {
   }
 
   Widget _verificationSteps(BuildContext context) => RoundColoredBox(
-      key: Key('verification_steps'),
+      key: const Key('verification_steps'),
       title: S.of(context).getReadyForTheVerification,
       content: CustomStepper(
         currentStep: 0,

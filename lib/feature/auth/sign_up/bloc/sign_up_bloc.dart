@@ -65,12 +65,14 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     try {
       emit(state.copyWith(response: BaseResponse.loading()));
 
-      final tempName = await _sharedPreference.readData(sfKeyPpiAccountId);
+      final tempName =
+          await _sharedPreference.readData(StorageKeys.sfKeyPpiAccountId);
 
       final data = await _signUpRepository.signUp(
           email: state.username, password: state.password, username: tempName!);
 
-      await _sharedPreference.writeData(sfKeyEmail, state.username);
+      await _sharedPreference.writeData(StorageKeys.sfKeyEmail, state.username);
+      await _sharedPreference.writeBoolData(StorageKeys.sfFreshInstall, false);
 
       emit(state.copyWith(response: data));
     } on AskloraApiClientException catch (e) {
