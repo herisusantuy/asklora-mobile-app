@@ -21,7 +21,6 @@ class ComponentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('label : ${component.label}');
     return LoraAiButton(
       textStyle: AskLoraTextStyles.button3
           .copyWith(color: aiThemeType.primaryFontColor),
