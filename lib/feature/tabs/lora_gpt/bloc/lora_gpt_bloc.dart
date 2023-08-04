@@ -345,7 +345,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     if (response.state == ResponseState.success) {
       _addQueryResponseToConversation(tempList, response.data!);
     } else {
-      tempList.add(const LoraError());
+      tempList.add(LoraError(LoraError.message()));
     }
     emit(state.copyWith(
         status: status,

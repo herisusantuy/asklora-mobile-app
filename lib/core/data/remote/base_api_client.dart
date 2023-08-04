@@ -138,8 +138,10 @@ class AppInterceptors extends Interceptor {
     var accessToken = '';
     try {
       final refreshToken = await _storage.getRefreshToken();
-      final response = await _dio
-          .post(endpointTokenRefresh, data: {'refresh': refreshToken});
+      final refreshTokenUrl =
+          Environment().config.askLoraApiBaseUrl + endpointTokenRefresh;
+      final response =
+          await _dio.post(refreshTokenUrl, data: {'refresh': refreshToken});
 
       if (response.statusCode == 200) {
         var refreshResponse = TokenRefreshResponse.fromJson(response.data);
@@ -174,10 +176,12 @@ class AppInterceptors extends Interceptor {
 
             /// TODO: Remove `Token invalid` and `Token invalid` checks once the BE apply this new code all across the place.
 
+            final aiErrorMessage = err.response?.data['detail'];
+
             final message = err.response?.data['message'];
             if (message == 'Token invalid' ||
                 message == 'Token invalid / expired' ||
-                message == 'Unauthorized' ||
+                aiErrorMessage == 'Unauthorized' ||
                 askloraError.type == ValidationCode.invalidToken) {
               _handleExpiredToken(err, handler);
               return;

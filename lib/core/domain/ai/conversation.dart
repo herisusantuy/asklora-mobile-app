@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -35,9 +37,17 @@ class Lora extends Conversation {
 }
 
 class LoraError extends Lora {
-  const LoraError({bool isNeedCallback = true})
-      : super('Lora is working on some optimizations to serve you better.',
-            isNeedCallback: isNeedCallback);
+  static const _errorMessages = [
+    'I am having a bit of trouble with your current question. Can you please try another question?',
+    'Lora is working on some optimizations to serve you better. Can you please ask a different question?',
+    'There\'s a small interruption in my service. Lora is working hard to restore it. Would you mind asking another question?',
+    'Apologies! I\'m currently facing an issue. Could we explore a different topic please?'
+  ];
+
+  const LoraError(super.text, {bool isNeedCallback = true});
+
+  static String message() =>
+      _errorMessages[Random().nextInt(_errorMessages.length)];
 
   @override
   List<Object?> get props => [type(), text, isNeedCallback];
