@@ -186,9 +186,7 @@ class BotRecommendationScreen extends StatelessWidget {
               Expanded(
                 child: PrimaryButton(
                   label: S.of(context).pressToRedoISQ,
-                  onTap: () => AiInvestmentStyleQuestionForYouScreen.open(
-                      context,
-                      aiThemeType: AiThemeType.light),
+                  onTap: () => _redoIsq(context),
                 ),
               ),
             ],
@@ -243,7 +241,7 @@ class BotRecommendationScreen extends StatelessWidget {
           subTitle:
               'Oops! Looks like there aren’t enough recommendations that meet your current investment profile - Let’s go through your Investment Style again to find suitable recommendations.',
           primaryButtonLabel: S.of(context).retakeInvestmentStyle,
-          onPrimaryButtonTap: () => _loraPopUpMessagePrimaryButtonTap(context),
+          onPrimaryButtonTap: () => _redoIsq(context),
         );
       default:
         return LoraPopUpMessageModel(
@@ -264,7 +262,7 @@ class BotRecommendationScreen extends StatelessWidget {
     }
   }
 
-  void _loraPopUpMessagePrimaryButtonTap(BuildContext context) {
+  void _redoIsq(BuildContext context) {
     AiInvestmentStyleQuestionForYouScreen.open(context,
         aiThemeType: AiThemeType.light);
   }
