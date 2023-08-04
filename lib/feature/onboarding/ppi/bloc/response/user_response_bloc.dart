@@ -176,17 +176,19 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
         ppiResponseState: PpiResponseState.dispatchResponse,
       ));
 
-      final tempId = await _sharedPreference.readIntData(sfKeyPpiUserId) ?? 0;
+      final tempId =
+          await _sharedPreference.readIntData(StorageKeys.sfKeyPpiUserId) ?? 0;
 
       var requests = _getAllSelectionsInRequest(tempId);
 
       if (requests.isEmpty) {
-        final cachedResponse =
-            await _jsonCacheSharedPreferences.value(sfKeyPpiAnswers);
+        final cachedResponse = await _jsonCacheSharedPreferences
+            .value(StorageKeys.sfKeyPpiAnswers);
         requests = List<PpiSelectionRequest>.from((cachedResponse)
             .map((e) => PpiSelectionRequest.fromJson(e, tempId)));
       } else {
-        await _jsonCacheSharedPreferences.refresh(sfKeyPpiAnswers, requests);
+        await _jsonCacheSharedPreferences.refresh(
+            StorageKeys.sfKeyPpiAnswers, requests);
       }
 
       final response = await _ppiResponseRepository.addBulkAnswer(requests);

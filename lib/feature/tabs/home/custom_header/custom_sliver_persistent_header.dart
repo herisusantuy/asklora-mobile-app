@@ -78,7 +78,7 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
   }
 
   Future<String> _getName() async =>
-      await SharedPreference().readData(sfKeyPpiName) ?? '';
+      await SharedPreference().readData(StorageKeys.sfKeyPpiName) ?? '';
 
   String _getHeaderTitle(BuildContext context, String name) {
     if (UserJourney.compareUserJourney(

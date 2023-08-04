@@ -15,14 +15,16 @@ class UserJourneyRepository {
 
   Future<BaseResponse<UserJourneyResponse>> saveUserJourney(
       {required UserJourney userJourney, String? data}) async {
-    await _sharedPreference.writeData(sfKeyUserJourney, userJourney.value);
-    await _sharedPreference.writeData(sfKeyUserJourneyData, data ?? '');
+    await _sharedPreference.writeData(
+        StorageKeys.sfKeyUserJourney, userJourney.value);
+    await _sharedPreference.writeData(
+        StorageKeys.sfKeyUserJourneyData, data ?? '');
     try {
       var response = await _userJourneyApiClient
           .save(UserJourneyRequest(userJourney: userJourney.value, data: data));
       var userJourneyResponse = UserJourneyResponse.fromJson(response.data!);
       await _sharedPreference.writeIntData(
-          sfKeyAskloraId, userJourneyResponse.user ?? 0);
+          StorageKeys.sfKeyAskloraId, userJourneyResponse.user ?? 0);
 
       return BaseResponse.complete(userJourneyResponse);
     } catch (e) {
@@ -33,13 +35,14 @@ class UserJourneyRepository {
 
   void saveUserJourneyToLocal({UserJourney? userJourney, String? data}) async {
     await _sharedPreference.writeData(
-        sfKeyUserJourney, userJourney?.value ?? '');
-    await _sharedPreference.writeData(sfKeyUserJourneyData, data ?? '');
+        StorageKeys.sfKeyUserJourney, userJourney?.value ?? '');
+    await _sharedPreference.writeData(
+        StorageKeys.sfKeyUserJourneyData, data ?? '');
   }
 
   Future<UserJourney?> getUserJourneyFromLocal() async {
     String? localUserJourneyString =
-        await _sharedPreference.readData(sfKeyUserJourney);
+        await _sharedPreference.readData(StorageKeys.sfKeyUserJourney);
     UserJourney? localUserJourney = UserJourney.values.firstWhereOrNull(
             (element) => element.value == localUserJourneyString) ??
         UserJourney.investmentStyle;
@@ -48,9 +51,9 @@ class UserJourneyRepository {
 
   Future<UserJourney?> getUserJourney() async {
     String? localUserJourneyString =
-        await _sharedPreference.readData(sfKeyUserJourney);
+        await _sharedPreference.readData(StorageKeys.sfKeyUserJourney);
     String? localUserJourneyDataString =
-        await _sharedPreference.readData(sfKeyUserJourneyData);
+        await _sharedPreference.readData(StorageKeys.sfKeyUserJourneyData);
     UserJourney? localUserJourney = UserJourney.values
         .firstWhereOrNull((element) => element.value == localUserJourneyString);
     try {
@@ -58,7 +61,7 @@ class UserJourneyRepository {
 
       var userJourneyResponse = UserJourneyResponse.fromJson(response.data);
       await _sharedPreference.writeIntData(
-          sfKeyAskloraId, userJourneyResponse.user!);
+          StorageKeys.sfKeyAskloraId, userJourneyResponse.user!);
 
       var indexUserJourneyResponse = UserJourney.values.indexWhere(
           (element) => element.value == userJourneyResponse.userJourney);

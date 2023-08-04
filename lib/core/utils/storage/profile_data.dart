@@ -5,13 +5,15 @@ class ProfileData {
   final SharedPreference _sharedPreference = SharedPreference();
 
   Future<String> getName() async {
-    String firstName = await _sharedPreference.readData(sfKeyPpiName) ?? '';
-    String lastName = await _sharedPreference.readData(sfKeyPpiLastName) ?? '';
+    String firstName =
+        await _sharedPreference.readData(StorageKeys.sfKeyPpiName) ?? '';
+    String lastName =
+        await _sharedPreference.readData(StorageKeys.sfKeyPpiLastName) ?? '';
     return '$firstName $lastName';
   }
 
   Future<String> getEmail() async {
-    return await _sharedPreference.readData(sfKeyEmail) ?? '';
+    return await _sharedPreference.readData(StorageKeys.sfKeyEmail) ?? '';
   }
 
   Future<ProfileDataModel> getProfileData() async {

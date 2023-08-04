@@ -1,6 +1,6 @@
-import 'package:asklora_mobile_app/core/domain/validation_enum.dart';
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/otp/get_otp_request.dart';
+import 'package:asklora_mobile_app/core/domain/validation_enum.dart';
 import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
 import 'package:asklora_mobile_app/core/utils/storage/storage_keys.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/bloc/sign_up_bloc.dart';
@@ -32,6 +32,9 @@ void main() async {
     setUpAll(() async {
       signUpRepository = MockSignUpRepository();
       sharedPreference = MockSharedPreference();
+
+      when(sharedPreference.writeBoolData(StorageKeys.sfFreshInstall, false))
+          .thenAnswer((_) async => true);
     });
 
     setUp(() async {
@@ -209,13 +212,14 @@ void main() async {
         'entered correct password and correct email WHEN '
         'pressed `Submit` button',
         build: () {
-          when(sharedPreference.writeData(sfKeyEmail, 'kk@test.com'))
+          when(sharedPreference.writeData(
+                  StorageKeys.sfKeyEmail, 'kk@test.com'))
               .thenAnswer((_) => Future.value(true));
 
-          when(sharedPreference.readData(sfKeyPpiAccountId))
+          when(sharedPreference.readData(StorageKeys.sfKeyPpiAccountId))
               .thenAnswer((_) => Future.value('AAAA|BBBB|CCCC'));
 
-          when(sharedPreference.readIntData(sfKeyPpiUserId))
+          when(sharedPreference.readIntData(StorageKeys.sfKeyPpiUserId))
               .thenAnswer((_) => Future.value(101));
 
           when(signUpRepository.signUp(

@@ -30,11 +30,13 @@ void main() async {
         'emits `isAllowEmailNotification=false, isAllowPushNotification=true, isAllowInAppNotification=false` WHEN '
         'initiating notification',
         build: () {
-          when(sharedPreference.readBoolData(sfKeyInAppNotification))
+          when(sharedPreference
+                  .readBoolData(StorageKeys.sfKeyInAppNotification))
               .thenAnswer((_) => Future.value(false));
-          when(sharedPreference.readBoolData(sfKeyPushNotification))
+          when(sharedPreference.readBoolData(StorageKeys.sfKeyPushNotification))
               .thenAnswer((_) => Future.value(true));
-          when(sharedPreference.readBoolData(sfKeyEmailNotification))
+          when(sharedPreference
+                  .readBoolData(StorageKeys.sfKeyEmailNotification))
               .thenAnswer((_) => Future.value(false));
           return notificationBloc;
         },
@@ -50,7 +52,8 @@ void main() async {
         'emits `isAllowInAppNotification=true` WHEN '
         'enable in app notification',
         build: () {
-          when(sharedPreference.writeBoolData(sfKeyInAppNotification, true))
+          when(sharedPreference.writeBoolData(
+                  StorageKeys.sfKeyInAppNotification, true))
               .thenAnswer((_) => Future.value(false));
           return notificationBloc;
         },
@@ -62,7 +65,8 @@ void main() async {
         'emits `isAllowPushNotification=true` WHEN '
         'enable push notification',
         build: () {
-          when(sharedPreference.writeBoolData(sfKeyPushNotification, true))
+          when(sharedPreference.writeBoolData(
+                  StorageKeys.sfKeyPushNotification, true))
               .thenAnswer((_) => Future.value(false));
           return notificationBloc;
         },
@@ -73,7 +77,8 @@ void main() async {
         'emits `isEmailNotification=true` WHEN '
         'enable in email notification',
         build: () {
-          when(sharedPreference.writeBoolData(sfKeyEmailNotification, true))
+          when(sharedPreference.writeBoolData(
+                  StorageKeys.sfKeyEmailNotification, true))
               .thenAnswer((_) => Future.value(false));
           return notificationBloc;
         },

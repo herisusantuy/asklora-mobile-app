@@ -101,8 +101,6 @@ class App extends StatelessWidget {
         }
       case AppStatus.unauthenticated:
         return const WelcomeScreen();
-      case AppStatus.unauthenticated:
-        return const WelcomeScreen();
       case AppStatus.unknown:
         return const SizedBox();
     }
