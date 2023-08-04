@@ -443,6 +443,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "想知Asklora有咩投資秘技？\n界定你嘅投資風格先！\n"),
         "isqNextButton": MessageLookupByLibrary.simpleMessage(
             "Press to move onto the next section"),
+        "isqWillHelpMeUnderstandWhatKindOfStocks":
+            MessageLookupByLibrary.simpleMessage("ISQ會幫到我了解你對咩類型股票有興趣"),
         "kycRejectedExplanationOfAffiliate":
             MessageLookupByLibrary.simpleMessage("我們不接受上述類別人士\n開立賬戶。"),
         "kycRejectedScreenTitle":
@@ -789,6 +791,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisInteractiveGraph":
             MessageLookupByLibrary.simpleMessage("你可以係下面見到Botstock最近"),
         "timeCompleted": MessageLookupByLibrary.simpleMessage("完成時間"),
+        "timeForInvestmentStyleQuestion":
+            MessageLookupByLibrary.simpleMessage("想知Asklora有咩投資技？\n界定你嘅投資風格先！"),
         "timeRequested": MessageLookupByLibrary.simpleMessage("請求時間"),
         "to": MessageLookupByLibrary.simpleMessage("至"),
         "toExecuteIt": MessageLookupByLibrary.simpleMessage(" 就可以立即執行指示！"),

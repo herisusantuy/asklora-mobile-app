@@ -809,5 +809,7 @@
   "giftBotStockMessageScreenBottomButton": "See my recommendations",
   "requestedToEnd": "Requested To End",
   "userNotFound": "User Not Found",
-  "portfolioDetailPerformanceBotAssetsInStockTooltip": "Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%."
+  "portfolioDetailPerformanceBotAssetsInStockTooltip": "Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.",
+  "timeForInvestmentStyleQuestion": "It’s time for the investment style questions (ISQ)",
+  "isqWillHelpMeUnderstandWhatKindOfStocks": "The ISQ will help me understand exactly what kind of stocks you might be interested in"
 }

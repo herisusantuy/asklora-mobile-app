@@ -5834,6 +5834,26 @@ class S {
       args: [],
     );
   }
+
+  /// `It’s time for the investment style questions (ISQ)`
+  String get timeForInvestmentStyleQuestion {
+    return Intl.message(
+      'It’s time for the investment style questions (ISQ)',
+      name: 'timeForInvestmentStyleQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The ISQ will help me understand exactly what kind of stocks you might be interested in`
+  String get isqWillHelpMeUnderstandWhatKindOfStocks {
+    return Intl.message(
+      'The ISQ will help me understand exactly what kind of stocks you might be interested in',
+      name: 'isqWillHelpMeUnderstandWhatKindOfStocks',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -535,6 +535,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "It’s time to define your investment style.Show me what you’re made of!"),
         "isqNextButton": MessageLookupByLibrary.simpleMessage(
             "Press to move onto the next section"),
+        "isqWillHelpMeUnderstandWhatKindOfStocks":
+            MessageLookupByLibrary.simpleMessage(
+                "The ISQ will help me understand exactly what kind of stocks you might be interested in"),
         "kycRejectedExplanationOfAffiliate": MessageLookupByLibrary.simpleMessage(
             "We do not accept any members who are affiliated with the organisations mentioned above"),
         "kycRejectedScreenTitle": MessageLookupByLibrary.simpleMessage(
@@ -954,6 +957,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisInteractiveGraph": MessageLookupByLibrary.simpleMessage(
             "This interactive graph shows the Botstock’s past "),
         "timeCompleted": MessageLookupByLibrary.simpleMessage("Time Completed"),
+        "timeForInvestmentStyleQuestion": MessageLookupByLibrary.simpleMessage(
+            "It’s time for the investment style questions (ISQ)"),
         "timeRequested": MessageLookupByLibrary.simpleMessage("Time Requested"),
         "to": MessageLookupByLibrary.simpleMessage("To"),
         "toExecuteIt": MessageLookupByLibrary.simpleMessage(" to execute it!"),

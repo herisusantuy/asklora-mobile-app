@@ -779,5 +779,7 @@
   "giftBotStockMessageScreenBottomButton": "OK! 睇下畀我嘅推薦 ",
   "userNotFound": "User Not Found",
   "goToPortfolio": "Go To Portfolio",
-  "startAnotherInvestments": "Start another investment"
+  "startAnotherInvestments": "Start another investment",
+  "timeForInvestmentStyleQuestion": "想知Asklora有咩投資技？\n界定你嘅投資風格先！",
+  "isqWillHelpMeUnderstandWhatKindOfStocks": "ISQ會幫到我了解你對咩類型股票有興趣"
 }

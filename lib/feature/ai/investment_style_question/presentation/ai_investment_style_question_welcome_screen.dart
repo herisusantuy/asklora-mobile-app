@@ -23,12 +23,12 @@ class AiInvestmentStyleQuestionWelcomeScreen extends StatelessWidget {
     return AiWelcomeScreen(
       enableBackgroundImage: isqType == ISQType.onboarding,
       aiThemeType: aiThemeType,
-      title: S.of(context).aiIsqWelcomeTitle,
+      title: S.of(context).timeForInvestmentStyleQuestion,
       child: Padding(
-        padding: const EdgeInsets.only(top: 29),
+        padding: const EdgeInsets.only(top: 48),
         child: AiWelcomeSubtitleText(
           aiThemeType: aiThemeType,
-          subTitle: S.of(context).aiIsqWelcomeSubTitle,
+          subTitle: S.of(context).isqWillHelpMeUnderstandWhatKindOfStocks,
         ),
       ),
       onBottomButtonTap: () {
