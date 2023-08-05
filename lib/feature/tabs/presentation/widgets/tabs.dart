@@ -53,10 +53,10 @@ class Tabs extends StatelessWidget {
                           tutorialKey: TutorialJourney.aiTab,
                           tooltipPosition: TooltipPosition.top,
                           targetBorderRadius: BorderRadius.circular(50),
-                          targetPadding: EdgeInsets.zero,
+                          targetPadding: const EdgeInsets.all(3),
                           boxShadow: const BoxShadow(
-                            blurRadius: 13,
-                            spreadRadius: -10,
+                            blurRadius: 20,
+                            spreadRadius: -7,
                             color: Colors.white,
                             blurStyle: BlurStyle.outer,
                           ),
