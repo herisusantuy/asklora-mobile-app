@@ -24,6 +24,7 @@ class CustomShowcaseView extends StatelessWidget {
   final double overlayOpacity;
   final Color overlayColor;
   final PointerPosition pointerPosition;
+  final BoxShadow? boxShadow;
   const CustomShowcaseView({
     Key? key,
     required this.tutorialKey,
@@ -37,6 +38,7 @@ class CustomShowcaseView extends StatelessWidget {
     this.overlayOpacity = 0.8,
     this.pointerPosition = PointerPosition.bottom,
     this.margin = const EdgeInsets.only(top: 10),
+    this.boxShadow,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class CustomShowcaseView extends StatelessWidget {
       overlayColor: overlayColor,
       overlayOpacity: overlayOpacity,
       targetPadding: targetPadding,
+      boxShadow: boxShadow,
       width: MediaQuery.of(context)
           .size
           .width, //* container width for tooltip widget
