@@ -88,7 +88,7 @@ class BotDetailModel extends Equatable {
       formatDateTimeAsString(spotDate, dateFormat: 'dd/MM/yyyy');
 
   String get expireDateFormatted => expireDate != null
-      ? formatDateTimeAsString(expireDate, dateFormat: 'dd/MM/yyyy')
+      ? addOneDayToDate(expireDate!, dateFormat: 'dd/MM/yyyy')
       : 'NA';
 
   String get totalPnLPctString {
