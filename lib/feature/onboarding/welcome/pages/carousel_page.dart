@@ -6,7 +6,7 @@ class CarouselPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Stack(
         children: [
-          ..._backgroundImages,
+          const BackgroundVideo(),
           Container(
             width: double.infinity,
             padding: AppValues.screenHorizontalPadding,
@@ -14,15 +14,14 @@ class CarouselPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const LocalizationToggleButton(),
-                const SizedBox(
-                  height: 30,
-                ),
+                if (!FeatureFlags.isMockApp) const LocalizationToggleButton(),
+                const SizedBox(height: 30),
                 SizedBox(height: 250, child: _animatedTexts(context)),
                 const Expanded(child: SizedBox()),
-                ButtonPair(
-                    key: const Key('button_pair'),
-                    primaryButtonOnClick: () {
+                PrimaryButton(
+                    buttonPrimaryType: ButtonPrimaryType.whiteTransparency,
+                    label: S.of(context).buttonLetsBegin,
+                    onTap: () {
                       if (FeatureFlags.isMockApp) {
                         AskNameScreen.open(context);
                       } else {
@@ -30,10 +29,14 @@ class CarouselPage extends StatelessWidget {
                             .read<NavigationBloc<WelcomePages>>()
                             .add(const PageChanged(WelcomePages.welcome));
                       }
-                    },
-                    secondaryButtonOnClick: () => SignInScreen.open(context),
-                    primaryButtonLabel: S.of(context).buttonLetsBegin,
-                    secondaryButtonLabel: S.of(context).buttonHaveAnAccount),
+                    }),
+                CustomTextButton(
+                  key: const Key('kyc_secondary_button'),
+                  margin: const EdgeInsets.only(top: 24, bottom: 30),
+                  label: S.of(context).buttonHaveAnAccount,
+                  color: AskLoraColors.white,
+                  onTap: () => SignInScreen.open(context),
+                ),
               ],
             ),
           ),
@@ -51,7 +54,7 @@ class CarouselPage extends StatelessWidget {
 
   Widget _animatedTexts(BuildContext context) {
     return DefaultTextStyle(
-        style: AskLoraTextStyles.h1.copyWith(color: AskLoraColors.charcoal),
+        style: AskLoraTextStyles.h1.copyWith(color: AskLoraColors.white),
         child: AnimatedTextKit(
             onTap: () => BackdoorScreen.open(context),
             animatedTexts: [
@@ -64,5 +67,53 @@ class CarouselPage extends StatelessWidget {
               RotateAnimatedText(S.of(context).carouselIntro4,
                   alignment: Alignment.centerLeft),
             ]));
+  }
+}
+
+class BackgroundVideo extends StatefulWidget {
+  const BackgroundVideo({super.key});
+
+  @override
+  BackgroundVideoState createState() => BackgroundVideoState();
+}
+
+class BackgroundVideoState extends State<BackgroundVideo> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.asset(
+        'assets/videos/carousel_background_video.mov')
+      ..initialize().then((_) {
+        _controller.play();
+        _controller.setLooping(true);
+        setState(() {});
+      });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SizedBox.expand(
+      child: FittedBox(
+        fit: BoxFit.none,
+        child: SizedBox(
+          width: _controller.value.size.width ?? 0,
+          height: _controller.value.size.height ?? 0,
+          child: VideoPlayer(_controller),
+        ),
+      ),
+    );
+
+    return SizedBox(
+        width: _controller.value.size.width ?? 0,
+        height: _controller.value.size.height ?? 0,
+        child: VideoPlayer(_controller));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 }
