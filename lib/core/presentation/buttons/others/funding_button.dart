@@ -4,6 +4,7 @@ import '../../../../generated/l10n.dart';
 import '../../../styles/asklora_colors.dart';
 import '../../../styles/asklora_text_styles.dart';
 import '../../../utils/app_icons.dart';
+import '../../../utils/feature_flags.dart';
 import '../../auto_sized_text_widget.dart';
 
 enum FundingType { fund, withdraw }
@@ -45,6 +46,7 @@ class FundingButton extends StatelessWidget {
             onPressed: () {
               if (!disabled) {
                 FocusManager.instance.primaryFocus?.unfocus();
+                if (FeatureFlags.isMockApp) return;
                 onTap();
               }
             },
