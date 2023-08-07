@@ -99,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AskloraAgreementFile": MessageLookupByLibrary.simpleMessage(
             "Asklora Customer Agreement.pdf"),
+        "LoraAi": MessageLookupByLibrary.simpleMessage("Lora AI"),
         "about": MessageLookupByLibrary.simpleMessage("About"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("About Asklora"),
         "aboutYourInvestment": MessageLookupByLibrary.simpleMessage(
@@ -304,6 +305,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Check back later to see if\nthere are any new\ntransactions!"),
         "checkBotStockDetails":
             MessageLookupByLibrary.simpleMessage("Check Botstock Details"),
+        "clickOnLora": MessageLookupByLibrary.simpleMessage("click on Lora "),
         "communitySocialService":
             MessageLookupByLibrary.simpleMessage("Community / Social Service"),
         "companyAddress":
@@ -548,6 +550,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Law Enforcement, Government, Protective Service"),
         "learnBotstockManagement":
             MessageLookupByLibrary.simpleMessage("Learn Botstock Management"),
+        "left": MessageLookupByLibrary.simpleMessage("Left"),
         "legal": MessageLookupByLibrary.simpleMessage("Legal"),
         "legalFirstName":
             MessageLookupByLibrary.simpleMessage("Legal English First Name"),
@@ -570,6 +573,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Master AI Trading"),
         "mediaCommunications":
             MessageLookupByLibrary.simpleMessage("Media and Communications"),
+        "middle": MessageLookupByLibrary.simpleMessage("Middle"),
         "milestones": MessageLookupByLibrary.simpleMessage("Milestones"),
         "min": m14,
         "min8Character":
@@ -579,6 +583,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nature of Business"),
         "natureOfBusinessDesc": MessageLookupByLibrary.simpleMessage(
             "Nature of Business description"),
+        "navBar": MessageLookupByLibrary.simpleMessage("nav bar"),
         "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
         "neuroticismLessThan8": MessageLookupByLibrary.simpleMessage(
             "we think you can take on more risk."),
@@ -683,6 +688,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pleaseSelect": MessageLookupByLibrary.simpleMessage("Please Select"),
         "porAddress": MessageLookupByLibrary.simpleMessage(
             "Proof of Residential Address"),
+        "portfolio": MessageLookupByLibrary.simpleMessage("Portfolio"),
         "portfolioBuyingPower": m16,
         "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
             "Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement\'."),
@@ -814,10 +820,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Push-Notification"),
         "reSendOtp": m22,
         "readyToGo": MessageLookupByLibrary.simpleMessage("Ready to go?"),
+        "recommendations":
+            MessageLookupByLibrary.simpleMessage("Recommendations"),
         "redeemYourBotstockNow":
             MessageLookupByLibrary.simpleMessage("Redeem Your Botstock Now"),
         "rejected": MessageLookupByLibrary.simpleMessage("Rejected"),
         "relearn": MessageLookupByLibrary.simpleMessage("relearn"),
+        "rememberYouCan":
+            MessageLookupByLibrary.simpleMessage("Remember, you can always "),
         "requestedToEnd":
             MessageLookupByLibrary.simpleMessage("Requested To End"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
@@ -833,6 +843,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
         "reviewYourTradeSummary": MessageLookupByLibrary.simpleMessage(
             "Review your trade summary and hit "),
+        "right": MessageLookupByLibrary.simpleMessage("Right"),
         "riskDisclosureStatement":
             MessageLookupByLibrary.simpleMessage("Risk Disclosure Statement"),
         "riskDisclosureStatementAcknowledgement":
@@ -959,9 +970,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "timeCompleted": MessageLookupByLibrary.simpleMessage("Time Completed"),
         "timeRequested": MessageLookupByLibrary.simpleMessage("Time Requested"),
         "to": MessageLookupByLibrary.simpleMessage("To"),
+        "toAskAnyOtherQuestion": MessageLookupByLibrary.simpleMessage(
+            "to ask any other questions you might have"),
         "toExecuteIt": MessageLookupByLibrary.simpleMessage(" to execute it!"),
         "toGiveYou": MessageLookupByLibrary.simpleMessage(
             "to give you a better idea of its trading potential!"),
+        "toGoToDifferentPages":
+            MessageLookupByLibrary.simpleMessage("to go to different pages."),
         "toOpenLora": MessageLookupByLibrary.simpleMessage(
             " to open Lora and get more details about your investment!"),
         "toStartAConversation": MessageLookupByLibrary.simpleMessage(
@@ -1042,6 +1057,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Upload proof of remittance"),
         "usResidentQuestion": MessageLookupByLibrary.simpleMessage(
             "Are you a United States tax resident, green card holder, or citizen?"),
+        "useThe": MessageLookupByLibrary.simpleMessage("Use the"),
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User Not Found"),
         "verifyIdentity":
