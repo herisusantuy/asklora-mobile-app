@@ -65,7 +65,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         await _sharedPreference.readData(StorageKeys.sfKeyLocalisationData));
     bool? aiWelcomeScreenStatus =
         await _sharedPreference.readBoolData(StorageKeys.sfAiWelcomeScreen);
-    print('aiWelcomeScreenStatus on _onAppLaunched:${aiWelcomeScreenStatus}');
     if (isTokenValid) {
       var userJourney = await _userJourneyRepository.getUserJourney();
       emit(AppState.authenticated(

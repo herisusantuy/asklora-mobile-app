@@ -64,13 +64,16 @@ void main() async {
             .thenAnswer((_) => Future.value(UserJourney.kyc));
         when(sharedPreference.readData(StorageKeys.sfKeyLocalisationData))
             .thenAnswer((_) => Future.value('eng'));
+        when(sharedPreference.readData(StorageKeys.sfAiWelcomeScreen))
+            .thenAnswer((_) => Future.value());
         return appBloc;
       },
       act: (bloc) => bloc.add(AppLaunched()),
       expect: () => {
         AppState.authenticated(
             userJourney: UserJourney.kyc,
-            localeType: LocaleType.findByLanguageCode('eng'))
+            localeType: LocaleType.findByLanguageCode('eng'),
+            aiWelcomeScreenStatus: false)
       },
     );
 
@@ -86,6 +89,8 @@ void main() async {
             .thenAnswer((_) => Future.value(UserJourney.privacy));
         when(sharedPreference.readData(StorageKeys.sfKeyLocalisationData))
             .thenAnswer((_) => Future.value('eng'));
+        when(sharedPreference.readData(StorageKeys.sfAiWelcomeScreen))
+            .thenAnswer((_) => Future.value());
         return appBloc;
       },
       act: (bloc) => bloc.add(AppLaunched()),
