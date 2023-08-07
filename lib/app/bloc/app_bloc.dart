@@ -35,6 +35,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<AppLanguageChangeEvent>(_onAppLanguageChangeEvent);
     on<SaveUserJourney>(_onSaveUserJourney);
     on<GetUserJourneyFromLocal>(_onGetUserJourneyFromLocal);
+    on<GetAiWelcomeScreenStatus>(_onAiWelcomeScreenStatus);
+    on<UpdateAiWelcomeScreenStatus>(_onUpdateAiWelcomeScreenStatus);
   }
 
   void _onAppLaunched(AppLaunched event, Emitter<AppState> emit) async {
@@ -54,17 +56,22 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       await _secureStorage.deleteAllData();
       await _tokenRepository.deleteAll();
       await _sharedPreference.writeBoolData(StorageKeys.sfFreshInstall, false);
+      await _sharedPreference.writeBoolData(
+          StorageKeys.sfAiWelcomeScreen, false);
     }
 
     bool isTokenValid = await _tokenRepository.isTokenValid();
     LocaleType localeType = LocaleType.findByLanguageCode(
         await _sharedPreference.readData(StorageKeys.sfKeyLocalisationData));
-
+    bool? aiWelcomeScreenStatus =
+        await _sharedPreference.readBoolData(StorageKeys.sfAiWelcomeScreen);
+    print('aiWelcomeScreenStatus on _onAppLaunched:${aiWelcomeScreenStatus}');
     if (isTokenValid) {
       var userJourney = await _userJourneyRepository.getUserJourney();
       emit(AppState.authenticated(
           userJourney: userJourney ?? UserJourney.investmentStyle,
-          localeType: localeType));
+          localeType: localeType,
+          aiWelcomeScreenStatus: aiWelcomeScreenStatus));
     } else {
       await _tokenRepository.deleteAll();
       await _sharedPreference.deleteAllDataExcept([
@@ -97,5 +104,19 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       GetUserJourneyFromLocal event, Emitter<AppState> emit) async {
     final data = await _userJourneyRepository.getUserJourneyFromLocal();
     emit(state.copyWith(userJourney: data));
+  }
+
+  void _onAiWelcomeScreenStatus(
+      GetAiWelcomeScreenStatus event, Emitter<AppState> emit) async {
+    bool? aiWelcomeScreenStatus =
+        await _sharedPreference.readBoolData(StorageKeys.sfAiWelcomeScreen);
+    emit(state.copyWith(aiWelcomeScreenStatus: aiWelcomeScreenStatus));
+  }
+
+  void _onUpdateAiWelcomeScreenStatus(
+      UpdateAiWelcomeScreenStatus event, Emitter<AppState> emit) async {
+    await _sharedPreference.writeBoolData(
+        StorageKeys.sfAiWelcomeScreen, event.aiWelcomeScreenStatus);
+    emit(state.copyWith(aiWelcomeScreenStatus: event.aiWelcomeScreenStatus));
   }
 }

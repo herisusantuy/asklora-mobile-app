@@ -43,23 +43,26 @@ class AppState extends Equatable {
   final LocaleType locale;
   final AppStatus status;
   final UserJourney userJourney;
+  final bool aiWelcomeScreenStatus;
 
-  const AppState._({
-    this.status = AppStatus.unknown,
-    this.locale = const LocaleType('en', 'US', 'ENG', 'English', 'Manrope'),
-    this.userJourney = UserJourney.privacy,
-  });
+  const AppState._(
+      {this.status = AppStatus.unknown,
+      this.locale = const LocaleType('en', 'US', 'ENG', 'English', 'Manrope'),
+      this.userJourney = UserJourney.privacy,
+      this.aiWelcomeScreenStatus = false});
 
   const AppState.unknown() : this._();
 
   const AppState.authenticated(
       {UserJourney userJourney = UserJourney.privacy,
       LocaleType localeType =
-          const LocaleType('en', 'US', 'ENG', 'English', 'Mulish')})
+          const LocaleType('en', 'US', 'ENG', 'English', 'Mulish'),
+      aiWelcomeScreenStatus = false})
       : this._(
             status: AppStatus.authenticated,
             userJourney: userJourney,
-            locale: localeType);
+            locale: localeType,
+            aiWelcomeScreenStatus: aiWelcomeScreenStatus);
 
   const AppState.unauthenticated(
       {localeType = const LocaleType('en', 'US', 'ENG', 'English', 'Manrope'),
@@ -69,21 +72,19 @@ class AppState extends Equatable {
             locale: localeType,
             userJourney: userJourney);
 
-  AppState copyWith({
-    UserJourney? userJourney,
-    LocaleType? locale,
-  }) {
+  AppState copyWith(
+      {UserJourney? userJourney,
+      LocaleType? locale,
+      bool? aiWelcomeScreenStatus}) {
     return AppState._(
-      status: status,
-      locale: locale ?? this.locale,
-      userJourney: userJourney ?? this.userJourney,
-    );
+        status: status,
+        locale: locale ?? this.locale,
+        userJourney: userJourney ?? this.userJourney,
+        aiWelcomeScreenStatus:
+            aiWelcomeScreenStatus ?? this.aiWelcomeScreenStatus);
   }
 
   @override
-  List<Object> get props => [
-        status,
-        locale,
-        userJourney,
-      ];
+  List<Object> get props =>
+      [status, locale, userJourney, aiWelcomeScreenStatus];
 }
