@@ -64,7 +64,7 @@ void main() async {
             .thenAnswer((_) => Future.value(UserJourney.kyc));
         when(sharedPreference.readData(StorageKeys.sfKeyLocalisationData))
             .thenAnswer((_) => Future.value('eng'));
-        when(sharedPreference.readData(StorageKeys.sfAiWelcomeScreen))
+        when(sharedPreference.readBoolData(StorageKeys.sfAiWelcomeScreen))
             .thenAnswer((_) => Future.value());
         return appBloc;
       },
@@ -89,7 +89,7 @@ void main() async {
             .thenAnswer((_) => Future.value(UserJourney.privacy));
         when(sharedPreference.readData(StorageKeys.sfKeyLocalisationData))
             .thenAnswer((_) => Future.value('eng'));
-        when(sharedPreference.readData(StorageKeys.sfAiWelcomeScreen))
+        when(sharedPreference.readBoolData(StorageKeys.sfAiWelcomeScreen))
             .thenAnswer((_) => Future.value());
         return appBloc;
       },
