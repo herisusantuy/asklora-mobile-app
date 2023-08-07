@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/ai/component.dart';
 import '../../../../core/domain/ai/conversation.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/log.dart';
@@ -187,6 +188,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
     if (!event.isNewSession && state.query.isNotEmpty) {
       tempList.add(Me(state.query, state.userName));
     }
+    tempList.removeWhere((element) => element is Component);
 
     tempList.add(const Loading());
 
@@ -209,6 +211,10 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
     tempList.removeLast();
     if (response.state == ResponseState.success) {
       tempList.add(Lora(response.data!.response));
+
+      if (_isFirstQuestion(response) && response.data!.components.isNotEmpty) {
+        tempList.addAll(response.data!.components);
+      }
 
       ///show next button on question 1
       if (_isNeedToAddNextButton(response)) {
@@ -240,8 +246,11 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
 
   bool _isNeedToAddNextButton(
           BaseResponse<InvestmentStyleQuestionQueryResponse> response) =>
-      response.data!.investmentStyleQuestionProgress.currentQuestion == 1 &&
-      response.data!.choices.isNotEmpty;
+      _isFirstQuestion(response) && response.data!.choices.isNotEmpty;
+
+  bool _isFirstQuestion(
+          BaseResponse<InvestmentStyleQuestionQueryResponse> response) =>
+      response.data!.investmentStyleQuestionProgress.currentQuestion == 1;
 
   bool _isNeedToSaveResult(
           BaseResponse<InvestmentStyleQuestionQueryResponse> response) =>
