@@ -95,6 +95,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                     TutorialJourney.tickerDetails,
                     TutorialJourney.tellMeMoreButton,
                     TutorialJourney.botDetails,
+                    TutorialJourney.aiTab,
                   ]);
                 }
               },

@@ -20,10 +20,10 @@ class BotStockDoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BotStockForm(
+      useHeader: true,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 50),
           ExtraInfoButton(
             onTap: () => '',
             label: 'Lora\'s tips',

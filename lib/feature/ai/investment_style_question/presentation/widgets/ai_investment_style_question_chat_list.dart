@@ -79,10 +79,36 @@ class AiInvestmentStyleQuestionChatList extends StatelessWidget {
       );
     } else if (e is Loading) {
       return LoraThinkingWidget(aiThemeType: aiThemeType);
+    } else if (e is Component) {
+      _updateConversation(context, e.isNeedCallback);
+      return LoraAiButton(
+        textStyle: AskLoraTextStyles.button3
+            .copyWith(color: aiThemeType.primaryFontColor),
+        textColor: aiThemeType.secondaryFontColor,
+        borderColor: aiThemeType.choicesInteractionBorderColor,
+        pressedFillColor: AskLoraColors.primaryGreen.withOpacity(0.4),
+        fillColor: Colors.transparent,
+        postfixIconColor: AskLoraColors.charcoal,
+        label: e.label,
+        onTap: () => {
+          context
+              .read<AiInvestmentStyleQuestionBloc>()
+              .add(QueryChanged(e.label)),
+          context.read<AiInvestmentStyleQuestionBloc>().add(const SubmitQuery())
+        },
+      );
     } else if (e is NextButton) {
       return AiInvestmentStyleQuestionNextButton(aiThemeType: aiThemeType);
     } else {
       return const SizedBox.shrink();
+    }
+  }
+
+  void _updateConversation(BuildContext context, bool isNeedCallback) {
+    if (isNeedCallback) {
+      context
+          .read<AiInvestmentStyleQuestionBloc>()
+          .add(const FinishChatAnimation());
     }
   }
 }

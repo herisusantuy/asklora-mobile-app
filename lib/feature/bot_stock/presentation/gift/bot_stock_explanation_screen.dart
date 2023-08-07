@@ -5,7 +5,10 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
+import '../../../../core/utils/feature_flags.dart';
 import '../../../../generated/l10n.dart';
+import '../../../tabs/presentation/tab_screen.dart';
+import '../../../tabs/utils/tab_util.dart';
 import '../widgets/bot_stock_form.dart';
 import '../widgets/circular_bot_card.dart';
 import 'bot_stock_do_screen.dart';
@@ -18,10 +21,10 @@ class BotStockExplanationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BotStockForm(
+      useHeader: true,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 50),
           ExtraInfoButton(
             onTap: () => '',
             label: 'Lora\'s tips',
@@ -40,7 +43,14 @@ class BotStockExplanationScreen extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 30.0),
         child: PrimaryButton(
           label: S.of(context).botStockExplanationScreenBottomButton,
-          onTap: () => BotStockDoScreen.open(context),
+          onTap: () {
+            if (FeatureFlags.isMockApp) {
+              TabScreen.openAndRemoveAllRoute(context,
+                  initialTabPage: TabPage.forYou);
+            } else {
+              BotStockDoScreen.open(context);
+            }
+          },
         ),
       ),
     );

@@ -1,17 +1,18 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../core/domain/ai/component.dart';
+
 part 'investment_style_question_query_response.g.dart';
 
-@JsonSerializable()
 class InvestmentStyleQuestionQueryResponse {
-  @JsonKey(name: 'progress')
   final InvestmentStyleQuestionProgress investmentStyleQuestionProgress;
-  @JsonKey(name: 'session_id')
   final String sessionId;
   final bool success;
   final String detail;
   final String response;
   final Map<String, String> choices;
+
+  final List<Component> components;
 
   const InvestmentStyleQuestionQueryResponse(
       this.investmentStyleQuestionProgress,
@@ -19,14 +20,38 @@ class InvestmentStyleQuestionQueryResponse {
       this.success,
       this.detail,
       this.response,
-      this.choices);
+      this.choices,
+      {this.components = const []});
 
   factory InvestmentStyleQuestionQueryResponse.fromJson(
           Map<String, dynamic> json) =>
-      _$InvestmentStyleQuestionQueryResponseFromJson(json);
+      InvestmentStyleQuestionQueryResponse(
+          InvestmentStyleQuestionProgress.fromJson(
+              json['progress'] as Map<String, dynamic>),
+          json['session_id'] as String,
+          json['success'] as bool,
+          json['detail'] as String,
+          json['response'] as String,
+          Map<String, String>.from(json['choices'] as Map),
+          components: (json['components'] as List<dynamic>?)?.map((e) {
+                if (e['id'] == ComponentType.promptButton.value) {
+                  return PromptButton(e['id'], e['label']);
+                } else {
+                  return NavigationButton(
+                      e['id'], e['label'], e['route'] ?? '');
+                }
+              }).toList() ??
+              const []);
 
-  Map<String, dynamic> toJson() =>
-      _$InvestmentStyleQuestionQueryResponseToJson(this);
+  Map<String, dynamic> toJson(InvestmentStyleQuestionQueryResponse instance) =>
+      <String, dynamic>{
+        'progress': instance.investmentStyleQuestionProgress,
+        'session_id': instance.sessionId,
+        'success': instance.success,
+        'detail': instance.detail,
+        'response': instance.response,
+        'choices': instance.choices,
+      };
 
   List<Object?> get props => [
         investmentStyleQuestionProgress,
@@ -79,14 +104,15 @@ class InvestmentStyleQuestionResult {
   final String openerSearchQuery;
 
   const InvestmentStyleQuestionResult(
-      this.keywords,
-      this.riskPreference,
-      this.investmentHorizon,
-      this.preferredMethod,
-      this.lastQuestion,
-      this.questionTwoIds,
-      this.questionThreeIds,
-      this.openerSearchQuery);
+    this.keywords,
+    this.riskPreference,
+    this.investmentHorizon,
+    this.preferredMethod,
+    this.lastQuestion,
+    this.questionTwoIds,
+    this.questionThreeIds,
+    this.openerSearchQuery,
+  );
 
   factory InvestmentStyleQuestionResult.fromJson(Map<String, dynamic> json) =>
       _$InvestmentStyleQuestionResultFromJson(json);
@@ -101,6 +127,6 @@ class InvestmentStyleQuestionResult {
         lastQuestion,
         questionTwoIds,
         questionThreeIds,
-        openerSearchQuery
+        openerSearchQuery,
       ];
 }

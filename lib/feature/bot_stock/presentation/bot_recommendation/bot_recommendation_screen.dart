@@ -74,6 +74,7 @@ class BotRecommendationScreen extends StatelessWidget {
                 listener: (context, tutorialState) =>
                     ShowCaseWidget.of(context).startShowCase([
                   TutorialJourney.botRecommendationList,
+                  TutorialJourney.tabs,
                 ]),
                 child: CustomLayoutWithBlurPopUp(
                   loraPopUpMessageModel: _getLoraPopUpMessageModel(
@@ -95,11 +96,11 @@ class BotRecommendationScreen extends StatelessWidget {
                         child: CustomShowcaseView(
                           tooltipPosition: TooltipPosition.top,
                           tutorialKey: TutorialJourney.botRecommendationList,
+                          targetBorderRadius: BorderRadius.zero,
+                          targetPadding: EdgeInsets.zero,
+                          boxShadow: const BoxShadow(color: Colors.transparent),
                           onToolTipClick: () {
-                            ShowCaseWidget.of(context).dismiss();
-                            context
-                                .read<TutorialBloc>()
-                                .add(BotRecommendationTutorialFinished());
+                            ShowCaseWidget.of(context).next();
                           },
                           tooltipWidget: Text.rich(
                             TextSpan(

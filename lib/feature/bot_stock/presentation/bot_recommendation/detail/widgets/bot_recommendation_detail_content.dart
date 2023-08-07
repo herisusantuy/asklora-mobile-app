@@ -9,7 +9,6 @@ import '../../../../../../core/presentation/column_text/pair_column_text.dart';
 import '../../../../../../core/presentation/column_text/pair_column_text_with_bottom_sheet.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
-import '../../../../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
@@ -333,8 +332,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
           tooltipPosition: TooltipPosition.bottom,
           tutorialKey: TutorialJourney.botDetails,
           onToolTipClick: () {
-            ShowCaseWidget.of(context).dismiss();
-            context.read<TutorialBloc>().add(BotDetailTutorialFinished());
+            ShowCaseWidget.of(context).next();
           },
           tooltipWidget: Text.rich(
             TextSpan(
@@ -466,21 +464,9 @@ class BotRecommendationDetailContent extends StatelessWidget {
     }
   }
 
-  double getPriceDifference() {
-    if (botDetailModel != null) {
-      final currentPrice = botDetailModel?.price ?? 0;
-      final prevClosePrice = botDetailModel?.prevClosePrice ?? 0;
-      return currentPrice - prevClosePrice;
-    }
-    return 0;
-  }
+  double getPriceDifference() =>
+      botDetailModel != null ? botDetailModel!.prevCloseAmt : 0;
 
-  double getPercentDifference() {
-    if (botDetailModel != null) {
-      final currentPrice = botDetailModel?.price ?? 0;
-      final prevClosePrice = botDetailModel?.prevClosePrice ?? 0;
-      return ((currentPrice / prevClosePrice) - 1) * 100;
-    }
-    return 0;
-  }
+  double getPercentDifference() =>
+      botDetailModel != null ? botDetailModel!.prevClosePct : 0;
 }

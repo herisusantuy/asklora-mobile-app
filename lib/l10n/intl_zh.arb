@@ -784,5 +784,17 @@
   "startAnotherInvestments": "Start another investment",
   "timeForInvestmentStyleQuestion": "想知Asklora有咩投資技？界定你嘅投資風格先！",
   "isqWillHelpMeUnderstandWhatKindOfStocks": "ISQ會幫到我了解你對咩類型股票有興趣",
-  "letsTrade": "LET'S TRADE"
+  "letsTrade": "LET'S TRADE",
+  "rememberYouCan": "Remember, you can always ",
+  "clickOnLora": "click on Lora ",
+  "toAskAnyOtherQuestion": "to ask any other questions you might have",
+  "useThe": "Use the",
+  "navBar": "nav bar",
+  "toGoToDifferentPages": "to go to different pages.",
+  "left": "Left",
+  "recommendations": "Recommendations",
+  "middle": "Middle",
+  "LoraAi": "Lora AI",
+  "right": "Right",
+  "portfolio": "Portfolio"
 }
