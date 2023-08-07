@@ -64,8 +64,9 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
       child: BlocListener<TabScreenBloc, TabScreenState>(
         listenWhen: (previous, current) =>
             previous.aiPageSelected != current.aiPageSelected,
-        listener: (context, state) =>
-            state.aiPageSelected ? _openAiOverlay(context) : _closeAiOverlay(),
+        listener: (context, state) => state.aiPageSelected
+            ? _openAiOverlay(context)
+            : _closeAiOverlay(context),
         child: Positioned(
           width: widget.maxWidth,
           height: widget.maxHeight,
@@ -99,9 +100,10 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
     _controller!.forward();
   }
 
-  void _closeAiOverlay() {
+  void _closeAiOverlay(BuildContext context) {
     BackButtonInterceptor.remove(_backButtonInterceptor);
     closeKeyboard();
+    context.read<LoraGptBloc>().add(const OnAiOverlayClose());
     final double startingPoint = _drawerBottom;
     _controller = AnimationController(
         duration: openAndCloseAnimationDuration, vsync: this);

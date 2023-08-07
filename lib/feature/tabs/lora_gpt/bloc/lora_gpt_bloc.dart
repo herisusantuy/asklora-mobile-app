@@ -17,6 +17,7 @@ import '../domain/query_response.dart';
 import '../repository/lora_gpt_repository.dart';
 
 part 'lora_gpt_event.dart';
+
 part 'lora_gpt_state.dart';
 
 class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
@@ -412,5 +413,10 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     }
   }
 
-  void _onAiOverlayClose(OnAiOverlayClose event, Emitter<LoraGptState> emit) {}
+  void _onAiOverlayClose(OnAiOverlayClose event, Emitter<LoraGptState> emit) {
+    final tempList = List<Conversation>.of(state.conversations);
+    tempList.removeWhere((element) => element is Component);
+    emit(
+        state.copyWith(conversations: tempList, status: ResponseState.unknown));
+  }
 }
