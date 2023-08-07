@@ -466,21 +466,9 @@ class BotRecommendationDetailContent extends StatelessWidget {
     }
   }
 
-  double getPriceDifference() {
-    if (botDetailModel != null) {
-      final currentPrice = botDetailModel?.price ?? 0;
-      final prevClosePrice = botDetailModel?.prevClosePrice ?? 0;
-      return currentPrice - prevClosePrice;
-    }
-    return 0;
-  }
+  double getPriceDifference() =>
+      botDetailModel != null ? botDetailModel!.prevCloseAmt : 0;
 
-  double getPercentDifference() {
-    if (botDetailModel != null) {
-      final currentPrice = botDetailModel?.price ?? 0;
-      final prevClosePrice = botDetailModel?.prevClosePrice ?? 0;
-      return ((currentPrice / prevClosePrice) - 1) * 100;
-    }
-    return 0;
-  }
+  double getPercentDifference() =>
+      botDetailModel != null ? botDetailModel!.prevClosePct : 0;
 }
