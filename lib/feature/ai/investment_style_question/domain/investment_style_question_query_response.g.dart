@@ -6,29 +6,6 @@ part of 'investment_style_question_query_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-InvestmentStyleQuestionQueryResponse
-    _$InvestmentStyleQuestionQueryResponseFromJson(Map<String, dynamic> json) =>
-        InvestmentStyleQuestionQueryResponse(
-          InvestmentStyleQuestionProgress.fromJson(
-              json['progress'] as Map<String, dynamic>),
-          json['session_id'] as String,
-          json['success'] as bool,
-          json['detail'] as String,
-          json['response'] as String,
-          Map<String, String>.from(json['choices'] as Map),
-        );
-
-Map<String, dynamic> _$InvestmentStyleQuestionQueryResponseToJson(
-        InvestmentStyleQuestionQueryResponse instance) =>
-    <String, dynamic>{
-      'progress': instance.investmentStyleQuestionProgress,
-      'session_id': instance.sessionId,
-      'success': instance.success,
-      'detail': instance.detail,
-      'response': instance.response,
-      'choices': instance.choices,
-    };
-
 InvestmentStyleQuestionProgress _$InvestmentStyleQuestionProgressFromJson(
         Map<String, dynamic> json) =>
     InvestmentStyleQuestionProgress(

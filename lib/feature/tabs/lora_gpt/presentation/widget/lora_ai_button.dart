@@ -15,6 +15,7 @@ class LoraAiButton extends StatefulWidget {
   final Color? fillColor;
   final Color? activeBorderColor;
   final Color? borderColor;
+  final Color? postfixIconColor;
   final TextStyle? textStyle;
   final Color? textColor;
   final Color? activeTextColor;
@@ -36,6 +37,7 @@ class LoraAiButton extends StatefulWidget {
       this.activeTextColor,
       this.horizontalPadding = 16,
       this.verticalPadding = 10,
+      this.postfixIconColor = AskLoraColors.white,
       Key? key})
       : super(key: key);
 
@@ -107,7 +109,7 @@ class _LoraAiButtonState extends State<LoraAiButton> {
             ),
             const SizedBox(width: 5),
             getSvgIcon('icon_sent_text',
-                color: AskLoraColors.white, height: 20, width: 20)
+                color: widget.postfixIconColor, height: 20, width: 20)
           ],
         ),
       ),
