@@ -5554,20 +5554,20 @@ class S {
     );
   }
 
-  /// `A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that I will manage for you!`
+  /// `A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you.`
   String get botStockExplanationScreenTitle {
     return Intl.message(
-      'A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that I will manage for you!',
+      'A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you.',
       name: 'botStockExplanationScreenTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Got it! But What Does a Bot Do?`
+  /// `Got it!`
   String get botStockExplanationScreenBottomButton {
     return Intl.message(
-      'Got it! But What Does a Bot Do?',
+      'Got it!',
       name: 'botStockExplanationScreenBottomButton',
       desc: '',
       args: [],

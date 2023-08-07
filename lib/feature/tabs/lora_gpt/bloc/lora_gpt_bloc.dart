@@ -17,7 +17,6 @@ import '../domain/query_response.dart';
 import '../repository/lora_gpt_repository.dart';
 
 part 'lora_gpt_event.dart';
-
 part 'lora_gpt_state.dart';
 
 class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
@@ -49,6 +48,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
   final SharedPreference _sharedPreference;
   final List<Conversation> _conversationQueue = [];
   BaseResponse<QueryResponse>? _tempIntroResponse;
+  final Set<BotstockIntro> _botIntroQueryHistory = {};
 
   void _onFetchBotIntro(
       FetchBotIntro fetchBotIntro, Emitter<LoraGptState> emit) async {
@@ -57,13 +57,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     tempList.add(const Loading());
     emit(state.copyWith(conversations: [...tempList], status: status));
 
-    var botIntroResponse = await _loraGptRepository.botIntro(
-        params: state.getIntroRequest(
-            botType:
-                BotType.findByValue(fetchBotIntro.arguments['botType']).name,
-            tickerSymbol: fetchBotIntro.arguments['symbol'],
-            investmentHorizon: fetchBotIntro.arguments['duration'],
-            ticker: fetchBotIntro.arguments['ticker']));
+    final botIntroResponse =
+        await _loraGptRepository.botIntro(params: fetchBotIntro.params);
 
     ///remove loading
     if (_tempIntroResponse != null) {
@@ -101,13 +96,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     emit(state.copyWith(status: status));
 
-    var botEarningsResponse = await _loraGptRepository.botEarnings(
-        params: state.getIntroRequest(
-            botType:
-                BotType.findByValue(fetchBotEarnings.arguments['botType']).name,
-            tickerSymbol: fetchBotEarnings.arguments['symbol'],
-            investmentHorizon: fetchBotEarnings.arguments['duration'],
-            ticker: fetchBotEarnings.arguments['ticker']));
+    final botEarningsResponse =
+        await _loraGptRepository.botEarnings(params: fetchBotEarnings.params);
 
     ///remove loading
     if (_tempIntroResponse != null) {
@@ -145,7 +135,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     tempList.add(const Loading());
     emit(state.copyWith(conversations: [...tempList], status: status));
 
-    var welcomeStarterResponse = await _loraGptRepository.welcomeStarter(
+    final welcomeStarterResponse = await _loraGptRepository.welcomeStarter(
         params: state.getLandingPageIntroRequest);
 
     ///remove loading
@@ -181,7 +171,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     final tempList = List<Conversation>.of(state.conversations);
     ResponseState status = ResponseState.loading;
 
-    var welcomeNewsResponse = await _loraGptRepository.welcomeNews(
+    final welcomeNewsResponse = await _loraGptRepository.welcomeNews(
         params: state.getLandingPageIntroRequest);
 
     ///remove loading
@@ -407,8 +397,18 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
             subPage.path == SubTabPage.recommendationsBotStockDetails.value ||
         subPage.path == SubTabPage.recommendationsBotStockDetails.value) {
       _tempIntroResponse = null;
-      add(FetchBotIntro(subPage.arguments));
-      add(FetchBotEarnings(subPage.arguments));
+
+      BotstockIntro params = state.getIntroRequest(
+          botType: BotType.findByValue(subPage.arguments['botType']).name,
+          tickerSymbol: subPage.arguments['symbol'],
+          investmentHorizon: subPage.arguments['duration'],
+          ticker: subPage.arguments['ticker']);
+
+      if (!_botIntroQueryHistory.contains(params)) {
+        _botIntroQueryHistory.add(params);
+        add(FetchBotIntro(params));
+        add(FetchBotEarnings(params));
+      }
     }
   }
 

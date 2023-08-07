@@ -50,7 +50,7 @@ class BotActiveOrderModel extends Equatable {
     if (botStatus == BotStatus.pending) {
       return '${S.of(context).startsAt} ${convertDateToHktString(optimalTime, dateFormat: 'dd/MM/yy')} HKT';
     } else {
-      return '${S.of(context).expiresAt} ${convertDateToHktString(expireDate ?? '-', dateFormat: 'dd/MM/yy')} HKT';
+      return '${S.of(context).expiresAt} ${addOneDayToDate(expireDate ?? '-', dateFormat: 'dd/MM/yy')} HKT';
     }
   }
 

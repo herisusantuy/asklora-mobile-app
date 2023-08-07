@@ -46,7 +46,7 @@ class DevConfig implements BaseConfig {
 
 class StagingConfig implements BaseConfig {
   @override
-  String get ppiBaseUrl => 'http://ppi-stag.api.asklora.ai/';
+  String get ppiBaseUrl => 'https://ppi-stag.api.asklora.ai/';
 
   @override
   String get askLoraApiBaseUrl => 'https://stag-apca.api.asklora.ai/';
@@ -71,7 +71,7 @@ class MockConfig implements BaseConfig {
 
   @override
   // String get ppiBaseUrl => 'http://ppi-beta.api.asklora.ai/';
-  String get ppiBaseUrl => 'http://ppi-stag.api.asklora.ai/';
+  String get ppiBaseUrl => 'https://ppi-stag.api.asklora.ai/';
 
   @override
   // String get askLoraApiBaseUrl => 'https://beta-apca.api.asklora.ai/';

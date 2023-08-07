@@ -190,10 +190,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "botStockDoScreenTitle": MessageLookupByLibrary.simpleMessage(
             "A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward."),
         "botStockExplanationScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage(
-                "Got it! But What Does a Bot Do?"),
+            MessageLookupByLibrary.simpleMessage("Got it!"),
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that I will manage for you!"),
+            "A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you."),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
         "botStocksDetails": MessageLookupByLibrary.simpleMessage(
             "Botstock’s details and estimated returns."),
