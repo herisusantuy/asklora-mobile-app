@@ -536,7 +536,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Press to move onto the next section"),
         "isqWillHelpMeUnderstandWhatKindOfStocks":
             MessageLookupByLibrary.simpleMessage(
-                "The ISQ will help me understand exactly what kind of stocks you might be interested in"),
+                "Through our chat-style dialogue, we\'ll grasp your investment interests to tailor botstock recommendations for you."),
         "kycRejectedExplanationOfAffiliate": MessageLookupByLibrary.simpleMessage(
             "We do not accept any members who are affiliated with the organisations mentioned above"),
         "kycRejectedScreenTitle": MessageLookupByLibrary.simpleMessage(
@@ -961,7 +961,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "This interactive graph shows the Botstock’s past "),
         "timeCompleted": MessageLookupByLibrary.simpleMessage("Time Completed"),
         "timeForInvestmentStyleQuestion": MessageLookupByLibrary.simpleMessage(
-            "It’s time for the investment style questions (ISQ)"),
+            "Now for the Investment Style Questions (ISQ)!These questions will feel more ChatGPT style."),
         "timeRequested": MessageLookupByLibrary.simpleMessage("Time Requested"),
         "to": MessageLookupByLibrary.simpleMessage("To"),
         "toExecuteIt": MessageLookupByLibrary.simpleMessage(" to execute it!"),

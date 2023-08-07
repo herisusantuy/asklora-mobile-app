@@ -5894,20 +5894,20 @@ class S {
     );
   }
 
-  /// `It’s time for the investment style questions (ISQ)`
+  /// `Now for the Investment Style Questions (ISQ)!These questions will feel more ChatGPT style.`
   String get timeForInvestmentStyleQuestion {
     return Intl.message(
-      'It’s time for the investment style questions (ISQ)',
+      'Now for the Investment Style Questions (ISQ)!These questions will feel more ChatGPT style.',
       name: 'timeForInvestmentStyleQuestion',
       desc: '',
       args: [],
     );
   }
 
-  /// `The ISQ will help me understand exactly what kind of stocks you might be interested in`
+  /// `Through our chat-style dialogue, we'll grasp your investment interests to tailor botstock recommendations for you.`
   String get isqWillHelpMeUnderstandWhatKindOfStocks {
     return Intl.message(
-      'The ISQ will help me understand exactly what kind of stocks you might be interested in',
+      'Through our chat-style dialogue, we\'ll grasp your investment interests to tailor botstock recommendations for you.',
       name: 'isqWillHelpMeUnderstandWhatKindOfStocks',
       desc: '',
       args: [],
