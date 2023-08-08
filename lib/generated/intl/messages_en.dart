@@ -166,6 +166,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "bestSuitedFor":
             MessageLookupByLibrary.simpleMessage("Best Suited For"),
         "botDuration": MessageLookupByLibrary.simpleMessage("Bot Duration"),
+        "botExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you."),
         "botManagementFee":
             MessageLookupByLibrary.simpleMessage("Bot Management Fee"),
         "botManagementFeeTooltip": MessageLookupByLibrary.simpleMessage(
@@ -173,27 +175,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "botRecommendationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Investments tailored  for you"),
         "botRecommendationTutorialDesc1":
-            MessageLookupByLibrary.simpleMessage("This is the "),
+            MessageLookupByLibrary.simpleMessage("Here are "),
         "botRecommendationTutorialDesc2": MessageLookupByLibrary.simpleMessage(
-            "Botstock recommendations screen. "),
-        "botRecommendationTutorialDesc3":
-            MessageLookupByLibrary.simpleMessage("press "),
-        "botRecommendationTutorialDesc4":
-            MessageLookupByLibrary.simpleMessage("\'Trade\' "),
-        "botRecommendationTutorialDesc5": MessageLookupByLibrary.simpleMessage(
-            "on a Botstock that catches your eye!"),
+            "your unique recommendations "),
+        "botRecommendationTutorialDesc3": MessageLookupByLibrary.simpleMessage(
+            "based on how you answered the ISQ section"),
         "botStockDoScreenPoint1":
-            MessageLookupByLibrary.simpleMessage("Go for occasional big wins"),
+            MessageLookupByLibrary.simpleMessage("Hit a home run!"),
         "botStockDoScreenPoint2":
-            MessageLookupByLibrary.simpleMessage("Avoid excessive losses"),
-        "botStockDoScreenPoint3": MessageLookupByLibrary.simpleMessage(
-            "Go for small but frequent wins"),
+            MessageLookupByLibrary.simpleMessage("Simple and easy!"),
+        "botStockDoScreenPoint3":
+            MessageLookupByLibrary.simpleMessage("Passive income!"),
         "botStockDoScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward."),
+            "A \'Bot\' is your personal AI manager that trades your stock for you."),
         "botStockExplanationScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("Got it!"),
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you."),
+            "You pick the stock, and the \'Bot\' will trade it for you!"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
         "botStocksDetails": MessageLookupByLibrary.simpleMessage(
             "Botstock’s details and estimated returns."),
@@ -259,6 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonForgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget Password?"),
         "buttonGoBack": MessageLookupByLibrary.simpleMessage("Go Back"),
+        "buttonGotIt": MessageLookupByLibrary.simpleMessage("Got it!"),
         "buttonHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Have An Account?"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("Let\'s Begin"),
@@ -463,7 +462,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftBotStockMessageScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("See my recommendations"),
         "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! "),
+            "Every trade is unique, each time you invest with a new Botstock, I\'ll ask you some investment style questions to tailor new recommendations! "),
         "giftBotStockWelcomeScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
         "giftBotStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
