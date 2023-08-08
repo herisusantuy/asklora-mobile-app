@@ -25,10 +25,11 @@ class OutChatBubbleWidget extends StatefulWidget {
 class _OutChatBubbleWidgetState extends State<OutChatBubbleWidget> {
   bool isCollapse = false;
   bool animationFinish = false;
+  static const fixedLen = 200;
 
   @override
   void initState() {
-    isCollapse = widget.message.length > 200;
+    isCollapse = widget.message.length > fixedLen;
     super.initState();
   }
 
@@ -54,7 +55,7 @@ class _OutChatBubbleWidgetState extends State<OutChatBubbleWidget> {
                         scrambledStyle: AskLoraTextStyles.body1.copyWith(
                             color: widget.aiThemeType.scrambledTextColor),
                         text: isCollapse
-                            ? '${widget.message.substring(0, 125)}...'
+                            ? '${widget.message.substring(0, fixedLen)}...'
                             : widget.message,
                         style: AskLoraTextStyles.body1.copyWith(
                             color: widget.aiThemeType.primaryFontColor),
@@ -89,8 +90,6 @@ class _OutChatBubbleWidgetState extends State<OutChatBubbleWidget> {
                                 'Show more',
                                 style: AskLoraTextStyles.body1
                                     .copyWith(color: AskLoraColors.gray),
-                                maxLines: 3,
-                                ellipsis: true,
                               ),
                             ),
                             const Icon(Icons.keyboard_arrow_down_rounded,
