@@ -119,7 +119,6 @@ class ChangePasswordScreen extends StatelessWidget {
               previous.newPasswordErrorType != current.newPasswordErrorType,
           builder: (context, state) {
             return PasswordTextField(
-              isShowingPasswordValidation: false,
               validPassword: (validPassword) => {},
               hintText: S.of(context).newPassword,
               errorText: state.newPasswordErrorType.text(context),
@@ -146,6 +145,7 @@ class ChangePasswordScreen extends StatelessWidget {
               previous.confirmNewPassword != current.confirmNewPassword,
           builder: (context, state) {
             return PasswordTextField(
+              isShowingPasswordValidation: false,
               validPassword: (validPassword) => {},
               hintText: S.of(context).confirmNewPassword,
               errorText: state.confirmNewPasswordErrorType.text(context),
