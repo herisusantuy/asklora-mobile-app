@@ -55,13 +55,40 @@ class BotRecommendationDetailScreen extends StatelessWidget {
           }),
           BlocProvider(create: (_) => BackButtonInterceptorBloc())
         ],
-        child:
+        child: MultiBlocListener(
+          listeners: [
             BlocListener<BackButtonInterceptorBloc, BackButtonInterceptorState>(
-          listener: (context, state) {
-            if (state is OnPressedBack) {
-              Navigator.of(context).maybePop();
-            }
-          },
+              listener: (context, state) {
+                if (state is OnPressedBack) {
+                  Navigator.of(context).maybePop();
+                }
+              },
+            ),
+            BlocListener<TutorialBloc, TutorialState>(
+              listenWhen: (previous, current) =>
+                  previous.isBotDetailsTutorial != current.isBotDetailsTutorial,
+              listener: (context, tutorialState) {
+                if (tutorialState.isBotDetailsTutorial) {
+                  ShowCaseWidget.of(context).startShowCase([
+                    TutorialJourney.tickerDetails,
+                    TutorialJourney.tellMeMoreButton,
+                    TutorialJourney.botDetails,
+                    TutorialJourney.aiTab,
+                  ]);
+                }
+              },
+            ),
+            BlocListener<TabScreenBloc, TabScreenState>(
+              listenWhen: (previous, current) =>
+                  previous.isBotDetailScreenOpened !=
+                  current.isBotDetailScreenOpened,
+              listener: (context, state) {
+                if (!state.isBotDetailScreenOpened) {
+                  Navigator.pop(context);
+                }
+              },
+            )
+          ],
           child: BlocConsumer<BotStockBloc, BotStockState>(
             listenWhen: (previous, current) =>
                 previous.botDetailResponse.state !=
@@ -85,108 +112,79 @@ class BotRecommendationDetailScreen extends StatelessWidget {
             buildWhen: (previous, current) =>
                 previous.botDetailResponse.state !=
                 current.botDetailResponse.state,
-            builder: (context, state) =>
-                BlocListener<TutorialBloc, TutorialState>(
-              listenWhen: (previous, current) =>
-                  previous.isBotDetailsTutorial != current.isBotDetailsTutorial,
-              listener: (context, tutorialState) {
-                if (tutorialState.isBotDetailsTutorial) {
-                  ShowCaseWidget.of(context).startShowCase([
-                    TutorialJourney.tickerDetails,
-                    TutorialJourney.tellMeMoreButton,
-                    TutorialJourney.botDetails,
-                    TutorialJourney.aiTab,
-                  ]);
-                }
-              },
-              child: BlocListener<TabScreenBloc, TabScreenState>(
-                listenWhen: (previous, current) =>
-                    previous.isBotDetailScreenOpened !=
-                    current.isBotDetailScreenOpened,
-                listener: (context, state) {
-                  if (!state.isBotDetailScreenOpened) {
-                    Navigator.pop(context);
-                  }
-                },
-                child: RefreshIndicator(
-                  onRefresh: () async =>
+            builder: (context, state) => RefreshIndicator(
+              onRefresh: () async =>
+                  _fetchBotDetail(context.read<BotStockBloc>()),
+              child: CustomLayoutWithBlurPopUp(
+                loraPopUpMessageModel: LoraPopUpMessageModel(
+                  title: S.of(context).errorGettingInformationTitle,
+                  subTitle: S
+                      .of(context)
+                      .errorGettingInformationInvestmentDetailSubTitle,
+                  primaryButtonLabel: S.of(context).buttonReloadPage,
+                  secondaryButtonLabel: S.of(context).buttonCancel,
+                  onSecondaryButtonTap: () => Navigator.pop(context),
+                  onPrimaryButtonTap: () =>
                       _fetchBotDetail(context.read<BotStockBloc>()),
-                  child: CustomLayoutWithBlurPopUp(
-                    loraPopUpMessageModel: LoraPopUpMessageModel(
-                      title: S.of(context).errorGettingInformationTitle,
-                      subTitle: S
-                          .of(context)
-                          .errorGettingInformationInvestmentDetailSubTitle,
-                      primaryButtonLabel: S.of(context).buttonReloadPage,
-                      secondaryButtonLabel: S.of(context).buttonCancel,
-                      onSecondaryButtonTap: () => Navigator.pop(context),
-                      onPrimaryButtonTap: () =>
-                          _fetchBotDetail(context.read<BotStockBloc>()),
-                    ),
-                    showPopUp:
-                        state.botDetailResponse.state == ResponseState.error,
-                    content: BotStockForm(
-                      contentPadding: EdgeInsets.zero,
-                      enableBackNavigation: false,
-                      padding: EdgeInsets.zero,
-                      content: BotRecommendationDetailContent(
-                        botRecommendationModel: botRecommendationModel,
-                        botType: botType,
-                        botDetailModel: state.botDetailResponse.data,
-                      ),
-                      bottomButton: Padding(
-                        padding: AppValues.screenHorizontalPadding
-                            .copyWith(top: 24, bottom: 30),
-                        child: PrimaryButton(
-                          disabled: state.botDetailResponse.state ==
-                                  ResponseState.loading ||
-                              state.botDetailResponse.state ==
-                                  ResponseState.error,
-                          label: S.of(context).trade,
-                          onTap: () {
-                            if (botRecommendationModel.freeBot) {
-                              context
-                                  .read<BackButtonInterceptorBloc>()
-                                  .add(RemoveInterceptor());
-                              BotTradeSummaryScreen.openWithBackCallBack(
-                                  context: context,
-                                  botTradeSummaryModel: BotTradeSummaryModel(
-                                      botType: botType,
-                                      botRecommendationModel:
-                                          botRecommendationModel,
-                                      botDetailModel:
-                                          state.botDetailResponse.data!,
-                                      amount: 500,
-                                      onCreateOrderSuccessCallback: () {
-                                        context
-                                            .read<PortfolioBloc>()
-                                            .add(FetchBalance());
-                                        context
-                                            .read<PortfolioBloc>()
-                                            .add(const FetchActiveOrders());
-                                        context.read<TabScreenBloc>().add(
-                                            const TabChanged(
-                                                TabPage.portfolio));
-                                        context
-                                            .read<ForYouBloc>()
-                                            .add(GetInvestmentStyleState());
-                                      }),
-                                  backCallBack: () {
+                ),
+                showPopUp: state.botDetailResponse.state == ResponseState.error,
+                content: BotStockForm(
+                  contentPadding: EdgeInsets.zero,
+                  enableBackNavigation: false,
+                  padding: EdgeInsets.zero,
+                  content: BotRecommendationDetailContent(
+                    botRecommendationModel: botRecommendationModel,
+                    botType: botType,
+                    botDetailModel: state.botDetailResponse.data,
+                  ),
+                  bottomButton: Padding(
+                    padding: AppValues.screenHorizontalPadding
+                        .copyWith(top: 24, bottom: 30),
+                    child: PrimaryButton(
+                      disabled: state.botDetailResponse.state ==
+                              ResponseState.loading ||
+                          state.botDetailResponse.state == ResponseState.error,
+                      label: S.of(context).trade,
+                      onTap: () {
+                        if (botRecommendationModel.freeBot) {
+                          context
+                              .read<BackButtonInterceptorBloc>()
+                              .add(RemoveInterceptor());
+                          BotTradeSummaryScreen.openWithBackCallBack(
+                              context: context,
+                              botTradeSummaryModel: BotTradeSummaryModel(
+                                  botType: botType,
+                                  botRecommendationModel:
+                                      botRecommendationModel,
+                                  botDetailModel: state.botDetailResponse.data!,
+                                  amount: 500,
+                                  onCreateOrderSuccessCallback: () {
                                     context
-                                        .read<BackButtonInterceptorBloc>()
-                                        .add(InitiateInterceptor());
-                                  });
-                            } else {
-                              BotStockBottomSheet.amountBotStockForm(
-                                  context,
-                                  botType,
-                                  botRecommendationModel,
-                                  state.botDetailResponse.data!,
-                                  state.buyingPower);
-                            }
-                          },
-                        ),
-                      ),
+                                        .read<PortfolioBloc>()
+                                        .add(FetchBalance());
+                                    context
+                                        .read<PortfolioBloc>()
+                                        .add(const FetchActiveOrders());
+                                    context.read<TabScreenBloc>().add(
+                                        const TabChanged(TabPage.portfolio));
+                                    context
+                                        .read<ForYouBloc>()
+                                        .add(GetInvestmentStyleState());
+                                  }),
+                              backCallBack: () {
+                                context
+                                    .read<BackButtonInterceptorBloc>()
+                                    .add(InitiateInterceptor());
+                              });
+                        } else {
+                          BotStockBottomSheet.amountBotStockForm(
+                              context,
+                              botType,
+                              botRecommendationModel,
+                              state.botDetailResponse.data!,
+                              state.buyingPower);
+                        }
+                      },
                     ),
                   ),
                 ),

@@ -65,13 +65,27 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                   ..add(FetchActiveOrderDetail(botOrderId: arguments.botUid))),
             BlocProvider(create: (_) => BackButtonInterceptorBloc())
           ],
-          child: BlocListener<BackButtonInterceptorBloc,
-              BackButtonInterceptorState>(
-            listener: (context, state) {
-              if (state is OnPressedBack) {
-                Navigator.of(context).maybePop();
-              }
-            },
+          child: MultiBlocListener(
+            listeners: [
+              BlocListener<BackButtonInterceptorBloc,
+                  BackButtonInterceptorState>(
+                listener: (context, state) {
+                  if (state is OnPressedBack) {
+                    Navigator.of(context).maybePop();
+                  }
+                },
+              ),
+              BlocListener<TabScreenBloc, TabScreenState>(
+                listenWhen: (previous, current) =>
+                    previous.isPortfolioDetailScreenOpened !=
+                    current.isPortfolioDetailScreenOpened,
+                listener: (context, state) {
+                  if (!state.isPortfolioDetailScreenOpened) {
+                    Navigator.pop(context);
+                  }
+                },
+              )
+            ],
             child: BlocConsumer<PortfolioBloc, PortfolioState>(
               listenWhen: (previous, current) =>
                   previous.botActiveOrderDetailResponse.state !=
@@ -97,44 +111,33 @@ class BotPortfolioDetailScreen extends StatelessWidget {
               builder: (context, state) {
                 final BotActiveOrderDetailModel? botActiveOrderDetailModel =
                     state.botActiveOrderDetailResponse.data;
-                return BlocListener<TabScreenBloc, TabScreenState>(
-                  listenWhen: (previous, current) =>
-                      previous.isPortfolioDetailScreenOpened !=
-                      current.isPortfolioDetailScreenOpened,
-                  listener: (context, state) {
-                    if (!state.isPortfolioDetailScreenOpened) {
-                      Navigator.pop(context);
-                    }
-                  },
-                  child: RefreshIndicator(
-                    onRefresh: () async => _fetchActiveOrderDetail(context),
-                    child: CustomLayoutWithBlurPopUp(
-                      loraPopUpMessageModel: LoraPopUpMessageModel(
-                        title: S.of(context).errorGettingInformationTitle,
-                        subTitle: S
-                            .of(context)
-                            .errorGettingInformationPortfolioSubTitle,
-                        primaryButtonLabel: S.of(context).buttonReloadPage,
-                        secondaryButtonLabel: S.of(context).buttonCancel,
-                        onSecondaryButtonTap: () => Navigator.pop(context),
-                        onPrimaryButtonTap: () =>
-                            _fetchActiveOrderDetail(context),
+                return RefreshIndicator(
+                  onRefresh: () async => _fetchActiveOrderDetail(context),
+                  child: CustomLayoutWithBlurPopUp(
+                    loraPopUpMessageModel: LoraPopUpMessageModel(
+                      title: S.of(context).errorGettingInformationTitle,
+                      subTitle: S
+                          .of(context)
+                          .errorGettingInformationPortfolioSubTitle,
+                      primaryButtonLabel: S.of(context).buttonReloadPage,
+                      secondaryButtonLabel: S.of(context).buttonCancel,
+                      onSecondaryButtonTap: () => Navigator.pop(context),
+                      onPrimaryButtonTap: () =>
+                          _fetchActiveOrderDetail(context),
+                    ),
+                    showPopUp: state.botActiveOrderDetailResponse.state ==
+                        ResponseState.error,
+                    content: BotStockForm(
+                      useHeader: true,
+                      customHeader: BotPortfolioDetailHeader(
+                        title: arguments.botName,
+                        botStatus: botActiveOrderDetailModel?.botStatus,
                       ),
-                      showPopUp: state.botActiveOrderDetailResponse.state ==
-                          ResponseState.error,
-                      content: BotStockForm(
-                        useHeader: true,
-                        customHeader: BotPortfolioDetailHeader(
-                          title: arguments.botName,
-                          botStatus: botActiveOrderDetailModel?.botStatus,
-                        ),
-                        padding: EdgeInsets.zero,
-                        content: BotPortfolioDetailContent(
-                          botActiveOrderDetailModel: botActiveOrderDetailModel,
-                        ),
-                        bottomButton:
-                            BotPortfolioButtons(portfolioState: state),
+                      padding: EdgeInsets.zero,
+                      content: BotPortfolioDetailContent(
+                        botActiveOrderDetailModel: botActiveOrderDetailModel,
                       ),
+                      bottomButton: BotPortfolioButtons(portfolioState: state),
                     ),
                   ),
                 );
