@@ -58,12 +58,11 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
               child: Container(
                   width: 110,
                   height: 36,
-                  decoration: ShapeDecoration(
-                    color: AskLoraColors.lightGray,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      border:
+                          Border.all(color: AskLoraColors.white, width: 1.5),
+                      borderRadius: BorderRadius.circular(20)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List.generate(
@@ -75,7 +74,7 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
                               textAlign: TextAlign.center,
                               fontWeight: FontWeight.w700,
                               type: FontType.smallNote,
-                              color: AskLoraColors.darkGray,
+                              color: AskLoraColors.white,
                             ))),
                   ))),
           AnimatedAlign(
@@ -89,7 +88,7 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
                   width: 52,
                   height: 30,
                   decoration: ShapeDecoration(
-                    color: AskLoraColors.charcoal,
+                    color: AskLoraColors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -101,7 +100,7 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
                         : LocaleType.supportedLocales()[1].label,
                     fontWeight: FontWeight.w700,
                     type: FontType.smallNote,
-                    color: AskLoraColors.primaryGreen,
+                    color: AskLoraColors.charcoal,
                   )))
         ]));
   }

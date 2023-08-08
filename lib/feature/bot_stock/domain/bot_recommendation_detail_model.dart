@@ -46,8 +46,8 @@ class BotRecommendationDetailModel extends Equatable {
   String get prevCloseDateFormatted =>
       formatDateTimeAsString(prevCloseDate, dateFormat: 'dd/MM/yyyy');
 
-  String get estEndDateFormatted =>
-      formatDateTimeAsString(estEndDate, dateFormat: 'dd/MM/yyyy');
+  String get endDateHKTString =>
+      addOneDayToDate(estEndDate, dateFormat: 'dd/MM/yyyy');
 
   String get estStopLossPriceFormatted =>
       checkDouble(estStopLossPrice).convertToCurrencyDecimal();
@@ -98,9 +98,6 @@ class BotRecommendationDetailModel extends Equatable {
 
   String get formattedStartDate =>
       convertDateToEstString(startDate, dateFormat: 'dd/MM/yyyy');
-
-  String get formattedEstEndDate =>
-      convertDateToEstString(estEndDate, dateFormat: 'dd/MM/yyyy');
 
   String get formattedAcknowledgementEstEndDate {
     return '${convertDateToEstString(estEndDate, dateFormat: 'dd/MM/yyyy HH:mm')} EST';
