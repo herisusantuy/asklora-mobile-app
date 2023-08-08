@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
+
 import '../../../../../core/presentation/animated_text.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
@@ -22,9 +23,9 @@ import '../../auth/sign_in/presentation/sign_in_screen.dart';
 import '../../backdoor/presentation/backdoor_screen.dart';
 import 'ask_name/presentation/ask_name_screen.dart';
 
-part 'pages/welcome_page.dart';
-
 part 'pages/carousel_page.dart';
+
+part 'pages/welcome_page.dart';
 
 enum WelcomePages { carousel, welcome }
 
@@ -37,6 +38,8 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     precacheImages(context);
     return CustomScaffold(
+      useSafeArea: false,
+      appBarBackgroundColor: Colors.transparent,
       enableBackNavigation: false,
       body: BlocProvider(
         create: (_) => NavigationBloc<WelcomePages>(WelcomePages.carousel),

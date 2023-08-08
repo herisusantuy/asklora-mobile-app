@@ -10,7 +10,7 @@ class CarouselPage extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: AppValues.screenHorizontalPadding,
-            margin: const EdgeInsets.only(top: 10),
+            margin: const EdgeInsets.only(top: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -32,7 +32,7 @@ class CarouselPage extends StatelessWidget {
                     }),
                 CustomTextButton(
                   key: const Key('kyc_secondary_button'),
-                  margin: const EdgeInsets.only(top: 24, bottom: 30),
+                  margin: const EdgeInsets.only(top: 25, bottom: 45),
                   label: S.of(context).buttonHaveAnAccount,
                   color: AskLoraColors.white,
                   onTap: () => SignInScreen.open(context),
@@ -98,16 +98,16 @@ class BackgroundVideoState extends State<BackgroundVideo> {
       child: FittedBox(
         fit: BoxFit.none,
         child: SizedBox(
-          width: _controller.value.size.width ?? 0,
-          height: _controller.value.size.height ?? 0,
+          width: _controller.value.size.width,
+          height: _controller.value.size.height,
           child: VideoPlayer(_controller),
         ),
       ),
     );
 
     return SizedBox(
-        width: _controller.value.size.width ?? 0,
-        height: _controller.value.size.height ?? 0,
+        width: _controller.value.size.width,
+        height: _controller.value.size.height,
         child: VideoPlayer(_controller));
   }
 
