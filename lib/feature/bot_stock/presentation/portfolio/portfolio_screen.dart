@@ -34,6 +34,7 @@ import '../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../tabs/utils/tab_util.dart';
 import '../../domain/orders/bot_active_order_model.dart';
 import '../../utils/bot_stock_utils.dart';
+import '../gift/gift_bot_stock_welcome_screen.dart';
 import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
 import 'utils/portfolio_utils.dart';
@@ -124,10 +125,13 @@ class PortfolioScreen extends StatelessWidget {
   Widget _header(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          if (!FeatureFlags.isMockApp)
+          if (FeatureFlags.isMockApp)
             Column(
               children: [
-                getSvgIcon('icon_notification', color: AskLoraColors.black),
+                InkWell(
+                    onTap: () => GiftBotStockWelcomeScreen.open(context),
+                    child: getSvgIcon('icon_notification',
+                        color: AskLoraColors.black)),
                 const SizedBox(width: 15),
               ],
             ),

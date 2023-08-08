@@ -17,20 +17,22 @@ class BotStockForm extends StatelessWidget {
   final bool useHeader;
   final VoidCallback? onTapBack;
   final Widget? customHeader;
+  final Widget? fixedBottomButton;
 
-  const BotStockForm(
-      {Key? key,
-      this.title = '',
-      this.enableBackNavigation = true,
-      required this.content,
-      this.bottomButton,
-      this.useHeader = false,
-      this.backgroundColor = AskLoraColors.white,
-      this.padding = AppValues.screenHorizontalPadding,
-      this.contentPadding = const EdgeInsets.only(top: 24.0, bottom: 43),
-      this.customHeader,
-      this.onTapBack})
-      : super(key: key);
+  const BotStockForm({
+    Key? key,
+    this.title = '',
+    this.enableBackNavigation = true,
+    required this.content,
+    this.bottomButton,
+    this.useHeader = false,
+    this.backgroundColor = AskLoraColors.white,
+    this.padding = AppValues.screenHorizontalPadding,
+    this.contentPadding = const EdgeInsets.only(top: 24.0, bottom: 43),
+    this.customHeader,
+    this.onTapBack,
+    this.fixedBottomButton,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,7 @@ class BotStockForm extends StatelessWidget {
         bottomButton: bottomButton,
         padding: padding,
       ),
+      bottomNavigationBar: fixedBottomButton,
     );
   }
 }

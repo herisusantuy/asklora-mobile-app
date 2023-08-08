@@ -7,6 +7,7 @@ import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
+import '../../../../core/values/app_values.dart';
 import '../../../../generated/l10n.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/bot_stock_form.dart';
@@ -46,8 +47,9 @@ class BotStockDoScreen extends StatelessWidget {
               description: S.of(context).botStockDoScreenPoint3),
         ],
       ),
-      bottomButton: Padding(
-        padding: const EdgeInsets.only(top: 30, bottom: 30.0),
+      fixedBottomButton: Padding(
+        padding:
+            AppValues.screenHorizontalPadding.copyWith(bottom: 30, top: 10),
         child: PrimaryButton(
           label: S.of(context).buttonGotIt,
           onTap: () => BotStockExplanationScreen.open(context),
