@@ -35,7 +35,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<AppLanguageChangeEvent>(_onAppLanguageChangeEvent);
     on<SaveUserJourney>(_onSaveUserJourney);
     on<GetUserJourneyFromLocal>(_onGetUserJourneyFromLocal);
-    on<GetAiWelcomeScreenStatus>(_onAiWelcomeScreenStatus);
+    on<GetAiWelcomeScreenStatus>(_onGetAiWelcomeScreenStatus);
     on<UpdateAiWelcomeScreenStatus>(_onUpdateAiWelcomeScreenStatus);
   }
 
@@ -105,10 +105,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     emit(state.copyWith(userJourney: data));
   }
 
-  void _onAiWelcomeScreenStatus(
+  void _onGetAiWelcomeScreenStatus(
       GetAiWelcomeScreenStatus event, Emitter<AppState> emit) async {
-    bool? aiWelcomeScreenStatus =
-        await _sharedPreference.readBoolData(StorageKeys.sfAiWelcomeScreen);
+    bool aiWelcomeScreenStatus =
+        await _sharedPreference.readBoolData(StorageKeys.sfAiWelcomeScreen) ??
+            false;
     emit(state.copyWith(aiWelcomeScreenStatus: aiWelcomeScreenStatus));
   }
 
