@@ -25,9 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(name) => "進度好好吖,\n${name}！";
 
   static String m2(availableAmount, minimumAmount) =>
-      "你有  ${availableAmount} 可供使用，每單交易最小金額為 ${minimumAmount} 。";
+      "你有 ${availableAmount} 可供使用，每單交易最小金額為 ${minimumAmount} 。";
 
-  static String m3(availableAmount) => "你有  ${availableAmount} 可供使用，";
+  static String m3(availableAmount) => "你有 ${availableAmount} 可供使用，";
 
   static String m4(minimumAmount) => "每單交易最小金額為 ${minimumAmount} 。";
 
