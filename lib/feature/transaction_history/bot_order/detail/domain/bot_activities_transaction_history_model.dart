@@ -66,6 +66,8 @@ class BotActivitiesTransactionHistoryModel {
   String get filledAtHKTString =>
       convertDateToHktString(filledAt, dateFormat: 'HH:mm:ss');
 
+  DateTime get filledAtHKTDateTime => convertDateToHkt(filledAt);
+
   String get createdDateHKTString =>
       convertDateToHktString(created, dateFormat: 'dd/mm/yyyy');
 
