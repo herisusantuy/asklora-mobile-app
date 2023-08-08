@@ -193,7 +193,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                                     leftSubTitle: botTradeSummaryModel
                                         .botDetailModel.formattedStartDate,
                                     rightSubTitle: botTradeSummaryModel
-                                        .botDetailModel.formattedEstEndDate),
+                                        .botDetailModel.endDateHKTString),
                               ],
                             ),
                             title: isFreeBotTrade
