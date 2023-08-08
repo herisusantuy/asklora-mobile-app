@@ -82,35 +82,22 @@ class BackgroundVideoState extends State<BackgroundVideo> {
   late VideoPlayerController _controller;
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
     _controller = VideoPlayerController.asset(
-        'assets/videos/carousel_background_video.mov');
-    await _controller.initialize().then((_) {
-      _controller.play();
-      _controller.setLooping(true);
-      setState(() {});
-    });
+        'assets/videos/carousel_background_video.mov')
+      ..initialize().then((_) {
+        _controller.play();
+        _controller.setLooping(true);
+        setState(() {});
+      });
   }
 
   @override
-  Widget build(BuildContext context) {
-    SizedBox.expand(
-      child: FittedBox(
-        fit: BoxFit.none,
-        child: SizedBox(
-          width: _controller.value.size.width,
-          height: _controller.value.size.height,
-          child: VideoPlayer(_controller),
-        ),
-      ),
-    );
-
-    return SizedBox(
-        width: _controller.value.size.width,
-        height: _controller.value.size.height,
-        child: VideoPlayer(_controller));
-  }
+  Widget build(BuildContext context) => SizedBox(
+      width: _controller.value.size.width,
+      height: _controller.value.size.height,
+      child: VideoPlayer(_controller));
 
   @override
   void dispose() {
