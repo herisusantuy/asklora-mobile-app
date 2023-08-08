@@ -22,7 +22,7 @@ class BotActivitiesTransactionHistoryModel {
   @JsonKey(name: 'filled_avg_price')
   final double? filledAvgPrice;
   @JsonKey(name: 'filled_at')
-  final String? filledAt;
+  final String filledAt;
   @JsonKey(name: 'filled_at_hkt')
   final String? filledAtHkt;
   @JsonKey(name: 'expire_at')
@@ -62,6 +62,9 @@ class BotActivitiesTransactionHistoryModel {
 
   String get createdTimeHKTString =>
       convertDateToHktString(created, dateFormat: 'HH:mm:ss');
+
+  String get filledAtHKTString =>
+      convertDateToHktString(filledAt, dateFormat: 'HH:mm:ss');
 
   String get createdDateHKTString =>
       convertDateToHktString(created, dateFormat: 'dd/mm/yyyy');

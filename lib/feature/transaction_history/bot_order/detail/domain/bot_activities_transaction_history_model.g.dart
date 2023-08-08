@@ -20,7 +20,7 @@ BotActivitiesTransactionHistoryModel
           (json['invested_usd'] as num).toDouble(),
           (json['filled_qty'] as num).toDouble(),
           (json['filled_avg_price'] as num?)?.toDouble(),
-          json['filled_at'] as String?,
+          json['filled_at'] as String,
           json['filled_at_hkt'] as String?,
           json['expire_at'] as String?,
           json['canceled_at'] as String?,
