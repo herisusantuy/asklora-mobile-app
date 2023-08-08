@@ -119,7 +119,7 @@
   "tooltipBotDetailsEstTakeProfit": "Plank Bot將出售以獲取利潤的預設最高股票價位",
   "tooltipBotDetailsEstStopLoss": "Plank Bot將出售以限制過分損失的預設最低股票價位",
   "botTradeBottomSheetAmountTitle": "你想投資嘅金額係？",
-  "botTradeBottomSheetAmountMinimum": "你有  {availableAmount} 可供使用，每單交易最小金額為 {minimumAmount} 。",
+  "botTradeBottomSheetAmountMinimum": "你有 {availableAmount} 可供使用，每單交易最小金額為 {minimumAmount} 。",
   "@botTradeBottomSheetAmountMinimum": {
     "placeholders": {
       "availableAmount": {
@@ -748,7 +748,7 @@
   "pressToRedoISQ": "重新界定投資風格",
   "seeMyRecommendations": "See My Recommendations",
   "startAgain": "Start Again",
-  "botTradeBottomSheetAmountMinimumFirst": "你有  {availableAmount} 可供使用，",
+  "botTradeBottomSheetAmountMinimumFirst": "你有 {availableAmount} 可供使用，",
   "@botTradeBottomSheetAmountMinimumFirst": {
     "placeholders": {
       "availableAmount": {
@@ -779,7 +779,6 @@
   "tellMeMore": "Tell Me More",
   "toOpenLora": " to open Lora and get more details about your investment!",
   "requestedToEnd": "Requested To End",
-  "giftBotStockMessageScreenBottomButton": "OK! 睇下畀我嘅推薦",
   "userNotFound": "User Not Found",
   "goToPortfolio": "Go To Portfolio",
   "startAnotherInvestments": "Start another investment",
