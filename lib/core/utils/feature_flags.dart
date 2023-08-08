@@ -12,5 +12,5 @@ class FeatureFlags {
   static const bool isProdTestEnabled = true;
 
   static const bool isMockApp = true;
-  static const bool showAiDebugWidget = true;
+  static const bool showAiDebugWidget = false;
 }
