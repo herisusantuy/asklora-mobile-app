@@ -390,7 +390,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               _spaceBetweenInfo,
               ColumnTextWithTooltip(
                   title: S.of(context).estimatedEndDate,
-                  subTitle: '${botDetailModel?.estEndDateFormatted}'),
+                  subTitle: '${botDetailModel?.endDateHKTString}'),
             ],
           ),
         ),

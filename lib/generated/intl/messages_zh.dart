@@ -25,9 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(name) => "進度好好吖,\n${name}！";
 
   static String m2(availableAmount, minimumAmount) =>
-      "你有  ${availableAmount} 可供使用，每單交易最小金額為 ${minimumAmount} 。";
+      "你有 ${availableAmount} 可供使用，每單交易最小金額為 ${minimumAmount} 。";
 
-  static String m3(availableAmount) => "你有  ${availableAmount} 可供使用，";
+  static String m3(availableAmount) => "你有 ${availableAmount} 可供使用，";
 
   static String m4(minimumAmount) => "每單交易最小金額為 ${minimumAmount} 。";
 
@@ -151,33 +151,31 @@ class MessageLookup extends MessageLookupByLibrary {
         "beforeKYCHeaderTitle": m1,
         "bestSuitedFor": MessageLookupByLibrary.simpleMessage("最適合"),
         "botDuration": MessageLookupByLibrary.simpleMessage("Bot 期限"),
+        "botExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "Botstock 由一隻股票及一個 Bot 組成。 每一個 Bot 各代表一個獨一無二的 AI 投資策略。而Lora會幫你管理策略。"),
         "botManagementFee": MessageLookupByLibrary.simpleMessage("Bot 管理費用"),
         "botManagementFeeTooltip": MessageLookupByLibrary.simpleMessage(
             "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!"),
         "botRecommendationScreenTitle":
             MessageLookupByLibrary.simpleMessage("最夾你嘅投資風格"),
         "botRecommendationTutorialDesc1":
-            MessageLookupByLibrary.simpleMessage("This is the "),
+            MessageLookupByLibrary.simpleMessage("Here are "),
         "botRecommendationTutorialDesc2": MessageLookupByLibrary.simpleMessage(
-            "Botstock recommendations screen. "),
-        "botRecommendationTutorialDesc3":
-            MessageLookupByLibrary.simpleMessage("press "),
-        "botRecommendationTutorialDesc4":
-            MessageLookupByLibrary.simpleMessage("\'Trade\' "),
-        "botRecommendationTutorialDesc5": MessageLookupByLibrary.simpleMessage(
-            "on a Botstock that catches your eye!"),
+            "your unique recommendations "),
+        "botRecommendationTutorialDesc3": MessageLookupByLibrary.simpleMessage(
+            "based on how you answered the ISQ section"),
         "botStockDoScreenPoint1":
-            MessageLookupByLibrary.simpleMessage("嘗試獲取較大收益"),
+            MessageLookupByLibrary.simpleMessage("Hit a home run!"),
         "botStockDoScreenPoint2":
-            MessageLookupByLibrary.simpleMessage("避免過度損失"),
+            MessageLookupByLibrary.simpleMessage("Simple and easy!"),
         "botStockDoScreenPoint3":
-            MessageLookupByLibrary.simpleMessage("獲取頻繁而小額的收益"),
+            MessageLookupByLibrary.simpleMessage("Passive income!"),
         "botStockDoScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "作為 AI 投資策略, Bot 將會於指定時間內，自動幫你進行交易，捕捉收益機會同時管理風險。"),
+            "A ‘Bot’ is your personal AI manager that trades your stock for you."),
         "botStockExplanationScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("明白！咁Bot可以做啲咩？"),
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "Botstock 由一隻股票及一個 Bot 組成。 每一個 Bot 各代表一個獨一無二的 AI 投資策略。而Lora會幫你管理策略。"),
+            "You pick the stock, and the \'Bot\' will trade it for you!"),
         "botStocksDetails":
             MessageLookupByLibrary.simpleMessage("Botstock 嘅詳情同預計回報。 "),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
@@ -231,6 +229,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonDone": MessageLookupByLibrary.simpleMessage("完成"),
         "buttonForgetPassword": MessageLookupByLibrary.simpleMessage("忘記密碼？"),
         "buttonGoBack": MessageLookupByLibrary.simpleMessage("返回"),
+        "buttonGotIt": MessageLookupByLibrary.simpleMessage("Got it!"),
         "buttonHaveAnAccount": MessageLookupByLibrary.simpleMessage("已有賬戶？"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("立即開始"),
         "buttonMaybeLater": MessageLookupByLibrary.simpleMessage("稍後再說"),

@@ -7,6 +7,7 @@ import '../../../../core/domain/ai/component.dart';
 import '../../../../core/domain/ai/conversation.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/ai/buttons/glowing_button.dart';
+import '../../../../core/presentation/ai/chat/ai_text_field.dart';
 import '../../../../core/presentation/ai/chat/chat_lora_header.dart';
 import '../../../../core/presentation/ai/chat/in_chat_bubble_widget.dart';
 import '../../../../core/presentation/ai/chat/lora_thinking_widget.dart';
@@ -15,7 +16,6 @@ import '../../../../core/presentation/ai/lora_animation_green.dart';
 import '../../../../core/presentation/ai/utils/ai_utils.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_text_new.dart';
-import '../../../../core/presentation/text_fields/style/text_field_style.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
@@ -31,7 +31,9 @@ import 'widget/component_widget.dart';
 import 'widget/session_reset_widget.dart';
 
 part 'lora_ai_overlay_screen.dart';
+
 part 'lora_gpt_screen.dart';
+
 part 'widget/ai_chat_list.dart';
 
 class LoraAiScreen extends StatelessWidget {
