@@ -6,7 +6,7 @@ import '../../../../core/presentation/lora_animation_header.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../generated/l10n.dart';
 import '../widgets/bot_stock_form.dart';
-import 'bot_stock_explanation_screen.dart';
+import 'bot_stock_do_screen.dart';
 
 class GiftBotStockWelcomeScreen extends StatelessWidget {
   static const String route = '/gift_bot_stock_welcome_screen';
@@ -38,7 +38,7 @@ class GiftBotStockWelcomeScreen extends StatelessWidget {
           child: PrimaryButton(
             buttonPrimaryType: ButtonPrimaryType.solidCharcoal,
             label: S.of(context).giftBotStockWelcomeScreenBottomButton,
-            onTap: () => BotStockExplanationScreen.open(context),
+            onTap: () => BotStockDoScreen.open(context),
           ),
         ),
       ),

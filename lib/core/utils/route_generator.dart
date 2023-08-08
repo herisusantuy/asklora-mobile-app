@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../feature/bot_stock/presentation/gift/bot_stock_explanation_screen.dart';
 import '../../feature/bot_stock/presentation/gift/gift_bot_stock_message.dart';
 import '../../feature/tabs/ai_landing_page/presentation/ai_landing_page.dart';
 import '../../feature/tabs/utils/tab_util.dart';
@@ -25,7 +26,7 @@ import '../../feature/bot_stock/presentation/bot_recommendation/free_bot_recomme
 import '../../feature/bot_stock/presentation/bot_stock_result_screen.dart';
 import '../../feature/bot_stock/presentation/bot_trade_summary/bot_trade_summary_screen.dart';
 import '../../feature/bot_stock/presentation/gift/bot_stock_do_screen.dart';
-import '../../feature/bot_stock/presentation/gift/bot_stock_explanation_screen.dart';
+import '../../feature/bot_stock/presentation/gift/bot_explanation_screen.dart';
 import '../../feature/bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/detail/bot_portfolio_detail_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/portfolio_screen.dart';
@@ -139,6 +140,9 @@ class RouterGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (_) => const GiftBotStockWelcomeScreen());
+      case BotExplanationScreen.route:
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const BotExplanationScreen());
       case BotStockExplanationScreen.route:
         return MaterialPageRoute(
             settings: settings,
