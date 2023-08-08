@@ -54,6 +54,8 @@ extension MessageExtension on ValidationCode {
         return 'Could not fetch the token!';
       case ValidationCode.couldNotUpdateOnfidoResult:
         return 'Could not update the Onfido result!';
+      case ValidationCode.userAlreadyActive:
+        return 'User is already activated. Please signing with the given email.';
       case ValidationCode.empty:
         return '';
       case ValidationCode.unknown:
