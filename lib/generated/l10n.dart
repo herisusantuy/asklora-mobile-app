@@ -5704,10 +5704,10 @@ class S {
     );
   }
 
-  /// `Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! `
+  /// `Every trade is unique, each time you invest with a new Botstock, I'll ask you some investment style questions to tailor new recommendations! `
   String get giftBotStockMessageScreenTitle {
     return Intl.message(
-      'Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ',
+      'Every trade is unique, each time you invest with a new Botstock, I\'ll ask you some investment style questions to tailor new recommendations! ',
       name: 'giftBotStockMessageScreenTitle',
       desc: '',
       args: [],
@@ -5754,51 +5754,31 @@ class S {
     );
   }
 
-  /// `This is the `
+  /// `Here are `
   String get botRecommendationTutorialDesc1 {
     return Intl.message(
-      'This is the ',
+      'Here are ',
       name: 'botRecommendationTutorialDesc1',
       desc: '',
       args: [],
     );
   }
 
-  /// `Botstock recommendations screen. `
+  /// `your unique recommendations `
   String get botRecommendationTutorialDesc2 {
     return Intl.message(
-      'Botstock recommendations screen. ',
+      'your unique recommendations ',
       name: 'botRecommendationTutorialDesc2',
       desc: '',
       args: [],
     );
   }
 
-  /// `press `
+  /// `based on how you answered the ISQ section`
   String get botRecommendationTutorialDesc3 {
     return Intl.message(
-      'press ',
+      'based on how you answered the ISQ section',
       name: 'botRecommendationTutorialDesc3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `'Trade' `
-  String get botRecommendationTutorialDesc4 {
-    return Intl.message(
-      '\'Trade\' ',
-      name: 'botRecommendationTutorialDesc4',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `on a Botstock that catches your eye!`
-  String get botRecommendationTutorialDesc5 {
-    return Intl.message(
-      'on a Botstock that catches your eye!',
-      name: 'botRecommendationTutorialDesc5',
       desc: '',
       args: [],
     );

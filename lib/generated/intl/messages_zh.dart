@@ -157,15 +157,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "botRecommendationScreenTitle":
             MessageLookupByLibrary.simpleMessage("最夾你嘅投資風格"),
         "botRecommendationTutorialDesc1":
-            MessageLookupByLibrary.simpleMessage("This is the "),
+            MessageLookupByLibrary.simpleMessage("Here are "),
         "botRecommendationTutorialDesc2": MessageLookupByLibrary.simpleMessage(
-            "Botstock recommendations screen. "),
-        "botRecommendationTutorialDesc3":
-            MessageLookupByLibrary.simpleMessage("press "),
-        "botRecommendationTutorialDesc4":
-            MessageLookupByLibrary.simpleMessage("\'Trade\' "),
-        "botRecommendationTutorialDesc5": MessageLookupByLibrary.simpleMessage(
-            "on a Botstock that catches your eye!"),
+            "your unique recommendations "),
+        "botRecommendationTutorialDesc3": MessageLookupByLibrary.simpleMessage(
+            "based on how you answered the ISQ section"),
         "botStockDoScreenPoint1":
             MessageLookupByLibrary.simpleMessage("嘗試獲取較大收益"),
         "botStockDoScreenPoint2":

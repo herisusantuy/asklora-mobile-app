@@ -173,15 +173,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "botRecommendationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Investments tailored  for you"),
         "botRecommendationTutorialDesc1":
-            MessageLookupByLibrary.simpleMessage("This is the "),
+            MessageLookupByLibrary.simpleMessage("Here are "),
         "botRecommendationTutorialDesc2": MessageLookupByLibrary.simpleMessage(
-            "Botstock recommendations screen. "),
-        "botRecommendationTutorialDesc3":
-            MessageLookupByLibrary.simpleMessage("press "),
-        "botRecommendationTutorialDesc4":
-            MessageLookupByLibrary.simpleMessage("\'Trade\' "),
-        "botRecommendationTutorialDesc5": MessageLookupByLibrary.simpleMessage(
-            "on a Botstock that catches your eye!"),
+            "your unique recommendations "),
+        "botRecommendationTutorialDesc3": MessageLookupByLibrary.simpleMessage(
+            "based on how you answered the ISQ section"),
         "botStockDoScreenPoint1":
             MessageLookupByLibrary.simpleMessage("Go for occasional big wins"),
         "botStockDoScreenPoint2":
@@ -463,7 +459,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftBotStockMessageScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("See my recommendations"),
         "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! "),
+            "Every trade is unique, each time you invest with a new Botstock, I\'ll ask you some investment style questions to tailor new recommendations! "),
         "giftBotStockWelcomeScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
         "giftBotStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
