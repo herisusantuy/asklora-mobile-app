@@ -62,16 +62,16 @@ class BotStockWithAnimation extends StatefulWidget {
 }
 
 class _BotStockWithAnimationState extends State<BotStockWithAnimation> {
-  bool fadeInCard1 = false;
-  bool fadeInCard2 = false;
-  bool fadeInCard3 = false;
+  bool isCard1Visible = false;
+  bool isCard2Visible = false;
+  bool isCard3Visible = false;
   double cardSpace = 20;
   Duration animatedDuration = const Duration(milliseconds: 600);
 
   @override
   void initState() {
     Future.delayed(const Duration(milliseconds: 500))
-        .then((value) => setState(() => fadeInCard1 = true));
+        .then((value) => setState(() => isCard1Visible = true));
     super.initState();
   }
 
@@ -83,17 +83,17 @@ class _BotStockWithAnimationState extends State<BotStockWithAnimation> {
       runSpacing: cardSpace + 6,
       children: [
         AnimatedOpacity(
-            opacity: fadeInCard1 ? 1.0 : 0,
-            onEnd: () => _fadeInCard(fadeInCard2 = true),
+            opacity: isCard1Visible ? 1.0 : 0,
+            onEnd: () => _fadeInCard(isCard2Visible = true),
             duration: animatedDuration,
             child: _botCard(context, botType: BotType.pullUp)),
         AnimatedOpacity(
-            opacity: fadeInCard2 ? 1.0 : 0,
+            opacity: isCard2Visible ? 1.0 : 0,
             duration: animatedDuration,
-            onEnd: () => _fadeInCard(fadeInCard3 = true),
+            onEnd: () => _fadeInCard(isCard3Visible = true),
             child: _botCard(context, botType: BotType.plank)),
         AnimatedOpacity(
-            opacity: fadeInCard3 ? 1.0 : 0,
+            opacity: isCard3Visible ? 1.0 : 0,
             duration: animatedDuration,
             child: _botCard(context, botType: BotType.squat)),
       ],
