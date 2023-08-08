@@ -151,6 +151,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "beforeKYCHeaderTitle": m1,
         "bestSuitedFor": MessageLookupByLibrary.simpleMessage("最適合"),
         "botDuration": MessageLookupByLibrary.simpleMessage("Bot 期限"),
+        "botExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "Botstock 由一隻股票及一個 Bot 組成。 每一個 Bot 各代表一個獨一無二的 AI 投資策略。而Lora會幫你管理策略。"),
         "botManagementFee": MessageLookupByLibrary.simpleMessage("Bot 管理費用"),
         "botManagementFeeTooltip": MessageLookupByLibrary.simpleMessage(
             "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!"),
@@ -173,10 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "botStockExplanationScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("明白！咁Bot可以做啲咩？"),
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "Botstock 由一隻股票及一個 Bot 組成。 每一個 Bot 各代表一個獨一無二的 AI 投資策略。而Lora會幫你管理策略。"),
-        "botStockExplanationWithAnimationScreenTitle":
-            MessageLookupByLibrary.simpleMessage(
-                "You pick the stock, and the \'Bot\' will trade it for you!"),
+            "You pick the stock, and the \'Bot\' will trade it for you!"),
         "botStocksDetails":
             MessageLookupByLibrary.simpleMessage("Botstock 嘅詳情同預計回報。 "),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":

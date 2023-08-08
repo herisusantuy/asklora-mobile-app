@@ -763,7 +763,7 @@
   "ourPersonalisedRecommendationsAreUnique": "Our personalised recommendations are unique. The recommended Botstocks are based on your risk tolerance, personality, and investment style.",
   "generalSettings": "General Settings",
   "notTheStockYouWereLooking": "Not the stocks you were looking for?",
-  "botStockExplanationScreenTitle": "A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you.",
+  "botExplanationScreenTitle": "A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you.",
   "botStockExplanationScreenBottomButton": "Got it!",
   "botStockDoScreenTitle": "A 'Bot' is your personal AI manager that trades your stock for you.",
   "botStockDoScreenPoint1": "Hit a home run!",
@@ -824,5 +824,5 @@
   "LoraAi": "Lora AI",
   "right": "Right",
   "portfolio": "Portfolio",
-  "botStockExplanationWithAnimationScreenTitle": "You pick the stock, and the 'Bot' will trade it for you!"
+  "botStockExplanationScreenTitle": "You pick the stock, and the 'Bot' will trade it for you!"
 }

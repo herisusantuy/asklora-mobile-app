@@ -10,7 +10,7 @@ import '../../../../core/utils/app_icons.dart';
 import '../../../../generated/l10n.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/bot_stock_form.dart';
-import 'bot_stock_explanation_with_animation_screen.dart';
+import 'bot_stock_explanation_screen.dart';
 
 class BotStockDoScreen extends StatelessWidget {
   static const String route = '/gift_bot_stock_do_screen';
@@ -50,7 +50,7 @@ class BotStockDoScreen extends StatelessWidget {
         padding: const EdgeInsets.only(top: 30, bottom: 30.0),
         child: PrimaryButton(
           label: S.of(context).buttonGotIt,
-          onTap: () => BotStockExplanationWithAnimationScreen.open(context),
+          onTap: () => BotStockExplanationScreen.open(context),
         ),
       ),
     );

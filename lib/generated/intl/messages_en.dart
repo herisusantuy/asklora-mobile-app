@@ -166,6 +166,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "bestSuitedFor":
             MessageLookupByLibrary.simpleMessage("Best Suited For"),
         "botDuration": MessageLookupByLibrary.simpleMessage("Bot Duration"),
+        "botExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you."),
         "botManagementFee":
             MessageLookupByLibrary.simpleMessage("Bot Management Fee"),
         "botManagementFeeTooltip": MessageLookupByLibrary.simpleMessage(
@@ -189,10 +191,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "botStockExplanationScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("Got it!"),
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you."),
-        "botStockExplanationWithAnimationScreenTitle":
-            MessageLookupByLibrary.simpleMessage(
-                "You pick the stock, and the \'Bot\' will trade it for you!"),
+            "You pick the stock, and the \'Bot\' will trade it for you!"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
         "botStocksDetails": MessageLookupByLibrary.simpleMessage(
             "Botstock’s details and estimated returns."),

@@ -5555,10 +5555,10 @@ class S {
   }
 
   /// `A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you.`
-  String get botStockExplanationScreenTitle {
+  String get botExplanationScreenTitle {
     return Intl.message(
       'A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you.',
-      name: 'botStockExplanationScreenTitle',
+      name: 'botExplanationScreenTitle',
       desc: '',
       args: [],
     );
@@ -6005,10 +6005,10 @@ class S {
   }
 
   /// `You pick the stock, and the 'Bot' will trade it for you!`
-  String get botStockExplanationWithAnimationScreenTitle {
+  String get botStockExplanationScreenTitle {
     return Intl.message(
       'You pick the stock, and the \'Bot\' will trade it for you!',
-      name: 'botStockExplanationWithAnimationScreenTitle',
+      name: 'botStockExplanationScreenTitle',
       desc: '',
       args: [],
     );

@@ -735,7 +735,7 @@
   "ourPersonalisedRecommendationsAreUnique": "每個個人化建議均獨一無二。所建議的 Botstock 都是根據你能承受的風險、個性測試及投資風格所提供。",
   "generalSettings": "設定",
   "notTheStockYouWereLooking": "唔係你想要嘅股票?",
-  "botStockExplanationScreenTitle": "Botstock 由一隻股票及一個 Bot 組成。 每一個 Bot 各代表一個獨一無二的 AI 投資策略。而Lora會幫你管理策略。",
+  "botExplanationScreenTitle": "Botstock 由一隻股票及一個 Bot 組成。 每一個 Bot 各代表一個獨一無二的 AI 投資策略。而Lora會幫你管理策略。",
   "botStockExplanationScreenBottomButton": "明白！咁Bot可以做啲咩？",
   "botStockDoScreenTitle": "A ‘Bot’ is your personal AI manager that trades your stock for you.",
   "botStockDoScreenPoint1": "Hit a home run!",
@@ -795,5 +795,5 @@
   "LoraAi": "Lora AI",
   "right": "Right",
   "portfolio": "Portfolio",
-  "botStockExplanationWithAnimationScreenTitle": "You pick the stock, and the 'Bot' will trade it for you!"
+  "botStockExplanationScreenTitle": "You pick the stock, and the 'Bot' will trade it for you!"
 }
