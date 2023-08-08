@@ -41,7 +41,10 @@ void main() {
       act: (bloc) {
         bloc.add(const TabChanged(TabPage.portfolio));
       },
-      expect: () => {const TabScreenState(currentTabPage: TabPage.portfolio)},
+      expect: () => {
+        const TabScreenState(currentTabPage: TabPage.forYou),
+        const TabScreenState(currentTabPage: TabPage.portfolio),
+      },
     );
 
     tearDown(() => {tabScreenBloc.close()});
