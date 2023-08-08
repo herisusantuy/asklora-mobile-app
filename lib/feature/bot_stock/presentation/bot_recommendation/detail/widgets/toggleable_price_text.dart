@@ -33,10 +33,10 @@ class ToggleablePriceText extends StatelessWidget {
                   ? '${percentDifference.convertToCurrencyDecimal()}%'
                   : '+${percentDifference.convertToCurrencyDecimal()}%';
           String priceText = (priceDifference == 0)
-              ? '${priceDifference.abs().convertToCurrencyDecimal()}%'
+              ? priceDifference.abs().convertToCurrencyDecimal()
               : (priceDifference < 0)
-                  ? '${priceDifference.convertToCurrencyDecimal()}%'
-                  : '+${priceDifference.convertToCurrencyDecimal()}%';
+                  ? priceDifference.convertToCurrencyDecimal()
+                  : '+${priceDifference.convertToCurrencyDecimal()}';
 
           final TextStyle toggleableTextStyle =
               AskLoraTextStyles.subtitle3.copyWith(color: AskLoraColors.white);
