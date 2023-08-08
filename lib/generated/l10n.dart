@@ -5834,6 +5834,166 @@ class S {
       args: [],
     );
   }
+
+  /// `Now for the Investment Style Questions (ISQ)!These questions will feel more ChatGPT style.`
+  String get timeForInvestmentStyleQuestion {
+    return Intl.message(
+      'Now for the Investment Style Questions (ISQ)!These questions will feel more ChatGPT style.',
+      name: 'timeForInvestmentStyleQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Through our chat-style dialogue, we'll grasp your investment interests to tailor botstock recommendations for you.`
+  String get isqWillHelpMeUnderstandWhatKindOfStocks {
+    return Intl.message(
+      'Through our chat-style dialogue, we\'ll grasp your investment interests to tailor botstock recommendations for you.',
+      name: 'isqWillHelpMeUnderstandWhatKindOfStocks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remember, you can always `
+  String get rememberYouCan {
+    return Intl.message(
+      'Remember, you can always ',
+      name: 'rememberYouCan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `click on Lora `
+  String get clickOnLora {
+    return Intl.message(
+      'click on Lora ',
+      name: 'clickOnLora',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `to ask any other questions you might have`
+  String get toAskAnyOtherQuestion {
+    return Intl.message(
+      'to ask any other questions you might have',
+      name: 'toAskAnyOtherQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use the`
+  String get useThe {
+    return Intl.message(
+      'Use the',
+      name: 'useThe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `nav bar`
+  String get navBar {
+    return Intl.message(
+      'nav bar',
+      name: 'navBar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `to go to different pages.`
+  String get toGoToDifferentPages {
+    return Intl.message(
+      'to go to different pages.',
+      name: 'toGoToDifferentPages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Left`
+  String get left {
+    return Intl.message(
+      'Left',
+      name: 'left',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recommendations`
+  String get recommendations {
+    return Intl.message(
+      'Recommendations',
+      name: 'recommendations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Middle`
+  String get middle {
+    return Intl.message(
+      'Middle',
+      name: 'middle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lora AI`
+  String get LoraAi {
+    return Intl.message(
+      'Lora AI',
+      name: 'LoraAi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Right`
+  String get right {
+    return Intl.message(
+      'Right',
+      name: 'right',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Portfolio`
+  String get portfolio {
+    return Intl.message(
+      'Portfolio',
+      name: 'portfolio',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Throughout your investment journey, you’ll see Lora on your bottom nav bar.Click on Lora at anytime to get advice or to ask anything related to finance.`
+  String get throughoutYourInvestmentJourney {
+    return Intl.message(
+      'Throughout your investment journey, you’ll see Lora on your bottom nav bar.Click on Lora at anytime to get advice or to ask anything related to finance.',
+      name: 'throughoutYourInvestmentJourney',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let’s Go`
+  String get letsGo {
+    return Intl.message(
+      'Let’s Go',
+      name: 'letsGo',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

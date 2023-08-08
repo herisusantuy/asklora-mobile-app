@@ -93,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AskloraAgreementFile":
             MessageLookupByLibrary.simpleMessage("Asklora 客戶協議.pdf"),
+        "LoraAi": MessageLookupByLibrary.simpleMessage("Lora AI"),
         "about": MessageLookupByLibrary.simpleMessage("關於"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("關於 Asklora"),
         "aboutYourInvestment":
@@ -266,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "checkBackLater": MessageLookupByLibrary.simpleMessage("稍後再來查看!"),
         "checkBotStockDetails":
             MessageLookupByLibrary.simpleMessage("查看 Botstock 資訊"),
+        "clickOnLora": MessageLookupByLibrary.simpleMessage("click on Lora "),
         "communitySocialService":
             MessageLookupByLibrary.simpleMessage("Community / Social Service"),
         "companyAddress": MessageLookupByLibrary.simpleMessage("銀行地址"),
@@ -443,6 +445,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "想知Asklora有咩投資秘技？\n界定你嘅投資風格先！\n"),
         "isqNextButton": MessageLookupByLibrary.simpleMessage(
             "Press to move onto the next section"),
+        "isqWillHelpMeUnderstandWhatKindOfStocks":
+            MessageLookupByLibrary.simpleMessage("ISQ會幫到我了解你對咩類型股票有興趣"),
         "kycRejectedExplanationOfAffiliate":
             MessageLookupByLibrary.simpleMessage("我們不接受上述類別人士\n開立賬戶。"),
         "kycRejectedScreenTitle":
@@ -457,9 +461,11 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Law Enforcement, Government, Protective Service"),
         "learnBotstockManagement":
             MessageLookupByLibrary.simpleMessage("學䲾 Botstock 管理"),
+        "left": MessageLookupByLibrary.simpleMessage("Left"),
         "legal": MessageLookupByLibrary.simpleMessage("Legal"),
         "legalFirstName": MessageLookupByLibrary.simpleMessage("法定英文名字"),
         "legalLastName": MessageLookupByLibrary.simpleMessage("法定英文姓氏"),
+        "letsGo": MessageLookupByLibrary.simpleMessage("Let’s Go"),
         "licenseeName": MessageLookupByLibrary.simpleMessage("持牌人：張永經"),
         "licenseeNumber": MessageLookupByLibrary.simpleMessage("CE 編號: AFF918"),
         "lifePhysicalSocialService": MessageLookupByLibrary.simpleMessage(
@@ -474,12 +480,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Master AI Trading"),
         "mediaCommunications":
             MessageLookupByLibrary.simpleMessage("Media and Communications"),
+        "middle": MessageLookupByLibrary.simpleMessage("Middle"),
         "milestones": MessageLookupByLibrary.simpleMessage("目標"),
         "min": m14,
         "min8Character": MessageLookupByLibrary.simpleMessage("最少 8 個字母"),
         "nationality": MessageLookupByLibrary.simpleMessage("國籍"),
         "natureOfBusiness": MessageLookupByLibrary.simpleMessage("業務性質"),
         "natureOfBusinessDesc": MessageLookupByLibrary.simpleMessage("業務性質描述"),
+        "navBar": MessageLookupByLibrary.simpleMessage("nav bar"),
         "needHelp": MessageLookupByLibrary.simpleMessage("需要幫助？"),
         "neuroticismLessThan8":
             MessageLookupByLibrary.simpleMessage("我哋可以進取少少, 承受一定嘅風險"),
@@ -570,6 +578,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "請細閱 Asklora 客戶協議。你必須剔選所有勾選框並提供你的簽名才能繼續。"),
         "pleaseSelect": MessageLookupByLibrary.simpleMessage("請選擇"),
         "porAddress": MessageLookupByLibrary.simpleMessage("住址證明"),
+        "portfolio": MessageLookupByLibrary.simpleMessage("Portfolio"),
         "portfolioBuyingPower": m16,
         "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
             "購買力代表了你可以用來購買Botstock的現金額。你的可提取金額和購買力會出現不一樣的情況。例如，開始Botstock後，你的購買力會相對減少，而Botstock總價值會相對提高。或當你的Botstock已到期或被終止，其價值將會增加至購買力，而在「T+2」日，T為交易當日， 該價值也會同時顯示在可提取金額。 "),
@@ -673,8 +682,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "reSendOtp": m22,
         "readyToGo": MessageLookupByLibrary.simpleMessage("準備好未？"),
+        "recommendations":
+            MessageLookupByLibrary.simpleMessage("Recommendations"),
         "rejected": MessageLookupByLibrary.simpleMessage("已拒絕"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
+        "rememberYouCan":
+            MessageLookupByLibrary.simpleMessage("Remember, you can always "),
         "requestedToEnd":
             MessageLookupByLibrary.simpleMessage("Requested To End"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("重設密碼"),
@@ -688,6 +701,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶號碼）。不過，我們亦可能會因核實交易，向你要求更多附加資料。"),
         "reviewYourTradeSummary":
             MessageLookupByLibrary.simpleMessage("查看你嘅交易摘要，點擊 "),
+        "right": MessageLookupByLibrary.simpleMessage("Right"),
         "riskDisclosureStatement":
             MessageLookupByLibrary.simpleMessage("Risk Disclosure Statement"),
         "riskDisclosureStatementAcknowledgement":
@@ -788,12 +802,20 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
         "thisInteractiveGraph":
             MessageLookupByLibrary.simpleMessage("你可以係下面見到Botstock最近"),
+        "throughoutYourInvestmentJourney": MessageLookupByLibrary.simpleMessage(
+            "Throughout your investment journey, you’ll see Lora on your bottom nav bar.Click on Lora at anytime to get advice or to ask anything related to finance."),
         "timeCompleted": MessageLookupByLibrary.simpleMessage("完成時間"),
+        "timeForInvestmentStyleQuestion":
+            MessageLookupByLibrary.simpleMessage("想知Asklora有咩投資技？界定你嘅投資風格先！"),
         "timeRequested": MessageLookupByLibrary.simpleMessage("請求時間"),
         "to": MessageLookupByLibrary.simpleMessage("至"),
+        "toAskAnyOtherQuestion": MessageLookupByLibrary.simpleMessage(
+            "to ask any other questions you might have"),
         "toExecuteIt": MessageLookupByLibrary.simpleMessage(" 就可以立即執行指示！"),
         "toGiveYou":
             MessageLookupByLibrary.simpleMessage("嘅表現，希望幫到你理解Botstock係點樣交易！"),
+        "toGoToDifferentPages":
+            MessageLookupByLibrary.simpleMessage("to go to different pages."),
         "toStartAConversation": MessageLookupByLibrary.simpleMessage(
             "to start a conversation. Tap the icon again to dismiss Asklora"),
         "tokenInvalid": MessageLookupByLibrary.simpleMessage(
@@ -856,6 +878,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("上載匯款證明"),
         "usResidentQuestion":
             MessageLookupByLibrary.simpleMessage("你是否擁有美國稅務居民身份、持有綠卡，或公民身份？"),
+        "useThe": MessageLookupByLibrary.simpleMessage("Use the"),
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User Not Found"),
         "verifyIdentity": MessageLookupByLibrary.simpleMessage("核實身份"),
