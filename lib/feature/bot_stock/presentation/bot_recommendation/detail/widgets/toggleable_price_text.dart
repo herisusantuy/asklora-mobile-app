@@ -27,18 +27,22 @@ class ToggleablePriceText extends StatelessWidget {
           ToggleablePriceTextBloc(sharedPreference: SharedPreference()),
       child: Builder(
         builder: (context) {
-          String percentageText = (percentDifference < 0 || priceDifference < 0)
-              ? '${percentDifference.convertToCurrencyDecimal()}%'
-              : '+${percentDifference.convertToCurrencyDecimal()}%';
-          String priceText = (percentDifference < 0 || priceDifference < 0)
-              ? priceDifference.convertToCurrencyDecimal()
-              : '+${priceDifference.convertToCurrencyDecimal()}';
+          String percentageText = (percentDifference == 0)
+              ? '${percentDifference.abs().convertToCurrencyDecimal()}%'
+              : (percentDifference < 0)
+                  ? '${percentDifference.convertToCurrencyDecimal()}%'
+                  : '+${percentDifference.convertToCurrencyDecimal()}%';
+          String priceText = (priceDifference == 0)
+              ? '${priceDifference.abs().convertToCurrencyDecimal()}%'
+              : (priceDifference < 0)
+                  ? '${priceDifference.convertToCurrencyDecimal()}%'
+                  : '+${priceDifference.convertToCurrencyDecimal()}%';
 
           final TextStyle toggleableTextStyle =
               AskLoraTextStyles.subtitle3.copyWith(color: AskLoraColors.white);
           final maxTextWidth = max(
-            priceText.textWidth(toggleableTextStyle),
             percentageText.textWidth(toggleableTextStyle),
+            priceText.textWidth(toggleableTextStyle),
           );
 
           return GestureDetector(

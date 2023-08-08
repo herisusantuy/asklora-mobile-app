@@ -464,9 +464,9 @@ class BotRecommendationDetailContent extends StatelessWidget {
     }
   }
 
-  double getPriceDifference() =>
-      botDetailModel != null ? botDetailModel!.prevCloseAmt : 0;
-
   double getPercentDifference() =>
       botDetailModel != null ? botDetailModel!.prevClosePct : 0;
+
+  double getPriceDifference() =>
+      botDetailModel != null ? botDetailModel!.prevCloseAmt : 0;
 }
