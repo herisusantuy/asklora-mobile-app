@@ -18,10 +18,22 @@ class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
     on<CloseAiOverLay>(_onCloseAiOverlay);
     on<BackButtonClicked>(_onBackButtonClicked);
     on<BackgroundImageTypeChanged>(_onBackgroundImageTypeChanged);
-    on<OnDetailsScreenOpened>(_onDetailScreenOpened);
   }
 
   _onTabChanged(TabChanged event, Emitter<TabScreenState> emit) {
+    final subPage = state.currentTabPage.getArguments;
+
+    if (subPage.path == SubTabPage.recommendationsBotStockDetails.value) {
+      emit(state.copyWith(isBotDetailScreenOpened: true));
+    } else {
+      emit(state.copyWith(isBotDetailScreenOpened: false));
+    }
+
+    if (subPage.path == SubTabPage.portfolioBotStockDetails.value) {
+      emit(state.copyWith(isPortfolioDetailScreenOpened: true));
+    } else {
+      emit(state.copyWith(isPortfolioDetailScreenOpened: false));
+    }
     if (state.currentTabPage != event.tabPage) {
       //Remove the data when tab change.
       state.currentTabPage.setData();
@@ -32,14 +44,6 @@ class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
         backgroundImageType: event.tabPage == state.currentTabPage
             ? state.backgroundImageType
             : event.tabPage.backgroundImageType));
-  }
-
-  _onDetailScreenOpened(
-      OnDetailsScreenOpened event, Emitter<TabScreenState> emit) {
-    emit(state.copyWith(
-      isBotDetailScreenOpened: event.isBotDetailScreenOpened,
-      isPortfolioDetailScreenOpened: event.isPortfolioDetailScreenOpened,
-    ));
   }
 
   _onAiOverlayClick(OnAiOverlayClick event, Emitter<TabScreenState> emit) {

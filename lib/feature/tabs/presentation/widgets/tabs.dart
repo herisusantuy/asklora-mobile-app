@@ -41,13 +41,14 @@ class Tabs extends StatelessWidget {
                             active: state.currentTabPage == TabPage.home),
                       _tabPng(
                           onTap: () {
-                            context
-                                .read<TabScreenBloc>()
-                                .add(const TabChanged(TabPage.forYou));
                             if (state.isBotDetailScreenOpened) {
-                              context.read<TabScreenBloc>().add(
-                                  const OnDetailsScreenOpened(
-                                      isBotDetailScreenOpened: false));
+                              context
+                                  .read<TabScreenBloc>()
+                                  .add(TabChanged(TabPage.forYou.setData()));
+                            } else {
+                              context
+                                  .read<TabScreenBloc>()
+                                  .add(const TabChanged(TabPage.forYou));
                             }
                           },
                           iconAsset: 'bottom_nav_isq',
@@ -107,13 +108,14 @@ class Tabs extends StatelessWidget {
                         ),
                       _tabSvg(
                           onTap: () {
-                            context
-                                .read<TabScreenBloc>()
-                                .add(const TabChanged(TabPage.portfolio));
                             if (state.isPortfolioDetailScreenOpened) {
-                              context.read<TabScreenBloc>().add(
-                                  const OnDetailsScreenOpened(
-                                      isPortfolioDetailScreenOpened: false));
+                              context
+                                  .read<TabScreenBloc>()
+                                  .add(TabChanged(TabPage.portfolio.setData()));
+                            } else {
+                              context
+                                  .read<TabScreenBloc>()
+                                  .add(const TabChanged(TabPage.portfolio));
                             }
                           },
                           iconAsset: 'bottom_nav_portfolio',

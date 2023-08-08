@@ -28,8 +28,7 @@ class BotPortfolioCard extends StatelessWidget {
                 'ticker': botActiveOrderModel.ticker
               }
             ))));
-        context.read<TabScreenBloc>().add(
-            const OnDetailsScreenOpened(isPortfolioDetailScreenOpened: true));
+
         BotPortfolioDetailScreen.open(
             context: context,
             arguments: BotPortfolioDetailArguments(

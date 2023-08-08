@@ -111,8 +111,5 @@ class BotRecommendationCard extends StatelessWidget {
             'duration': botRecommendationModel.botDuration
           }
         ))));
-    context
-        .read<TabScreenBloc>()
-        .add(const OnDetailsScreenOpened(isBotDetailScreenOpened: true));
   }
 }
