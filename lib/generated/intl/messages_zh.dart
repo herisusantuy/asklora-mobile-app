@@ -163,17 +163,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "botRecommendationTutorialDesc3": MessageLookupByLibrary.simpleMessage(
             "based on how you answered the ISQ section"),
         "botStockDoScreenPoint1":
-            MessageLookupByLibrary.simpleMessage("嘗試獲取較大收益"),
+            MessageLookupByLibrary.simpleMessage("Hit a home run!"),
         "botStockDoScreenPoint2":
-            MessageLookupByLibrary.simpleMessage("避免過度損失"),
+            MessageLookupByLibrary.simpleMessage("Simple and easy!"),
         "botStockDoScreenPoint3":
-            MessageLookupByLibrary.simpleMessage("獲取頻繁而小額的收益"),
+            MessageLookupByLibrary.simpleMessage("Passive income!"),
         "botStockDoScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "作為 AI 投資策略, Bot 將會於指定時間內，自動幫你進行交易，捕捉收益機會同時管理風險。"),
+            "A ‘Bot’ is your personal AI manager that trades your stock for you."),
         "botStockExplanationScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("明白！咁Bot可以做啲咩？"),
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Botstock 由一隻股票及一個 Bot 組成。 每一個 Bot 各代表一個獨一無二的 AI 投資策略。而Lora會幫你管理策略。"),
+        "botStockExplanationWithAnimationScreenTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "You pick the stock, and the \'Bot\' will trade it for you!"),
         "botStocksDetails":
             MessageLookupByLibrary.simpleMessage("Botstock 嘅詳情同預計回報。 "),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
@@ -227,6 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonDone": MessageLookupByLibrary.simpleMessage("完成"),
         "buttonForgetPassword": MessageLookupByLibrary.simpleMessage("忘記密碼？"),
         "buttonGoBack": MessageLookupByLibrary.simpleMessage("返回"),
+        "buttonGotIt": MessageLookupByLibrary.simpleMessage("Got it!"),
         "buttonHaveAnAccount": MessageLookupByLibrary.simpleMessage("已有賬戶？"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("立即開始"),
         "buttonMaybeLater": MessageLookupByLibrary.simpleMessage("稍後再說"),

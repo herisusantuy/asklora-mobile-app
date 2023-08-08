@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../feature/bot_stock/presentation/gift/bot_stock_explanation_with_animation_screen.dart';
 import '../../feature/bot_stock/presentation/gift/gift_bot_stock_message.dart';
 import '../../feature/tabs/ai_landing_page/presentation/ai_landing_page.dart';
 import '../../feature/tabs/utils/tab_util.dart';
@@ -143,6 +144,10 @@ class RouterGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (_) => const BotStockExplanationScreen());
+      case BotStockExplanationWithAnimationScreen.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const BotStockExplanationWithAnimationScreen());
       case BotStockDoScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const BotStockDoScreen());

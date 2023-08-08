@@ -765,10 +765,11 @@
   "notTheStockYouWereLooking": "Not the stocks you were looking for?",
   "botStockExplanationScreenTitle": "A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you.",
   "botStockExplanationScreenBottomButton": "Got it!",
-  "botStockDoScreenTitle": "A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward.",
-  "botStockDoScreenPoint1": "Go for occasional big wins",
-  "botStockDoScreenPoint2": "Avoid excessive losses",
-  "botStockDoScreenPoint3": "Go for small but frequent wins",
+  "botStockDoScreenTitle": "A 'Bot' is your personal AI manager that trades your stock for you.",
+  "botStockDoScreenPoint1": "Hit a home run!",
+  "botStockDoScreenPoint2": "Simple and easy!",
+  "botStockDoScreenPoint3": "Passive income!",
+  "buttonGotIt": "Got it!",
   "understood": "Understood!",
   "giftBotStockWelcomeScreenTitle": "You're all set!\nLet's begin a real AI trade!",
   "giftBotStockWelcomeScreenBottomButton": "Sure! What is a Botstock?",
@@ -822,5 +823,6 @@
   "middle": "Middle",
   "LoraAi": "Lora AI",
   "right": "Right",
-  "portfolio": "Portfolio"
+  "portfolio": "Portfolio",
+  "botStockExplanationWithAnimationScreenTitle": "You pick the stock, and the 'Bot' will trade it for you!"
 }

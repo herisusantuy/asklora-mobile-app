@@ -179,17 +179,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "botRecommendationTutorialDesc3": MessageLookupByLibrary.simpleMessage(
             "based on how you answered the ISQ section"),
         "botStockDoScreenPoint1":
-            MessageLookupByLibrary.simpleMessage("Go for occasional big wins"),
+            MessageLookupByLibrary.simpleMessage("Hit a home run!"),
         "botStockDoScreenPoint2":
-            MessageLookupByLibrary.simpleMessage("Avoid excessive losses"),
-        "botStockDoScreenPoint3": MessageLookupByLibrary.simpleMessage(
-            "Go for small but frequent wins"),
+            MessageLookupByLibrary.simpleMessage("Simple and easy!"),
+        "botStockDoScreenPoint3":
+            MessageLookupByLibrary.simpleMessage("Passive income!"),
         "botStockDoScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward."),
+            "A \'Bot\' is your personal AI manager that trades your stock for you."),
         "botStockExplanationScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("Got it!"),
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you."),
+        "botStockExplanationWithAnimationScreenTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "You pick the stock, and the \'Bot\' will trade it for you!"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
         "botStocksDetails": MessageLookupByLibrary.simpleMessage(
             "Botstock’s details and estimated returns."),
@@ -255,6 +258,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonForgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget Password?"),
         "buttonGoBack": MessageLookupByLibrary.simpleMessage("Go Back"),
+        "buttonGotIt": MessageLookupByLibrary.simpleMessage("Got it!"),
         "buttonHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Have An Account?"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("Let\'s Begin"),

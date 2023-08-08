@@ -5574,41 +5574,51 @@ class S {
     );
   }
 
-  /// `A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward.`
+  /// `A 'Bot' is your personal AI manager that trades your stock for you.`
   String get botStockDoScreenTitle {
     return Intl.message(
-      'A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward.',
+      'A \'Bot\' is your personal AI manager that trades your stock for you.',
       name: 'botStockDoScreenTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Go for occasional big wins`
+  /// `Hit a home run!`
   String get botStockDoScreenPoint1 {
     return Intl.message(
-      'Go for occasional big wins',
+      'Hit a home run!',
       name: 'botStockDoScreenPoint1',
       desc: '',
       args: [],
     );
   }
 
-  /// `Avoid excessive losses`
+  /// `Simple and easy!`
   String get botStockDoScreenPoint2 {
     return Intl.message(
-      'Avoid excessive losses',
+      'Simple and easy!',
       name: 'botStockDoScreenPoint2',
       desc: '',
       args: [],
     );
   }
 
-  /// `Go for small but frequent wins`
+  /// `Passive income!`
   String get botStockDoScreenPoint3 {
     return Intl.message(
-      'Go for small but frequent wins',
+      'Passive income!',
       name: 'botStockDoScreenPoint3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Got it!`
+  String get buttonGotIt {
+    return Intl.message(
+      'Got it!',
+      name: 'buttonGotIt',
       desc: '',
       args: [],
     );
@@ -5989,6 +5999,16 @@ class S {
     return Intl.message(
       'Portfolio',
       name: 'portfolio',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You pick the stock, and the 'Bot' will trade it for you!`
+  String get botStockExplanationWithAnimationScreenTitle {
+    return Intl.message(
+      'You pick the stock, and the \'Bot\' will trade it for you!',
+      name: 'botStockExplanationWithAnimationScreenTitle',
       desc: '',
       args: [],
     );

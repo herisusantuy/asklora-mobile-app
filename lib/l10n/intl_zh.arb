@@ -737,10 +737,11 @@
   "notTheStockYouWereLooking": "唔係你想要嘅股票?",
   "botStockExplanationScreenTitle": "Botstock 由一隻股票及一個 Bot 組成。 每一個 Bot 各代表一個獨一無二的 AI 投資策略。而Lora會幫你管理策略。",
   "botStockExplanationScreenBottomButton": "明白！咁Bot可以做啲咩？",
-  "botStockDoScreenTitle": "作為 AI 投資策略, Bot 將會於指定時間內，自動幫你進行交易，捕捉收益機會同時管理風險。",
-  "botStockDoScreenPoint1": "嘗試獲取較大收益",
-  "botStockDoScreenPoint2": "避免過度損失",
-  "botStockDoScreenPoint3": "獲取頻繁而小額的收益",
+  "botStockDoScreenTitle": "A ‘Bot’ is your personal AI manager that trades your stock for you.",
+  "botStockDoScreenPoint1": "Hit a home run!",
+  "botStockDoScreenPoint2": "Simple and easy!",
+  "botStockDoScreenPoint3": "Passive income!",
+  "buttonGotIt": "Got it!",
   "understood": "明白！",
   "giftBotStockWelcomeScreenTitle": "萬事具備, 即刻開始交易你嘅第一隻Botstock!",
   "giftBotStockWelcomeScreenBottomButton": "好！咩咩Botstock話？",
@@ -793,5 +794,6 @@
   "middle": "Middle",
   "LoraAi": "Lora AI",
   "right": "Right",
-  "portfolio": "Portfolio"
+  "portfolio": "Portfolio",
+  "botStockExplanationWithAnimationScreenTitle": "You pick the stock, and the 'Bot' will trade it for you!"
 }
