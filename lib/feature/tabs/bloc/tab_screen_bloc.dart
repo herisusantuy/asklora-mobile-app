@@ -18,6 +18,7 @@ class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
     on<CloseAiOverLay>(_onCloseAiOverlay);
     on<BackButtonClicked>(_onBackButtonClicked);
     on<BackgroundImageTypeChanged>(_onBackgroundImageTypeChanged);
+    on<OnDetailsScreenOpened>(_onDetailScreenOpened);
   }
 
   _onTabChanged(TabChanged event, Emitter<TabScreenState> emit) {
@@ -31,6 +32,14 @@ class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
         backgroundImageType: event.tabPage == state.currentTabPage
             ? state.backgroundImageType
             : event.tabPage.backgroundImageType));
+  }
+
+  _onDetailScreenOpened(
+      OnDetailsScreenOpened event, Emitter<TabScreenState> emit) {
+    emit(state.copyWith(
+      isBotDetailScreenOpened: event.isBotDetailScreenOpened,
+      isPortfolioDetailScreenOpened: event.isPortfolioDetailScreenOpened,
+    ));
   }
 
   _onAiOverlayClick(OnAiOverlayClick event, Emitter<TabScreenState> emit) {

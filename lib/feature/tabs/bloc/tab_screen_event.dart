@@ -25,3 +25,13 @@ class BackgroundImageTypeChanged extends TabScreenEvent {
 
   const BackgroundImageTypeChanged(this.backgroundImageType);
 }
+
+class OnDetailsScreenOpened extends TabScreenEvent {
+  final bool isBotDetailScreenOpened;
+  final bool isPortfolioDetailScreenOpened;
+
+  const OnDetailsScreenOpened({
+    this.isBotDetailScreenOpened = false,
+    this.isPortfolioDetailScreenOpened = false,
+  });
+}

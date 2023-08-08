@@ -40,9 +40,16 @@ class Tabs extends StatelessWidget {
                             activeIconAsset: 'bottom_nav_home_selected',
                             active: state.currentTabPage == TabPage.home),
                       _tabPng(
-                          onTap: () => context
-                              .read<TabScreenBloc>()
-                              .add(const TabChanged(TabPage.forYou)),
+                          onTap: () {
+                            context
+                                .read<TabScreenBloc>()
+                                .add(const TabChanged(TabPage.forYou));
+                            if (state.isBotDetailScreenOpened) {
+                              context.read<TabScreenBloc>().add(
+                                  const OnDetailsScreenOpened(
+                                      isBotDetailScreenOpened: false));
+                            }
+                          },
                           iconAsset: 'bottom_nav_isq',
                           activeIconAsset: 'bottom_nav_isq_selected',
                           filledColor: backgroundImageType.tabForYouFilledColor,
@@ -99,9 +106,16 @@ class Tabs extends StatelessWidget {
                                       TabPage.aiLandingPage),
                         ),
                       _tabSvg(
-                          onTap: () => context
-                              .read<TabScreenBloc>()
-                              .add(const TabChanged(TabPage.portfolio)),
+                          onTap: () {
+                            context
+                                .read<TabScreenBloc>()
+                                .add(const TabChanged(TabPage.portfolio));
+                            if (state.isPortfolioDetailScreenOpened) {
+                              context.read<TabScreenBloc>().add(
+                                  const OnDetailsScreenOpened(
+                                      isPortfolioDetailScreenOpened: false));
+                            }
+                          },
                           iconAsset: 'bottom_nav_portfolio',
                           activeIconAsset: 'bottom_nav_portfolio_selected',
                           filledColor:
