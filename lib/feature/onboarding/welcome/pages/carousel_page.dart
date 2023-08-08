@@ -19,6 +19,7 @@ class CarouselPage extends StatelessWidget {
                 SizedBox(height: 250, child: _animatedTexts(context)),
                 const Expanded(child: SizedBox()),
                 PrimaryButton(
+                    key: const Key('button_lets_begin'),
                     buttonPrimaryType: ButtonPrimaryType.whiteTransparency,
                     label: S.of(context).buttonLetsBegin,
                     onTap: () {
@@ -31,7 +32,7 @@ class CarouselPage extends StatelessWidget {
                       }
                     }),
                 CustomTextButton(
-                  key: const Key('kyc_secondary_button'),
+                  key: const Key('button_sign_in'),
                   margin: const EdgeInsets.only(top: 25, bottom: 45),
                   label: S.of(context).buttonHaveAnAccount,
                   color: AskLoraColors.white,
@@ -81,15 +82,15 @@ class BackgroundVideoState extends State<BackgroundVideo> {
   late VideoPlayerController _controller;
 
   @override
-  void initState() {
+  void initState() async {
     super.initState();
     _controller = VideoPlayerController.asset(
-        'assets/videos/carousel_background_video.mov')
-      ..initialize().then((_) {
-        _controller.play();
-        _controller.setLooping(true);
-        setState(() {});
-      });
+        'assets/videos/carousel_background_video.mov');
+    await _controller.initialize().then((_) {
+      _controller.play();
+      _controller.setLooping(true);
+      setState(() {});
+    });
   }
 
   @override
