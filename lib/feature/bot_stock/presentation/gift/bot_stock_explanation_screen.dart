@@ -13,7 +13,7 @@ import '../../utils/bot_stock_utils.dart';
 import '../widgets/bot_stock_form.dart';
 
 class BotStockExplanationScreen extends StatelessWidget {
-  static const String route = 'bot_stock_explanation_with_animation_screen';
+  static const String route = 'bot_stock_explanation_screen';
   const BotStockExplanationScreen({super.key});
 
   @override

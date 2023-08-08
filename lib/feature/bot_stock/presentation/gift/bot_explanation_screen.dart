@@ -11,7 +11,7 @@ import '../widgets/circular_bot_card.dart';
 import 'bot_stock_do_screen.dart';
 
 class BotExplanationScreen extends StatelessWidget {
-  static const String route = '/gift_bot_stock_explanation_screen';
+  static const String route = '/bot_explanation_screen';
 
   const BotExplanationScreen({Key? key}) : super(key: key);
 
