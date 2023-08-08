@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../app/bloc/app_bloc.dart';
-import '../../../../../core/presentation/ai/utils/ai_utils.dart';
-import '../../../../../core/utils/feature_flags.dart';
-import '../../../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
-import 'investment_style_result_end_screen.dart';
-import '../../../../ai/investment_style_question/presentation/ai_investment_style_question_form.dart';
+import '../../../../../../../app/bloc/app_bloc.dart';
+import '../../../../../../../core/presentation/ai/utils/ai_utils.dart';
+import '../../../../../../../core/utils/feature_flags.dart';
+import '../../../../../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
+import '../../investment_style_result_end_screen.dart';
+import '../../../../../../ai/investment_style_question/presentation/ai_investment_style_question_form.dart';
 
 class AiInvestmentStyleQuestionOnboardingScreen extends StatelessWidget {
   static const String route = '/ai_investment_style_question_onboarding_screen';

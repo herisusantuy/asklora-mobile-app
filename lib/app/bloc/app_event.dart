@@ -25,12 +25,3 @@ class SaveUserJourney extends AppEvent {
 class GetUserJourneyFromLocal extends AppEvent {
   const GetUserJourneyFromLocal();
 }
-
-class GetAiWelcomeScreenStatus extends AppEvent {
-  const GetAiWelcomeScreenStatus();
-}
-
-class UpdateAiWelcomeScreenStatus extends AppEvent {
-  final bool aiWelcomeScreenStatus;
-  const UpdateAiWelcomeScreenStatus(this.aiWelcomeScreenStatus);
-}

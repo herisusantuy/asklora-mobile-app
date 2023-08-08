@@ -43,13 +43,11 @@ class AppState extends Equatable {
   final LocaleType locale;
   final AppStatus status;
   final UserJourney userJourney;
-  final bool aiWelcomeScreenStatus;
 
   const AppState._(
       {this.status = AppStatus.unknown,
       this.locale = const LocaleType('en', 'US', 'ENG', 'English', 'Manrope'),
-      this.userJourney = UserJourney.privacy,
-      this.aiWelcomeScreenStatus = false});
+      this.userJourney = UserJourney.privacy});
 
   const AppState.unknown() : this._();
 
@@ -61,8 +59,7 @@ class AppState extends Equatable {
       : this._(
             status: AppStatus.authenticated,
             userJourney: userJourney,
-            locale: localeType,
-            aiWelcomeScreenStatus: aiWelcomeScreenStatus);
+            locale: localeType);
 
   const AppState.unauthenticated(
       {localeType = const LocaleType('en', 'US', 'ENG', 'English', 'Manrope'),
@@ -79,12 +76,9 @@ class AppState extends Equatable {
     return AppState._(
         status: status,
         locale: locale ?? this.locale,
-        userJourney: userJourney ?? this.userJourney,
-        aiWelcomeScreenStatus:
-            aiWelcomeScreenStatus ?? this.aiWelcomeScreenStatus);
+        userJourney: userJourney ?? this.userJourney);
   }
 
   @override
-  List<Object> get props =>
-      [status, locale, userJourney, aiWelcomeScreenStatus];
+  List<Object> get props => [status, locale, userJourney];
 }
