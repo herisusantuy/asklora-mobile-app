@@ -65,8 +65,8 @@ class _BotStockWithAnimationState extends State<BotStockWithAnimation> {
   bool isCard1Visible = false;
   bool isCard2Visible = false;
   bool isCard3Visible = false;
-  double cardSpace = 20;
-  Duration animatedDuration = const Duration(milliseconds: 600);
+  final double cardSpace = 20;
+  final Duration animatedDuration = const Duration(milliseconds: 600);
 
   @override
   void initState() {
