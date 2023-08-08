@@ -27,12 +27,12 @@ class ToggleablePriceText extends StatelessWidget {
           ToggleablePriceTextBloc(sharedPreference: SharedPreference()),
       child: Builder(
         builder: (context) {
-          String priceText = priceDifference < 0
-              ? priceDifference.convertToCurrencyDecimal()
-              : '+${priceDifference.convertToCurrencyDecimal()}';
-          String percentageText = percentDifference < 0
+          String percentageText = (percentDifference < 0 || priceDifference < 0)
               ? '${percentDifference.convertToCurrencyDecimal()}%'
               : '+${percentDifference.convertToCurrencyDecimal()}%';
+          String priceText = (percentDifference < 0 || priceDifference < 0)
+              ? priceDifference.convertToCurrencyDecimal()
+              : '+${priceDifference.convertToCurrencyDecimal()}';
 
           final TextStyle toggleableTextStyle =
               AskLoraTextStyles.subtitle3.copyWith(color: AskLoraColors.white);
@@ -56,7 +56,7 @@ class ToggleablePriceText extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 2),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: (percentDifference < 0)
+                    color: (percentDifference < 0 || priceDifference < 0)
                         ? AskLoraColors.primaryMagenta
                         : AskLoraColors.primaryGreen,
                   ),
