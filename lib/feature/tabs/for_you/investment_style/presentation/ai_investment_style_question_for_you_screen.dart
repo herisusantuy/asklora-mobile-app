@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/ai/utils/ai_utils.dart';
+import '../../../../onboarding/ppi/presentation/investment_style_question/isq/bloc/isq_onboarding_bloc.dart';
 import '../../../presentation/tab_screen.dart';
 import '../../../../ai/investment_style_question/presentation/ai_investment_style_question_form.dart';
 import '../../../utils/tab_util.dart';
@@ -28,6 +29,10 @@ class AiInvestmentStyleQuestionForYouScreen extends StatelessWidget {
             child: AiInvestmentStyleQuestionForm(
               aiThemeType: aiThemeType,
               onFinished: () {
+                // context
+                //     .read<IsqOnBoardingBloc>()
+                //     .add(const UpdateAiWelcomeScreenStatus(false));
+
                 context.read<ForYouBloc>().add(SaveInvestmentStyleState());
               },
             ),
