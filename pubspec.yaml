@@ -55,6 +55,7 @@ dependencies:
   auto_size_text_field: ^2.2.1
   auto_size_text: ^3.0.0
   flutter_keyboard_visibility: ^5.4.1
+  video_player: ^2.7.0
 
 dependency_overrides:
   intl: ^0.18.0
@@ -80,6 +81,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/apng/
+    - assets/videos/
     - assets/json/
     - assets/
     - .env

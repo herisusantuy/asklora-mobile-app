@@ -73,7 +73,7 @@ platform :ios do
     set_up_env_vars(env:"dev")
     cert_dev()
     build_ios_app(workspace: "Runner.xcworkspace", scheme: "dev", export_method: "development")
-    upload_to_testflight(username: "asklora@loratechai.com", app_identifier: "ai.asklora.app.dev", ipa: "Runner.ipa", skip_waiting_for_build_processing: true)
+#    upload_to_testflight(username: "asklora@loratechai.com", app_identifier: "ai.asklora.app.dev", ipa: "Runner.ipa", skip_waiting_for_build_processing: true)
     dev_release = firebase_app_distribution(
         app: ENV["FIREBASE_IOS_DEV_APP_ID"],
         ipa_path: "Runner.ipa", debug: true,

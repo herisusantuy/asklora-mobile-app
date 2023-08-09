@@ -154,8 +154,11 @@ class PrimaryButton extends StatelessWidget {
           break;
       }
       return RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radius),
+          borderRadius: BorderRadius.circular(
+            radius,
+          ),
           side: BorderSide(
+              width: 1.5,
               color: states.contains(MaterialState.pressed)
                   ? colorPressed
                   : color));

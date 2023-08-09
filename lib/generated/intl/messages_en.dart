@@ -49,8 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m10(emailAddress) =>
       "We\'ve sent an email to\n ${emailAddress}\n\nPlease use your phone to click on the activation link!";
 
-  static String m11(botName, botSymbol, dateTime) =>
-      "${botName} ${botSymbol} will end at ${dateTime}";
+  static String m11(botName, botSymbol) =>
+      "${botName} ${botSymbol} will end when the US market opens";
 
   static String m12(time) =>
       "Current Exchange Rate: HKD 1 = USD 0.137 (at HKT ${time})";
@@ -156,7 +156,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "at least 1 upper case letter"),
         "backToAccountSettings":
             MessageLookupByLibrary.simpleMessage("Back to account settings"),
-        "backToLogin": MessageLookupByLibrary.simpleMessage("Back to login"),
+        "backToLogin": MessageLookupByLibrary.simpleMessage("Back To Login"),
         "bankAccountNumber":
             MessageLookupByLibrary.simpleMessage("Bank Account Number"),
         "bankName": MessageLookupByLibrary.simpleMessage("Bank Name"),
@@ -166,6 +166,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "bestSuitedFor":
             MessageLookupByLibrary.simpleMessage("Best Suited For"),
         "botDuration": MessageLookupByLibrary.simpleMessage("Bot Duration"),
+        "botExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you."),
         "botManagementFee":
             MessageLookupByLibrary.simpleMessage("Bot Management Fee"),
         "botManagementFeeTooltip": MessageLookupByLibrary.simpleMessage(
@@ -173,28 +175,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "botRecommendationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Investments tailored  for you"),
         "botRecommendationTutorialDesc1":
-            MessageLookupByLibrary.simpleMessage("This is the "),
+            MessageLookupByLibrary.simpleMessage("Here are "),
         "botRecommendationTutorialDesc2": MessageLookupByLibrary.simpleMessage(
-            "Botstock recommendations screen. "),
-        "botRecommendationTutorialDesc3":
-            MessageLookupByLibrary.simpleMessage("press "),
-        "botRecommendationTutorialDesc4":
-            MessageLookupByLibrary.simpleMessage("\'Trade\' "),
-        "botRecommendationTutorialDesc5": MessageLookupByLibrary.simpleMessage(
-            "on a Botstock that catches your eye!"),
+            "your unique recommendations "),
+        "botRecommendationTutorialDesc3": MessageLookupByLibrary.simpleMessage(
+            "based on how you answered the ISQ section"),
         "botStockDoScreenPoint1":
-            MessageLookupByLibrary.simpleMessage("Go for occasional big wins"),
+            MessageLookupByLibrary.simpleMessage("Hit a home run!"),
         "botStockDoScreenPoint2":
-            MessageLookupByLibrary.simpleMessage("Avoid excessive losses"),
-        "botStockDoScreenPoint3": MessageLookupByLibrary.simpleMessage(
-            "Go for small but frequent wins"),
+            MessageLookupByLibrary.simpleMessage("Simple and easy!"),
+        "botStockDoScreenPoint3":
+            MessageLookupByLibrary.simpleMessage("Passive income!"),
         "botStockDoScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward."),
+            "A \'Bot\' is your personal AI manager that trades your stock for you."),
         "botStockExplanationScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage(
-                "Got it! But What Does a Bot Do?"),
+            MessageLookupByLibrary.simpleMessage("Got it!"),
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that I will manage for you!"),
+            "You pick the stock, and the \'Bot\' will trade it for you!"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
         "botStocksDetails": MessageLookupByLibrary.simpleMessage(
             "Botstock’s details and estimated returns."),
@@ -260,6 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonForgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget Password?"),
         "buttonGoBack": MessageLookupByLibrary.simpleMessage("Go Back"),
+        "buttonGotIt": MessageLookupByLibrary.simpleMessage("Got it!"),
         "buttonHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Have An Account?"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("Let\'s Begin"),
@@ -464,7 +462,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftBotStockMessageScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("See my recommendations"),
         "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! "),
+            "Every trade is unique, each time you invest with a new Botstock, I\'ll ask you some investment style questions to tailor new recommendations! "),
         "giftBotStockWelcomeScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
         "giftBotStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
@@ -514,6 +512,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Input wrong email address"),
         "installationMaintenanceRepair": MessageLookupByLibrary.simpleMessage(
             "Installation, Maintenance, and Repair"),
+        "interactive":
+            MessageLookupByLibrary.simpleMessage(" - (Interactive) "),
         "introduceBotPlank":
             MessageLookupByLibrary.simpleMessage("Introduce Bot - Plank"),
         "introduceBotPullup":
@@ -535,6 +535,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I like your style"),
         "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
             "It’s time to define your investment style.Show me what you’re made of!"),
+        "isq": MessageLookupByLibrary.simpleMessage(" - (ISQ) "),
         "isqNextButton": MessageLookupByLibrary.simpleMessage(
             "Press to move onto the next section"),
         "isqWillHelpMeUnderstandWhatKindOfStocks":
@@ -561,6 +562,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "legalLastName":
             MessageLookupByLibrary.simpleMessage("Legal English Last Name"),
         "letsGo": MessageLookupByLibrary.simpleMessage("Let’s Go"),
+        "letsTrade": MessageLookupByLibrary.simpleMessage("LET\'S TRADE"),
         "licenseeName":
             MessageLookupByLibrary.simpleMessage("Licensee: Chang Yung Ching"),
         "licenseeNumber":
@@ -913,6 +915,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "takePhotoFront": MessageLookupByLibrary.simpleMessage(
             "Take a photo of the front of your HKID"),
         "takeSelfie": MessageLookupByLibrary.simpleMessage("Take a selfie"),
+        "tapAnyWhere":
+            MessageLookupByLibrary.simpleMessage("Tap anywhere to continue"),
         "taxAgreementCheckboxDesc": MessageLookupByLibrary.simpleMessage(
             "By checking this box, you consent to the collection and distribution of tax forms in an electronic format in lieu of paper"),
         "taxAgreementDesc1": MessageLookupByLibrary.simpleMessage(
@@ -951,6 +955,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "(4) I understand and agree that my electronic signature is the legal equivalent of a manual written signature."),
         "taxAgreementSignatureTitle":
             MessageLookupByLibrary.simpleMessage("Signature"),
+        "tellMeMore": MessageLookupByLibrary.simpleMessage("Tell Me More"),
         "terminateAccount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
@@ -982,6 +987,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "to give you a better idea of its trading potential!"),
         "toGoToDifferentPages":
             MessageLookupByLibrary.simpleMessage("to go to different pages."),
+        "toOpenLora": MessageLookupByLibrary.simpleMessage(
+            " to open Lora and get more details about your investment!"),
         "toStartAConversation": MessageLookupByLibrary.simpleMessage(
             "to start a conversation. Tap the icon again to dismiss Asklora"),
         "tokenInvalid": MessageLookupByLibrary.simpleMessage(
@@ -998,6 +1005,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "The duration you set for Botstock where the Bot will automatically buy and sell."),
         "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
             "Lora\'s date to start the Botstocks"),
+        "tooltipDescOfTickerDetailsTutorial": MessageLookupByLibrary.simpleMessage(
+            "Here\'s a brief description of the bot and stock you\'ve chosen"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("Total amount"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("Total P/L is"),
         "trade": MessageLookupByLibrary.simpleMessage("Trade"),
@@ -1106,6 +1115,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "withdrawalWorkingDays": MessageLookupByLibrary.simpleMessage(
             "Your withdrawal can take up to 2 working days."),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
+        "youCanClickOn":
+            MessageLookupByLibrary.simpleMessage("You can click on "),
         "yourAddressProofMustContainFullName": MessageLookupByLibrary.simpleMessage(
             "Your address proof must contain your full name, full residential address and the issuing agency.\n\nWe accept water/electricity/gas bills, bank statement, or government correspondence within the last 3 months."),
         "yourBankAccount":

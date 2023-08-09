@@ -18,8 +18,7 @@ class _AiChatListState extends State<AiChatList> {
     return BlocBuilder<LoraGptBloc, LoraGptState>(
       buildWhen: (previous, current) =>
           previous.status != current.status ||
-          previous.conversations.length != current.conversations.length ||
-          previous.isTyping != current.isTyping,
+          previous.conversations.length != current.conversations.length,
       builder: (context, state) {
         return Stack(children: [
           ShaderMask(
@@ -61,19 +60,15 @@ class _AiChatListState extends State<AiChatList> {
                     padding: const EdgeInsets.only(bottom: 10, top: 20),
                     reverse: true,
                     child: Column(
-                      children:
-                          state.conversations.mapIndexed((index, conversation) {
-                        return Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 17, left: 20, right: 20),
-                          child: _getBubbleChat(
-                            conversation,
-                            index,
-                            state.isTyping &&
-                                index == state.conversations.length - 1,
-                          ),
-                        );
-                      }).toList(),
+                      children: state.conversations
+                          .map(
+                            (conversation) => Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 17, left: 20, right: 20),
+                              child: _getBubbleChat(conversation),
+                            ),
+                          )
+                          .toList(),
                     ),
                   ),
                 )
@@ -154,22 +149,26 @@ class _AiChatListState extends State<AiChatList> {
     );
   }
 
-  Widget _getBubbleChat(Conversation e, int index, bool isTyping) {
+  void _updateConversation(BuildContext context, bool isNeedCallback) {
+    if (isNeedCallback) {
+      context.read<LoraGptBloc>().add(const OnFinishTyping());
+    }
+  }
+
+  Widget _getBubbleChat(Conversation e) {
     if (e is Lora) {
       return OutChatBubbleWidget(
         e.text.toString(),
-        animateText: isTyping,
+        animateText: e.isNeedCallback,
         onFinishedAnimation: () =>
-            context.read<LoraGptBloc>().add(const OnFinishTyping()),
+            _updateConversation(context, e.isNeedCallback),
       );
     } else if (e is Me) {
       return InChatBubbleWidget(message: e.text, name: e.userName);
     } else if (e is Reset) {
       return const SessionResetWidget();
     } else if (e is Component) {
-      if (isTyping) {
-        context.read<LoraGptBloc>().add(const OnFinishTyping());
-      }
+      _updateConversation(context, e.isNeedCallback);
       return ComponentWidget(
         aiThemeType: widget.aiThemeType,
         component: e,

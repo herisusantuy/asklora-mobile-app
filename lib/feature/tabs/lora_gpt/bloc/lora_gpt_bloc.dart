@@ -49,23 +49,17 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
   final SharedPreference _sharedPreference;
   final List<Conversation> _conversationQueue = [];
   BaseResponse<QueryResponse>? _tempIntroResponse;
+  final Set<BotstockIntro> _botIntroQueryHistory = {};
 
   void _onFetchBotIntro(
       FetchBotIntro fetchBotIntro, Emitter<LoraGptState> emit) async {
     final tempList = List<Conversation>.of(state.conversations);
+    ResponseState status = ResponseState.loading;
+    tempList.add(const Loading());
+    emit(state.copyWith(conversations: [...tempList], status: status));
 
-    bool isTyping = false;
-
-    tempList.add(Loading());
-    emit(state.copyWith(conversations: tempList));
-
-    var botIntroResponse = await _loraGptRepository.botIntro(
-        params: state.getIntroRequest(
-            botType:
-                BotType.findByValue(fetchBotIntro.arguments['botType']).name,
-            tickerSymbol: fetchBotIntro.arguments['symbol'],
-            investmentHorizon: fetchBotIntro.arguments['duration'],
-            ticker: fetchBotIntro.arguments['ticker']));
+    final botIntroResponse =
+        await _loraGptRepository.botIntro(params: fetchBotIntro.params);
 
     ///remove loading
     if (_tempIntroResponse != null) {
@@ -73,41 +67,38 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     }
 
     if (botIntroResponse.state == ResponseState.success) {
-      isTyping = true;
       if (_tempIntroResponse?.state == ResponseState.success) {
+        status = ResponseState.success;
         _addQueryResponseToConversation(tempList, botIntroResponse.data!);
         _addQueryResponseToConversationQueues(_tempIntroResponse!.data!);
       } else if (_tempIntroResponse?.state == ResponseState.error) {
+        status = ResponseState.error;
         _addQueryResponseToConversation(tempList, botIntroResponse.data!);
       } else {
-        isTyping = false;
         _tempIntroResponse = botIntroResponse;
       }
     } else {
+      status = ResponseState.error;
       if (_tempIntroResponse?.state == ResponseState.success) {
-        isTyping = true;
+        status = ResponseState.success;
         _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
       } else {
         _tempIntroResponse ??= botIntroResponse;
       }
     }
 
-    emit(state.copyWith(conversations: tempList, isTyping: isTyping));
+    emit(state.copyWith(conversations: [...tempList], status: status));
   }
 
   void _onFetchBotEarnings(
       FetchBotEarnings fetchBotEarnings, Emitter<LoraGptState> emit) async {
     final tempList = List<Conversation>.of(state.conversations);
+    ResponseState status = ResponseState.loading;
 
-    bool isTyping = false;
+    emit(state.copyWith(status: status));
 
-    var botEarningsResponse = await _loraGptRepository.botEarnings(
-        params: state.getIntroRequest(
-            botType:
-                BotType.findByValue(fetchBotEarnings.arguments['botType']).name,
-            tickerSymbol: fetchBotEarnings.arguments['symbol'],
-            investmentHorizon: fetchBotEarnings.arguments['duration'],
-            ticker: fetchBotEarnings.arguments['ticker']));
+    final botEarningsResponse =
+        await _loraGptRepository.botEarnings(params: fetchBotEarnings.params);
 
     ///remove loading
     if (_tempIntroResponse != null) {
@@ -115,38 +106,37 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     }
 
     if (botEarningsResponse.state == ResponseState.success) {
-      isTyping = true;
       if (_tempIntroResponse?.state == ResponseState.success) {
+        status = ResponseState.success;
         _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
         _addQueryResponseToConversationQueues(botEarningsResponse.data!);
       } else if (_tempIntroResponse?.state == ResponseState.error) {
+        status = ResponseState.error;
         _addQueryResponseToConversation(tempList, botEarningsResponse.data!);
       } else {
-        isTyping = false;
         _tempIntroResponse = botEarningsResponse;
       }
     } else {
       if (_tempIntroResponse?.state == ResponseState.success) {
-        isTyping = true;
+        status = ResponseState.success;
         _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
       } else {
         _tempIntroResponse ??= botEarningsResponse;
       }
     }
 
-    emit(state.copyWith(conversations: tempList, isTyping: isTyping));
+    emit(state.copyWith(conversations: [...tempList], status: status));
   }
 
   void _onFetchWelcomeStarter(FetchWelcomeStarter fetchWelcomeStarter,
       Emitter<LoraGptState> emit) async {
     final tempList = List<Conversation>.of(state.conversations);
+    ResponseState status = ResponseState.loading;
 
-    bool isTyping = false;
+    tempList.add(const Loading());
+    emit(state.copyWith(conversations: [...tempList], status: status));
 
-    tempList.add(Loading());
-    emit(state.copyWith(conversations: tempList));
-
-    var welcomeStarterResponse = await _loraGptRepository.welcomeStarter(
+    final welcomeStarterResponse = await _loraGptRepository.welcomeStarter(
         params: state.getLandingPageIntroRequest);
 
     ///remove loading
@@ -155,35 +145,34 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     }
 
     if (welcomeStarterResponse.state == ResponseState.success) {
-      isTyping = true;
       if (_tempIntroResponse?.state == ResponseState.success) {
+        status = ResponseState.success;
         _addQueryResponseToConversation(tempList, welcomeStarterResponse.data!);
         _addQueryResponseToConversationQueues(_tempIntroResponse!.data!);
       } else if (_tempIntroResponse?.state == ResponseState.error) {
+        status = ResponseState.error;
         _addQueryResponseToConversation(tempList, welcomeStarterResponse.data!);
       } else {
-        isTyping = false;
         _tempIntroResponse = welcomeStarterResponse;
       }
     } else {
       if (_tempIntroResponse?.state == ResponseState.success) {
-        isTyping = true;
+        status = ResponseState.success;
         _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
       } else {
         _tempIntroResponse ??= welcomeStarterResponse;
       }
     }
 
-    emit(state.copyWith(conversations: tempList, isTyping: isTyping));
+    emit(state.copyWith(conversations: [...tempList], status: status));
   }
 
   void _onFetchWelcomeNews(
       FetchWelcomeNews fetchWelcomeNews, Emitter<LoraGptState> emit) async {
     final tempList = List<Conversation>.of(state.conversations);
+    ResponseState status = ResponseState.loading;
 
-    bool isTyping = false;
-
-    var welcomeNewsResponse = await _loraGptRepository.welcomeNews(
+    final welcomeNewsResponse = await _loraGptRepository.welcomeNews(
         params: state.getLandingPageIntroRequest);
 
     ///remove loading
@@ -192,26 +181,26 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     }
 
     if (welcomeNewsResponse.state == ResponseState.success) {
-      isTyping = true;
       if (_tempIntroResponse?.state == ResponseState.success) {
+        status = ResponseState.success;
         _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
         _addQueryResponseToConversationQueues(welcomeNewsResponse.data!);
       } else if (_tempIntroResponse?.state == ResponseState.error) {
+        status = ResponseState.error;
         _addQueryResponseToConversation(tempList, welcomeNewsResponse.data!);
       } else {
-        isTyping = false;
         _tempIntroResponse = welcomeNewsResponse;
       }
     } else {
       if (_tempIntroResponse?.state == ResponseState.success) {
-        isTyping = true;
+        status = ResponseState.success;
         _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
       } else {
         _tempIntroResponse ??= welcomeNewsResponse;
       }
     }
 
-    emit(state.copyWith(conversations: tempList, isTyping: isTyping));
+    emit(state.copyWith(conversations: [...tempList], status: status));
   }
 
   List<Conversation> _addQueryResponseToConversation(
@@ -239,8 +228,10 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
   void _onScreenLaunch(
       OnScreenLaunch onEditQuery, Emitter<LoraGptState> emit) async {
-    final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
-    final askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
+    final userName =
+        await _sharedPreference.readData(StorageKeys.sfKeyPpiName) ?? 'Me';
+    final askloraId =
+        await _sharedPreference.readIntData(StorageKeys.sfKeyAskloraId);
 
     emit(state.copyWith(
         status: ResponseState.success,
@@ -252,11 +243,13 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
   void _onLandingPageOpened(
       OnLandingPageOpened onEditQuery, Emitter<LoraGptState> emit) async {
-    final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
-    final askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
+    final userName =
+        await _sharedPreference.readData(StorageKeys.sfKeyPpiName) ?? 'Me';
+    final askloraId =
+        await _sharedPreference.readIntData(StorageKeys.sfKeyAskloraId);
 
     emit(state.copyWith(
-        status: ResponseState.success,
+        status: ResponseState.loading,
         conversations: [],
         sessionId: '',
         userName: userName,
@@ -268,8 +261,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
   }
 
   void _onEditQuery(OnEditQuery onEditQuery, Emitter<LoraGptState> emit) =>
-      emit(state.copyWith(
-          query: onEditQuery.query, status: ResponseState.unknown));
+      emit(state.copyWith(query: onEditQuery.query));
 
   void _onPromptTap(OnPromptTap onPromptTap, Emitter<LoraGptState> emit) {
     emit(state.copyWith(query: onPromptTap.query));
@@ -287,20 +279,21 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
   void _onSearchQuery(
       OnSearchQuery onSearchQuery, Emitter<LoraGptState> emit) async {
     final tempList = List<Conversation>.of(state.conversations);
+    ResponseState status = ResponseState.loading;
 
     ///Remove components from conversations
     tempList.removeWhere((element) => element is Component);
 
     tempList.add(Me(state.query, state.userName));
-    tempList.add(Loading());
+    tempList.add(const Loading());
 
     final query = state.query.trim();
 
     emit(state.copyWith(
-        status: ResponseState.loading,
-        conversations: tempList,
-        query: '',
-        isTyping: false));
+      status: status,
+      conversations: tempList,
+      query: '',
+    ));
 
     BaseResponse<QueryResponse> response = BaseResponse.error();
 
@@ -339,17 +332,16 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     }
 
     tempList.removeLast();
+    status = response.state;
     if (response.state == ResponseState.success) {
       _addQueryResponseToConversation(tempList, response.data!);
     } else {
-      tempList.add(LoraError());
+      tempList.add(LoraError(LoraError.message()));
     }
     emit(state.copyWith(
-        status: ResponseState.success,
-        conversations: tempList,
-        query: '',
-        sessionId: response.data?.requestId,
-        isTyping: true));
+        status: status,
+        conversations: [...tempList],
+        sessionId: response.data?.requestId));
   }
 
   void _onResetSession(
@@ -357,22 +349,31 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       emit(state.copyWith(
           status: ResponseState.success,
           conversations: [],
-          isTyping: false,
           sessionId: '',
           query: ''));
 
   void _onFinishTyping(
       OnFinishTyping onFinishTyping, Emitter<LoraGptState> emit) {
-    bool isTyping = false;
-    List<Conversation> tempConversation =
-        List<Conversation>.of(state.conversations);
+    List<Conversation> tempList = List<Conversation>.of(state.conversations);
+
+    final Conversation lastConversation = tempList.last;
+
+    if (lastConversation is Lora) {
+      tempList.removeLast();
+      tempList.add(lastConversation.copyWith(isNeedCallback: false));
+    } else if (lastConversation is PromptButton) {
+      tempList.removeLast();
+      tempList.add(lastConversation.copyWith(isNeedCallback: false));
+    } else if (lastConversation is NavigationButton) {
+      tempList.removeLast();
+      tempList.add(lastConversation.copyWith(isNeedCallback: false));
+    }
 
     if (_conversationQueue.isNotEmpty) {
-      isTyping = true;
-      tempConversation.add(_conversationQueue[0]);
+      tempList.add(_conversationQueue[0]);
       _conversationQueue.removeAt(0);
     }
-    emit(state.copyWith(conversations: tempConversation, isTyping: isTyping));
+    emit(state.copyWith(conversations: [...tempList]));
   }
 
   void _onActiveBotResponse(
@@ -397,10 +398,25 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
             subPage.path == SubTabPage.recommendationsBotStockDetails.value ||
         subPage.path == SubTabPage.recommendationsBotStockDetails.value) {
       _tempIntroResponse = null;
-      add(FetchBotIntro(subPage.arguments));
-      add(FetchBotEarnings(subPage.arguments));
+
+      BotstockIntro params = state.getIntroRequest(
+          botType: BotType.findByValue(subPage.arguments['botType']).name,
+          tickerSymbol: subPage.arguments['symbol'],
+          investmentHorizon: subPage.arguments['duration'],
+          ticker: subPage.arguments['ticker']);
+
+      if (!_botIntroQueryHistory.contains(params)) {
+        _botIntroQueryHistory.add(params);
+        add(FetchBotIntro(params));
+        add(FetchBotEarnings(params));
+      }
     }
   }
 
-  void _onAiOverlayClose(OnAiOverlayClose event, Emitter<LoraGptState> emit) {}
+  void _onAiOverlayClose(OnAiOverlayClose event, Emitter<LoraGptState> emit) {
+    final tempList = List<Conversation>.of(state.conversations);
+    tempList.removeWhere((element) => element is Component);
+    emit(
+        state.copyWith(conversations: tempList, status: ResponseState.unknown));
+  }
 }

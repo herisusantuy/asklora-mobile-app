@@ -33,7 +33,8 @@ class ForYouQuestionBloc
     try {
       final Fixture fixture =
           await _ppiQuestionRepository.fetchInvestmentStyleQuestions(
-              await _sharedPreference.readData(sfKeyPpiAccountId) ?? '');
+              await _sharedPreference.readData(StorageKeys.sfKeyPpiAccountId) ??
+                  '');
       List<Question> data = fixture.getInvestmentStyleQuestion;
       if (data.isNotEmpty) {
         Question? omniSearchQuestion;

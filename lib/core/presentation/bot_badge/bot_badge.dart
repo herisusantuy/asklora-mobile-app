@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 
 import '../../../feature/bot_stock/utils/bot_stock_utils.dart';
+import '../../../generated/l10n.dart';
 import '../../styles/asklora_text_styles.dart';
 import '../../utils/app_icons.dart';
 import '../custom_text_new.dart';
 
 class BotBadge extends StatefulWidget {
   final BotType botType;
+  final String tickerSymbol;
   final Color? backgroundColor;
   final Color? textColor;
   final EdgeInsets margin;
 
   const BotBadge(
       {required this.botType,
+      this.tickerSymbol = '',
       this.backgroundColor,
       this.textColor,
       this.margin = const EdgeInsets.only(bottom: 18),
@@ -65,7 +68,7 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
       height: 50,
       color: widget.backgroundColor ?? widget.botType.primaryBgColor,
       child: ListView.builder(
-        reverse: true,
+        reverse: false,
         controller: scrollController,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
@@ -74,20 +77,28 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
             child: Row(
               children: [
                 _getBotTypeIcon(),
-                const SizedBox(
-                  width: 5,
-                ),
+                const SizedBox(width: 5),
                 CustomTextNew(
-                  '${widget.botType.upperCaseName} BOTS',
+                  '${widget.botType.upperCaseName} ${widget.tickerSymbol.toUpperCase()}',
                   style: AskLoraTextStyles.h3.copyWith(
                       color:
                           widget.textColor ?? widget.botType.expiredTextColor),
                 ),
-                const SizedBox(
-                  width: 5,
-                ),
+                const SizedBox(width: 5),
                 getSvgIcon('icon_bot_badge_pop_up_message_arrow',
-                    color: widget.textColor ?? widget.botType.expiredTextColor)
+                    color: widget.textColor ?? widget.botType.expiredTextColor),
+                const SizedBox(width: 5),
+                _getBotTypeIcon(),
+                const SizedBox(width: 5),
+                CustomTextNew(
+                  S.of(context).letsTrade,
+                  style: AskLoraTextStyles.h3.copyWith(
+                      color:
+                          widget.textColor ?? widget.botType.expiredTextColor),
+                ),
+                const SizedBox(width: 5),
+                getSvgIcon('icon_bot_badge_pop_up_message_arrow',
+                    color: widget.textColor ?? widget.botType.expiredTextColor),
               ],
             ),
           );

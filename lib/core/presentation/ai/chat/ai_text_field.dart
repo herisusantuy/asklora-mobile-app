@@ -64,7 +64,7 @@ class _AiTextFieldState extends State<AiTextField> {
                     .copyWith(color: widget.aiThemeType.primaryFontColor),
                 decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 17, vertical: 14),
+                        horizontal: 17, vertical: 18),
                     enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                       Radius.circular(15.0),
@@ -76,13 +76,13 @@ class _AiTextFieldState extends State<AiTextField> {
                     hintStyle: TextFieldStyle.valueTextStyle
                         .copyWith(color: widget.aiThemeType.primaryFontColor),
                     fillColor: widget.aiThemeType.textFieldFillColor,
-                    filled: _filled)),
+                    filled: true)),
           ),
         ),
-        const SizedBox(width: 14),
+        const SizedBox(width: 8),
         AiSendTextButton(
           isDisabled: widget.isSendButtonDisabled,
-          size: const Size(48, 48),
+          size: const Size(55, 55),
           enabledIconColor: widget.aiThemeType.sendChatButtonIconEnableColor,
           disabledIconColor: widget.aiThemeType.sendChatButtonIconDisableColor,
           onTap: () {
@@ -93,8 +93,4 @@ class _AiTextFieldState extends State<AiTextField> {
       ],
     );
   }
-
-  bool get _filled => widget.aiThemeType == AiThemeType.light
-      ? true
-      : !focused && controller.text.isEmpty;
 }

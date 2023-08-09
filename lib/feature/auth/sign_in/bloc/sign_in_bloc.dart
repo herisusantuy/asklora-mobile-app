@@ -95,6 +95,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
                       userJourney: UserJourney.investmentStyle))));
             } else {
               ///this is normal sign in flow
+              await _sharedPreference.writeBoolData(
+                  StorageKeys.sfFreshInstall, false);
               emit(state.copyWith(
                   response: BaseResponse.complete(
                       data.copyWith(userJourney: userJourney))));
@@ -116,18 +118,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
             response: BaseResponse.complete(
                 data.copyWith(userJourney: userJourney))));
       }
-      /*} on UnauthorizedException {
-      emit(state.copyWith(
-          response: BaseResponse.error(
-              message: AuthErrorMessage.invalidPassword.value)));
-    } on NotFoundException {
-      emit(state.copyWith(
-          response: BaseResponse.error(
-              message: AuthErrorMessage.emailNotExist.value)));
-    } on NotAcceptableException {
-      emit(state.copyWith(
-          response: BaseResponse.error(
-              message: AuthErrorMessage.emailNotVerified.value)));*/
     } on AskloraApiClientException catch (e) {
       emit(state.copyWith(
           response: BaseResponse.error(validationCode: e.askloraError.type)));
@@ -151,6 +141,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       if (getAccountResponse != null) {
         var snapshot = await _getUserSnapshot(getAccountResponse.username);
         if (snapshot.state == ResponseState.success) {
+          await _sharedPreference.writeBoolData(
+              StorageKeys.sfFreshInstall, false);
           emit(state.copyWith(
               response: BaseResponse.complete(data.copyWith(
                   userJourney: userJourney ?? UserJourney.investmentStyle))));
@@ -167,20 +159,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     } on AskloraApiClientException catch (e) {
       emit(state.copyWith(
           response: BaseResponse.error(validationCode: e.askloraError.type)));
-    }
-
-    /*on NotFoundException {
-      emit(state.copyWith(
-          response: BaseResponse.error(
-              message: 'User does not exist with the given email')));
-    } on NotAcceptableException {
-      emit(state.copyWith(
-          response: BaseResponse.error(message: 'User email is not verified')));
-    } on BadRequestException {
-      emit(
-          state.copyWith(response: BaseResponse.error(message: 'Invalid OTP')));
-    }*/
-    catch (e) {
+    } catch (e) {
       _authRepository.removeStorageOnSignInFailed();
       emit(state.copyWith(response: BaseResponse.error()));
     }
@@ -189,8 +168,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   Future<GetAccountResponse?> _fetchUserProfile() async {
     final accountInfo = await _accountRepository.getAccount();
     if (accountInfo.state == ResponseState.success) {
-      _sharedPreference.writeData(sfKeyEmail, accountInfo.data!.email);
-      _sharedPreference.writeData(sfKeyPpiUsername, accountInfo.data!.username);
+      _sharedPreference.writeData(
+          StorageKeys.sfKeyEmail, accountInfo.data!.email);
+      _sharedPreference.writeData(
+          StorageKeys.sfKeyPpiUsername, accountInfo.data!.username);
       return accountInfo.data;
     }
     return null;

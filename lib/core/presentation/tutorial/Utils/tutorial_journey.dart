@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TutorialJourney {
-  static GlobalKey botDetails = GlobalKey();
-  static GlobalKey botChart = GlobalKey();
-  static GlobalKey chatLoraTab = GlobalKey();
-  static GlobalKey summaryTrade = GlobalKey();
-  static GlobalKey sendQuestionButton = GlobalKey();
-  static GlobalKey chatLoraButton = GlobalKey();
+  static final GlobalKey tickerDetails = GlobalKey();
+  static final GlobalKey tabs = GlobalKey();
+  static final GlobalKey botDetails = GlobalKey();
+  static final GlobalKey tellMeMoreButton = GlobalKey();
+  static final GlobalKey aiTab = GlobalKey();
+  static final GlobalKey botChart = GlobalKey();
+  static final GlobalKey summaryTrade = GlobalKey();
 
   ///bot recommendation
-  static GlobalKey botRecommendationList = GlobalKey();
+  static final GlobalKey botRecommendationList = GlobalKey();
 }

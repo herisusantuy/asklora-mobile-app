@@ -14,13 +14,13 @@ class ForYouRepository {
   Future<BaseResponse<bool>> saveInvestmentStyleState() async {
     bool investmentStyleState = true;
     _sharedPreference.writeBoolData(
-        sfKeyInvestmentStyleState, investmentStyleState);
+        StorageKeys.sfKeyInvestmentStyleState, investmentStyleState);
     return BaseResponse.complete(investmentStyleState);
   }
 
   Future<BaseResponse<bool>> getInvestmentStyleState() async {
-    bool? investmentStyleState =
-        await _sharedPreference.readBoolData(sfKeyInvestmentStyleState);
+    bool? investmentStyleState = await _sharedPreference
+        .readBoolData(StorageKeys.sfKeyInvestmentStyleState);
     return BaseResponse.complete(investmentStyleState ?? true);
   }
 }

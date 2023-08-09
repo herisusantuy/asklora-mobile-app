@@ -448,16 +448,13 @@
       }
     }
   },
-  "endBotStockAcknowledgement": "{botName} {botSymbol} will end at {dateTime}",
+  "endBotStockAcknowledgement": "{botName} {botSymbol} will end when the US market opens",
   "@endBotStockAcknowledgement": {
     "placeholders": {
       "botName": {
         "type": "String"
       },
       "botSymbol": {
-        "type": "String"
-      },
-      "dateTime": {
         "type": "String"
       }
     }
@@ -551,7 +548,7 @@
   "forgotPasswordMessage": "Please enter your email. Instructions will be sent to reset your password.",
   "resetPasswordSuccessful": "Password Reset Successful",
   "resetPasswordSuccessfulMessage": "Your password has been reset. Please go back to the Login page and login again.",
-  "backToLogin": "Back to login",
+  "backToLogin": "Back To Login",
   "askloraYouUltimateFinancialAdvisor": "Asklora.\n Your ultimate\nfinancial advisor",
   "askMeAnythingRelatedToFinance": "Ask me anything related to finance",
   "investmentResultScreenTitle": "I like your style",
@@ -766,12 +763,13 @@
   "ourPersonalisedRecommendationsAreUnique": "Our personalised recommendations are unique. The recommended Botstocks are based on your risk tolerance, personality, and investment style.",
   "generalSettings": "General Settings",
   "notTheStockYouWereLooking": "Not the stocks you were looking for?",
-  "botStockExplanationScreenTitle": "A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that I will manage for you!",
-  "botStockExplanationScreenBottomButton": "Got it! But What Does a Bot Do?",
-  "botStockDoScreenTitle": "A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward.",
-  "botStockDoScreenPoint1": "Go for occasional big wins",
-  "botStockDoScreenPoint2": "Avoid excessive losses",
-  "botStockDoScreenPoint3": "Go for small but frequent wins",
+  "botExplanationScreenTitle": "A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you.",
+  "botStockExplanationScreenBottomButton": "Got it!",
+  "botStockDoScreenTitle": "A 'Bot' is your personal AI manager that trades your stock for you.",
+  "botStockDoScreenPoint1": "Hit a home run!",
+  "botStockDoScreenPoint2": "Simple and easy!",
+  "botStockDoScreenPoint3": "Passive income!",
+  "buttonGotIt": "Got it!",
   "understood": "Understood!",
   "giftBotStockWelcomeScreenTitle": "You're all set!\nLet's begin a real AI trade!",
   "giftBotStockWelcomeScreenBottomButton": "Sure! What is a Botstock?",
@@ -800,16 +798,18 @@
   "goToPortfolio": "Go To Portfolio",
   "startAnotherInvestments": "Start another investment",
   "botValues": "Bot Values",
-  "botRecommendationTutorialDesc1": "This is the ",
-  "botRecommendationTutorialDesc2": "Botstock recommendations screen. ",
-  "botRecommendationTutorialDesc3": "press ",
-  "botRecommendationTutorialDesc4": "'Trade' ",
-  "botRecommendationTutorialDesc5": "on a Botstock that catches your eye!",
-  "giftBotStockMessageScreenTitle": "Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ",
-  "giftBotStockMessageScreenBottomButton": "See my recommendations",
+  "botRecommendationTutorialDesc1": "Here are ",
+  "botRecommendationTutorialDesc2": "your unique recommendations ",
+  "botRecommendationTutorialDesc3": "based on how you answered the ISQ section",
+  "portfolioDetailPerformanceBotAssetsInStockTooltip": "Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.",
+  "tooltipDescOfTickerDetailsTutorial": "Here's a brief description of the bot and stock you've chosen",
+  "tapAnyWhere": "Tap anywhere to continue",
+  "youCanClickOn": "You can click on ",
+  "tellMeMore": "Tell Me More",
+  "toOpenLora": " to open Lora and get more details about your investment!",
+  "letsTrade": "LET'S TRADE",
   "requestedToEnd": "Requested To End",
   "userNotFound": "User Not Found",
-  "portfolioDetailPerformanceBotAssetsInStockTooltip": "Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.",
   "timeForInvestmentStyleQuestion": "Now for the Investment Style Questions (ISQ)!These questions will feel more ChatGPT style.",
   "isqWillHelpMeUnderstandWhatKindOfStocks": "Through our chat-style dialogue, we'll grasp your investment interests to tailor botstock recommendations for you.",
   "rememberYouCan": "Remember, you can always ",
@@ -825,5 +825,8 @@
   "right": "Right",
   "portfolio": "Portfolio",
   "throughoutYourInvestmentJourney": "Throughout your investment journey, you’ll see Lora on your bottom nav bar.Click on Lora at anytime to get advice or to ask anything related to finance.",
-  "letsGo": "Let’s Go"
+  "letsGo": "Let’s Go",
+  "isq": " - (ISQ) ",
+  "interactive": " - (Interactive) ",
+  "botStockExplanationScreenTitle": "You pick the stock, and the 'Bot' will trade it for you!"
 }

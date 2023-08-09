@@ -26,7 +26,7 @@ class AccountRepository {
       GetAccountResponse getAccountResponse =
           GetAccountResponse.fromJson(response.data);
       await _jsonCacheSharedPreference.refresh(
-          sfKeyAccountData, getAccountResponse);
+          StorageKeys.sfKeyAccountData, getAccountResponse);
       return BaseResponse.complete<GetAccountResponse>(getAccountResponse);
     } on AskloraApiClientException catch (e) {
       return BaseResponse.error(validationCode: e.askloraError.type);
@@ -37,7 +37,8 @@ class AccountRepository {
   }
 
   Future<BaseResponse<GetAccountResponse>> getLocalAccount() async {
-    var response = await _jsonCacheSharedPreference.value(sfKeyAccountData);
+    var response =
+        await _jsonCacheSharedPreference.value(StorageKeys.sfKeyAccountData);
     if (response != null && response.isNotEmpty) {
       return BaseResponse.complete<GetAccountResponse>(
           GetAccountResponse.fromJson(response));

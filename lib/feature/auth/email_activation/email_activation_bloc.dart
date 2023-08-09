@@ -93,7 +93,8 @@ class EmailActivationBloc
   ) async {
     emit(state.copyWith(response: BaseResponse.loading()));
 
-    final tempId = await _sharedPreference.readIntData(sfKeyPpiUserId);
+    final tempId =
+        await _sharedPreference.readIntData(StorageKeys.sfKeyPpiUserId);
 
     await _ppiResponseRepository.linkUser(tempId ?? 0);
 

@@ -45,7 +45,11 @@ class BotRecommendationDetailContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BotBadge(botType: botType, margin: EdgeInsets.zero),
+        BotBadge(
+            botType: botType,
+            tickerSymbol: botRecommendationModel.tickerSymbol,
+            textColor: AskLoraColors.charcoal,
+            margin: EdgeInsets.zero),
         if (!FeatureFlags.isMockApp)
           _botDetailsExpansionTile(context)
         else
@@ -58,70 +62,101 @@ class BotRecommendationDetailContent extends StatelessWidget {
 
   Widget _botDetails(BuildContext context) => Container(
         padding: AppValues.screenHorizontalPadding.copyWith(top: 15),
-        margin: const EdgeInsets.only(bottom: 60),
+        margin: const EdgeInsets.only(bottom: 25),
         decoration: const BoxDecoration(color: AskLoraColors.whiteSmoke),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
           children: [
-            CustomTextNew('${botType.upperCaseName} Bot',
-                style: AskLoraTextStyles.h5
-                    .copyWith(color: AskLoraColors.charcoal)),
-            const SizedBox(height: 8),
-            CustomTextNew(
-              botDetailModel?.botInfo.botDescription.detail ?? 'NA',
-              style: AskLoraTextStyles.body3
-                  .copyWith(color: AskLoraColors.charcoal),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Column(
+            CustomShowcaseView(
+              tutorialKey: TutorialJourney.tickerDetails,
+              tooltipWidget: CustomTextNew(
+                S.of(context).tooltipDescOfTickerDetailsTutorial,
+                style: AskLoraTextStyles.body1,
+              ),
+              margin: const EdgeInsets.only(top: 117),
+              onToolTipClick: () => ShowCaseWidget.of(context).next(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomTextNew('${botType.upperCaseName} Bot',
+                      style: AskLoraTextStyles.h5
+                          .copyWith(color: AskLoraColors.charcoal)),
+                  const SizedBox(height: 8),
+                  CustomTextNew(
+                    botDetailModel?.botInfo.botDescription.detail ?? 'NA',
+                    style: AskLoraTextStyles.body3
+                        .copyWith(color: AskLoraColors.charcoal),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomTextNew(
-                        '${botDetailModel?.stockInfo.tickerName} (${botDetailModel?.stockInfo.symbol})',
-                        style: AskLoraTextStyles.h5
-                            .copyWith(color: AskLoraColors.charcoal),
-                        maxLines: 2,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomTextNew(
+                              '${botDetailModel?.stockInfo.tickerName} (${botDetailModel?.stockInfo.symbol})',
+                              style: AskLoraTextStyles.h5
+                                  .copyWith(color: AskLoraColors.charcoal),
+                              maxLines: 2,
+                            ),
+                            const SizedBox(height: 8),
+                            CustomTextNew(
+                              '${S.of(context).prevClose} ${botDetailModel?.prevCloseDateFormatted ?? 'NA'}',
+                              style: AskLoraTextStyles.body2
+                                  .copyWith(color: AskLoraColors.charcoal),
+                            ),
+                          ],
+                        ),
                       ),
-                      const SizedBox(height: 8),
-                      CustomTextNew(
-                        '${S.of(context).prevClose} ${botDetailModel?.prevCloseDateFormatted ?? 'NA'}',
-                        style: AskLoraTextStyles.body2
-                            .copyWith(color: AskLoraColors.charcoal),
+                      const SizedBox(width: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          CustomTextNew(
+                            (botDetailModel?.price ?? 0)
+                                .convertToCurrencyDecimal(),
+                            style: AskLoraTextStyles.h5
+                                .copyWith(color: AskLoraColors.charcoal),
+                          ),
+                          ToggleablePriceText(
+                            percentDifference: getPercentDifference(),
+                            priceDifference: getPriceDifference(),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    CustomTextNew(
-                      (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
-                      style: AskLoraTextStyles.h5
-                          .copyWith(color: AskLoraColors.charcoal),
-                    ),
-                    ToggleablePriceText(
-                      percentDifference: getPercentDifference(),
-                      priceDifference: getPriceDifference(),
-                    ),
-                  ],
-                ),
-              ],
+                  const SizedBox(height: 5),
+                  const IexDataProviderLink(),
+                ],
+              ),
             ),
-            const SizedBox(height: 5),
-            const IexDataProviderLink(),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 40),
-              child: Center(
+              child: CustomShowcaseView(
+                tutorialKey: TutorialJourney.tellMeMoreButton,
+                tooltipWidget: Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                          text: S.of(context).youCanClickOn,
+                          style: AskLoraTextStyles.body1),
+                      TextSpan(
+                          text: "'${S.of(context).tellMeMore}'",
+                          style: AskLoraTextStyles.subtitle2),
+                      TextSpan(
+                          text: S.of(context).toOpenLora,
+                          style: AskLoraTextStyles.body1),
+                    ],
+                  ),
+                ),
+                margin: const EdgeInsets.only(top: 30),
+                onToolTipClick: () => ShowCaseWidget.of(context).next(),
                 child: SizedBox(
                     width: 169,
                     child: PrimaryButton(
-                        label: 'Tell Me More',
+                        label: S.of(context).tellMeMore,
                         onTap: () => context
                             .read<TabScreenBloc>()
                             .add(const OnAiOverlayClick()),
@@ -296,7 +331,9 @@ class BotRecommendationDetailContent extends StatelessWidget {
         child: CustomShowcaseView(
           tooltipPosition: TooltipPosition.bottom,
           tutorialKey: TutorialJourney.botDetails,
-          onToolTipClick: () => ShowCaseWidget.of(context).next(),
+          onToolTipClick: () {
+            ShowCaseWidget.of(context).next();
+          },
           tooltipWidget: Text.rich(
             TextSpan(
               children: [
@@ -353,7 +390,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               _spaceBetweenInfo,
               ColumnTextWithTooltip(
                   title: S.of(context).estimatedEndDate,
-                  subTitle: '${botDetailModel?.estEndDateFormatted}'),
+                  subTitle: '${botDetailModel?.endDateHKTString}'),
             ],
           ),
         ),
@@ -427,21 +464,9 @@ class BotRecommendationDetailContent extends StatelessWidget {
     }
   }
 
-  double getPriceDifference() {
-    if (botDetailModel != null) {
-      final currentPrice = botDetailModel?.price ?? 0;
-      final prevClosePrice = botDetailModel?.prevClosePrice ?? 0;
-      return currentPrice - prevClosePrice;
-    }
-    return 0;
-  }
+  double getPriceDifference() =>
+      botDetailModel != null ? botDetailModel!.prevCloseAmt : 0;
 
-  double getPercentDifference() {
-    if (botDetailModel != null) {
-      final currentPrice = botDetailModel?.price ?? 0;
-      final prevClosePrice = botDetailModel?.prevClosePrice ?? 0;
-      return ((currentPrice / prevClosePrice) - 1) * 100;
-    }
-    return 0;
-  }
+  double getPercentDifference() =>
+      botDetailModel != null ? botDetailModel!.prevClosePct : 0;
 }

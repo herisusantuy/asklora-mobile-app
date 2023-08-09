@@ -21,12 +21,12 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
 
   void _onInitiateNotification(
       InitiateNotification event, Emitter<NotificationState> emit) async {
-    bool? isAllowInAppNotification =
-        await _sharedPreference.readBoolData(sfKeyInAppNotification);
+    bool? isAllowInAppNotification = await _sharedPreference
+        .readBoolData(StorageKeys.sfKeyInAppNotification);
     bool? isAllowPushNotification =
-        await _sharedPreference.readBoolData(sfKeyPushNotification);
-    bool? isAllowEmailNotification =
-        await _sharedPreference.readBoolData(sfKeyEmailNotification);
+        await _sharedPreference.readBoolData(StorageKeys.sfKeyPushNotification);
+    bool? isAllowEmailNotification = await _sharedPreference
+        .readBoolData(StorageKeys.sfKeyEmailNotification);
     emit(state.copyWith(
         isAllowInAppNotification: isAllowInAppNotification,
         isAllowPushNotification: isAllowPushNotification,
@@ -36,7 +36,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   void _onAllowInAppNotification(
       AllowInAppNotification event, Emitter<NotificationState> emit) async {
     await _sharedPreference.writeBoolData(
-        sfKeyInAppNotification, event.isAllowInAppNotification);
+        StorageKeys.sfKeyInAppNotification, event.isAllowInAppNotification);
     emit(state.copyWith(
         isAllowInAppNotification: event.isAllowInAppNotification));
   }
@@ -44,7 +44,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   void _onAllowPushNotification(
       AllowPushNotification event, Emitter<NotificationState> emit) async {
     await _sharedPreference.writeBoolData(
-        sfKeyPushNotification, event.isAllowPushNotification);
+        StorageKeys.sfKeyPushNotification, event.isAllowPushNotification);
     emit(
         state.copyWith(isAllowPushNotification: event.isAllowPushNotification));
   }
@@ -52,7 +52,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   void _onAllowEmailNotification(
       AllowEmailNotification event, Emitter<NotificationState> emit) async {
     await _sharedPreference.writeBoolData(
-        sfKeyEmailNotification, event.isAllowEmailNotification);
+        StorageKeys.sfKeyEmailNotification, event.isAllowEmailNotification);
     emit(state.copyWith(
         isAllowEmailNotification: event.isAllowEmailNotification));
   }

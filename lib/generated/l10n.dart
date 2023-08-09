@@ -3193,14 +3193,13 @@ class S {
     );
   }
 
-  /// `{botName} {botSymbol} will end at {dateTime}`
-  String endBotStockAcknowledgement(
-      String botName, String botSymbol, String dateTime) {
+  /// `{botName} {botSymbol} will end when the US market opens`
+  String endBotStockAcknowledgement(String botName, String botSymbol) {
     return Intl.message(
-      '$botName $botSymbol will end at $dateTime',
+      '$botName $botSymbol will end when the US market opens',
       name: 'endBotStockAcknowledgement',
       desc: '',
-      args: [botName, botSymbol, dateTime],
+      args: [botName, botSymbol],
     );
   }
 
@@ -3814,10 +3813,10 @@ class S {
     );
   }
 
-  /// `Back to login`
+  /// `Back To Login`
   String get backToLogin {
     return Intl.message(
-      'Back to login',
+      'Back To Login',
       name: 'backToLogin',
       desc: '',
       args: [],
@@ -5555,61 +5554,71 @@ class S {
     );
   }
 
-  /// `A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that I will manage for you!`
-  String get botStockExplanationScreenTitle {
+  /// `A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you.`
+  String get botExplanationScreenTitle {
     return Intl.message(
-      'A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that I will manage for you!',
-      name: 'botStockExplanationScreenTitle',
+      'A Botstock is a combination of a stock and a Bot. A Bot is a unique AI trading strategy will automatically manage your investment for you.',
+      name: 'botExplanationScreenTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Got it! But What Does a Bot Do?`
+  /// `Got it!`
   String get botStockExplanationScreenBottomButton {
     return Intl.message(
-      'Got it! But What Does a Bot Do?',
+      'Got it!',
       name: 'botStockExplanationScreenBottomButton',
       desc: '',
       args: [],
     );
   }
 
-  /// `A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward.`
+  /// `A 'Bot' is your personal AI manager that trades your stock for you.`
   String get botStockDoScreenTitle {
     return Intl.message(
-      'A Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward.',
+      'A \'Bot\' is your personal AI manager that trades your stock for you.',
       name: 'botStockDoScreenTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Go for occasional big wins`
+  /// `Hit a home run!`
   String get botStockDoScreenPoint1 {
     return Intl.message(
-      'Go for occasional big wins',
+      'Hit a home run!',
       name: 'botStockDoScreenPoint1',
       desc: '',
       args: [],
     );
   }
 
-  /// `Avoid excessive losses`
+  /// `Simple and easy!`
   String get botStockDoScreenPoint2 {
     return Intl.message(
-      'Avoid excessive losses',
+      'Simple and easy!',
       name: 'botStockDoScreenPoint2',
       desc: '',
       args: [],
     );
   }
 
-  /// `Go for small but frequent wins`
+  /// `Passive income!`
   String get botStockDoScreenPoint3 {
     return Intl.message(
-      'Go for small but frequent wins',
+      'Passive income!',
       name: 'botStockDoScreenPoint3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Got it!`
+  String get buttonGotIt {
+    return Intl.message(
+      'Got it!',
+      name: 'buttonGotIt',
       desc: '',
       args: [],
     );
@@ -5705,10 +5714,10 @@ class S {
     );
   }
 
-  /// `Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! `
+  /// `Every trade is unique, each time you invest with a new Botstock, I'll ask you some investment style questions to tailor new recommendations! `
   String get giftBotStockMessageScreenTitle {
     return Intl.message(
-      'Every trade is unique, each time you invest with a new Botstock, I’ll ask you some investment style questions to tailor new recommendations! ',
+      'Every trade is unique, each time you invest with a new Botstock, I\'ll ask you some investment style questions to tailor new recommendations! ',
       name: 'giftBotStockMessageScreenTitle',
       desc: '',
       args: [],
@@ -5755,51 +5764,101 @@ class S {
     );
   }
 
-  /// `This is the `
+  /// `Here are `
   String get botRecommendationTutorialDesc1 {
     return Intl.message(
-      'This is the ',
+      'Here are ',
       name: 'botRecommendationTutorialDesc1',
       desc: '',
       args: [],
     );
   }
 
-  /// `Botstock recommendations screen. `
+  /// `your unique recommendations `
   String get botRecommendationTutorialDesc2 {
     return Intl.message(
-      'Botstock recommendations screen. ',
+      'your unique recommendations ',
       name: 'botRecommendationTutorialDesc2',
       desc: '',
       args: [],
     );
   }
 
-  /// `press `
+  /// `based on how you answered the ISQ section`
   String get botRecommendationTutorialDesc3 {
     return Intl.message(
-      'press ',
+      'based on how you answered the ISQ section',
       name: 'botRecommendationTutorialDesc3',
       desc: '',
       args: [],
     );
   }
 
-  /// `'Trade' `
-  String get botRecommendationTutorialDesc4 {
+  /// `Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.`
+  String get portfolioDetailPerformanceBotAssetsInStockTooltip {
     return Intl.message(
-      '\'Trade\' ',
-      name: 'botRecommendationTutorialDesc4',
+      'Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.',
+      name: 'portfolioDetailPerformanceBotAssetsInStockTooltip',
       desc: '',
       args: [],
     );
   }
 
-  /// `on a Botstock that catches your eye!`
-  String get botRecommendationTutorialDesc5 {
+  /// `Here's a brief description of the bot and stock you've chosen`
+  String get tooltipDescOfTickerDetailsTutorial {
     return Intl.message(
-      'on a Botstock that catches your eye!',
-      name: 'botRecommendationTutorialDesc5',
+      'Here\'s a brief description of the bot and stock you\'ve chosen',
+      name: 'tooltipDescOfTickerDetailsTutorial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap anywhere to continue`
+  String get tapAnyWhere {
+    return Intl.message(
+      'Tap anywhere to continue',
+      name: 'tapAnyWhere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can click on `
+  String get youCanClickOn {
+    return Intl.message(
+      'You can click on ',
+      name: 'youCanClickOn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tell Me More`
+  String get tellMeMore {
+    return Intl.message(
+      'Tell Me More',
+      name: 'tellMeMore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` to open Lora and get more details about your investment!`
+  String get toOpenLora {
+    return Intl.message(
+      ' to open Lora and get more details about your investment!',
+      name: 'toOpenLora',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `LET'S TRADE`
+  String get letsTrade {
+    return Intl.message(
+      'LET\'S TRADE',
+      name: 'letsTrade',
       desc: '',
       args: [],
     );
@@ -5820,16 +5879,6 @@ class S {
     return Intl.message(
       'User Not Found',
       name: 'userNotFound',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.`
-  String get portfolioDetailPerformanceBotAssetsInStockTooltip {
-    return Intl.message(
-      'Represents how much stock the bot is holding in terms of %. For example, for a HKD10,000 investment, if your Stock Values are HKD4,000 and your Cash is HKD6,000, your Stock Holding % is 40%.',
-      name: 'portfolioDetailPerformanceBotAssetsInStockTooltip',
       desc: '',
       args: [],
     );
@@ -5990,6 +6039,36 @@ class S {
     return Intl.message(
       'Let’s Go',
       name: 'letsGo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` - (ISQ) `
+  String get isq {
+    return Intl.message(
+      ' - (ISQ) ',
+      name: 'isq',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` - (Interactive) `
+  String get interactive {
+    return Intl.message(
+      ' - (Interactive) ',
+      name: 'interactive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You pick the stock, and the 'Bot' will trade it for you!`
+  String get botStockExplanationScreenTitle {
+    return Intl.message(
+      'You pick the stock, and the \'Bot\' will trade it for you!',
+      name: 'botStockExplanationScreenTitle',
       desc: '',
       args: [],
     );

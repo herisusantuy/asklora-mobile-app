@@ -12,6 +12,7 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/presentation/ai/utils/ai_utils.dart';
 import '../../../../core/presentation/auto_sized_text_widget.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
@@ -73,25 +74,13 @@ class BotRecommendationScreen extends StatelessWidget {
                 listener: (context, tutorialState) =>
                     ShowCaseWidget.of(context).startShowCase([
                   TutorialJourney.botRecommendationList,
+                  TutorialJourney.tabs,
                 ]),
                 child: CustomLayoutWithBlurPopUp(
-                  loraPopUpMessageModel: LoraPopUpMessageModel(
-                    title: S.of(context).errorGettingInformationTitle,
-                    subTitle: S
-                        .of(context)
-                        .errorGettingInformationInvestmentDetailSubTitle,
-                    primaryButtonLabel: S.of(context).buttonReloadPage,
-                    onSecondaryButtonTap: () => Navigator.pop(context),
-                    onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
-                        context: context,
-                        target: UserJourney.freeBotStock,
-                        onTrueCallback: () => context
-                            .read<BotStockBloc>()
-                            .add(FetchBotRecommendation()),
-                        onFalseCallback: () => context
-                            .read<BotStockBloc>()
-                            .add(FetchFreeBotRecommendation())),
-                  ),
+                  loraPopUpMessageModel: _getLoraPopUpMessageModel(
+                      context: context,
+                      validationCode:
+                          state.botRecommendationResponse.validationCode),
                   showPopUp: state.botRecommendationResponse.state ==
                       ResponseState.error,
                   content: Column(
@@ -107,11 +96,11 @@ class BotRecommendationScreen extends StatelessWidget {
                         child: CustomShowcaseView(
                           tooltipPosition: TooltipPosition.top,
                           tutorialKey: TutorialJourney.botRecommendationList,
+                          targetBorderRadius: BorderRadius.zero,
+                          targetPadding: EdgeInsets.zero,
+                          boxShadow: const BoxShadow(color: Colors.transparent),
                           onToolTipClick: () {
-                            ShowCaseWidget.of(context).dismiss();
-                            context
-                                .read<TutorialBloc>()
-                                .add(BotRecommendationTutorialFinished());
+                            ShowCaseWidget.of(context).next();
                           },
                           tooltipWidget: Text.rich(
                             TextSpan(
@@ -130,16 +119,6 @@ class BotRecommendationScreen extends StatelessWidget {
                                     text: S
                                         .of(context)
                                         .botRecommendationTutorialDesc3,
-                                    style: AskLoraTextStyles.body1),
-                                TextSpan(
-                                    text: S
-                                        .of(context)
-                                        .botRecommendationTutorialDesc4,
-                                    style: AskLoraTextStyles.subtitle2),
-                                TextSpan(
-                                    text: S
-                                        .of(context)
-                                        .botRecommendationTutorialDesc5,
                                     style: AskLoraTextStyles.body1),
                               ],
                             ),
@@ -198,9 +177,7 @@ class BotRecommendationScreen extends StatelessWidget {
               Expanded(
                 child: PrimaryButton(
                   label: S.of(context).pressToRedoISQ,
-                  onTap: () => AiInvestmentStyleQuestionForYouScreen.open(
-                      context,
-                      aiThemeType: AiThemeType.light),
+                  onTap: () => _redoIsq(context),
                 ),
               ),
             ],
@@ -244,5 +221,40 @@ class BotRecommendationScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  LoraPopUpMessageModel _getLoraPopUpMessageModel(
+      {required BuildContext context, required ValidationCode validationCode}) {
+    switch (validationCode) {
+      case ValidationCode.redoIsq:
+        return LoraPopUpMessageModel(
+          title: 'No Botstock recommendations',
+          subTitle:
+              'Oops! Looks like there aren’t enough recommendations that meet your current investment profile - Let’s go through your Investment Style again to find suitable recommendations.',
+          primaryButtonLabel: S.of(context).retakeInvestmentStyle,
+          onPrimaryButtonTap: () => _redoIsq(context),
+        );
+      default:
+        return LoraPopUpMessageModel(
+          title: S.of(context).errorGettingInformationTitle,
+          subTitle:
+              S.of(context).errorGettingInformationInvestmentDetailSubTitle,
+          primaryButtonLabel: S.of(context).buttonReloadPage,
+          onSecondaryButtonTap: () => Navigator.pop(context),
+          onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
+              context: context,
+              target: UserJourney.freeBotStock,
+              onTrueCallback: () =>
+                  context.read<BotStockBloc>().add(FetchBotRecommendation()),
+              onFalseCallback: () => context
+                  .read<BotStockBloc>()
+                  .add(FetchFreeBotRecommendation())),
+        );
+    }
+  }
+
+  void _redoIsq(BuildContext context) {
+    AiInvestmentStyleQuestionForYouScreen.open(context,
+        aiThemeType: AiThemeType.light);
   }
 }

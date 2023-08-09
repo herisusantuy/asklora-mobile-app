@@ -46,7 +46,7 @@ enum TransferType {
 }
 
 enum BotSummaryType {
-  makeIndicative('make_indicative'),
+  setActive('set_active'),
   makeLive('make_live'),
   makeCancel('make_cancel'),
   loss('loss'),
@@ -69,7 +69,7 @@ enum BotSummaryType {
 String getNameByBotSummaryType(
     BuildContext context, BotSummaryType botSummaryType) {
   switch (botSummaryType) {
-    case BotSummaryType.makeIndicative:
+    case BotSummaryType.setActive:
       return S.of(context).orderPlaced;
     case BotSummaryType.makeLive:
       return S.of(context).orderStarted;

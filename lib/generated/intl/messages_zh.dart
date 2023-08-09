@@ -25,9 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(name) => "進度好好吖,\n${name}！";
 
   static String m2(availableAmount, minimumAmount) =>
-      "你有  ${availableAmount} 可供使用，每單交易最小金額為 ${minimumAmount} 。";
+      "你有 ${availableAmount} 可供使用，每單交易最小金額為 ${minimumAmount} 。";
 
-  static String m3(availableAmount) => "你有  ${availableAmount} 可供使用，";
+  static String m3(availableAmount) => "你有 ${availableAmount} 可供使用，";
 
   static String m4(minimumAmount) => "每單交易最小金額為 ${minimumAmount} 。";
 
@@ -45,8 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m10(emailAddress) =>
       "已發送電子郵件至\n ${emailAddress}\n\n請用手機點擊開通連結！";
 
-  static String m11(botName, botSymbol, dateTime) =>
-      "${botName} ${botSymbol} 將會在 ${dateTime} 開始";
+  static String m11(botName, botSymbol) =>
+      "${botName} ${botSymbol} will end when the US market opens";
 
   static String m12(time) => "現時匯率: HKD 1 = USD 0.137 (於 HKT ${time})";
 
@@ -151,33 +151,31 @@ class MessageLookup extends MessageLookupByLibrary {
         "beforeKYCHeaderTitle": m1,
         "bestSuitedFor": MessageLookupByLibrary.simpleMessage("最適合"),
         "botDuration": MessageLookupByLibrary.simpleMessage("Bot 期限"),
+        "botExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "Botstock 由一隻股票及一個 Bot 組成。 每一個 Bot 各代表一個獨一無二的 AI 投資策略。而Lora會幫你管理策略。"),
         "botManagementFee": MessageLookupByLibrary.simpleMessage("Bot 管理費用"),
         "botManagementFeeTooltip": MessageLookupByLibrary.simpleMessage(
             "The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!"),
         "botRecommendationScreenTitle":
             MessageLookupByLibrary.simpleMessage("最夾你嘅投資風格"),
         "botRecommendationTutorialDesc1":
-            MessageLookupByLibrary.simpleMessage("This is the "),
+            MessageLookupByLibrary.simpleMessage("Here are "),
         "botRecommendationTutorialDesc2": MessageLookupByLibrary.simpleMessage(
-            "Botstock recommendations screen. "),
-        "botRecommendationTutorialDesc3":
-            MessageLookupByLibrary.simpleMessage("press "),
-        "botRecommendationTutorialDesc4":
-            MessageLookupByLibrary.simpleMessage("\'Trade\' "),
-        "botRecommendationTutorialDesc5": MessageLookupByLibrary.simpleMessage(
-            "on a Botstock that catches your eye!"),
+            "your unique recommendations "),
+        "botRecommendationTutorialDesc3": MessageLookupByLibrary.simpleMessage(
+            "based on how you answered the ISQ section"),
         "botStockDoScreenPoint1":
-            MessageLookupByLibrary.simpleMessage("嘗試獲取較大收益"),
+            MessageLookupByLibrary.simpleMessage("Hit a home run!"),
         "botStockDoScreenPoint2":
-            MessageLookupByLibrary.simpleMessage("避免過度損失"),
+            MessageLookupByLibrary.simpleMessage("Simple and easy!"),
         "botStockDoScreenPoint3":
-            MessageLookupByLibrary.simpleMessage("獲取頻繁而小額的收益"),
+            MessageLookupByLibrary.simpleMessage("Passive income!"),
         "botStockDoScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "作為 AI 投資策略, Bot 將會於指定時間內，自動幫你進行交易，捕捉收益機會同時管理風險。"),
+            "A ‘Bot’ is your personal AI manager that trades your stock for you."),
         "botStockExplanationScreenBottomButton":
             MessageLookupByLibrary.simpleMessage("明白！咁Bot可以做啲咩？"),
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "Botstock 由一隻股票及一個 Bot 組成。 每一個 Bot 各代表一個獨一無二的 AI 投資策略。而Lora會幫你管理策略。"),
+            "You pick the stock, and the \'Bot\' will trade it for you!"),
         "botStocksDetails":
             MessageLookupByLibrary.simpleMessage("Botstock 嘅詳情同預計回報。 "),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
@@ -231,6 +229,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonDone": MessageLookupByLibrary.simpleMessage("完成"),
         "buttonForgetPassword": MessageLookupByLibrary.simpleMessage("忘記密碼？"),
         "buttonGoBack": MessageLookupByLibrary.simpleMessage("返回"),
+        "buttonGotIt": MessageLookupByLibrary.simpleMessage("Got it!"),
         "buttonHaveAnAccount": MessageLookupByLibrary.simpleMessage("已有賬戶？"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("立即開始"),
         "buttonMaybeLater": MessageLookupByLibrary.simpleMessage("稍後再說"),
@@ -378,7 +377,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getTheFirstBotstockForFree":
             MessageLookupByLibrary.simpleMessage("獲取首個免費 Botstock "),
         "giftBotStockMessageScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage("OK! 睇下畀我嘅推薦 "),
+            MessageLookupByLibrary.simpleMessage("OK! 睇下畀我嘅推薦"),
         "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
             "每一次你投資新嘅Botstock, 我都會問你投資風格問題，咁我就可以提供新嘅個人化投資建議畀你！"),
         "giftBotStockWelcomeScreenBottomButton":
@@ -466,6 +465,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "legalFirstName": MessageLookupByLibrary.simpleMessage("法定英文名字"),
         "legalLastName": MessageLookupByLibrary.simpleMessage("法定英文姓氏"),
         "letsGo": MessageLookupByLibrary.simpleMessage("Let’s Go"),
+        "letsTrade": MessageLookupByLibrary.simpleMessage("LET\'S TRADE"),
         "licenseeName": MessageLookupByLibrary.simpleMessage("持牌人：張永經"),
         "licenseeNumber": MessageLookupByLibrary.simpleMessage("CE 編號: AFF918"),
         "lifePhysicalSocialService": MessageLookupByLibrary.simpleMessage(
@@ -753,6 +753,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "takePhotoBack": MessageLookupByLibrary.simpleMessage("拍攝香港身份證背面"),
         "takePhotoFront": MessageLookupByLibrary.simpleMessage("拍攝香港身份證正面"),
         "takeSelfie": MessageLookupByLibrary.simpleMessage("自拍照一張"),
+        "tapAnyWhere":
+            MessageLookupByLibrary.simpleMessage("Tap anywhere to continue"),
         "taxAgreementCheckboxDesc": MessageLookupByLibrary.simpleMessage(
             "By checking this box, you consent to the collection and distribution of tax forms in an electronic format in lieu of paper"),
         "taxAgreementDesc2": MessageLookupByLibrary.simpleMessage(
@@ -789,6 +791,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "(4) I understand and agree that my electronic signature is the legal equivalent of a manual written signature."),
         "taxAgreementSignatureTitle":
             MessageLookupByLibrary.simpleMessage("Signature"),
+        "tellMeMore": MessageLookupByLibrary.simpleMessage("Tell Me More"),
         "terminateAccount": MessageLookupByLibrary.simpleMessage("終止賬戶"),
         "termsAndConditions": MessageLookupByLibrary.simpleMessage("條款與約束"),
         "theAmountMustMatch":
@@ -816,6 +819,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("嘅表現，希望幫到你理解Botstock係點樣交易！"),
         "toGoToDifferentPages":
             MessageLookupByLibrary.simpleMessage("to go to different pages."),
+        "toOpenLora": MessageLookupByLibrary.simpleMessage(
+            " to open Lora and get more details about your investment!"),
         "toStartAConversation": MessageLookupByLibrary.simpleMessage(
             "to start a conversation. Tap the icon again to dismiss Asklora"),
         "tokenInvalid": MessageLookupByLibrary.simpleMessage(
@@ -833,6 +838,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "你定下的投資時間，Botstock將會於此期間內自動買賣股票。"),
         "tooltipBotDetailsStartDate":
             MessageLookupByLibrary.simpleMessage("Lora開始Botstocks交易"),
+        "tooltipDescOfTickerDetailsTutorial": MessageLookupByLibrary.simpleMessage(
+            "Here\'s a brief description of the bot and stock you\'ve chosen"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("總金額"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "trade": MessageLookupByLibrary.simpleMessage("交易"),
@@ -920,6 +927,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "withdrawalWorkingDays":
             MessageLookupByLibrary.simpleMessage("提取款項最多需時2個工作天。"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),
+        "youCanClickOn":
+            MessageLookupByLibrary.simpleMessage("You can click on "),
         "yourAddressProofMustContainFullName":
             MessageLookupByLibrary.simpleMessage(
                 " 你的住址證明必須包含你全名、詳細住址及發行機構。\n\n我們接受最近3個月的水/電/煤氣繳費單、銀行結單或政府函件。"),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:showcaseview/showcaseview.dart';
 
+import '../../../generated/l10n.dart';
 import '../../styles/asklora_colors.dart';
-import 'tutorial_touch_guide.dart';
+import '../../styles/asklora_text_styles.dart';
+import '../custom_text_new.dart';
 
 enum PointerPosition {
   top,
@@ -17,10 +19,12 @@ class CustomShowcaseView extends StatelessWidget {
   final TooltipPosition tooltipPosition;
   final BorderRadius targetBorderRadius;
   final EdgeInsets targetPadding;
+  final EdgeInsets margin;
 
   final double overlayOpacity;
   final Color overlayColor;
   final PointerPosition pointerPosition;
+  final BoxShadow? boxShadow;
   const CustomShowcaseView({
     Key? key,
     required this.tutorialKey,
@@ -31,8 +35,10 @@ class CustomShowcaseView extends StatelessWidget {
     this.targetPadding = const EdgeInsets.all(10),
     this.targetBorderRadius = const BorderRadius.all(Radius.circular(20)),
     this.overlayColor = Colors.black,
-    this.overlayOpacity = 0.5,
+    this.overlayOpacity = 0.8,
     this.pointerPosition = PointerPosition.bottom,
+    this.margin = const EdgeInsets.only(top: 10),
+    this.boxShadow,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -44,6 +50,7 @@ class CustomShowcaseView extends StatelessWidget {
       overlayColor: overlayColor,
       overlayOpacity: overlayOpacity,
       targetPadding: targetPadding,
+      boxShadow: boxShadow,
       width: MediaQuery.of(context)
           .size
           .width, //* container width for tooltip widget
@@ -54,20 +61,18 @@ class CustomShowcaseView extends StatelessWidget {
         child: Container(
           color: Colors.transparent,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               if (pointerPosition == PointerPosition.top)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
-                  child: GestureDetector(
-                      onTap: onToolTipClick, child: const TutorialTouchGuide()),
+                  child: _tapAnyWhereButton(context),
                 ),
               GestureDetector(
                 onTap: onToolTipClick,
                 child: Container(
                     margin: tooltipPosition == TooltipPosition.top
                         ? EdgeInsets.zero
-                        : const EdgeInsets.only(top: 10),
+                        : margin,
                     width: MediaQuery.of(context).size.width -
                         30, //* width of tooltip widget
                     padding: const EdgeInsets.symmetric(
@@ -79,13 +84,9 @@ class CustomShowcaseView extends StatelessWidget {
                     child: tooltipWidget),
               ),
               if (pointerPosition == PointerPosition.bottom)
-                Column(
-                  children: [
-                    const SizedBox(height: 10),
-                    GestureDetector(
-                        onTap: onToolTipClick,
-                        child: const TutorialTouchGuide()),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: _tapAnyWhereButton(context),
                 )
             ],
           ),
@@ -94,4 +95,13 @@ class CustomShowcaseView extends StatelessWidget {
       child: child,
     );
   }
+
+  Widget _tapAnyWhereButton(BuildContext context) => GestureDetector(
+        onTap: onToolTipClick,
+        child: CustomTextNew(
+          S.of(context).tapAnyWhere,
+          style:
+              AskLoraTextStyles.subtitle2.copyWith(color: AskLoraColors.white),
+        ),
+      );
 }

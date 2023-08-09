@@ -47,9 +47,18 @@ class AppBloc extends Bloc<AppEvent, AppState> {
               : backDoorBaseUrl;
     }
 
+    final isAppFreshInstall =
+        await _sharedPreference.readBoolData(StorageKeys.sfFreshInstall) ??
+            true;
+    if (isAppFreshInstall) {
+      await _secureStorage.deleteAllData();
+      await _tokenRepository.deleteAll();
+      await _sharedPreference.writeBoolData(StorageKeys.sfFreshInstall, false);
+    }
+
     bool isTokenValid = await _tokenRepository.isTokenValid();
     LocaleType localeType = LocaleType.findByLanguageCode(
-        await _sharedPreference.readData(sfKeyLocalisationData));
+        await _sharedPreference.readData(StorageKeys.sfKeyLocalisationData));
 
     if (isTokenValid) {
       var userJourney = await _userJourneyRepository.getUserJourney();
@@ -58,7 +67,13 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           localeType: localeType));
     } else {
       await _tokenRepository.deleteAll();
-      await _sharedPreference.deleteAllDataExcept([sfKeyLocalisationData]);
+      await _sharedPreference.deleteAllDataExcept([
+        StorageKeys.sfKeyLocalisationData,
+        StorageKeys.sfKeyInvestmentStyleState,
+        StorageKeys.sfKeyBotDetailsTutorial,
+        StorageKeys.sfKeyBotRecommendationTutorial,
+        StorageKeys.sfKeyTradeSummaryTutorial,
+      ]);
       await _secureStorage.deleteAllData();
       emit(AppState.unauthenticated(localeType: localeType));
     }
@@ -67,7 +82,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   void _onAppLanguageChangeEvent(
       AppLanguageChangeEvent event, Emitter<AppState> emit) async {
     await _sharedPreference.writeData(
-        sfKeyLocalisationData, event.localeType.languageCode);
+        StorageKeys.sfKeyLocalisationData, event.localeType.languageCode);
     emit(state.copyWith(
         locale: event.localeType, userJourney: state.userJourney));
   }
