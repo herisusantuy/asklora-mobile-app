@@ -40,17 +40,9 @@ class Tabs extends StatelessWidget {
                             activeIconAsset: 'bottom_nav_home_selected',
                             active: state.currentTabPage == TabPage.home),
                       _tabPng(
-                          onTap: () {
-                            if (state.isBotDetailScreenOpened) {
-                              context
-                                  .read<TabScreenBloc>()
-                                  .add(TabChanged(TabPage.forYou.setData()));
-                            } else {
-                              context
-                                  .read<TabScreenBloc>()
-                                  .add(const TabChanged(TabPage.forYou));
-                            }
-                          },
+                          onTap: () => context
+                              .read<TabScreenBloc>()
+                              .add(TabChanged(TabPage.forYou.setData())),
                           iconAsset: 'bottom_nav_isq',
                           activeIconAsset: 'bottom_nav_isq_selected',
                           filledColor: backgroundImageType.tabForYouFilledColor,
@@ -107,17 +99,9 @@ class Tabs extends StatelessWidget {
                                       TabPage.aiLandingPage),
                         ),
                       _tabSvg(
-                          onTap: () {
-                            if (state.isPortfolioDetailScreenOpened) {
-                              context
-                                  .read<TabScreenBloc>()
-                                  .add(TabChanged(TabPage.portfolio.setData()));
-                            } else {
-                              context
-                                  .read<TabScreenBloc>()
-                                  .add(const TabChanged(TabPage.portfolio));
-                            }
-                          },
+                          onTap: () => context
+                              .read<TabScreenBloc>()
+                              .add(TabChanged(TabPage.portfolio.setData())),
                           iconAsset: 'bottom_nav_portfolio',
                           activeIconAsset: 'bottom_nav_portfolio_selected',
                           filledColor:

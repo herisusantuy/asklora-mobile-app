@@ -84,7 +84,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                   current.isBotDetailScreenOpened,
               listener: (context, state) {
                 if (!state.isBotDetailScreenOpened) {
-                  Navigator.pop(context);
+                  Navigator.maybePop(context);
                 }
               },
             )
