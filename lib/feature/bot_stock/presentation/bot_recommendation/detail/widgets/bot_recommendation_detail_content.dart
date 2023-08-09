@@ -120,8 +120,14 @@ class BotRecommendationDetailContent extends StatelessWidget {
                                 .copyWith(color: AskLoraColors.charcoal),
                           ),
                           ToggleablePriceText(
-                            percentDifference: getPercentDifference(),
-                            priceDifference: getPriceDifference(),
+                            fillColor: botDetailModel?.prevClosePct != null &&
+                                    botDetailModel!.prevClosePct < 0
+                                ? AskLoraColors.primaryMagenta
+                                : AskLoraColors.primaryGreen,
+                            percentDifference:
+                                botDetailModel?.prevClosePctFormatted ?? 'NA',
+                            priceDifference:
+                                botDetailModel?.prevCloseAmtFormatted ?? 'NA',
                           ),
                         ],
                       ),
@@ -259,8 +265,14 @@ class BotRecommendationDetailContent extends StatelessWidget {
                           height: 5,
                         ),
                         ToggleablePriceText(
-                          percentDifference: getPercentDifference(),
-                          priceDifference: getPriceDifference(),
+                          fillColor: botDetailModel?.prevClosePct != null &&
+                                  botDetailModel!.prevClosePct < 0
+                              ? AskLoraColors.primaryMagenta
+                              : AskLoraColors.primaryGreen,
+                          percentDifference:
+                              botDetailModel?.prevClosePctFormatted ?? 'NA',
+                          priceDifference:
+                              botDetailModel?.prevCloseAmtFormatted ?? 'NA',
                         ),
                       ],
                     ),
@@ -463,10 +475,4 @@ class BotRecommendationDetailContent extends StatelessWidget {
       return const SizedBox.shrink();
     }
   }
-
-  double getPriceDifference() =>
-      botDetailModel != null ? botDetailModel!.prevCloseAmt : 0;
-
-  double getPercentDifference() =>
-      botDetailModel != null ? botDetailModel!.prevClosePct : 0;
 }
