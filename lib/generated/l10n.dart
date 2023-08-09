@@ -5884,10 +5884,10 @@ class S {
     );
   }
 
-  /// `Now for the Investment Style Questions (ISQ)!These questions will feel more ChatGPT style.`
+  /// `Now for the Investment Style Questions (ISQ)! These questions will feel more ChatGPT style.`
   String get timeForInvestmentStyleQuestion {
     return Intl.message(
-      'Now for the Investment Style Questions (ISQ)!These questions will feel more ChatGPT style.',
+      'Now for the Investment Style Questions (ISQ)! These questions will feel more ChatGPT style.',
       name: 'timeForInvestmentStyleQuestion',
       desc: '',
       args: [],
