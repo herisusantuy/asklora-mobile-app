@@ -810,6 +810,8 @@
   "letsTrade": "LET'S TRADE",
   "requestedToEnd": "Requested To End",
   "userNotFound": "User Not Found",
+  "timeForInvestmentStyleQuestion": "Now for the Investment Style Questions (ISQ)!These questions will feel more ChatGPT style.",
+  "isqWillHelpMeUnderstandWhatKindOfStocks": "Through our chat-style dialogue, we'll grasp your investment interests to tailor botstock recommendations for you.",
   "rememberYouCan": "Remember, you can always ",
   "clickOnLora": "click on Lora ",
   "toAskAnyOtherQuestion": "to ask any other questions you might have",

@@ -10,7 +10,7 @@ import '../../core/utils/feature_flags.dart';
 import '../../core/utils/route_generator.dart';
 import '../../core/utils/storage/secure_storage.dart';
 import '../../core/utils/storage/shared_preference.dart';
-import '../../feature/onboarding/ppi/presentation/investment_style_question/ai_investment_style_question_onboarding_screen.dart';
+import '../../feature/onboarding/ppi/presentation/investment_style_question/isq/presentation/isq_onboarding_screen.dart';
 import '../../feature/onboarding/welcome/welcome_screen.dart';
 import '../../feature/tabs/presentation/tab_screen.dart';
 import '../../generated/l10n.dart';
@@ -100,7 +100,7 @@ class App extends StatelessWidget {
       case AppStatus.authenticated:
         if (FeatureFlags.isMockApp &&
             state.userJourney == UserJourney.investmentStyle) {
-          return const AiInvestmentStyleQuestionOnboardingScreen();
+          return const IsqOnBoardingScreen();
         } else {
           return const TabScreen();
         }

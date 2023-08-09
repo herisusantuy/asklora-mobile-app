@@ -5884,6 +5884,26 @@ class S {
     );
   }
 
+  /// `Now for the Investment Style Questions (ISQ)!These questions will feel more ChatGPT style.`
+  String get timeForInvestmentStyleQuestion {
+    return Intl.message(
+      'Now for the Investment Style Questions (ISQ)!These questions will feel more ChatGPT style.',
+      name: 'timeForInvestmentStyleQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Through our chat-style dialogue, we'll grasp your investment interests to tailor botstock recommendations for you.`
+  String get isqWillHelpMeUnderstandWhatKindOfStocks {
+    return Intl.message(
+      'Through our chat-style dialogue, we\'ll grasp your investment interests to tailor botstock recommendations for you.',
+      name: 'isqWillHelpMeUnderstandWhatKindOfStocks',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Remember, you can always `
   String get rememberYouCan {
     return Intl.message(

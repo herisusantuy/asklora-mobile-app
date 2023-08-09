@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../feature/bot_stock/presentation/gift/bot_stock_explanation_screen.dart';
 import '../../feature/bot_stock/presentation/gift/gift_bot_stock_message.dart';
+import '../../feature/onboarding/ppi/presentation/investment_style_question/isq/presentation/isq_onboarding_screen.dart';
 import '../../feature/tabs/ai_landing_page/presentation/ai_landing_page.dart';
 import '../../feature/tabs/utils/tab_util.dart';
 import '../presentation/ai/utils/ai_utils.dart';
-import '../../feature/onboarding/ppi/presentation/investment_style_question/ai_investment_style_question_onboarding_screen.dart';
+import '../../feature/onboarding/ppi/presentation/investment_style_question/isq/presentation/ai_investment_style_question_onboarding_screen.dart';
 import '../../feature/ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../feature/auth/email_activation/presentation/email_activation_screen.dart';
 import '../../feature/auth/otp/presentation/otp_screen.dart';
@@ -341,6 +342,9 @@ class RouterGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (_) => const AiInvestmentStyleQuestionWelcomeScreen());
+      case IsqOnBoardingScreen.route:
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const IsqOnBoardingScreen());
       case AiInvestmentStyleQuestionOnboardingScreen.route:
         return MaterialPageRoute(
             settings: settings,
