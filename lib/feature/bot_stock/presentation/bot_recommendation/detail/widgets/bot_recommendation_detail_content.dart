@@ -356,15 +356,19 @@ class BotRecommendationDetailContent extends StatelessWidget {
                 Column(
                   children: [
                     if (!FeatureFlags.isMockApp)
-                      BotPriceLevelIndicator(
-                        stopLossPrice:
-                            botDetailModel!.estStopLossPriceFormatted,
-                        currentPrice: botDetailModel!.priceFormatted,
-                        takeProfitPrice:
-                            botDetailModel!.estTakeProfitPriceFormatted,
-                        botType: botType,
+                      Column(
+                        children: [
+                          BotPriceLevelIndicator(
+                            stopLossPrice:
+                                botDetailModel!.estStopLossPriceFormatted,
+                            currentPrice: botDetailModel!.priceFormatted,
+                            takeProfitPrice:
+                                botDetailModel!.estTakeProfitPriceFormatted,
+                            botType: botType,
+                          ),
+                          const SizedBox(height: 28),
+                        ],
                       ),
-                    const SizedBox(height: 28),
                     PairColumnTextWithBottomSheet(
                         leftTitle: botType == BotType.plank
                             ? S.of(context).estStopLossPercent
