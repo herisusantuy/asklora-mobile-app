@@ -5944,20 +5944,20 @@ class S {
     );
   }
 
-  /// `nav bar buttons `
+  /// `nav bar`
   String get navBar {
     return Intl.message(
-      'nav bar buttons ',
+      'nav bar',
       name: 'navBar',
       desc: '',
       args: [],
     );
   }
 
-  /// `to go to`
+  /// `to go to different pages.`
   String get toGoToDifferentPages {
     return Intl.message(
-      'to go to',
+      'to go to different pages.',
       name: 'toGoToDifferentPages',
       desc: '',
       args: [],
@@ -5974,16 +5974,6 @@ class S {
     );
   }
 
-  /// ` - (ISQ) `
-  String get isq {
-    return Intl.message(
-      ' - (ISQ) ',
-      name: 'isq',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Recommendations`
   String get recommendations {
     return Intl.message(
@@ -5994,30 +5984,20 @@ class S {
     );
   }
 
-  /// `Middle `
+  /// `Middle`
   String get middle {
     return Intl.message(
-      'Middle ',
+      'Middle',
       name: 'middle',
       desc: '',
       args: [],
     );
   }
 
-  /// ` - (Interactive) `
-  String get interactive {
-    return Intl.message(
-      ' - (Interactive) ',
-      name: 'interactive',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Lora`
+  /// `Lora AI`
   String get LoraAi {
     return Intl.message(
-      'Lora',
+      'Lora AI',
       name: 'LoraAi',
       desc: '',
       args: [],
@@ -6039,6 +6019,46 @@ class S {
     return Intl.message(
       'Portfolio',
       name: 'portfolio',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Throughout your investment journey, you’ll see Lora on your bottom nav bar.Click on Lora at anytime to get advice or to ask anything related to finance.`
+  String get throughoutYourInvestmentJourney {
+    return Intl.message(
+      'Throughout your investment journey, you’ll see Lora on your bottom nav bar.Click on Lora at anytime to get advice or to ask anything related to finance.',
+      name: 'throughoutYourInvestmentJourney',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let’s Go`
+  String get letsGo {
+    return Intl.message(
+      'Let’s Go',
+      name: 'letsGo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` - (ISQ) `
+  String get isq {
+    return Intl.message(
+      ' - (ISQ) ',
+      name: 'isq',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` - (Interactive) `
+  String get interactive {
+    return Intl.message(
+      ' - (Interactive) ',
+      name: 'interactive',
       desc: '',
       args: [],
     );
