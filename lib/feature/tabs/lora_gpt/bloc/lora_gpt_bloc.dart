@@ -243,9 +243,11 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     String result = queryResponse.getResult();
     if (result.isNotEmpty) {
       conversations.add(Lora(result));
-    }
-    if (queryResponse.components.isNotEmpty) {
-      _conversationQueue.addAll(queryResponse.components);
+      if (queryResponse.components.isNotEmpty) {
+        _conversationQueue.addAll(queryResponse.components);
+      }
+    } else if (queryResponse.components.isNotEmpty) {
+      conversations.addAll(queryResponse.components);
     }
 
     return conversations;
