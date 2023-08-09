@@ -96,6 +96,18 @@ class BotRecommendationDetailModel extends Equatable {
     this.marketCap,
   );
 
+  String get prevClosePctFormatted => prevClosePct > 0
+      ? '+${prevClosePct.convertToCurrencyDecimal()}%'
+      : (prevClosePct < 0)
+          ? '${prevClosePct.convertToCurrencyDecimal()}%'
+          : '0.00%';
+
+  String get prevCloseAmtFormatted => prevCloseAmt > 0
+      ? '+${prevCloseAmt.convertToCurrencyDecimal()}'
+      : (prevCloseAmt < 0)
+          ? prevCloseAmt.convertToCurrencyDecimal()
+          : '0.00';
+
   String get formattedStartDate =>
       addOneDayToDate(startDate, dateFormat: 'dd/MM/yyyy');
 

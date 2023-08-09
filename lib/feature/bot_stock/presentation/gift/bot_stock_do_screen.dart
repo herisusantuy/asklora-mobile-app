@@ -39,7 +39,7 @@ class BotStockDoScreen extends StatelessWidget {
         ],
       ),
       bottomButton: Padding(
-        padding: const EdgeInsets.only(top: 30, bottom: 30.0),
+        padding: const EdgeInsets.only(bottom: 50),
         child: PrimaryButton(
           label: S.of(context).buttonGotIt,
           onTap: () => BotStockExplanationScreen.open(context),
