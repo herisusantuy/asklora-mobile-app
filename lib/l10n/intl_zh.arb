@@ -781,7 +781,7 @@
   "userNotFound": "User Not Found",
   "goToPortfolio": "Go To Portfolio",
   "startAnotherInvestments": "Start another investment",
-  "timeForInvestmentStyleQuestion": "想知Asklora有咩投資技？界定你嘅投資風格先！",
+  "timeForInvestmentStyleQuestion": "想知Asklora有咩投資技？ 界定你嘅投資風格先！",
   "isqWillHelpMeUnderstandWhatKindOfStocks": "ISQ會幫到我了解你對咩類型股票有興趣",
   "letsTrade": "LET'S TRADE",
   "rememberYouCan": "Remember, you can always ",
@@ -796,7 +796,7 @@
   "LoraAi": "Lora AI",
   "right": "Right",
   "portfolio": "Portfolio",
-  "throughoutYourInvestmentJourney": "Throughout your investment journey, you’ll see Lora on your bottom nav bar.Click on Lora at anytime to get advice or to ask anything related to finance.",
+  "throughoutYourInvestmentJourney": "Throughout your investment journey, you’ll see Lora on your bottom nav bar. Click on Lora at anytime to get advice or to ask anything related to finance.",
   "letsGo": "Let’s Go",
   "botStockExplanationScreenTitle": "You pick the stock, and the 'Bot' will trade it for you!"
 }
