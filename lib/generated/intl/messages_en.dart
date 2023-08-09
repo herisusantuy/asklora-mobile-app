@@ -808,7 +808,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyEvaluation":
             MessageLookupByLibrary.simpleMessage("Privacy Evaluation"),
         "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
-            "It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again."),
+            "Most likely, your risk score is too low to meet SFC requirements.\n\nIf you made a mistake and did not answer the questions correctly, please try again."),
         "privacyFailedScreenTitle": MessageLookupByLibrary.simpleMessage(
             "I\'m afraid you\'re not eligible for Asklora yet."),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
