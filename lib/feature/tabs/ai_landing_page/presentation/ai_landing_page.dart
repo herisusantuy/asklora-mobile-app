@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/presentation/custom_scaffold.dart';
+
+import '../../../../../core/domain/ai/conversation.dart';
 import '../../../../../core/presentation/ai/chat/chat_lora_header.dart';
 import '../../../../../core/presentation/ai/chat/in_chat_bubble_widget.dart';
 import '../../../../../core/presentation/ai/chat/lora_thinking_widget.dart';
 import '../../../../../core/presentation/ai/chat/out_chat_bubble_widget.dart';
+import '../../../../../core/presentation/ai/utils/ai_utils.dart';
+import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../../core/values/app_values.dart';
-import '../../../../../core/domain/ai/conversation.dart';
-import '../../../../../core/presentation/ai/utils/ai_utils.dart';
 import '../../../../core/domain/ai/component.dart';
 import '../../../../core/presentation/ai/chat/ai_text_field.dart';
 import '../../lora_gpt/bloc/lora_gpt_bloc.dart';
@@ -30,19 +31,22 @@ class AiLandingPage extends StatelessWidget {
           sharedPreference: SharedPreference(),
           loraGptRepository: LoraGptRepository(),
         )..add(const OnLandingPageOpened()),
-        child: CustomScaffold(
-          enableBackNavigation: false,
-          appBarBackgroundColor: Colors.transparent,
-          backgroundColor: Colors.transparent,
-          body: Padding(
-            padding:
-                AppValues.screenHorizontalPadding.copyWith(top: 8, bottom: 12),
-            child: Column(
-              children: [
-                _header,
-                _chatList,
-                _bottomContent,
-              ],
+        child: WillPopScope(
+          onWillPop: () async => false,
+          child: CustomScaffold(
+            enableBackNavigation: false,
+            appBarBackgroundColor: Colors.transparent,
+            backgroundColor: Colors.transparent,
+            body: Padding(
+              padding: AppValues.screenHorizontalPadding
+                  .copyWith(top: 8, bottom: 12),
+              child: Column(
+                children: [
+                  _header,
+                  _chatList,
+                  _bottomContent,
+                ],
+              ),
             ),
           ),
         ),
