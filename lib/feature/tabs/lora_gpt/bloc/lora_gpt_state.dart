@@ -13,8 +13,6 @@ class LoraGptState extends Equatable {
   final TabPage tabPage;
   final bool isTyping;
 
-  static const String platform = 'asklora';
-
   const LoraGptState({
     this.debugText = '',
     this.query = '',
@@ -64,7 +62,7 @@ class LoraGptState extends Equatable {
         input: query,
         userId: userId,
         username: userName,
-        platform: platform,
+        platform: aiPlatform,
       );
 
   PortfolioDetailsRequest getPortfolioDetailsRequest(
@@ -77,7 +75,7 @@ class LoraGptState extends Equatable {
         input: query,
         userId: userId,
         username: userName,
-        platform: platform,
+        platform: aiPlatform,
         botType: botType,
         tickerSymbol: tickerSymbol,
       );
@@ -87,7 +85,7 @@ class LoraGptState extends Equatable {
         input: query,
         userId: userId,
         username: userName,
-        platform: platform,
+        platform: aiPlatform,
         sessionId: '',
       );
 
@@ -95,7 +93,7 @@ class LoraGptState extends Equatable {
         input: '',
         userId: userId,
         username: userName,
-        platform: platform,
+        platform: aiPlatform,
         sessionId: '',
       );
 
@@ -110,7 +108,7 @@ class LoraGptState extends Equatable {
           ticker: ticker,
           investmentHorizon: investmentHorizon,
           userId: userId,
-          platform: platform,
+          platform: aiPlatform,
           username: userName);
 
   @override

@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../core/domain/endpoints.dart';
 import '../../../tabs/lora_gpt/domain/query_request.dart';
 
 part 'investment_style_question_query_request.g.dart';
@@ -16,9 +17,9 @@ class InvestmentStyleQuestionQueryRequest extends BaseQueryRequest {
 
   const InvestmentStyleQuestionQueryRequest({
     required String input,
-    this.userId = 'user_id',
-    this.username = 'testing user',
-    this.platform = 'mobile_app',
+    required this.userId,
+    required this.username,
+    this.platform = aiPlatform,
     required this.start,
     this.answer = -1,
   }) : super(input: input);
