@@ -34,16 +34,8 @@ class BotStockDoScreen extends StatelessWidget {
             S.of(context).botStockDoScreenTitle,
             style: AskLoraTextStyles.h4,
           ),
-          const SizedBox(height: 50),
-          _botCard(
-              botType: BotType.pullUp,
-              description: S.of(context).botStockDoScreenPoint1),
-          _botCard(
-              botType: BotType.plank,
-              description: S.of(context).botStockDoScreenPoint2),
-          _botCard(
-              botType: BotType.squat,
-              description: S.of(context).botStockDoScreenPoint3),
+          const SizedBox(height: 10),
+          const BotTypeWithAnimation()
         ],
       ),
       bottomButton: Padding(
@@ -56,9 +48,72 @@ class BotStockDoScreen extends StatelessWidget {
     );
   }
 
+  static void open(BuildContext context) => Navigator.pushNamed(
+        context,
+        route,
+      );
+}
+
+class BotTypeWithAnimation extends StatefulWidget {
+  const BotTypeWithAnimation({super.key});
+
+  @override
+  State<BotTypeWithAnimation> createState() => _BotTypeWithAnimationState();
+}
+
+class _BotTypeWithAnimationState extends State<BotTypeWithAnimation> {
+  bool isCard1Visible = false;
+  bool isCard2Visible = false;
+  bool isCard3Visible = false;
+  final double cardSpace = 20;
+  final Duration animatedDuration = const Duration(milliseconds: 500);
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(milliseconds: 500))
+        .then((value) => setState(() => isCard1Visible = true));
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        AnimatedOpacity(
+          opacity: isCard1Visible ? 1 : 0,
+          onEnd: () => _fadeInCard(isCard2Visible = true),
+          duration: animatedDuration,
+          child: _botCard(
+              botType: BotType.pullUp,
+              description: S.of(context).botStockDoScreenPoint1),
+        ),
+        AnimatedOpacity(
+          opacity: isCard2Visible ? 1 : 0,
+          onEnd: () => _fadeInCard(isCard3Visible = true),
+          duration: animatedDuration,
+          child: _botCard(
+              botType: BotType.plank,
+              description: S.of(context).botStockDoScreenPoint2),
+        ),
+        AnimatedOpacity(
+          opacity: isCard3Visible ? 1 : 0,
+          duration: animatedDuration,
+          child: _botCard(
+              botType: BotType.squat,
+              description: S.of(context).botStockDoScreenPoint3),
+        ),
+      ],
+    );
+  }
+
+  void _fadeInCard(bool setStateCard) {
+    Future.delayed(
+        const Duration(milliseconds: 500), () => setState(() => setStateCard));
+  }
+
   Widget _botCard({required BotType botType, required String description}) =>
       Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        padding: const EdgeInsets.fromLTRB(30, 20, 0, 0),
         child: Row(
           children: [
             CircularContainer(
@@ -81,24 +136,12 @@ class BotStockDoScreen extends StatelessWidget {
             const SizedBox(
               width: 15,
             ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomTextNew(
-                    description,
-                    style: AskLoraTextStyles.subtitle2
-                        .copyWith(color: AskLoraColors.charcoal),
-                  ),
-                ],
-              ),
+            CustomTextNew(
+              description,
+              style: AskLoraTextStyles.subtitle2
+                  .copyWith(color: AskLoraColors.charcoal),
             ),
           ],
         ),
-      );
-
-  static void open(BuildContext context) => Navigator.pushNamed(
-        context,
-        route,
       );
 }
