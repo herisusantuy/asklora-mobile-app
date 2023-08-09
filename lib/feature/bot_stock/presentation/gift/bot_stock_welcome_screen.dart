@@ -9,10 +9,10 @@ import '../../../../generated/l10n.dart';
 import '../widgets/bot_stock_form.dart';
 import 'bot_stock_do_screen.dart';
 
-class GiftBotStockWelcomeScreen extends StatelessWidget {
+class BotStockWelcomeScreen extends StatelessWidget {
   static const String route = '/gift_bot_stock_welcome_screen';
 
-  const GiftBotStockWelcomeScreen({Key? key}) : super(key: key);
+  const BotStockWelcomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class GiftBotStockWelcomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               CustomTextNew(
-                S.of(context).giftBotStockWelcomeScreenTitle,
+                S.of(context).botStockWelcomeScreenTitle,
                 style: AskLoraTextStyles.h4,
                 textAlign: TextAlign.center,
               ),
@@ -45,7 +45,7 @@ class GiftBotStockWelcomeScreen extends StatelessWidget {
               AppValues.screenHorizontalPadding.copyWith(bottom: 30, top: 10),
           child: PrimaryButton(
             buttonPrimaryType: ButtonPrimaryType.solidCharcoal,
-            label: S.of(context).giftBotStockWelcomeScreenBottomButton,
+            label: S.of(context).botStockWelcomeScreenBottomButton,
             onTap: () => BotStockDoScreen.open(context),
           ),
         ),

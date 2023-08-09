@@ -5635,20 +5635,20 @@ class S {
   }
 
   /// `You're all set!\nLet's begin a real AI trade!`
-  String get giftBotStockWelcomeScreenTitle {
+  String get botStockWelcomeScreenTitle {
     return Intl.message(
       'You\'re all set!\nLet\'s begin a real AI trade!',
-      name: 'giftBotStockWelcomeScreenTitle',
+      name: 'botStockWelcomeScreenTitle',
       desc: '',
       args: [],
     );
   }
 
   /// `Sure! What is a Botstock?`
-  String get giftBotStockWelcomeScreenBottomButton {
+  String get botStockWelcomeScreenBottomButton {
     return Intl.message(
       'Sure! What is a Botstock?',
-      name: 'giftBotStockWelcomeScreenBottomButton',
+      name: 'botStockWelcomeScreenBottomButton',
       desc: '',
       args: [],
     );
