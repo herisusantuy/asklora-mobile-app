@@ -176,6 +176,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("明白！咁Bot可以做啲咩？"),
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "You pick the stock, and the \'Bot\' will trade it for you!"),
+        "botStockWelcomeScreenBottomButton":
+            MessageLookupByLibrary.simpleMessage("好！咩咩Botstock話？"),
+        "botStockWelcomeScreenTitle":
+            MessageLookupByLibrary.simpleMessage("萬事具備, 即刻開始交易你嘅第一隻Botstock!"),
         "botStocksDetails":
             MessageLookupByLibrary.simpleMessage("Botstock 嘅詳情同預計回報。 "),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
@@ -255,7 +259,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cannotRememberEmailAddress": MessageLookupByLibrary.simpleMessage(
             "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai"),
         "cantRememberYourEmail": MessageLookupByLibrary.simpleMessage(
-            "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai"),
+            "忘記登入電郵地址？\n請發送電郵至 help@asklora.ai"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage("投資一樣\n要夠Fit"),
         "carouselIntro2":
             MessageLookupByLibrary.simpleMessage("FinFit教練，Lora 全程教路"),
@@ -380,10 +384,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("OK! 睇下畀我嘅推薦"),
         "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
             "每一次你投資新嘅Botstock, 我都會問你投資風格問題，咁我就可以提供新嘅個人化投資建議畀你！"),
-        "giftBotStockWelcomeScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage("好！咩咩Botstock話？"),
-        "giftBotStockWelcomeScreenTitle":
-            MessageLookupByLibrary.simpleMessage("萬事具備, 即刻開始交易你嘅第一隻Botstock!"),
         "go": MessageLookupByLibrary.simpleMessage("繼續"),
         "goToPortfolio":
             MessageLookupByLibrary.simpleMessage("Go To Portfolio"),

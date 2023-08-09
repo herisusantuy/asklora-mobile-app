@@ -34,7 +34,7 @@ class KeyInfo extends StatelessWidget {
           _spaceBetweenInfo,
           PairColumnTextWithTooltip(
               leftTitle: S.of(context).portfolioDetailKeyInfoStartTime,
-              leftSubTitle: botActiveOrderDetailModel.spotDateFormatted,
+              leftSubTitle: botActiveOrderDetailModel.startDateHKTString,
               rightTitle: S.of(context).portfolioDetailKeyInfoEndTime,
               rightSubTitle: botActiveOrderDetailModel.expireDateFormatted),
           _spaceBetweenInfo,

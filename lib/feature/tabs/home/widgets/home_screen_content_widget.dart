@@ -85,7 +85,7 @@ class HomeScreenContentWidget extends StatelessWidget {
             buttonLabel: 'Get It Now',
             secondaryButtonLabel: 'Learn More',
             onSecondaryButtonTap: () {},
-            onPrimaryButtonTap: () => GiftBotStockWelcomeScreen.open(context),
+            onPrimaryButtonTap: () => BotStockWelcomeScreen.open(context),
             backgroundColor: AskLoraColors.whiteSmoke,
           ),
           _spaceHeightBig,

@@ -34,7 +34,7 @@ class BotStockDoScreen extends StatelessWidget {
             S.of(context).botStockDoScreenTitle,
             style: AskLoraTextStyles.h4,
           ),
-          const SizedBox(height: 50),
+          const SizedBox(height: 20),
           _botCard(
               botType: BotType.pullUp,
               description: S.of(context).botStockDoScreenPoint1),
@@ -47,7 +47,7 @@ class BotStockDoScreen extends StatelessWidget {
         ],
       ),
       bottomButton: Padding(
-        padding: const EdgeInsets.only(top: 30, bottom: 30.0),
+        padding: const EdgeInsets.only(bottom: 50),
         child: PrimaryButton(
           label: S.of(context).buttonGotIt,
           onTap: () => BotStockExplanationScreen.open(context),
@@ -58,7 +58,7 @@ class BotStockDoScreen extends StatelessWidget {
 
   Widget _botCard({required BotType botType, required String description}) =>
       Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
         child: Row(
           children: [
             CircularContainer(

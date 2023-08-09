@@ -3873,10 +3873,10 @@ class S {
     );
   }
 
-  /// `It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.`
+  /// `Most likely, your risk score is too low to meet SFC requirements.\n\nIf you made a mistake and did not answer the questions correctly, please try again.`
   String get privacyFailedScreenDescription {
     return Intl.message(
-      'It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.',
+      'Most likely, your risk score is too low to meet SFC requirements.\n\nIf you made a mistake and did not answer the questions correctly, please try again.',
       name: 'privacyFailedScreenDescription',
       desc: '',
       args: [],
@@ -4243,10 +4243,10 @@ class S {
     );
   }
 
-  /// `Can't remember your email address?\nEmail us at cs@asklora.ai`
+  /// `Can't remember your email address?\nEmail us at help@asklora.ai`
   String get cantRememberYourEmail {
     return Intl.message(
-      'Can\'t remember your email address?\nEmail us at cs@asklora.ai',
+      'Can\'t remember your email address?\nEmail us at help@asklora.ai',
       name: 'cantRememberYourEmail',
       desc: '',
       args: [],
@@ -5635,20 +5635,20 @@ class S {
   }
 
   /// `You're all set!\nLet's begin a real AI trade!`
-  String get giftBotStockWelcomeScreenTitle {
+  String get botStockWelcomeScreenTitle {
     return Intl.message(
       'You\'re all set!\nLet\'s begin a real AI trade!',
-      name: 'giftBotStockWelcomeScreenTitle',
+      name: 'botStockWelcomeScreenTitle',
       desc: '',
       args: [],
     );
   }
 
   /// `Sure! What is a Botstock?`
-  String get giftBotStockWelcomeScreenBottomButton {
+  String get botStockWelcomeScreenBottomButton {
     return Intl.message(
       'Sure! What is a Botstock?',
-      name: 'giftBotStockWelcomeScreenBottomButton',
+      name: 'botStockWelcomeScreenBottomButton',
       desc: '',
       args: [],
     );
