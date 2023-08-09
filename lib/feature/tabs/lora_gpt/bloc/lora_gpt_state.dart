@@ -11,6 +11,7 @@ class LoraGptState extends Equatable {
   final List<Botstock> botstocks;
   final double totalPnl;
   final TabPage tabPage;
+  final bool isTyping;
 
   static const String platform = 'asklora';
 
@@ -26,6 +27,7 @@ class LoraGptState extends Equatable {
     this.botstocks = const [],
     this.totalPnl = 0,
     this.tabPage = TabPage.forYou,
+    this.isTyping = false,
   });
 
   LoraGptState copyWith({
@@ -52,6 +54,7 @@ class LoraGptState extends Equatable {
       botstocks: botstocks ?? this.botstocks,
       totalPnl: totalPnl ?? this.totalPnl,
       tabPage: tabPage ?? this.tabPage,
+      isTyping: isTyping ?? this.isTyping,
     );
   }
 
@@ -126,5 +129,5 @@ class LoraGptState extends Equatable {
       ];
 
   bool get isTextFieldSendButtonDisabled =>
-      status == ResponseState.loading || query.isEmpty || query.trim().isEmpty;
+      isTyping || query.trim().isEmpty || status == ResponseState.loading;
 }
