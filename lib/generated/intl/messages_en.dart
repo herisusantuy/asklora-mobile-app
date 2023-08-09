@@ -286,7 +286,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cannotRememberEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Can’t remember your email address?\nEmail us at cs@asklora.ai"),
         "cantRememberYourEmail": MessageLookupByLibrary.simpleMessage(
-            "Can\'t remember your email address?\nEmail us at cs@asklora.ai"),
+            "Can\'t remember your email address?\nEmail us at help@asklora.ai"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage(
             "Get your Investments in Shape"),
         "carouselIntro2": MessageLookupByLibrary.simpleMessage(

@@ -255,7 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cannotRememberEmailAddress": MessageLookupByLibrary.simpleMessage(
             "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai"),
         "cantRememberYourEmail": MessageLookupByLibrary.simpleMessage(
-            "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai"),
+            "忘記登入電郵地址？\n請發送電郵至 help@asklora.ai"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage("投資一樣\n要夠Fit"),
         "carouselIntro2":
             MessageLookupByLibrary.simpleMessage("FinFit教練，Lora 全程教路"),
