@@ -11,13 +11,17 @@ import '../../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../bloc/toggleable_price_text_bloc.dart';
 
 class ToggleablePriceText extends StatelessWidget {
-  final double percentDifference;
-  final double priceDifference;
+  final Color fillColor;
+  final String percentDifference;
+  final String priceDifference;
+  final TextStyle toggleableTextStyle =
+      AskLoraTextStyles.subtitle3.copyWith(color: AskLoraColors.white);
 
-  const ToggleablePriceText({
+  ToggleablePriceText({
     Key? key,
     required this.percentDifference,
     required this.priceDifference,
+    required this.fillColor,
   }) : super(key: key);
 
   @override
@@ -25,56 +29,35 @@ class ToggleablePriceText extends StatelessWidget {
     return BlocProvider<ToggleablePriceTextBloc>(
       create: (_) =>
           ToggleablePriceTextBloc(sharedPreference: SharedPreference()),
-      child: Builder(
-        builder: (context) {
-          String percentageText = (percentDifference == 0)
-              ? '${percentDifference.abs().convertToCurrencyDecimal()}%'
-              : (percentDifference < 0)
-                  ? '${percentDifference.convertToCurrencyDecimal()}%'
-                  : '+${percentDifference.convertToCurrencyDecimal()}%';
-          String priceText = (priceDifference == 0)
-              ? priceDifference.abs().convertToCurrencyDecimal()
-              : (priceDifference < 0)
-                  ? priceDifference.convertToCurrencyDecimal()
-                  : '+${priceDifference.convertToCurrencyDecimal()}';
-
-          final TextStyle toggleableTextStyle =
-              AskLoraTextStyles.subtitle3.copyWith(color: AskLoraColors.white);
-          final maxTextWidth = max(
-            percentageText.textWidth(toggleableTextStyle),
-            priceText.textWidth(toggleableTextStyle),
-          );
-
-          return GestureDetector(
-            onTap: () {
-              context
-                  .read<ToggleablePriceTextBloc>()
-                  .add(TogglePriceDifferenceEvent());
-            },
-            child: BlocBuilder<ToggleablePriceTextBloc, ToggleState>(
-              buildWhen: (previous, current) =>
-                  previous.showPriceDifference != current.showPriceDifference,
-              builder: (context, state) {
-                return Container(
-                  width: maxTextWidth + 10,
-                  padding: const EdgeInsets.symmetric(vertical: 2),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: (percentDifference < 0 || priceDifference < 0)
-                        ? AskLoraColors.primaryMagenta
-                        : AskLoraColors.primaryGreen,
-                  ),
-                  child: CustomTextNew(
-                    state.showPriceDifference ? priceText : percentageText,
-                    style: toggleableTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                );
-              },
+      child: BlocBuilder<ToggleablePriceTextBloc, ToggleState>(
+        buildWhen: (previous, current) =>
+            previous.showPriceDifference != current.showPriceDifference,
+        builder: (context, state) => GestureDetector(
+          onTap: () => context
+              .read<ToggleablePriceTextBloc>()
+              .add(TogglePriceDifferenceEvent()),
+          child: Container(
+            width: containerWidth,
+            padding: const EdgeInsets.symmetric(vertical: 2),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: fillColor,
             ),
-          );
-        },
+            child: CustomTextNew(
+              state.showPriceDifference ? priceDifference : percentDifference,
+              style: toggleableTextStyle,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
       ),
     );
   }
+
+  double get containerWidth =>
+      max(
+        percentDifference.textWidth(toggleableTextStyle),
+        priceDifference.textWidth(toggleableTextStyle),
+      ) +
+      10;
 }
