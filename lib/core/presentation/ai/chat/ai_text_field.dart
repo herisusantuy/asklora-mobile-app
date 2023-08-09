@@ -79,12 +79,10 @@ class _AiTextFieldState extends State<AiTextField> {
                     filled: true)),
           ),
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 14),
         AiSendTextButton(
           isDisabled: widget.isSendButtonDisabled,
-          size: const Size(55, 55),
-          enabledIconColor: widget.aiThemeType.sendChatButtonIconEnableColor,
-          disabledIconColor: widget.aiThemeType.sendChatButtonIconDisableColor,
+          aiThemeType: widget.aiThemeType,
           onTap: () {
             widget.onTap();
             controller.text = '';

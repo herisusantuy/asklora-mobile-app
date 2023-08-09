@@ -8,7 +8,7 @@ import '../../../../core/utils/feature_flags.dart';
 import '../../../../generated/l10n.dart';
 import '../../../balance/deposit/presentation/deposit_screen.dart';
 import '../../../balance/deposit/utils/deposit_utils.dart';
-import '../../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
+import '../../../bot_stock/presentation/gift/bot_stock_welcome_screen.dart';
 import '../../../tabs/presentation/tab_screen.dart';
 
 class KycResultScreen extends StatelessWidget {
@@ -34,7 +34,7 @@ class KycResultScreen extends StatelessWidget {
         primaryButtonOnClick: () => FeatureFlags.byPassFreeBots
             ? DepositScreen.open(
                 context: context, depositType: DepositType.firstTime)
-            : GiftBotStockWelcomeScreen.open(context),
+            : BotStockWelcomeScreen.open(context),
         secondaryButtonOnClick: () => TabScreen.openAndRemoveAllRoute(context),
         primaryButtonLabel: FeatureFlags.byPassFreeBots
             ? S.of(context).depositFund

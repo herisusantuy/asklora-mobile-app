@@ -109,7 +109,7 @@ class BotRecommendationDetailModel extends Equatable {
           : '0.00';
 
   String get formattedStartDate =>
-      convertDateToEstString(startDate, dateFormat: 'dd/MM/yyyy');
+      addOneDayToDate(startDate, dateFormat: 'dd/MM/yyyy');
 
   String get formattedAcknowledgementEstEndDate {
     return '${convertDateToEstString(estEndDate, dateFormat: 'dd/MM/yyyy HH:mm')} EST';

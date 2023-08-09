@@ -193,6 +193,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "You pick the stock, and the \'Bot\' will trade it for you!"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
+        "botStockWelcomeScreenBottomButton":
+            MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
+        "botStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "You\'re all set!\nLet\'s begin a real AI trade!"),
         "botStocksDetails": MessageLookupByLibrary.simpleMessage(
             "Botstock’s details and estimated returns."),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
@@ -286,7 +290,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cannotRememberEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Can’t remember your email address?\nEmail us at cs@asklora.ai"),
         "cantRememberYourEmail": MessageLookupByLibrary.simpleMessage(
-            "Can\'t remember your email address?\nEmail us at cs@asklora.ai"),
+            "Can\'t remember your email address?\nEmail us at help@asklora.ai"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage(
             "Get your Investments in Shape"),
         "carouselIntro2": MessageLookupByLibrary.simpleMessage(
@@ -463,10 +467,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("See my recommendations"),
         "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Every trade is unique, each time you invest with a new Botstock, I\'ll ask you some investment style questions to tailor new recommendations! "),
-        "giftBotStockWelcomeScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
-        "giftBotStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "You\'re all set!\nLet\'s begin a real AI trade!"),
         "go": MessageLookupByLibrary.simpleMessage("Go"),
         "goToPortfolio":
             MessageLookupByLibrary.simpleMessage("Go To Portfolio"),
@@ -808,7 +808,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyEvaluation":
             MessageLookupByLibrary.simpleMessage("Privacy Evaluation"),
         "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
-            "It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again."),
+            "Most likely, your risk score is too low to meet SFC requirements.\n\nIf you made a mistake and did not answer the questions correctly, please try again."),
         "privacyFailedScreenTitle": MessageLookupByLibrary.simpleMessage(
             "I\'m afraid you\'re not eligible for Asklora yet."),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
