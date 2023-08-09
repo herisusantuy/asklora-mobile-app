@@ -37,9 +37,8 @@ class BotStockExplanationScreen extends StatelessWidget {
           const BotStockWithAnimation(),
         ],
       ),
-      fixedBottomButton: Padding(
-        padding:
-            AppValues.screenHorizontalPadding.copyWith(bottom: 30, top: 10),
+      bottomButton: Padding(
+        padding: const EdgeInsets.only(bottom: 30),
         child: PrimaryButton(
             label: S.of(context).understood,
             onTap: () => TabScreen.openAndRemoveAllRoute(context,

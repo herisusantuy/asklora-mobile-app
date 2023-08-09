@@ -4,7 +4,6 @@ import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/lora_animation_header.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
-import '../../../../core/values/app_values.dart';
 import '../../../../generated/l10n.dart';
 import '../widgets/bot_stock_form.dart';
 import 'bot_stock_do_screen.dart';
@@ -40,9 +39,8 @@ class BotStockWelcomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        fixedBottomButton: Padding(
-          padding:
-              AppValues.screenHorizontalPadding.copyWith(bottom: 30, top: 10),
+        bottomButton: Padding(
+          padding: const EdgeInsets.only(bottom: 30),
           child: PrimaryButton(
             buttonPrimaryType: ButtonPrimaryType.solidCharcoal,
             label: S.of(context).botStockWelcomeScreenBottomButton,
