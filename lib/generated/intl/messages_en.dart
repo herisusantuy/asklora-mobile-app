@@ -974,7 +974,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisInteractiveGraph": MessageLookupByLibrary.simpleMessage(
             "This interactive graph shows the Botstock’s past "),
         "throughoutYourInvestmentJourney": MessageLookupByLibrary.simpleMessage(
-            "Throughout your investment journey, you’ll see Lora on your bottom nav bar.Click on Lora at anytime to get advice or to ask anything related to finance."),
+            "Throughout your investment journey, you’ll see Lora on your bottom nav bar. Click on Lora at anytime to get advice or to ask anything related to finance."),
         "timeCompleted": MessageLookupByLibrary.simpleMessage("Time Completed"),
         "timeForInvestmentStyleQuestion": MessageLookupByLibrary.simpleMessage(
             "Now for the Investment Style Questions (ISQ)!These questions will feel more ChatGPT style."),

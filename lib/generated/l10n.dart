@@ -6024,10 +6024,10 @@ class S {
     );
   }
 
-  /// `Throughout your investment journey, you’ll see Lora on your bottom nav bar.Click on Lora at anytime to get advice or to ask anything related to finance.`
+  /// `Throughout your investment journey, you’ll see Lora on your bottom nav bar. Click on Lora at anytime to get advice or to ask anything related to finance.`
   String get throughoutYourInvestmentJourney {
     return Intl.message(
-      'Throughout your investment journey, you’ll see Lora on your bottom nav bar.Click on Lora at anytime to get advice or to ask anything related to finance.',
+      'Throughout your investment journey, you’ll see Lora on your bottom nav bar. Click on Lora at anytime to get advice or to ask anything related to finance.',
       name: 'throughoutYourInvestmentJourney',
       desc: '',
       args: [],

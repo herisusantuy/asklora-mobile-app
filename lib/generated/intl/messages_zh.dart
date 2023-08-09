@@ -806,7 +806,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisInteractiveGraph":
             MessageLookupByLibrary.simpleMessage("你可以係下面見到Botstock最近"),
         "throughoutYourInvestmentJourney": MessageLookupByLibrary.simpleMessage(
-            "Throughout your investment journey, you’ll see Lora on your bottom nav bar.Click on Lora at anytime to get advice or to ask anything related to finance."),
+            "Throughout your investment journey, you’ll see Lora on your bottom nav bar. Click on Lora at anytime to get advice or to ask anything related to finance."),
         "timeCompleted": MessageLookupByLibrary.simpleMessage("完成時間"),
         "timeForInvestmentStyleQuestion":
             MessageLookupByLibrary.simpleMessage("想知Asklora有咩投資技？界定你嘅投資風格先！"),
