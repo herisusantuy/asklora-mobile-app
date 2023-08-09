@@ -69,10 +69,7 @@ class AppState extends Equatable {
             locale: localeType,
             userJourney: userJourney);
 
-  AppState copyWith(
-      {UserJourney? userJourney,
-      LocaleType? locale,
-      bool? aiWelcomeScreenStatus}) {
+  AppState copyWith({UserJourney? userJourney, LocaleType? locale}) {
     return AppState._(
         status: status,
         locale: locale ?? this.locale,

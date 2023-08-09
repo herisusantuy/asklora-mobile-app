@@ -23,37 +23,28 @@ class AiInvestmentStyleQuestionWelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => IsqOnBoardingBloc(
-        sharedPreference: SharedPreference(),
+    return AiWelcomeScreen(
+      enableBackgroundImage: isqType == ISQType.onboarding,
+      aiThemeType: aiThemeType,
+      title: S.of(context).timeForInvestmentStyleQuestion,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 48),
+        child: AiWelcomeSubtitleText(
+          aiThemeType: aiThemeType,
+          subTitle: S.of(context).isqWillHelpMeUnderstandWhatKindOfStocks,
+        ),
       ),
-      child: BlocBuilder<IsqOnBoardingBloc, IsqOnBoardingState>(
-        builder: (context, state) {
-          return AiWelcomeScreen(
-            enableBackgroundImage: isqType == ISQType.onboarding,
-            aiThemeType: aiThemeType,
-            title: S.of(context).timeForInvestmentStyleQuestion,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 48),
-              child: AiWelcomeSubtitleText(
-                aiThemeType: aiThemeType,
-                subTitle: S.of(context).isqWillHelpMeUnderstandWhatKindOfStocks,
-              ),
-            ),
-            onBottomButtonTap: () {
-              if (isqType == ISQType.onboarding) {
-                context
-                    .read<IsqOnBoardingBloc>()
-                    .add(const UpdateAiWelcomeScreenStatus(false));
-                AiInvestmentStyleQuestionOnboardingScreen.open(context);
-              } else {
-                AiInvestmentStyleQuestionForYouScreen.open(context,
-                    aiThemeType: aiThemeType);
-              }
-            },
-          );
-        },
-      ),
+      onBottomButtonTap: () {
+        if (isqType == ISQType.onboarding) {
+          context
+              .read<IsqOnBoardingBloc>()
+              .add(const UpdateAiWelcomeScreenStatus(false));
+          AiInvestmentStyleQuestionOnboardingScreen.open(context);
+        } else {
+          AiInvestmentStyleQuestionForYouScreen.open(context,
+              aiThemeType: aiThemeType);
+        }
+      },
     );
   }
 

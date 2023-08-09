@@ -7,10 +7,6 @@ abstract class IsqOnBoardingEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class OnIsqOnBoardingLaunch extends IsqOnBoardingEvent {
-  const OnIsqOnBoardingLaunch();
-}
-
 class GetAiWelcomeScreenStatus extends IsqOnBoardingEvent {
   const GetAiWelcomeScreenStatus();
 }

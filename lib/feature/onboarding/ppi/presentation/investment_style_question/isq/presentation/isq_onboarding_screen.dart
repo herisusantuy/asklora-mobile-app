@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../../core/domain/base_response.dart';
 import '../../../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
@@ -17,7 +18,7 @@ class IsqOnBoardingScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => IsqOnBoardingBloc(
         sharedPreference: SharedPreference(),
-      )..add(const OnIsqOnBoardingLaunch()),
+      )..add(const GetAiWelcomeScreenStatus()),
       child: BlocBuilder<IsqOnBoardingBloc, IsqOnBoardingState>(
         builder: (context, state) {
           return CustomScaffold(
@@ -30,10 +31,14 @@ class IsqOnBoardingScreen extends StatelessWidget {
   }
 
   Widget _getBody(IsqOnBoardingState state) {
-    if (state.aiWelcomeScreenStatus == true) {
-      return const AiInvestmentStyleQuestionWelcomeScreen();
+    if (state.isqOnboardingResponseState == ResponseState.success) {
+      if (state.aiWelcomeScreenStatus == true) {
+        return const AiInvestmentStyleQuestionWelcomeScreen();
+      } else {
+        return const AiInvestmentStyleQuestionOnboardingScreen();
+      }
     } else {
-      return const AiInvestmentStyleQuestionOnboardingScreen();
+      return const SizedBox.shrink();
     }
   }
 
