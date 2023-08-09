@@ -17,7 +17,9 @@ enum AiThemeType {
       choicesInteractionBorderColor: AskLoraColors.charcoal,
       loraThingkingWidgetColor: AskLoraColors.whiteSmoke,
       outChatBubbleWidgetColor: AskLoraColors.whiteSmoke,
-      scrambledTextColor: AskLoraColors.charcoalAlpha50),
+      scrambledTextColor: AskLoraColors.charcoalAlpha50,
+      sendChatButtonEnableColor: AskLoraColors.primaryGreenAlpha70,
+      sendChatButtonDisableColor: AskLoraColors.grayAlpha20),
   dark(
       backgroundImageAsset: 'assets/lora_gpt_background.png',
       baseBackgroundColor: AskLoraColors.black,
@@ -25,12 +27,14 @@ enum AiThemeType {
       secondaryFontColor: AskLoraColors.white,
       startButtonFillColor: Color(0xFF373A49),
       textFieldFillColor: AskLoraColors.whiteAlpha15,
-      sendChatButtonIconEnableColor: AskLoraColors.gray,
+      sendChatButtonIconEnableColor: AskLoraColors.white,
       sendChatButtonIconDisableColor: AskLoraColors.gray,
       inChatBubbleWidgetColor: AskLoraColors.whiteAlpha35,
       loraThingkingWidgetColor: AskLoraColors.whiteAlpha20,
       outChatBubbleWidgetColor: AskLoraColors.whiteAlpha15,
-      scrambledTextColor: AskLoraColors.whiteAlpha50);
+      scrambledTextColor: AskLoraColors.whiteAlpha50,
+      sendChatButtonDisableColor: AskLoraColors.grayAlpha20,
+      sendChatButtonEnableColor: AskLoraColors.primaryGreenAlpha90);
 
   final String backgroundImageAsset;
   final Color baseBackgroundColor;
@@ -40,6 +44,8 @@ enum AiThemeType {
   final Color sendChatButtonIconDisableColor;
   final Color sendChatButtonIconEnableColor;
   final Color textFieldFillColor;
+  final Color sendChatButtonDisableColor;
+  final Color sendChatButtonEnableColor;
 
   final Color scrambledTextColor;
   final Color loraThingkingWidgetColor;
@@ -63,5 +69,7 @@ enum AiThemeType {
     required this.scrambledTextColor,
     this.chatNextButtonBorderColor,
     this.choicesInteractionBorderColor,
+    required this.sendChatButtonEnableColor,
+    required this.sendChatButtonDisableColor,
   });
 }
