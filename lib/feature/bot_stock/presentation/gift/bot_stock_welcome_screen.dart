@@ -40,7 +40,7 @@ class BotStockWelcomeScreen extends StatelessWidget {
           ),
         ),
         bottomButton: Padding(
-          padding: const EdgeInsets.only(bottom: 30),
+          padding: const EdgeInsets.only(bottom: 50),
           child: PrimaryButton(
             buttonPrimaryType: ButtonPrimaryType.solidCharcoal,
             label: S.of(context).botStockWelcomeScreenBottomButton,
