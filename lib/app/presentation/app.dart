@@ -83,6 +83,11 @@ class App extends StatelessWidget {
                     onGenerateRoute: RouterGenerator.generateRoute,
                     title: 'Asklora',
                     theme: ThemeData(
+                        pageTransitionsTheme:
+                            const PageTransitionsTheme(builders: {
+                          TargetPlatform.android: ZoomPageTransitionsBuilder(),
+                          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+                        }),
                         useMaterial3: false,
                         fontFamily: state.locale.fontType,
                         primarySwatch: MaterialColor(
