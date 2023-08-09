@@ -3873,10 +3873,10 @@ class S {
     );
   }
 
-  /// `It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.`
+  /// `Most likely, your risk score is too low to meet SFC requirements.\n\nIf you made a mistake and did not answer the questions correctly, please try again.`
   String get privacyFailedScreenDescription {
     return Intl.message(
-      'It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.',
+      'Most likely, your risk score is too low to meet SFC requirements.\n\nIf you made a mistake and did not answer the questions correctly, please try again.',
       name: 'privacyFailedScreenDescription',
       desc: '',
       args: [],
