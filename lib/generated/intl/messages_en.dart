@@ -193,6 +193,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "You pick the stock, and the \'Bot\' will trade it for you!"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
+        "botStockWelcomeScreenBottomButton":
+            MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
+        "botStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "You\'re all set!\nLet\'s begin a real AI trade!"),
         "botStocksDetails": MessageLookupByLibrary.simpleMessage(
             "Botstock’s details and estimated returns."),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
@@ -463,10 +467,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("See my recommendations"),
         "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Every trade is unique, each time you invest with a new Botstock, I\'ll ask you some investment style questions to tailor new recommendations! "),
-        "giftBotStockWelcomeScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
-        "giftBotStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "You\'re all set!\nLet\'s begin a real AI trade!"),
         "go": MessageLookupByLibrary.simpleMessage("Go"),
         "goToPortfolio":
             MessageLookupByLibrary.simpleMessage("Go To Portfolio"),

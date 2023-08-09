@@ -28,7 +28,7 @@ import '../../feature/bot_stock/presentation/bot_stock_result_screen.dart';
 import '../../feature/bot_stock/presentation/bot_trade_summary/bot_trade_summary_screen.dart';
 import '../../feature/bot_stock/presentation/gift/bot_stock_do_screen.dart';
 import '../../feature/bot_stock/presentation/gift/bot_explanation_screen.dart';
-import '../../feature/bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
+import '../../feature/bot_stock/presentation/gift/bot_stock_welcome_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/detail/bot_portfolio_detail_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/portfolio_screen.dart';
 import '../../feature/bot_stock/utils/bot_stock_utils.dart';
@@ -137,10 +137,9 @@ class RouterGenerator {
             settings: settings,
             builder: (_) => ResetPasswordScreen(
                 resetPasswordToken: settings.arguments as String));
-      case GiftBotStockWelcomeScreen.route:
+      case BotStockWelcomeScreen.route:
         return MaterialPageRoute(
-            settings: settings,
-            builder: (_) => const GiftBotStockWelcomeScreen());
+            settings: settings, builder: (_) => const BotStockWelcomeScreen());
       case BotExplanationScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const BotExplanationScreen());

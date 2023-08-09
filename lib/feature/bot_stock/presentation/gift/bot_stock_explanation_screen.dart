@@ -20,7 +20,6 @@ class BotStockExplanationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BotStockForm(
       useHeader: true,
-      enableBackNavigation: false,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
