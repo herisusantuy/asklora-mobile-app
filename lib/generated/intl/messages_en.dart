@@ -286,7 +286,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cannotRememberEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Can’t remember your email address?\nEmail us at cs@asklora.ai"),
         "cantRememberYourEmail": MessageLookupByLibrary.simpleMessage(
-            "Can\'t remember your email address?\nEmail us at cs@asklora.ai"),
+            "Can\'t remember your email address?\nEmail us at help@asklora.ai"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage(
             "Get your Investments in Shape"),
         "carouselIntro2": MessageLookupByLibrary.simpleMessage(
@@ -808,7 +808,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyEvaluation":
             MessageLookupByLibrary.simpleMessage("Privacy Evaluation"),
         "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
-            "It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again."),
+            "Most likely, your risk score is too low to meet SFC requirements.\n\nIf you made a mistake and did not answer the questions correctly, please try again."),
         "privacyFailedScreenTitle": MessageLookupByLibrary.simpleMessage(
             "I\'m afraid you\'re not eligible for Asklora yet."),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),

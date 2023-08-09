@@ -18,7 +18,7 @@ class _AiChatListState extends State<AiChatList> {
     return BlocBuilder<LoraGptBloc, LoraGptState>(
       buildWhen: (previous, current) =>
           previous.status != current.status ||
-          previous.conversations.length != current.conversations.length,
+          previous.conversations != current.conversations,
       builder: (context, state) {
         return Stack(children: [
           ShaderMask(

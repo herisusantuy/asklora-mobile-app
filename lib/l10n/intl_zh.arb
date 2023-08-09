@@ -559,7 +559,7 @@
   "linkPasswordResetIsSent": "重設密碼連結已發送至電子郵件。",
   "accountIsNotActive": "Your account is not active yet.",
   "pleaseEnterYouEmail": "請輸入你的電郵地址，我們會發送重設密碼的指示給你。",
-  "cantRememberYourEmail": "忘記登入電郵地址？\n請發送電郵至 cs@asklora.ai",
+  "cantRememberYourEmail": "忘記登入電郵地址？\n請發送電郵至 help@asklora.ai",
   "inputWrongEmail": "電郵地址錯誤",
   "buttonBackToPortfolio": "返回投資組合頁",
   "resultOfPersonalizationQuestion": "{opennessScore} {neuroticismScore}\n\n{extrovertScore}",
