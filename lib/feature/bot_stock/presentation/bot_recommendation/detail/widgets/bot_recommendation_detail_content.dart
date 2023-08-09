@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:showcaseview/showcaseview.dart';
 
+import '../../../../../../core/presentation/auto_sized_text_widget.dart';
 import '../../../../../../core/presentation/bot_badge/bot_badge.dart';
 import '../../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
@@ -94,11 +95,13 @@ class BotRecommendationDetailContent extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CustomTextNew(
+                            AutoSizedTextWidget(
                               '${botDetailModel?.stockInfo.tickerName} (${botDetailModel?.stockInfo.symbol})',
                               style: AskLoraTextStyles.h5
                                   .copyWith(color: AskLoraColors.charcoal),
                               maxLines: 2,
+                              minFontSize: 12,
+                              ellipsis: true,
                             ),
                             const SizedBox(height: 8),
                             CustomTextNew(
@@ -364,14 +367,17 @@ class BotRecommendationDetailContent extends StatelessWidget {
               if (botDetailModel != null)
                 Column(
                   children: [
-                    BotPriceLevelIndicator(
-                      stopLossPrice: botDetailModel!.estStopLossPriceFormatted,
-                      currentPrice: botDetailModel!.priceFormatted,
-                      takeProfitPrice:
-                          botDetailModel!.estTakeProfitPriceFormatted,
-                      botType: botType,
-                    ),
-                    const SizedBox(height: 28),
+                    if (!FeatureFlags.isMockApp) ...[
+                      BotPriceLevelIndicator(
+                        stopLossPrice:
+                            botDetailModel!.estStopLossPriceFormatted,
+                        currentPrice: botDetailModel!.priceFormatted,
+                        takeProfitPrice:
+                            botDetailModel!.estTakeProfitPriceFormatted,
+                        botType: botType,
+                      ),
+                      const SizedBox(height: 28),
+                    ],
                     PairColumnTextWithBottomSheet(
                         leftTitle: botType == BotType.plank
                             ? S.of(context).estStopLossPercent
