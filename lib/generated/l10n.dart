@@ -3873,10 +3873,10 @@ class S {
     );
   }
 
-  /// `It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.`
+  /// `Most likely, your risk score is too low to meet SFC requirements.\n\nIf you made a mistake and did not answer the questions correctly, please try again.`
   String get privacyFailedScreenDescription {
     return Intl.message(
-      'It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.',
+      'Most likely, your risk score is too low to meet SFC requirements.\n\nIf you made a mistake and did not answer the questions correctly, please try again.',
       name: 'privacyFailedScreenDescription',
       desc: '',
       args: [],
@@ -5944,20 +5944,20 @@ class S {
     );
   }
 
-  /// `nav bar`
+  /// `nav bar buttons `
   String get navBar {
     return Intl.message(
-      'nav bar',
+      'nav bar buttons ',
       name: 'navBar',
       desc: '',
       args: [],
     );
   }
 
-  /// `to go to different pages.`
+  /// `to go to`
   String get toGoToDifferentPages {
     return Intl.message(
-      'to go to different pages.',
+      'to go to',
       name: 'toGoToDifferentPages',
       desc: '',
       args: [],
@@ -5974,6 +5974,16 @@ class S {
     );
   }
 
+  /// ` - (ISQ) `
+  String get isq {
+    return Intl.message(
+      ' - (ISQ) ',
+      name: 'isq',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Recommendations`
   String get recommendations {
     return Intl.message(
@@ -5984,20 +5994,30 @@ class S {
     );
   }
 
-  /// `Middle`
+  /// `Middle `
   String get middle {
     return Intl.message(
-      'Middle',
+      'Middle ',
       name: 'middle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Lora AI`
+  /// ` - (Interactive) `
+  String get interactive {
+    return Intl.message(
+      ' - (Interactive) ',
+      name: 'interactive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lora`
   String get LoraAi {
     return Intl.message(
-      'Lora AI',
+      'Lora',
       name: 'LoraAi',
       desc: '',
       args: [],
