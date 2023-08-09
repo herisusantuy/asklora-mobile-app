@@ -4243,10 +4243,10 @@ class S {
     );
   }
 
-  /// `Can't remember your email address?\nEmail us at cs@asklora.ai`
+  /// `Can't remember your email address?\nEmail us at help@asklora.ai`
   String get cantRememberYourEmail {
     return Intl.message(
-      'Can\'t remember your email address?\nEmail us at cs@asklora.ai',
+      'Can\'t remember your email address?\nEmail us at help@asklora.ai',
       name: 'cantRememberYourEmail',
       desc: '',
       args: [],

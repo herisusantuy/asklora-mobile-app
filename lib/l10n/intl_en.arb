@@ -598,7 +598,7 @@
   "linkPasswordResetIsSent": "Link for Password reset is sent to email.",
   "accountIsNotActive": "Your account is not active yet.",
   "pleaseEnterYouEmail": "Please enter your email. Instructions will be sent to reset your password.",
-  "cantRememberYourEmail": "Can't remember your email address?\nEmail us at cs@asklora.ai",
+  "cantRememberYourEmail": "Can't remember your email address?\nEmail us at help@asklora.ai",
   "inputWrongEmail": "Input wrong email address",
   "resultOfPersonalizationQuestion": "Based on your answer, {opennessScore} and {neuroticismScore}\n\n{extrovertScore}",
   "@resultOfPersonalizationQuestion": {
