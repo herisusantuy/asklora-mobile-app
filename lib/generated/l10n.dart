@@ -5924,20 +5924,20 @@ class S {
     );
   }
 
-  /// `nav bar`
+  /// `nav bar buttons `
   String get navBar {
     return Intl.message(
-      'nav bar',
+      'nav bar buttons ',
       name: 'navBar',
       desc: '',
       args: [],
     );
   }
 
-  /// `to go to different pages.`
+  /// `to go to`
   String get toGoToDifferentPages {
     return Intl.message(
-      'to go to different pages.',
+      'to go to',
       name: 'toGoToDifferentPages',
       desc: '',
       args: [],
@@ -5954,6 +5954,16 @@ class S {
     );
   }
 
+  /// ` - (ISQ) `
+  String get isq {
+    return Intl.message(
+      ' - (ISQ) ',
+      name: 'isq',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Recommendations`
   String get recommendations {
     return Intl.message(
@@ -5964,20 +5974,30 @@ class S {
     );
   }
 
-  /// `Middle`
+  /// `Middle `
   String get middle {
     return Intl.message(
-      'Middle',
+      'Middle ',
       name: 'middle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Lora AI`
+  /// ` - (Interactive) `
+  String get interactive {
+    return Intl.message(
+      ' - (Interactive) ',
+      name: 'interactive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lora`
   String get LoraAi {
     return Intl.message(
-      'Lora AI',
+      'Lora',
       name: 'LoraAi',
       desc: '',
       args: [],
