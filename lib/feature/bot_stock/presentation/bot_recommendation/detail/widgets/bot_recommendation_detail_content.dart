@@ -475,10 +475,4 @@ class BotRecommendationDetailContent extends StatelessWidget {
       return const SizedBox.shrink();
     }
   }
-
-  double getPercentDifference() =>
-      botDetailModel != null ? botDetailModel!.prevClosePct : 0;
-
-  double getPriceDifference() =>
-      botDetailModel != null ? botDetailModel!.prevCloseAmt : 0;
 }
