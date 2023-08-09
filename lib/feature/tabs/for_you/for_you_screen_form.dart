@@ -14,7 +14,7 @@ import '../../../generated/l10n.dart';
 import '../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../../core/presentation/ai/utils/ai_utils.dart';
 import '../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
-import '../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
+import '../../bot_stock/presentation/gift/bot_stock_welcome_screen.dart';
 import '../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../bloc/tab_screen_bloc.dart';
 import '../utils/tab_util.dart';
@@ -133,8 +133,7 @@ class ForYouScreenForm extends StatelessWidget {
               subTitle:
                   'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
               primaryButtonLabel: S.of(context).redeemYourBotstockNow,
-              onPrimaryButtonTap: () =>
-                  GiftBotStockWelcomeScreen.open(context));
+              onPrimaryButtonTap: () => BotStockWelcomeScreen.open(context));
         default:
           return LoraPopUpMessageModel(
               title: '',

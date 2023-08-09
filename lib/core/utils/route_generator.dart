@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../feature/bot_stock/presentation/gift/bot_stock_explanation_screen.dart';
 import '../../feature/bot_stock/presentation/gift/gift_bot_stock_message.dart';
+import '../../feature/onboarding/ppi/presentation/investment_style_question/isq/presentation/isq_onboarding_screen.dart';
 import '../../feature/tabs/ai_landing_page/presentation/ai_landing_page.dart';
 import '../../feature/tabs/utils/tab_util.dart';
 import '../presentation/ai/utils/ai_utils.dart';
-import '../../feature/onboarding/ppi/presentation/investment_style_question/ai_investment_style_question_onboarding_screen.dart';
+import '../../feature/onboarding/ppi/presentation/investment_style_question/isq/presentation/ai_investment_style_question_onboarding_screen.dart';
 import '../../feature/ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
 import '../../feature/auth/email_activation/presentation/email_activation_screen.dart';
 import '../../feature/auth/otp/presentation/otp_screen.dart';
@@ -27,7 +28,7 @@ import '../../feature/bot_stock/presentation/bot_stock_result_screen.dart';
 import '../../feature/bot_stock/presentation/bot_trade_summary/bot_trade_summary_screen.dart';
 import '../../feature/bot_stock/presentation/gift/bot_stock_do_screen.dart';
 import '../../feature/bot_stock/presentation/gift/bot_explanation_screen.dart';
-import '../../feature/bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
+import '../../feature/bot_stock/presentation/gift/bot_stock_welcome_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/detail/bot_portfolio_detail_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/portfolio_screen.dart';
 import '../../feature/bot_stock/utils/bot_stock_utils.dart';
@@ -136,10 +137,9 @@ class RouterGenerator {
             settings: settings,
             builder: (_) => ResetPasswordScreen(
                 resetPasswordToken: settings.arguments as String));
-      case GiftBotStockWelcomeScreen.route:
+      case BotStockWelcomeScreen.route:
         return MaterialPageRoute(
-            settings: settings,
-            builder: (_) => const GiftBotStockWelcomeScreen());
+            settings: settings, builder: (_) => const BotStockWelcomeScreen());
       case BotExplanationScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const BotExplanationScreen());
@@ -342,6 +342,9 @@ class RouterGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (_) => const AiInvestmentStyleQuestionWelcomeScreen());
+      case IsqOnBoardingScreen.route:
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const IsqOnBoardingScreen());
       case AiInvestmentStyleQuestionOnboardingScreen.route:
         return MaterialPageRoute(
             settings: settings,

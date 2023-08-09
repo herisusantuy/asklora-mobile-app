@@ -11,7 +11,7 @@ import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.
 import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../../tabs/presentation/tab_screen.dart';
 import '../../../../tabs/utils/tab_util.dart';
-import '../../gift/gift_bot_stock_welcome_screen.dart';
+import '../../gift/bot_stock_welcome_screen.dart';
 import '../utils/portfolio_utils.dart';
 
 class BotPortfolioPopUp extends StatelessWidget {
@@ -66,7 +66,7 @@ class BotPortfolioPopUp extends StatelessWidget {
             title: S.of(context).portfolioPopUpRedeemYourBotstockTitle,
             subTitle: S.of(context).portfolioPopUpRedeemYourBotstockSubTitle,
             primaryButtonLabel: S.of(context).redeemYourBotstockNow,
-            onPrimaryButtonTap: () => GiftBotStockWelcomeScreen.open(context));
+            onPrimaryButtonTap: () => BotStockWelcomeScreen.open(context));
       case BotPortfolioPopUpType.noBotStock:
         return LoraPopUpMessageModel(
             title: S.of(context).portfolioPopUpNoTradingHasStartedTitle,

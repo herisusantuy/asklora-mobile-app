@@ -743,8 +743,8 @@
   "botStockDoScreenPoint3": "Passive income!",
   "buttonGotIt": "Got it!",
   "understood": "明白！",
-  "giftBotStockWelcomeScreenTitle": "萬事具備, 即刻開始交易你嘅第一隻Botstock!",
-  "giftBotStockWelcomeScreenBottomButton": "好！咩咩Botstock話？",
+  "botStockWelcomeScreenTitle": "萬事具備, 即刻開始交易你嘅第一隻Botstock!",
+  "botStockWelcomeScreenBottomButton": "好！咩咩Botstock話？",
   "pressToStartOver": "重新界定",
   "pressToRedoISQ": "重新界定投資風格",
   "seeMyRecommendations": "See My Recommendations",
@@ -781,6 +781,8 @@
   "userNotFound": "User Not Found",
   "goToPortfolio": "Go To Portfolio",
   "startAnotherInvestments": "Start another investment",
+  "timeForInvestmentStyleQuestion": "想知Asklora有咩投資技？界定你嘅投資風格先！",
+  "isqWillHelpMeUnderstandWhatKindOfStocks": "ISQ會幫到我了解你對咩類型股票有興趣",
   "letsTrade": "LET'S TRADE",
   "rememberYouCan": "Remember, you can always ",
   "clickOnLora": "click on Lora ",
@@ -794,5 +796,7 @@
   "LoraAi": "Lora AI",
   "right": "Right",
   "portfolio": "Portfolio",
+  "throughoutYourInvestmentJourney": "Throughout your investment journey, you’ll see Lora on your bottom nav bar.Click on Lora at anytime to get advice or to ask anything related to finance.",
+  "letsGo": "Let’s Go",
   "botStockExplanationScreenTitle": "You pick the stock, and the 'Bot' will trade it for you!"
 }

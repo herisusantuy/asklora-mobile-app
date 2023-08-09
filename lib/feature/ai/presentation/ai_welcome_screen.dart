@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/presentation/ai/lora_animation_green.dart';
+import '../../../core/presentation/ai/lora_animation_magenta.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
@@ -45,10 +45,12 @@ class AiWelcomeScreen extends StatelessWidget {
             width: double.infinity,
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-              const LoraAnimationGreen(),
+              const LoraAnimationMagenta(),
               const SizedBox(
-                height: 64,
+                height: 32,
               ),
+              Center(
+                  child: getPngImage('splash_screen', width: 210, height: 100)),
               CustomTextNew(
                 title,
                 style: AskLoraTextStyles.h3
@@ -56,9 +58,12 @@ class AiWelcomeScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               if (child != null) child!,
+              const SizedBox(
+                height: 32,
+              ),
+              _bottomButton
             ]),
           ),
-          bottomButton: _bottomButton,
         ),
       );
 

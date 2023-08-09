@@ -16,5 +16,6 @@ class AiWelcomeSubtitleText extends StatelessWidget {
         subTitle,
         style: AskLoraTextStyles.body1
             .copyWith(color: aiThemeType.secondaryFontColor),
+        textAlign: TextAlign.center,
       );
 }

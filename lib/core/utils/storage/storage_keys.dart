@@ -26,4 +26,5 @@ class StorageKeys {
   static const String sfKeyChatLoraButtonTutorial = 'chat_lora_button_tutorial';
   static const String sfShowPriceDifference = 'show_price_difference';
   static const String sfFreshInstall = 'fresh_install';
+  static const String sfAiWelcomeScreen = 'ai_welcome_screen';
 }

@@ -54,12 +54,13 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       await _secureStorage.deleteAllData();
       await _tokenRepository.deleteAll();
       await _sharedPreference.writeBoolData(StorageKeys.sfFreshInstall, false);
+      await _sharedPreference.writeBoolData(
+          StorageKeys.sfAiWelcomeScreen, false);
     }
 
     bool isTokenValid = await _tokenRepository.isTokenValid();
     LocaleType localeType = LocaleType.findByLanguageCode(
         await _sharedPreference.readData(StorageKeys.sfKeyLocalisationData));
-
     if (isTokenValid) {
       var userJourney = await _userJourneyRepository.getUserJourney();
       emit(AppState.authenticated(
