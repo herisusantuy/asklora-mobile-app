@@ -69,8 +69,13 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     if (botIntroResponse.state == ResponseState.success) {
       if (_tempIntroResponse?.state == ResponseState.success) {
         status = ResponseState.success;
-        _addQueryResponseToConversation(tempList, botIntroResponse.data!);
-        _addQueryResponseToConversationQueues(_tempIntroResponse!.data!);
+        if (botIntroResponse.data!.results!.isNotEmpty ||
+            botIntroResponse.data!.components.isNotEmpty) {
+          _addQueryResponseToConversation(tempList, botIntroResponse.data!);
+          _addQueryResponseToConversationQueues(_tempIntroResponse!.data!);
+        } else {
+          _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
+        }
       } else if (_tempIntroResponse?.state == ResponseState.error) {
         status = ResponseState.error;
         _addQueryResponseToConversation(tempList, botIntroResponse.data!);
@@ -108,8 +113,13 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     if (botEarningsResponse.state == ResponseState.success) {
       if (_tempIntroResponse?.state == ResponseState.success) {
         status = ResponseState.success;
-        _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
-        _addQueryResponseToConversationQueues(botEarningsResponse.data!);
+        if (_tempIntroResponse!.data!.results!.isNotEmpty ||
+            _tempIntroResponse!.data!.components.isNotEmpty) {
+          _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
+          _addQueryResponseToConversationQueues(botEarningsResponse.data!);
+        } else {
+          _addQueryResponseToConversation(tempList, botEarningsResponse.data!);
+        }
       } else if (_tempIntroResponse?.state == ResponseState.error) {
         status = ResponseState.error;
         _addQueryResponseToConversation(tempList, botEarningsResponse.data!);
@@ -147,8 +157,14 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     if (welcomeStarterResponse.state == ResponseState.success) {
       if (_tempIntroResponse?.state == ResponseState.success) {
         status = ResponseState.success;
-        _addQueryResponseToConversation(tempList, welcomeStarterResponse.data!);
-        _addQueryResponseToConversationQueues(_tempIntroResponse!.data!);
+        if (welcomeStarterResponse.data!.results!.isNotEmpty ||
+            welcomeStarterResponse.data!.components.isNotEmpty) {
+          _addQueryResponseToConversation(
+              tempList, welcomeStarterResponse.data!);
+          _addQueryResponseToConversationQueues(_tempIntroResponse!.data!);
+        } else {
+          _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
+        }
       } else if (_tempIntroResponse?.state == ResponseState.error) {
         status = ResponseState.error;
         _addQueryResponseToConversation(tempList, welcomeStarterResponse.data!);
@@ -183,8 +199,14 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     if (welcomeNewsResponse.state == ResponseState.success) {
       if (_tempIntroResponse?.state == ResponseState.success) {
         status = ResponseState.success;
-        _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
-        _addQueryResponseToConversationQueues(welcomeNewsResponse.data!);
+
+        if (_tempIntroResponse!.data!.results!.isNotEmpty ||
+            _tempIntroResponse!.data!.components.isNotEmpty) {
+          _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
+          _addQueryResponseToConversationQueues(welcomeNewsResponse.data!);
+        } else {
+          _addQueryResponseToConversation(tempList, welcomeNewsResponse.data!);
+        }
       } else if (_tempIntroResponse?.state == ResponseState.error) {
         status = ResponseState.error;
         _addQueryResponseToConversation(tempList, welcomeNewsResponse.data!);
@@ -208,9 +230,11 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     String result = queryResponse.getResult();
     if (result.isNotEmpty) {
       conversations.add(Lora(result));
-    }
-    if (queryResponse.components.isNotEmpty) {
-      _conversationQueue.addAll(queryResponse.components);
+      if (queryResponse.components.isNotEmpty) {
+        _conversationQueue.addAll(queryResponse.components);
+      }
+    } else if (queryResponse.components.isNotEmpty) {
+      conversations.addAll(queryResponse.components);
     }
 
     return conversations;
