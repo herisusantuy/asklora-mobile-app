@@ -444,6 +444,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "想知Asklora有咩投資秘技？\n界定你嘅投資風格先！\n"),
         "isqNextButton": MessageLookupByLibrary.simpleMessage(
             "Press to move onto the next section"),
+        "isqWillHelpMeUnderstandWhatKindOfStocks":
+            MessageLookupByLibrary.simpleMessage("ISQ會幫到我了解你對咩類型股票有興趣"),
         "kycRejectedExplanationOfAffiliate":
             MessageLookupByLibrary.simpleMessage("我們不接受上述類別人士\n開立賬戶。"),
         "kycRejectedScreenTitle":
@@ -462,6 +464,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "legal": MessageLookupByLibrary.simpleMessage("Legal"),
         "legalFirstName": MessageLookupByLibrary.simpleMessage("法定英文名字"),
         "legalLastName": MessageLookupByLibrary.simpleMessage("法定英文姓氏"),
+        "letsGo": MessageLookupByLibrary.simpleMessage("Let’s Go"),
         "letsTrade": MessageLookupByLibrary.simpleMessage("LET\'S TRADE"),
         "licenseeName": MessageLookupByLibrary.simpleMessage("持牌人：張永經"),
         "licenseeNumber": MessageLookupByLibrary.simpleMessage("CE 編號: AFF918"),
@@ -802,7 +805,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
         "thisInteractiveGraph":
             MessageLookupByLibrary.simpleMessage("你可以係下面見到Botstock最近"),
+        "throughoutYourInvestmentJourney": MessageLookupByLibrary.simpleMessage(
+            "Throughout your investment journey, you’ll see Lora on your bottom nav bar.Click on Lora at anytime to get advice or to ask anything related to finance."),
         "timeCompleted": MessageLookupByLibrary.simpleMessage("完成時間"),
+        "timeForInvestmentStyleQuestion":
+            MessageLookupByLibrary.simpleMessage("想知Asklora有咩投資技？界定你嘅投資風格先！"),
         "timeRequested": MessageLookupByLibrary.simpleMessage("請求時間"),
         "to": MessageLookupByLibrary.simpleMessage("至"),
         "toAskAnyOtherQuestion": MessageLookupByLibrary.simpleMessage(
