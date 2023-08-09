@@ -32,7 +32,6 @@ class GreetingScreen extends StatelessWidget {
           body: CustomStretchedLayout(
             contentPadding: EdgeInsets.zero,
             content: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 50),
                 const LoraAnimationGreen(),
