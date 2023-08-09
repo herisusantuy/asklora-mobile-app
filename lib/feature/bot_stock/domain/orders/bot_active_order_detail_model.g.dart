@@ -26,6 +26,7 @@ BotActiveOrderDetailModel _$BotActiveOrderDetailModelFromJson(
       json['days_to_expire'] as int,
       (json['avg_return_pct'] as num).toDouble(),
       (json['avg_loss_pct'] as num).toDouble(),
+      json['start_date'] as String,
       (json['avg_period'] as num).toDouble(),
       json['stock_info'] == null
           ? null
@@ -60,6 +61,7 @@ Map<String, dynamic> _$BotActiveOrderDetailModelToJson(
       'days_to_expire': instance.daysToExpire,
       'avg_return_pct': instance.avgReturnPct,
       'avg_loss_pct': instance.avgLossPct,
+      'start_date': instance.startDate,
       'avg_period': instance.avgPeriod,
       'stock_info': instance.stockInfo,
       'current_price': instance.currentPrice,

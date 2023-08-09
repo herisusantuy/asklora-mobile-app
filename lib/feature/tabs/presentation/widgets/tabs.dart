@@ -184,7 +184,7 @@ class Tabs extends StatelessWidget {
                     text: ' ${S.of(context).navBar} ',
                     style: AskLoraTextStyles.subtitle2),
                 TextSpan(
-                    text: '${S.of(context).toGoToDifferentPages}',
+                    text: S.of(context).toGoToDifferentPages,
                     style: AskLoraTextStyles.body1),
               ],
             ),
@@ -198,8 +198,12 @@ class Tabs extends StatelessWidget {
                   style: AskLoraTextStyles.subtitle2,
                 ),
                 TextSpan(
-                    text: ' - ${S.of(context).recommendations} ',
-                    style: AskLoraTextStyles.body1),
+                  text: S.of(context).isq,
+                  style: AskLoraTextStyles.body1,
+                ),
+                TextSpan(
+                    text: '${S.of(context).recommendations} ',
+                    style: AskLoraTextStyles.subtitle2),
               ],
             ),
             textAlign: TextAlign.center,
@@ -212,8 +216,12 @@ class Tabs extends StatelessWidget {
                   style: AskLoraTextStyles.subtitle2,
                 ),
                 TextSpan(
-                    text: ' - ${S.of(context).LoraAi} ',
-                    style: AskLoraTextStyles.body1),
+                  text: S.of(context).interactive,
+                  style: AskLoraTextStyles.body1,
+                ),
+                TextSpan(
+                    text: S.of(context).LoraAi,
+                    style: AskLoraTextStyles.subtitle2),
               ],
             ),
             textAlign: TextAlign.center,
@@ -228,7 +236,7 @@ class Tabs extends StatelessWidget {
                   ),
                   TextSpan(
                       text: ' - ${S.of(context).portfolio} ',
-                      style: AskLoraTextStyles.body1),
+                      style: AskLoraTextStyles.subtitle2),
                 ],
               ),
             ),
