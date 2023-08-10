@@ -11,6 +11,8 @@ import '../../../core/domain/token/repository/token_repository.dart';
 import '../../../core/domain/validation_enum.dart';
 import '../../../core/utils/storage/shared_preference.dart';
 import '../../../core/utils/storage/storage_keys.dart';
+import '../../onboarding/kyc/domain/get_account/get_account_response.dart';
+import '../../onboarding/kyc/repository/account_repository.dart';
 import '../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../sign_up/repository/sign_up_repository.dart';
 
@@ -25,6 +27,7 @@ class EmailActivationBloc
     this._tokenRepository,
     this._sharedPreference,
     this._ppiResponseRepository,
+    this._accountRepository,
   ) : super(const EmailActivationState()) {
     on<ResendEmailActivationLink>(_onResendEmailActivationLink);
     on<StartListenOnDeeplink>(_onStartListenOnDeeplink);
@@ -34,6 +37,7 @@ class EmailActivationBloc
   final SignUpRepository _signUpRepository;
   final TokenRepository _tokenRepository;
   final PpiResponseRepository _ppiResponseRepository;
+  final AccountRepository _accountRepository;
   final SharedPreference _sharedPreference;
   StreamSubscription? _streamSubscription;
 
@@ -93,13 +97,6 @@ class EmailActivationBloc
   ) async {
     emit(state.copyWith(response: BaseResponse.loading()));
 
-    final tempId =
-        await _sharedPreference.readIntData(StorageKeys.sfKeyPpiUserId);
-
-    await _sharedPreference.writeBoolData(StorageKeys.sfAiWelcomeScreen, true);
-
-    await _ppiResponseRepository.linkUser(tempId ?? 0);
-
     await Future.delayed(const Duration(milliseconds: 1500));
 
     await _tokenRepository
@@ -107,8 +104,44 @@ class EmailActivationBloc
     await _tokenRepository
         .saveRefreshToken(event.uri.queryParameters['refresh']!);
 
+    await _sharedPreference.writeBoolData(StorageKeys.sfAiWelcomeScreen, true);
+
+    ///need to fetch user snapshot if cannot found on local storage
+    ///edge case user reinstall app or activating deeplink using other phone
+    print('come here');
+    GetAccountResponse? getAccountResponse = await _fetchUserProfile();
+    if (getAccountResponse != null) {
+      var snapshot = await _ppiResponseRepository
+          .getUserSnapShotUserId(getAccountResponse.username);
+      if (snapshot.state == ResponseState.success) {
+        await _ppiResponseRepository.linkUser(snapshot.data!.id);
+
+        emit(state.copyWith(
+            response: const BaseResponse(),
+            deeplinkStatus: DeeplinkStatus.success));
+      } else {
+        onDeepLinkValidateFailed(emit);
+      }
+    } else {
+      onDeepLinkValidateFailed(emit);
+    }
+  }
+
+  void onDeepLinkValidateFailed(Emitter<EmailActivationState> emit) {
+    _tokenRepository.deleteAll();
     emit(state.copyWith(
-        response: const BaseResponse(),
-        deeplinkStatus: DeeplinkStatus.success));
+        response: BaseResponse.error(), deeplinkStatus: DeeplinkStatus.failed));
+  }
+
+  Future<GetAccountResponse?> _fetchUserProfile() async {
+    final accountInfo = await _accountRepository.getAccount();
+    if (accountInfo.state == ResponseState.success) {
+      _sharedPreference.writeData(
+          StorageKeys.sfKeyEmail, accountInfo.data!.email);
+      _sharedPreference.writeData(
+          StorageKeys.sfKeyPpiUsername, accountInfo.data!.username);
+      return accountInfo.data;
+    }
+    return null;
   }
 }
