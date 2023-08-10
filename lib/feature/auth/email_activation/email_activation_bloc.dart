@@ -106,9 +106,6 @@ class EmailActivationBloc
 
     await _sharedPreference.writeBoolData(StorageKeys.sfAiWelcomeScreen, true);
 
-    ///need to fetch user snapshot if cannot found on local storage
-    ///edge case user reinstall app or activating deeplink using other phone
-    print('come here');
     GetAccountResponse? getAccountResponse = await _fetchUserProfile();
     if (getAccountResponse != null) {
       var snapshot = await _ppiResponseRepository
