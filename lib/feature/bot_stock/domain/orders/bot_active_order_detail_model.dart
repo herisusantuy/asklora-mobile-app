@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../../../core/domain/bot/bot_detail_model.dart';
 import '../../../../core/domain/bot/bot_info.dart';
 import '../../../../core/domain/bot/stock_info.dart';
+import '../../../../core/utils/date_utils.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../utils/bot_stock_utils.dart';
 
@@ -16,6 +17,8 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   final double avgReturnPct;
   @JsonKey(name: 'avg_loss_pct')
   final double avgLossPct;
+  @JsonKey(name: 'start_date')
+  final String startDate;
   @JsonKey(name: 'avg_period')
   final double avgPeriod;
   @JsonKey(name: 'stock_info')
@@ -55,6 +58,7 @@ class BotActiveOrderDetailModel extends BotDetailModel {
       this.daysToExpire,
       this.avgReturnPct,
       this.avgLossPct,
+      this.startDate,
       this.avgPeriod,
       this.stockInfo,
       this.currentPrice,
@@ -173,6 +177,8 @@ class BotActiveOrderDetailModel extends BotDetailModel {
           : '/';
     }
   }
+
+  String get startDateHKTString => convertDateToHktString(startDate);
 
   OmsStatus get omsStatus => OmsStatus.findByString(status);
 

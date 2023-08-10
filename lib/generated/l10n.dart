@@ -3873,10 +3873,10 @@ class S {
     );
   }
 
-  /// `It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.`
+  /// `Most likely, your risk score is too low to meet SFC requirements.\n\nIf you made a mistake and did not answer the questions correctly, please try again.`
   String get privacyFailedScreenDescription {
     return Intl.message(
-      'It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again.',
+      'Most likely, your risk score is too low to meet SFC requirements.\n\nIf you made a mistake and did not answer the questions correctly, please try again.',
       name: 'privacyFailedScreenDescription',
       desc: '',
       args: [],
@@ -4243,10 +4243,10 @@ class S {
     );
   }
 
-  /// `Can't remember your email address?\nEmail us at cs@asklora.ai`
+  /// `Can't remember your email address?\nEmail us at help@asklora.ai`
   String get cantRememberYourEmail {
     return Intl.message(
-      'Can\'t remember your email address?\nEmail us at cs@asklora.ai',
+      'Can\'t remember your email address?\nEmail us at help@asklora.ai',
       name: 'cantRememberYourEmail',
       desc: '',
       args: [],
@@ -4404,10 +4404,10 @@ class S {
     );
   }
 
-  /// `Press to move onto the next section`
+  /// `Please press to proceed to the next question`
   String get isqNextButton {
     return Intl.message(
-      'Press to move onto the next section',
+      'Please press to proceed to the next question',
       name: 'isqNextButton',
       desc: '',
       args: [],
@@ -5635,20 +5635,20 @@ class S {
   }
 
   /// `You're all set!\nLet's begin a real AI trade!`
-  String get giftBotStockWelcomeScreenTitle {
+  String get botStockWelcomeScreenTitle {
     return Intl.message(
       'You\'re all set!\nLet\'s begin a real AI trade!',
-      name: 'giftBotStockWelcomeScreenTitle',
+      name: 'botStockWelcomeScreenTitle',
       desc: '',
       args: [],
     );
   }
 
   /// `Sure! What is a Botstock?`
-  String get giftBotStockWelcomeScreenBottomButton {
+  String get botStockWelcomeScreenBottomButton {
     return Intl.message(
       'Sure! What is a Botstock?',
-      name: 'giftBotStockWelcomeScreenBottomButton',
+      name: 'botStockWelcomeScreenBottomButton',
       desc: '',
       args: [],
     );
@@ -5884,6 +5884,26 @@ class S {
     );
   }
 
+  /// `Now for the Investment Style Questions (ISQ)! These questions will feel more ChatGPT style.`
+  String get timeForInvestmentStyleQuestion {
+    return Intl.message(
+      'Now for the Investment Style Questions (ISQ)! These questions will feel more ChatGPT style.',
+      name: 'timeForInvestmentStyleQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Through our chat-style dialogue, we'll grasp your investment interests to tailor botstock recommendations for you.`
+  String get isqWillHelpMeUnderstandWhatKindOfStocks {
+    return Intl.message(
+      'Through our chat-style dialogue, we\'ll grasp your investment interests to tailor botstock recommendations for you.',
+      name: 'isqWillHelpMeUnderstandWhatKindOfStocks',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Remember, you can always `
   String get rememberYouCan {
     return Intl.message(
@@ -5999,6 +6019,46 @@ class S {
     return Intl.message(
       'Portfolio',
       name: 'portfolio',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Throughout your investment journey, you’ll see Lora on your bottom nav bar. Click on Lora at anytime to get advice or to ask anything related to finance.`
+  String get throughoutYourInvestmentJourney {
+    return Intl.message(
+      'Throughout your investment journey, you’ll see Lora on your bottom nav bar. Click on Lora at anytime to get advice or to ask anything related to finance.',
+      name: 'throughoutYourInvestmentJourney',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let’s Go`
+  String get letsGo {
+    return Intl.message(
+      'Let’s Go',
+      name: 'letsGo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` - (ISQ) `
+  String get isq {
+    return Intl.message(
+      ' - (ISQ) ',
+      name: 'isq',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` - (Interactive) `
+  String get interactive {
+    return Intl.message(
+      ' - (Interactive) ',
+      name: 'interactive',
       desc: '',
       args: [],
     );

@@ -10,9 +10,9 @@ InvestmentStyleQuestionQueryRequest
     _$InvestmentStyleQuestionQueryRequestFromJson(Map<String, dynamic> json) =>
         InvestmentStyleQuestionQueryRequest(
           input: json['input'] as String,
-          userId: json['user_id'] as String? ?? 'user_id',
-          username: json['username'] as String? ?? 'testing user',
-          platform: json['platform'] as String? ?? 'mobile_app',
+          userId: json['user_id'] as String,
+          username: json['username'] as String,
+          platform: json['platform'] as String? ?? aiPlatform,
           start: json['start'] as bool,
           answer: json['ans'] as int? ?? -1,
         );

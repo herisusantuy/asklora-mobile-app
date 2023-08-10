@@ -11,8 +11,7 @@ class LoraGptState extends Equatable {
   final List<Botstock> botstocks;
   final double totalPnl;
   final TabPage tabPage;
-
-  static const String platform = 'asklora';
+  final bool isTyping;
 
   const LoraGptState({
     this.debugText = '',
@@ -26,6 +25,7 @@ class LoraGptState extends Equatable {
     this.botstocks = const [],
     this.totalPnl = 0,
     this.tabPage = TabPage.forYou,
+    this.isTyping = false,
   });
 
   LoraGptState copyWith({
@@ -52,6 +52,7 @@ class LoraGptState extends Equatable {
       botstocks: botstocks ?? this.botstocks,
       totalPnl: totalPnl ?? this.totalPnl,
       tabPage: tabPage ?? this.tabPage,
+      isTyping: isTyping ?? this.isTyping,
     );
   }
 
@@ -61,30 +62,31 @@ class LoraGptState extends Equatable {
         input: query,
         userId: userId,
         username: userName,
-        platform: platform,
+        platform: aiPlatform,
       );
 
   PortfolioDetailsRequest getPortfolioDetailsRequest(
           {required String query,
           required String ticker,
           required String tickerSymbol,
-          required String botType}) =>
+          required String botType,
+          required String duration}) =>
       PortfolioDetailsRequest(
-        ticker: ticker,
-        input: query,
-        userId: userId,
-        username: userName,
-        platform: platform,
-        botType: botType,
-        tickerSymbol: tickerSymbol,
-      );
+          ticker: ticker,
+          input: query,
+          userId: userId,
+          username: userName,
+          platform: aiPlatform,
+          botType: botType,
+          tickerSymbol: tickerSymbol,
+          duration: duration);
 
   GeneralQueryRequest getGeneralChatRequest({required String query}) =>
       GeneralQueryRequest(
         input: query,
         userId: userId,
         username: userName,
-        platform: platform,
+        platform: aiPlatform,
         sessionId: '',
       );
 
@@ -92,7 +94,7 @@ class LoraGptState extends Equatable {
         input: '',
         userId: userId,
         username: userName,
-        platform: platform,
+        platform: aiPlatform,
         sessionId: '',
       );
 
@@ -107,7 +109,7 @@ class LoraGptState extends Equatable {
           ticker: ticker,
           investmentHorizon: investmentHorizon,
           userId: userId,
-          platform: platform,
+          platform: aiPlatform,
           username: userName);
 
   @override
@@ -126,5 +128,5 @@ class LoraGptState extends Equatable {
       ];
 
   bool get isTextFieldSendButtonDisabled =>
-      status == ResponseState.loading || query.isEmpty || query.trim().isEmpty;
+      isTyping || query.trim().isEmpty || status == ResponseState.loading;
 }

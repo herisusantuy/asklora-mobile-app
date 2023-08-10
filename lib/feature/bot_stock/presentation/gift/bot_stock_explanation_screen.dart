@@ -20,7 +20,6 @@ class BotStockExplanationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BotStockForm(
       useHeader: true,
-      enableBackNavigation: false,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -39,7 +38,7 @@ class BotStockExplanationScreen extends StatelessWidget {
         ],
       ),
       bottomButton: Padding(
-        padding: const EdgeInsets.only(bottom: 30),
+        padding: const EdgeInsets.only(bottom: 50),
         child: PrimaryButton(
             label: S.of(context).understood,
             onTap: () => TabScreen.openAndRemoveAllRoute(context,

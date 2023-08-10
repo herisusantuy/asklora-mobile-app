@@ -44,18 +44,18 @@ class AppState extends Equatable {
   final AppStatus status;
   final UserJourney userJourney;
 
-  const AppState._({
-    this.status = AppStatus.unknown,
-    this.locale = const LocaleType('en', 'US', 'ENG', 'English', 'Manrope'),
-    this.userJourney = UserJourney.privacy,
-  });
+  const AppState._(
+      {this.status = AppStatus.unknown,
+      this.locale = const LocaleType('en', 'US', 'ENG', 'English', 'Manrope'),
+      this.userJourney = UserJourney.privacy});
 
   const AppState.unknown() : this._();
 
   const AppState.authenticated(
       {UserJourney userJourney = UserJourney.privacy,
       LocaleType localeType =
-          const LocaleType('en', 'US', 'ENG', 'English', 'Mulish')})
+          const LocaleType('en', 'US', 'ENG', 'English', 'Mulish'),
+      aiWelcomeScreenStatus = false})
       : this._(
             status: AppStatus.authenticated,
             userJourney: userJourney,
@@ -69,21 +69,13 @@ class AppState extends Equatable {
             locale: localeType,
             userJourney: userJourney);
 
-  AppState copyWith({
-    UserJourney? userJourney,
-    LocaleType? locale,
-  }) {
+  AppState copyWith({UserJourney? userJourney, LocaleType? locale}) {
     return AppState._(
-      status: status,
-      locale: locale ?? this.locale,
-      userJourney: userJourney ?? this.userJourney,
-    );
+        status: status,
+        locale: locale ?? this.locale,
+        userJourney: userJourney ?? this.userJourney);
   }
 
   @override
-  List<Object> get props => [
-        status,
-        locale,
-        userJourney,
-      ];
+  List<Object> get props => [status, locale, userJourney];
 }

@@ -96,8 +96,19 @@ class BotRecommendationDetailModel extends Equatable {
     this.marketCap,
   );
 
-  String get formattedStartDate =>
-      convertDateToEstString(startDate, dateFormat: 'dd/MM/yyyy');
+  String get prevClosePctFormatted => prevClosePct > 0
+      ? '+${prevClosePct.convertToCurrencyDecimal()}%'
+      : (prevClosePct < 0)
+          ? '${prevClosePct.convertToCurrencyDecimal()}%'
+          : '0.00%';
+
+  String get prevCloseAmtFormatted => prevCloseAmt > 0
+      ? '+${prevCloseAmt.convertToCurrencyDecimal()}'
+      : (prevCloseAmt < 0)
+          ? prevCloseAmt.convertToCurrencyDecimal()
+          : '0.00';
+
+  String get formattedStartDate => convertDateToHktString(startDate);
 
   String get formattedAcknowledgementEstEndDate {
     return '${convertDateToEstString(estEndDate, dateFormat: 'dd/MM/yyyy HH:mm')} EST';

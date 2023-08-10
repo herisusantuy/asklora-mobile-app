@@ -96,6 +96,8 @@ class EmailActivationBloc
     final tempId =
         await _sharedPreference.readIntData(StorageKeys.sfKeyPpiUserId);
 
+    await _sharedPreference.writeBoolData(StorageKeys.sfAiWelcomeScreen, true);
+
     await _ppiResponseRepository.linkUser(tempId ?? 0);
 
     await Future.delayed(const Duration(milliseconds: 1500));

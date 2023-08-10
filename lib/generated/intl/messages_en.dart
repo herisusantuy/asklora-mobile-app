@@ -193,6 +193,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "botStockExplanationScreenTitle": MessageLookupByLibrary.simpleMessage(
             "You pick the stock, and the \'Bot\' will trade it for you!"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
+        "botStockWelcomeScreenBottomButton":
+            MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
+        "botStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "You\'re all set!\nLet\'s begin a real AI trade!"),
         "botStocksDetails": MessageLookupByLibrary.simpleMessage(
             "Botstock’s details and estimated returns."),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
@@ -286,7 +290,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cannotRememberEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Can’t remember your email address?\nEmail us at cs@asklora.ai"),
         "cantRememberYourEmail": MessageLookupByLibrary.simpleMessage(
-            "Can\'t remember your email address?\nEmail us at cs@asklora.ai"),
+            "Can\'t remember your email address?\nEmail us at help@asklora.ai"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage(
             "Get your Investments in Shape"),
         "carouselIntro2": MessageLookupByLibrary.simpleMessage(
@@ -463,10 +467,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("See my recommendations"),
         "giftBotStockMessageScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Every trade is unique, each time you invest with a new Botstock, I\'ll ask you some investment style questions to tailor new recommendations! "),
-        "giftBotStockWelcomeScreenBottomButton":
-            MessageLookupByLibrary.simpleMessage("Sure! What is a Botstock?"),
-        "giftBotStockWelcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
-            "You\'re all set!\nLet\'s begin a real AI trade!"),
         "go": MessageLookupByLibrary.simpleMessage("Go"),
         "goToPortfolio":
             MessageLookupByLibrary.simpleMessage("Go To Portfolio"),
@@ -512,6 +512,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Input wrong email address"),
         "installationMaintenanceRepair": MessageLookupByLibrary.simpleMessage(
             "Installation, Maintenance, and Repair"),
+        "interactive":
+            MessageLookupByLibrary.simpleMessage(" - (Interactive) "),
         "introduceBotPlank":
             MessageLookupByLibrary.simpleMessage("Introduce Bot - Plank"),
         "introduceBotPullup":
@@ -533,8 +535,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I like your style"),
         "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
             "It’s time to define your investment style.Show me what you’re made of!"),
+        "isq": MessageLookupByLibrary.simpleMessage(" - (ISQ) "),
         "isqNextButton": MessageLookupByLibrary.simpleMessage(
-            "Press to move onto the next section"),
+            "Please press to proceed to the next question"),
+        "isqWillHelpMeUnderstandWhatKindOfStocks":
+            MessageLookupByLibrary.simpleMessage(
+                "Through our chat-style dialogue, we\'ll grasp your investment interests to tailor botstock recommendations for you."),
         "kycRejectedExplanationOfAffiliate": MessageLookupByLibrary.simpleMessage(
             "We do not accept any members who are affiliated with the organisations mentioned above"),
         "kycRejectedScreenTitle": MessageLookupByLibrary.simpleMessage(
@@ -555,6 +561,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Legal English First Name"),
         "legalLastName":
             MessageLookupByLibrary.simpleMessage("Legal English Last Name"),
+        "letsGo": MessageLookupByLibrary.simpleMessage("Let’s Go"),
         "letsTrade": MessageLookupByLibrary.simpleMessage("LET\'S TRADE"),
         "licenseeName":
             MessageLookupByLibrary.simpleMessage("Licensee: Chang Yung Ching"),
@@ -805,7 +812,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyEvaluation":
             MessageLookupByLibrary.simpleMessage("Privacy Evaluation"),
         "privacyFailedScreenDescription": MessageLookupByLibrary.simpleMessage(
-            "It could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again."),
+            "Most likely, your risk score is too low to meet SFC requirements.\n\nIf you made a mistake and did not answer the questions correctly, please try again."),
         "privacyFailedScreenTitle": MessageLookupByLibrary.simpleMessage(
             "I\'m afraid you\'re not eligible for Asklora yet."),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
@@ -966,7 +973,11 @@ class MessageLookup extends MessageLookupByLibrary {
                 "The proof of remittance should show your bank account number, full name, and amount."),
         "thisInteractiveGraph": MessageLookupByLibrary.simpleMessage(
             "This interactive graph shows the Botstock’s past "),
+        "throughoutYourInvestmentJourney": MessageLookupByLibrary.simpleMessage(
+            "Throughout your investment journey, you’ll see Lora on your bottom nav bar. Click on Lora at anytime to get advice or to ask anything related to finance."),
         "timeCompleted": MessageLookupByLibrary.simpleMessage("Time Completed"),
+        "timeForInvestmentStyleQuestion": MessageLookupByLibrary.simpleMessage(
+            "Now for the Investment Style Questions (ISQ)! These questions will feel more ChatGPT style."),
         "timeRequested": MessageLookupByLibrary.simpleMessage("Time Requested"),
         "to": MessageLookupByLibrary.simpleMessage("To"),
         "toAskAnyOtherQuestion": MessageLookupByLibrary.simpleMessage(

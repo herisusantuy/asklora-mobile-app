@@ -96,3 +96,5 @@ const String endpointBotIntro = '/miscellaneous/bot_starter_omit_earnings';
 const String endpointBotEarning = '/miscellaneous/earnings_analysis';
 const String endpointWelcomeStarter = '/miscellaneous/welcome_starter';
 const String endpointWelcomeNews = '/miscellaneous/welcome_news';
+
+const String aiPlatform = 'asklora';
