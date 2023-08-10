@@ -4404,10 +4404,10 @@ class S {
     );
   }
 
-  /// `Press to move onto the next section`
+  /// `Please press to proceed to the next question`
   String get isqNextButton {
     return Intl.message(
-      'Press to move onto the next section',
+      'Please press to proceed to the next question',
       name: 'isqNextButton',
       desc: '',
       args: [],
