@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../generated/l10n.dart';
-import '../../../onboarding/ppi/presentation/investment_style_question/isq/bloc/isq_onboarding_bloc.dart';
 import '../../../tabs/for_you/investment_style/presentation/ai_investment_style_question_for_you_screen.dart';
 import '../../presentation/ai_welcome_screen.dart';
 import '../../presentation/widgets/ai_welcome_subtitle_text.dart';
@@ -35,9 +33,6 @@ class AiInvestmentStyleQuestionWelcomeScreen extends StatelessWidget {
       ),
       onBottomButtonTap: () {
         if (isqType == ISQType.onboarding) {
-          context
-              .read<IsqOnBoardingBloc>()
-              .add(const UpdateAiWelcomeScreenStatus(false));
           AiInvestmentStyleQuestionOnboardingScreen.open(context);
         } else {
           AiInvestmentStyleQuestionForYouScreen.open(context,

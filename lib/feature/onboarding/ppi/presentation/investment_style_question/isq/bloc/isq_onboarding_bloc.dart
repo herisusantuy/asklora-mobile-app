@@ -36,6 +36,7 @@ class IsqOnBoardingBloc extends Bloc<IsqOnBoardingEvent, IsqOnBoardingState> {
       Emitter<IsqOnBoardingState> emit) async {
     await _sharedPreference.writeBoolData(
         StorageKeys.sfAiWelcomeScreen, event.aiWelcomeScreenStatus);
+    print('now ${event.aiWelcomeScreenStatus}');
     emit(state.copyWith(aiWelcomeScreenStatus: event.aiWelcomeScreenStatus));
   }
 }
