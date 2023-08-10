@@ -15,7 +15,7 @@ import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../onboarding/kyc/presentation/kyc_screen.dart';
-import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
+import '../../../onboarding/ppi/presentation/investment_style_question/isq/presentation/isq_onboarding_screen.dart';
 import '../../../onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
 import '../../../tabs/presentation/tab_screen.dart';
 import '../../email_activation/presentation/email_activation_screen.dart';
@@ -56,10 +56,10 @@ class SignInForm extends StatelessWidget {
         } else {
           switch (state.response.data!.userJourney) {
             case UserJourney.kyc:
-              KycScreen.open(context);
+              KycScreen.openAndRemoveAllRoute(context);
               break;
             case UserJourney.investmentStyle:
-              InvestmentStyleWelcomeScreen.openAndRemoveAllRoute(context);
+              IsqOnBoardingScreen.openAndRemoveAllRoute(context);
               break;
             default:
               TabScreen.openAndRemoveAllRoute(context);

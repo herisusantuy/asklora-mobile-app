@@ -185,6 +185,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         status = ResponseState.success;
         _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
       } else {
+        isTyping = false;
         _tempIntroResponse ??= welcomeStarterResponse;
       }
     }
@@ -230,6 +231,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         status = ResponseState.success;
         _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
       } else {
+        isTyping = false;
         _tempIntroResponse ??= welcomeNewsResponse;
       }
     }
