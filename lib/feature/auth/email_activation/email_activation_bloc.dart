@@ -109,11 +109,14 @@ class EmailActivationBloc
 
     await _sharedPreference.writeBoolData(StorageKeys.sfAiWelcomeScreen, true);
     if (tempId != null) {
-      await _ppiResponseRepository.linkUser(tempId);
-
-      emit(state.copyWith(
-          response: const BaseResponse(),
-          deeplinkStatus: DeeplinkStatus.success));
+      final linkUserResponse = await _ppiResponseRepository.linkUser(tempId);
+      if (linkUserResponse.state == ResponseState.success) {
+        emit(state.copyWith(
+            response: const BaseResponse(),
+            deeplinkStatus: DeeplinkStatus.success));
+      } else {
+        onDeepLinkValidateFailed(emit);
+      }
     } else {
       ///need to fetch user snapshot if cannot found on local storage
       ///edge case user reinstall app or activating deeplink using other phone
@@ -122,11 +125,15 @@ class EmailActivationBloc
         var snapshot = await _ppiResponseRepository
             .getUserSnapShotUserId(getAccountResponse.username);
         if (snapshot.state == ResponseState.success) {
-          await _ppiResponseRepository.linkUser(snapshot.data!.id);
-
-          emit(state.copyWith(
-              response: const BaseResponse(),
-              deeplinkStatus: DeeplinkStatus.success));
+          final linkUserResponse =
+              await _ppiResponseRepository.linkUser(snapshot.data!.id);
+          if (linkUserResponse.state == ResponseState.success) {
+            emit(state.copyWith(
+                response: const BaseResponse(),
+                deeplinkStatus: DeeplinkStatus.success));
+          } else {
+            onDeepLinkValidateFailed(emit);
+          }
         } else {
           onDeepLinkValidateFailed(emit);
         }
