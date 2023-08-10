@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
+import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
@@ -17,6 +18,7 @@ import '../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/isq/presentation/isq_onboarding_screen.dart';
 import '../../../onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
 import '../../../tabs/presentation/tab_screen.dart';
+import '../../email_activation/presentation/email_activation_screen.dart';
 import '../../forgot_password/presentation/forgot_password_screen.dart';
 import '../../otp/presentation/otp_screen.dart';
 import '../../utils/auth_utils.dart';
@@ -32,9 +34,19 @@ class SignInForm extends StatelessWidget {
       CustomLoadingOverlay.of(context).show(state.response.state);
       var responseState = state.response.state;
       if (responseState == ResponseState.error) {
-        context.read<SignInBloc>().add(SignInEmailChanged(state.emailAddress));
-        CustomInAppNotification.show(
-            context, state.response.validationCode.getText(context));
+        if (state.response.validationCode == ValidationCode.unverifiedEmail) {
+          EmailActivationScreen.open(
+            context,
+            EmailActivationScreenArguments(
+                userName: state.emailAddress, isFromLoginScreen: true),
+          );
+        } else {
+          context
+              .read<SignInBloc>()
+              .add(SignInEmailChanged(state.emailAddress));
+          CustomInAppNotification.show(
+              context, state.response.validationCode.getText(context));
+        }
       } else if (responseState == ResponseState.success) {
         context.read<AppBloc>().add(const GetUserJourneyFromLocal());
         var arguments = Pair(state.emailAddress, state.password);

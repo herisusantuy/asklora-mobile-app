@@ -102,6 +102,11 @@ class PpiResponseRepository {
     }
   }
 
-  Future<Response> linkUser(int userId) async =>
-      await _ppiApiRepository.linkUser(userId);
+  Future<BaseResponse<Response>> linkUser(int userId) async {
+    try {
+      return BaseResponse.complete(await _ppiApiRepository.linkUser(userId));
+    } catch (_) {
+      return BaseResponse.error();
+    }
+  }
 }
