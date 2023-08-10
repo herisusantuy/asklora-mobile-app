@@ -69,7 +69,8 @@ class EmailActivationScreen extends StatelessWidget {
                 context
                     .read<AppBloc>()
                     .add(const SaveUserJourney(UserJourney.investmentStyle));
-                AiInvestmentStyleQuestionWelcomeScreen.open(context);
+                AiInvestmentStyleQuestionWelcomeScreen.openAndRemoveAllRoute(
+                    context);
               }
               switch (state.response.state) {
                 case ResponseState.error:
