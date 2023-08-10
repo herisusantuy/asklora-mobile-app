@@ -50,7 +50,7 @@ class PortfolioDetailsRequest extends BaseQueryRequest {
         'platform': platform,
         'bot_type': botType,
         'ticker_symbol': tickerSymbol,
-        'duration': duration.toLowerCase(),
+        'duration': duration,
       };
 
   factory PortfolioDetailsRequest.fromJson(Map<String, dynamic> json) =>
