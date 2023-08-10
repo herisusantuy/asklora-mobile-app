@@ -104,23 +104,35 @@ class EmailActivationBloc
     await _tokenRepository
         .saveRefreshToken(event.uri.queryParameters['refresh']!);
 
+    final tempId =
+        await _sharedPreference.readIntData(StorageKeys.sfKeyPpiUserId);
+
     await _sharedPreference.writeBoolData(StorageKeys.sfAiWelcomeScreen, true);
+    if (tempId != null) {
+      await _ppiResponseRepository.linkUser(tempId);
 
-    GetAccountResponse? getAccountResponse = await _fetchUserProfile();
-    if (getAccountResponse != null) {
-      var snapshot = await _ppiResponseRepository
-          .getUserSnapShotUserId(getAccountResponse.username);
-      if (snapshot.state == ResponseState.success) {
-        await _ppiResponseRepository.linkUser(snapshot.data!.id);
+      emit(state.copyWith(
+          response: const BaseResponse(),
+          deeplinkStatus: DeeplinkStatus.success));
+    } else {
+      ///need to fetch user snapshot if cannot found on local storage
+      ///edge case user reinstall app or activating deeplink using other phone
+      GetAccountResponse? getAccountResponse = await _fetchUserProfile();
+      if (getAccountResponse != null) {
+        var snapshot = await _ppiResponseRepository
+            .getUserSnapShotUserId(getAccountResponse.username);
+        if (snapshot.state == ResponseState.success) {
+          await _ppiResponseRepository.linkUser(snapshot.data!.id);
 
-        emit(state.copyWith(
-            response: const BaseResponse(),
-            deeplinkStatus: DeeplinkStatus.success));
+          emit(state.copyWith(
+              response: const BaseResponse(),
+              deeplinkStatus: DeeplinkStatus.success));
+        } else {
+          onDeepLinkValidateFailed(emit);
+        }
       } else {
         onDeepLinkValidateFailed(emit);
       }
-    } else {
-      onDeepLinkValidateFailed(emit);
     }
   }
 

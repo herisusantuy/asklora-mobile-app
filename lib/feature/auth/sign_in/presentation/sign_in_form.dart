@@ -38,8 +38,7 @@ class SignInForm extends StatelessWidget {
           EmailActivationScreen.open(
             context,
             EmailActivationScreenArguments(
-                userName: state.emailAddress,
-                isInitiateRequestEmailActivation: true),
+                userName: state.emailAddress, isFromLoginScreen: true),
           );
         } else {
           context

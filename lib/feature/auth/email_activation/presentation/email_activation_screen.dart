@@ -53,7 +53,7 @@ class EmailActivationScreen extends StatelessWidget {
               PpiResponseRepository(),
               AccountRepository())
             ..add(const StartListenOnDeeplink());
-          if (arguments.isInitiateRequestEmailActivation) {
+          if (arguments.isFromLoginScreen) {
             emailActivationBloc
                 .add(ResendEmailActivationLink(arguments.userName));
           }
@@ -128,12 +128,17 @@ class EmailActivationScreen extends StatelessWidget {
                         primaryButtonOnClick: () => context
                             .read<EmailActivationBloc>()
                             .add(ResendEmailActivationLink(arguments.userName)),
-                        secondaryButtonOnClick: () => context
-                            .read<LoraAskNameBloc>()
-                            .add(const ReSubmitUserName()),
+                        secondaryButtonOnClick: () =>
+                            arguments.isFromLoginScreen
+                                ? Navigator.pop(context)
+                                : context
+                                    .read<LoraAskNameBloc>()
+                                    .add(const ReSubmitUserName()),
                         primaryButtonLabel:
                             S.of(context).buttonResendActivationLink,
-                        secondaryButtonLabel: S.of(context).buttonSignUpAgain),
+                        secondaryButtonLabel: arguments.isFromLoginScreen
+                            ? S.of(context).buttonBack
+                            : S.of(context).buttonSignUpAgain),
                   ),
                 ));
           },
@@ -150,8 +155,8 @@ class EmailActivationScreen extends StatelessWidget {
 
 class EmailActivationScreenArguments {
   final String userName;
-  final bool isInitiateRequestEmailActivation;
+  final bool isFromLoginScreen;
 
   const EmailActivationScreenArguments(
-      {required this.userName, this.isInitiateRequestEmailActivation = false});
+      {required this.userName, this.isFromLoginScreen = false});
 }
