@@ -29,10 +29,6 @@ class AiInvestmentStyleQuestionForYouScreen extends StatelessWidget {
             child: AiInvestmentStyleQuestionForm(
               aiThemeType: aiThemeType,
               onFinished: () {
-                // context
-                //     .read<IsqOnBoardingBloc>()
-                //     .add(const UpdateAiWelcomeScreenStatus(false));
-
                 context.read<ForYouBloc>().add(SaveInvestmentStyleState());
               },
             ),

@@ -41,9 +41,6 @@ class AiInvestmentStyleQuestionWelcomeScreen extends StatelessWidget {
             ),
             onBottomButtonTap: () {
               if (isqType == ISQType.onboarding) {
-                // context
-                //     .read<IsqOnBoardingBloc>()
-                //     .add(const UpdateAiWelcomeScreenStatus(false));
                 AiInvestmentStyleQuestionOnboardingScreen.open(context);
               } else {
                 AiInvestmentStyleQuestionForYouScreen.open(context,
