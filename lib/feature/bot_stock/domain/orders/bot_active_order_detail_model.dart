@@ -178,8 +178,7 @@ class BotActiveOrderDetailModel extends BotDetailModel {
     }
   }
 
-  String get startDateHKTString =>
-      addOneDayToDate(startDate, dateFormat: 'dd/MM/yyyy');
+  String get startDateHKTString => convertDateToHktString(startDate);
 
   OmsStatus get omsStatus => OmsStatus.findByString(status);
 

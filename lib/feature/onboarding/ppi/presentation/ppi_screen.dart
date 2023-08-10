@@ -59,6 +59,10 @@ class PpiScreen extends StatelessWidget {
         buildWhen: (previous, current) => previous.page != current.page,
         builder: (context, state) {
           return CustomScaffold(
+            appBarBackgroundColor:
+                state.page == QuestionPageStep.personalisationResultEnd
+                    ? AskLoraColors.charcoal
+                    : AskLoraColors.white,
             backgroundColor:
                 state.page == QuestionPageStep.personalisationResultEnd
                     ? AskLoraColors.charcoal
