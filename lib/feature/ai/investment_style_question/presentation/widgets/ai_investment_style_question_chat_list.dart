@@ -65,6 +65,7 @@ class AiInvestmentStyleQuestionChatList extends StatelessWidget {
     if (e is Lora) {
       return OutChatBubbleWidget(
         e.text,
+        forceExpand: true,
         animateText: animateText,
         onFinishedAnimation: () => context
             .read<AiInvestmentStyleQuestionBloc>()
