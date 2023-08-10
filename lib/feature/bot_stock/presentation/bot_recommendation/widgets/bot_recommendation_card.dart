@@ -63,15 +63,18 @@ class BotRecommendationCard extends StatelessWidget {
                 ),
                 CustomTextNew(
                   botRecommendationModel.botAppType,
-                  style: AskLoraTextStyles.body4,
+                  style: AskLoraTextStyles.body1,
                 ),
-                const SizedBox(
-                  height: 1,
-                ),
-                CustomTextNew(
-                  '\$${botRecommendationModel.latestPriceFormatted}',
-                  style: AskLoraTextStyles.subtitle2,
-                ),
+                if (!FeatureFlags.isMockApp)
+                  Column(
+                    children: [
+                      const SizedBox(height: 1),
+                      CustomTextNew(
+                        '\$${botRecommendationModel.latestPriceFormatted}',
+                        style: AskLoraTextStyles.subtitle2,
+                      ),
+                    ],
+                  ),
                 const SizedBox(
                   height: 10,
                 ),
