@@ -16,6 +16,7 @@ PortfolioDetailsRequest _$PortfolioDetailsRequestFromJson(
       platform: json['platform'] as String,
       botType: json['bot_type'] as String,
       tickerSymbol: json['ticker_symbol'] as String,
+      duration: json['duration'] as String,
     );
 
 Map<String, dynamic> _$PortfolioDetailsRequestToJson(
@@ -28,4 +29,5 @@ Map<String, dynamic> _$PortfolioDetailsRequestToJson(
       'platform': instance.platform,
       'bot_type': instance.botType,
       'ticker_symbol': instance.tickerSymbol,
+      'duration': instance.duration,
     };

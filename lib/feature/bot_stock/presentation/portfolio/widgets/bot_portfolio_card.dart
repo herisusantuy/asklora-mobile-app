@@ -25,7 +25,8 @@ class BotPortfolioCard extends StatelessWidget {
               arguments: {
                 'botType': botType.internalName,
                 'symbol': botActiveOrderModel.symbol,
-                'ticker': botActiveOrderModel.ticker
+                'ticker': botActiveOrderModel.ticker,
+                'duration': botActiveOrderModel.botDuration
               }
             ))));
         BotPortfolioDetailScreen.open(
