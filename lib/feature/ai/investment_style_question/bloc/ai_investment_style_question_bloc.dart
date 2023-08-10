@@ -85,7 +85,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
       NextQuestion event, Emitter<AiInvestmentStyleQuestionState> emit) {
     final tempList = List<Conversation>.of(state.conversations)
       ..removeLast()
-      ..add(Me('Moving onto next section', state.userName));
+      ..add(Me('Keywords saved for botstock search.', state.userName));
     emit(state.copyWith(
         query: '',
         conversations: tempList,

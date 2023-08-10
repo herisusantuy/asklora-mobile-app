@@ -443,7 +443,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
             "想知Asklora有咩投資秘技？\n界定你嘅投資風格先！\n"),
         "isqNextButton": MessageLookupByLibrary.simpleMessage(
-            "Press to move onto the next section"),
+            "Please press to proceed to the next question"),
         "isqWillHelpMeUnderstandWhatKindOfStocks":
             MessageLookupByLibrary.simpleMessage("ISQ會幫到我了解你對咩類型股票有興趣"),
         "kycRejectedExplanationOfAffiliate":
