@@ -537,7 +537,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "It’s time to define your investment style.Show me what you’re made of!"),
         "isq": MessageLookupByLibrary.simpleMessage(" - (ISQ) "),
         "isqNextButton": MessageLookupByLibrary.simpleMessage(
-            "Press to move onto the next section"),
+            "Please press to proceed to the next question"),
         "isqWillHelpMeUnderstandWhatKindOfStocks":
             MessageLookupByLibrary.simpleMessage(
                 "Through our chat-style dialogue, we\'ll grasp your investment interests to tailor botstock recommendations for you."),

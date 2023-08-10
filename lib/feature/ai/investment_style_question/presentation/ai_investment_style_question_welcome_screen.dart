@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/presentation/ai/utils/ai_utils.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../generated/l10n.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/isq/bloc/isq_onboarding_bloc.dart';
+import '../../../onboarding/ppi/presentation/investment_style_question/isq/presentation/ai_investment_style_question_onboarding_screen.dart';
 import '../../../tabs/for_you/investment_style/presentation/ai_investment_style_question_for_you_screen.dart';
 import '../../presentation/ai_welcome_screen.dart';
 import '../../presentation/widgets/ai_welcome_subtitle_text.dart';
-import '../../../onboarding/ppi/presentation/investment_style_question/isq/presentation/ai_investment_style_question_onboarding_screen.dart';
-import '../../../../core/presentation/ai/utils/ai_utils.dart';
 
 enum ISQType { onboarding, forYou }
 
@@ -24,33 +25,30 @@ class AiInvestmentStyleQuestionWelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => IsqOnBoardingBloc(
-        sharedPreference: SharedPreference(),
-      )..add(const GetAiWelcomeScreenStatus()),
-      child: AiWelcomeScreen(
-        enableBackgroundImage: isqType == ISQType.onboarding,
-        aiThemeType: aiThemeType,
-        title: S.of(context).timeForInvestmentStyleQuestion,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 32),
-          child: AiWelcomeSubtitleText(
+        create: (_) => IsqOnBoardingBloc(sharedPreference: SharedPreference()),
+        child: BlocBuilder<IsqOnBoardingBloc, IsqOnBoardingState>(
+            builder: (context, state) {
+          return AiWelcomeScreen(
+            enableBackgroundImage: isqType == ISQType.onboarding,
             aiThemeType: aiThemeType,
-            subTitle: S.of(context).isqWillHelpMeUnderstandWhatKindOfStocks,
-          ),
-        ),
-        onBottomButtonTap: () {
-          if (isqType == ISQType.onboarding) {
-            context
-                .read<IsqOnBoardingBloc>()
-                .add(const UpdateAiWelcomeScreenStatus(false));
-            AiInvestmentStyleQuestionOnboardingScreen.open(context);
-          } else {
-            AiInvestmentStyleQuestionForYouScreen.open(context,
-                aiThemeType: aiThemeType);
-          }
-        },
-      ),
-    );
+            title: S.of(context).timeForInvestmentStyleQuestion,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 32),
+              child: AiWelcomeSubtitleText(
+                aiThemeType: aiThemeType,
+                subTitle: S.of(context).isqWillHelpMeUnderstandWhatKindOfStocks,
+              ),
+            ),
+            onBottomButtonTap: () {
+              if (isqType == ISQType.onboarding) {
+                AiInvestmentStyleQuestionOnboardingScreen.open(context);
+              } else {
+                AiInvestmentStyleQuestionForYouScreen.open(context,
+                    aiThemeType: aiThemeType);
+              }
+            },
+          );
+        }));
   }
 
   static void open(BuildContext context) =>
