@@ -15,7 +15,6 @@ class IsqOnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('hello');
     return BlocProvider(
       create: (context) => IsqOnBoardingBloc(
         sharedPreference: SharedPreference(),
@@ -45,4 +44,8 @@ class IsqOnBoardingScreen extends StatelessWidget {
 
   static void open(BuildContext context) =>
       Navigator.of(context).pushNamed(route);
+
+  static void openAndRemoveAllRoute(BuildContext context) =>
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false);
 }
