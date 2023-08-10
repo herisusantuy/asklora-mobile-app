@@ -25,7 +25,7 @@ class AiInvestmentStyleQuestionWelcomeScreen extends StatelessWidget {
       aiThemeType: aiThemeType,
       title: S.of(context).timeForInvestmentStyleQuestion,
       child: Padding(
-        padding: const EdgeInsets.only(top: 48),
+        padding: const EdgeInsets.only(top: 32),
         child: AiWelcomeSubtitleText(
           aiThemeType: aiThemeType,
           subTitle: S.of(context).isqWillHelpMeUnderstandWhatKindOfStocks,

@@ -39,21 +39,19 @@ class AiWelcomeScreen extends StatelessWidget {
         appBarBackgroundColor: Colors.transparent,
         backgroundColor: Colors.transparent,
         body: CustomStretchedLayout(
+          contentPadding: const EdgeInsets.only(top: 0),
           padding:
-              AppValues.screenHorizontalPadding.copyWith(bottom: 40, top: 40),
+              AppValues.screenHorizontalPadding.copyWith(bottom: 40, top: 20),
           content: SizedBox(
             width: double.infinity,
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               const LoraAnimationMagenta(),
-              const SizedBox(
-                height: 32,
-              ),
               Center(
                   child: getPngImage('splash_screen', width: 210, height: 100)),
               CustomTextNew(
                 title,
-                style: AskLoraTextStyles.h3
+                style: AskLoraTextStyles.h5
                     .copyWith(color: aiThemeType.primaryFontColor),
                 textAlign: TextAlign.center,
               ),
