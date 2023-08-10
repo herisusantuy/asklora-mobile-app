@@ -103,7 +103,7 @@ class _LoraAiButtonState extends State<LoraAiButton> {
                     color: widget.active
                         ? widget.activeTextColor ?? AskLoraColors.charcoal
                         : widget.textColor ?? AskLoraColors.gray),
-                maxLines: 3,
+                maxLines: 5,
                 ellipsis: true,
               ),
             ),
