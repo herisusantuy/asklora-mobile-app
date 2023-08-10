@@ -65,13 +65,14 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     if (_tempIntroResponse != null) {
       tempList.removeLast();
     }
-    bool isTyping = true;
+    bool isTyping = false;
 
     if (botIntroResponse.state == ResponseState.success) {
       if (_tempIntroResponse?.state == ResponseState.success) {
         status = ResponseState.success;
         if (botIntroResponse.data!.results!.isNotEmpty ||
             botIntroResponse.data!.components.isNotEmpty) {
+          isTyping = true;
           _addQueryResponseToConversation(tempList, botIntroResponse.data!);
           _addQueryResponseToConversationQueues(_tempIntroResponse!.data!);
         } else {
@@ -94,7 +95,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       }
     }
 
-    emit(state.copyWith(conversations: [], status: status, isTyping: isTyping));
+    emit(state.copyWith(
+        conversations: [...tempList], status: status, isTyping: isTyping));
   }
 
   void _onFetchBotEarnings(
@@ -112,13 +114,14 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       tempList.removeLast();
     }
 
-    bool isTyping = true;
+    bool isTyping = false;
 
     if (botEarningsResponse.state == ResponseState.success) {
       if (_tempIntroResponse?.state == ResponseState.success) {
         status = ResponseState.success;
         if (_tempIntroResponse!.data!.results!.isNotEmpty ||
             _tempIntroResponse!.data!.components.isNotEmpty) {
+          isTyping = true;
           _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
           _addQueryResponseToConversationQueues(botEarningsResponse.data!);
         } else {
@@ -141,7 +144,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       }
     }
 
-    emit(state.copyWith(conversations: [], status: status, isTyping: isTyping));
+    emit(state.copyWith(
+        conversations: [...tempList], status: status, isTyping: isTyping));
   }
 
   void _onFetchWelcomeStarter(FetchWelcomeStarter fetchWelcomeStarter,
@@ -166,13 +170,13 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       if (_tempIntroResponse?.state == ResponseState.success) {
         if (welcomeStarterResponse.data!.results!.isNotEmpty ||
             welcomeStarterResponse.data!.components.isNotEmpty) {
+          isTyping = true;
           _addQueryResponseToConversation(
               tempList, welcomeStarterResponse.data!);
           _addQueryResponseToConversationQueues(_tempIntroResponse!.data!);
         } else {
           _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
         }
-        isTyping = true;
       } else if (_tempIntroResponse?.state == ResponseState.error) {
         status = ResponseState.error;
         _addQueryResponseToConversation(tempList, welcomeStarterResponse.data!);
