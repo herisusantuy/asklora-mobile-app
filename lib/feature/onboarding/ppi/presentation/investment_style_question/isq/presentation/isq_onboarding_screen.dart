@@ -44,4 +44,8 @@ class IsqOnBoardingScreen extends StatelessWidget {
 
   static void open(BuildContext context) =>
       Navigator.of(context).pushNamed(route);
+
+  static void openAndRemoveAllRoute(BuildContext context) =>
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false);
 }
