@@ -32,7 +32,8 @@ class SignUpForm extends StatelessWidget {
               context, state.response.validationCode.getText(context));
           break;
         case ResponseState.success:
-          EmailActivationScreen.open(context, state.username);
+          EmailActivationScreen.open(context,
+              EmailActivationScreenArguments(userName: state.username));
           break;
         default:
           break;

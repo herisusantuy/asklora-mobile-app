@@ -130,8 +130,9 @@ class RouterGenerator {
       case EmailActivationScreen.route:
         return MaterialPageRoute(
             settings: settings,
-            builder: (_) =>
-                EmailActivationScreen(userName: settings.arguments as String));
+            builder: (_) => EmailActivationScreen(
+                arguments:
+                    settings.arguments as EmailActivationScreenArguments));
       case ResetPasswordScreen.route:
         return MaterialPageRoute(
             settings: settings,

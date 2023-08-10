@@ -25,7 +25,7 @@ class AiInvestmentStyleQuestionWelcomeScreen extends StatelessWidget {
       aiThemeType: aiThemeType,
       title: S.of(context).timeForInvestmentStyleQuestion,
       child: Padding(
-        padding: const EdgeInsets.only(top: 48),
+        padding: const EdgeInsets.only(top: 32),
         child: AiWelcomeSubtitleText(
           aiThemeType: aiThemeType,
           subTitle: S.of(context).isqWillHelpMeUnderstandWhatKindOfStocks,
@@ -44,4 +44,8 @@ class AiInvestmentStyleQuestionWelcomeScreen extends StatelessWidget {
 
   static void open(BuildContext context) =>
       Navigator.of(context, rootNavigator: true).pushNamed(route);
+
+  static void openAndRemoveAllRoute(BuildContext context) =>
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false);
 }

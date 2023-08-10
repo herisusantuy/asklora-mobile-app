@@ -69,16 +69,17 @@ class LoraGptState extends Equatable {
           {required String query,
           required String ticker,
           required String tickerSymbol,
-          required String botType}) =>
+          required String botType,
+          required String duration}) =>
       PortfolioDetailsRequest(
-        ticker: ticker,
-        input: query,
-        userId: userId,
-        username: userName,
-        platform: aiPlatform,
-        botType: botType,
-        tickerSymbol: tickerSymbol,
-      );
+          ticker: ticker,
+          input: query,
+          userId: userId,
+          username: userName,
+          platform: aiPlatform,
+          botType: botType,
+          tickerSymbol: tickerSymbol,
+          duration: duration);
 
   GeneralQueryRequest getGeneralChatRequest({required String query}) =>
       GeneralQueryRequest(

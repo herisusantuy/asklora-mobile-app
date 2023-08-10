@@ -346,7 +346,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
           query: query,
           botType: subPage.arguments['botType'],
           ticker: subPage.arguments['ticker'],
-          tickerSymbol: subPage.arguments['symbol']);
+          tickerSymbol: subPage.arguments['symbol'],
+          duration: subPage.arguments['duration']);
 
       emit(
         state.copyWith(

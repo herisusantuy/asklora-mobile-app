@@ -14,6 +14,7 @@ import '../../../../core/utils/storage/cache/json_cache_shared_preferences.dart'
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../generated/l10n.dart';
 import '../../../ai/investment_style_question/presentation/ai_investment_style_question_welcome_screen.dart';
+import '../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../onboarding/ppi/bloc/response/user_response_bloc.dart';
 import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../../../onboarding/welcome/ask_name/bloc/lora_ask_name_bloc.dart';
@@ -24,10 +25,12 @@ import '../email_activation_bloc.dart';
 
 class EmailActivationScreen extends StatelessWidget {
   static const route = '/email_activation_screen';
+  final EmailActivationScreenArguments arguments;
 
-  const EmailActivationScreen({super.key, required this.userName});
-
-  final String userName;
+  const EmailActivationScreen({
+    super.key,
+    required this.arguments,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +45,20 @@ class EmailActivationScreen extends StatelessWidget {
             create: (_) => LoraAskNameBloc(
                 addUserNameRepository: AddUserNameRepository(),
                 sharedPreference: SharedPreference())),
-        BlocProvider(
-            create: (_) => EmailActivationBloc(SignUpRepository(),
-                TokenRepository(), SharedPreference(), PpiResponseRepository())
-              ..add(const StartListenOnDeeplink())),
+        BlocProvider(create: (_) {
+          EmailActivationBloc emailActivationBloc = EmailActivationBloc(
+              SignUpRepository(),
+              TokenRepository(),
+              SharedPreference(),
+              PpiResponseRepository(),
+              AccountRepository())
+            ..add(const StartListenOnDeeplink());
+          if (arguments.isFromLoginScreen) {
+            emailActivationBloc
+                .add(ResendEmailActivationLink(arguments.userName));
+          }
+          return emailActivationBloc;
+        }),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -56,10 +69,13 @@ class EmailActivationScreen extends StatelessWidget {
                 context
                     .read<AppBloc>()
                     .add(const SaveUserJourney(UserJourney.investmentStyle));
-                AiInvestmentStyleQuestionWelcomeScreen.open(context);
+                AiInvestmentStyleQuestionWelcomeScreen.openAndRemoveAllRoute(
+                    context);
               }
               switch (state.response.state) {
                 case ResponseState.error:
+                  CustomInAppNotification.show(
+                      context, state.response.validationCode.getText(context));
                 case ResponseState.success:
                   CustomInAppNotification.show(
                       context, state.response.validationCode.getText(context));
@@ -94,7 +110,9 @@ class EmailActivationScreen extends StatelessWidget {
                     loraAnimationType: LoraAnimationType.magenta,
                   )
                 : LoraAnimationHeader(
-                    text: S.of(context).emailActivationSuccessTitle(userName),
+                    text: S
+                        .of(context)
+                        .emailActivationSuccessTitle(arguments.userName),
                   );
 
             return WillPopScope(
@@ -109,13 +127,18 @@ class EmailActivationScreen extends StatelessWidget {
                     bottomButton: ButtonPair(
                         primaryButtonOnClick: () => context
                             .read<EmailActivationBloc>()
-                            .add(ResendEmailActivationLink(userName)),
-                        secondaryButtonOnClick: () => context
-                            .read<LoraAskNameBloc>()
-                            .add(const ReSubmitUserName()),
+                            .add(ResendEmailActivationLink(arguments.userName)),
+                        secondaryButtonOnClick: () =>
+                            arguments.isFromLoginScreen
+                                ? Navigator.pop(context)
+                                : context
+                                    .read<LoraAskNameBloc>()
+                                    .add(const ReSubmitUserName()),
                         primaryButtonLabel:
                             S.of(context).buttonResendActivationLink,
-                        secondaryButtonLabel: S.of(context).buttonSignUpAgain),
+                        secondaryButtonLabel: arguments.isFromLoginScreen
+                            ? S.of(context).buttonBack
+                            : S.of(context).buttonSignUpAgain),
                   ),
                 ));
           },
@@ -124,7 +147,16 @@ class EmailActivationScreen extends StatelessWidget {
     );
   }
 
-  static void open(BuildContext context, String userName) {
-    Navigator.of(context).pushNamed(route, arguments: userName);
+  static void open(
+      BuildContext context, EmailActivationScreenArguments arguments) {
+    Navigator.of(context).pushNamed(route, arguments: arguments);
   }
+}
+
+class EmailActivationScreenArguments {
+  final String userName;
+  final bool isFromLoginScreen;
+
+  const EmailActivationScreenArguments(
+      {required this.userName, this.isFromLoginScreen = false});
 }
