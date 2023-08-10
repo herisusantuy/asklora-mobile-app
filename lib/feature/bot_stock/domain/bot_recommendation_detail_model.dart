@@ -108,8 +108,7 @@ class BotRecommendationDetailModel extends Equatable {
           ? prevCloseAmt.convertToCurrencyDecimal()
           : '0.00';
 
-  String get formattedStartDate =>
-      addOneDayToDate(startDate, dateFormat: 'dd/MM/yyyy');
+  String get formattedStartDate => convertDateToHktString(startDate);
 
   String get formattedAcknowledgementEstEndDate {
     return '${convertDateToEstString(estEndDate, dateFormat: 'dd/MM/yyyy HH:mm')} EST';
