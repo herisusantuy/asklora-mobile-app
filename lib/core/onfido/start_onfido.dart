@@ -16,7 +16,7 @@ Future<List<OnfidoResult>> startOnfido(String applicantToken) async {
       documentCapture: DocumentCapture(
           documentType: DocumentType.nationalIdentityCard,
           countryCode: CountryCode.HKG),
-      faceCapture: FaceCapture.photo(),
+      faceCapture: FaceCaptureType.photo,
     ),
   );
 

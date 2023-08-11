@@ -106,7 +106,7 @@ class AppInterceptors extends Interceptor {
   }
 
   Future<void> _handleExpiredToken(
-      DioException error, ErrorInterceptorHandler handler) async {
+      DioError error, ErrorInterceptorHandler handler) async {
     final accessToken = await _refreshToken();
 
     if (accessToken.isNotEmpty) {
@@ -158,14 +158,14 @@ class AppInterceptors extends Interceptor {
   }
 
   @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
+  void onError(DioError err, ErrorInterceptorHandler handler) {
     switch (err.type) {
-      case DioExceptionType.connectionTimeout:
-      case DioExceptionType.sendTimeout:
-      case DioExceptionType.receiveTimeout:
+      case DioErrorType.connectionTimeout:
+      case DioErrorType.sendTimeout:
+      case DioErrorType.receiveTimeout:
         throw DeadlineExceededException(
             err.requestOptions, const AskloraError());
-      case DioExceptionType.badResponse:
+      case DioErrorType.badResponse:
         final askloraError = err.response != null
             ? AskloraError.fromJson(err.response!.data)
             : AskloraError(detail: '', code: ValidationCode.unknown.code);
@@ -203,16 +203,16 @@ class AppInterceptors extends Interceptor {
                 err.requestOptions, askloraError);
         }
         break;
-      case DioExceptionType.cancel:
+      case DioErrorType.cancel:
         throw AskloraApiClientException(err.requestOptions,
             askloraError: const AskloraError());
-      case DioExceptionType.unknown:
+      case DioErrorType.unknown:
         throw NoInternetConnectionException(err.requestOptions,
             AskloraError(code: ValidationCode.noInternetConnection.code));
-      case DioExceptionType.badCertificate:
+      case DioErrorType.badCertificate:
         throw AskloraApiClientException(err.requestOptions,
             askloraError: const AskloraError());
-      case DioExceptionType.connectionError:
+      case DioErrorType.connectionError:
         throw AskloraApiClientException(err.requestOptions,
             askloraError: const AskloraError());
       default:
@@ -324,7 +324,7 @@ class DeadlineExceededException extends AskloraApiClientException {
   }
 }
 
-class AskloraApiClientException extends DioException {
+class AskloraApiClientException extends DioError {
   AskloraApiClientException(RequestOptions r, {required this.askloraError})
       : super(requestOptions: r);
 
