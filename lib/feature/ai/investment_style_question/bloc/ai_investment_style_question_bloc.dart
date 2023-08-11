@@ -280,7 +280,7 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
 
   void _onFinishChatAnimation(FinishChatAnimation onFinishTyping,
           Emitter<AiInvestmentStyleQuestionState> emit) =>
-      emit(state.copyWith(isChatAnimationRunning: false));
+      emit(state.copyWith(isChatAnimationRunning: false, isTyping: false));
 
   final Map<String, String> _investmentHorizon = {
     '12 months': '1 year',

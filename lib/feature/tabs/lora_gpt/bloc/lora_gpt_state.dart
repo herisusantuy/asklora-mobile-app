@@ -21,7 +21,6 @@ class LoraGptState extends Equatable {
     this.userName = '',
     this.userId = '',
     this.conversations = const [],
-    // this.shouldShowOverlay = true,
     this.botstocks = const [],
     this.totalPnl = 0,
     this.tabPage = TabPage.forYou,
@@ -124,7 +123,7 @@ class LoraGptState extends Equatable {
         botstocks,
         totalPnl,
         tabPage,
-        DateTime.now().millisecondsSinceEpoch
+        isTyping,
       ];
 
   bool get isTextFieldSendButtonDisabled =>
