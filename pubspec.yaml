@@ -27,7 +27,7 @@ dependencies:
   url_launcher: ^6.1.10
   signature: ^5.3.2
   dart_ipify: ^1.1.1
-  intl: ^0.17.0
+  intl: ^0.18.1
   device_info_plus: ^9.0.0
   file_picker: ^5.2.5
   collection: ^1.16.0
@@ -41,7 +41,7 @@ dependencies:
   back_button_interceptor: ^6.0.2
   onfido_sdk: ^3.3.0
   just_the_tooltip: ^0.0.12
-  sentry_flutter: ^7.4.2
+  sentry_flutter: ^7.9.0
   showcaseview:
     path: ../flutter_showcaseview
 
@@ -80,7 +80,6 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-    - assets/apng/
     - assets/videos/
     - assets/json/
     - assets/

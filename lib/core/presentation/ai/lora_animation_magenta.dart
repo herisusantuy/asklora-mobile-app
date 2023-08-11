@@ -7,7 +7,7 @@ class LoraAnimationMagenta extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset('assets/apng/lora_animation_pink.png',
+    return Image.asset('assets/videos/lora_animation_pink.webp',
         height: height, width: width, filterQuality: FilterQuality.high);
   }
 }

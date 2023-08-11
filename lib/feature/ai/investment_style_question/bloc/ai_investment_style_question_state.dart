@@ -65,7 +65,8 @@ class AiInvestmentStyleQuestionState extends Equatable {
         interaction,
         result ?? '',
         ppiResponseState,
-        isChatAnimationRunning
+        isChatAnimationRunning,
+        DateTime.timestamp()
       ];
 
   bool get isTextFieldSendButtonDisabled =>
