@@ -81,13 +81,16 @@ class BotActiveOrderModel extends Equatable {
     final String totalPnLPctString =
         totalPnLPctDouble.convertToCurrencyDecimal();
 
-    return (totalPnLPctDouble > 0)
-        ? '+$totalPnLPctString%'
-        : (totalPnLPctDouble < 0)
-            ? '$totalPnLPctString%'
-            : BotStatus.findByOmsStatus(status) == BotStatus.live
-                ? '0.00%'
-                : '/';
+    if ((BotStatus.findByOmsStatus(status) == BotStatus.live) &&
+        totalPnLPctDouble == 0) {
+      return '0.00%';
+    } else {
+      return (totalPnLPctDouble > 0)
+          ? '+$totalPnLPctString%'
+          : (totalPnLPctDouble < 0)
+              ? '$totalPnLPctString%'
+              : '/';
+    }
   }
 
   String get botStockValueString {
