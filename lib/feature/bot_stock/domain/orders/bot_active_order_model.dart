@@ -80,11 +80,20 @@ class BotActiveOrderModel extends Equatable {
     final double totalPnLPctDouble = checkDouble(totalPnLPct);
     final String totalPnLPctString =
         totalPnLPctDouble.convertToCurrencyDecimal();
-    return (totalPnLPctDouble > 0)
-        ? '+$totalPnLPctString%'
-        : (totalPnLPctDouble < 0)
-            ? '$totalPnLPctString%'
-            : '/';
+
+    if (BotStatus.findByOmsStatus(status) == BotStatus.live) {
+      return (totalPnLPctDouble > 0)
+          ? '+$totalPnLPctString%'
+          : (totalPnLPctDouble < 0)
+              ? '$totalPnLPctString%'
+              : '0.00%';
+    } else {
+      return (totalPnLPctDouble > 0)
+          ? '+$totalPnLPctString%'
+          : (totalPnLPctDouble < 0)
+              ? '$totalPnLPctString%'
+              : '/';
+    }
   }
 
   String get botStockValueString {

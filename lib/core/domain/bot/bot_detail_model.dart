@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../../../../../core/utils/date_utils.dart';
 import '../../../../../core/utils/extensions.dart';
+import '../../../feature/bot_stock/utils/bot_stock_utils.dart';
 import 'bot_info.dart';
 
 part 'bot_detail_model.g.dart';
@@ -95,11 +96,20 @@ class BotDetailModel extends Equatable {
     final double totalPnlPctDouble = checkDouble(totalPnLPct);
     final String totalPnlPctFormatted =
         totalPnlPctDouble.convertToCurrencyDecimal();
-    return (totalPnlPctDouble > 0)
-        ? '+$totalPnlPctFormatted%'
-        : (totalPnlPctDouble < 0)
-            ? '$totalPnlPctFormatted%'
-            : '/';
+
+    if (BotStatus.findByOmsStatus(status) == BotStatus.live) {
+      return (totalPnlPctDouble > 0)
+          ? '+$totalPnlPctFormatted%'
+          : (totalPnlPctDouble < 0)
+              ? '$totalPnlPctFormatted%'
+              : '0.00%';
+    } else {
+      return (totalPnlPctDouble > 0)
+          ? '+$totalPnlPctFormatted%'
+          : (totalPnlPctDouble < 0)
+              ? '$totalPnlPctFormatted%'
+              : '/';
+    }
   }
 
   factory BotDetailModel.fromJson(Map<String, dynamic> json) =>
