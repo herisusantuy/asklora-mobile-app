@@ -108,7 +108,9 @@ class BotDetailModel extends Equatable {
           ? '+$totalPnlPctFormatted%'
           : (totalPnlPctDouble < 0)
               ? '$totalPnlPctFormatted%'
-              : '/';
+              : BotStatus.findByOmsStatus(status) == BotStatus.live
+                  ? '0.00%'
+                  : '/';
     }
   }
 
