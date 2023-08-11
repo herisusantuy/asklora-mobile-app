@@ -44,15 +44,6 @@ class CarouselPage extends StatelessWidget {
         ],
       );
 
-  List<Widget> get _backgroundImages => [
-        Positioned(
-            top: 30, right: 0, child: getPngImage('carousel_bg_dollar_3')),
-        Positioned(
-            top: 200, left: 0, child: getPngImage('carousel_bg_dollar_1')),
-        Positioned(
-            top: 364, right: 1.61, child: getPngImage('carousel_bg_dollar_2')),
-      ];
-
   Widget _animatedTexts(BuildContext context) {
     return DefaultTextStyle(
         style: AskLoraTextStyles.h1.copyWith(color: AskLoraColors.white),
