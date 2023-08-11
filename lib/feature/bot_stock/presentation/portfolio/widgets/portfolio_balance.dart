@@ -12,7 +12,7 @@ class PortfolioBalance extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _currencyToggleButton(context),
+        if (!FeatureFlags.isMockApp) _currencyToggleButton(context),
         const SizedBox(
           height: 7,
         ),
