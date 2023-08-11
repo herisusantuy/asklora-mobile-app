@@ -97,21 +97,13 @@ class BotDetailModel extends Equatable {
     final String totalPnlPctFormatted =
         totalPnlPctDouble.convertToCurrencyDecimal();
 
-    if (BotStatus.findByOmsStatus(status) == BotStatus.live) {
-      return (totalPnlPctDouble > 0)
-          ? '+$totalPnlPctFormatted%'
-          : (totalPnlPctDouble < 0)
-              ? '$totalPnlPctFormatted%'
-              : '0.00%';
-    } else {
-      return (totalPnlPctDouble > 0)
-          ? '+$totalPnlPctFormatted%'
-          : (totalPnlPctDouble < 0)
-              ? '$totalPnlPctFormatted%'
-              : BotStatus.findByOmsStatus(status) == BotStatus.live
-                  ? '0.00%'
-                  : '/';
-    }
+    return (totalPnlPctDouble > 0)
+        ? '+$totalPnlPctFormatted%'
+        : (totalPnlPctDouble < 0)
+            ? '$totalPnlPctFormatted%'
+            : BotStatus.findByOmsStatus(status) == BotStatus.live
+                ? '0.00%'
+                : '/';
   }
 
   factory BotDetailModel.fromJson(Map<String, dynamic> json) =>
