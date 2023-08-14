@@ -41,11 +41,12 @@ class AccountSettingScreen extends StatelessWidget {
                 onTap: () => PaymentDetailScreen.open(context),
                 title: S.of(context).paymentDetails,
               ),
-            MenuButtonWidget(
-                onTap: () => LanguageSelectionScreen.open(context),
-                title: S.of(context).language,
-                subtitle: context.read<AppBloc>().state.locale.labelName,
-                showBottomBorder: false),
+            if (!FeatureFlags.isMockApp)
+              MenuButtonWidget(
+                  onTap: () => LanguageSelectionScreen.open(context),
+                  title: S.of(context).language,
+                  subtitle: context.read<AppBloc>().state.locale.labelName,
+                  showBottomBorder: false),
             if (!FeatureFlags.isMockApp)
               Column(
                 children: [

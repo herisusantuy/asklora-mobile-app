@@ -76,19 +76,20 @@ class AiLandingPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: BlocBuilder<LoraGptBloc, LoraGptState>(
-            buildWhen: (previous, current) =>
-                previous.isTextFieldSendButtonDisabled !=
-                current.isTextFieldSendButtonDisabled,
-            builder: (context, state) => AiTextField(
-              aiThemeType: aiThemeType,
-              isSendButtonDisabled: state.isTextFieldSendButtonDisabled,
-              onFieldSubmitted: (_) {},
-              onChanged: (value) =>
-                  context.read<LoraGptBloc>().add(OnEditQuery(value)),
-              onTap: () =>
-                  context.read<LoraGptBloc>().add(const OnSearchQuery()),
-            ),
-          ),
+              buildWhen: (previous, current) =>
+                  previous.isTextFieldSendButtonDisabled !=
+                  current.isTextFieldSendButtonDisabled,
+              builder: (context, state) {
+                return AiTextField(
+                  aiThemeType: aiThemeType,
+                  isSendButtonDisabled: state.isTextFieldSendButtonDisabled,
+                  onFieldSubmitted: (_) {},
+                  onChanged: (value) =>
+                      context.read<LoraGptBloc>().add(OnEditQuery(value)),
+                  onTap: () =>
+                      context.read<LoraGptBloc>().add(const OnSearchQuery()),
+                );
+              }),
         ),
       );
 

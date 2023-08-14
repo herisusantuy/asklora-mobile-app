@@ -12,8 +12,6 @@ class AiInvestmentStyleQuestionState extends Equatable {
   final ResponseState ppiResponseState;
   final bool isChatAnimationRunning;
 
-  static const String platform = 'asklora';
-
   const AiInvestmentStyleQuestionState({
     this.query = '',
     this.sessionId = '',

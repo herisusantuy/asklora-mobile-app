@@ -37,6 +37,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     on<OnScreenLaunch>(_onScreenLaunch);
     on<OnLandingPageOpened>(_onLandingPageOpened);
     on<OnResetSession>(_onResetSession);
+    on<OnStartTyping>(_onStartTyping);
     on<OnFinishTyping>(_onFinishTyping);
     on<StorePortfolioBotStocks>(_onActiveBotResponse);
     on<StorePortfolioDetails>(_onStoreTotalPnl);
@@ -65,14 +66,12 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     if (_tempIntroResponse != null) {
       tempList.removeLast();
     }
-    bool isTyping = false;
 
     if (botIntroResponse.state == ResponseState.success) {
       if (_tempIntroResponse?.state == ResponseState.success) {
         status = ResponseState.success;
         if (botIntroResponse.data!.results!.isNotEmpty ||
             botIntroResponse.data!.components.isNotEmpty) {
-          isTyping = true;
           _addQueryResponseToConversation(tempList, botIntroResponse.data!);
           _addQueryResponseToConversationQueues(_tempIntroResponse!.data!);
         } else {
@@ -90,13 +89,11 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
       } else {
         status = ResponseState.error;
-        isTyping = false;
         _tempIntroResponse ??= botIntroResponse;
       }
     }
 
-    emit(state.copyWith(
-        conversations: [...tempList], status: status, isTyping: isTyping));
+    emit(state.copyWith(conversations: [...tempList], status: status));
   }
 
   void _onFetchBotEarnings(
@@ -114,14 +111,11 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       tempList.removeLast();
     }
 
-    bool isTyping = false;
-
     if (botEarningsResponse.state == ResponseState.success) {
       if (_tempIntroResponse?.state == ResponseState.success) {
         status = ResponseState.success;
         if (_tempIntroResponse!.data!.results!.isNotEmpty ||
             _tempIntroResponse!.data!.components.isNotEmpty) {
-          isTyping = true;
           _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
           _addQueryResponseToConversationQueues(botEarningsResponse.data!);
         } else {
@@ -138,14 +132,12 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         status = ResponseState.success;
         _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
       } else {
-        isTyping = false;
         status = ResponseState.error;
         _tempIntroResponse ??= botEarningsResponse;
       }
     }
 
-    emit(state.copyWith(
-        conversations: [...tempList], status: status, isTyping: isTyping));
+    emit(state.copyWith(conversations: [...tempList], status: status));
   }
 
   void _onFetchWelcomeStarter(FetchWelcomeStarter fetchWelcomeStarter,
@@ -164,13 +156,10 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       tempList.removeLast();
     }
 
-    bool isTyping = false;
-
     if (welcomeStarterResponse.state == ResponseState.success) {
       if (_tempIntroResponse?.state == ResponseState.success) {
         if (welcomeStarterResponse.data!.results!.isNotEmpty ||
             welcomeStarterResponse.data!.components.isNotEmpty) {
-          isTyping = true;
           _addQueryResponseToConversation(
               tempList, welcomeStarterResponse.data!);
           _addQueryResponseToConversationQueues(_tempIntroResponse!.data!);
@@ -189,13 +178,11 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
       } else {
         status = ResponseState.error;
-        isTyping = false;
         _tempIntroResponse ??= welcomeStarterResponse;
       }
     }
 
-    emit(state.copyWith(
-        conversations: [...tempList], status: status, isTyping: isTyping));
+    emit(state.copyWith(conversations: [...tempList], status: status));
   }
 
   void _onFetchWelcomeNews(
@@ -211,11 +198,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       tempList.removeLast();
     }
 
-    bool isTyping = false;
-
     if (welcomeNewsResponse.state == ResponseState.success) {
       if (_tempIntroResponse?.state == ResponseState.success) {
-        isTyping = true;
         status = ResponseState.success;
         if (_tempIntroResponse!.data!.results!.isNotEmpty ||
             _tempIntroResponse!.data!.components.isNotEmpty) {
@@ -236,13 +220,11 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         _addQueryResponseToConversation(tempList, _tempIntroResponse!.data!);
       } else {
         status = ResponseState.error;
-        isTyping = false;
         _tempIntroResponse ??= welcomeNewsResponse;
       }
     }
 
-    emit(state.copyWith(
-        conversations: [...tempList], status: status, isTyping: isTyping));
+    emit(state.copyWith(conversations: [...tempList], status: status));
   }
 
   List<Conversation> _addQueryResponseToConversation(
@@ -403,6 +385,10 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
           conversations: [],
           sessionId: '',
           query: ''));
+
+  void _onStartTyping(OnStartTyping onStartTyping, Emitter<LoraGptState> emit) {
+    emit(state.copyWith(isTyping: true));
+  }
 
   void _onFinishTyping(
       OnFinishTyping onFinishTyping, Emitter<LoraGptState> emit) {
