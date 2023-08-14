@@ -92,13 +92,16 @@ class BotDetailModel extends Equatable {
       ? addOneDayToDate(expireDate!, dateFormat: 'dd/MM/yyyy')
       : 'NA';
 
+  OmsStatus get omsStatus => OmsStatus.findByString(status);
+
+  BotStatus get botStatus => BotStatus.findByOmsStatus(status);
+
   String get totalPnLPctString {
     final double totalPnlPctDouble = checkDouble(totalPnLPct);
     final String totalPnlPctFormatted =
         totalPnlPctDouble.convertToCurrencyDecimal();
 
-    if ((BotStatus.findByOmsStatus(status) == BotStatus.live) &&
-        totalPnlPctDouble == 0) {
+    if ((botStatus == BotStatus.live) && totalPnlPctDouble == 0) {
       return '0.00%';
     } else {
       return (totalPnlPctDouble > 0)
