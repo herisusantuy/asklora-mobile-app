@@ -105,6 +105,19 @@ class InteractionWidget extends StatelessWidget {
                 ],
               );
             });
+      case ISQInteractionType.error:
+        return BlocBuilder<AiInvestmentStyleQuestionBloc,
+            AiInvestmentStyleQuestionState>(
+          buildWhen: (previous, current) =>
+              previous.isChatAnimationRunning != current.isChatAnimationRunning,
+          builder: (context, state) => PrimaryButton(
+            label: S.of(context).startAgain,
+            onTap: () => context
+                .read<AiInvestmentStyleQuestionBloc>()
+                .add(const ResetSession()),
+            buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
+          ),
+        );
       case ISQInteractionType.empty:
         return const SizedBox.shrink();
     }

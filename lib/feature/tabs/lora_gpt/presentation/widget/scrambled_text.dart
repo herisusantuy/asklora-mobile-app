@@ -24,6 +24,9 @@ class ScrambledText extends StatefulWidget {
   /// A function which will be triggered at the end of animation
   final VoidCallback? onFinished;
 
+  /// A function which will be triggered at the start of animation
+  final VoidCallback? onStart;
+
   /// A collection of common animation curves.
   final Curve curve;
 
@@ -65,6 +68,7 @@ class ScrambledText extends StatefulWidget {
     this.scrambledStyle,
     this.randomString = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
     required this.duration,
+    this.onStart,
     this.onFinished,
     this.curve = Curves.easeIn,
     this.textDirection = TextDirection.ltr,
@@ -95,7 +99,7 @@ class ScrambledTextState extends State<ScrambledText>
   @override
   void initState() {
     super.initState();
-
+    widget.onStart?.call();
     final totalDuration = (widget.duration * widget.text.length);
 
     _controller = AnimationController(duration: totalDuration, vsync: this);
