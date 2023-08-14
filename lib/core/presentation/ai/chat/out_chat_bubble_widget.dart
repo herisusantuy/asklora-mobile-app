@@ -11,11 +11,13 @@ class OutChatBubbleWidget extends StatefulWidget {
       {super.key,
       this.animateText = false,
       this.onFinishedAnimation,
+      this.onStartAnimation,
       this.aiThemeType = AiThemeType.dark});
 
   final String message;
   final bool animateText;
   final VoidCallback? onFinishedAnimation;
+  final VoidCallback? onStartAnimation;
   final AiThemeType aiThemeType;
 
   @override
@@ -60,6 +62,9 @@ class _OutChatBubbleWidgetState extends State<OutChatBubbleWidget> {
                         style: AskLoraTextStyles.body1.copyWith(
                             color: widget.aiThemeType.primaryFontColor),
                         duration: const Duration(milliseconds: 17),
+                        onStart: () async {
+                          widget.onStartAnimation?.call();
+                        },
                         onFinished: () async {
                           Future.delayed(Duration.zero, () async {
                             setState(() {
@@ -112,11 +117,13 @@ class OutChatExpandedBubbleWidget extends StatelessWidget {
       {super.key,
       this.animateText = false,
       this.onFinishedAnimation,
+      this.onStartAnimation,
       this.aiThemeType = AiThemeType.dark});
 
   final String message;
   final bool animateText;
   final VoidCallback? onFinishedAnimation;
+  final VoidCallback? onStartAnimation;
   final AiThemeType aiThemeType;
 
   @override
@@ -141,6 +148,9 @@ class OutChatExpandedBubbleWidget extends StatelessWidget {
                     style: AskLoraTextStyles.body1
                         .copyWith(color: aiThemeType.primaryFontColor),
                     duration: const Duration(milliseconds: 17),
+                    onStart: () {
+                      onStartAnimation?.call();
+                    },
                     onFinished: () {
                       if (onFinishedAnimation != null) {
                         onFinishedAnimation!();
