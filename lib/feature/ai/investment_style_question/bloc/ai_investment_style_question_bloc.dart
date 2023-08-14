@@ -146,7 +146,8 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
     } else {
       emit(state.copyWith(
           conversations: [...state.conversations, _errorChat],
-          ppiResponseState: ResponseState.error));
+          ppiResponseState: ResponseState.error,
+          interaction: const ErrorInteraction()));
     }
   }
 
@@ -236,7 +237,10 @@ class AiInvestmentStyleQuestionBloc extends Bloc<AiInvestmentStyleQuestionEvent,
       ));
     } else {
       tempList.add(_errorChat);
-      emit(state.copyWith(conversations: tempList, isTyping: false));
+      emit(state.copyWith(
+          conversations: tempList,
+          isTyping: false,
+          interaction: const ErrorInteraction()));
     }
   }
 

@@ -50,6 +50,13 @@ class OnResetSession extends LoraGptEvent {
   List<Object?> get props => [];
 }
 
+class OnStartTyping extends LoraGptEvent {
+  const OnStartTyping();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class OnFinishTyping extends LoraGptEvent {
   const OnFinishTyping();
 
