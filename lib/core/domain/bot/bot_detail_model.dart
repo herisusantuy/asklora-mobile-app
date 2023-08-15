@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../../../../../core/utils/date_utils.dart';
 import '../../../../../core/utils/extensions.dart';
+import '../../../feature/bot_stock/utils/bot_stock_utils.dart';
 import 'bot_info.dart';
 
 part 'bot_detail_model.g.dart';
@@ -85,21 +86,31 @@ class BotDetailModel extends Equatable {
   }
 
   String get spotDateFormatted =>
-      formatDateTimeAsString(spotDate, dateFormat: 'dd/MM/yyyy');
+      formatDateTimeAsString(spotDate, dateFormat: 'dd/MM/yy');
 
-  String get expireDateFormatted => expireDate != null
-      ? addOneDayToDate(expireDate!, dateFormat: 'dd/MM/yyyy')
-      : 'NA';
+  String expireDateFormatted({String dateFormat = 'dd/MM/yyyy'}) =>
+      expireDate != null
+          ? addOneDayToDate(expireDate!, dateFormat: dateFormat)
+          : 'NA';
+
+  OmsStatus get omsStatus => OmsStatus.findByString(status);
+
+  BotStatus get botStatus => BotStatus.findByOmsStatus(status);
 
   String get totalPnLPctString {
     final double totalPnlPctDouble = checkDouble(totalPnLPct);
     final String totalPnlPctFormatted =
         totalPnlPctDouble.convertToCurrencyDecimal();
-    return (totalPnlPctDouble > 0)
-        ? '+$totalPnlPctFormatted%'
-        : (totalPnlPctDouble < 0)
-            ? '$totalPnlPctFormatted%'
-            : '/';
+
+    if ((botStatus == BotStatus.live) && totalPnlPctDouble == 0) {
+      return '0.00%';
+    } else {
+      return (totalPnlPctDouble > 0)
+          ? '+$totalPnlPctFormatted%'
+          : (totalPnlPctDouble < 0)
+              ? '$totalPnlPctFormatted%'
+              : '/';
+    }
   }
 
   factory BotDetailModel.fromJson(Map<String, dynamic> json) =>

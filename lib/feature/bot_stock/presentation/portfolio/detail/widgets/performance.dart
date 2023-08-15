@@ -93,7 +93,7 @@ class Performance extends StatelessWidget {
             S.of(context).portfolioDetailChartCaption(
                 '${botType.upperCaseName} ${botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol}',
                 botActiveOrderDetailModel.spotDate,
-                botActiveOrderDetailModel.expireDateFormatted,
+                botActiveOrderDetailModel.expireDateFormatted(),
                 botActiveOrderDetailModel.botDuration),
             style: AskLoraTextStyles.body4),
       );

@@ -57,12 +57,12 @@ class AiLandingPageChatList extends StatelessWidget {
 
   Widget _getBubbleChat(BuildContext context, Conversation e) {
     if (e is Lora) {
-      return OutChatBubbleWidget(
-        e.text.toString(),
-        animateText: e.isNeedCallback,
-        onFinishedAnimation: () =>
-            _updateConversation(context, e.isNeedCallback),
-      );
+      return OutChatBubbleWidget(e.text.toString(),
+          animateText: e.isNeedCallback,
+          onFinishedAnimation: () =>
+              _updateConversation(context, e.isNeedCallback),
+          onStartAnimation: () =>
+              context.read<LoraGptBloc>().add(const OnStartTyping()));
     } else if (e is Me) {
       return InChatBubbleWidget(message: e.text, name: e.userName);
     } else if (e is Reset) {
