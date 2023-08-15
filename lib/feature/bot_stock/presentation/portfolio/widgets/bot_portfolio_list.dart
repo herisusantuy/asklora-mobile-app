@@ -64,7 +64,7 @@ class BotPortfolioList extends StatelessWidget {
             ),
           );
         } else {
-          return const SizedBox();
+          return const SizedBox.shrink();
         }
       } else if (portfolioState.botActiveOrderResponse.state ==
           ResponseState.loading) {
