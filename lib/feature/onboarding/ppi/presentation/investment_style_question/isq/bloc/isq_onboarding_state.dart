@@ -1,6 +1,6 @@
 part of 'isq_onboarding_bloc.dart';
 
-enum IsqOnBoardingBackState { none, openConfirmation, closeApp }
+enum IsqOnBoardingBackState { none, openConfirmation, delayed, closeApp }
 
 class IsqOnBoardingState extends Equatable {
   final bool aiWelcomeScreenStatus;
@@ -14,14 +14,16 @@ class IsqOnBoardingState extends Equatable {
       : super();
 
   IsqOnBoardingState copyWith(
-      {bool aiWelcomeScreenStatus = false,
-      ResponseState isqOnboardingResponseState = ResponseState.unknown,
-      IsqOnBoardingBackState isqOnBoardingBackState =
-          IsqOnBoardingBackState.none}) {
+      {bool? aiWelcomeScreenStatus,
+      ResponseState? isqOnboardingResponseState,
+      IsqOnBoardingBackState? isqOnBoardingBackState}) {
     return IsqOnBoardingState(
-        aiWelcomeScreenStatus: aiWelcomeScreenStatus,
-        isqOnboardingResponseState: isqOnboardingResponseState,
-        isqOnBoardingBackState: isqOnBoardingBackState);
+        aiWelcomeScreenStatus:
+            aiWelcomeScreenStatus ?? this.aiWelcomeScreenStatus,
+        isqOnboardingResponseState:
+            isqOnboardingResponseState ?? this.isqOnboardingResponseState,
+        isqOnBoardingBackState:
+            isqOnBoardingBackState ?? this.isqOnBoardingBackState);
   }
 
   @override
