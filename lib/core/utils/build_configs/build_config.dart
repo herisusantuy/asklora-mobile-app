@@ -67,17 +67,12 @@ class ProdConfig implements BaseConfig {
 }
 
 class MockConfig implements BaseConfig {
-  /// Using staging configs just because want to submit the build for review.
-
   @override
-  // String get ppiBaseUrl => 'http://ppi-beta.api.asklora.ai/';
   String get ppiBaseUrl => 'https://ppi-stag.api.asklora.ai/';
 
   @override
-  // String get askLoraApiBaseUrl => 'https://beta-apca.api.asklora.ai/';
   String get askLoraApiBaseUrl => 'https://stag-apca.api.asklora.ai/';
 
   @override
-  // String get askloraAiBaseUrl => 'http://stock-gpt-dev.intra.asklora.ai/';
   String get askloraAiBaseUrl => 'https://stock-gpt-stag.api.asklora.ai/';
 }

@@ -548,13 +548,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = GB8GPPG7HX;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = GB8GPPG7HX;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_MODE = debug;
+				FLUTTER_BUILD_MODE = release;
 				INFOPLIST_FILE = Runner/info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -564,7 +564,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ai.asklora.app.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development ai.asklora.app.dev";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development ai.asklora.app.dev";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore ai.asklora.app.dev";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -765,12 +765,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = GB8GPPG7HX;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = GB8GPPG7HX;
 				ENABLE_BITCODE = NO;
+				FLUTTER_BUILD_MODE = release;
 				INFOPLIST_FILE = Runner/info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -780,7 +781,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ai.asklora.app.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development ai.asklora.app.dev";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development ai.asklora.app.dev";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore ai.asklora.app.dev";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
