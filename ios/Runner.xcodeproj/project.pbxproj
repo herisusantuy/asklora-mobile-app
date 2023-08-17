@@ -177,7 +177,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					97C146ED1CF9000F007C117D = {
@@ -554,7 +554,7 @@
 				DEVELOPMENT_TEAM = GB8GPPG7HX;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = GB8GPPG7HX;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_MODE = release;
+				FLUTTER_BUILD_MODE = debug;
 				INFOPLIST_FILE = Runner/info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -771,7 +771,7 @@
 				DEVELOPMENT_TEAM = GB8GPPG7HX;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = GB8GPPG7HX;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_MODE = release;
+				FLUTTER_BUILD_MODE = debug;
 				INFOPLIST_FILE = Runner/info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				LD_RUNPATH_SEARCH_PATHS = (
