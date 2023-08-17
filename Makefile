@@ -59,7 +59,7 @@ run_production_mobile: ## Runs the mobile application in production
 
 build_runner:
 	@echo "╠ Generating the code"
-	@flutter pub run build_runner build --delete-conflicting-outputs
+	@dart run build_runner build --delete-conflicting-outputs
 
 #run_dev_mobile: ## Runs the mobile application in dev
 #	@echo "╠ Running the app"
