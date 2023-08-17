@@ -180,10 +180,6 @@ class BotActiveOrderDetailModel extends BotDetailModel {
 
   String get startDateHKTString => convertDateToHktString(startDate);
 
-  OmsStatus get omsStatus => OmsStatus.findByString(status);
-
-  BotStatus get botStatus => BotStatus.findByOmsStatus(status);
-
   BotType get botType => BotType.findByString(botInfo.botName);
 
   factory BotActiveOrderDetailModel.fromJson(Map<String, dynamic> json) =>

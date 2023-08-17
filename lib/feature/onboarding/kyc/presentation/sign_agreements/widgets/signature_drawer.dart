@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:signature/signature.dart';
+
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/presentation/dotted_border/dotted_border.dart';
 import '../../../../../../core/presentation/we_create/custom_text_button.dart';
@@ -9,7 +9,6 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 
 class SignatureDrawer extends StatelessWidget {
-  final SignatureController signatureController;
   final VoidCallback onSubmit;
   final VoidCallback onReset;
   final String initialValue;
@@ -19,7 +18,6 @@ class SignatureDrawer extends StatelessWidget {
     required this.onSubmit,
     required this.onReset,
     this.initialValue = '',
-    required this.signatureController,
   }) : super(key: key);
 
   @override
@@ -64,11 +62,6 @@ class SignatureDrawer extends StatelessWidget {
       ];
 
   List<Widget> get _signatureDrawer => [
-        Signature(
-          controller: signatureController,
-          height: 300,
-          backgroundColor: Colors.transparent,
-        ),
         Positioned(
           bottom: 8,
           left: 0,
