@@ -93,8 +93,8 @@ class MockBotStockRepository extends _i1.Mock
             botId,
           ],
         ),
-        returnValue: _i4
-            .Future<_i2.BaseResponse<_i5.BotRecommendationDetailModel>>.value(
+        returnValue: _i4.Future<
+                _i2.BaseResponse<_i5.BotRecommendationDetailModel>>.value(
             _FakeBaseResponse_0<_i5.BotRecommendationDetailModel>(
           this,
           Invocation.method(
@@ -129,8 +129,8 @@ class MockBotStockRepository extends _i1.Mock
               #fetchTradeChartDataJson,
               [],
             ),
-            returnValue: _i4
-                .Future<_i2.BaseResponse<_i7.ChartStudioAnimationModel>>.value(
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<_i7.ChartStudioAnimationModel>>.value(
                 _FakeBaseResponse_0<_i7.ChartStudioAnimationModel>(
               this,
               Invocation.method(
@@ -146,8 +146,8 @@ class MockBotStockRepository extends _i1.Mock
               #fetchBotRecommendation,
               [],
             ),
-            returnValue: _i4
-                .Future<_i2.BaseResponse<_i8.BotRecommendationResponse>>.value(
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<_i8.BotRecommendationResponse>>.value(
                 _FakeBaseResponse_0<_i8.BotRecommendationResponse>(
               this,
               Invocation.method(
@@ -165,8 +165,8 @@ class MockBotStockRepository extends _i1.Mock
               [],
               {#isFreeBot: isFreeBot},
             ),
-            returnValue: _i4
-                .Future<_i2.BaseResponse<_i8.BotRecommendationResponse>>.value(
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<_i8.BotRecommendationResponse>>.value(
                 _FakeBaseResponse_0<_i8.BotRecommendationResponse>(
               this,
               Invocation.method(
@@ -223,22 +223,24 @@ class MockBotStockRepository extends _i1.Mock
         )),
       ) as _i4.Future<_i2.BaseResponse<List<_i10.BotActiveOrderModel>>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i11.BotActiveOrderDetailModel>>
-      activeOrderDetail(String? botOrderId) => (super.noSuchMethod(
-            Invocation.method(
-              #activeOrderDetail,
-              [botOrderId],
-            ),
-            returnValue: _i4
-                .Future<_i2.BaseResponse<_i11.BotActiveOrderDetailModel>>.value(
+  _i4.Future<
+      _i2.BaseResponse<_i11.BotActiveOrderDetailModel>> activeOrderDetail(
+          String? botOrderId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #activeOrderDetail,
+          [botOrderId],
+        ),
+        returnValue:
+            _i4.Future<_i2.BaseResponse<_i11.BotActiveOrderDetailModel>>.value(
                 _FakeBaseResponse_0<_i11.BotActiveOrderDetailModel>(
-              this,
-              Invocation.method(
-                #activeOrderDetail,
-                [botOrderId],
-              ),
-            )),
-          ) as _i4.Future<_i2.BaseResponse<_i11.BotActiveOrderDetailModel>>);
+          this,
+          Invocation.method(
+            #activeOrderDetail,
+            [botOrderId],
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i11.BotActiveOrderDetailModel>>);
   @override
   _i4.Future<_i2.BaseResponse<List<_i12.BotPortfolioChartDataSet>>>
       fetchBotPerformance(String? botOrderId) => (super.noSuchMethod(
@@ -247,8 +249,8 @@ class MockBotStockRepository extends _i1.Mock
               [botOrderId],
             ),
             returnValue: _i4.Future<
-                    _i2
-                    .BaseResponse<List<_i12.BotPortfolioChartDataSet>>>.value(
+                    _i2.BaseResponse<
+                        List<_i12.BotPortfolioChartDataSet>>>.value(
                 _FakeBaseResponse_0<List<_i12.BotPortfolioChartDataSet>>(
               this,
               Invocation.method(
@@ -424,22 +426,24 @@ class MockTransactionRepository extends _i1.Mock
           ) as _i4.Future<
               _i2.BaseResponse<_i17.BotDetailTransactionHistoryResponse>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i18.TransactionBalanceResponse>>
-      fetchBalance() => (super.noSuchMethod(
-            Invocation.method(
-              #fetchBalance,
-              [],
-            ),
-            returnValue: _i4.Future<
-                    _i2.BaseResponse<_i18.TransactionBalanceResponse>>.value(
+  _i4.Future<
+      _i2
+          .BaseResponse<_i18.TransactionBalanceResponse>> fetchBalance() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchBalance,
+          [],
+        ),
+        returnValue:
+            _i4.Future<_i2.BaseResponse<_i18.TransactionBalanceResponse>>.value(
                 _FakeBaseResponse_0<_i18.TransactionBalanceResponse>(
-              this,
-              Invocation.method(
-                #fetchBalance,
-                [],
-              ),
-            )),
-          ) as _i4.Future<_i2.BaseResponse<_i18.TransactionBalanceResponse>>);
+          this,
+          Invocation.method(
+            #fetchBalance,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i18.TransactionBalanceResponse>>);
   @override
   _i4.Future<_i2.BaseResponse<_i19.TransactionLedgerBalanceResponse>>
       fetchLedgerBalance() => (super.noSuchMethod(
@@ -448,8 +452,8 @@ class MockTransactionRepository extends _i1.Mock
               [],
             ),
             returnValue: _i4.Future<
-                    _i2
-                    .BaseResponse<_i19.TransactionLedgerBalanceResponse>>.value(
+                    _i2.BaseResponse<
+                        _i19.TransactionLedgerBalanceResponse>>.value(
                 _FakeBaseResponse_0<_i19.TransactionLedgerBalanceResponse>(
               this,
               Invocation.method(

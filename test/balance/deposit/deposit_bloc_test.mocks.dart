@@ -153,8 +153,8 @@ class MockTransactionRepository extends _i1.Mock
               [],
             ),
             returnValue: _i4.Future<
-                    _i2
-                    .BaseResponse<_i8.TransactionLedgerBalanceResponse>>.value(
+                    _i2.BaseResponse<
+                        _i8.TransactionLedgerBalanceResponse>>.value(
                 _FakeBaseResponse_0<_i8.TransactionLedgerBalanceResponse>(
               this,
               Invocation.method(
