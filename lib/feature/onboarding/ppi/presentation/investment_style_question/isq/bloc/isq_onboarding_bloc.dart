@@ -17,6 +17,7 @@ class IsqOnBoardingBloc extends Bloc<IsqOnBoardingEvent, IsqOnBoardingState> {
         super(const IsqOnBoardingState()) {
     on<GetAiWelcomeScreenStatus>(_onGetAiWelcomeScreenStatus);
     on<UpdateAiWelcomeScreenStatus>(_onUpdateAiWelcomeScreenStatus);
+    on<BackButtonClicked>(_onBackButtonClicked);
   }
 
   void _onGetAiWelcomeScreenStatus(
@@ -37,5 +38,19 @@ class IsqOnBoardingBloc extends Bloc<IsqOnBoardingEvent, IsqOnBoardingState> {
     await _sharedPreference.writeBoolData(
         StorageKeys.sfAiWelcomeScreen, event.aiWelcomeScreenStatus);
     emit(state.copyWith(aiWelcomeScreenStatus: event.aiWelcomeScreenStatus));
+  }
+
+  _onBackButtonClicked(
+      BackButtonClicked event, Emitter<IsqOnBoardingState> emit) async {
+    if (state.isqOnBoardingBackState == IsqOnBoardingBackState.none) {
+      emit(state.copyWith(
+          isqOnBoardingBackState: IsqOnBoardingBackState.openConfirmation));
+      await Future.delayed(const Duration(seconds: 3));
+      emit(state.copyWith(isqOnBoardingBackState: IsqOnBoardingBackState.none));
+    } else if (state.isqOnBoardingBackState ==
+        IsqOnBoardingBackState.openConfirmation) {
+      emit(state.copyWith(
+          isqOnBoardingBackState: IsqOnBoardingBackState.closeApp));
+    }
   }
 }

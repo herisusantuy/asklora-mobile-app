@@ -15,3 +15,5 @@ class UpdateAiWelcomeScreenStatus extends IsqOnBoardingEvent {
   final bool aiWelcomeScreenStatus;
   const UpdateAiWelcomeScreenStatus(this.aiWelcomeScreenStatus);
 }
+
+class BackButtonClicked extends IsqOnBoardingEvent {}
