@@ -23,18 +23,20 @@ class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
   _onTabChanged(TabChanged event, Emitter<TabScreenState> emit) {
     final subPage = state.currentTabPage.getArguments;
 
-    if (event.tabPage == TabPage.forYou) {
-      if (subPage.path == SubTabPage.recommendationsBotStockDetails.value) {
-        emit(state.copyWith(isBotDetailScreenOpened: true));
-      } else {
-        emit(state.copyWith(isBotDetailScreenOpened: false));
-      }
-    } else if (event.tabPage == TabPage.portfolio) {
-      if (event.tabPage == TabPage.portfolio &&
-          subPage.path == SubTabPage.portfolioBotStockDetails.value) {
-        emit(state.copyWith(isPortfolioDetailScreenOpened: true));
-      } else {
-        emit(state.copyWith(isPortfolioDetailScreenOpened: false));
+    if (!state.aiPageSelected) {
+      if (event.tabPage == TabPage.forYou) {
+        if (subPage.path == SubTabPage.recommendationsBotStockDetails.value) {
+          emit(state.copyWith(isBotDetailScreenOpened: true));
+        } else {
+          emit(state.copyWith(isBotDetailScreenOpened: false));
+        }
+      } else if (event.tabPage == TabPage.portfolio) {
+        if (event.tabPage == TabPage.portfolio &&
+            subPage.path == SubTabPage.portfolioBotStockDetails.value) {
+          emit(state.copyWith(isPortfolioDetailScreenOpened: true));
+        } else {
+          emit(state.copyWith(isPortfolioDetailScreenOpened: false));
+        }
       }
     }
 
