@@ -32,12 +32,17 @@ class TabScreenState extends Equatable {
   final bool aiPageSelected;
   final TabScreenBackState tabScreenBackState;
   final BackgroundImageType backgroundImageType;
+  final bool isBotDetailScreenOpened;
+  final bool isPortfolioDetailScreenOpened;
 
-  const TabScreenState(
-      {required this.currentTabPage,
-      this.aiPageSelected = false,
-      this.tabScreenBackState = TabScreenBackState.none,
-      this.backgroundImageType = BackgroundImageType.none});
+  const TabScreenState({
+    required this.currentTabPage,
+    this.aiPageSelected = false,
+    this.tabScreenBackState = TabScreenBackState.none,
+    this.backgroundImageType = BackgroundImageType.none,
+    this.isBotDetailScreenOpened = false,
+    this.isPortfolioDetailScreenOpened = false,
+  });
 
   @override
   List<Object?> get props => [
@@ -45,6 +50,8 @@ class TabScreenState extends Equatable {
         aiPageSelected,
         tabScreenBackState,
         backgroundImageType,
+        isBotDetailScreenOpened,
+        isPortfolioDetailScreenOpened
       ];
 
   TabScreenState copyWith({
@@ -53,12 +60,18 @@ class TabScreenState extends Equatable {
     TabScreenBackState? tabScreenBackState,
     List<GlobalKey>? tutorialKeys,
     BackgroundImageType? backgroundImageType,
+    bool? isBotDetailScreenOpened,
+    bool? isPortfolioDetailScreenOpened,
   }) {
     return TabScreenState(
       currentTabPage: currentTabPage ?? this.currentTabPage,
       aiPageSelected: aiPageSelected ?? this.aiPageSelected,
       tabScreenBackState: tabScreenBackState ?? this.tabScreenBackState,
       backgroundImageType: backgroundImageType ?? this.backgroundImageType,
+      isBotDetailScreenOpened:
+          isBotDetailScreenOpened ?? this.isBotDetailScreenOpened,
+      isPortfolioDetailScreenOpened:
+          isPortfolioDetailScreenOpened ?? this.isPortfolioDetailScreenOpened,
     );
   }
 }

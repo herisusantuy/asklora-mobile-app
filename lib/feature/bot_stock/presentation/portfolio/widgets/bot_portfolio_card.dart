@@ -29,6 +29,7 @@ class BotPortfolioCard extends StatelessWidget {
                 'duration': botActiveOrderModel.botDuration
               }
             ))));
+
         BotPortfolioDetailScreen.open(
             context: context,
             arguments: BotPortfolioDetailArguments(

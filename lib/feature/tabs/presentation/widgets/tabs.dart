@@ -42,7 +42,7 @@ class Tabs extends StatelessWidget {
                       _tabPng(
                           onTap: () => context
                               .read<TabScreenBloc>()
-                              .add(const TabChanged(TabPage.forYou)),
+                              .add(TabChanged(TabPage.forYou.setData())),
                           iconAsset: 'bottom_nav_isq',
                           activeIconAsset: 'bottom_nav_isq_selected',
                           filledColor: backgroundImageType.tabForYouFilledColor,
@@ -101,7 +101,7 @@ class Tabs extends StatelessWidget {
                       _tabSvg(
                           onTap: () => context
                               .read<TabScreenBloc>()
-                              .add(const TabChanged(TabPage.portfolio)),
+                              .add(TabChanged(TabPage.portfolio.setData())),
                           iconAsset: 'bottom_nav_portfolio',
                           activeIconAsset: 'bottom_nav_portfolio_selected',
                           filledColor:
