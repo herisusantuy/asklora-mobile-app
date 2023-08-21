@@ -30,10 +30,14 @@ class BotPortfolioButtons extends StatelessWidget {
             if (portfolioState.isShowTerminateButton)
               if (botActiveOrderDetailModel.terminationRequested)
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 30),
-                  child: CustomTextNew(
-                    S.of(context).requestedToEnd,
-                    style: AskLoraTextStyles.button1,
+                  padding: const EdgeInsets.only(bottom: 3.0),
+                  child: IgnorePointer(
+                    child: PrimaryButton(
+                      label: S.of(context).requestedToEnd,
+                      onTap: () => '',
+                      buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
+                      disabled: true,
+                    ),
                   ),
                 )
               else
