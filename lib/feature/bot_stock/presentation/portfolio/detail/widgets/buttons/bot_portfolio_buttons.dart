@@ -29,11 +29,19 @@ class BotPortfolioButtons extends StatelessWidget {
 
             if (portfolioState.isShowTerminateButton)
               if (botActiveOrderDetailModel.terminationRequested)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 30),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.only(bottom: 30),
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AskLoraColors.darkGray),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   child: CustomTextNew(
                     S.of(context).requestedToEnd,
-                    style: AskLoraTextStyles.button1,
+                    style: AskLoraTextStyles.button1
+                        .copyWith(color: AskLoraColors.darkGray),
+                    textAlign: TextAlign.center,
                   ),
                 )
               else
