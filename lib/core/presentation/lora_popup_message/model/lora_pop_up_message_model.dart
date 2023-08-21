@@ -7,7 +7,6 @@ class LoraPopUpMessageModel {
   final String? secondaryButtonLabel;
   final VoidCallback? onPrimaryButtonTap;
   final VoidCallback? onSecondaryButtonTap;
-  final String? loraMemojiType;
 
   LoraPopUpMessageModel(
       {required this.title,
@@ -15,6 +14,5 @@ class LoraPopUpMessageModel {
       this.primaryButtonLabel,
       this.secondaryButtonLabel,
       this.onPrimaryButtonTap,
-      this.onSecondaryButtonTap,
-      this.loraMemojiType});
+      this.onSecondaryButtonTap});
 }
