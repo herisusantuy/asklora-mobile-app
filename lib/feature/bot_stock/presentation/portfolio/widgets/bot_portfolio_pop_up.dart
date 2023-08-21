@@ -83,10 +83,8 @@ class BotPortfolioPopUp extends StatelessWidget {
                 DepositWelcomeScreen.open(context: context));
       case BotPortfolioPopUpType.pendingReview:
         return LoraPopUpMessageModel(
-          title: S.of(context).portfolioPopUpPendingReviewTitle,
-          subTitle: S.of(context).portfolioPopUpPendingReviewSubTitle,
-          loraMemojiType: 'lora_memoji_6',
-        );
+            title: S.of(context).portfolioPopUpPendingReviewTitle,
+            subTitle: S.of(context).portfolioPopUpPendingReviewSubTitle);
     }
   }
 }
