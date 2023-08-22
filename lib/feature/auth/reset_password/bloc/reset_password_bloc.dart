@@ -59,20 +59,12 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
 
   void _onResetPasswordSubmitted(
       ResetPasswordSubmitted event, Emitter<ResetPasswordState> emit) async {
-    try {
-      emit(state.copyWith(response: BaseResponse.loading()));
-      var data = await _authRepository.resetPassword(
-          token: event.resetPasswordToken,
-          password: state.password,
-          confirmPassword: state.confirmPassword);
+    emit(state.copyWith(response: BaseResponse.loading()));
+    var data = await _authRepository.resetPassword(
+        token: event.resetPasswordToken,
+        password: state.password,
+        confirmPassword: state.confirmPassword);
 
-      emit(state.copyWith(response: data));
-    } on AskloraApiClientException catch (e) {
-      emit(state.copyWith(
-          response: BaseResponse.error(validationCode: e.askloraError.type)));
-    } catch (e) {
-      emit(state.copyWith(
-          response: BaseResponse.error(message: 'Something went wrong!')));
-    }
+    emit(state.copyWith(response: data));
   }
 }
