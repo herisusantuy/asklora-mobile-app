@@ -30,6 +30,7 @@ enum ValidationCode {
   invalidUser('AU0005'),
   otpRequired('AU0006'),
   otpInvalid('AU0007'),
+  useOldPassword('AC0014'),
 
   // REGISTER
   accountExists('RX0001'),
