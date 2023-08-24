@@ -15,14 +15,14 @@ class ResetPasswordState extends Equatable {
     this.confirmPasswordError = PasswordValidationError.none,
   }) : super();
 
-  final BaseResponse response;
+  final BaseResponse<ResetPasswordResponse> response;
   final String password;
   final String confirmPassword;
   final PasswordValidationError passwordValidationError;
   final PasswordValidationError confirmPasswordError;
 
   ResetPasswordState copyWith({
-    BaseResponse? response,
+    BaseResponse<ResetPasswordResponse>? response,
     String? token,
     String? password,
     String? confirmPassword,

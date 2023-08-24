@@ -1,14 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/data/remote/base_api_client.dart';
 import '../../../../core/domain/base_response.dart';
-import '../../../../core/domain/validation_enum.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../repository/auth_repository.dart';
+import '../domain/reset_password_response.dart';
 
 part 'reset_password_event.dart';
-
 part 'reset_password_state.dart';
 
 class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
@@ -60,22 +58,12 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
 
   void _onResetPasswordSubmitted(
       ResetPasswordSubmitted event, Emitter<ResetPasswordState> emit) async {
-    try {
-      emit(state.copyWith(response: BaseResponse.loading()));
-      var data = await _authRepository.resetPassword(
-          token: event.resetPasswordToken,
-          password: state.password,
-          confirmPassword: state.confirmPassword);
+    emit(state.copyWith(response: BaseResponse.loading()));
+    var data = await _authRepository.resetPassword(
+        token: event.resetPasswordToken,
+        password: state.password,
+        confirmPassword: state.confirmPassword);
 
-      emit(state.copyWith(
-          response: BaseResponse.complete(data,
-              validationCode: ValidationCode.passwordChangeSuccessfully)));
-    } on AskloraApiClientException catch (e) {
-      emit(state.copyWith(
-          response: BaseResponse.error(validationCode: e.askloraError.type)));
-    } catch (e) {
-      emit(state.copyWith(
-          response: BaseResponse.error(message: 'Something went wrong!')));
-    }
+    emit(state.copyWith(response: data));
   }
 }

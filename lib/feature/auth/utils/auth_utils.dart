@@ -56,6 +56,8 @@ extension MessageExtension on ValidationCode {
         return 'Could not update the Onfido result!';
       case ValidationCode.userAlreadyActive:
         return 'User is already activated. Please try logging in with the email';
+      case ValidationCode.useOldPassword:
+        return 'Password same as old password!\n Please use new password';
       case ValidationCode.empty:
         return '';
       case ValidationCode.unknown:

@@ -180,7 +180,7 @@ class TransferDetailStep extends StatelessWidget {
               _wireDetail(
                   context: context,
                   title: S.of(context).accountNumber,
-                  value: '1234567890'),
+                  value: '001789680'),
               _wireDetail(
                   context: context,
                   title: S.of(context).bankName,

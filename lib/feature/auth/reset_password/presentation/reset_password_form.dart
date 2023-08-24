@@ -7,7 +7,6 @@ import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../generated/l10n.dart';
-import '../../forgot_password/presentation/forgot_password_screen.dart';
 import '../../utils/auth_utils.dart';
 import '../bloc/reset_password_bloc.dart';
 import 'reset_password_success_screen.dart';
@@ -36,7 +35,6 @@ class ResetPasswordForm extends StatelessWidget {
           context
               .read<ResetPasswordBloc>()
               .add(ResetPasswordConfirmPasswordChanged(state.confirmPassword));
-          ForgotPasswordScreen.open(context);
         }
       },
       child: LayoutBuilder(
