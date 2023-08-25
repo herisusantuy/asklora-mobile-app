@@ -105,7 +105,10 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                   onChanged: widget.onChanged,
                   textCapitalization: widget.textCapitalization,
                   inputFormatters: widget.textInputFormatterList ??
-                      [LengthLimitingTextInputFormatter(16)],
+                      [
+                        LengthLimitingTextInputFormatter(16),
+                        FilteringTextInputFormatter.deny(RegExp(r'\s'))
+                      ],
                   obscureText: obscureText,
                   obscuringCharacter: '●',
                   style: TextFieldStyle.valueTextStyle,
